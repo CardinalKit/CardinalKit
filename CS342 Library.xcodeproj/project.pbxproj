@@ -8,12 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		8ECC9343231C7DB300A6DB80 /* CS342_Library.h in Headers */ = {isa = PBXBuildFile; fileRef = 8ECC9341231C7DB300A6DB80 /* CS342_Library.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8ECC934C231C7E3F00A6DB80 /* ReplaceViewSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECC934B231C7E3F00A6DB80 /* ReplaceViewSegue.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		8ECC933E231C7DB300A6DB80 /* CS342_Library.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CS342_Library.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8ECC9341231C7DB300A6DB80 /* CS342_Library.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CS342_Library.h; sourceTree = "<group>"; };
 		8ECC9342231C7DB300A6DB80 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8ECC934B231C7E3F00A6DB80 /* ReplaceViewSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplaceViewSegue.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,10 +48,27 @@
 		8ECC9340231C7DB300A6DB80 /* CS342 Library */ = {
 			isa = PBXGroup;
 			children = (
+				8ECC934A231C7E1700A6DB80 /* Segues */,
+				8ECC9349231C7E0500A6DB80 /* Supporting Files */,
+			);
+			path = "CS342 Library";
+			sourceTree = "<group>";
+		};
+		8ECC9349231C7E0500A6DB80 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
 				8ECC9341231C7DB300A6DB80 /* CS342_Library.h */,
 				8ECC9342231C7DB300A6DB80 /* Info.plist */,
 			);
-			path = "CS342 Library";
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8ECC934A231C7E1700A6DB80 /* Segues */ = {
+			isa = PBXGroup;
+			children = (
+				8ECC934B231C7E3F00A6DB80 /* ReplaceViewSegue.swift */,
+			);
+			path = Segues;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -95,6 +114,7 @@
 				TargetAttributes = {
 					8ECC933D231C7DB300A6DB80 = {
 						CreatedOnToolsVersion = 10.3;
+						LastSwiftMigration = 1030;
 					};
 				};
 			};
@@ -130,6 +150,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8ECC934C231C7E3F00A6DB80 /* ReplaceViewSegue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +282,7 @@
 		8ECC9347231C7DB300A6DB80 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -268,7 +290,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "CS342 Library/Info.plist";
+				INFOPLIST_FILE = "CS342 Library/Supporting Files/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -278,6 +300,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "edu.stanford.CS342-Library";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -286,6 +309,7 @@
 		8ECC9348231C7DB300A6DB80 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -293,7 +317,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "CS342 Library/Info.plist";
+				INFOPLIST_FILE = "CS342 Library/Supporting Files/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
