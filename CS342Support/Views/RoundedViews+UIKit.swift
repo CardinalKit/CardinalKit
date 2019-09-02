@@ -9,7 +9,7 @@
 import UIKit
 
 @IBDesignable
-class RoundedButton: UIButton {
+public class RoundedButton: UIButton {
     
     @IBInspectable
     var enabledColor: UIColor = UIColor.radicalRed
@@ -20,7 +20,7 @@ class RoundedButton: UIButton {
     @IBInspectable
     var cornerRadius: CGFloat = 7
     
-    override func awakeFromNib() {
+    override public func awakeFromNib() {
         super.awakeFromNib()
         
         self.layoutIfNeeded()
@@ -34,13 +34,13 @@ class RoundedButton: UIButton {
         }
     }
     
-    func enable() {
+    public func enable() {
         self.backgroundColor = enabledColor
         self.setTitleColor(UIColor.white, for: UIControl.State())
         self.isEnabled = true
     }
     
-    func disable() {
+    public func disable() {
         self.backgroundColor = disabledColor
         self.setTitleColor(UIColor.darkGray, for: UIControl.State())
         self.isEnabled = false
