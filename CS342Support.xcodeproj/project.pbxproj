@@ -7,15 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8ECC9343231C7DB300A6DB80 /* CS342_Library.h in Headers */ = {isa = PBXBuildFile; fileRef = 8ECC9341231C7DB300A6DB80 /* CS342_Library.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8ECC9343231C7DB300A6DB80 /* CS342Support.h in Headers */ = {isa = PBXBuildFile; fileRef = 8ECC9341231C7DB300A6DB80 /* CS342Support.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8ECC934C231C7E3F00A6DB80 /* ReplaceViewSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECC934B231C7E3F00A6DB80 /* ReplaceViewSegue.swift */; };
+		8ECC9361231C828E00A6DB80 /* StanfordBanner.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8ECC9360231C828E00A6DB80 /* StanfordBanner.xib */; };
+		8ECC9364231C84AB00A6DB80 /* RoundedViews+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECC9363231C84AB00A6DB80 /* RoundedViews+UIKit.swift */; };
+		8ECC9371231C86DE00A6DB80 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8ECC9370231C86DE00A6DB80 /* Assets.xcassets */; };
+		8ECC937B231C87F900A6DB80 /* Appearance+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECC937A231C87F900A6DB80 /* Appearance+UIColor.swift */; };
+		8ECC937D231C8A7700A6DB80 /* NumberDescription.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8ECC937C231C8A7700A6DB80 /* NumberDescription.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		8ECC933E231C7DB300A6DB80 /* CS342_Library.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CS342_Library.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8ECC9341231C7DB300A6DB80 /* CS342_Library.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CS342_Library.h; sourceTree = "<group>"; };
+		8ECC933E231C7DB300A6DB80 /* CS342Support.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CS342Support.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8ECC9341231C7DB300A6DB80 /* CS342Support.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CS342Support.h; sourceTree = "<group>"; };
 		8ECC9342231C7DB300A6DB80 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8ECC934B231C7E3F00A6DB80 /* ReplaceViewSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplaceViewSegue.swift; sourceTree = "<group>"; };
+		8ECC9360231C828E00A6DB80 /* StanfordBanner.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StanfordBanner.xib; sourceTree = "<group>"; };
+		8ECC9363231C84AB00A6DB80 /* RoundedViews+UIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RoundedViews+UIKit.swift"; sourceTree = "<group>"; };
+		8ECC9370231C86DE00A6DB80 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8ECC937A231C87F900A6DB80 /* Appearance+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Appearance+UIColor.swift"; sourceTree = "<group>"; };
+		8ECC937C231C8A7700A6DB80 /* NumberDescription.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NumberDescription.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,7 +42,7 @@
 		8ECC9334231C7DB300A6DB80 = {
 			isa = PBXGroup;
 			children = (
-				8ECC9340231C7DB300A6DB80 /* CS342 Library */,
+				8ECC9340231C7DB300A6DB80 /* CS342Support */,
 				8ECC933F231C7DB300A6DB80 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -40,25 +50,28 @@
 		8ECC933F231C7DB300A6DB80 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8ECC933E231C7DB300A6DB80 /* CS342_Library.framework */,
+				8ECC933E231C7DB300A6DB80 /* CS342Support.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		8ECC9340231C7DB300A6DB80 /* CS342 Library */ = {
+		8ECC9340231C7DB300A6DB80 /* CS342Support */ = {
 			isa = PBXGroup;
 			children = (
+				8ECC935D231C825D00A6DB80 /* Views */,
 				8ECC934A231C7E1700A6DB80 /* Segues */,
 				8ECC9349231C7E0500A6DB80 /* Supporting Files */,
 			);
-			path = "CS342 Library";
+			path = CS342Support;
 			sourceTree = "<group>";
 		};
 		8ECC9349231C7E0500A6DB80 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				8ECC9341231C7DB300A6DB80 /* CS342_Library.h */,
+				8ECC9379231C87D700A6DB80 /* Convenience */,
+				8ECC9341231C7DB300A6DB80 /* CS342Support.h */,
 				8ECC9342231C7DB300A6DB80 /* Info.plist */,
+				8ECC9370231C86DE00A6DB80 /* Assets.xcassets */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -71,6 +84,32 @@
 			path = Segues;
 			sourceTree = "<group>";
 		};
+		8ECC935D231C825D00A6DB80 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8ECC9362231C848000A6DB80 /* XIB */,
+				8ECC9363231C84AB00A6DB80 /* RoundedViews+UIKit.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		8ECC9362231C848000A6DB80 /* XIB */ = {
+			isa = PBXGroup;
+			children = (
+				8ECC9360231C828E00A6DB80 /* StanfordBanner.xib */,
+				8ECC937C231C8A7700A6DB80 /* NumberDescription.xib */,
+			);
+			path = XIB;
+			sourceTree = "<group>";
+		};
+		8ECC9379231C87D700A6DB80 /* Convenience */ = {
+			isa = PBXGroup;
+			children = (
+				8ECC937A231C87F900A6DB80 /* Appearance+UIColor.swift */,
+			);
+			path = Convenience;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -78,16 +117,16 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8ECC9343231C7DB300A6DB80 /* CS342_Library.h in Headers */,
+				8ECC9343231C7DB300A6DB80 /* CS342Support.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		8ECC933D231C7DB300A6DB80 /* CS342 Library */ = {
+		8ECC933D231C7DB300A6DB80 /* CS342Support */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8ECC9346231C7DB300A6DB80 /* Build configuration list for PBXNativeTarget "CS342 Library" */;
+			buildConfigurationList = 8ECC9346231C7DB300A6DB80 /* Build configuration list for PBXNativeTarget "CS342Support" */;
 			buildPhases = (
 				8ECC9339231C7DB300A6DB80 /* Headers */,
 				8ECC933A231C7DB300A6DB80 /* Sources */,
@@ -98,9 +137,9 @@
 			);
 			dependencies = (
 			);
-			name = "CS342 Library";
+			name = CS342Support;
 			productName = "CS342 Library";
-			productReference = 8ECC933E231C7DB300A6DB80 /* CS342_Library.framework */;
+			productReference = 8ECC933E231C7DB300A6DB80 /* CS342Support.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -118,7 +157,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 8ECC9338231C7DB300A6DB80 /* Build configuration list for PBXProject "CS342 Library" */;
+			buildConfigurationList = 8ECC9338231C7DB300A6DB80 /* Build configuration list for PBXProject "CS342Support" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -130,7 +169,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8ECC933D231C7DB300A6DB80 /* CS342 Library */,
+				8ECC933D231C7DB300A6DB80 /* CS342Support */,
 			);
 		};
 /* End PBXProject section */
@@ -140,6 +179,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8ECC9361231C828E00A6DB80 /* StanfordBanner.xib in Resources */,
+				8ECC9371231C86DE00A6DB80 /* Assets.xcassets in Resources */,
+				8ECC937D231C8A7700A6DB80 /* NumberDescription.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,6 +193,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8ECC934C231C7E3F00A6DB80 /* ReplaceViewSegue.swift in Sources */,
+				8ECC937B231C87F900A6DB80 /* Appearance+UIColor.swift in Sources */,
+				8ECC9364231C84AB00A6DB80 /* RoundedViews+UIKit.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,14 +334,14 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "CS342 Library/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "CS342Support/Supporting Files/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "edu.stanford.CS342-Library";
+				PRODUCT_BUNDLE_IDENTIFIER = edu.stanford.CS342Support;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -317,14 +361,14 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "CS342 Library/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "CS342Support/Supporting Files/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "edu.stanford.CS342-Library";
+				PRODUCT_BUNDLE_IDENTIFIER = edu.stanford.CS342Support;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -335,7 +379,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8ECC9338231C7DB300A6DB80 /* Build configuration list for PBXProject "CS342 Library" */ = {
+		8ECC9338231C7DB300A6DB80 /* Build configuration list for PBXProject "CS342Support" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8ECC9344231C7DB300A6DB80 /* Debug */,
@@ -344,7 +388,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8ECC9346231C7DB300A6DB80 /* Build configuration list for PBXNativeTarget "CS342 Library" */ = {
+		8ECC9346231C7DB300A6DB80 /* Build configuration list for PBXNativeTarget "CS342Support" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8ECC9347231C7DB300A6DB80 /* Debug */,
