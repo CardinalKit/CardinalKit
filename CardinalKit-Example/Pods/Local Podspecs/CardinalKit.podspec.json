@@ -1,0 +1,55 @@
+{
+  "name": "CardinalKit",
+  "version": "0.1.0",
+  "summary": "A short description of CardinalKit.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/CardinalKit/CardinalKit",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "CardinalKit": "ssgutierrez42@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/CardinalKit/CardinalKit.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "11.0"
+  },
+  "source_files": "CardinalKit/Source/**/*",
+  "resource_bundles": {
+    "CardinalKit": [
+      "CardinalKit/Assets/*.png",
+      "CardinalKit/Assets/*.pdf"
+    ]
+  },
+  "frameworks": [
+    "UIKit",
+    "Foundation"
+  ],
+  "dependencies": {
+    "ResearchKit": [
+
+    ],
+    "SAMKeychain": [
+      "~> 1.5.2"
+    ],
+    "RealmSwift": [
+      "~> 3.7.6"
+    ],
+    "ObjectMapper": [
+      "~> 3.3.0"
+    ],
+    "SwiftyJSON": [
+      "~> 4.1.0"
+    ],
+    "ReachabilitySwift": [
+      "~> 3"
+    ],
+    "Zip": [
+      "~> 1.1.0"
+    ]
+  }
+}

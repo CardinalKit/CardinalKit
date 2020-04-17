@@ -1,0 +1,6 @@
+framework module CardinalKit {
+  umbrella header "CardinalKit-umbrella.h"
+
+  export *
+  module * { export * }
+}
