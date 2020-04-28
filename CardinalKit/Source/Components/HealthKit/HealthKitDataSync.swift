@@ -197,8 +197,8 @@ extension HealthKitDataSync {
         if let start = data.first?.quantitySample?.startDate,
             let end = data.last?.quantitySample?.startDate,
             let type = data.first?.quantitySample?.type,
-            let device = data.first?.quantitySample?.deviceId {
-            return "E\(sessionEID)_hkdata_report_\(device)_\(type)_\(start.stringWithFormat("MMdd'T'HHmm"))_\(end.stringWithFormat("MMdd'T'HHmm"))"
+            let device = data.first?.quantitySample?.source {
+            return "E\(sessionEID)_hkdata_report_\(device)_\(type)_\(start.stringWithFormat("MMdd'T'HHmm"))_\(end.stringWithFormat("MMdd'T'HHmm"))".trimmingCharacters(in: .whitespaces)
         }
         return nil
     }

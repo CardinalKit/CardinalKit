@@ -10,7 +10,7 @@ import HealthKit
 
 extension HKSample {
     var deviceKey: String {
-        return "\(self.device?.key ?? "UnknownDevice") \(self.sourceRevision.source.key)"
+        return "\(self.device?.key ?? "UnknownDevice")_\(self.sourceRevision.source.key)"
     }
 }
 

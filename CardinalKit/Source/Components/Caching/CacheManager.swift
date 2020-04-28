@@ -9,16 +9,16 @@
 import Foundation
 
 enum CacheType : String {
-    case network = "edu.stanford.vasctrac.network"
-    case walkTest = "edu.stanford.vasctrac.walktest"
+    case network = "cardinalkit.network"
+    case walkTest = "cardinalkit.walktest"
 }
 
 class CacheManager : NSObject {
     
     static let shared = CacheManager()
     
-    let parentContainer = "edu.stanford.vasctrac"
-    let realmContainerPath = "edu.stanford.vasctrac.realm"
+    let parentContainer = "\(Constants.app)"
+    let realmContainerPath = "\(Constants.app).realm"
     
     lazy var documents: URL? = {
         guard let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
@@ -61,7 +61,7 @@ class CacheManager : NSObject {
             return nil
         }
         
-        return realm.appendingPathComponent("vasctrac.realm")
+        return realm.appendingPathComponent("cardinalkit.realm")
     }()
     
     var userContainer: URL? { //not lazy because userId needs to be valid after log-in and log-out
@@ -189,6 +189,7 @@ extension CacheManager {
             do {
                 try FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true, attributes: [FileAttributeKey.protectionKey: FileProtectionType.completeUntilFirstUserAuthentication])
             } catch {
+                VError("Unable to create directory @", error.localizedDescription)
                 return false
             }
         } else {

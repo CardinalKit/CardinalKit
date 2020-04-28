@@ -138,27 +138,7 @@ class HealthKitCollector {
         }
         
     }
-    
-    func collectDataRetroactively(onCompletion: @escaping ([HealthKitData]) -> Void) {
-        
-        guard !isBulkCollectionRunning else {
-            onCompletion([HealthKitData]())
-            return
-        }
-        
-        isBulkCollectionRunning = true
-        
-        //TODO: APIClient (!!!)
-        /* APIClient.sharedClient.getDailyDataRetroactiveSyncDate { [weak self] (syncDate) in
-            
-            self?.collectBulkData(startingFrom: syncDate) { [weak self] results in
-                self?.isBulkCollectionRunning = false
-                onCompletion(results)
-            }
-        } */
-        
-    }
-    
+
 }
 
 extension HealthKitCollector {
@@ -235,7 +215,9 @@ extension HealthKitCollector {
     
     @available(*, deprecated)
     func collectAndSendRetroactively(onCompletion: @escaping ()->Void) {
-        collectDataRetroactively() { [weak self] (data) in
+        
+        let syncDate = (UserDefaults.standard.object(forKey: Constants.UserDefaults.HKStartDate) as? Date) ?? Date().dayByAdding(-1) ?? Date()
+        collectStrictRangeDataRetroactively(fromDate: syncDate) { [weak self] (data) in
             guard !data.isEmpty else {
                 onCompletion()
                 return
@@ -252,32 +234,41 @@ extension HealthKitCollector {
         
         if let lastSentPayload = realm.objects(HealthKitData.self).last,
             lastSentPayload == data.first {
+            VLog("[HealthKitCollector] cummulative data already up-to-date")
             //don't send the same thing again
             //we can get here if the phone tries to sync data but hasn't moved at all since the last time it synced. This patient needs to get up!
             onCompletion()
             return
         }
         
-        let collectedData = Mapper().toJSONArray(data)
-        let payload: [String:Any] = ["daysData": collectedData]
+        // let collectedData = Mapper().toJSONArray(data)
+        // let payload: [String:Any] = ["daysData": collectedData]
         
-        //TODO: we no longer have an API client
-        /* APIClient.sharedClient.sendDailyData(payload) { (_, error: String?) in
+        VLog("[HealthKitCollector] attempting to encode and send")
+        
+        do {
+            let encoder = JSONEncoder()
+            encoder.dateEncodingStrategy = .iso8601
+            let collectedData = try encoder.encode(["payload": data])
             
-            if let error = error {
-                VError("%@", error)
-            } else if let entry = data.first {
+            let packageName = UUID().uuidString
+            let package = try Package(packageName, type: .hkdataAggregate, data: collectedData)
+            try NetworkDataRequest.send(package)
+            
+            if let entry = data.first {
                 
                 let dataQueue = realm.objects(HealthKitData.self)
                 try! realm.write {
                     realm.delete(dataQueue)
-                    realm.add(entry, update: true)
+                    realm.add(entry, update: .all)
                 }
             }
             
             onCompletion()
-            //self.finishExecution()
-        }*/
+        } catch {
+            VError("Unable to process package %@", error.localizedDescription)
+            onCompletion()
+        }
         
     }
     

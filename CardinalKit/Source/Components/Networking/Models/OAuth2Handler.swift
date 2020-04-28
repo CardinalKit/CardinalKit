@@ -39,6 +39,8 @@ class OAuth2Handler {
                 }
             }
             
+            urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            
             if let deviceId = UIDevice.current.identifierForVendor?.uuidString {
                 urlRequest.setValue(deviceId, forHTTPHeaderField: "X-DeviceId")
             }

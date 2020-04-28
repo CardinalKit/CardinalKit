@@ -31,7 +31,7 @@ class QuantitySampleData: Object, Codable {
     
     var value: Double = 0
     var unit: String = ""
-    var deviceId: String = ""
+    var source: String = ""
     var type: String = ""
     var startDate: Date = Date()
     var endDate: Date = Date()
@@ -41,7 +41,7 @@ class QuantitySampleData: Object, Codable {
         if let sampleUnit = QuantitySampleData.unitForQuantityType(type: sample.quantityType) {
             unit = sampleUnit.unitString
             value = sample.quantity.doubleValue(for: sampleUnit)
-            deviceId = sample.deviceKey
+            source = sample.deviceKey
             type = sample.quantityType.identifier
             startDate = sample.startDate
             endDate = sample.endDate

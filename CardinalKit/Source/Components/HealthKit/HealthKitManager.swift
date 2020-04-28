@@ -24,6 +24,7 @@ class HealthKitManager: SyncDelegate {
         }
         set(newValue) {
             UserDefaults.standard.set(newValue, forKey: Constants.UserDefaults.HKDataShare)
+            CKSession.putSecure(value: String(newValue ?? false), forKey: Constants.UserDefaults.HKDataShare)
         }
     }
     
@@ -104,6 +105,18 @@ class HealthKitManager: SyncDelegate {
         }
     }
     
+    public func disableHealthKit() {
+        healthStore.disableAllBackgroundDelivery { (success, error) in
+            if let error = error {
+                VError("Unable to disable HK background delivery %@", error.localizedDescription)
+            }
+        }
+    }
+    
+}
+
+extension HealthKitManager {
+    
     fileprivate func setUpBackgroundDeliveryForDataTypes(types: Set<HKQuantityType>) {
         
         for type in types {
@@ -120,10 +133,10 @@ class HealthKitManager: SyncDelegate {
                     dispatchGroup.leave()
                 })
                 
-                dispatchGroup.enter()
+                /*dispatchGroup.enter()
                 strongSelf.cumulativeBackgroundQuery(forType: type, completionHandler: {
                     dispatchGroup.leave()
-                })
+                })*/
                 
                 dispatchGroup.notify(queue: .main, execute: {
                     completionHandler()
@@ -132,7 +145,7 @@ class HealthKitManager: SyncDelegate {
             })
             
             healthStore.execute(query)
-            healthStore.enableBackgroundDelivery(for: type, frequency: .hourly, withCompletion: { (success, error) in
+            healthStore.enableBackgroundDelivery(for: type, frequency: .immediate, withCompletion: { (success, error) in
                 if let error = error {
                     VError("%@", error.localizedDescription)
                 }
@@ -145,9 +158,18 @@ class HealthKitManager: SyncDelegate {
     @available(*, deprecated)
     fileprivate func cumulativeBackgroundQuery(forType type: HKQuantityType, completionHandler: @escaping ()->Void) {
         
-        HealthKitCollector.shared.collectAndSendRetroactively {
-            VLog("[DEPRECATED] cumulative dollection done with type %@", type.identifier)
+        guard canQuery(forType: type) else {
+            VLog("Cannot yet query for %@, please try again in a minute.", type.identifier)
             completionHandler()
+            return
+        }
+        DispatchQueue.main.async { //run on main queue, which exists even if the app is 100% in the background.
+        
+            VLog("[DEPRECATED] cumulative querying for type %@", type.identifier)
+            HealthKitCollector.shared.collectAndSendRetroactively {
+                VLog("[DEPRECATED] cumulative dollection done with type %@", type.identifier)
+                completionHandler()
+            }
         }
         
     }
@@ -195,4 +217,5 @@ class HealthKitManager: SyncDelegate {
             HealthKitDataSync.shared.collectAndUploadData(forType: type, onCompletion: nil)
         }
     }
+    
 }

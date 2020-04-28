@@ -61,8 +61,7 @@ public class SessionManager {
     
     func clearKeychainData() {
         
-        // TODO: CKSession?
-        
+        CKSession.removeSecure(key: Constants.UserDefaults.HKDataShare);
     }
     
     func clearAppData(forceNavigation: Bool = false, onCompletion: (()->Void)? = nil) {

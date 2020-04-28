@@ -22,7 +22,8 @@ class Constants {
         static let FirstRun = "\(app).firstRun"
         static let FirstLogin = "\(app).firstLogin"
         static let CompletedMarketingSurvey = "\(app).completedMarketingSurvey"
-        static let HKDataShare = "\(app).vasctrac.healthKitShare"
+        static let HKDataShare = "\(app).healthKitShare"
+        static let HKStartDate = "\(app).healthKitDate"
         
         //Session
         static let DeviceToken = "\(app).deviceToken"

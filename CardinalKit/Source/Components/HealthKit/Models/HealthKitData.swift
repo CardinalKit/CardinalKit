@@ -19,7 +19,7 @@ enum HealthKitDataModel : Int {
     static let all = [maxNonStopSteps, totalSteps, totalFlights, distanceWalked]
 }
 
-class HealthKitData: Object, Mappable {
+class HealthKitData: Object, Mappable, Codable {
     
     @objc dynamic var id: Int = 0
     @objc dynamic var startDate: String = ""

@@ -11,8 +11,8 @@ import ReachabilitySwift
 import RealmSwift
 
 enum NetworkTypes: String {
-    case connected = "edu.stanford.vasctrac.connected"
-    case disconnected = "edu.stanford.vasctrac.disconnected"
+    case connected = "cardinalkit.network.connected"
+    case disconnected = "cardinalkit.network.disconnected"
 }
 
 class NetworkTracker {
