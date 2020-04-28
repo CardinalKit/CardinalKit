@@ -67,7 +67,7 @@ extension NetworkTracker {
             }
         }
         
-        sendFileSnapshot()
+        // sendFileSnapshot()
     }
     
     fileprivate func checkProcessing() {
@@ -87,7 +87,6 @@ extension NetworkTracker {
     }
     
     fileprivate func checkCache() {
-        migrateLegacyCache()
         
         guard let cacheContents = CacheManager.shared.getZipContents(fileType: .sensorData), !cacheContents.isEmpty else {
             VLog("No contents on iPhone cache")
@@ -116,79 +115,6 @@ extension NetworkTracker {
         }
     }
     
-    @available(*, deprecated)
-    fileprivate func migrateLegacyCache() {
-        guard let cacheContents = CacheManager.shared.getZipContents(forType: .walkTest), !cacheContents.isEmpty else {
-            VLog("No contents on iPhone legacy cache")
-            return
-        }
-        
-        for url in cacheContents {
-            
-            let fileName = url.lastPathComponent
-            let newPackage = Package(fileName, type: .sensorData)
-            
-            if let dataContents = FileManager.default.contents(atPath: url.path) {
-                do {
-                    try newPackage.write(dataContents)
-                    CacheManager.shared.deleteCache(atURL: url)
-                    
-                    VLog("Moved file between legacy %@ and new cache", url.path)
-                } catch {
-                    VError("%@", error.localizedDescription)
-                }
-            }
-            
-            
-        }
-        
-    }
-    
-    @available(*, deprecated)
-    fileprivate func reloadNetworkQueue() {
-        
-        /*guard let bridge = NetworkBridge.getInstance() else {
-            return
-        }
-        
-        let failedRequests = bridge.failedRequests
-        
-        guard !failedRequests.isEmpty else {
-            return
-        }
-        
-        for request in failedRequests {
-            AnalyticsManager.shared.log(event: .networkTryingFailedRequests, ["request": request.urlString ?? "[unknown URL]","failedRequests": failedRequests.count, "status" : "requesting"])
-            
-            if request.isInvalidated {
-                continue
-            }
-            
-            request.perform() { result in
-                if !request.isInvalidated {
-                    
-                    //delete the cached network request under two conditions:
-                    // (1) request was sent successfully, no need to cache further.
-                    // (2) request was deemed invalid multiple times
-                    if result || request.invalidThreshold > 3 {
-                        //AnalyticsManager.shared.log(event: .networkTryingFailedRequests, ["request": request.urlString ?? "[unknown URL]","failedRequests": failedRequests.count, "status" : "success", "invalidThreshold" : request.invalidThreshold])
-                        
-                        let realm = try! Realm()
-                        try! realm.write {
-                            realm.delete(request)
-                        }
-                    } else {
-                        AnalyticsManager.shared.log(event: .networkTryingFailedRequests, ["request": request.urlString ?? "[unknown URL]","failedRequests": failedRequests.count, "status" : "failed"])
-                    }
-                    
-                }
-            }
-        }
-        
-        sendFileSnapshot()*/
-        
-    }
-    
 }
 
 extension NetworkTracker {
@@ -199,14 +125,16 @@ extension NetworkTracker {
         }
         
         do {
-            let sessionEID = SessionManager.shared.eId ?? ""
+            let sessionEID = SessionManager.shared.userId ?? ""
             let package = try Package("\(sessionEID)_snapshot_report_\(Date().stringWithFormat("yyyyMMdd'T'HHmmss"))", type: .snapshot, data: snapshot)
             
             let store = try package.store()
             
             //TODO: send without retry (!!!)
+            
             //using the APIClient because we don't actually want this request to be retried if it fails at the moment
             //APIClient.sharedClient.uploadSnapshot(usingFile: store)
+            
             //try NetworkDataRequest.send(package)
             
         } catch {
@@ -227,7 +155,7 @@ extension NetworkTracker {
 extension NetworkTracker {
     
     fileprivate func networkCheck() {
-        guard isHealthy == false && SessionManager.shared.currentUser != nil else {
+        guard isHealthy == false && SessionManager.shared.userId != nil else {
             return
         }
         

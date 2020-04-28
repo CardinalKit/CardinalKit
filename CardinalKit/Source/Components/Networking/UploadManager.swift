@@ -45,10 +45,7 @@ extension UploadManager {
     fileprivate func _request(to url: URL) -> URLRequest {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        if let accessToken = SessionManager.shared.accessToken {
-            return OAuth2Handler.adapt(request, token: accessToken)
-        }
-        return request
+        return OAuth2Handler.adapt(request)
     }
     
 }

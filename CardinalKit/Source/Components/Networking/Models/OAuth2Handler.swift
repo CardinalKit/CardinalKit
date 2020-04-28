@@ -12,24 +12,32 @@ import UIKit
 //request retrying protocol
 class OAuth2Handler {
     
-    private let lock = NSLock()
-    
-    private var accessToken: String
-    
-    //private var requestsToRetry: [RequestRetryCompletion] = []
-    
-    public init(accessToken: String) {
-        self.accessToken = accessToken
-    }
-    
     func adapt(_ urlRequest: URLRequest) throws -> URLRequest {
-        return OAuth2Handler.adapt(urlRequest, token: accessToken)
+        return OAuth2Handler.adapt(urlRequest)
     }
     
-    class func adapt(_ urlRequest: URLRequest, token accessToken: String) -> URLRequest {
-        if let urlString = urlRequest.url?.absoluteString, urlString.hasPrefix(Constants.Network.currentServerUrl) {
+    class func getHeaders() -> [String:String]? {
+        return CKApp.instance.networkDelegate?.getHeaders()
+    }
+    
+    class func isWhitelisted(url: String) -> Bool {
+        guard let whitelistUrls = CKApp.instance.networkDelegate?.getWhitelistURLs() else {
+            return false
+        }
+        
+        return (whitelistUrls.filter { url.hasPrefix($0) }.count != 0)
+    }
+    
+    class func adapt(_ urlRequest: URLRequest) -> URLRequest {
+        if let source = urlRequest.url?.absoluteString, isWhitelisted(url: source) {
+            
             var urlRequest = urlRequest
-            urlRequest.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+            
+            if let headers = getHeaders() {
+                for (key, value) in headers {
+                    urlRequest.setValue(value, forHTTPHeaderField: key)
+                }
+            }
             
             if let deviceId = UIDevice.current.identifierForVendor?.uuidString {
                 urlRequest.setValue(deviceId, forHTTPHeaderField: "X-DeviceId")
@@ -49,6 +57,8 @@ class OAuth2Handler {
             }
             
             return urlRequest
+        } else {
+            VError("URL is NOT white-listed by project.")
         }
         
         return urlRequest

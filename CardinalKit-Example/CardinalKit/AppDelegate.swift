@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import ResearchKit
+import CardinalKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -47,6 +48,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             try? Auth.auth().signOut()
             UserDefaults.standard.set(true, forKey: Constants.prefFirstRunWasMarked)
         }
+        
+        CardinalKit.initDefault()
         
         return true
     }

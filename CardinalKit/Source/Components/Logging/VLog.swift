@@ -23,7 +23,7 @@ func VLogger(_ type: OSLogType, _ message: StaticString, _ args: CVarArg..., cat
     //WatchConnectivityManager.shared.sendMessage(message: ["os.log":logWatch])
     #endif
     
-    let log = OSLog(subsystem: "edu.stanford.vasctrac.logging", category: category)
+    let log = OSLog(subsystem: "\(Constants.app).logging", category: category)
     if #available(iOS 12.0, *), #available(watchOSApplicationExtension 5.0, *) {
         os_log(type, log: log, message, args)
     } else {

@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum PackageType: String {
+public enum PackageType: String {
     case sensorData = "SENSOR_DATA"
     case snapshot = "SNAPSHOT"
     case hkdata = "HKDATA"
@@ -81,6 +81,18 @@ class Package: NSObject {
 }
 
 extension Package {
+    
+    func route() -> String? {
+        return CKApp.instance.networkDelegate?.getAPIRoute(type: self.type)
+    }
+    
+    func routeAsURL() -> URL? {
+        guard let route = route() else {
+            return nil
+        }
+        
+        return URL(string: route)
+    }
 
     /*func route() -> APIRoute {
         return APIRoute.route(for: self.type)

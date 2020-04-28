@@ -41,7 +41,7 @@ class SyncManager {
     
     func sync(_ options: SyncOptions = .everything) {
         
-        guard SessionManager.shared.currentUser != nil else {//&& !isRunning else {
+        guard SessionManager.shared.userId != nil else {//&& !isRunning else {
             return //must be logged in to sync
         }
         

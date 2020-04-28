@@ -82,10 +82,10 @@ class HealthKitManager: SyncDelegate {
         return true
     }
     
-    func getHealthAuthorization(_ completion: ((_ success: Bool, _ error: NSError?) -> Void)? = nil) {
+    public func getHealthAuthorization(_ completion: ((_ success: Bool, _ error: NSError?) -> Void)? = nil) {
         
-        guard HKHealthStore.isHealthDataAvailable() && SessionManager.shared.currentUser != nil else {
-            let error = NSError(domain: "edu.stanford.vasctrac", code: 2, userInfo: [NSLocalizedDescriptionKey: "User is logged out or health data is not available on this device."])
+        guard HKHealthStore.isHealthDataAvailable() && SessionManager.shared.userId != nil else {
+            let error = NSError(domain: Constants.app, code: 2, userInfo: [NSLocalizedDescriptionKey: "Health data is not available on this device."])
             completion?(false, error)
             return
         }

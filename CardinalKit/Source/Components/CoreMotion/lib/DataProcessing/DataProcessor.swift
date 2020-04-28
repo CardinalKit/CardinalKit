@@ -54,7 +54,7 @@ class DataProcessor {
         var prefix = ""
         
         #if os(iOS)
-        prefix += "E" + (SessionManager.shared.eId ?? "") + "_"
+        prefix += (SessionManager.shared.userId ?? "") + "_"
         #endif
         
         prefix += motionData.syncId + "_"

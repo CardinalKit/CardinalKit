@@ -193,7 +193,7 @@ extension HealthKitDataSync {
     }
     
     fileprivate func getPackageName(for data: [HKSampleData]) -> String? {
-        let sessionEID = SessionManager.shared.eId ?? ""
+        let sessionEID = SessionManager.shared.userId ?? ""
         if let start = data.first?.quantitySample?.startDate,
             let end = data.last?.quantitySample?.startDate,
             let type = data.first?.quantitySample?.type,

@@ -46,7 +46,7 @@ TODO: Add long description of the pod here.
   s.dependency 'SAMKeychain',      '~> 1.5.2'
 
   #Local Storage
-  s.dependency 'RealmSwift',       '~> 3.7.6'
+  s.dependency 'RealmSwift',       '~> 4.4.1'
   
   #Networking and responses
   s.dependency 'ObjectMapper',     '~> 3.3.0'

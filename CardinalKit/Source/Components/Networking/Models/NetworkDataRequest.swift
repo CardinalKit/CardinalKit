@@ -90,7 +90,7 @@ class NetworkDataRequest: Object {
         
         let realm = try Realm()
         try realm.write {
-            realm.add(newRequest, update: true)
+            realm.add(newRequest, update: .all)
         }
         
         return newRequest
@@ -148,9 +148,12 @@ extension NetworkDataRequest {
         let store = try package.store()
         
         // TODO: where do we upload to? (!!!)
-        /* let endpointURL = try package.route().asURL()
-        UploadManager.shared.upload(file: store, to: endpointURL, uuid: "\(id)")
-        try markAsProcessing() //mark request as processing*/
+        if let endpointURL = package.routeAsURL() {
+            UploadManager.shared.upload(file: store, to: endpointURL, uuid: "\(id)")
+            try markAsProcessing() //mark request as processing
+        } else {
+            VError("Unable to find route for network package type (%@)", package.type.rawValue)
+        }
     }
     
     func complete() {
@@ -195,8 +198,8 @@ extension NetworkDataRequest {
 extension NetworkDataRequest {
 
     fileprivate func shouldPerform() -> Bool {
-        guard SessionManager.shared.hasAccessToken else {
-            return false //only send data when authenticated 
+        guard package?.route() != nil else {
+            return false //package has no endpoint
         }
         
         let threshold = Date().addingTimeInterval(-60*5) //3 mins

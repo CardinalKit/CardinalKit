@@ -14,57 +14,41 @@ class Constants {
     }
     
     static let environment: Environment = .production
+    static let app = "io.biodesign.cardinalkit"
     
     struct UserDefaults {
         
         //Misc
-        static let FirstRun = "edu.stanford.vasctrac.firstRun"
-        static let FirstLogin = "edu.stanford.vasctrac.firstLogin"
-        static let CompletedMarketingSurvey = "edu.stanford.vasctrac.completedMarketingSurvey"
-        static let HKDataShare = "edu.stanford.vasctrac.healthKitShare"
+        static let FirstRun = "\(app).firstRun"
+        static let FirstLogin = "\(app).firstLogin"
+        static let CompletedMarketingSurvey = "\(app).completedMarketingSurvey"
+        static let HKDataShare = "\(app).vasctrac.healthKitShare"
         
         //Session
-        static let DeviceToken = "edu.stanford.vasctrac.deviceToken"
-        static let UserId = "edu.stanford.vasctrac.userId"
-        static let EID = "edu.stanford.vasctrac.EID"
-        static let ValidSession = "edu.stanford.vasctrac.validSession"
+        static let DeviceToken = "\(app).deviceToken"
+        static let UserId = "\(app).userId"
+        static let ValidSession = "\(app).validSession"
         
         // Surveys
-        static let MedicalSurvey = "edu.stanford.vasctrac.medicalSurvey"
-        static let SF12Survey = "edu.stanford.vasctrac.sf12Survey"
-        static let SurgicalSurvey = "edu.stanford.vasctrac.surgicalSurvey"
-        static let PhysicalSurvey = "edu.stanford.vasctrac.physicalSurvey"
+        static let MedicalSurvey = "\(app).medicalSurvey"
+        static let SF12Survey = "\(app).sf12Survey"
+        static let SurgicalSurvey = "\(app).surgicalSurvey"
+        static let PhysicalSurvey = "\(app).physicalSurvey"
         
         // Watch
-        static let WatchReceivedFiles = "edu.stanford.vasctrac.watch.receivedFiles"
-        static let WatchTransferFailedFiles = "edu.stanford.vasctrac.watch.failedFiles"
+        static let WatchReceivedFiles = "\(app).watch.receivedFiles"
+        static let WatchTransferFailedFiles = "\(app).watch.failedFiles"
     }
     
     struct Network {
-        
-        // MARK: Environments URLs
-        static let stagingUrl = "https://vasctracdev.azurewebsites.net"
-        static let productionUrl = "https://vasctrac-samoyed.azurewebsites.net"
-        
-        static let localUrl = "http://192.168.7.243:3000"//"http://localhost:3000"
-        
-        static var currentServerUrl: String {
-            switch Constants.environment {
-            case .development:
-                return localUrl//stagingUrl
-            case .production:
-                return productionUrl
-            }
-        }
-        
         static let SuccessRange = 200..<300
         static let NotFound = 404
         static let ServerError = 500
     }
     
     struct Keychain {
-        static let AppIdentifier = "edu.stanford.vasctrac"
-        static let TokenIdentifier = "edu.stanford.vasctrac.token"
+        static let AppIdentifier = "\(app)"
+        static let TokenIdentifier = "\(app).keychain"
     }
     
     struct Notification {
