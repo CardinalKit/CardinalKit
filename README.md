@@ -1,15 +1,19 @@
-# CardinalKit
+<img src="https://github.com/CardinalKit/CardinalKit/blob/master/CardinalKit-Web-Assets/header.png?raw=true" alt="cardinalkit logo">
+
+# CardinalKit Framework 🏥
 
 [![CI Status](https://img.shields.io/travis/ssgutierrez42/CardinalKit.svg?style=flat)](https://travis-ci.org/ssgutierrez42/CardinalKit)
 [![Version](https://img.shields.io/cocoapods/v/CardinalKit.svg?style=flat)](https://cocoapods.org/pods/CardinalKit)
 [![License](https://img.shields.io/cocoapods/l/CardinalKit.svg?style=flat)](https://cocoapods.org/pods/CardinalKit)
 [![Platform](https://img.shields.io/cocoapods/p/CardinalKit.svg?style=flat)](https://cocoapods.org/pods/CardinalKit)
 
-## Example
+---
+
+Please visit http://cardinalkit.github.io/ to get started with our documentation 🙌
+
+## Run the Sample Project
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
-
-## Requirements
 
 ## Installation
 
@@ -20,10 +24,9 @@ it, simply add the following line to your Podfile:
 pod 'CardinalKit'
 ```
 
-## Author
-
-ssgutierrez42, ssgutierrez42@gmail.com
-
 ## License
 
 CardinalKit is available under the MIT license. See the LICENSE file for more info.
+
+
+<img src="https://github.com/CardinalKit/CardinalKit/blob/master/CardinalKit-Web-Assets/footer.png?raw=true" alt="biodesign logo">
