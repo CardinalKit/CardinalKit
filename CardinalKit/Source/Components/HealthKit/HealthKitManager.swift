@@ -28,36 +28,8 @@ class HealthKitManager: SyncDelegate {
         }
     }
     
-    //these items will be queried for in the background
-    fileprivate let healthDataItemsToReadPassively: Set<HKQuantityType> = [
-        HKObjectType.quantityType(forIdentifier: .stepCount)!,
-        HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning)!,
-        HKObjectType.quantityType(forIdentifier: .flightsClimbed)!,
-        HKObjectType.quantityType(forIdentifier: .heartRate)!
-    ]
-    
-    //these items will be used for setup only
-    fileprivate let healthKitDataItemsToReadForSetup: Set<HKQuantityType> = [
-        HKObjectType.quantityType(forIdentifier: .restingHeartRate)!,
-        HKObjectType.quantityType(forIdentifier: .height)!,
-        HKObjectType.quantityType(forIdentifier: .bodyMass)!
-    ]
-    
-    
-    //will be used to request READ permissions from HealthKit
-    fileprivate var healthDataItemsToRead: Set<HKQuantityType> {
-        return healthKitDataItemsToReadForSetup.union(healthDataItemsToReadPassively)
-    }
-    
-    //will be used to request WRITE permissions from HealthKit
-    fileprivate var healthDataItemsToWrite: Set<HKQuantityType> {
-        return healthDataItemsToRead //we only ask for "write" permissions because the only way to verify HK permissions is if there is a "write" permission granted.
-    }
-    
     init() {
         NotificationCenter.default.addObserver(self, selector: #selector(HealthKitManager.syncData), name: NSNotification.Name(rawValue: Constants.Notification.DataSyncRequest), object: nil)
-        //SyncManager.shared.addDelegate(self)
-        getHealthAuthorization()
     }
     
     deinit {
@@ -69,7 +41,7 @@ class HealthKitManager: SyncDelegate {
     // It is not possible to get the status for the 'Read Data' because Apple think it is sensitive issue
     // Thus we will keep "step counts" as a dummy variable to check whether
     // the user has given permission for the health kit
-    func hasHealthKitPermissions() -> Bool {
+    /* func hasHealthKitPermissions() -> Bool {
         
         for quantity in healthDataItemsToWrite {
             
@@ -81,35 +53,36 @@ class HealthKitManager: SyncDelegate {
         }
         
         return true
-    }
+    }*/
     
-    public func getHealthAuthorization(_ completion: ((_ success: Bool, _ error: NSError?) -> Void)? = nil) {
+    public func getHealthKitAuth(forTypes types: Set<HKQuantityType>, _ completion: @escaping (_ success: Bool, _ error: NSError?) -> Void) {
         
         guard HKHealthStore.isHealthDataAvailable() && SessionManager.shared.userId != nil else {
             let error = NSError(domain: Constants.app, code: 2, userInfo: [NSLocalizedDescriptionKey: "Health data is not available on this device."])
-            completion?(false, error)
+            completion(false, error)
             return
         }
         
-        // Get authorization to access the actividata
-        healthStore.requestAuthorization(toShare: healthDataItemsToWrite, read: healthDataItemsToRead) {
+        healthStore.requestAuthorization(toShare: nil, read: types) {
             [weak self] success, error in
             
             guard let strongSelf = self else { return }
             strongSelf.userAuthorizedHKOnDevice = success
             
-            guard success else { return }
-            strongSelf.setUpBackgroundDeliveryForDataTypes(types: strongSelf.healthDataItemsToReadPassively)
-            
-            completion?(success, error as NSError?)
+            completion(success, error as NSError?)
         }
     }
     
-    public func disableHealthKit() {
+    public func startBackgroundDelivery(forTypes types: Set<HKQuantityType>, withFrequency frequency: HKUpdateFrequency, _ completion: ((_ success: Bool, _ error: Error?) -> Void)? = nil) {
+        self.setUpBackgroundDeliveryForDataTypes(types: types, frequency: frequency, completion)
+    }
+    
+    public func disableHealthKit(_ completion: ((_ success: Bool, _ error: Error?) -> Void)? = nil) {
         healthStore.disableAllBackgroundDelivery { (success, error) in
             if let error = error {
                 VError("Unable to disable HK background delivery %@", error.localizedDescription)
             }
+            completion?(success, error)
         }
     }
     
@@ -117,8 +90,8 @@ class HealthKitManager: SyncDelegate {
 
 extension HealthKitManager {
     
-    fileprivate func setUpBackgroundDeliveryForDataTypes(types: Set<HKQuantityType>) {
-        
+    fileprivate func setUpBackgroundDeliveryForDataTypes(types: Set<HKQuantityType>, frequency: HKUpdateFrequency, _ completion: ((_ success: Bool, _ error: Error?) -> Void)? = nil) {
+
         for type in types {
             let query = HKObserverQuery(sampleType: type, predicate: nil, updateHandler: { [weak self] (query, completionHandler, error) in
                 
@@ -133,7 +106,7 @@ extension HealthKitManager {
                     dispatchGroup.leave()
                 })
                 
-                /*dispatchGroup.enter()
+                /* dispatchGroup.enter()
                 strongSelf.cumulativeBackgroundQuery(forType: type, completionHandler: {
                     dispatchGroup.leave()
                 })*/
@@ -145,10 +118,11 @@ extension HealthKitManager {
             })
             
             healthStore.execute(query)
-            healthStore.enableBackgroundDelivery(for: type, frequency: .immediate, withCompletion: { (success, error) in
+            healthStore.enableBackgroundDelivery(for: type, frequency: frequency, withCompletion: { (success, error) in
                 if let error = error {
                     VError("%@", error.localizedDescription)
                 }
+                completion?(success, error)
             })
             
         }
@@ -158,6 +132,13 @@ extension HealthKitManager {
     @available(*, deprecated)
     fileprivate func cumulativeBackgroundQuery(forType type: HKQuantityType, completionHandler: @escaping ()->Void) {
         
+        let supportedTypes = [HKQuantityTypeIdentifier.stepCount.rawValue, HKQuantityTypeIdentifier.flightsClimbed.rawValue, HKQuantityTypeIdentifier.distanceWalkingRunning.rawValue]
+        if (!supportedTypes.contains(type.identifier)) {
+            VLog("No cumulative query will run for type %@", type.identifier)
+            completionHandler()
+            return
+        }
+        
         guard canQuery(forType: type) else {
             VLog("Cannot yet query for %@, please try again in a minute.", type.identifier)
             completionHandler()
@@ -166,7 +147,7 @@ extension HealthKitManager {
         DispatchQueue.main.async { //run on main queue, which exists even if the app is 100% in the background.
         
             VLog("[DEPRECATED] cumulative querying for type %@", type.identifier)
-            HealthKitCollector.shared.collectAndSendRetroactively {
+            HealthKitCollector.shared.collectAndSendSinceStartOfDay {
                 VLog("[DEPRECATED] cumulative dollection done with type %@", type.identifier)
                 completionHandler()
             }
@@ -177,17 +158,16 @@ extension HealthKitManager {
     fileprivate func backgroundQuery(forType type: HKQuantityType, completionHandler: @escaping ()->Void) {
         
         guard canQuery(forType: type) else {
-            VLog("Cannot yet query for %@, please try again in a minute.", type.identifier)
+            VLog("Cannot yet query for %{public}@, please try again in a minute.", type.identifier)
             completionHandler()
             return
         }
         
         DispatchQueue.main.async { //run on main queue, which exists even if the app is 100% in the background.
             
-            VLog("Querying for type %@", type.identifier)
+            VLog("Querying for type %{public}@", type.identifier)
             HealthKitDataSync.shared.collectAndUploadData(forType: type, onCompletion: {
-                //you can use remaining background time to perform additional operations here, such as attempting to send files that are still stuck. TODO.
-                VLog("Done with type %@", type.identifier)
+                // VLog("Done with type %@", type.identifier)
                 completionHandler()
             })
         }
@@ -204,10 +184,12 @@ extension HealthKitManager {
             return true
         }
         
-        if lastQueryDate.addingTimeInterval(-timeBetweenQueries) >= currentDate {
+        if currentDate.addingTimeInterval(-timeBetweenQueries) >= lastQueryDate {
             queryLog[type.identifier] = currentDate
             return true
         }
+        
+        VLog("canQuery is returning false for type, knowing lastQuery and currentDate = %{public}@", type.identifier, lastQueryDate.ISOStringFromDate(), currentDate.ISOStringFromDate());
         
         return false
     }

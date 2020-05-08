@@ -23,14 +23,17 @@ public class CKApp {
         // CardinalKit Options
         instance.networkDelegate = options?.networkDelegate
         
+        // Start listenig for changes in HealthKit items (waits for valid user inherently)
+        _ = CKActivityManager.shared.load()
+        
+        // Realm
+        _ = RealmManager.shared.configure()
+        
         // Reinstallation/Unistallation
         SessionManager.shared.checkFirstRun()
         
         // Create cache directories with correct permissions
         _ = CacheManager.shared.userContainer
-        
-        // Start listeing for changes in HealthKit items (waits for valid user inherently)
-        _ = HealthKitManager.shared
         
         configureWithValidUser()
     }

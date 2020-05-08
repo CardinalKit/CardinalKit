@@ -135,6 +135,12 @@ public class SessionManager {
     func checkFirstRun() {
         if self.getFirstRun() == nil { // app never run before
             
+            if let hkResult = CKSession.getSecure(key: Constants.UserDefaults.HKDataShare),
+                let hasUsedHealthKit = Bool(hkResult), hasUsedHealthKit {
+                
+                HealthKitManager.shared.disableHealthKit()
+            }
+            
             // if SessionManager.shared.userId == nil { //if we have no user...
                 UIApplication.shared.applicationIconBadgeNumber = 0
                 self.clearKeychainData() //clear the keychain

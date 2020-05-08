@@ -9,12 +9,15 @@ import Foundation
 
 public protocol CKAPIRouteDelegate {
     func getAPIRoute(type: PackageType) -> String?
-    func getWhitelistURLs() -> [String]
+    func getWhitelistDomains() -> [String]
     func getHeaders() -> [String:String]?
+    
+    //POST: URL
+    //<with headers>
+    
+    //need network delivery override methods for GCP-interactions
 }
 
 public class CKNetworkManager : NSObject {
-    
-    
-    
+
 }

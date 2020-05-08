@@ -42,15 +42,15 @@ class HealthKitCollector {
         var operations = [Operation]()
         let doneOperation = Operation()
         
-        let stepsOperation = CumulativeCollector(withPredicate: predicate, willCollect: .totalSteps)
+        let stepsOperation = CumulativeCollector(withPredicate: predicate, willCollect: .steps)
         doneOperation.addDependency(stepsOperation)
         operations.append(stepsOperation)
         
-        let distanceOperation = CumulativeCollector(withPredicate: predicate, willCollect: .distanceWalked)
+        let distanceOperation = CumulativeCollector(withPredicate: predicate, willCollect: .distance)
         doneOperation.addDependency(distanceOperation)
         operations.append(distanceOperation)
         
-        let flightsOperation = CumulativeCollector(withPredicate: predicate, willCollect: .totalFlights)
+        let flightsOperation = CumulativeCollector(withPredicate: predicate, willCollect: .flightsClimbed)
         doneOperation.addDependency(flightsOperation)
         operations.append(flightsOperation)
         
@@ -84,24 +84,24 @@ class HealthKitCollector {
                         
                         //create a single object for this source with all of the data that we collected appended
                         
-                        if singleSourceHkData.maxNonStopSteps >  sourceResults.maxNonStopSteps {
+                        if singleSourceHkData.MSWS >  sourceResults.MSWS {
                             
-                            sourceResults.maxNonStopSteps = singleSourceHkData.maxNonStopSteps
+                            sourceResults.MSWS = singleSourceHkData.MSWS
                         }
                         
-                        if singleSourceHkData.totalSteps >  sourceResults.totalSteps {
+                        if singleSourceHkData.steps >  sourceResults.steps {
                             
-                            sourceResults.totalSteps = singleSourceHkData.totalSteps
+                            sourceResults.steps = singleSourceHkData.steps
                         }
                         
-                        if singleSourceHkData.totalFlights >  sourceResults.totalFlights {
+                        if singleSourceHkData.flightsClimbed >  sourceResults.flightsClimbed {
                             
-                            sourceResults.totalFlights = singleSourceHkData.totalFlights
+                            sourceResults.flightsClimbed = singleSourceHkData.flightsClimbed
                         }
                         
-                        if singleSourceHkData.distanceWalked >  sourceResults.distanceWalked {
+                        if singleSourceHkData.distance >  sourceResults.distance {
                             
-                            sourceResults.distanceWalked = singleSourceHkData.distanceWalked
+                            sourceResults.distance = singleSourceHkData.distance
                         }
                         
                     })
@@ -159,7 +159,7 @@ extension HealthKitCollector {
             
             collectionCalls += 1
             //not using the singleton to let each operation run in its own queue
-            HealthKitCollector().collectData(forDay: currentDay, bulk: true, onCompletion: { (dayResults: [HealthKitData]) in
+            HealthKitCollector().collectData(forDay: currentDay, bulk: true) { (dayResults: [HealthKitData]) in
                 
                 semaphore.wait()  // requesting results resource
                 
@@ -176,7 +176,7 @@ extension HealthKitCollector {
                 if collectionCalls == 0 {
                     onCompletion(results)
                 }
-            })
+            }
             
         }
         
@@ -204,6 +204,19 @@ extension HealthKitCollector {
     @available(*, deprecated)
     func collectAndSendForYesterday(onCompletion: @escaping ()->Void) {
         collectData(forDay: Date().dayByAdding(-1)!) { [weak self] (data) in
+            guard !data.isEmpty else {
+                onCompletion()
+                return
+            }
+            
+            self?.send(data, onCompletion)
+        }
+    }
+    
+    @available(*, deprecated)
+    func collectAndSendSinceStartOfDay(onCompletion: @escaping ()->Void) {
+        
+        collectStrictRangeDataRetroactively(fromDate: Date().startOfDay) { [weak self] (data) in
             guard !data.isEmpty else {
                 onCompletion()
                 return

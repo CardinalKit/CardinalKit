@@ -21,7 +21,7 @@ class OAuth2Handler {
     }
     
     class func isWhitelisted(url: String) -> Bool {
-        guard let whitelistUrls = CKApp.instance.networkDelegate?.getWhitelistURLs() else {
+        guard let whitelistUrls = CKApp.instance.networkDelegate?.getWhitelistDomains() else {
             return false
         }
         
@@ -42,20 +42,20 @@ class OAuth2Handler {
             urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
             
             if let deviceId = UIDevice.current.identifierForVendor?.uuidString {
-                urlRequest.setValue(deviceId, forHTTPHeaderField: "X-DeviceId")
+                urlRequest.setValue(deviceId, forHTTPHeaderField: "x-deviceid")
             }
             
             if let release = Bundle.main.releaseVersionNumber,
                 let build = Bundle.main.buildVersionNumber {
                 let appVersion = "\(release).\(build)"
-                urlRequest.setValue(appVersion, forHTTPHeaderField: "X-AppVersion")
+                urlRequest.setValue(appVersion, forHTTPHeaderField: "x-appversion")
             }
             
             let localTimeZone = String(describing: TimeZone.current).components(separatedBy: " ")[0]
-            urlRequest.setValue(localTimeZone, forHTTPHeaderField: "X-Device-Timezone")
+            urlRequest.setValue(localTimeZone, forHTTPHeaderField: "x-device-timezone")
             
             if let language = Locale.current.languageCode {
-                urlRequest.setValue(language, forHTTPHeaderField: "X-Device-Language") //fi, sv, en
+                urlRequest.setValue(language, forHTTPHeaderField: "x-device-language") //fi, sv, en
             }
             
             return urlRequest

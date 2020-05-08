@@ -43,7 +43,7 @@ class HealthKitDataSync {
                         //let tag = "hkdata_\(type.identifier)_\(sourceRevision.source.key)_\(lastSyncDate.ISOStringFromDate())"
                         self?.send(data: resultData)
                         
-                        VLog("Sent data for type and source %@", type.identifier, sourceRevision.source.key)
+                        VLog("Sent data for type and source %{public}@", type.identifier, sourceRevision.source.key)
                     }
                     
                     dispatchGroup.leave()
@@ -169,7 +169,6 @@ extension HealthKitDataSync {
         let sourcePredicate = HKQuery.predicateForObjects(from: [sourceRevision])
         let predicate = NSCompoundPredicate.init(andPredicateWithSubpredicates: [datePredicate, sourcePredicate])
         
-        //TODO: study query length, with a desired limit of 22,000 (depends on device and background run-time).
         let query = HKSampleQuery(sampleType: type, predicate: predicate, limit: HKObjectQueryNoLimit, sortDescriptors: [sortDescriptor]) {
             (query: HKSampleQuery, results: [HKSample]?, error: Error?) in
             queryHandler(query, results, error)
@@ -187,7 +186,7 @@ extension HealthKitDataSync {
                 let package = try Package(packageName, type: .hkdata, data: collectedData)
                 try NetworkDataRequest.send(package)
             } catch {
-                VError("Unable to process package %@", error.localizedDescription)
+                VError("Unable to process package %{public}@", error.localizedDescription)
             }
         }
     }

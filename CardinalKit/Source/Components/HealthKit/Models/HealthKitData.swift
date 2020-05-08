@@ -11,12 +11,12 @@ import RealmSwift
 import ObjectMapper
 
 enum HealthKitDataModel : Int {
-    case maxNonStopSteps = 0
-    case totalSteps 
-    case totalFlights
-    case distanceWalked
+    case MSWS = 0
+    case steps
+    case flightsClimbed
+    case distance
     
-    static let all = [maxNonStopSteps, totalSteps, totalFlights, distanceWalked]
+    static let all = [MSWS, steps, flightsClimbed, distance]
 }
 
 class HealthKitData: Object, Mappable, Codable {
@@ -28,10 +28,10 @@ class HealthKitData: Object, Mappable, Codable {
     
     @objc dynamic var source: String = ""
     
-    @objc dynamic var maxNonStopSteps : Int = -1
-    @objc dynamic var totalSteps : Int = -1
-    @objc dynamic var totalFlights : Int = -1
-    @objc dynamic var distanceWalked : Int = -1
+    @objc dynamic var MSWS : Int = -1
+    @objc dynamic var steps : Int = -1
+    @objc dynamic var flightsClimbed : Int = -1
+    @objc dynamic var distance : Int = -1
     
     @objc dynamic var passiveWhenCollected : Bool = false
     
@@ -46,10 +46,10 @@ class HealthKitData: Object, Mappable, Codable {
         
         source <- map["source"]
         
-        maxNonStopSteps <- map["max_non_stop_steps"]
-        totalSteps <- map["total_steps"]
-        totalFlights <- map["flights_climbed"]
-        distanceWalked <- map["distance_walked"]
+        MSWS <- map["MSWS"]
+        steps <- map["steps"]
+        flightsClimbed <- map["flights_climbed"]
+        distance <- map["distance"]
         
         passiveWhenCollected <- map["passive"]
     }
@@ -68,28 +68,28 @@ class HealthKitData: Object, Mappable, Codable {
     
     func set(value: Double, usingType type: HealthKitDataModel) {
         switch type {
-        case .maxNonStopSteps:
-            self.maxNonStopSteps = Int(value)
-        case .totalSteps:
-            self.totalSteps = Int(value)
-        case .totalFlights:
-            self.totalFlights = Int(value)
-        case .distanceWalked:
-            self.distanceWalked = Int(value)
+        case .MSWS:
+            self.MSWS = Int(value)
+        case .steps:
+            self.steps = Int(value)
+        case .flightsClimbed:
+            self.flightsClimbed = Int(value)
+        case .distance:
+            self.distance = Int(value)
             
         }
     }
     
     func getValue(forType type: HealthKitDataModel) -> Int {
         switch type {
-        case .maxNonStopSteps:
-            return self.maxNonStopSteps
-        case .totalSteps:
-            return self.totalSteps
-        case .totalFlights:
-            return self.totalFlights
-        case .distanceWalked:
-            return self.distanceWalked
+        case .MSWS:
+            return self.MSWS
+        case .steps:
+            return self.steps
+        case .flightsClimbed:
+            return self.flightsClimbed
+        case .distance:
+            return self.distance
         }
     }
     
@@ -106,7 +106,7 @@ class HealthKitData: Object, Mappable, Codable {
     }*/
     
     static func == (lhs: HealthKitData, rhs: HealthKitData) -> Bool {
-        return lhs.startDate == rhs.startDate && lhs.endDate == rhs.endDate && lhs.date == rhs.date && lhs.maxNonStopSteps == rhs.maxNonStopSteps && lhs.totalSteps == rhs.totalSteps && lhs.totalFlights == rhs.totalFlights && lhs.distanceWalked == rhs.distanceWalked
+        return lhs.startDate == rhs.startDate && lhs.endDate == rhs.endDate && lhs.date == rhs.date && lhs.MSWS == rhs.MSWS && lhs.steps == rhs.steps && lhs.flightsClimbed == rhs.flightsClimbed && lhs.distance == rhs.distance
     }
     
 }

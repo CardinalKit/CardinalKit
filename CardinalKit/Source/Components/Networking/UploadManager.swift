@@ -25,7 +25,7 @@ class UploadManager: NSObject {
     }()
     
     func upload(file: URL, to url: URL, uuid: String) {
-        VLog("Uploading file to url %@", file.path, url.absoluteString)
+        VLog("Uploading file to url %{public}@", file.path, url.absoluteString)
         self._upload(file: file, to: url, uuid: uuid)
     }
     

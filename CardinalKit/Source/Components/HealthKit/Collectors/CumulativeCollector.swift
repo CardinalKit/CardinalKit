@@ -81,16 +81,16 @@ extension CumulativeCollector {
         if let metric = collectionMetric {
             
             switch metric {
-            case .maxNonStopSteps:
+            case .MSWS:
                 fallthrough
-            case .totalSteps:
+            case .steps:
                 let sum = stepsSum(daySample)
                 if !sum.isEmpty {
                     result.append(sum)
                 }
-            case .totalFlights:
+            case .flightsClimbed:
                 fallthrough
-            case .distanceWalked:
+            case .distance:
                 if let sum = cummulativeSum(daySample) {
                     result[metric] = sum
                 }
@@ -145,11 +145,11 @@ extension CumulativeCollector {
         }
         
         if let max = countSamples.max() {
-            result[.maxNonStopSteps] = max
+            result[.MSWS] = max
         }
         
         let total = countSamples.reduce(0) {$0 + $1}
-        result[.totalSteps] = total
+        result[.steps] = total
         
         return result
     }
@@ -165,13 +165,13 @@ extension CumulativeCollector {
         }
         
         switch metric {
-        case .maxNonStopSteps:
+        case .MSWS:
             fallthrough
-        case .totalSteps:
+        case .steps:
             return HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.stepCount)
-        case .totalFlights:
+        case .flightsClimbed:
             return HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.flightsClimbed)
-        case .distanceWalked:
+        case .distance:
             return HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.distanceWalkingRunning)
             
         }
@@ -184,13 +184,13 @@ extension CumulativeCollector {
         }
         
         switch metric {
-        case .maxNonStopSteps:
+        case .MSWS:
             fallthrough
-        case .totalSteps:
+        case .steps:
         fallthrough //we want count
-        case .totalFlights:
+        case .flightsClimbed:
             return HKUnit.count()
-        case .distanceWalked:
+        case .distance:
             return HKUnit.meter()
             
         }

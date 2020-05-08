@@ -147,7 +147,6 @@ extension NetworkDataRequest {
         
         let store = try package.store()
         
-        // TODO: where do we upload to? (!!!)
         if let endpointURL = package.routeAsURL() {
             UploadManager.shared.upload(file: store, to: endpointURL, uuid: "\(id)")
             try markAsProcessing() //mark request as processing
