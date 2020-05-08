@@ -1,7 +1,5 @@
 <img src="https://github.com/CardinalKit/CardinalKit/blob/master/CardinalKit-Web-Assets/header.png?raw=true" alt="cardinalkit logo">
 
-# CardinalKit Framework 🏥
-
 [![CI Status](https://img.shields.io/travis/ssgutierrez42/CardinalKit.svg?style=flat)](https://travis-ci.org/ssgutierrez42/CardinalKit)
 [![Version](https://img.shields.io/cocoapods/v/CardinalKit.svg?style=flat)](https://cocoapods.org/pods/CardinalKit)
 [![License](https://img.shields.io/cocoapods/l/CardinalKit.svg?style=flat)](https://cocoapods.org/pods/CardinalKit)
