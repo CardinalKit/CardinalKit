@@ -25,7 +25,12 @@
 
 #import "schema.hpp"
 #import "shared_realm.hpp"
+
+#if REALM_ENABLE_SYNC
 #import "sync/sync_config.hpp"
+#else
+@class RLMSyncConfiguration;
+#endif
 
 static NSString *const c_RLMRealmConfigurationProperties[] = {
     @"fileURL",
@@ -148,7 +153,7 @@ static void RLMNSStringToStdString(std::string &out, NSString *in) {
 }
 
 - (NSURL *)fileURL {
-    if (_config.in_memory || _config.sync_config) {
+    if (_config.in_memory) {
         return nil;
     }
     return [NSURL fileURLWithPath:@(_config.path.c_str())];
@@ -159,7 +164,6 @@ static void RLMNSStringToStdString(std::string &out, NSString *in) {
     if (path.length == 0) {
         @throw RLMException(@"Realm path must not be empty");
     }
-    _config.sync_config = nullptr;
 
     RLMNSStringToStdString(_config.path, path);
     _config.in_memory = false;
@@ -190,16 +194,20 @@ static void RLMNSStringToStdString(std::string &out, NSString *in) {
     if (NSData *key = RLMRealmValidatedEncryptionKey(encryptionKey)) {
         auto bytes = static_cast<const char *>(key.bytes);
         _config.encryption_key.assign(bytes, bytes + key.length);
+#if REALM_ENABLE_SYNC
         if (_config.sync_config) {
             auto& sync_encryption_key = self.config.sync_config->realm_encryption_key;
             sync_encryption_key = std::array<char, 64>();
             std::copy_n(_config.encryption_key.begin(), 64, sync_encryption_key->begin());
         }
+#endif
     }
     else {
         _config.encryption_key.clear();
+#if REALM_ENABLE_SYNC
         if (_config.sync_config)
             _config.sync_config->realm_encryption_key = realm::util::none;
+#endif
     }
 }
 
@@ -299,5 +307,11 @@ static void RLMNSStringToStdString(std::string &out, NSString *in) {
 - (void)setCustomSchemaWithoutCopying:(RLMSchema *)schema {
     _customSchema = schema;
 }
+
+#if !REALM_ENABLE_SYNC
+- (RLMSyncConfiguration *)syncConfiguration {
+    return nil;
+}
+#endif
 
 @end

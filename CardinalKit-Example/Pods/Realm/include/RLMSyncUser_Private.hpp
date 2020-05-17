@@ -65,12 +65,7 @@ private:
 - (instancetype)initWithSyncUser:(std::shared_ptr<SyncUser>)user;
 - (NSURL *)defaultRealmURL;
 - (std::shared_ptr<SyncUser>)_syncUser;
-- (nullable NSString *)_refreshToken;
 + (void)_setUpBindingContextFactory;
 @end
-
-using PermissionChangeCallback = std::function<void(std::exception_ptr)>;
-
-PermissionChangeCallback RLMWrapPermissionStatusCallback(RLMPermissionStatusBlock callback);
 
 NS_ASSUME_NONNULL_END
