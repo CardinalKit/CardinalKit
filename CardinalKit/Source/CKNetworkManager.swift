@@ -14,7 +14,7 @@ public protocol CKAPIRouteDelegate {
 }
 
 public protocol CKAPIDeliveryDelegate {
-    func send(file: URL, type: PackageType, onCompletion: @escaping (Bool) -> Void)
+    func send(file: URL, type: PackageType, authPath: String, onCompletion: @escaping (Bool) -> Void)
 }
 
 public class CKNetworkManager : NSObject {

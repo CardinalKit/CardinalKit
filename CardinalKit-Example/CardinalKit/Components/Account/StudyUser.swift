@@ -8,6 +8,7 @@
 
 import Foundation
 import Firebase
+import CardinalKit
 
 class StudyUser {
     
@@ -46,6 +47,8 @@ class StudyUser {
         if let dataBucket = RITConfig.shared.getRootCollection(),
             let email = currentUser?.email,
             let uid = currentUser?.uid {
+            
+            CKSession.shared.userId = uid
             
             let db = Firestore.firestore()
             db.collection(dataBucket).document(uid).setData(["userID":uid, "lastActive":Date().ISOStringFromDate(),"email":email])

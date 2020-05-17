@@ -15,7 +15,7 @@ public enum PackageType: String {
     
     static let debuggable: [PackageType] = [.sensorData, .hkdata]
     
-    var description: String {
+    public var description: String {
         switch self {
         case .sensorData:
             return "6MWT and Open Walk"

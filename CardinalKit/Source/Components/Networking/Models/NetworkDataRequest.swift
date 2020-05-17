@@ -152,7 +152,9 @@ extension NetworkDataRequest {
             if let customDelegate = CKApp.instance.options.networkDeliveryDelegate {
                 // if the user has a custom send function, use it
                 
-                customDelegate.send(file: store, type: package.type) { [weak self] (success) in
+                let authenticatedPath = CKSession.shared.getAuthCollection() ?? ""
+                
+                customDelegate.send(file: store, type: package.type, authPath: authenticatedPath) { [weak self] (success) in
                     if (success) {
                         self?.complete()
                     } else {
