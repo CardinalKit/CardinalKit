@@ -148,8 +148,25 @@ extension NetworkDataRequest {
         let store = try package.store()
         
         if let endpointURL = package.routeAsURL() {
-            UploadManager.shared.upload(file: store, to: endpointURL, uuid: "\(id)")
-            try markAsProcessing() //mark request as processing
+            
+            if let customDelegate = CKApp.instance.options.networkDeliveryDelegate {
+                // if the user has a custom send function, use it
+                
+                customDelegate.send(file: store, type: package.type) { [weak self] (success) in
+                    if (success) {
+                        self?.complete()
+                    } else {
+                        self?.fail()
+                    }
+                }
+                try markAsProcessing() //mark request as processing
+            } else {
+                // send file using CK network protocols
+                
+                UploadManager.shared.upload(file: store, to: endpointURL, uuid: "\(id)")
+                try markAsProcessing() //mark request as processing
+            }
+            
         } else {
             VError("Unable to find route for network package type (%@)", package.type.rawValue)
         }

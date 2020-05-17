@@ -48,7 +48,7 @@ class StudyUser {
             let uid = currentUser?.uid {
             
             let db = Firestore.firestore()
-            db.collection(dataBucket).document(uid).setData(["eID":uid,"userID":uid, "lastActive":Date().ISOStringFromDate(),"email":email])
+            db.collection(dataBucket).document(uid).setData(["userID":uid, "lastActive":Date().ISOStringFromDate(),"email":email])
         }
         
     }

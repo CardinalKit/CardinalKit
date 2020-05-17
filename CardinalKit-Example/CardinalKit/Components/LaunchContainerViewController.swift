@@ -41,7 +41,7 @@ class LaunchContainerViewController: UIViewController {
     }
     
     // MARK: Transitions
-    
+
     func toStudy() {
         performSegue(withIdentifier: "toStudy", sender: self)
     }

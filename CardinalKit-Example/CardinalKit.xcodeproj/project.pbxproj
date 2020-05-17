@@ -11,7 +11,6 @@
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		8E0A43A7244A4A0400656518 /* ProfileTableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A437A244A4A0400656518 /* ProfileTableItem.swift */; };
 		8E0A43A8244A4A0400656518 /* StaticProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A437B244A4A0400656518 /* StaticProfileViewController.swift */; };
-		8E0A43A9244A4A0400656518 /* StudyContainerTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A437D244A4A0400656518 /* StudyContainerTabBarController.swift */; };
 		8E0A43AA244A4A0400656518 /* WithdrawalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A437F244A4A0400656518 /* WithdrawalViewController.swift */; };
 		8E0A43AB244A4A0400656518 /* RITConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4381244A4A0400656518 /* RITConfig.swift */; };
 		8E0A43AC244A4A0400656518 /* StudyUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4382244A4A0400656518 /* StudyUser.swift */; };
@@ -26,7 +25,6 @@
 		8E0A43B7244A4A0400656518 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4394244A4A0400656518 /* HealthKitManager.swift */; };
 		8E0A43B9244A4A0400656518 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4396244A4A0400656518 /* AppDelegate.swift */; };
 		8E0A43BA244A4A0400656518 /* LaunchContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4397244A4A0400656518 /* LaunchContainerViewController.swift */; };
-		8E0A43BB244A4A0400656518 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4398244A4A0400656518 /* ViewController.swift */; };
 		8E0A43BC244A4A0400656518 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A439A244A4A0400656518 /* OnboardingViewController.swift */; };
 		8E0A43BD244A4A0400656518 /* IntroductionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A439B244A4A0400656518 /* IntroductionViewController.swift */; };
 		8E0A43BE244A4A0400656518 /* HealthDataStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A439D244A4A0400656518 /* HealthDataStep.swift */; };
@@ -81,7 +79,6 @@
 		8E0A4378244A4A0300656518 /* CardinalKit_Example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CardinalKit_Example-Bridging-Header.h"; sourceTree = "<group>"; };
 		8E0A437A244A4A0400656518 /* ProfileTableItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableItem.swift; sourceTree = "<group>"; };
 		8E0A437B244A4A0400656518 /* StaticProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticProfileViewController.swift; sourceTree = "<group>"; };
-		8E0A437D244A4A0400656518 /* StudyContainerTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyContainerTabBarController.swift; sourceTree = "<group>"; };
 		8E0A437F244A4A0400656518 /* WithdrawalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WithdrawalViewController.swift; sourceTree = "<group>"; };
 		8E0A4381244A4A0400656518 /* RITConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RITConfig.swift; sourceTree = "<group>"; };
 		8E0A4382244A4A0400656518 /* StudyUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyUser.swift; sourceTree = "<group>"; };
@@ -90,7 +87,7 @@
 		8E0A4387244A4A0400656518 /* ORKESerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKESerialization.h; sourceTree = "<group>"; };
 		8E0A4388244A4A0400656518 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8E0A438A244A4A0400656518 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		8E0A438B244A4A0400656518 /* Master-Sample.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "Master-Sample.entitlements"; sourceTree = "<group>"; };
+		8E0A438B244A4A0400656518 /* CardinalKit-Example.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "CardinalKit-Example.entitlements"; sourceTree = "<group>"; };
 		8E0A438E244A4A0400656518 /* ActivitiesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitiesTableViewController.swift; sourceTree = "<group>"; };
 		8E0A438F244A4A0400656518 /* StudyTasks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyTasks.swift; sourceTree = "<group>"; };
 		8E0A4390244A4A0400656518 /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
@@ -98,7 +95,6 @@
 		8E0A4394244A4A0400656518 /* HealthKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		8E0A4396244A4A0400656518 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8E0A4397244A4A0400656518 /* LaunchContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchContainerViewController.swift; sourceTree = "<group>"; };
-		8E0A4398244A4A0400656518 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		8E0A439A244A4A0400656518 /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		8E0A439B244A4A0400656518 /* IntroductionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroductionViewController.swift; sourceTree = "<group>"; };
 		8E0A439D244A4A0400656518 /* HealthDataStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthDataStep.swift; sourceTree = "<group>"; };
@@ -110,7 +106,6 @@
 		8E0A43C9244A4C6500656518 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8E0A43CC244A4D7C00656518 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Supporting Files/Base.lproj/Main.storyboard"; sourceTree = "<group>"; };
 		8E0A43D1244A675F00656518 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		8E0A43D3244A692700656518 /* CardinalKit Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "CardinalKit Example.entitlements"; sourceTree = "<group>"; };
 		8E0A43D4244A693D00656518 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		CB97C14C759E56B88E4E3941 /* Pods_CardinalKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CardinalKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F30ABA7020E91EBA421A80F9 /* Pods-CardinalKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardinalKit_Example.debug.xcconfig"; path = "Target Support Files/Pods-CardinalKit_Example/Pods-CardinalKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -150,7 +145,7 @@
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
-				8E0A43D3244A692700656518 /* CardinalKit Example.entitlements */,
+				8E0A438B244A4A0400656518 /* CardinalKit-Example.entitlements */,
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				607FACD21AFB9204008FA782 /* CardinalKit-Example */,
 				607FACE81AFB9204008FA782 /* Tests */,
@@ -176,7 +171,6 @@
 				8E0A43C5244A4A5700656518 /* Components */,
 				8E0A4396244A4A0400656518 /* AppDelegate.swift */,
 				8E0A43CB244A4D7C00656518 /* Main.storyboard */,
-				8E0A4378244A4A0300656518 /* CardinalKit_Example-Bridging-Header.h */,
 			);
 			name = "CardinalKit-Example";
 			path = CardinalKit;
@@ -238,12 +232,12 @@
 		8E0A4383244A4A0400656518 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				8E0A43D1244A675F00656518 /* GoogleService-Info.plist */,
-				8E0A4384244A4A0400656518 /* Constants.swift */,
-				8E0A4385244A4A0400656518 /* ResearchKit */,
 				8E0A4388244A4A0400656518 /* Assets.xcassets */,
+				8E0A4385244A4A0400656518 /* ResearchKit */,
 				8E0A4389244A4A0400656518 /* LaunchScreen.storyboard */,
-				8E0A438B244A4A0400656518 /* Master-Sample.entitlements */,
+				8E0A4384244A4A0400656518 /* Constants.swift */,
+				8E0A4378244A4A0300656518 /* CardinalKit_Example-Bridging-Header.h */,
+				8E0A43D1244A675F00656518 /* GoogleService-Info.plist */,
 				8E0A43C9244A4C6500656518 /* Info.plist */,
 			);
 			path = "Supporting Files";
@@ -311,8 +305,6 @@
 		8E0A43C5244A4A5700656518 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				8E0A437D244A4A0400656518 /* StudyContainerTabBarController.swift */,
-				8E0A4398244A4A0400656518 /* ViewController.swift */,
 				8E0A4397244A4A0400656518 /* LaunchContainerViewController.swift */,
 				8E0A4379244A4A0400656518 /* Profile */,
 				8E0A4399244A4A0400656518 /* Onboarding */,
@@ -577,7 +569,6 @@
 				8E0A43B3244A4A0400656518 /* StudyTasks.swift in Sources */,
 				8E0A43BC244A4A0400656518 /* OnboardingViewController.swift in Sources */,
 				8E0A43BD244A4A0400656518 /* IntroductionViewController.swift in Sources */,
-				8E0A43A9244A4A0400656518 /* StudyContainerTabBarController.swift in Sources */,
 				8E0A43B9244A4A0400656518 /* AppDelegate.swift in Sources */,
 				8E0A43B4244A4A0400656518 /* ActivityTableViewCell.swift in Sources */,
 				8E0A43A7244A4A0400656518 /* ProfileTableItem.swift in Sources */,
@@ -591,7 +582,6 @@
 				8E0A43C3244A4A0400656518 /* LoginCustomWaitStepViewController.swift in Sources */,
 				8E0A43BF244A4A0400656518 /* HealthDataStepViewController.swift in Sources */,
 				8E0A43AA244A4A0400656518 /* WithdrawalViewController.swift in Sources */,
-				8E0A43BB244A4A0400656518 /* ViewController.swift in Sources */,
 				8E0A43BA244A4A0400656518 /* LaunchContainerViewController.swift in Sources */,
 				8E0A43C2244A4A0400656518 /* ConsentDocument.swift in Sources */,
 			);
@@ -740,7 +730,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "CardinalKit Example.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "CardinalKit-Example.entitlements";
 				DEVELOPMENT_TEAM = L5J57DU2Q2;
 				INFOPLIST_FILE = "CardinalKit/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -748,7 +738,7 @@
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "edu.stanford.cs342.sample-study";
 				PRODUCT_NAME = "CardinalKit Example";
-				SWIFT_OBJC_BRIDGING_HEADER = "CardinalKit/CardinalKit_Example-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "CardinalKit/Supporting Files/CardinalKit_Example-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
@@ -761,7 +751,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "CardinalKit Example.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "CardinalKit-Example.entitlements";
 				DEVELOPMENT_TEAM = L5J57DU2Q2;
 				INFOPLIST_FILE = "CardinalKit/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -769,7 +759,7 @@
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "edu.stanford.cs342.sample-study";
 				PRODUCT_NAME = "CardinalKit Example";
-				SWIFT_OBJC_BRIDGING_HEADER = "CardinalKit/CardinalKit_Example-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "CardinalKit/Supporting Files/CardinalKit_Example-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 			};

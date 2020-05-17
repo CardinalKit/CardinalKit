@@ -86,7 +86,7 @@ class Package: NSObject {
 extension Package {
     
     func route() -> String? {
-        return CKApp.instance.networkDelegate?.getAPIRoute(type: self.type)
+        return CKApp.instance.options.networkRouteDelegate?.getAPIRoute(type: self.type)
     }
     
     func routeAsURL() -> URL? {

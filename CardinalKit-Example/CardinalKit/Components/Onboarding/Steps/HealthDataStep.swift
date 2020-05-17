@@ -30,6 +30,7 @@
 
 import HealthKit
 import ResearchKit
+import CardinalKit
 
 class HealthDataStep: ORKInstructionStep {
     
@@ -47,7 +48,14 @@ class HealthDataStep: ORKInstructionStep {
     
     // MARK: Convenience
     func getHealthAuthorization(_ completion: @escaping (_ success: Bool, _ error: Error?) -> Void) {
-        HealthKitManager.shared.getHealthAuthorization { (success, error) in
+        let hkTypesToReadInBackground: Set<HKQuantityType> = [
+            HKObjectType.quantityType(forIdentifier: .stepCount)!,
+            HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning)!,
+            HKObjectType.quantityType(forIdentifier: .flightsClimbed)!,
+            HKObjectType.quantityType(forIdentifier: .heartRate)!
+        ]
+        
+        CKActivityManager.shared.getHealthAuthorizaton(forTypes: hkTypesToReadInBackground) { (success, error) in
             completion(success, error)
         }
     }

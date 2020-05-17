@@ -11,11 +11,10 @@ public protocol CKAPIRouteDelegate {
     func getAPIRoute(type: PackageType) -> String?
     func getWhitelistDomains() -> [String]
     func getHeaders() -> [String:String]?
-    
-    //POST: URL
-    //<with headers>
-    
-    //need network delivery override methods for GCP-interactions
+}
+
+public protocol CKAPIDeliveryDelegate {
+    func send(file: URL, type: PackageType, onCompletion: @escaping (Bool) -> Void)
 }
 
 public class CKNetworkManager : NSObject {

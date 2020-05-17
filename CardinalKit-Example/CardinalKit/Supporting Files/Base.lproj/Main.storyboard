@@ -357,10 +357,10 @@
             </objects>
             <point key="canvasLocation" x="96" y="1231"/>
         </scene>
-        <!--Study Container Tab Bar Controller-->
+        <!--Tab Bar Controller-->
         <scene sceneID="HSB-Mq-ed9">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="S3Y-K8-dCH" customClass="StudyContainerTabBarController" customModule="CardinalKit_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="S3Y-K8-dCH" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="hSm-z6-huc">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -369,42 +369,12 @@
                     </tabBar>
                     <connections>
                         <segue destination="JvU-YF-65o" kind="relationship" relationship="viewControllers" id="6EZ-5D-flS"/>
-                        <segue destination="b02-Iy-Tso" kind="relationship" relationship="viewControllers" id="ShJ-8H-Mhy"/>
-                        <segue destination="6Sp-uC-LHE" kind="relationship" relationship="viewControllers" id="8VN-jv-aUN"/>
                         <segue destination="d4G-0T-hQK" kind="relationship" relationship="viewControllers" id="VOj-YB-IR1"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jnR-i7-cma" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1018.840579710145" y="502.90178571428567"/>
-        </scene>
-        <!--Learn-->
-        <scene sceneID="dt9-WM-JFH">
-            <objects>
-                <viewController id="1JS-ql-qFy" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="q4I-9N-F82">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🔜" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="02q-CL-cBG">
-                                <rect key="frame" x="153" y="361" width="108" height="120"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="100"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="02q-CL-cBG" firstAttribute="centerX" secondItem="q4I-9N-F82" secondAttribute="centerX" id="GnR-Ur-LrX"/>
-                            <constraint firstItem="02q-CL-cBG" firstAttribute="centerY" secondItem="q4I-9N-F82" secondAttribute="centerY" id="uLO-IA-fbQ"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="Vge-WR-J1Z"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Learn" id="2as-CH-qs1"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mfk-Zn-n4l" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1896" y="1965"/>
         </scene>
         <!--Profile-->
         <scene sceneID="dLE-no-028">
@@ -423,54 +393,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tAp-Al-lGr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2790" y="1231"/>
-        </scene>
-        <!--Dashboard-->
-        <scene sceneID="9Be-Vd-Qb8">
-            <objects>
-                <viewController id="RJR-bg-uLI" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="cEB-Lu-WTy">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🔜" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7x9-4F-Naf">
-                                <rect key="frame" x="153" y="361" width="108" height="120"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="100"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="7x9-4F-Naf" firstAttribute="centerY" secondItem="cEB-Lu-WTy" secondAttribute="centerY" id="rrK-HU-ls7"/>
-                            <constraint firstItem="7x9-4F-Naf" firstAttribute="centerX" secondItem="cEB-Lu-WTy" secondAttribute="centerX" id="yBA-1j-oON"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="3hd-ZA-Dbj"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Dashboard" id="4v8-Vp-mAW"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vf1-CM-Cp2" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1019" y="1965"/>
-        </scene>
-        <!--Dashboard-->
-        <scene sceneID="Uly-VT-08z">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="b02-Iy-Tso" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Dashboard" image="tab_dashboard" id="jJV-yb-sVn"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="boG-mT-BOw">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="RJR-bg-uLI" kind="relationship" relationship="rootViewController" id="vHv-Xb-zbo"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="JNJ-5d-mYa" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1019" y="1231"/>
+            <point key="canvasLocation" x="1938" y="1231"/>
         </scene>
         <!--Activities Table View Controller-->
         <scene sceneID="Yay-ms-gww">
@@ -823,7 +746,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a2M-bN-CbJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Rdu-3m-xuO" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2790" y="1965"/>
+            <point key="canvasLocation" x="1938" y="1965"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="dkX-Jg-Do2">
@@ -838,33 +761,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sh3-v6-GtJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3625" y="1965"/>
-        </scene>
-        <!--Learn-->
-        <scene sceneID="rio-ha-Uh1">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6Sp-uC-LHE" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Learn" image="tab_learn" id="gqR-B3-FbZ"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="K86-jy-Mdc">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="1JS-ql-qFy" kind="relationship" relationship="rootViewController" id="urM-eG-msn"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="93B-K7-gUM" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1896" y="1231"/>
+            <point key="canvasLocation" x="2772" y="1965"/>
         </scene>
     </scenes>
     <resources>
         <image name="StanfordMedicine" width="328" height="56"/>
         <image name="tab_activities" width="23" height="23"/>
-        <image name="tab_dashboard" width="29" height="21"/>
-        <image name="tab_learn" width="25" height="22"/>
         <image name="tab_profile" width="24" height="24"/>
     </resources>
 </document>

@@ -15,7 +15,7 @@ enum HealthKitError : Error {
 
 class HealthKitManager {
     
-    static let shared = HealthKitManager()
+    // static let shared = HealthKitManager()
     
     var healthStore: HKHealthStore = HKHealthStore()
     
@@ -46,7 +46,7 @@ class HealthKitManager {
         HKObjectType.quantityType(forIdentifier: .heartRate)!
     ]
     
-    func getHealthAuthorization(completion: @escaping (_ success: Bool, _ error: Error?) -> Void) {
+    /* func getHealthAuthorization(completion: @escaping (_ success: Bool, _ error: Error?) -> Void) {
         guard HKHealthStore.isHealthDataAvailable() else {
             completion(false, HealthKitError.notAvailable)
             return
@@ -64,7 +64,7 @@ class HealthKitManager {
                 strongSelf.setUpBackgroundDelivery(forTypes: strongSelf.hkTypesToReadInBackground)
             }
         }
-    }
+    } */
     
 }
 

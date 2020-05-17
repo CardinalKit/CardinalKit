@@ -8,7 +8,8 @@
 import Foundation
 
 public struct CKAppOptions {
-    public var networkDelegate: CKAPIRouteDelegate?
+    public var networkRouteDelegate: CKAPIRouteDelegate?
+    public var networkDeliveryDelegate : CKAPIDeliveryDelegate?
     public init() { }
 }
 
@@ -16,12 +17,14 @@ public class CKApp {
     
     public static let instance = CKApp()
     
-    var networkDelegate: CKAPIRouteDelegate?
+    var networkRouteDelegate: CKAPIRouteDelegate?
+    
+    var options = CKAppOptions()
     
     class public func configure(_ options: CKAppOptions? = nil) {
         
         // CardinalKit Options
-        instance.networkDelegate = options?.networkDelegate
+        instance.options.networkRouteDelegate = options?.networkRouteDelegate
         
         // Start listenig for changes in HealthKit items (waits for valid user inherently)
         _ = CKActivityManager.shared.load()
