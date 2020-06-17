@@ -65,7 +65,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 // MARK - HELPER: Google Identity
 extension AppDelegate {
     
-    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        
         let handled = DynamicLinks.dynamicLinks().handleUniversalLink(userActivity.webpageURL!) { (dynamiclink, error) in
             
             guard let link = dynamiclink?.url?.absoluteString, let email = StudyUser.globalEmail() else {

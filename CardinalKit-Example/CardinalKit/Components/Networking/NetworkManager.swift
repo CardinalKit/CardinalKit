@@ -11,7 +11,7 @@ import Firebase
 
 class NetworkManager: CKAPIDeliveryDelegate {
     
-    fileprivate func sendHealthKit(_ file: URL, _ type: PackageType, _ authPath: String, _ onCompletion: @escaping (Bool) -> Void) {
+    fileprivate func sendHealthKit(_ file: URL, _ package: Package, _ authPath: String, _ onCompletion: @escaping (Bool) -> Void) {
         
         do {
             let data = try Data(contentsOf: file)
@@ -20,7 +20,7 @@ class NetworkManager: CKAPIDeliveryDelegate {
                 return
             }
             
-            let identifier = Date().startOfDay.shortStringFromDate() + "-\(type.rawValue)"
+            let identifier = Date().startOfDay.shortStringFromDate() + "-\(package.fileName)"
             let trimmedIdentifier = identifier.trimmingCharacters(in: .whitespaces)
             
             let db = Firestore.firestore()
@@ -43,13 +43,13 @@ class NetworkManager: CKAPIDeliveryDelegate {
         
     }
     
-    func send(file: URL, type: PackageType, authPath: String, onCompletion: @escaping (Bool) -> Void) {
-        switch type {
+    func send(file: URL, package: Package, authPath: String, onCompletion: @escaping (Bool) -> Void) {
+        switch package.type {
         case .hkdata:
-            sendHealthKit(file, type, authPath, onCompletion)
+            sendHealthKit(file, package, authPath, onCompletion)
             break
         default:
-            fatalError("Sending data of type \(type.description) is NOT supported.")
+            fatalError("Sending data of type \(package.type.description) is NOT supported.")
             break
         }
         

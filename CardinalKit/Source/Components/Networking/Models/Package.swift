@@ -33,10 +33,10 @@ enum PackageError: Error {
     case unableToResolveStore
 }
 
-class Package: NSObject {
+public class Package: NSObject {
     
-    let fileName: String
-    let type: PackageType
+    public let fileName: String
+    public let type: PackageType
     
     func store() throws -> URL {
         guard let store = CacheManager.shared.getPackageStore(fileName: fileName, fileType: type) else {
@@ -77,7 +77,7 @@ class Package: NSObject {
         return url.lastPathComponent
     }
     
-    override var description: String {
+    public override var description: String {
         return "\(fileName) : \(type)"
     }
     

@@ -17,14 +17,14 @@ public class CKApp {
     
     public static let instance = CKApp()
     
-    var networkRouteDelegate: CKAPIRouteDelegate?
-    
     var options = CKAppOptions()
     
     class public func configure(_ options: CKAppOptions? = nil) {
         
         // CardinalKit Options
-        instance.options.networkRouteDelegate = options?.networkRouteDelegate
+        if let options = options {
+            instance.options = options
+        }
         
         // Start listenig for changes in HealthKit items (waits for valid user inherently)
         _ = CKActivityManager.shared.load()

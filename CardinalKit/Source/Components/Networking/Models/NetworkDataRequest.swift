@@ -154,7 +154,7 @@ extension NetworkDataRequest {
                 
                 let authenticatedPath = CKSession.shared.getAuthCollection() ?? ""
                 
-                customDelegate.send(file: store, type: package.type, authPath: authenticatedPath) { [weak self] (success) in
+                customDelegate.send(file: store, package: package, authPath: authenticatedPath) { [weak self] (success) in
                     if (success) {
                         self?.complete()
                     } else {

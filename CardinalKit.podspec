@@ -40,7 +40,7 @@ TODO: Add long description of the pod here.
   s.frameworks = 'UIKit', 'Foundation'
   
   #ResearchKit
-  s.dependency 'ResearchKit'
+  # s.dependency 'ResearchKit', :git => 'https://github.com/ResearchKit/ResearchKit.git', :branch => 'master'
   
   #Securely storing key-value pairs on keychain
   s.dependency 'SAMKeychain',      '~> 1.5.2'
