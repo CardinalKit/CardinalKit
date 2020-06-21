@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment version="2304" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="410" height="396"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vda-73-Z7c" customClass="CircleView" customModule="CardinalKit" customModuleProvider="target">
+                    <rect key="frame" x="137.5" y="64" width="135" height="135"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vS8-kn-vnO">
+                            <rect key="frame" x="0.0" y="0.0" width="135" height="135"/>
+                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="48"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="0.20784313730000001" blue="0.3294117647" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="vS8-kn-vnO" firstAttribute="top" secondItem="vda-73-Z7c" secondAttribute="top" id="TZa-Pf-Pad"/>
+                        <constraint firstAttribute="trailing" secondItem="vS8-kn-vnO" secondAttribute="trailing" id="V2f-2N-qEg"/>
+                        <constraint firstAttribute="bottom" secondItem="vS8-kn-vnO" secondAttribute="bottom" id="fj2-hB-uID"/>
+                        <constraint firstAttribute="height" constant="135" id="g7C-tQ-uts"/>
+                        <constraint firstAttribute="width" constant="135" id="gm8-Le-PXH"/>
+                        <constraint firstItem="vS8-kn-vnO" firstAttribute="leading" secondItem="vda-73-Z7c" secondAttribute="leading" id="oLz-Ej-BsZ"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FoV-zl-1Ij">
+                    <rect key="frame" x="20" y="252.5" width="370" height="64.5"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Simple Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aDF-bg-VUQ">
+                    <rect key="frame" x="20" y="214" width="370" height="33.5"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="aDF-bg-VUQ" secondAttribute="trailing" constant="20" id="Ffh-vb-7Tv"/>
+                <constraint firstItem="aDF-bg-VUQ" firstAttribute="top" secondItem="vda-73-Z7c" secondAttribute="bottom" constant="15" id="KlO-Yj-4Fg"/>
+                <constraint firstItem="FoV-zl-1Ij" firstAttribute="trailing" secondItem="aDF-bg-VUQ" secondAttribute="trailing" id="MW0-1R-8oi"/>
+                <constraint firstItem="vda-73-Z7c" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="20" id="S7y-x3-fYE"/>
+                <constraint firstItem="FoV-zl-1Ij" firstAttribute="top" secondItem="aDF-bg-VUQ" secondAttribute="bottom" constant="5" id="UuS-eR-A11"/>
+                <constraint firstItem="aDF-bg-VUQ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="agI-v9-vr1"/>
+                <constraint firstItem="FoV-zl-1Ij" firstAttribute="leading" secondItem="aDF-bg-VUQ" secondAttribute="leading" id="hef-dJ-8zP"/>
+                <constraint firstItem="vda-73-Z7c" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="lkA-aV-Fwk"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="44.927536231884062" y="100.44642857142857"/>
+        </view>
+    </objects>
+</document>
