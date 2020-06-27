@@ -7,7 +7,7 @@
 
 ---
 
-Please visit http://cardinalkit.github.io/ to get started with our documentation 🙌
+Please visit https://cardinalkit.org to get started with our documentation 🙌
 
 ## Run the Sample Project
 
