@@ -1,16 +1,19 @@
 //
-//  NetworkManager.swift
-//  CardinalKit_Example
+//  CKAppNetworkManager.swift
 //
-//  Created by Santiago Gutierrez on 5/17/20.
-//  Copyright © 2020 CocoaPods. All rights reserved.
+//  Created for the CardinalKit Framework.
+//  Copyright © 2019 Stanford University. All rights reserved.
 //
 
 import CardinalKit
 import Firebase
 
-class NetworkManager: CKAPIDeliveryDelegate {
+class CKAppNetworkManager: CKAPIDeliveryDelegate {
     
+    /**
+     Override the CardinalKit networking engine to
+     send HealthKit data using Firebase
+    */
     fileprivate func sendHealthKit(_ file: URL, _ package: Package, _ authPath: String, _ onCompletion: @escaping (Bool) -> Void) {
         
         do {
@@ -43,6 +46,7 @@ class NetworkManager: CKAPIDeliveryDelegate {
         
     }
     
+    // MARK: - CKAPIDeliveryDelegate
     func send(file: URL, package: Package, authPath: String, onCompletion: @escaping (Bool) -> Void) {
         switch package.type {
         case .hkdata:

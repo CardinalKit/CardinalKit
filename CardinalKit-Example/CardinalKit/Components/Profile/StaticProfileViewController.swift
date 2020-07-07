@@ -1,8 +1,7 @@
 //
 //  StaticProfileViewController.swift
-//  Master-Sample
 //
-//  Created by Santiago Gutierrez on 9/22/19.
+//  Created for the CardinalKit Framework.
 //  Copyright © 2019 Stanford University. All rights reserved.
 //
 
@@ -19,7 +18,7 @@ class StaticProfileViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let currentUser = StudyUser.shared.currentUser {
+        if let currentUser = CKStudyUser.shared.currentUser {
             self.userIdLabel.text = currentUser.uid
         }
         

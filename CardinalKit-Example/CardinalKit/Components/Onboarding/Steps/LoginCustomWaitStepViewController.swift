@@ -1,8 +1,7 @@
 //
 //  LoginCustomWaitStep.swift
-//  Master-Sample
 //
-//  Created by Santiago Gutierrez on 11/5/19.
+//  Created for the CardinalKit Framework.
 //  Copyright © 2019 Stanford University. All rights reserved.
 //
 
@@ -40,7 +39,6 @@ class LoginCustomWaitStepViewController: ORKStepViewController {
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        // InitiatingStepView will used (note the naming convention, as per Apple design)
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
@@ -62,14 +60,14 @@ class LoginCustomWaitStepViewController: ORKStepViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if StudyUser.loggedIn() { //we are already logged in
+        if CKStudyUser.shared.isLoggedIn { // we are already logged in
             self.continueIfLoggedIn()
             print("Continuing; already logged in.")
         }
     }
     
     func continueIfLoggedIn() {
-        StudyUser.shared.save()
+        CKStudyUser.shared.save()
         
         self.removeLoginObserver()
         self.goForward()

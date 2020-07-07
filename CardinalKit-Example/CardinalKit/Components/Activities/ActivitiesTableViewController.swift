@@ -93,8 +93,8 @@ extension ActivitiesTableViewController: ORKTaskViewControllerDelegate {
     func send(_ json: [String:Any]) throws {
         if  let identifier = json["identifier"] as? String,
             let taskUUID = json["taskRunUUID"] as? String,
-            let stanfordRITBucket = RITConfig.shared.getAuthCollection(),
-            let userId = StudyUser.shared.currentUser?.uid {
+            let stanfordRITBucket = CKStudyUser.shared.authCollection,
+            let userId = CKStudyUser.shared.currentUser?.uid {
             
             let dataPayload: [String:Any] = ["userId":"\(userId)", "payload":json]
             
@@ -114,7 +114,7 @@ extension ActivitiesTableViewController: ORKTaskViewControllerDelegate {
     func send(_ files: URL, result: [String:Any]) throws {
         if  let identifier = result["identifier"] as? String,
             let taskUUID = result["taskRunUUID"] as? String,
-            let stanfordRITBucket = RITConfig.shared.getAuthCollection() {
+            let stanfordRITBucket = CKStudyUser.shared.authCollection {
             
             let fileManager = FileManager.default
             let fileURLs = try fileManager.contentsOfDirectory(at: files, includingPropertiesForKeys: nil)
