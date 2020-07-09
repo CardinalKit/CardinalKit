@@ -21,11 +21,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        // (1) initialize CardinalKit API
-        CKAppLaunch()
-        
-        // (2) initialize Firebase SDK
+         // (1) initialize Firebase SDK
         FirebaseApp.configure()
+        
+        // (2) initialize CardinalKit API
+        CKAppLaunch()
         
         // (3) check if this is the first time
         // that the app runs!
