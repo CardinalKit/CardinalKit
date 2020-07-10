@@ -12,8 +12,7 @@
 		8E0A43A7244A4A0400656518 /* ProfileTableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A437A244A4A0400656518 /* ProfileTableItem.swift */; };
 		8E0A43A8244A4A0400656518 /* StaticProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A437B244A4A0400656518 /* StaticProfileViewController.swift */; };
 		8E0A43AA244A4A0400656518 /* WithdrawalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A437F244A4A0400656518 /* WithdrawalViewController.swift */; };
-		8E0A43AB244A4A0400656518 /* RITConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4381244A4A0400656518 /* RITConfig.swift */; };
-		8E0A43AC244A4A0400656518 /* StudyUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4382244A4A0400656518 /* StudyUser.swift */; };
+		8E0A43AC244A4A0400656518 /* CKStudyUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4382244A4A0400656518 /* CKStudyUser.swift */; };
 		8E0A43AD244A4A0400656518 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4384244A4A0400656518 /* Constants.swift */; };
 		8E0A43AE244A4A0400656518 /* ORKESerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4386244A4A0400656518 /* ORKESerialization.m */; };
 		8E0A43AF244A4A0400656518 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E0A4388244A4A0400656518 /* Assets.xcassets */; };
@@ -22,13 +21,11 @@
 		8E0A43B3244A4A0400656518 /* StudyTasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A438F244A4A0400656518 /* StudyTasks.swift */; };
 		8E0A43B4244A4A0400656518 /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4390244A4A0400656518 /* ActivityTableViewCell.swift */; };
 		8E0A43B5244A4A0400656518 /* ActivityTableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4391244A4A0400656518 /* ActivityTableItem.swift */; };
-		8E0A43B7244A4A0400656518 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4394244A4A0400656518 /* HealthKitManager.swift */; };
 		8E0A43B9244A4A0400656518 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4396244A4A0400656518 /* AppDelegate.swift */; };
 		8E0A43BA244A4A0400656518 /* LaunchContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4397244A4A0400656518 /* LaunchContainerViewController.swift */; };
 		8E0A43BC244A4A0400656518 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A439A244A4A0400656518 /* OnboardingViewController.swift */; };
 		8E0A43BD244A4A0400656518 /* IntroductionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A439B244A4A0400656518 /* IntroductionViewController.swift */; };
-		8E0A43BE244A4A0400656518 /* HealthDataStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A439D244A4A0400656518 /* HealthDataStep.swift */; };
-		8E0A43BF244A4A0400656518 /* HealthDataStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A439E244A4A0400656518 /* HealthDataStepViewController.swift */; };
+		8E0A43BE244A4A0400656518 /* CKHealthDataStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A439D244A4A0400656518 /* CKHealthDataStepViewController.swift */; };
 		8E0A43C0244A4A0400656518 /* LoginStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A439F244A4A0400656518 /* LoginStep.swift */; };
 		8E0A43C1244A4A0400656518 /* LoginCustomWaitStepView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E0A43A1244A4A0400656518 /* LoginCustomWaitStepView.xib */; };
 		8E0A43C2244A4A0400656518 /* ConsentDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A43A2244A4A0400656518 /* ConsentDocument.swift */; };
@@ -38,7 +35,8 @@
 		8E0A43CF244A60D800656518 /* Pods_CardinalKit_Example.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1D31556B648F48DA664CEE80 /* Pods_CardinalKit_Example.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8E0A43D2244A675F00656518 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8E0A43D1244A675F00656518 /* GoogleService-Info.plist */; };
 		8E0A43D5244A693D00656518 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E0A43D4244A693D00656518 /* HealthKit.framework */; };
-		8E40DC042471E5940027536B /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E40DC032471E5940027536B /* NetworkManager.swift */; };
+		8E40DC042471E5940027536B /* CKNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E40DC032471E5940027536B /* CKNetworkManager.swift */; };
+		8EBE6F9C24B3C0E60093D07C /* AppDelegate+CardinalKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE6F9B24B3C0E60093D07C /* AppDelegate+CardinalKit.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,8 +79,7 @@
 		8E0A437A244A4A0400656518 /* ProfileTableItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableItem.swift; sourceTree = "<group>"; };
 		8E0A437B244A4A0400656518 /* StaticProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticProfileViewController.swift; sourceTree = "<group>"; };
 		8E0A437F244A4A0400656518 /* WithdrawalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WithdrawalViewController.swift; sourceTree = "<group>"; };
-		8E0A4381244A4A0400656518 /* RITConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RITConfig.swift; sourceTree = "<group>"; };
-		8E0A4382244A4A0400656518 /* StudyUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyUser.swift; sourceTree = "<group>"; };
+		8E0A4382244A4A0400656518 /* CKStudyUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKStudyUser.swift; sourceTree = "<group>"; };
 		8E0A4384244A4A0400656518 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8E0A4386244A4A0400656518 /* ORKESerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKESerialization.m; sourceTree = "<group>"; };
 		8E0A4387244A4A0400656518 /* ORKESerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKESerialization.h; sourceTree = "<group>"; };
@@ -93,13 +90,11 @@
 		8E0A438F244A4A0400656518 /* StudyTasks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyTasks.swift; sourceTree = "<group>"; };
 		8E0A4390244A4A0400656518 /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
 		8E0A4391244A4A0400656518 /* ActivityTableItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityTableItem.swift; sourceTree = "<group>"; };
-		8E0A4394244A4A0400656518 /* HealthKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		8E0A4396244A4A0400656518 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8E0A4397244A4A0400656518 /* LaunchContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchContainerViewController.swift; sourceTree = "<group>"; };
 		8E0A439A244A4A0400656518 /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		8E0A439B244A4A0400656518 /* IntroductionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroductionViewController.swift; sourceTree = "<group>"; };
-		8E0A439D244A4A0400656518 /* HealthDataStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthDataStep.swift; sourceTree = "<group>"; };
-		8E0A439E244A4A0400656518 /* HealthDataStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthDataStepViewController.swift; sourceTree = "<group>"; };
+		8E0A439D244A4A0400656518 /* CKHealthDataStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKHealthDataStepViewController.swift; sourceTree = "<group>"; };
 		8E0A439F244A4A0400656518 /* LoginStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginStep.swift; sourceTree = "<group>"; };
 		8E0A43A1244A4A0400656518 /* LoginCustomWaitStepView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginCustomWaitStepView.xib; sourceTree = "<group>"; };
 		8E0A43A2244A4A0400656518 /* ConsentDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsentDocument.swift; sourceTree = "<group>"; };
@@ -108,7 +103,8 @@
 		8E0A43CC244A4D7C00656518 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Supporting Files/Base.lproj/Main.storyboard"; sourceTree = "<group>"; };
 		8E0A43D1244A675F00656518 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8E0A43D4244A693D00656518 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
-		8E40DC032471E5940027536B /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		8E40DC032471E5940027536B /* CKNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKNetworkManager.swift; sourceTree = "<group>"; };
+		8EBE6F9B24B3C0E60093D07C /* AppDelegate+CardinalKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+CardinalKit.swift"; sourceTree = "<group>"; };
 		CB97C14C759E56B88E4E3941 /* Pods_CardinalKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CardinalKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F30ABA7020E91EBA421A80F9 /* Pods-CardinalKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardinalKit_Example.debug.xcconfig"; path = "Target Support Files/Pods-CardinalKit_Example/Pods-CardinalKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -172,6 +168,7 @@
 				8E0A4383244A4A0400656518 /* Supporting Files */,
 				8E0A43C5244A4A5700656518 /* Components */,
 				8E0A4396244A4A0400656518 /* AppDelegate.swift */,
+				8EBE6F9B24B3C0E60093D07C /* AppDelegate+CardinalKit.swift */,
 				8E0A43CB244A4D7C00656518 /* Main.storyboard */,
 			);
 			name = "CardinalKit-Example";
@@ -225,8 +222,7 @@
 		8E0A4380244A4A0400656518 /* Account */ = {
 			isa = PBXGroup;
 			children = (
-				8E0A4381244A4A0400656518 /* RITConfig.swift */,
-				8E0A4382244A4A0400656518 /* StudyUser.swift */,
+				8E0A4382244A4A0400656518 /* CKStudyUser.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -265,14 +261,6 @@
 			path = Activities;
 			sourceTree = "<group>";
 		};
-		8E0A4393244A4A0400656518 /* HealthKit */ = {
-			isa = PBXGroup;
-			children = (
-				8E0A4394244A4A0400656518 /* HealthKitManager.swift */,
-			);
-			path = HealthKit;
-			sourceTree = "<group>";
-		};
 		8E0A4399244A4A0400656518 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
@@ -286,12 +274,11 @@
 		8E0A439C244A4A0400656518 /* Steps */ = {
 			isa = PBXGroup;
 			children = (
-				8E0A439D244A4A0400656518 /* HealthDataStep.swift */,
-				8E0A439E244A4A0400656518 /* HealthDataStepViewController.swift */,
-				8E0A439F244A4A0400656518 /* LoginStep.swift */,
 				8E0A43A0244A4A0400656518 /* Views */,
-				8E0A43A2244A4A0400656518 /* ConsentDocument.swift */,
+				8E0A439D244A4A0400656518 /* CKHealthDataStepViewController.swift */,
+				8E0A439F244A4A0400656518 /* LoginStep.swift */,
 				8E0A43A3244A4A0400656518 /* LoginCustomWaitStepViewController.swift */,
+				8E0A43A2244A4A0400656518 /* ConsentDocument.swift */,
 			);
 			path = Steps;
 			sourceTree = "<group>";
@@ -310,7 +297,6 @@
 				8E40DC022471E5590027536B /* Networking */,
 				8E0A4379244A4A0400656518 /* Profile */,
 				8E0A4399244A4A0400656518 /* Onboarding */,
-				8E0A4393244A4A0400656518 /* HealthKit */,
 				8E0A437E244A4A0400656518 /* Withdrawal */,
 				8E0A4380244A4A0400656518 /* Account */,
 				8E0A438D244A4A0400656518 /* Activities */,
@@ -322,7 +308,7 @@
 		8E40DC022471E5590027536B /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				8E40DC032471E5940027536B /* NetworkManager.swift */,
+				8E40DC032471E5940027536B /* CKNetworkManager.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -575,24 +561,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E0A43A8244A4A0400656518 /* StaticProfileViewController.swift in Sources */,
-				8E0A43AB244A4A0400656518 /* RITConfig.swift in Sources */,
 				8E0A43C0244A4A0400656518 /* LoginStep.swift in Sources */,
 				8E0A43B3244A4A0400656518 /* StudyTasks.swift in Sources */,
-				8E40DC042471E5940027536B /* NetworkManager.swift in Sources */,
+				8E40DC042471E5940027536B /* CKNetworkManager.swift in Sources */,
 				8E0A43BC244A4A0400656518 /* OnboardingViewController.swift in Sources */,
 				8E0A43BD244A4A0400656518 /* IntroductionViewController.swift in Sources */,
+				8EBE6F9C24B3C0E60093D07C /* AppDelegate+CardinalKit.swift in Sources */,
 				8E0A43B9244A4A0400656518 /* AppDelegate.swift in Sources */,
 				8E0A43B4244A4A0400656518 /* ActivityTableViewCell.swift in Sources */,
 				8E0A43A7244A4A0400656518 /* ProfileTableItem.swift in Sources */,
 				8E0A43B5244A4A0400656518 /* ActivityTableItem.swift in Sources */,
 				8E0A43AD244A4A0400656518 /* Constants.swift in Sources */,
-				8E0A43BE244A4A0400656518 /* HealthDataStep.swift in Sources */,
+				8E0A43BE244A4A0400656518 /* CKHealthDataStepViewController.swift in Sources */,
 				8E0A43AE244A4A0400656518 /* ORKESerialization.m in Sources */,
 				8E0A43B2244A4A0400656518 /* ActivitiesTableViewController.swift in Sources */,
-				8E0A43B7244A4A0400656518 /* HealthKitManager.swift in Sources */,
-				8E0A43AC244A4A0400656518 /* StudyUser.swift in Sources */,
+				8E0A43AC244A4A0400656518 /* CKStudyUser.swift in Sources */,
 				8E0A43C3244A4A0400656518 /* LoginCustomWaitStepViewController.swift in Sources */,
-				8E0A43BF244A4A0400656518 /* HealthDataStepViewController.swift in Sources */,
 				8E0A43AA244A4A0400656518 /* WithdrawalViewController.swift in Sources */,
 				8E0A43BA244A4A0400656518 /* LaunchContainerViewController.swift in Sources */,
 				8E0A43C2244A4A0400656518 /* ConsentDocument.swift in Sources */,

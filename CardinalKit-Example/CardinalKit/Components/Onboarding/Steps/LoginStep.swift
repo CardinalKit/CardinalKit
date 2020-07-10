@@ -1,8 +1,7 @@
 //
 //  LoginStep.swift
-//  Master-Sample
 //
-//  Created by Santiago Gutierrez on 9/22/19.
+//  Created for the CardinalKit Framework.
 //  Copyright © 2019 Stanford University. All rights reserved.
 //
 
@@ -18,6 +17,7 @@ class LoginStep: ORKFormStep {
     override init(identifier: String) {
         super.init(identifier: identifier)
         
+        // TODO: make configurable
         title = NSLocalizedString("Almost done!", comment: "")
         text = NSLocalizedString("We need to confirm your email address and send you a copy of the consent you just signed.", comment: "")
         
@@ -29,6 +29,11 @@ class LoginStep: ORKFormStep {
         fatalError("init(coder:) has not been implemented")
     }
     
+    /**
+     This function creates a form with the exact email question to ask.
+     
+     - Returns a `ORKFormItem` array with questions to show.
+    */
     fileprivate func createFormItems() -> [ORKFormItem] {
         let emailAnswerFormat = ORKEmailAnswerFormat()
         let idStepTitle = "Enter your email address:"

@@ -1,16 +1,24 @@
 //
 //  IntroductionViewController.swift
-//  Master-Sample
 //
-//  Created by Santiago Gutierrez on 9/22/19.
+//  Created for the CardinalKit Framework.
 //  Copyright © 2019 Stanford University. All rights reserved.
 //
 
 import UIKit
 
+/**
+  Enables a "swipe-able" interfaces for the three intro view controllers
+  on our `Main` storyboard file.
+  
+  Relies on having a `Main.storyboard` file with three VC identifiers:
+  `introOneViewController`,
+  `introTwoViewController`,
+   and `introThreeViewController`
+ */
 class IntroductionViewController: UIPageViewController, UIPageViewControllerDataSource {
-    // MARK: Properties
     
+    // MARK: Properties
     let pageViewControllers: [UIViewController] = {
         let introOne = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "introOneViewController")
         let introTwo = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "introTwoViewController")
@@ -20,7 +28,6 @@ class IntroductionViewController: UIPageViewController, UIPageViewControllerData
     }()
     
     // MARK: UIViewController
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -35,7 +42,6 @@ class IntroductionViewController: UIPageViewController, UIPageViewControllerData
     }
     
     // MARK: UIPageViewControllerDataSource
-    
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         let index = pageViewControllers.firstIndex(of: viewController)!
         

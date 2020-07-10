@@ -1,8 +1,7 @@
 //
 //  ProfileTableItem.swift
-//  Master-Sample
 //
-//  Created by Santiago Gutierrez on 10/14/19.
+//  Created for the CardinalKit Framework.
 //  Copyright © 2019 Stanford University. All rights reserved.
 //
 
