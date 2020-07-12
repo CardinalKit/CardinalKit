@@ -338,11 +338,11 @@
             </objects>
             <point key="canvasLocation" x="1790" y="-228"/>
         </scene>
-        <!--Activities-->
+        <!--Study-->
         <scene sceneID="PWP-Ck-vnq">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="JvU-YF-65o" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Activities" image="tab_activities" id="whh-gd-gnT"/>
+                    <tabBarItem key="tabBarItem" title="Study" image="tab_activities" id="whh-gd-gnT"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="qC7-k4-rbJ">
                         <rect key="frame" x="0.0" y="-54" width="0.0" height="0.0"/>
@@ -395,10 +395,10 @@
             </objects>
             <point key="canvasLocation" x="1938" y="1231"/>
         </scene>
-        <!--Activities Table View Controller-->
+        <!--Study Table View Controller-->
         <scene sceneID="Yay-ms-gww">
             <objects>
-                <tableViewController id="xtd-SM-41W" customClass="ActivitiesTableViewController" customModule="CardinalKit_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="xtd-SM-41W" customClass="StudyTableViewController" customModule="CardinalKit_Example" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="bDL-KT-sTW">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -455,7 +455,7 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="standardTableCell" rowHeight="60" id="1QG-QF-BLh" customClass="ActivityTableViewCell" customModule="CardinalKit_Example" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="studyTableCell" rowHeight="60" id="1QG-QF-BLh" customClass="StudyTableViewCell" customModule="CardinalKit_Example" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="163" width="414" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1QG-QF-BLh" id="5xz-sI-rJb">

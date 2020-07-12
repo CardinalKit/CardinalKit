@@ -17,10 +17,10 @@
 		8E0A43AE244A4A0400656518 /* ORKESerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4386244A4A0400656518 /* ORKESerialization.m */; };
 		8E0A43AF244A4A0400656518 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E0A4388244A4A0400656518 /* Assets.xcassets */; };
 		8E0A43B0244A4A0400656518 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E0A4389244A4A0400656518 /* LaunchScreen.storyboard */; };
-		8E0A43B2244A4A0400656518 /* ActivitiesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A438E244A4A0400656518 /* ActivitiesTableViewController.swift */; };
+		8E0A43B2244A4A0400656518 /* StudyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A438E244A4A0400656518 /* StudyTableViewController.swift */; };
 		8E0A43B3244A4A0400656518 /* StudyTasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A438F244A4A0400656518 /* StudyTasks.swift */; };
-		8E0A43B4244A4A0400656518 /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4390244A4A0400656518 /* ActivityTableViewCell.swift */; };
-		8E0A43B5244A4A0400656518 /* ActivityTableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4391244A4A0400656518 /* ActivityTableItem.swift */; };
+		8E0A43B4244A4A0400656518 /* StudyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4390244A4A0400656518 /* StudyTableViewCell.swift */; };
+		8E0A43B5244A4A0400656518 /* StudyTableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4391244A4A0400656518 /* StudyTableItem.swift */; };
 		8E0A43B9244A4A0400656518 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4396244A4A0400656518 /* AppDelegate.swift */; };
 		8E0A43BA244A4A0400656518 /* LaunchContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4397244A4A0400656518 /* LaunchContainerViewController.swift */; };
 		8E0A43BC244A4A0400656518 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A439A244A4A0400656518 /* OnboardingViewController.swift */; };
@@ -36,6 +36,7 @@
 		8E0A43D2244A675F00656518 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8E0A43D1244A675F00656518 /* GoogleService-Info.plist */; };
 		8E0A43D5244A693D00656518 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E0A43D4244A693D00656518 /* HealthKit.framework */; };
 		8E40DC042471E5940027536B /* CKNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E40DC032471E5940027536B /* CKNetworkManager.swift */; };
+		8E67519C24B7ACB7004EC405 /* StudyTableViewController+CardinalKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E67519B24B7ACB7004EC405 /* StudyTableViewController+CardinalKit.swift */; };
 		8EBE6F9C24B3C0E60093D07C /* AppDelegate+CardinalKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE6F9B24B3C0E60093D07C /* AppDelegate+CardinalKit.swift */; };
 /* End PBXBuildFile section */
 
@@ -86,10 +87,10 @@
 		8E0A4388244A4A0400656518 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8E0A438A244A4A0400656518 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8E0A438B244A4A0400656518 /* CardinalKit-Example.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "CardinalKit-Example.entitlements"; sourceTree = "<group>"; };
-		8E0A438E244A4A0400656518 /* ActivitiesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitiesTableViewController.swift; sourceTree = "<group>"; };
+		8E0A438E244A4A0400656518 /* StudyTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyTableViewController.swift; sourceTree = "<group>"; };
 		8E0A438F244A4A0400656518 /* StudyTasks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyTasks.swift; sourceTree = "<group>"; };
-		8E0A4390244A4A0400656518 /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
-		8E0A4391244A4A0400656518 /* ActivityTableItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityTableItem.swift; sourceTree = "<group>"; };
+		8E0A4390244A4A0400656518 /* StudyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyTableViewCell.swift; sourceTree = "<group>"; };
+		8E0A4391244A4A0400656518 /* StudyTableItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyTableItem.swift; sourceTree = "<group>"; };
 		8E0A4396244A4A0400656518 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8E0A4397244A4A0400656518 /* LaunchContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchContainerViewController.swift; sourceTree = "<group>"; };
 		8E0A439A244A4A0400656518 /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
@@ -104,6 +105,7 @@
 		8E0A43D1244A675F00656518 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8E0A43D4244A693D00656518 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		8E40DC032471E5940027536B /* CKNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKNetworkManager.swift; sourceTree = "<group>"; };
+		8E67519B24B7ACB7004EC405 /* StudyTableViewController+CardinalKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StudyTableViewController+CardinalKit.swift"; sourceTree = "<group>"; };
 		8EBE6F9B24B3C0E60093D07C /* AppDelegate+CardinalKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+CardinalKit.swift"; sourceTree = "<group>"; };
 		CB97C14C759E56B88E4E3941 /* Pods_CardinalKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CardinalKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F30ABA7020E91EBA421A80F9 /* Pods-CardinalKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardinalKit_Example.debug.xcconfig"; path = "Target Support Files/Pods-CardinalKit_Example/Pods-CardinalKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -250,15 +252,16 @@
 			path = ResearchKit;
 			sourceTree = "<group>";
 		};
-		8E0A438D244A4A0400656518 /* Activities */ = {
+		8E0A438D244A4A0400656518 /* Study */ = {
 			isa = PBXGroup;
 			children = (
-				8E0A438E244A4A0400656518 /* ActivitiesTableViewController.swift */,
+				8E0A438E244A4A0400656518 /* StudyTableViewController.swift */,
+				8E67519B24B7ACB7004EC405 /* StudyTableViewController+CardinalKit.swift */,
 				8E0A438F244A4A0400656518 /* StudyTasks.swift */,
-				8E0A4390244A4A0400656518 /* ActivityTableViewCell.swift */,
-				8E0A4391244A4A0400656518 /* ActivityTableItem.swift */,
+				8E0A4390244A4A0400656518 /* StudyTableViewCell.swift */,
+				8E0A4391244A4A0400656518 /* StudyTableItem.swift */,
 			);
-			path = Activities;
+			path = Study;
 			sourceTree = "<group>";
 		};
 		8E0A4399244A4A0400656518 /* Onboarding */ = {
@@ -299,7 +302,7 @@
 				8E0A4399244A4A0400656518 /* Onboarding */,
 				8E0A437E244A4A0400656518 /* Withdrawal */,
 				8E0A4380244A4A0400656518 /* Account */,
-				8E0A438D244A4A0400656518 /* Activities */,
+				8E0A438D244A4A0400656518 /* Study */,
 				8E0A4397244A4A0400656518 /* LaunchContainerViewController.swift */,
 			);
 			path = Components;
@@ -379,7 +382,7 @@
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = L5J57DU2Q2;
+						DevelopmentTeam = CQRZ4E7K9U;
 						LastSwiftMigration = 1120;
 					};
 					607FACE41AFB9204008FA782 = {
@@ -568,15 +571,16 @@
 				8E0A43BD244A4A0400656518 /* IntroductionViewController.swift in Sources */,
 				8EBE6F9C24B3C0E60093D07C /* AppDelegate+CardinalKit.swift in Sources */,
 				8E0A43B9244A4A0400656518 /* AppDelegate.swift in Sources */,
-				8E0A43B4244A4A0400656518 /* ActivityTableViewCell.swift in Sources */,
+				8E0A43B4244A4A0400656518 /* StudyTableViewCell.swift in Sources */,
 				8E0A43A7244A4A0400656518 /* ProfileTableItem.swift in Sources */,
-				8E0A43B5244A4A0400656518 /* ActivityTableItem.swift in Sources */,
+				8E0A43B5244A4A0400656518 /* StudyTableItem.swift in Sources */,
 				8E0A43AD244A4A0400656518 /* Constants.swift in Sources */,
 				8E0A43BE244A4A0400656518 /* CKHealthDataStepViewController.swift in Sources */,
 				8E0A43AE244A4A0400656518 /* ORKESerialization.m in Sources */,
-				8E0A43B2244A4A0400656518 /* ActivitiesTableViewController.swift in Sources */,
+				8E0A43B2244A4A0400656518 /* StudyTableViewController.swift in Sources */,
 				8E0A43AC244A4A0400656518 /* CKStudyUser.swift in Sources */,
 				8E0A43C3244A4A0400656518 /* LoginCustomWaitStepViewController.swift in Sources */,
+				8E67519C24B7ACB7004EC405 /* StudyTableViewController+CardinalKit.swift in Sources */,
 				8E0A43AA244A4A0400656518 /* WithdrawalViewController.swift in Sources */,
 				8E0A43BA244A4A0400656518 /* LaunchContainerViewController.swift in Sources */,
 				8E0A43C2244A4A0400656518 /* ConsentDocument.swift in Sources */,
@@ -727,12 +731,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "CardinalKit-Example.entitlements";
-				DEVELOPMENT_TEAM = L5J57DU2Q2;
+				DEVELOPMENT_TEAM = CQRZ4E7K9U;
 				INFOPLIST_FILE = "CardinalKit/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "edu.stanford.cs342.sample-study";
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.stanford.cs342.sample-study.santig";
 				PRODUCT_NAME = "CardinalKit Example";
 				SWIFT_OBJC_BRIDGING_HEADER = "CardinalKit/Supporting Files/CardinalKit_Example-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -748,12 +752,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "CardinalKit-Example.entitlements";
-				DEVELOPMENT_TEAM = L5J57DU2Q2;
+				DEVELOPMENT_TEAM = CQRZ4E7K9U;
 				INFOPLIST_FILE = "CardinalKit/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "edu.stanford.cs342.sample-study";
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.stanford.cs342.sample-study.santig";
 				PRODUCT_NAME = "CardinalKit Example";
 				SWIFT_OBJC_BRIDGING_HEADER = "CardinalKit/Supporting Files/CardinalKit_Example-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;

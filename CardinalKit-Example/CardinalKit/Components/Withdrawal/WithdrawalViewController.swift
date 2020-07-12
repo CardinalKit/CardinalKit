@@ -10,7 +10,6 @@ import ResearchKit
 
 class WithdrawViewController: ORKTaskViewController {
     
-    // MARK: Initialization
     init() {
         // TODO: configurability
         let instructionStep = ORKInstructionStep(identifier: "WithdrawlInstruction")
