@@ -1,18 +1,19 @@
 //
-//  ActivityTableItem.swift
-//  Survey-Sample
+//  StudyTableItem.swift
 //
-//  Created by Santiago Gutierrez on 9/16/19.
+//  Created for the CardinalKit Framework.
 //  Copyright © 2019 Stanford University. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-enum ActivityTableItem: Int {
+enum StudyTableItem: Int {
+    
+    // table items
     case survey, activeTask
     
-    static var allValues: [ActivityTableItem] {
+    static var allValues: [StudyTableItem] {
         var index = 0
         return Array (
             AnyIterator {
@@ -26,18 +27,18 @@ enum ActivityTableItem: Int {
     var title: String {
         switch self {
         case .survey:
-            return "Survey"
+            return "Survey Sample"
         case .activeTask:
-            return "Active Task"
+            return "Active Task Sample"
         }
     }
     
     var subtitle: String {
         switch self {
         case .survey:
-            return "Answer 6 short questions"
+            return "Answer some short questions."
         case .activeTask:
-            return "Active movement task!"
+            return "Perform an action."
         }
     }
     
