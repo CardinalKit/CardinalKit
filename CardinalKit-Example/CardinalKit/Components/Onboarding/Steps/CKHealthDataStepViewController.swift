@@ -11,6 +11,14 @@ import CardinalKit
 
 class CKHealthDataStep: ORKInstructionStep {
     
+    // TODO: save as configurable element
+    let hkTypesToReadInBackground: Set<HKQuantityType> = [
+        HKObjectType.quantityType(forIdentifier: .stepCount)!,
+        HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning)!,
+        HKObjectType.quantityType(forIdentifier: .flightsClimbed)!,
+        HKObjectType.quantityType(forIdentifier: .heartRate)!
+    ]
+
     override init(identifier: String) {
         super.init(identifier: identifier)
         
@@ -35,19 +43,14 @@ class CKHealthDataStep: ORKInstructionStep {
          * in the background. Choose from any HKQuantityType:
          * https://developer.apple.com/documentation/healthkit/hkquantitytypeidentifier
         **************************************************************/
-        // TODO: save as configurable element
-        let hkTypesToReadInBackground: Set<HKQuantityType> = [
-            HKObjectType.quantityType(forIdentifier: .stepCount)!,
-            HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning)!,
-            HKObjectType.quantityType(forIdentifier: .flightsClimbed)!,
-            HKObjectType.quantityType(forIdentifier: .heartRate)!
-        ]
         
         // handle authorization from the OS
-        OperationQueue.main.addOperation {
-            CKActivityManager.shared.getHealthAuthorizaton(forTypes: hkTypesToReadInBackground) { (success, error) in
-                completion(success, error)
+        CKActivityManager.shared.getHealthAuthorizaton(forTypes: hkTypesToReadInBackground) { (success, error) in
+            if (success) {
+                // TODO: save as configurable element
+                CKActivityManager.shared.startHealthKitCollectionInBackground(withFrequency: .immediate)
             }
+            completion(success, error)
         }
     }
 }

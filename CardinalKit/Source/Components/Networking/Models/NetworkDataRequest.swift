@@ -146,32 +146,27 @@ extension NetworkDataRequest {
         }
         
         let store = try package.store()
-        
-        if let endpointURL = package.routeAsURL() {
             
-            if let customDelegate = CKApp.instance.options.networkDeliveryDelegate {
-                // if the user has a custom send function, use it
-                
-                let authenticatedPath = CKSession.shared.getAuthCollection() ?? ""
-                
-                customDelegate.send(file: store, package: package, authPath: authenticatedPath) { [weak self] (success) in
-                    if (success) {
-                        self?.complete()
-                    } else {
-                        self?.fail()
-                    }
+        if let customDelegate = CKApp.instance.options.networkDeliveryDelegate {
+            // if the user has a custom send function, use it
+            customDelegate.send(file: store, package: package) { [weak self] (success) in
+                if (success) {
+                    self?.complete()
+                } else {
+                    self?.fail()
                 }
-                try markAsProcessing() //mark request as processing
-            } else {
-                // send file using CK network protocols
-                
+            }
+            try markAsProcessing() //mark request as processing
+        } else {
+            // send file using CK network protocols
+            if let endpointURL = package.routeAsURL() {
                 UploadManager.shared.upload(file: store, to: endpointURL, uuid: "\(id)")
                 try markAsProcessing() //mark request as processing
+            }  else {
+                VError("Unable to find route for network package type (%@)", package.type.rawValue)
             }
-            
-        } else {
-            VError("Unable to find route for network package type (%@)", package.type.rawValue)
         }
+            
     }
     
     func complete() {
@@ -216,7 +211,7 @@ extension NetworkDataRequest {
 extension NetworkDataRequest {
 
     fileprivate func shouldPerform() -> Bool {
-        guard package?.route() != nil else {
+        guard CKApp.instance.options.networkDeliveryDelegate != nil || package?.route() != nil else {
             return false //package has no endpoint
         }
         

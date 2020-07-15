@@ -31,7 +31,12 @@ extension AppDelegate {
             
             // (4) then start the requested HK data collection (if any).
             // TODO: make frequency configurable
-            CKActivityManager.shared.startHealthKitCollectionInBackground(withFrequency: .immediate)
+            let healthStep = CKHealthDataStep(identifier: UUID().uuidString)
+            healthStep.getHealthAuthorization { (success, error) in
+                if let error = error {
+                    print(error)
+                }
+            }
         }
     }
     

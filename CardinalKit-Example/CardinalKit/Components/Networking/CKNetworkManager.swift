@@ -14,11 +14,12 @@ class CKAppNetworkManager: CKAPIDeliveryDelegate {
      Override the CardinalKit networking engine to
      send HealthKit data using Firebase
     */
-    fileprivate func sendHealthKit(_ file: URL, _ package: Package, _ authPath: String, _ onCompletion: @escaping (Bool) -> Void) {
+    fileprivate func sendHealthKit(_ file: URL, _ package: Package, _ onCompletion: @escaping (Bool) -> Void) {
         
         do {
             let data = try Data(contentsOf: file)
-            guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
+            guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+                let authPath = CKSession.shared.getAuthCollection() else {
                 onCompletion(false)
                 return
             }
@@ -47,10 +48,10 @@ class CKAppNetworkManager: CKAPIDeliveryDelegate {
     }
     
     // MARK: - CKAPIDeliveryDelegate
-    func send(file: URL, package: Package, authPath: String, onCompletion: @escaping (Bool) -> Void) {
+    func send(file: URL, package: Package, onCompletion: @escaping (Bool) -> Void) {
         switch package.type {
         case .hkdata:
-            sendHealthKit(file, package, authPath, onCompletion)
+            sendHealthKit(file, package, onCompletion)
             break
         default:
             fatalError("Sending data of type \(package.type.description) is NOT supported.")

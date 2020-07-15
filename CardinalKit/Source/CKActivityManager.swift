@@ -80,7 +80,6 @@ public class CKActivityManager : NSObject {
          }
      }
      
-     
      fileprivate var hasGrantedAuth : Bool {
          get {
              return UserDefaults.standard.bool(forKey: keyHasGrantedAuth)
