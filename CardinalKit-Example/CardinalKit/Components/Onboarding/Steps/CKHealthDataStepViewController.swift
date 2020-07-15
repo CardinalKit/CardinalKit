@@ -44,8 +44,10 @@ class CKHealthDataStep: ORKInstructionStep {
         ]
         
         // handle authorization from the OS
-        CKActivityManager.shared.getHealthAuthorizaton(forTypes: hkTypesToReadInBackground) { (success, error) in
-            completion(success, error)
+        OperationQueue.main.addOperation {
+            CKActivityManager.shared.getHealthAuthorizaton(forTypes: hkTypesToReadInBackground) { (success, error) in
+                completion(success, error)
+            }
         }
     }
 }

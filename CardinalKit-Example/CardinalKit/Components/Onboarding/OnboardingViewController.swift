@@ -81,10 +81,10 @@ class OnboardingViewController: UIViewController {
         **************************************************************/
         
         // given intro steps that the user should review and consent to
-        let introSteps = [consentStep, reviewConsentStep, healthDataStep]
+        let introSteps = [consentStep, reviewConsentStep]
         
         // and steps regarding login / security
-        let emailVerificationSteps = [loginStep, loginVerificationStep, passcodeStep, completionStep]
+        let emailVerificationSteps = [loginStep, loginVerificationStep, passcodeStep, healthDataStep, completionStep]
         
         // guide the user through ALL steps
         let fullSteps = introSteps + emailVerificationSteps

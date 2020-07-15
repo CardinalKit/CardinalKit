@@ -24,12 +24,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // (1) initialize Firebase SDK
         FirebaseApp.configure()
         
-        // (2) initialize CardinalKit API
-        CKAppLaunch()
-        
-        // (3) check if this is the first time
+        // (2) check if this is the first time
         // that the app runs!
         cleanIfFirstRun()
+        
+        // (3) initialize CardinalKit API
+        CKAppLaunch()
         
         return true
     }

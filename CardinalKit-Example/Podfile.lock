@@ -222,15 +222,9 @@ PODS:
     - ObjectMapper (~> 3.3.0)
     - ReachabilitySwift (~> 3)
     - RealmSwift (~> 4.4.1)
-    - ResearchKit
     - SAMKeychain (~> 1.5.2)
     - SwiftyJSON (~> 4.1.0)
     - Zip (~> 1.1.0)
-  - FBSnapshotTestCase (2.1.4):
-    - FBSnapshotTestCase/SwiftSupport (= 2.1.4)
-  - FBSnapshotTestCase/Core (2.1.4)
-  - FBSnapshotTestCase/SwiftSupport (2.1.4):
-    - FBSnapshotTestCase/Core
   - Firebase/Analytics (6.24.0):
     - Firebase/Core
   - Firebase/Auth (6.24.0):
@@ -364,15 +358,8 @@ PODS:
     - nanopb/encode (= 1.30905.0)
   - nanopb/decode (1.30905.0)
   - nanopb/encode (1.30905.0)
-  - Nimble (7.3.4)
-  - Nimble-Snapshots (6.3.0):
-    - Nimble-Snapshots/Core (= 6.3.0)
-  - Nimble-Snapshots/Core (6.3.0):
-    - FBSnapshotTestCase (~> 2.0)
-    - Nimble (~> 7.0)
   - ObjectMapper (3.3.0)
   - PromisesObjC (1.2.8)
-  - Quick (1.2.0)
   - ReachabilitySwift (3)
   - Realm (4.4.1):
     - Realm/Headers (= 4.4.1)
@@ -386,22 +373,17 @@ PODS:
 
 DEPENDENCIES:
   - CardinalKit (from `../`)
-  - FBSnapshotTestCase (~> 2.1.4)
   - Firebase/Analytics
   - Firebase/Auth
   - Firebase/DynamicLinks
   - Firebase/Firestore
   - Firebase/Storage
-  - Nimble (~> 7.0)
-  - Nimble-Snapshots (~> 6.3.0)
-  - Quick (~> 1.2.0)
   - ResearchKit (from `https://github.com/ResearchKit/ResearchKit.git`, branch `stable`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - abseil
     - BoringSSL-GRPC
-    - FBSnapshotTestCase
     - Firebase
     - FirebaseAnalytics
     - FirebaseAnalyticsInterop
@@ -423,11 +405,8 @@ SPEC REPOS:
     - GTMSessionFetcher
     - leveldb-library
     - nanopb
-    - Nimble
-    - Nimble-Snapshots
     - ObjectMapper
     - PromisesObjC
-    - Quick
     - ReachabilitySwift
     - Realm
     - RealmSwift
@@ -450,8 +429,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
   BoringSSL-GRPC: 8edf627ee524575e2f8d19d56f068b448eea3879
-  CardinalKit: fdde0f5cdc59cbe9e589dc390caf0b4c1f40191a
-  FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
+  CardinalKit: 18632b6a0ed0bc3dac9c3974cbaa9bbfa9a24df0
   Firebase: b28e55c60efd98963cd9011fe2fac5a10c2ba124
   FirebaseAnalytics: 7386fc2176e3f93ad8ef34b5b1f2b33a891e4962
   FirebaseAnalyticsInterop: 3f86269c38ae41f47afeb43ebf32a001f58fcdae
@@ -473,11 +451,8 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 6f5c8abbab8a9bce4bb3f057e317728ec6182b10
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
-  Nimble: 051e3d8912d40138fa5591c78594f95fb172af37
-  Nimble-Snapshots: f5459b5b091678dc942d03ec4741cacb58ba4a52
   ObjectMapper: b612bf8c8e99c4dc0bb6013a51f7c27966ed5da9
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
-  Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08
   ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
   Realm: 4eb04d7487bd43c0581256f40b424eafb711deff
   RealmSwift: 3eb8924ff7100df5928c7602f71d0fec51e7c9c5
@@ -486,6 +461,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
   Zip: 8877eede3dda76bcac281225c20e71c25270774c
 
-PODFILE CHECKSUM: 3cb3d8eab2b788de7fa8070c7c559479c31ff6b2
+PODFILE CHECKSUM: 154d12ecec5d58a418d9894670f7fae02125cad5
 
 COCOAPODS: 1.7.5

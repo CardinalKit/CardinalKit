@@ -30,9 +30,6 @@
     "Foundation"
   ],
   "dependencies": {
-    "ResearchKit": [
-
-    ],
     "SAMKeychain": [
       "~> 1.5.2"
     ],
