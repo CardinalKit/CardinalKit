@@ -13,6 +13,10 @@ Please visit https://cardinalkit.org to get started with our documentation 🙌
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
+## Contribute to CardinalKit
+
+Head on over to https://cardinalkit.org/docs/contribute to get onboarded to our open source community ⚡️ 
+
 ## Installation
 
 CardinalKit is available through [CocoaPods](https://cocoapods.org). To install
