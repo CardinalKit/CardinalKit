@@ -27,6 +27,8 @@ class OnboardingViewController: UIViewController {
     */
     fileprivate func presentOnboarding() {
         
+        let config = CKPropertyReader(file: "CKConfiguration")
+        
         /* **************************************************************
         *  STEP (1): get user consent
         **************************************************************/
@@ -38,11 +40,10 @@ class OnboardingViewController: UIViewController {
         *  STEP (2): ask user to review and sign consent document
         **************************************************************/
         // use the `ORKConsentReviewStep` from ResearchKit
-        // TODO: make text and reason configurable.
         let signature = consentDocument.signatures!.first!
         let reviewConsentStep = ORKConsentReviewStep(identifier: "ConsentReviewStep", signature: signature, in: consentDocument)
-        reviewConsentStep.text = "Review the consent form."
-        reviewConsentStep.reasonForConsent = "Consent to join the Developer Health Research Study."
+        reviewConsentStep.text = config.read(query: "Review Consent Step Text")
+        reviewConsentStep.reasonForConsent = config.read(query: "Reason for Consent Text")
         
         /* **************************************************************
         *  STEP (3): get permission to collect HealthKit data
@@ -63,18 +64,22 @@ class OnboardingViewController: UIViewController {
         *  that will be required to use this app!
         **************************************************************/
         // use the `ORKPasscodeStep` from ResearchKit.
-        // TODO: make text and type (?) configurable
         let passcodeStep = ORKPasscodeStep(identifier: "Passcode") //NOTE: requires NSFaceIDUsageDescription in info.plist
-        passcodeStep.text = "Now you will create a passcode to identify yourself to the app and protect access to information you've entered."
+        let type = config.read(query: "Passcode Type")
+        if type == "6" {
+            passcodeStep.passcodeType = .type6Digit
+        } else {
+            passcodeStep.passcodeType = .type4Digit
+        }
+        passcodeStep.text = config.read(query: "Passcode Text")
         
         /* **************************************************************
         *  STEP (6): inform the user that they are done with sign-up!
         **************************************************************/
         // use the `ORKCompletionStep` from ResearchKit
-        // TODO: make text configurable.
         let completionStep = ORKCompletionStep(identifier: "CompletionStep")
-        completionStep.title = "Welcome aboard."
-        completionStep.text = "Thank you for joining this study."
+        completionStep.title = config.read(query: "Completition Step Title")
+        completionStep.text = config.read(query: "Completition Step Text")
         
         /* **************************************************************
         * finally, CREATE an array with the steps to show the user
@@ -158,8 +163,9 @@ extension OnboardingViewController : ORKTaskViewControllerDelegate {
                     guard success else {
                         // and react accordingly if we ran into an error.
                         DispatchQueue.main.async {
-                            // TODO: configurability
-                            Alerts.showInfo(title: "Unable to Login 😔", message: "Please try again in five minutes.")
+                            let config = CKPropertyReader(file: "CKConfiguration")
+                            
+                            Alerts.showInfo(title: config.read(query: "Failed Login Title"), message: config.read(query: "Failed Login Text"))
                             stepViewController.goBackward()
                         }
                         return

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Tint Color</key>
+	<string>#b6133f</string>
+	<key>Review Consent Step Text</key>
+	<string>Review Consent Form</string>
+	<key>Reason for Consent Text</key>
+	<string>Consent to join the Developer Health Research Study.</string>
+	<key>Passcode Text</key>
+	<string>Now you will create a passcode to identify yourself to the app and protect access to information you&apos;ve entered.</string>
+	<key>Passcode Type</key>
+	<string>4</string>
+	<key>Completition Step Title</key>
+	<string>Welcome aboard.</string>
+	<key>Completition Step Text</key>
+	<string>Thank you for joining this study.</string>
+	<key>Failed Login Title</key>
+	<string>Unable to Login 😔</string>
+	<key>Failed Login Text</key>
+	<string>Please try again in five minutes.</string>
+	<key>Health Permissions Title</key>
+	<string>Health Data</string>
+	<key>Health Permissions Text</key>
+	<string>On the next screen, you will be prompted to grant access to read and write some of your general and health information, such as height, weight, and steps taken so you don&apos;t have to enter it again.</string>
+	<key>Background Read Frequency</key>
+	<string>immediate</string>
+	<key>Login Step Title</key>
+	<string>Almost done!</string>
+	<key>Login Step Text</key>
+	<string>We need to confirm your email address and send you a copy of the consent you just signed.</string>
+	<key>Withdrawal Instruction Title</key>
+	<string>Are you sure you want to withdraw?</string>
+	<key>Withdrawal Instruction Text</key>
+	<string>Withdrawing from the study will reset the app to the state it was in prior to you originally joining the study.</string>
+	<key>Withdraw Title</key>
+	<string>We appreciate your time.</string>
+	<key>Withdraw Text</key>
+	<string>Thank you for your contribution to this study. We are sorry that you could not continue.</string>
+	<key>Passcode On Return Text</key>
+	<string>Welcome back!</string>
+</dict>
+</plist>

@@ -12,13 +12,15 @@ class WithdrawViewController: ORKTaskViewController {
     
     init() {
         // TODO: configurability
+        let config = CKPropertyReader(file: "CKConfiguration")
+        
         let instructionStep = ORKInstructionStep(identifier: "WithdrawlInstruction")
-        instructionStep.title = NSLocalizedString("Are you sure you want to withdraw?", comment: "")
-        instructionStep.text = NSLocalizedString("Withdrawing from the study will reset the app to the state it was in prior to you originally joining the study.", comment: "")
+        instructionStep.title = NSLocalizedString(config.read(query: "Withdrawal Instruction Title"), comment: "")
+        instructionStep.text = NSLocalizedString(config.read(query: "Withdrawal Instruction Text"), comment: "")
         
         let completionStep = ORKCompletionStep(identifier: "Withdraw")
-        completionStep.title = NSLocalizedString("We appreciate your time.", comment: "")
-        completionStep.text = NSLocalizedString("Thank you for your contribution to this study. We are sorry that you could not continue.", comment: "")
+        completionStep.title = NSLocalizedString(config.read(query: "Withdraw Title"), comment: "")
+        completionStep.text = NSLocalizedString(config.read(query: "Withdraw Text"), comment: "")
         
         let withdrawTask = ORKOrderedTask(identifier: "Withdraw", steps: [instructionStep, completionStep])
         
