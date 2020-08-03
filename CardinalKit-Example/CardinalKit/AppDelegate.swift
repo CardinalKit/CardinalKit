@@ -31,6 +31,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // (3) initialize CardinalKit API
         CKAppLaunch()
         
+        let config = CKPropertyReader(file: "CKConfiguration")
+        
+        UIView.appearance(whenContainedInInstancesOf: [ORKTaskViewController.self]).tintColor = config.readColor(query: "Tint Color")
+        
         return true
     }
 

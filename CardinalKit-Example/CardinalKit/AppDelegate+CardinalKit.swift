@@ -113,7 +113,9 @@ extension AppDelegate: ORKPasscodeDelegate {
         window?.makeKeyAndVisible()
         
         //TODO: make text and passcodeType (?) configurable
-        let passcodeViewController = ORKPasscodeViewController.passcodeAuthenticationViewController(withText: "Welcome back!", delegate: self)
+        let config = CKPropertyReader(file: "CKConfiguration")
+        
+        let passcodeViewController = ORKPasscodeViewController.passcodeAuthenticationViewController(withText: config.read(query: "Passcode On Return Text"), delegate: self)
         containerViewController?.present(passcodeViewController, animated: false, completion: nil)
     }
     

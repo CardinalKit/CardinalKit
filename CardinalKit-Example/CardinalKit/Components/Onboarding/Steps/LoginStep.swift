@@ -17,9 +17,10 @@ class LoginStep: ORKFormStep {
     override init(identifier: String) {
         super.init(identifier: identifier)
         
-        // TODO: make configurable
-        title = NSLocalizedString("Almost done!", comment: "")
-        text = NSLocalizedString("We need to confirm your email address and send you a copy of the consent you just signed.", comment: "")
+        let config = CKPropertyReader(file: "CKConfiguration")
+        
+        title = NSLocalizedString(config.read(query: "Login Step Title"), comment: "")
+        text = NSLocalizedString(config.read(query: "Login Step Text"), comment: "")
         
         formItems = createFormItems()
         isOptional = false

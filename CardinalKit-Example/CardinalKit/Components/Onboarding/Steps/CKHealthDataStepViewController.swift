@@ -26,9 +26,11 @@ class CKHealthDataStep: ORKInstructionStep {
          * customize the instruction text that user sees when
          * requesting health data permissions.
         **************************************************************/
-        // TODO: save as configurable element
-        title = NSLocalizedString("Health Data", comment: "")
-        text = NSLocalizedString("On the next screen, you will be prompted to grant access to read and write some of your general and health information, such as height, weight, and steps taken so you don't have to enter it again.", comment: "")
+        
+        let config = CKPropertyReader(file: "CKConfiguration")
+        
+        title = NSLocalizedString(config.read(query: "Health Permissions Title"), comment: "")
+        text = NSLocalizedString(config.read(query: "Health Permissions Text"), comment: "")
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -47,8 +49,21 @@ class CKHealthDataStep: ORKInstructionStep {
         // handle authorization from the OS
         CKActivityManager.shared.getHealthAuthorizaton(forTypes: hkTypesToReadInBackground) { (success, error) in
             if (success) {
-                // TODO: save as configurable element
-                CKActivityManager.shared.startHealthKitCollectionInBackground(withFrequency: .immediate)
+                let config = CKPropertyReader(file: "CKConfiguration")
+                let frequency = config.read(query: "Background Read Frequency")
+
+                if frequency == "immediate" {
+                    CKActivityManager.shared.startHealthKitCollectionInBackground(withFrequency: .immediate)
+                    
+                } else if frequency == "daily" {
+                    
+                    CKActivityManager.shared.startHealthKitCollectionInBackground(withFrequency: .daily)
+                    
+                } else if frequency == "weekly" {
+                    CKActivityManager.shared.startHealthKitCollectionInBackground(withFrequency: .weekly)
+                } else if frequency == "hourly" {
+                    CKActivityManager.shared.startHealthKitCollectionInBackground(withFrequency: .hourly)
+                }
             }
             completion(success, error)
         }
