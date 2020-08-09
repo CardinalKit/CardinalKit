@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class CKPropertyReader {
+public class CKPropertyReader {
     
     var data: [String: AnyObject] = [:]
     

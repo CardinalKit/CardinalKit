@@ -32,6 +32,7 @@ public class RoundedButton: UIButton {
         } else {
             disable()
         }
+        
     }
     
     public func enable() {
