@@ -45,21 +45,25 @@ class ConsentDocument: ORKConsentDocument {
             .withdrawing
         ]
         
-        let consentForm = Array(config.readDict(query: "Consent Form").values)
+        let keys = ["Overview", "Data Gathering", "Privacy", "Data Use", "Time Commitment", "Study Survey", "Study Tasks", "Withdrawing"]
+        
+        let consentForm = config.readDict(query: "Consent Form")
         sections = []
         
-        for sectionType in sectionTypes {
-            let section = ORKConsentSection(type: sectionType)
+        for sectionType in keys {
+            let section = ORKConsentSection(type: sectionTypes[keys.index(of: sectionType)!])
             
-            let localizedStep = NSLocalizedString(consentForm[sectionTypes.index(of: sectionType)!], comment: "")
-            let localizedSummary = localizedStep.components(separatedBy: ".")[0] + "."
-            
-            section.summary = localizedSummary
-            section.content = localizedStep
-            if sections == nil {
-                sections = [section]
-            } else {
-                sections!.append(section)
+            if let consentSectionText = consentForm[sectionType] {
+                let localizedStep = NSLocalizedString(consentSectionText, comment: "")
+                let localizedSummary = localizedStep.components(separatedBy: ".")[0] + "."
+                
+                section.summary = localizedSummary
+                section.content = localizedStep
+                if sections == nil {
+                    sections = [section]
+                } else {
+                    sections!.append(section)
+                }
             }
         }
         
