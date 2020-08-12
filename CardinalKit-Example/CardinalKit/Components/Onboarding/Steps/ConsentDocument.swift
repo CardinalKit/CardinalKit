@@ -28,7 +28,11 @@ class ConsentDocument: ORKConsentDocument {
     override init() {
         super.init()
         
-        title = NSLocalizedString("Research Health Study Consent Form", comment: "")
+        let config = CKPropertyReader(file: "CKConfiguration")
+        
+        let consentTitle = config.read(query: "Consent Title")
+        
+        title = NSLocalizedString(consentTitle, comment: "")
         
         let sectionTypes: [ORKConsentSectionType] = [
             .overview,
@@ -40,20 +44,26 @@ class ConsentDocument: ORKConsentDocument {
             .studyTasks,
             .withdrawing
         ]
+        
+        let keys = ["Overview", "Data Gathering", "Privacy", "Data Use", "Time Commitment", "Study Survey", "Study Tasks", "Withdrawing"]
+        
+        let consentForm = config.readDict(query: "Consent Form")
         sections = []
         
-        for sectionType in sectionTypes {
-            let section = ORKConsentSection(type: sectionType)
+        for sectionType in keys {
+            let section = ORKConsentSection(type: sectionTypes[keys.index(of: sectionType)!])
             
-            let localizedIpsum = NSLocalizedString(ipsum[sectionTypes.index(of: sectionType)!], comment: "")
-            let localizedSummary = localizedIpsum.components(separatedBy: ".")[0] + "."
-            
-            section.summary = localizedSummary
-            section.content = localizedIpsum
-            if sections == nil {
-                sections = [section]
-            } else {
-                sections!.append(section)
+            if let consentSectionText = consentForm[sectionType] {
+                let localizedStep = NSLocalizedString(consentSectionText, comment: "")
+                let localizedSummary = localizedStep.components(separatedBy: ".")[0] + "."
+                
+                section.summary = localizedSummary
+                section.content = localizedStep
+                if sections == nil {
+                    sections = [section]
+                } else {
+                    sections!.append(section)
+                }
             }
         }
         
