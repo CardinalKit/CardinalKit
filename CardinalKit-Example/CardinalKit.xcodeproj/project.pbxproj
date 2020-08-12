@@ -38,7 +38,6 @@
 		8EBE6F9C24B3C0E60093D07C /* AppDelegate+CardinalKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE6F9B24B3C0E60093D07C /* AppDelegate+CardinalKit.swift */; };
 		E2F1FD7624D61EDA006C39DF /* CKPropertyReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F1FD7524D61EDA006C39DF /* CKPropertyReader.swift */; };
 		E2F1FD7824D62064006C39DF /* CKConfiguration.plist in Resources */ = {isa = PBXBuildFile; fileRef = E2F1FD7724D62064006C39DF /* CKConfiguration.plist */; };
-		E2FD5ACF24DF78F3002490E3 /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FD5ACE24DF78F3002490E3 /* Onboarding.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -98,7 +97,6 @@
 		CB97C14C759E56B88E4E3941 /* Pods_CardinalKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CardinalKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2F1FD7524D61EDA006C39DF /* CKPropertyReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKPropertyReader.swift; sourceTree = "<group>"; };
 		E2F1FD7724D62064006C39DF /* CKConfiguration.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = CKConfiguration.plist; sourceTree = "<group>"; };
-		E2FD5ACE24DF78F3002490E3 /* Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
 		F30ABA7020E91EBA421A80F9 /* Pods-CardinalKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardinalKit_Example.debug.xcconfig"; path = "Target Support Files/Pods-CardinalKit_Example/Pods-CardinalKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -263,7 +261,6 @@
 		8E0A43C5244A4A5700656518 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				E2FD5ACD24DF7875002490E3 /* User Interface */,
 				8E40DC022471E5590027536B /* Networking */,
 				8E0A4379244A4A0400656518 /* Profile */,
 				8E0A4399244A4A0400656518 /* Onboarding */,
@@ -292,14 +289,6 @@
 				00480E2D79186BE9405F0F72 /* Pods-CardinalKit_Tests.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		E2FD5ACD24DF7875002490E3 /* User Interface */ = {
-			isa = PBXGroup;
-			children = (
-				E2FD5ACE24DF78F3002490E3 /* Onboarding.swift */,
-			);
-			path = "User Interface";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -478,7 +467,6 @@
 				8E0A43C3244A4A0400656518 /* LoginCustomWaitStepViewController.swift in Sources */,
 				E2F1FD7624D61EDA006C39DF /* CKPropertyReader.swift in Sources */,
 				8E67519C24B7ACB7004EC405 /* StudyTableViewController+CardinalKit.swift in Sources */,
-				E2FD5ACF24DF78F3002490E3 /* Onboarding.swift in Sources */,
 				8E0A43AA244A4A0400656518 /* WithdrawalViewController.swift in Sources */,
 				8E0A43BA244A4A0400656518 /* LaunchContainerViewController.swift in Sources */,
 				8E0A43C2244A4A0400656518 /* ConsentDocument.swift in Sources */,
