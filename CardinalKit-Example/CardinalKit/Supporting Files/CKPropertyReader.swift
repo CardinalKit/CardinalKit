@@ -29,9 +29,19 @@ public class CKPropertyReader {
         }
     }
     
-    // read from stored dictionary
+    // read from stored value
     func read(query: String) -> String {
         return data[query] as! String
+    }
+    
+    // read from stored dictionary
+    func readDict(query: String) -> [String:String] {
+        return data[query] as! [String:String]
+    }
+    
+    // read from stored dictionary
+    func readArray(query: String) -> [String] {
+        return data[query] as! [String]
     }
     
     // read color from stored dictionary

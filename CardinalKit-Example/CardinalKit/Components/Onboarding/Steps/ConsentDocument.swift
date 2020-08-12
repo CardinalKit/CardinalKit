@@ -28,7 +28,11 @@ class ConsentDocument: ORKConsentDocument {
     override init() {
         super.init()
         
-        title = NSLocalizedString("Research Health Study Consent Form", comment: "")
+        let config = CKPropertyReader(file: "CKConfiguration")
+        
+        let consentTitle = config.read(query: "Consent Title")
+        
+        title = NSLocalizedString(consentTitle, comment: "")
         
         let sectionTypes: [ORKConsentSectionType] = [
             .overview,
@@ -40,16 +44,18 @@ class ConsentDocument: ORKConsentDocument {
             .studyTasks,
             .withdrawing
         ]
+        
+        let consentForm = Array(config.readDict(query: "Consent Form").values)
         sections = []
         
         for sectionType in sectionTypes {
             let section = ORKConsentSection(type: sectionType)
             
-            let localizedIpsum = NSLocalizedString(ipsum[sectionTypes.index(of: sectionType)!], comment: "")
-            let localizedSummary = localizedIpsum.components(separatedBy: ".")[0] + "."
+            let localizedStep = NSLocalizedString(consentForm[sectionTypes.index(of: sectionType)!], comment: "")
+            let localizedSummary = localizedStep.components(separatedBy: ".")[0] + "."
             
             section.summary = localizedSummary
-            section.content = localizedIpsum
+            section.content = localizedStep
             if sections == nil {
                 sections = [section]
             } else {
