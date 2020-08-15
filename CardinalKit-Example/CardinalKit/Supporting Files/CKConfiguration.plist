@@ -48,6 +48,13 @@
 	<string>Welcome back!</string>
 	<key>Consent Title</key>
 	<string>Research Health Study Consent Form</string>
+	<key>HealthKit Data to Read</key>
+	<array>
+		<string>StepCount</string>
+		<string>DistanceWalkingRunning</string>
+		<string>FlightsClimbed</string>
+		<string>HeartRate</string>
+	</array>
 	<key>Consent Form</key>
 	<dict>
 		<key>Overview</key>

@@ -8,6 +8,8 @@
 
 import SwiftUI
 import UIKit
+import ResearchKit
+import CardinalKit
 
 struct OnboardingElement {
     let logo: String
@@ -20,6 +22,7 @@ struct OnboardingUI: View {
     var onboardingElements: [OnboardingElement] = []
     let color: Color
     let config = CKPropertyReader(file: "CKConfiguration")
+    @State var showingDetail = false
     
     init() {
         let onboardingData = config.readAny(query: "Onboarding") as! [[String:String]]
@@ -38,6 +41,7 @@ struct OnboardingUI: View {
     var body: some View {
         VStack(spacing: 10) {
             Spacer()
+            
             Text(config.read(query: "Team Name")).padding(.leading, 20).padding(.trailing, 20)
             Text(config.read(query: "Study Title"))
                 .foregroundColor(self.color)
@@ -50,19 +54,134 @@ struct OnboardingUI: View {
             Spacer()
             
             Button(action: {
-                
+                self.showingDetail.toggle()
             }, label: {
                 Text("Join Study")
                     .padding(20)
                     .frame(width: 300, height: 70, alignment: .center)
                     .foregroundColor(.white).background(self.color)
                     .cornerRadius(15).font(.system(size: 20, weight: .bold, design: .default))
-                })
+            }).sheet(isPresented: $showingDetail, onDismiss: {
+                print("dismissed")
+            }, content: {
+                OnboardingVC()
+            })
         }
         
     }
 }
 
+struct OnboardingVC: UIViewControllerRepresentable {
+    func makeCoordinator() -> Coordinator {
+        Coordinator()
+    }
+
+
+    typealias UIViewControllerType = ORKTaskViewController
+
+    func makeUIViewController(context: Context) -> ORKTaskViewController {
+
+        let config = CKPropertyReader(file: "CKConfiguration")
+            
+        /* **************************************************************
+        *  STEP (1): get user consent
+        **************************************************************/
+        // use the `ORKVisualConsentStep` from ResearchKit
+        let consentDocument = ConsentDocument()
+        let consentStep = ORKVisualConsentStep(identifier: "VisualConsentStep", document: consentDocument)
+        
+        /* **************************************************************
+        *  STEP (2): ask user to review and sign consent document
+        **************************************************************/
+        // use the `ORKConsentReviewStep` from ResearchKit
+        let signature = consentDocument.signatures!.first!
+        let reviewConsentStep = ORKConsentReviewStep(identifier: "ConsentReviewStep", signature: signature, in: consentDocument)
+        reviewConsentStep.text = config.read(query: "Review Consent Step Text")
+        reviewConsentStep.reasonForConsent = config.read(query: "Reason for Consent Text")
+        
+        /* **************************************************************
+        *  STEP (3): get permission to collect HealthKit data
+        **************************************************************/
+        // see `HealthDataStep` to configure!
+        let healthDataStep = CKHealthDataStep(identifier: "Health")
+        
+        /* **************************************************************
+        *  STEP (4): ask user to enter their email address for login
+        **************************************************************/
+        // the `LoginStep` collects and email address, and
+        // the `LoginCustomWaitStep` waits for email verification.
+        let loginStep = LoginStep(identifier: LoginStep.identifier)
+        let loginVerificationStep = LoginCustomWaitStep(identifier: LoginCustomWaitStep.identifier)
+        
+        /* **************************************************************
+        *  STEP (5): ask the user to create a security passcode
+        *  that will be required to use this app!
+        **************************************************************/
+        // use the `ORKPasscodeStep` from ResearchKit.
+        let passcodeStep = ORKPasscodeStep(identifier: "Passcode") //NOTE: requires NSFaceIDUsageDescription in info.plist
+        let type = config.read(query: "Passcode Type")
+        if type == "6" {
+            passcodeStep.passcodeType = .type6Digit
+        } else {
+            passcodeStep.passcodeType = .type4Digit
+        }
+        passcodeStep.text = config.read(query: "Passcode Text")
+        
+        /* **************************************************************
+        *  STEP (6): inform the user that they are done with sign-up!
+        **************************************************************/
+        // use the `ORKCompletionStep` from ResearchKit
+        let completionStep = ORKCompletionStep(identifier: "CompletionStep")
+        completionStep.title = config.read(query: "Completition Step Title")
+        completionStep.text = config.read(query: "Completition Step Text")
+        
+        /* **************************************************************
+        * finally, CREATE an array with the steps to show the user
+        **************************************************************/
+        
+        // given intro steps that the user should review and consent to
+        let introSteps = [consentStep, reviewConsentStep]
+        
+        // and steps regarding login / security
+        let emailVerificationSteps = [loginStep, loginVerificationStep, passcodeStep, healthDataStep, completionStep]
+        
+        // guide the user through ALL steps
+        let fullSteps = introSteps + emailVerificationSteps
+        
+        // unless they have already gotten as far as to enter an email address
+        var stepsToUse = fullSteps
+        if CKStudyUser.shared.email != nil {
+            stepsToUse = emailVerificationSteps
+        }
+        
+        /* **************************************************************
+        * and SHOW the user these steps!
+        **************************************************************/
+        // create a task with each step
+        let orderedTask = ORKOrderedTask(identifier: "StudyOnboardingTask", steps: stepsToUse)
+        
+        print("generated ordeeredTask")
+        
+        // wrap that task on a view controller
+        let taskViewController = ORKTaskViewController(task: orderedTask, taskRun: nil)
+        taskViewController.delegate = context.coordinator // enables `ORKTaskViewControllerDelegate` below
+        
+        // & present the VC!
+        return taskViewController
+
+    }
+
+    func updateUIViewController(_ taskViewController: ORKTaskViewController, context: Context) {
+
+        }
+
+    class Coordinator: NSObject, ORKTaskViewControllerDelegate {
+        func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
+            taskViewController.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+}
 struct infoView: View {
     let logo: String
     let title: String

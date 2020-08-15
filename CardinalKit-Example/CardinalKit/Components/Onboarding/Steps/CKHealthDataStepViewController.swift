@@ -12,12 +12,7 @@ import CardinalKit
 class CKHealthDataStep: ORKInstructionStep {
     
     // TODO: save as configurable element
-    let hkTypesToReadInBackground: Set<HKQuantityType> = [
-        HKObjectType.quantityType(forIdentifier: .stepCount)!,
-        HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning)!,
-        HKObjectType.quantityType(forIdentifier: .flightsClimbed)!,
-        HKObjectType.quantityType(forIdentifier: .heartRate)!
-    ]
+    var hkTypesToReadInBackground: Set<HKQuantityType> = []
 
     override init(identifier: String) {
         super.init(identifier: identifier)
@@ -28,6 +23,12 @@ class CKHealthDataStep: ORKInstructionStep {
         **************************************************************/
         
         let config = CKPropertyReader(file: "CKConfiguration")
+        
+        for requestedHKType in config.readArray(query: "HealthKit Data to Read") {
+            let id = HKQuantityTypeIdentifier(rawValue: "HKQuantityTypeIdentifier" + requestedHKType)
+            let hkType = HKQuantityType.quantityType(forIdentifier: id)
+            hkTypesToReadInBackground.insert(hkType!)
+        }
         
         title = NSLocalizedString(config.read(query: "Health Permissions Title"), comment: "")
         text = NSLocalizedString(config.read(query: "Health Permissions Text"), comment: "")

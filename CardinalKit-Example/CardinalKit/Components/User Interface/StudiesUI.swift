@@ -49,7 +49,10 @@ struct ActivitiesView: View {
             List {
                 Section(header: Text("Current Activities")) {
                     
-                        ActivityView()
+                        ActivityView().gesture(TapGesture().onEnded({
+                            print("Activity!")
+                        }))
+                    
                 }.listRowBackground(Color.white)
             }.listStyle(GroupedListStyle())
         }
@@ -64,9 +67,8 @@ struct ActivityView: View {
                 Text("Survey Title").font(.system(size: 18, weight: .semibold, design: .default))
                 Text("Survey Description").font(.system(size: 14, weight: .light, design: .default))
             }
-        }.frame(height: 65).gesture(TapGesture().onEnded({
-            print("Activity!")
-        }))
+            Spacer()
+        }.frame(height: 65).contentShape(Rectangle())
     }
 }
 
@@ -82,7 +84,9 @@ struct WithdrawView: View {
             Text("Withdraw from Study").foregroundColor(self.color)
             Spacer()
             Text("›").foregroundColor(self.color)
-        }.frame(height: 60).gesture(TapGesture().onEnded({
+        }.frame(height: 60)
+            .contentShape(Rectangle())
+            .gesture(TapGesture().onEnded({
             print("Withdraw!")
         }))
     }
@@ -100,7 +104,10 @@ struct ReportView: View {
             Text("Report a Problem")
             Spacer()
             Text("contact@domain.com").foregroundColor(self.color)
-        }.frame(height: 60)
+        }.frame(height: 60).contentShape(Rectangle())
+            .gesture(TapGesture().onEnded({
+            print("Email!")
+        }))
     }
 }
 
@@ -116,7 +123,10 @@ struct SupportView: View {
             Text("Support")
             Spacer()
             Text("(408) 123-4567").foregroundColor(self.color)
-        }.frame(height: 60)
+        }.frame(height: 60).contentShape(Rectangle())
+            .gesture(TapGesture().onEnded({
+            print("Support!")
+        }))
     }
 }
 
@@ -126,7 +136,10 @@ struct HelpView: View {
             Text("Help")
             Spacer()
             Text("›")
-        }.frame(height: 70)
+        }.frame(height: 70).contentShape(Rectangle())
+            .gesture(TapGesture().onEnded({
+            print("Help!")
+        }))
     }
 }
 
@@ -136,7 +149,10 @@ struct ChangePasscodeView: View {
             Text("Change Passcode")
             Spacer()
             Text("›")
-        }.frame(height: 70)
+        }.frame(height: 70).contentShape(Rectangle())
+            .gesture(TapGesture().onEnded({
+            print("Passcode!")
+        }))
     }
 }
 
