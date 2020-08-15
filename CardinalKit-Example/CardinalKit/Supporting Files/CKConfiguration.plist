@@ -2,8 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>Study Title</key>
+	<string>CardinalKit Sample App</string>
+	<key>Team Name</key>
+	<string>Stanford Department of Medicine</string>
 	<key>Tint Color</key>
 	<string>#b6133f</string>
+	<key>Primary Color</key>
+	<string>#ff3961</string>
 	<key>Review Consent Step Text</key>
 	<string>Review Consent Form</string>
 	<key>Reason for Consent Text</key>
@@ -61,5 +67,32 @@
 		<key>Withdrawing</key>
 		<string>Your Withdrawing Section: Vivamus laoreet erat sit amet tincidunt scelerisque. Maecenas odio sapien, molestie eu vulputate sodales, tincidunt at neque. Nunc venenatis velit et ligula dictum, eget accumsan felis consectetur. Donec scelerisque fermentum vestibulum. Nam molestie finibus mauris, id congue lectus ultrices eu. Nunc et odio vitae dui interdum dictum. Proin sagittis leo quam. Proin vulputate massa ac orci pulvinar, eget rhoncus urna congue. Sed ut vehicula tellus, eget scelerisque enim. Cras lobortis diam at faucibus scelerisque. Curabitur pharetra arcu erat, nec tincidunt mi eleifend ut. Nunc suscipit risus vitae consectetur sodales. Aenean vitae lectus odio. Phasellus diam orci, accumsan non elementum at, finibus condimentum mauris. Nullam est enim, rhoncus a rutrum sed, laoreet a magna.</string>
 	</dict>
+	<key>Onboarding</key>
+	<array>
+		<dict>
+			<key>Title</key>
+			<string>First Title</string>
+			<key>Description</key>
+			<string>Lorem Ipsum is simply dummy text of the printing and typesetting industry</string>
+			<key>Logo</key>
+			<string>😁</string>
+		</dict>
+		<dict>
+			<key>Title</key>
+			<string>Second Title</string>
+			<key>Description</key>
+			<string>Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</string>
+			<key>Logo</key>
+			<string>🦠</string>
+		</dict>
+		<dict>
+			<key>Title</key>
+			<string>Third Title</string>
+			<key>Description</key>
+			<string>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</string>
+			<key>Logo</key>
+			<string>🙉</string>
+		</dict>
+	</array>
 </dict>
 </plist>

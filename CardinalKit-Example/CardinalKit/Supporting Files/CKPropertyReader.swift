@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 public class CKPropertyReader {
     
@@ -32,6 +33,10 @@ public class CKPropertyReader {
     // read from stored value
     func read(query: String) -> String {
         return data[query] as! String
+    }
+    
+    func readAny(query: String) -> AnyObject {
+        return data[query]!
     }
     
     // read from stored dictionary
@@ -66,5 +71,26 @@ public class CKPropertyReader {
             blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
             alpha: CGFloat(1.0)
         )
+    }
+}
+
+extension UIColor {
+    var rgba: (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
+        var red: CGFloat = 0
+        var green: CGFloat = 0
+        var blue: CGFloat = 0
+        var alpha: CGFloat = 0
+        getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+
+        return (red, green, blue, alpha)
+    }
+}
+
+extension Color {
+    init(uiColor: UIColor) {
+        self.init(red: Double(uiColor.rgba.red),
+                  green: Double(uiColor.rgba.green),
+                  blue: Double(uiColor.rgba.blue),
+                  opacity: Double(uiColor.rgba.alpha))
     }
 }
