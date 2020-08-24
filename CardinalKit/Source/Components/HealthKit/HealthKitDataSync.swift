@@ -129,7 +129,13 @@ extension HealthKitDataSync {
             let metadata = HealthKitDataUploads()
             metadata.dataType = type.identifier
             metadata.device = getSourceRevisionKey(source: sourceRevision)
-            metadata.lastSyncDate = Date().dayByAdding(-maxRetroactiveDays)! //a day ago
+
+            if let startDate = UserDefaults.standard.object(forKey: Constants.UserDefaults.HKStartDate) as? Date {
+                metadata.lastSyncDate = startDate
+            } else {
+                metadata.lastSyncDate = Date().dayByAdding(-maxRetroactiveDays)! //a day ago
+            }
+            
             try! realm.write {
                 realm.add(metadata)
             }
@@ -144,10 +150,6 @@ extension HealthKitDataSync {
         let lastSyncMetadata = getLastSyncItem(forType: type, sourceRevision)
         if let lastSyncItem = lastSyncMetadata.first {
             return lastSyncItem.lastSyncDate
-        }
-        
-        if let startDate = UserDefaults.standard.object(forKey: Constants.UserDefaults.HKStartDate) as? Date {
-            return startDate
         }
         
         // No sync for this type found, grab all data for type starting from from one day ago
