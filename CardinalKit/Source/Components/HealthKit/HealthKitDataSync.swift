@@ -146,6 +146,10 @@ extension HealthKitDataSync {
             return lastSyncItem.lastSyncDate
         }
         
+        if let startDate = UserDefaults.standard.object(forKey: Constants.UserDefaults.HKStartDate) as? Date {
+            return startDate
+        }
+        
         // No sync for this type found, grab all data for type starting from from one day ago
         return Date().dayByAdding(-maxRetroactiveDays)! // Q: what date should we put?
     }
