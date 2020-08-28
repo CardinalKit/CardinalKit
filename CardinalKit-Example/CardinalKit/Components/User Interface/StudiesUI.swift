@@ -35,6 +35,7 @@ struct StudiesUI: View {
 
 struct ActivitiesView: View {
     let color: Color
+    let config = CKPropertyReader(file: "CKConfiguration")
     
     init(color: Color) {
         self.color = color
@@ -42,10 +43,10 @@ struct ActivitiesView: View {
     
     var body: some View {
         VStack {
-            Text("CardinalKit Sample App").font(.system(size: 25, weight:.bold)).foregroundColor(self.color)
+            Text(config.read(query: "Study Title")).font(.system(size: 25, weight:.bold)).foregroundColor(self.color)
             
-            Text("Stanford University Department of Medicine").font(.system(size: 15, weight:.light))
-            Text("Aug. 14, 2020").font(.system(size: 18, weight: .regular)).padding()
+            Text(config.read(query: "Team Name")).font(.system(size: 15, weight:.light))
+            Text("Aug. 26, 2020").font(.system(size: 18, weight: .regular)).padding()
             List {
                 Section(header: Text("Current Activities")) {
                     

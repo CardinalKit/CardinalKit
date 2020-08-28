@@ -4,10 +4,7 @@
 <dict>
 	<key>com.apple.developer.associated-domains</key>
 	<array>
-		<string>applinks:cs342.page.link/zLL2</string>
 		<string>applinks:cs342.page.link</string>
-		<string>applinks:mhealthcs342.page.link/u9DC</string>
-		<string>applinks:mhealthcs342.page.link</string>
 	</array>
 	<key>com.apple.developer.default-data-protection</key>
 	<string>NSFileProtectionComplete</string>

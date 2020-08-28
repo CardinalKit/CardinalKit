@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Study Title</key>
+	<string>Caffeine Consumption Study</string>
+	<key>Team Name</key>
+	<string>Stanford Department of Psychology</string>
+	<key>Tint Color</key>
+	<string>#22a6b3</string>
+	<key>Primary Color</key>
+	<string>#30336b</string>
+	<key>Review Consent Step Text</key>
+	<string>Review Consent Form</string>
+	<key>Reason for Consent Text</key>
+	<string>Consent to join the Developer Health Research Study.</string>
+	<key>Passcode Text</key>
+	<string>Now you will create a passcode to identify yourself to the app and protect access to information you&apos;ve entered.</string>
+	<key>Passcode Type</key>
+	<string>4</string>
+	<key>Completition Step Title</key>
+	<string>Welcome aboard.</string>
+	<key>Completition Step Text</key>
+	<string>Thank you for joining this study.</string>
+	<key>Failed Login Title</key>
+	<string>Unable to Login 😔</string>
+	<key>Failed Login Text</key>
+	<string>Please try again in five minutes.</string>
+	<key>Health Permissions Title</key>
+	<string>Health Data</string>
+	<key>Health Permissions Text</key>
+	<string>On the next screen, you will be prompted to grant access to read and write some of your general and health information, such as height, weight, and steps taken so you don&apos;t have to enter it again.</string>
+	<key>Background Read Frequency</key>
+	<string>immediate</string>
+	<key>Login Step Title</key>
+	<string>Almost done!</string>
+	<key>Login Step Text</key>
+	<string>We need to confirm your email address and send you a copy of the consent you just signed.</string>
+	<key>Withdrawal Instruction Title</key>
+	<string>Are you sure you want to withdraw?</string>
+	<key>Withdrawal Instruction Text</key>
+	<string>Withdrawing from the study will reset the app to the state it was in prior to you originally joining the study.</string>
+	<key>Withdraw Title</key>
+	<string>We appreciate your time.</string>
+	<key>Withdraw Text</key>
+	<string>Thank you for your contribution to this study. We are sorry that you could not continue.</string>
+	<key>Passcode On Return Text</key>
+	<string>Welcome back!</string>
+	<key>Consent Title</key>
+	<string>Research Health Study Consent Form</string>
+	<key>HealthKit Data to Read</key>
+	<array>
+		<string>HeartRate</string>
+	</array>
+	<key>Consent Form</key>
+	<dict>
+		<key>Overview</key>
+		<string>Welcome to CardinalKit. Vivamus laoreet erat sit amet tincidunt scelerisque. Maecenas odio sapien, molestie eu vulputate sodales, tincidunt at neque. Nunc venenatis velit et ligula dictum, eget accumsan felis consectetur. Donec scelerisque fermentum vestibulum. Nam molestie finibus mauris, id congue lectus ultrices eu. Nunc et odio vitae dui interdum dictum. Proin sagittis leo quam. Proin vulputate massa ac orci pulvinar, eget rhoncus urna congue. Sed ut vehicula tellus, eget scelerisque enim. Cras lobortis diam at faucibus scelerisque. Curabitur pharetra arcu erat, nec tincidunt mi eleifend ut. Nunc suscipit risus vitae consectetur sodales. Aenean vitae lectus odio. Phasellus diam orci, accumsan non elementum at, finibus condimentum mauris. Nullam est enim, rhoncus a rutrum sed, laoreet a magna.</string>
+		<key>Time Commitment</key>
+		<string>Your Time Commitment Section: Vivamus laoreet erat sit amet tincidunt scelerisque. Maecenas odio sapien, molestie eu vulputate sodales, tincidunt at neque. Nunc venenatis velit et ligula dictum, eget accumsan felis consectetur. Donec scelerisque fermentum vestibulum. Nam molestie finibus mauris, id congue lectus ultrices eu. Nunc et odio vitae dui interdum dictum. Proin sagittis leo quam. Proin vulputate massa ac orci pulvinar, eget rhoncus urna congue. Sed ut vehicula tellus, eget scelerisque enim. Cras lobortis diam at faucibus scelerisque. Curabitur pharetra arcu erat, nec tincidunt mi eleifend ut. Nunc suscipit risus vitae consectetur sodales. Aenean vitae lectus odio. Phasellus diam orci, accumsan non elementum at, finibus condimentum mauris. Nullam est enim, rhoncus a rutrum sed, laoreet a magna.</string>
+		<key>Withdrawing</key>
+		<string>Your Withdrawing Section: Vivamus laoreet erat sit amet tincidunt scelerisque. Maecenas odio sapien, molestie eu vulputate sodales, tincidunt at neque. Nunc venenatis velit et ligula dictum, eget accumsan felis consectetur. Donec scelerisque fermentum vestibulum. Nam molestie finibus mauris, id congue lectus ultrices eu. Nunc et odio vitae dui interdum dictum. Proin sagittis leo quam. Proin vulputate massa ac orci pulvinar, eget rhoncus urna congue. Sed ut vehicula tellus, eget scelerisque enim. Cras lobortis diam at faucibus scelerisque. Curabitur pharetra arcu erat, nec tincidunt mi eleifend ut. Nunc suscipit risus vitae consectetur sodales. Aenean vitae lectus odio. Phasellus diam orci, accumsan non elementum at, finibus condimentum mauris. Nullam est enim, rhoncus a rutrum sed, laoreet a magna.</string>
+	</dict>
+	<key>Onboarding</key>
+	<array>
+		<dict>
+			<key>Title</key>
+			<string>Caffeine and the Brain</string>
+			<key>Description</key>
+			<string>We want to study caffeine and its effects on your brain.</string>
+			<key>Logo</key>
+			<string>🧠</string>
+		</dict>
+		<dict>
+			<key>Title</key>
+			<string>Your job?</string>
+			<key>Description</key>
+			<string>Complete three coffee-related tasks each day.</string>
+			<key>Logo</key>
+			<string>☕️</string>
+		</dict>
+		<dict>
+			<key>Title</key>
+			<string>Log your Intake</string>
+			<key>Description</key>
+			<string>How much are you drinking?</string>
+			<key>Logo</key>
+			<string>🙉</string>
+		</dict>
+		<dict>
+			<key>Title</key>
+			<string>Complete Surveys</string>
+			<key>Description</key>
+			<string>&lt; 3 minutes each</string>
+			<key>Logo</key>
+			<string>📝</string>
+		</dict>
+	</array>
+</dict>
+</plist>

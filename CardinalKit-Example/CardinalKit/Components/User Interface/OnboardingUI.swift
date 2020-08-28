@@ -23,6 +23,7 @@ struct OnboardingUI: View {
     let color: Color
     let config = CKPropertyReader(file: "CKConfiguration")
     @State var showingDetail = false
+    @State var showingStudyTasks = false
     
     init() {
         let onboardingData = config.readAny(query: "Onboarding") as! [[String:String]]
@@ -34,38 +35,47 @@ struct OnboardingUI: View {
         for data in onboardingData {
             self.onboardingElements.append(OnboardingElement(logo: data["Logo"]!, title: data["Title"]!, description: data["Description"]!))
         }
-        
-        
     }
     
     var body: some View {
         VStack(spacing: 10) {
-            Spacer()
-            
-            Text(config.read(query: "Team Name")).padding(.leading, 20).padding(.trailing, 20)
-            Text(config.read(query: "Study Title"))
-                .foregroundColor(self.color)
-                .font(.system(size: 35, weight: .bold, design: .default)).padding(.leading, 20).padding(.trailing, 20)
-            
-            Spacer()
-           
-            PageView(self.onboardingElements.map { infoView(logo: $0.logo, title: $0.title, description: $0.description, color: self.color) })
-            
-            Spacer()
-            
-            Button(action: {
-                self.showingDetail.toggle()
-            }, label: {
-                Text("Join Study")
-                    .padding(20)
-                    .frame(width: 300, height: 70, alignment: .center)
-                    .foregroundColor(.white).background(self.color)
-                    .cornerRadius(15).font(.system(size: 20, weight: .bold, design: .default))
-            }).sheet(isPresented: $showingDetail, onDismiss: {
-                print("dismissed")
-            }, content: {
-                OnboardingVC()
-            })
+            if showingStudyTasks {
+                StudiesUI()
+            } else {
+                Spacer()
+
+                Text(config.read(query: "Team Name")).padding(.leading, 20).padding(.trailing, 20)
+                Text(config.read(query: "Study Title"))
+                 .foregroundColor(self.color)
+                 .font(.system(size: 35, weight: .bold, design: .default)).padding(.leading, 20).padding(.trailing, 20)
+
+                Spacer()
+
+                PageView(self.onboardingElements.map { infoView(logo: $0.logo, title: $0.title, description: $0.description, color: self.color) })
+
+                Spacer()
+                
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        self.showingDetail.toggle()
+                    }, label: {
+                         Text("Join Study")
+                            .padding(20).frame(maxWidth: .infinity)
+                             .foregroundColor(.white).background(self.color)
+                             .cornerRadius(15).font(.system(size: 20, weight: .bold, design: .default))
+                    }).sheet(isPresented: $showingDetail, onDismiss: {
+                         if let completed = UserDefaults.standard.object(forKey: "didCompleteOnboarding") {
+                            self.showingStudyTasks = completed as! Bool
+                         }
+                    }, content: {
+                        OnboardingVC()
+                    })
+                    Spacer()
+                }
+                
+                Spacer()
+            }
         }
         
     }
@@ -160,8 +170,6 @@ struct OnboardingVC: UIViewControllerRepresentable {
         // create a task with each step
         let orderedTask = ORKOrderedTask(identifier: "StudyOnboardingTask", steps: stepsToUse)
         
-        print("generated ordeeredTask")
-        
         // wrap that task on a view controller
         let taskViewController = ORKTaskViewController(task: orderedTask, taskRun: nil)
         taskViewController.delegate = context.coordinator // enables `ORKTaskViewControllerDelegate` below
@@ -176,8 +184,95 @@ struct OnboardingVC: UIViewControllerRepresentable {
         }
 
     class Coordinator: NSObject, ORKTaskViewControllerDelegate {
-        func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
-            taskViewController.dismiss(animated: true, completion: nil)
+        public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
+            print("made it into 'didFinishWith'")
+            switch reason {
+            case .completed:
+                // if we completed the onboarding task view controller, go to study.
+                // performSegue(withIdentifier: "unwindToStudy", sender: nil)
+                
+                // TODO: where to go next?
+                // trigger "Studies UI"
+                UserDefaults.standard.set(true, forKey: "didCompleteOnboarding")
+                
+                print("Login successful! task: \(taskViewController.task?.identifier ?? "(no ID)")")
+                
+                fallthrough
+            default:
+                // otherwise dismiss onboarding without proceeding.
+                taskViewController.dismiss(animated: true, completion: nil)
+            }
+        }
+        
+        func taskViewController(_ taskViewController: ORKTaskViewController, stepViewControllerWillAppear stepViewController: ORKStepViewController) {
+            
+            // MARK: - Advanced Concepts
+            // Sometimes we might want some custom logic
+            // to run when a step appears 🎩
+            
+            if stepViewController.step?.identifier == LoginStep.identifier {
+                
+                /* **************************************************************
+                * When the login step appears, asking for the patient's email
+                **************************************************************/
+                if let _ = CKStudyUser.shared.currentUser?.email {
+                    // if we already have an email, go forward and continue.
+                    DispatchQueue.main.async {
+                        stepViewController.goForward()
+                    }
+                }
+                
+            } else if stepViewController.step?.identifier == LoginCustomWaitStep.identifier {
+                
+                /* **************************************************************
+                * When the email verification step appears, send email in background!
+                **************************************************************/
+                
+                let stepResult = taskViewController.result.stepResult(forStepIdentifier: LoginStep.identifier)
+                if let emailRes = stepResult?.results?.first as? ORKTextQuestionResult, let email = emailRes.textAnswer {
+                    
+                    // if we received a valid email
+                    CKStudyUser.shared.sendLoginLink(email: email) { (success) in
+                        // send a login link
+                        guard success else {
+                            // and react accordingly if we ran into an error.
+                            DispatchQueue.main.async {
+                                let config = CKPropertyReader(file: "CKConfiguration")
+                                
+                                Alerts.showInfo(title: config.read(query: "Failed Login Title"), message: config.read(query: "Failed Login Text"))
+                                stepViewController.goBackward()
+                            }
+                            return
+                        }
+                        
+                        CKStudyUser.shared.email = email
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        func taskViewController(_ taskViewController: ORKTaskViewController, viewControllerFor step: ORKStep) -> ORKStepViewController? {
+            
+            // MARK: - Advanced Concepts
+            // Overriding the view controller of an ORKStep
+            // lets us run our own code on top of what
+            // ResearchKit already provides!
+            
+            if step is CKHealthDataStep {
+                // this step lets us run custom logic to ask for
+                // HealthKit permissins when this step appears on screen.
+                return CKHealthDataStepViewController(step: step)
+            }
+            
+            if step is LoginCustomWaitStep {
+                // run custom code to send an email for login!
+                return LoginCustomWaitStepViewController(step: step)
+            }
+            
+            return nil
         }
     }
     
