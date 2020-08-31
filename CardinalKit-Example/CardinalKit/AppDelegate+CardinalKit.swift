@@ -44,9 +44,8 @@ extension AppDelegate {
 
 // MARK: - Google Identity Integration
 extension AppDelegate {
-    
+
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-        print("intercepted dynamic link")
         /**
          This code runs when a user clicks on a login verification link from an email.
          Uses `Firebase` and the `DynamicLinks` API.
@@ -71,7 +70,6 @@ extension AppDelegate {
                         // (4) confirm email and inform app of authorization as needed.
                         NotificationCenter.default.post(name: NSNotification.Name(rawValue: Constants.notificationUserLogin), object: confirmedEmail)
                         UserDefaults.standard.set(true, forKey: Constants.prefConfirmedLogin)
-                        print("confirmed!")
                     }
                     
                 })
@@ -90,9 +88,6 @@ extension AppDelegate {
     
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         // TODO: handle any source links here if needed
-        /*if let dynamicLink = DynamicLinks.dynamicLinks().dynamicLink(fromCustomSchemeURL: url) {
-            return true
-        }*/
         return false
     }
     

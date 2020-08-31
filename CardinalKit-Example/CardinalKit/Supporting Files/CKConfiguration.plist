@@ -6,6 +6,14 @@
 	<string>CardinalKit Sample App</string>
 	<key>Team Name</key>
 	<string>Stanford Department of Medicine</string>
+	<key>Email</key>
+	<string>contact@stanford.edu</string>
+	<key>Phone</key>
+	<string>650-123-4567</string>
+	<key>Copyright</key>
+	<string>Made at Stanford with ❤️</string>
+	<key>Website</key>
+	<string>https://cardinalkit.org</string>
 	<key>Tint Color</key>
 	<string>#b6133f</string>
 	<key>Primary Color</key>
@@ -43,7 +51,7 @@
 	<key>Withdraw Title</key>
 	<string>We appreciate your time.</string>
 	<key>Withdraw Text</key>
-	<string>Thank you for your contribution to this study. We are sorry that you could not continue.</string>
+	<string>Thank you for your contribution to this study. We are sorry that you could not continue. The app will now close.</string>
 	<key>Passcode On Return Text</key>
 	<string>Welcome back!</string>
 	<key>Consent Title</key>

@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import ResearchKit
 
 enum StudyTableItem: Int {
     
@@ -22,6 +23,15 @@ enum StudyTableItem: Int {
                 return returnedElement
             }
         )
+    }
+    
+    var task: ORKTaskViewController {
+        switch self {
+        case .survey:
+            return ORKTaskViewController(task: StudyTasks.sf12Task, taskRun: NSUUID() as UUID)
+        case .activeTask:
+            return ORKTaskViewController(task: StudyTasks.walkingTask, taskRun: NSUUID() as UUID)
+        }
     }
     
     var title: String {

@@ -3,7 +3,7 @@
 //  CardinalKit_Example
 //
 //  Created by Varun Shenoy on 8/14/20.
-//  Copyright © 2020 CocoaPods. All rights reserved.
+//  Copyright © 2020 Stanford University. All rights reserved.
 //
 
 import SwiftUI
@@ -28,13 +28,13 @@ struct OnboardingUI: View {
     init() {
         let onboardingData = config.readAny(query: "Onboarding") as! [[String:String]]
         
-        print(onboardingData)
         
         self.color = Color(config.readColor(query: "Primary Color"))
         
         for data in onboardingData {
             self.onboardingElements.append(OnboardingElement(logo: data["Logo"]!, title: data["Title"]!, description: data["Description"]!))
         }
+        
     }
     
     var body: some View {
@@ -76,7 +76,11 @@ struct OnboardingUI: View {
                 
                 Spacer()
             }
-        }
+        }.onAppear(perform: {
+            if let completed = UserDefaults.standard.object(forKey: "didCompleteOnboarding") {
+               self.showingStudyTasks = completed as! Bool
+            }
+        })
         
     }
 }
@@ -185,7 +189,6 @@ struct OnboardingVC: UIViewControllerRepresentable {
 
     class Coordinator: NSObject, ORKTaskViewControllerDelegate {
         public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
-            print("made it into 'didFinishWith'")
             switch reason {
             case .completed:
                 // if we completed the onboarding task view controller, go to study.
@@ -277,6 +280,7 @@ struct OnboardingVC: UIViewControllerRepresentable {
     }
     
 }
+
 struct infoView: View {
     let logo: String
     let title: String
