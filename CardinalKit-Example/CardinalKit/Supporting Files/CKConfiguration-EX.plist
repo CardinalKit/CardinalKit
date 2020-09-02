@@ -5,11 +5,19 @@
 	<key>Study Title</key>
 	<string>Caffeine Consumption Study</string>
 	<key>Team Name</key>
-	<string>Stanford Department of Psychology</string>
+	<string>Stanford Department of Coffee</string>
+	<key>Email</key>
+	<string>coffee@stanford.edu</string>
+	<key>Phone</key>
+	<string>650-123-4567</string>
+	<key>Copyright</key>
+	<string>Made at Stanford with (❤️ &amp;&amp; ☕️)</string>
+	<key>Website</key>
+	<string>https://cardinalkit.org</string>
 	<key>Tint Color</key>
-	<string>#22a6b3</string>
+	<string>#6D4C41</string>
 	<key>Primary Color</key>
-	<string>#30336b</string>
+	<string>#40739e</string>
 	<key>Review Consent Step Text</key>
 	<string>Review Consent Form</string>
 	<key>Reason for Consent Text</key>
@@ -18,9 +26,9 @@
 	<string>Now you will create a passcode to identify yourself to the app and protect access to information you&apos;ve entered.</string>
 	<key>Passcode Type</key>
 	<string>4</string>
-	<key>Completition Step Title</key>
+	<key>Completion Step Title</key>
 	<string>Welcome aboard.</string>
-	<key>Completition Step Text</key>
+	<key>Completion Step Text</key>
 	<string>Thank you for joining this study.</string>
 	<key>Failed Login Title</key>
 	<string>Unable to Login 😔</string>
@@ -75,7 +83,7 @@
 			<key>Title</key>
 			<string>Your job?</string>
 			<key>Description</key>
-			<string>Complete three coffee-related tasks each day.</string>
+			<string>Complete a coffee-related task each day.</string>
 			<key>Logo</key>
 			<string>☕️</string>
 		</dict>
@@ -85,13 +93,13 @@
 			<key>Description</key>
 			<string>How much are you drinking?</string>
 			<key>Logo</key>
-			<string>🙉</string>
+			<string>🧐</string>
 		</dict>
 		<dict>
 			<key>Title</key>
 			<string>Complete Surveys</string>
 			<key>Description</key>
-			<string>&lt; 3 minutes each</string>
+			<string>&lt; 1 minute each</string>
 			<key>Logo</key>
 			<string>📝</string>
 		</dict>

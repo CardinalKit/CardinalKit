@@ -11,9 +11,6 @@ import ResearchKit
 
 enum StudyTableItem: Int {
     
-    // table items
-    case survey, activeTask
-    
     static var allValues: [StudyTableItem] {
         var index = 0
         return Array (
@@ -24,16 +21,19 @@ enum StudyTableItem: Int {
             }
         )
     }
-    
-    var task: ORKTaskViewController {
+
+    // table items
+    case survey, activeTask
+
+    var task: ORKOrderedTask {
         switch self {
         case .survey:
-            return ORKTaskViewController(task: StudyTasks.sf12Task, taskRun: NSUUID() as UUID)
+            return StudyTasks.sf12Task
         case .activeTask:
-            return ORKTaskViewController(task: StudyTasks.walkingTask, taskRun: NSUUID() as UUID)
+            return StudyTasks.walkingTask
         }
     }
-    
+
     var title: String {
         switch self {
         case .survey:
@@ -42,7 +42,7 @@ enum StudyTableItem: Int {
             return "Active Task Sample"
         }
     }
-    
+
     var subtitle: String {
         switch self {
         case .survey:
@@ -51,7 +51,7 @@ enum StudyTableItem: Int {
             return "Perform an action."
         }
     }
-    
+
     var image: UIImage? {
         switch self {
         case .survey:
@@ -60,4 +60,34 @@ enum StudyTableItem: Int {
             return UIImage(named: "ActivityIcon")
         }
     }
+    
+//    case coffee
+//
+//    var task: ORKOrderedTask {
+//        switch self {
+//        case .coffee:
+//            return StudyTasks.coffeeTask
+//        }
+//    }
+//
+//    var title: String {
+//        switch self {
+//        case .coffee:
+//            return "Coffee Task"
+//        }
+//    }
+//
+//    var subtitle: String {
+//        switch self {
+//        case .coffee:
+//            return "Record your coffee intake for the day."
+//        }
+//    }
+//
+//    var image: UIImage? {
+//        switch self {
+//        case .coffee:
+//            return UIImage(named: "CoffeeIcon")
+//        }
+//    }
 }

@@ -78,8 +78,8 @@ class OnboardingViewController: UIViewController {
         **************************************************************/
         // use the `ORKCompletionStep` from ResearchKit
         let completionStep = ORKCompletionStep(identifier: "CompletionStep")
-        completionStep.title = config.read(query: "Completition Step Title")
-        completionStep.text = config.read(query: "Completition Step Text")
+        completionStep.title = config.read(query: "Completion Step Title")
+        completionStep.text = config.read(query: "Completion Step Text")
         
         /* **************************************************************
         * finally, CREATE an array with the steps to show the user

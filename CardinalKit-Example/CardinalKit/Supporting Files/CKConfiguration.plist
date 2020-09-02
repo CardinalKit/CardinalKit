@@ -26,9 +26,9 @@
 	<string>Now you will create a passcode to identify yourself to the app and protect access to information you&apos;ve entered.</string>
 	<key>Passcode Type</key>
 	<string>4</string>
-	<key>Completition Step Title</key>
+	<key>Completion Step Title</key>
 	<string>Welcome aboard.</string>
-	<key>Completition Step Text</key>
+	<key>Completion Step Text</key>
 	<string>Thank you for joining this study.</string>
 	<key>Failed Login Title</key>
 	<string>Unable to Login 😔</string>

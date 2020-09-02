@@ -43,13 +43,13 @@ struct StudyItem: Identifiable {
     let image: UIImage
     var title = ""
     var description = ""
-    let vc: ORKTaskViewController
+    let task: ORKOrderedTask
     
     init(study: StudyTableItem) {
         self.image = study.image!
         self.title = study.title
         self.description = study.subtitle
-        self.vc = study.task
+        self.task = study.task
     }
 }
 
@@ -83,7 +83,7 @@ struct ActivitiesView: View {
                 Section(header: Text("Current Activities")) {
                     
                     ForEach(0 ..< self.activities.count) {
-                        ActivityView(icon: self.activities[$0].image, title: self.activities[$0].title, description: self.activities[$0].description, vc: self.activities[$0].vc)
+                        ActivityView(icon: self.activities[$0].image, title: self.activities[$0].title, description: self.activities[$0].description, tasks: self.activities[$0].task)
                     }
                     
                 }.listRowBackground(Color.white)
@@ -96,14 +96,14 @@ struct ActivityView: View {
     let icon: UIImage
     var title = ""
     var description = ""
-    let vc: ORKTaskViewController
+    let tasks: ORKOrderedTask
     @State var showingDetail = false
     
-    init(icon: UIImage, title: String, description: String, vc: ORKTaskViewController) {
+    init(icon: UIImage, title: String, description: String, tasks: ORKOrderedTask) {
         self.icon = icon
         self.title = title
         self.description = description
-        self.vc = vc
+        self.tasks = tasks
     }
     
     var body: some View {
@@ -119,7 +119,7 @@ struct ActivityView: View {
             })).sheet(isPresented: $showingDetail, onDismiss: {
                 
             }, content: {
-                TaskVC(vc: self.vc)
+                TaskVC(tasks: self.tasks)
             })
     }
 }
@@ -395,8 +395,8 @@ struct TaskVC: UIViewControllerRepresentable {
     
     let vc: ORKTaskViewController
     
-    init(vc: ORKTaskViewController) {
-        self.vc = vc
+    init(tasks: ORKOrderedTask) {
+        self.vc = ORKTaskViewController(task: tasks, taskRun: NSUUID() as UUID)
     }
     
     func makeCoordinator() -> Coordinator {
@@ -408,7 +408,9 @@ struct TaskVC: UIViewControllerRepresentable {
 
     func makeUIViewController(context: Context) -> ORKTaskViewController {
         
-        vc.outputDirectory = context.coordinator.CKGetTaskOutputDirectory(vc)
+        if vc.outputDirectory == nil {
+            vc.outputDirectory = context.coordinator.CKGetTaskOutputDirectory(vc)
+        }
         
         self.vc.delegate = context.coordinator // enables `ORKTaskViewControllerDelegate` below
         
