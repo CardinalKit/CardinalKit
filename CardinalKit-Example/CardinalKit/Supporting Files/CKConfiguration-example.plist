@@ -59,6 +59,9 @@
 	<key>HealthKit Data to Read</key>
 	<array>
 		<string>HeartRate</string>
+		<string>DietaryEnergyConsumed</string>
+		<string>BloodPressureDiastolic</string>
+		<string>BloodPressureSystolic</string>
 	</array>
 	<key>Consent Form</key>
 	<dict>

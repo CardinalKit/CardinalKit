@@ -24,7 +24,7 @@
 		8E0A43BC244A4A0400656518 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A439A244A4A0400656518 /* OnboardingViewController.swift */; };
 		8E0A43BD244A4A0400656518 /* IntroductionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A439B244A4A0400656518 /* IntroductionViewController.swift */; };
 		8E0A43BE244A4A0400656518 /* CKHealthDataStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A439D244A4A0400656518 /* CKHealthDataStepViewController.swift */; };
-		8E0A43C0244A4A0400656518 /* LoginStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A439F244A4A0400656518 /* LoginStep.swift */; };
+		8E0A43C0244A4A0400656518 /* PasswordlessLoginStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A439F244A4A0400656518 /* PasswordlessLoginStep.swift */; };
 		8E0A43C1244A4A0400656518 /* LoginCustomWaitStepView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E0A43A1244A4A0400656518 /* LoginCustomWaitStepView.xib */; };
 		8E0A43C2244A4A0400656518 /* ConsentDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A43A2244A4A0400656518 /* ConsentDocument.swift */; };
 		8E0A43C3244A4A0400656518 /* LoginCustomWaitStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A43A3244A4A0400656518 /* LoginCustomWaitStepViewController.swift */; };
@@ -39,7 +39,9 @@
 		E290FB1D24FF4BBA00D19BE9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E290FB1C24FF4BBA00D19BE9 /* GoogleService-Info.plist */; };
 		E29143FC24E74AD100EE97B2 /* OnboardingUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29143FB24E74AD100EE97B2 /* OnboardingUI.swift */; };
 		E29143FE24E769F000EE97B2 /* StudiesUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29143FD24E769F000EE97B2 /* StudiesUI.swift */; };
-		E2CB7FE524F730C80039C24A /* CKConfiguration-EX.plist in Resources */ = {isa = PBXBuildFile; fileRef = E2CB7FE424F730C80039C24A /* CKConfiguration-EX.plist */; };
+		E2CB7FE524F730C80039C24A /* CKConfiguration-example.plist in Resources */ = {isa = PBXBuildFile; fileRef = E2CB7FE424F730C80039C24A /* CKConfiguration-example.plist */; };
+		E2DF9F062500B9F000A93B93 /* LoginStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DF9F052500B9F000A93B93 /* LoginStep.swift */; };
+		E2DF9F0A2500C9CE00A93B93 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DF9F092500C9CE00A93B93 /* LoginViewController.swift */; };
 		E2F1FD7624D61EDA006C39DF /* CKPropertyReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F1FD7524D61EDA006C39DF /* CKPropertyReader.swift */; };
 		E2F1FD7824D62064006C39DF /* CKConfiguration.plist in Resources */ = {isa = PBXBuildFile; fileRef = E2F1FD7724D62064006C39DF /* CKConfiguration.plist */; };
 /* End PBXBuildFile section */
@@ -87,7 +89,7 @@
 		8E0A439A244A4A0400656518 /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		8E0A439B244A4A0400656518 /* IntroductionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroductionViewController.swift; sourceTree = "<group>"; };
 		8E0A439D244A4A0400656518 /* CKHealthDataStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKHealthDataStepViewController.swift; sourceTree = "<group>"; };
-		8E0A439F244A4A0400656518 /* LoginStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginStep.swift; sourceTree = "<group>"; };
+		8E0A439F244A4A0400656518 /* PasswordlessLoginStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordlessLoginStep.swift; sourceTree = "<group>"; };
 		8E0A43A1244A4A0400656518 /* LoginCustomWaitStepView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginCustomWaitStepView.xib; sourceTree = "<group>"; };
 		8E0A43A2244A4A0400656518 /* ConsentDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsentDocument.swift; sourceTree = "<group>"; };
 		8E0A43A3244A4A0400656518 /* LoginCustomWaitStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginCustomWaitStepViewController.swift; sourceTree = "<group>"; };
@@ -102,7 +104,9 @@
 		E290FB1C24FF4BBA00D19BE9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E29143FB24E74AD100EE97B2 /* OnboardingUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingUI.swift; sourceTree = "<group>"; };
 		E29143FD24E769F000EE97B2 /* StudiesUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudiesUI.swift; sourceTree = "<group>"; };
-		E2CB7FE424F730C80039C24A /* CKConfiguration-EX.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "CKConfiguration-EX.plist"; sourceTree = "<group>"; };
+		E2CB7FE424F730C80039C24A /* CKConfiguration-example.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "CKConfiguration-example.plist"; sourceTree = "<group>"; };
+		E2DF9F052500B9F000A93B93 /* LoginStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginStep.swift; sourceTree = "<group>"; };
+		E2DF9F092500C9CE00A93B93 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E2F1FD7524D61EDA006C39DF /* CKPropertyReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKPropertyReader.swift; sourceTree = "<group>"; };
 		E2F1FD7724D62064006C39DF /* CKConfiguration.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = CKConfiguration.plist; sourceTree = "<group>"; };
 		F30ABA7020E91EBA421A80F9 /* Pods-CardinalKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardinalKit_Example.debug.xcconfig"; path = "Target Support Files/Pods-CardinalKit_Example/Pods-CardinalKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -212,7 +216,7 @@
 				E290FB1C24FF4BBA00D19BE9 /* GoogleService-Info.plist */,
 				E2F1FD7524D61EDA006C39DF /* CKPropertyReader.swift */,
 				E2F1FD7724D62064006C39DF /* CKConfiguration.plist */,
-				E2CB7FE424F730C80039C24A /* CKConfiguration-EX.plist */,
+				E2CB7FE424F730C80039C24A /* CKConfiguration-example.plist */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -253,9 +257,11 @@
 			children = (
 				8E0A43A0244A4A0400656518 /* Views */,
 				8E0A439D244A4A0400656518 /* CKHealthDataStepViewController.swift */,
-				8E0A439F244A4A0400656518 /* LoginStep.swift */,
+				8E0A439F244A4A0400656518 /* PasswordlessLoginStep.swift */,
+				E2DF9F052500B9F000A93B93 /* LoginStep.swift */,
 				8E0A43A3244A4A0400656518 /* LoginCustomWaitStepViewController.swift */,
 				8E0A43A2244A4A0400656518 /* ConsentDocument.swift */,
+				E2DF9F092500C9CE00A93B93 /* LoginViewController.swift */,
 			);
 			path = Steps;
 			sourceTree = "<group>";
@@ -380,7 +386,7 @@
 				8E0A43CD244A4D7C00656518 /* Main.storyboard in Resources */,
 				E2F1FD7824D62064006C39DF /* CKConfiguration.plist in Resources */,
 				8E0A43C1244A4A0400656518 /* LoginCustomWaitStepView.xib in Resources */,
-				E2CB7FE524F730C80039C24A /* CKConfiguration-EX.plist in Resources */,
+				E2CB7FE524F730C80039C24A /* CKConfiguration-example.plist in Resources */,
 				E290FB1D24FF4BBA00D19BE9 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -469,13 +475,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2DF9F0A2500C9CE00A93B93 /* LoginViewController.swift in Sources */,
 				8E0A43A8244A4A0400656518 /* StaticProfileViewController.swift in Sources */,
 				E29143FC24E74AD100EE97B2 /* OnboardingUI.swift in Sources */,
-				8E0A43C0244A4A0400656518 /* LoginStep.swift in Sources */,
+				8E0A43C0244A4A0400656518 /* PasswordlessLoginStep.swift in Sources */,
 				8E0A43B3244A4A0400656518 /* StudyTasks.swift in Sources */,
 				8E40DC042471E5940027536B /* CKNetworkManager.swift in Sources */,
 				8E0A43BC244A4A0400656518 /* OnboardingViewController.swift in Sources */,
 				8E0A43BD244A4A0400656518 /* IntroductionViewController.swift in Sources */,
+				E2DF9F062500B9F000A93B93 /* LoginStep.swift in Sources */,
 				8EBE6F9C24B3C0E60093D07C /* AppDelegate+CardinalKit.swift in Sources */,
 				8E0A43B9244A4A0400656518 /* AppDelegate.swift in Sources */,
 				E29143FE24E769F000EE97B2 /* StudiesUI.swift in Sources */,

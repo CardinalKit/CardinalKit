@@ -2,12 +2,12 @@
 //  LoginStep.swift
 //
 //  Created for the CardinalKit Framework.
-//  Copyright © 2020 Stanford University. All rights reserved.
+//  Copyright © 2019 Stanford University. All rights reserved.
 //
 
 import ResearchKit
 
-class LoginStep: ORKFormStep {
+class PasswordlessLoginStep: ORKFormStep {
     
     static let identifier = "Login"
     

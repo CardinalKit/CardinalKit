@@ -10,6 +10,7 @@ import SwiftUI
 import UIKit
 import ResearchKit
 import CardinalKit
+import Firebase
 
 struct OnboardingElement {
     let logo: String
@@ -124,8 +125,16 @@ struct OnboardingVC: UIViewControllerRepresentable {
         **************************************************************/
         // the `LoginStep` collects and email address, and
         // the `LoginCustomWaitStep` waits for email verification.
-        let loginStep = LoginStep(identifier: LoginStep.identifier)
-        let loginVerificationStep = LoginCustomWaitStep(identifier: LoginCustomWaitStep.identifier)
+        
+        let regexp = try! NSRegularExpression(pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[d$@$!%*?&#])[A-Za-z\\dd$@$!%*?&#]{8,}")
+        
+        let registerStep = ORKRegistrationStep(identifier: "RegistrationStep", title: "Registration", text: "Sign up for this study.", passcodeValidationRegularExpression: regexp, passcodeInvalidMessage: "Your password does not meet the following criteria: minimum 8 characters with at least 1 Uppercase Alphabet, 1 Lowercase Alphabet, 1 Number and 1 Special Character", options: .init())
+        
+        let loginStep = ORKLoginStep(identifier: "LoginStep", title: "Login", text: "Log into this study.", loginViewControllerClass: LoginViewController.self)
+    
+        
+//        let loginStep = PasswordlessLoginStep(identifier: PasswordlessLoginStep.identifier)
+//        let loginVerificationStep = LoginCustomWaitStep(identifier: LoginCustomWaitStep.identifier)
         
         /* **************************************************************
         *  STEP (5): ask the user to create a security passcode
@@ -157,7 +166,7 @@ struct OnboardingVC: UIViewControllerRepresentable {
         let introSteps = [consentStep, reviewConsentStep]
         
         // and steps regarding login / security
-        let emailVerificationSteps = [loginStep, loginVerificationStep, passcodeStep, healthDataStep, completionStep]
+        let emailVerificationSteps = [registerStep, loginStep, passcodeStep, healthDataStep, completionStep]
         
         // guide the user through ALL steps
         let fullSteps = introSteps + emailVerificationSteps
@@ -213,7 +222,7 @@ struct OnboardingVC: UIViewControllerRepresentable {
             // Sometimes we might want some custom logic
             // to run when a step appears 🎩
             
-            if stepViewController.step?.identifier == LoginStep.identifier {
+            if stepViewController.step?.identifier == PasswordlessLoginStep.identifier {
                 
                 /* **************************************************************
                 * When the login step appears, asking for the patient's email
@@ -225,13 +234,81 @@ struct OnboardingVC: UIViewControllerRepresentable {
                     }
                 }
                 
+            } else if (stepViewController.step?.identifier == "RegistrationStep") {
+                
+                if let _ = CKStudyUser.shared.currentUser?.email {
+                    // if we already have an email, go forward and continue.
+                    DispatchQueue.main.async {
+                        stepViewController.goForward()
+                    }
+                }
+                
+            } else if (stepViewController.step?.identifier == "LoginStep") {
+                
+                if let _ = CKStudyUser.shared.currentUser?.email {
+                    // good — we have an email!
+                } else {
+                    let stepResult = taskViewController.result.stepResult(forStepIdentifier: "RegistrationStep")
+                    if let emailRes = stepResult?.results?.first as? ORKTextQuestionResult, let email = emailRes.textAnswer {
+                        if let passwordRes = stepResult?.results?[1] as? ORKTextQuestionResult, let pass = passwordRes.textAnswer {
+                            Auth.auth().createUser(withEmail: email, password: pass) { (res, error) in
+                                if error != nil {
+
+                                    if let errCode = AuthErrorCode(rawValue: error!._code) {
+
+                                        switch errCode {
+                                            default:
+                                                let alert = UIAlertController(title: "Registration Error!", message: "\(error!)", preferredStyle: .alert)
+                                                alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+
+                                                taskViewController.present(alert, animated: true)
+                                        }
+                                    }
+                                    
+                                    stepViewController.goBackward()
+
+                                } else {
+                                    print("Created user!")
+                                }
+                            }
+                        }
+                    }
+                }
+            } else if (stepViewController.step?.identifier == "Passcode") {
+                let stepResult = taskViewController.result.stepResult(forStepIdentifier: "LoginStep")
+                if let emailRes = stepResult?.results?.first as? ORKTextQuestionResult, let email = emailRes.textAnswer {
+                    if let passwordRes = stepResult?.results?[1] as? ORKTextQuestionResult, let pass = passwordRes.textAnswer {
+                        Auth.auth().signIn(withEmail: email, password: pass) { (res, error) in
+                            if error != nil {
+
+                                if let errCode = AuthErrorCode(rawValue: error!._code) {
+
+                                    switch errCode {
+                                        default:
+                                            let alert = UIAlertController(title: "Login Error!", message: "\(error!)", preferredStyle: .alert)
+                                            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+
+                                            taskViewController.present(alert, animated: true)
+                                    }
+                                }
+                                
+                                stepViewController.goBackward()
+
+                            } else {
+                                print("successfully signed in!")
+                            }
+                        }
+                    }
+                }
+
+                
             } else if stepViewController.step?.identifier == LoginCustomWaitStep.identifier {
                 
                 /* **************************************************************
                 * When the email verification step appears, send email in background!
                 **************************************************************/
                 
-                let stepResult = taskViewController.result.stepResult(forStepIdentifier: LoginStep.identifier)
+                let stepResult = taskViewController.result.stepResult(forStepIdentifier: PasswordlessLoginStep.identifier)
                 if let emailRes = stepResult?.results?.first as? ORKTextQuestionResult, let email = emailRes.textAnswer {
                     
                     // if we received a valid email

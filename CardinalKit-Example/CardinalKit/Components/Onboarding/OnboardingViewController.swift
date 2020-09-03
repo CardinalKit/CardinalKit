@@ -56,8 +56,17 @@ class OnboardingViewController: UIViewController {
         **************************************************************/
         // the `LoginStep` collects and email address, and
         // the `LoginCustomWaitStep` waits for email verification.
-        let loginStep = LoginStep(identifier: LoginStep.identifier)
-        let loginVerificationStep = LoginCustomWaitStep(identifier: LoginCustomWaitStep.identifier)
+    
+
+        
+        let regexp = try? NSRegularExpression(pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[d$@$!%*?&#])[A-Za-z\\dd$@$!%*?&#]{8,}")
+        
+        let registerStep = ORKRegistrationStep(identifier: "RegistrationStep", title: "Registration", text: "Sign up for this study.", passcodeValidationRegularExpression: regexp, passcodeInvalidMessage: "Your password does not meet the following criteria: minimum 8 characters with at least 1 Uppercase Alphabet, 1 Lowercase Alphabet, 1 Number and 1 Special Character", options: .includeDOB)
+        
+        let loginStep = ORKLoginStep(identifier: "LoginStep", title: "Login", text: "Log into this study.", loginViewControllerClass: ORKLoginStepViewController.self)
+        
+        // let loginStep = PasswordlessLoginStep(identifier: PasswordlessLoginStep.identifier)
+        // let loginVerificationStep = LoginCustomWaitStep(identifier: LoginCustomWaitStep.identifier)
         
         /* **************************************************************
         *  STEP (5): ask the user to create a security passcode
@@ -89,7 +98,9 @@ class OnboardingViewController: UIViewController {
         let introSteps = [consentStep, reviewConsentStep]
         
         // and steps regarding login / security
-        let emailVerificationSteps = [loginStep, loginVerificationStep, passcodeStep, healthDataStep, completionStep]
+        // let emailVerificationSteps = [loginStep, loginVerificationStep, passcodeStep, healthDataStep, completionStep]
+        
+        let emailVerificationSteps = [registerStep]
         
         // guide the user through ALL steps
         let fullSteps = introSteps + emailVerificationSteps
@@ -135,8 +146,7 @@ extension OnboardingViewController : ORKTaskViewControllerDelegate {
         // MARK: - Advanced Concepts
         // Sometimes we might want some custom logic
         // to run when a step appears 🎩
-        
-        if stepViewController.step?.identifier == LoginStep.identifier {
+        if stepViewController.step?.identifier == PasswordlessLoginStep.identifier {
             
             /* **************************************************************
             * When the login step appears, asking for the patient's email
@@ -148,13 +158,30 @@ extension OnboardingViewController : ORKTaskViewControllerDelegate {
                 }
             }
             
+        } else if (stepViewController.step?.identifier == "RegistrationStep") {
+            
+            if let _ = CKStudyUser.shared.currentUser?.email {
+                // if we already have an email, go forward and continue.
+                DispatchQueue.main.async {
+                    stepViewController.goForward()
+                }
+            }
+            
+        } else if (stepViewController.step?.identifier == "LoginStep") {
+            
+            if let _ = CKStudyUser.shared.currentUser?.email {
+                // good — we have an email!
+            } else {
+                // create user if not registered
+                // send confirmation email
+            }
         } else if stepViewController.step?.identifier == LoginCustomWaitStep.identifier {
             
             /* **************************************************************
             * When the email verification step appears, send email in background!
             **************************************************************/
             
-            let stepResult = taskViewController.result.stepResult(forStepIdentifier: LoginStep.identifier)
+            let stepResult = taskViewController.result.stepResult(forStepIdentifier: PasswordlessLoginStep.identifier)
             if let emailRes = stepResult?.results?.first as? ORKTextQuestionResult, let email = emailRes.textAnswer {
                 
                 // if we received a valid email
