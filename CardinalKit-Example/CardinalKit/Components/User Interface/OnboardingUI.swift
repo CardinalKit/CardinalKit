@@ -214,16 +214,19 @@ struct OnboardingVC: UIViewControllerRepresentable {
                 signatureResult.apply(to: consentDocument)
 
                 consentDocument.makePDF { (data, error) -> Void in
+                    
+                    let config = CKPropertyReader(file: "CKConfiguration")
                         
                     var docURL = (FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)).last as NSURL?
-                    docURL = docURL?.appendingPathComponent("consent_form.pdf") as NSURL?
+                    docURL = docURL?.appendingPathComponent("\(config.read(query: "Consent File Name")).pdf") as NSURL?
                     
-                    UserDefaults.standard.set(docURL?.path, forKey: "consentFormURL")
 
                     do {
-
-                        try data?.write(to:docURL! as URL)
-                        print(docURL! as URL)
+                        let url = docURL! as URL
+                        try data?.write(to: url)
+                        
+                        UserDefaults.standard.set(url.path, forKey: "consentFormURL")
+                        print(url.path)
 
                     } catch let error {
 

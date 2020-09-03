@@ -202,8 +202,8 @@ struct DocumentView: View {
     
     init() {
         let documentsPath = UserDefaults.standard.object(forKey: "consentFormURL")
-        self.documentsURL = NSURL.fileURL(withPath: documentsPath as! String)
-        print(self.documentsURL)
+        self.documentsURL = URL(fileURLWithPath: documentsPath as! String, isDirectory: false)
+        print(self.documentsURL.path)
     }
     
     var body: some View {
@@ -215,11 +215,7 @@ struct DocumentView: View {
             .gesture(TapGesture().onEnded({
                 self.showPreview = true
                 
-            })).sheet(isPresented: $showPreview, onDismiss: {
-                
-            }, content: {
-                DocumentPreview(self.$showPreview, url: self.documentsURL)
-        })
+        })).background(DocumentPreview(self.$showPreview, url: self.documentsURL))
     }
 }
 
