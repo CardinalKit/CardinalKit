@@ -196,6 +196,33 @@ struct SupportView: View {
     }
 }
 
+struct DocumentView: View {
+    @State private var showPreview = false
+    let documentsURL: URL!
+    
+    init() {
+        let documentsPath = UserDefaults.standard.object(forKey: "consentFormURL")
+        self.documentsURL = NSURL.fileURL(withPath: documentsPath as! String)
+        print(self.documentsURL)
+    }
+    
+    var body: some View {
+        HStack {
+            Text("View Consent Document")
+            Spacer()
+            Text("›")
+        }.frame(height: 60).contentShape(Rectangle())
+            .gesture(TapGesture().onEnded({
+                self.showPreview = true
+                
+            })).sheet(isPresented: $showPreview, onDismiss: {
+                
+            }, content: {
+                DocumentPreview(self.$showPreview, url: self.documentsURL)
+        })
+    }
+}
+
 struct HelpView: View {
     var site = ""
     
@@ -285,6 +312,7 @@ struct ProfileView: View {
                 Section {
                     ReportView(color: self.color, email: config.read(query: "Email"))
                     SupportView(color: self.color, phone: config.read(query: "Phone"))
+                    DocumentView()
                 }
                 
                 Section {
@@ -340,6 +368,47 @@ class EmailHelper: NSObject, MFMailComposeViewControllerDelegate {
     
     static func getRootViewController() -> UIViewController? {
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window?.rootViewController
+    }
+}
+
+struct DocumentPreview: UIViewControllerRepresentable {
+    private var isActive: Binding<Bool>
+    private let viewController = UIViewController()
+    private let docController: UIDocumentInteractionController
+
+    init(_ isActive: Binding<Bool>, url: URL) {
+        self.isActive = isActive
+        self.docController = UIDocumentInteractionController(url: url)
+    }
+
+    func makeUIViewController(context: UIViewControllerRepresentableContext<DocumentPreview>) -> UIViewController {
+        return viewController
+    }
+
+    func updateUIViewController(_ uiViewController: UIViewController, context: UIViewControllerRepresentableContext<DocumentPreview>) {
+        if self.isActive.wrappedValue && docController.delegate == nil { // to not show twice
+            docController.delegate = context.coordinator
+            self.docController.presentPreview(animated: true)
+        }
+    }
+
+    func makeCoordinator() -> Coordintor {
+        return Coordintor(owner: self)
+    }
+
+    final class Coordintor: NSObject, UIDocumentInteractionControllerDelegate { // works as delegate
+        let owner: DocumentPreview
+        init(owner: DocumentPreview) {
+            self.owner = owner
+        }
+        func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
+            return owner.viewController
+        }
+
+        func documentInteractionControllerDidEndPreview(_ controller: UIDocumentInteractionController) {
+            controller.delegate = nil // done, so unlink self
+            owner.isActive.wrappedValue = false // notify external about done
+        }
     }
 }
 
@@ -629,9 +698,22 @@ struct WithdrawalVC: UIViewControllerRepresentable {
             switch reason {
             case .completed:
                 UserDefaults.standard.set(false, forKey: "didCompleteOnboarding")
-                taskViewController.dismiss(animated: true, completion: {
-                    fatalError()
-                })
+                
+                do {
+                    try Auth.auth().signOut()
+                    
+                    if (ORKPasscodeViewController.isPasscodeStoredInKeychain()) {
+                        ORKPasscodeViewController.removePasscodeFromKeychain()
+                    }
+                    
+                    taskViewController.dismiss(animated: true, completion: {
+                        fatalError()
+                    })
+                    
+                } catch {
+                    print(error.localizedDescription)
+                    Alerts.showInfo(title: "Error", message: error.localizedDescription)
+                }
                 
             default:
                 

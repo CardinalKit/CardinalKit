@@ -110,6 +110,7 @@ struct OnboardingVC: UIViewControllerRepresentable {
         **************************************************************/
         // use the `ORKConsentReviewStep` from ResearchKit
         let signature = consentDocument.signatures!.first!
+        signature.title = "Patient"
         let reviewConsentStep = ORKConsentReviewStep(identifier: "ConsentReviewStep", signature: signature, in: consentDocument)
         reviewConsentStep.text = config.read(query: "Review Consent Step Text")
         reviewConsentStep.reasonForConsent = config.read(query: "Reason for Consent Text")
@@ -207,6 +208,30 @@ struct OnboardingVC: UIViewControllerRepresentable {
                 // trigger "Studies UI"
                 UserDefaults.standard.set(true, forKey: "didCompleteOnboarding")
                 
+                let signatureResult = taskViewController.result.stepResult(forStepIdentifier: "ConsentReviewStep")?.results?.first as! ORKConsentSignatureResult
+                
+                let consentDocument = ConsentDocument()
+                signatureResult.apply(to: consentDocument)
+
+                consentDocument.makePDF { (data, error) -> Void in
+                        
+                    var docURL = (FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)).last as NSURL?
+                    docURL = docURL?.appendingPathComponent("consent_form.pdf") as NSURL?
+                    
+                    UserDefaults.standard.set(docURL?.path, forKey: "consentFormURL")
+
+                    do {
+
+                        try data?.write(to:docURL! as URL)
+                        print(docURL! as URL)
+
+                    } catch let error {
+
+                        print(error.localizedDescription)
+                    }
+                }
+                
+                
                 print("Login successful! task: \(taskViewController.task?.identifier ?? "(no ID)")")
                 
                 fallthrough
@@ -248,17 +273,71 @@ struct OnboardingVC: UIViewControllerRepresentable {
                 if let _ = CKStudyUser.shared.currentUser?.email {
                     // good — we have an email!
                 } else {
+                    let alert = UIAlertController(title: nil, message: "Creating account...", preferredStyle: .alert)
+
+                    let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+                    loadingIndicator.hidesWhenStopped = true
+                    loadingIndicator.style = UIActivityIndicatorView.Style.medium
+                    loadingIndicator.startAnimating();
+
+                    alert.view.addSubview(loadingIndicator)
+                    taskViewController.present(alert, animated: true, completion: nil)
+                    
                     let stepResult = taskViewController.result.stepResult(forStepIdentifier: "RegistrationStep")
                     if let emailRes = stepResult?.results?.first as? ORKTextQuestionResult, let email = emailRes.textAnswer {
                         if let passwordRes = stepResult?.results?[1] as? ORKTextQuestionResult, let pass = passwordRes.textAnswer {
-                            Auth.auth().createUser(withEmail: email, password: pass) { (res, error) in
-                                if error != nil {
+                            DispatchQueue.main.async {
+                                Auth.auth().createUser(withEmail: email, password: pass) { (res, error) in
+                                    DispatchQueue.main.async {
+                                        if error != nil {
+                                            alert.dismiss(animated: true, completion: nil)
+                                            if let errCode = AuthErrorCode(rawValue: error!._code) {
 
+                                                switch errCode {
+                                                    default:
+                                                        let alert = UIAlertController(title: "Registration Error!", message: error?.localizedDescription, preferredStyle: .alert)
+                                                        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+
+                                                        taskViewController.present(alert, animated: true)
+                                                }
+                                            }
+                                            
+                                            stepViewController.goBackward()
+
+                                        } else {
+                                            alert.dismiss(animated: true, completion: nil)
+                                            print("Created user!")
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            } else if (stepViewController.step?.identifier == "Passcode") {
+
+                let alert = UIAlertController(title: nil, message: "Logging in...", preferredStyle: .alert)
+
+                let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+                loadingIndicator.hidesWhenStopped = true
+                loadingIndicator.style = UIActivityIndicatorView.Style.medium
+                loadingIndicator.startAnimating();
+
+                alert.view.addSubview(loadingIndicator)
+                taskViewController.present(alert, animated: true, completion: nil)
+                
+                let stepResult = taskViewController.result.stepResult(forStepIdentifier: "LoginStep")
+                if let emailRes = stepResult?.results?.first as? ORKTextQuestionResult, let email = emailRes.textAnswer {
+                    if let passwordRes = stepResult?.results?[1] as? ORKTextQuestionResult, let pass = passwordRes.textAnswer {
+                        Auth.auth().signIn(withEmail: email, password: pass) { (res, error) in
+                            DispatchQueue.main.async {
+                                if error != nil {
+                                    alert.dismiss(animated: true, completion: nil)
                                     if let errCode = AuthErrorCode(rawValue: error!._code) {
 
                                         switch errCode {
                                             default:
-                                                let alert = UIAlertController(title: "Registration Error!", message: "\(error!)", preferredStyle: .alert)
+                                                let alert = UIAlertController(title: "Login Error!", message: error?.localizedDescription, preferredStyle: .alert)
                                                 alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
 
                                                 taskViewController.present(alert, animated: true)
@@ -268,34 +347,9 @@ struct OnboardingVC: UIViewControllerRepresentable {
                                     stepViewController.goBackward()
 
                                 } else {
-                                    print("Created user!")
+                                    alert.dismiss(animated: true, completion: nil)
+                                    print("successfully signed in!")
                                 }
-                            }
-                        }
-                    }
-                }
-            } else if (stepViewController.step?.identifier == "Passcode") {
-                let stepResult = taskViewController.result.stepResult(forStepIdentifier: "LoginStep")
-                if let emailRes = stepResult?.results?.first as? ORKTextQuestionResult, let email = emailRes.textAnswer {
-                    if let passwordRes = stepResult?.results?[1] as? ORKTextQuestionResult, let pass = passwordRes.textAnswer {
-                        Auth.auth().signIn(withEmail: email, password: pass) { (res, error) in
-                            if error != nil {
-
-                                if let errCode = AuthErrorCode(rawValue: error!._code) {
-
-                                    switch errCode {
-                                        default:
-                                            let alert = UIAlertController(title: "Login Error!", message: "\(error!)", preferredStyle: .alert)
-                                            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-
-                                            taskViewController.present(alert, animated: true)
-                                    }
-                                }
-                                
-                                stepViewController.goBackward()
-
-                            } else {
-                                print("successfully signed in!")
                             }
                         }
                     }
@@ -456,7 +510,7 @@ struct PageViewController: UIViewControllerRepresentable {
 
     func updateUIViewController(_ pageViewController: UIPageViewController, context: Context) {
         pageViewController.setViewControllers(
-            [controllers[currentPage]], direction: .forward, animated: true)
+        [self.controllers[self.currentPage]], direction: .forward, animated: true)
     }
 
     class Coordinator: NSObject, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
