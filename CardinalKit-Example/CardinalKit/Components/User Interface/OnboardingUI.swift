@@ -29,7 +29,6 @@ struct OnboardingUI: View {
     init() {
         let onboardingData = config.readAny(query: "Onboarding") as! [[String:String]]
         
-        
         self.color = Color(config.readColor(query: "Primary Color"))
         
         for data in onboardingData {
@@ -37,7 +36,7 @@ struct OnboardingUI: View {
         }
         
     }
-    
+
     var body: some View {
         VStack(spacing: 10) {
             if showingStudyTasks {
@@ -289,31 +288,30 @@ struct OnboardingVC: UIViewControllerRepresentable {
                     let stepResult = taskViewController.result.stepResult(forStepIdentifier: "RegistrationStep")
                     if let emailRes = stepResult?.results?.first as? ORKTextQuestionResult, let email = emailRes.textAnswer {
                         if let passwordRes = stepResult?.results?[1] as? ORKTextQuestionResult, let pass = passwordRes.textAnswer {
-                            DispatchQueue.main.async {
-                                Auth.auth().createUser(withEmail: email, password: pass) { (res, error) in
-                                    DispatchQueue.main.async {
-                                        if error != nil {
-                                            alert.dismiss(animated: true, completion: nil)
-                                            if let errCode = AuthErrorCode(rawValue: error!._code) {
+                            Auth.auth().createUser(withEmail: email, password: pass) { (res, error) in
+                                DispatchQueue.main.async {
+                                    if error != nil {
+                                        alert.dismiss(animated: true, completion: nil)
+                                        if let errCode = AuthErrorCode(rawValue: error!._code) {
 
-                                                switch errCode {
-                                                    default:
-                                                        let alert = UIAlertController(title: "Registration Error!", message: error?.localizedDescription, preferredStyle: .alert)
-                                                        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+                                            switch errCode {
+                                                default:
+                                                    let alert = UIAlertController(title: "Registration Error!", message: error?.localizedDescription, preferredStyle: .alert)
+                                                    alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
 
-                                                        taskViewController.present(alert, animated: true)
-                                                }
+                                                    taskViewController.present(alert, animated: true)
                                             }
-                                            
-                                            stepViewController.goBackward()
-
-                                        } else {
-                                            alert.dismiss(animated: true, completion: nil)
-                                            print("Created user!")
                                         }
+                                        
+                                        stepViewController.goBackward()
+
+                                    } else {
+                                        alert.dismiss(animated: true, completion: nil)
+                                        print("Created user!")
                                     }
                                 }
                             }
+                            
                         }
                     }
                 }
