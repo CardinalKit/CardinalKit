@@ -4,6 +4,9 @@
 [![Version](https://img.shields.io/cocoapods/v/CardinalKit.svg?style=flat)](https://cocoapods.org/pods/CardinalKit)
 [![License](https://img.shields.io/cocoapods/l/CardinalKit.svg?style=flat)](https://cocoapods.org/pods/CardinalKit)
 [![Platform](https://img.shields.io/cocoapods/p/CardinalKit.svg?style=flat)](https://cocoapods.org/pods/CardinalKit)
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors)
+<!-- ALL-CONTRIBUTORS-BADGE:END --> 
 
 ---
 
@@ -25,12 +28,6 @@ it, simply add the following line to your Podfile:
 ```ruby
 pod 'CardinalKit'
 ```
-
-## Contributors
-
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-13-orange.svg?style=flat-square)](#contributors)
-<!-- ALL-CONTRIBUTORS-BADGE:END --> 
 
 ## License
 
