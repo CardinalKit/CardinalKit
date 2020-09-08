@@ -1,0 +1,24 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "ssgutierrez42",
+      "name": "Santiago Gutierrez",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/5482213?v=4",
+      "profile": "http://gutierrezsantiago.com",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "CardinalKit",
+  "projectOwner": "CardinalKit",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
