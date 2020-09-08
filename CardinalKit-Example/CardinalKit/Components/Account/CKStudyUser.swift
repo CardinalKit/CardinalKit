@@ -76,7 +76,7 @@ class CKStudyUser {
         }
         
         let actionCodeSettings = ActionCodeSettings()
-        actionCodeSettings.url = URL(string: "https://cs342.page.link")
+        actionCodeSettings.url = URL(string: "https://cardinalkit-ad277.firebaseapp.com")
         actionCodeSettings.handleCodeInApp = true // The sign-in operation has to always be completed in the app.
         actionCodeSettings.setIOSBundleID(Bundle.main.bundleIdentifier!)
         
