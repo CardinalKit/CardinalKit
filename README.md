@@ -1,6 +1,6 @@
 <img src="https://github.com/CardinalKit/CardinalKit/blob/master/CardinalKit-Web-Assets/header.png?raw=true" alt="cardinalkit logo">
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![CI Status](https://img.shields.io/travis/ssgutierrez42/CardinalKit.svg?style=flat)](https://travis-ci.org/ssgutierrez42/CardinalKit)
@@ -43,6 +43,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="http://gutierrezsantiago.com"><img src="https://avatars2.githubusercontent.com/u/5482213?v=4" width="100px;" alt=""/><br /><sub><b>Santiago Gutierrez</b></sub></a><br /><a href="https://github.com/CardinalKit/CardinalKit/commits?author=ssgutierrez42" title="Code">💻</a></td>
     <td align="center"><a href="http://varunshenoy.com"><img src="https://avatars3.githubusercontent.com/u/10859091?v=4" width="100px;" alt=""/><br /><sub><b>Varun Shenoy</b></sub></a><br /><a href="https://github.com/CardinalKit/CardinalKit/commits?author=varunshenoy" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/mhittle"><img src="https://avatars1.githubusercontent.com/u/1742619?v=4" width="100px;" alt=""/><br /><sub><b>mhittle</b></sub></a><br /><a href="#ideas-mhittle" title="Ideas, Planning, & Feedback">🤔</a> <a href="#maintenance-mhittle" title="Maintenance">🚧</a> <a href="#projectManagement-mhittle" title="Project Management">📆</a></td>
   </tr>
 </table>
 
