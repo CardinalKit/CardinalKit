@@ -14,19 +14,17 @@
  * limitations under the License.
  */
 
-#import "FirebaseDynamicLinks/Sources/Public/FIRDynamicLinks.h"
+#import <TargetConditionals.h>
+#if TARGET_OS_IOS
+
+#import "FirebaseDynamicLinks/Sources/Public/FirebaseDynamicLinks/FIRDynamicLinks.h"
 
 #import <UIKit/UIKit.h>
 
 #ifdef FIRDynamicLinks3P
-#import <FirebaseAnalyticsInterop/FIRAnalyticsInterop.h>
-#import <FirebaseCore/FIRAppInternal.h>
-#import <FirebaseCore/FIRComponent.h>
-#import <FirebaseCore/FIRComponentContainer.h>
-#import <FirebaseCore/FIRDependency.h>
-#import <FirebaseCore/FIRLibrary.h>
-#import <FirebaseCore/FIROptionsInternal.h>
+#import "FirebaseCore/Sources/Private/FirebaseCoreInternal.h"
 #import "FirebaseDynamicLinks/Sources/FIRDLScionLogging.h"
+#import "Interop/Analytics/Public/FIRAnalyticsInterop.h"
 #endif
 
 #ifdef FIRDynamicLinks3P
@@ -312,7 +310,11 @@ static const NSInteger FIRErrorCodeDurableDeepLinkFailed = -119;
 
 - (void)checkForPendingDynamicLink {
   // Make sure this method is called only once after the application was installed.
-  BOOL appInviteDeepLinkRead = [_userDefaults boolForKey:kFIRDLReadDeepLinkAfterInstallKey];
+  // kFIRDLOpenURLKey marks checkForPendingDynamic link had been called already so no need to do it
+  // again. kFIRDLReadDeepLinkAfterInstallKey marks we have already read a deeplink after the
+  // install and so no need to do check for pending dynamic link.
+  BOOL appInviteDeepLinkRead = [_userDefaults boolForKey:kFIRDLOpenURLKey] ||
+                               [_userDefaults boolForKey:kFIRDLReadDeepLinkAfterInstallKey];
 
   if (appInviteDeepLinkRead || self.retrievingPendingDynamicLink) {
     NSString *errorDescription =
@@ -554,9 +556,14 @@ static const NSInteger FIRErrorCodeDurableDeepLinkFailed = -119;
   self.retrievingPendingDynamicLink = NO;
   _retrievalProcess = nil;
 
-  if (!result.error && ![_userDefaults boolForKey:kFIRDLOpenURLKey]) {
+  if (![_userDefaults boolForKey:kFIRDLOpenURLKey]) {
+    // Once we complete the Pending dynamic link retrieval, regardless of whether the retrieval is
+    // success or failure, we don't want to do the retrieval again on next app start.
+    // If we try to redo the retrieval again because of some error, the user will experience
+    // unwanted deeplinking when they restart the app next time.
     [_userDefaults setBool:YES forKey:kFIRDLOpenURLKey];
   }
+
   NSURL *linkToPassToApp = [result URLWithCustomURLScheme:_URLScheme];
   [self passRetrievedDynamicLinkToApplication:linkToPassToApp];
 }
@@ -777,3 +784,5 @@ static NSString *kSelfDiagnoseOutputFooter =
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif  // TARGET_OS_IOS

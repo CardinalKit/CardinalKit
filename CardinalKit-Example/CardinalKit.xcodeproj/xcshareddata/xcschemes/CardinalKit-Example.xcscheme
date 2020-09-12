@@ -16,7 +16,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "607FACCF1AFB9204008FA782"
                BuildableName = "CardinalKit Example.app"
-               BlueprintName = "CardinalKit_Example"
+               BlueprintName = "TrialX"
                ReferencedContainer = "container:CardinalKit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -41,15 +41,6 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "607FACCF1AFB9204008FA782"
-            BuildableName = "CardinalKit Example.app"
-            BlueprintName = "CardinalKit_Example"
-            ReferencedContainer = "container:CardinalKit.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <Testables>
          <TestableReference
             skipped = "NO">
@@ -79,7 +70,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "607FACCF1AFB9204008FA782"
             BuildableName = "CardinalKit Example.app"
-            BlueprintName = "CardinalKit_Example"
+            BlueprintName = "TrialX"
             ReferencedContainer = "container:CardinalKit.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -96,7 +87,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "607FACCF1AFB9204008FA782"
             BuildableName = "CardinalKit Example.app"
-            BlueprintName = "CardinalKit_Example"
+            BlueprintName = "TrialX"
             ReferencedContainer = "container:CardinalKit.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

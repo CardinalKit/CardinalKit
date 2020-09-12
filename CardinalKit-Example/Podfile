@@ -1,6 +1,8 @@
+platform :ios, '13.0'
 use_frameworks!
+inhibit_all_warnings!
 
-target 'CardinalKit_Example' do
+target 'TrialX' do
   pod 'CardinalKit', :path => '../'
   
   # CK Sample Pods
@@ -8,7 +10,6 @@ target 'CardinalKit_Example' do
   
   pod 'Firebase/Firestore'
   pod 'Firebase/Auth'
-  pod 'Firebase/Analytics'
   pod 'Firebase/DynamicLinks'
   pod 'Firebase/Storage'
 

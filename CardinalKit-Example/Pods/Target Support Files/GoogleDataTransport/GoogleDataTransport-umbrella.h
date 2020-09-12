@@ -10,23 +10,14 @@
 #endif
 #endif
 
-#import "GDTCORAssert.h"
-#import "GDTCORClock.h"
-#import "GDTCORConsoleLogger.h"
-#import "GDTCOREvent.h"
-#import "GDTCOREventDataObject.h"
-#import "GDTCOREventTransformer.h"
-#import "GDTCORLifecycle.h"
-#import "GDTCORPlatform.h"
-#import "GDTCORPrioritizer.h"
-#import "GDTCORReachability.h"
-#import "GDTCORRegistrar.h"
-#import "GDTCORStorageProtocol.h"
-#import "GDTCORTargets.h"
-#import "GDTCORTransport.h"
-#import "GDTCORUploader.h"
-#import "GDTCORUploadPackage.h"
-#import "GoogleDataTransport.h"
+#import "GDTCOREvent_Private.h"
+#import "GDTCORFlatFileStorage.h"
+#import "GDTCORReachability_Private.h"
+#import "GDTCORRegistrar_Private.h"
+#import "GDTCORTransformer.h"
+#import "GDTCORTransformer_Private.h"
+#import "GDTCORTransport_Private.h"
+#import "GDTCORUploadCoordinator.h"
 
 FOUNDATION_EXPORT double GoogleDataTransportVersionNumber;
 FOUNDATION_EXPORT const unsigned char GoogleDataTransportVersionString[];

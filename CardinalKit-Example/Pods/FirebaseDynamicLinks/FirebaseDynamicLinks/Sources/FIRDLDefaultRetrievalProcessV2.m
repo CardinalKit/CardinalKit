@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 
+#import <TargetConditionals.h>
+#if TARGET_OS_IOS
+
 #import "FirebaseDynamicLinks/Sources/FIRDLDefaultRetrievalProcessV2.h"
 
 #import <UIKit/UIKit.h>
@@ -270,7 +273,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (nullable NSURL *)uniqueMatchLinkToCheck {
   _clipboardContentAtMatchProcessStart = nil;
-  NSString *pasteboardContents = [UIPasteboard generalPasteboard].string;
+  NSString *pasteboardContents = [self retrievePasteboardContents];
   NSInteger linkStringMinimumLength =
       expectedCopiedLinkStringSuffix.length + /* ? or & */ 1 + /* http:// */ 7;
   if ((pasteboardContents.length >= linkStringMinimumLength) &&
@@ -296,6 +299,38 @@ NS_ASSUME_NONNULL_BEGIN
   return nil;
 }
 
+- (NSString *)retrievePasteboardContents {
+  if (![self isPasteboardRetrievalEnabled]) {
+    // Pasteboard check for dynamic link is disabled by user.
+    return @"";
+  }
+
+  NSString *pasteboardContents = @"";
+  if (@available(iOS 10.0, *)) {
+    if ([[UIPasteboard generalPasteboard] hasURLs]) {
+      pasteboardContents = [UIPasteboard generalPasteboard].string;
+    }
+  } else {
+    pasteboardContents = [UIPasteboard generalPasteboard].string;
+  }
+  return pasteboardContents;
+}
+
+/**
+ Property to enable or disable dynamic link retrieval from Pasteboard.
+ This property is added because of iOS 14 feature where pop up is displayed while accessing
+ Pasteboard. So if developers don't want their users to see the Pasteboard popup, they can set
+ "FirebaseDeepLinkPasteboardRetrievalEnabled" to false in their plist.
+ */
+- (BOOL)isPasteboardRetrievalEnabled {
+  id retrievalEnabledValue =
+      [[NSBundle mainBundle] infoDictionary][@"FirebaseDeepLinkPasteboardRetrievalEnabled"];
+  if ([retrievalEnabledValue respondsToSelector:@selector(boolValue)]) {
+    return [retrievalEnabledValue boolValue];
+  }
+  return YES;
+}
+
 - (void)clearUsedUniqueMatchLinkToCheckFromClipboard {
   // See discussion in b/65304652
   // We will clear clipboard after we used the unique match link from the clipboard
@@ -319,3 +354,5 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif  // TARGET_OS_IOS
