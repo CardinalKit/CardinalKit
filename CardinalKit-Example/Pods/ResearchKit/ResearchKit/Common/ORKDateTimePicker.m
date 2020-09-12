@@ -48,6 +48,7 @@
     NSDateFormatter *_labelFormatter;
     UIDatePicker *_pickerView;
     NSDate *_date;
+    NSInteger _minuteInterval;
     __weak id<ORKPickerDelegate> _pickerDelegate;
     id _answer;
 }
@@ -82,8 +83,13 @@
 - (void)setAnswer:(id)answer {
     _answer = answer;
     
+    if (answer == [ORKDontKnowAnswer answer]) {
+        return;
+    }
+    
     if ([self isTimeOfDay]) {
         ORKTimeOfDayAnswerFormat *timeOfDayAnswerFormat = (ORKTimeOfDayAnswerFormat *)self.answerFormat;
+        [self setMinuteInterval:timeOfDayAnswerFormat.minuteInterval];
         
         if (answer && answer != ORKNullAnswerValue()) {
             NSDateComponents *timeOfDayComponents = (NSDateComponents *)answer;
@@ -96,6 +102,7 @@
         }
     } else {
         ORKDateAnswerFormat *dateAnswerFormat = (ORKDateAnswerFormat *)self.answerFormat;
+        [self setMinuteInterval:dateAnswerFormat.minuteInterval];
         
         if (answer && answer != ORKNullAnswerValue()) {
             NSDate *defaultDate = (NSDate *)answer;
@@ -153,6 +160,11 @@
     _pickerView.date = date;
 }
 
+- (void)setMinuteInterval:(NSInteger)minuteInterval {
+    _minuteInterval = minuteInterval;
+    _pickerView.minuteInterval = minuteInterval;
+}
+
 - (NSDateFormatter *)labelFormatter {
     if (_labelFormatter) {
         _labelFormatter.calendar = self.calendar;
@@ -202,12 +214,16 @@
 - (void)valueDidChange:(id)sender {
     _date = _pickerView.date;
     
-    if ([self isTimeOfDay]) {
-        NSDateComponents *answer = ORKTimeOfDayComponentsFromDate([_pickerView date]);
-        _answer = answer;
-    } else {
-        NSDate *dateAnswer = _date;
-        _answer = dateAnswer;
+    if (self.answer != [ORKDontKnowAnswer answer]) {
+        
+        if ([self isTimeOfDay]) {
+            NSDateComponents *answer = ORKTimeOfDayComponentsFromDate([_pickerView date]);
+            _answer = answer;
+        } else {
+            NSDate *dateAnswer = _date;
+            _answer = dateAnswer;
+        }
+        
     }
     
     if ([self.pickerDelegate respondsToSelector:@selector(picker:answerDidChangeTo:)]) {

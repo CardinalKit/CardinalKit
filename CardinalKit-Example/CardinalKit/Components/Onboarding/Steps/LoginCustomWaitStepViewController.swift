@@ -30,22 +30,6 @@ class LoginCustomWaitStepViewController: ORKStepViewController {
     
     var onLoginCallback: NSObjectProtocol?
     
-    override init(step: ORKStep?) {
-        super.init(step: step)
-    }
-    
-    override init(step: ORKStep, result: ORKResult) {
-        super.init(step: step, result: result)
-    }
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
