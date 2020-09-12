@@ -29,7 +29,7 @@ struct StudiesUI: View {
                     Text("Activities")
             }
             
-            VisualizationView(color: self.color)
+            VisualizationsView(color: self.color)
                 .tabItem {
                     Image("tab_profile").renderingMode(.template)
                     Text("Visualize")
@@ -98,23 +98,6 @@ struct ActivitiesView: View {
     }
 }
 
-struct VisualizationView: View {
-    let color: Color
-    let config = CKPropertyReader(file: "CKConfiguration")
-    var date = ""
-    var activities: [StudyItem] = []
-    
-    init(color: Color) {
-        self.color = color
-    }
-    
-    var body: some View {
-        VStack {
-            Text("Hello there!")
-        }
-    }
-}
-
 struct ActivityView: View {
     let icon: UIImage
     var title = ""
@@ -147,6 +130,75 @@ struct ActivityView: View {
     }
 }
 
+struct VisualizationsView: View {
+    let color: Color
+    var visualizations: [Visualization] = []
+    
+    // For bonus points: add hooks to the CKConfiguration.plist file to customize the data visualization.
+    let config = CKPropertyReader(file: "CKConfiguration")
+    
+    init(color: Color) {
+        self.color = color
+        self.visualizations = [
+            Visualization(desc: "This is the survey data about how much coffee you drink.", type: "bar", title: "Coffee Survey"),
+            Visualization(desc: "This is a set-survey", type: "line", title: "Step Survey")
+        ]
+    }
+    
+    var body: some View {
+        VStack {
+            Text("Visualization")
+            List {
+                Section(header: Text("Patient Data")) {
+                    ForEach(0 ..< self.visualizations.count) {
+                        VisualizationView(visualization: self.visualizations[$0])
+                    }
+                }.listRowBackground(Color.white)
+            }.listStyle(GroupedListStyle())
+        }
+    }
+}
+
+struct VisualizationView: View {
+    var visualization: Visualization
+    
+    var type: String
+    var title: String
+    var desc: String
+    @State var showingDetail = false
+    
+    init(visualization: Visualization) {
+        self.visualization = visualization
+        self.type = visualization.type
+        self.title = visualization.title
+        self.desc = visualization.desc
+    }
+    
+    var body: some View {
+        HStack {
+            VStack {
+                Text(self.title)
+                Text(self.desc)
+                
+            }
+            Text(self.type)
+        }
+
+    }
+}
+
+struct Visualization: Identifiable {
+    var id = UUID()
+    var desc: String
+    var type: String
+    var title: String
+    
+    init(desc: String, type: String, title: String) {
+        self.desc = desc
+        self.type = type
+        self.title = title
+    }
+}
 
 
 struct WithdrawView: View {
