@@ -31,7 +31,7 @@ struct StudiesUI: View {
             
             VisualizationsView(color: self.color)
                 .tabItem {
-                    Image("tab_profile").renderingMode(.template)
+                    Image("tab_dashboard").renderingMode(.template)
                     Text("Visualize")
             }
 
@@ -132,7 +132,7 @@ struct ActivityView: View {
 
 struct VisualizationsView: View {
     let color: Color
-    var visualizations: [Visualization] = []
+    var visualizations: [VisualizationData] = []
     
     // For bonus points: add hooks to the CKConfiguration.plist file to customize the data visualization.
     let config = CKPropertyReader(file: "CKConfiguration")
@@ -140,18 +140,19 @@ struct VisualizationsView: View {
     init(color: Color) {
         self.color = color
         self.visualizations = [
-            Visualization(desc: "This is the survey data about how much coffee you drink.", type: "bar", title: "Coffee Survey"),
-            Visualization(desc: "This is a set-survey", type: "line", title: "Step Survey")
+            VisualizationData(description: "This is the survey data about how much coffee you drink.", type: "bar", title: "Coffee Survey"),
+            VisualizationData(description: "This is a set-survey", type: "line", title: "Step Survey")
         ]
     }
     
     var body: some View {
         VStack {
-            Text("Visualization")
+            Text(config.read(query: "Study Title")).font(.system(size: 25, weight:.bold)).foregroundColor(self.color)
+            Text(config.read(query: "Team Name")).font(.system(size: 15, weight:.light))
             List {
                 Section(header: Text("Patient Data")) {
                     ForEach(0 ..< self.visualizations.count) {
-                        VisualizationView(visualization: self.visualizations[$0])
+                        VisualizationView(data: self.visualizations[$0])
                     }
                 }.listRowBackground(Color.white)
             }.listStyle(GroupedListStyle())
@@ -160,41 +161,71 @@ struct VisualizationsView: View {
 }
 
 struct VisualizationView: View {
-    var visualization: Visualization
-    
+    var data: VisualizationData    
     var type: String
     var title: String
-    var desc: String
+    var description: String
     @State var showingDetail = false
     
-    init(visualization: Visualization) {
-        self.visualization = visualization
-        self.type = visualization.type
-        self.title = visualization.title
-        self.desc = visualization.desc
+    init(data: VisualizationData) {
+        self.data = data
+        self.type = data.type
+        self.title = data.title
+        self.description = data.description
     }
     
     var body: some View {
         HStack {
-            VStack {
-                Text(self.title)
-                Text(self.desc)
-                
+            VStack(alignment: .leading) {
+                Text(self.title).font(.system(size: 18, weight: .semibold, design: .default))
+                Text(self.description).font(.system(size: 14, weight: .light, design: .default))
             }
+            Spacer()
             Text(self.type)
-        }
-
+        }.frame(height: 65).contentShape(Rectangle()).gesture(TapGesture().onEnded({
+            self.showingDetail.toggle()
+        })).sheet(isPresented: $showingDetail, onDismiss: {
+            
+        }, content: {
+            VisualizationInspectionView(data: self.data)
+        })
     }
 }
 
-struct Visualization: Identifiable {
+struct VisualizationInspectionView: View {
+    var data: VisualizationData
+    
+    init (data: VisualizationData) {
+        self.data = data
+    }
+    
+    @Environment(\.presentationMode) var presentationMode
+    var body: some View {
+        VStack {
+            Spacer()
+            HStack {
+                VStack {
+                    Text(self.data.title)
+                    Text(self.data.description)
+                }
+                Text(self.data.type)
+            }
+            Spacer()
+            Button(action: { self.presentationMode.wrappedValue.dismiss() })
+            { Text("Back") }
+            Spacer()
+        }
+    }
+}
+
+struct VisualizationData: Identifiable {
     var id = UUID()
-    var desc: String
+    var description: String
     var type: String
     var title: String
     
-    init(desc: String, type: String, title: String) {
-        self.desc = desc
+    init(description: String, type: String, title: String) {
+        self.description = description
         self.type = type
         self.title = title
     }
