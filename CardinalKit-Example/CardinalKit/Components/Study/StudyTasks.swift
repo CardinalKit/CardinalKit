@@ -16,17 +16,36 @@ struct StudyTasks {
     /**
      Active tasks created with short-hand constructors from `ORKOrderedTask`
     */
-    static let tappingTask: ORKOrderedTask = {
-        let intendedUseDescription = "Finger tapping is a universal way to communicate."
+    static let trailMakingA: ORKOrderedTask = {
+        let intendedUseDescription = "Trail Making A"
         
-        return ORKOrderedTask.twoFingerTappingIntervalTask(withIdentifier: "TappingTask", intendedUseDescription: intendedUseDescription, duration: 10, handOptions: .both, options: ORKPredefinedTaskOption())
+        return ORKOrderedTask.trailmakingTask(withIdentifier: "Trail making A", intendedUseDescription: intendedUseDescription, trailmakingInstruction: "....", trailType: .A, options: ORKPredefinedTaskOption())
     }()
     
-    static let walkingTask: ORKOrderedTask = {
-        let intendedUseDescription = "Tests ability to walk"
+    static let trailMakingB: ORKOrderedTask = {
+        let intendedUseDescription = "Trail Making B"
         
-        return ORKOrderedTask.shortWalk(withIdentifier: "ShortWalkTask", intendedUseDescription: intendedUseDescription, numberOfStepsPerLeg: 20, restDuration: 30, options: ORKPredefinedTaskOption())
+        return ORKOrderedTask.trailmakingTask(withIdentifier: "Trail making B", intendedUseDescription: intendedUseDescription, trailmakingInstruction: "blah blah", trailType: .B, options: ORKPredefinedTaskOption())
     }()
+    
+    static let spatial: ORKOrderedTask = {
+        let intendedUseDescription = "Spatial Memory Test"
+        
+        return ORKOrderedTask.spatialSpanMemoryTask(withIdentifier: "Spatial Memory", intendedUseDescription: intendedUseDescription, initialSpan: 4, minimumSpan: 2, maximumSpan: 8, playSpeed: 20, maximumTests: 3, maximumConsecutiveFailures: 5, customTargetImage: nil, customTargetPluralName: nil, requireReversal: false, options: ORKPredefinedTaskOption())
+    }()
+    
+   static let speechRecognition: ORKOrderedTask = {
+       let intendedUseDescription = "Speech Recognition"
+
+    return ORKOrderedTask.speechRecognitionTask(withIdentifier: "Speech Recognition", intendedUseDescription: intendedUseDescription, speechRecognizerLocale: ORKSpeechRecognizerLocale(rawValue: "en-US"), speechRecognitionImage: nil, speechRecognitionText: "Today is Monday and the air is smokey and grey.", shouldHideTranscript: true, allowsEdittingTranscript: false, options: ORKPredefinedTaskOption())
+   }()
+
+   static let amslerGrid: ORKOrderedTask = {
+       let intendedUseDescription = "Amsler Grid"
+
+       return ORKOrderedTask.amslerGridTask(withIdentifier: "Amsler Grid", intendedUseDescription: intendedUseDescription, options: ORKPredefinedTaskOption())
+   }()
+    
     
     /**
         Coffee Task Example for 9/2 Workshop

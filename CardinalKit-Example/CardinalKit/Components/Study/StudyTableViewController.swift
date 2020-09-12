@@ -49,7 +49,7 @@ extension StudyTableViewController {
         if let activity = StudyTableItem(rawValue: (indexPath as NSIndexPath).row) {
             cell.titleLabel?.text = activity.title
             cell.subtitleLabel?.text = activity.subtitle
-            cell.customImage.image = activity.image
+            //cell.customImage.image = activity.image
         }
         
         return cell
@@ -113,6 +113,10 @@ extension StudyTableViewController : ORKTaskViewControllerDelegate {
             // (1) convert the result of the ResearchKit task into a JSON dictionary
             if let json = try CKTaskResultAsJson(taskViewController.result) {
                 
+                //print("Result from Task: \(json)")
+            
+                //print("HIIIIIIIIIIIIIIIII")
+                
                 // (2) send using Firebase
                 try CKSendJSON(json)
                 
@@ -122,6 +126,7 @@ extension StudyTableViewController : ORKTaskViewControllerDelegate {
                 }
             }
         } catch {
+            //print("HIIIIIIIIIIIIII")
             print(error.localizedDescription)
         }
         
