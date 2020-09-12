@@ -11,8 +11,9 @@ import SwiftUI
 struct ConsentDocumentView: View {
     @State private var showPreview = false
     let documentsURL: URL = {
-        let documentsPath = UserDefaults.standard.string(forKey: "consentFormURL")
-        let documentsURL = URL(fileURLWithPath: documentsPath!, isDirectory: false)
+        let data = UserDefaults.standard.data(forKey: "consentFormURL")!
+        var isStale: Bool = false
+        let documentsURL = try! URL(resolvingBookmarkData: data, bookmarkDataIsStale: &isStale)
         print(documentsURL.path)
         return documentsURL
     }()

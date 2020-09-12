@@ -61,12 +61,7 @@ struct ActivitiesView: View {
 
     init(color: Color) {
         self.color = color
-        
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .none
-        self.date = formatter.string(from: Date())
-
+        self.date = DateFormatter.mediumDate.string(from: Date())
         self.activities = StudyTableItem.allValues.map { StudyItem(study: $0) }
     }
     
@@ -124,14 +119,19 @@ struct StudiesUI_Previews: PreviewProvider {
     }
 }
 
-extension Color {
-    static var greyText: Color {
-        return Color(UIColor(netHex: 0x989998))
-    }
+extension DateFormatter {
+    static let mediumDate: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
+        return formatter
+    }()
+}
 
-    static var lightWhite: Color {
-        return Color(UIColor(netHex: 0xf7f8f7))
-    }
+extension Color {
+    static let greyText = Color(UIColor(netHex: 0x989998))
+
+    static let lightWhite = Color(UIColor(netHex: 0xf7f8f7))
 }
 
 class EmailHelper: NSObject, MFMailComposeViewControllerDelegate {

@@ -44,6 +44,7 @@
 		D253D125250CB3AF00A363E4 /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D253D124250CB3AF00A363E4 /* ReportView.swift */; };
 		D253D127250CB57600A363E4 /* WithdrawalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D253D126250CB57600A363E4 /* WithdrawalVC.swift */; };
 		D253D129250CBF2800A363E4 /* SupportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D253D128250CBF2800A363E4 /* SupportView.swift */; };
+		D253D12B250CD16400A363E4 /* PageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D253D12A250CD16400A363E4 /* PageView.swift */; };
 		E235077724F7082700CC1899 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E235077624F7082700CC1899 /* SceneDelegate.swift */; };
 		E290FB1D24FF4BBA00D19BE9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E290FB1C24FF4BBA00D19BE9 /* GoogleService-Info.plist */; };
 		E29143FC24E74AD100EE97B2 /* OnboardingUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29143FB24E74AD100EE97B2 /* OnboardingUI.swift */; };
@@ -107,6 +108,7 @@
 		D253D124250CB3AF00A363E4 /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
 		D253D126250CB57600A363E4 /* WithdrawalVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalVC.swift; sourceTree = "<group>"; };
 		D253D128250CBF2800A363E4 /* SupportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportView.swift; sourceTree = "<group>"; };
+		D253D12A250CD16400A363E4 /* PageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageView.swift; sourceTree = "<group>"; };
 		DF8FAFB3C7221261A7397AFD /* Pods-TrialX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrialX.debug.xcconfig"; path = "Target Support Files/Pods-TrialX/Pods-TrialX.debug.xcconfig"; sourceTree = "<group>"; };
 		E235077624F7082700CC1899 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		E290FB1C24FF4BBA00D19BE9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -348,6 +350,7 @@
 			isa = PBXGroup;
 			children = (
 				E29143FB24E74AD100EE97B2 /* OnboardingUI.swift */,
+				D253D12A250CD16400A363E4 /* PageView.swift */,
 				E29143FD24E769F000EE97B2 /* StudiesUI.swift */,
 				D253D113250CA2D800A363E4 /* Profile */,
 			);
@@ -518,6 +521,7 @@
 				8E0A43C0244A4A0400656518 /* PasswordlessLoginStep.swift in Sources */,
 				D253D11D250CAAD200A363E4 /* HelpView.swift in Sources */,
 				D253D127250CB57600A363E4 /* WithdrawalVC.swift in Sources */,
+				D253D12B250CD16400A363E4 /* PageView.swift in Sources */,
 				8E0A43B3244A4A0400656518 /* StudyTasks.swift in Sources */,
 				8E40DC042471E5940027536B /* CKNetworkManager.swift in Sources */,
 				D253D11F250CAC8E00A363E4 /* ConsentDocumentView.swift in Sources */,
