@@ -63,7 +63,7 @@ struct ActivitiesView: View {
         self.color = color
         
         let formatter = DateFormatter()
-        formatter.dateStyle = .short
+        formatter.dateStyle = .medium
         formatter.timeStyle = .none
         self.date = formatter.string(from: Date())
 
@@ -71,10 +71,7 @@ struct ActivitiesView: View {
     }
     
     var body: some View {
-        VStack {
-            Text(config.read(query: "Study Title")).font(.system(size: 25, weight:.bold)).foregroundColor(self.color)
-            Text(config.read(query: "Team Name")).font(.system(size: 15, weight:.light))
-            Text(self.date).font(.system(size: 18, weight: .regular)).padding()
+        NavigationView {
             List {
                 Section(header: Text("Current Activities")) {
                     ForEach(0 ..< self.activities.count) {
@@ -83,6 +80,8 @@ struct ActivitiesView: View {
                 }
             }
             .listStyle(GroupedListStyle())
+            .navigationBarTitle(config.read(query: "Study Title"))
+            .navigationBarItems(trailing: Text(date).foregroundColor(color))
         }
     }
 }

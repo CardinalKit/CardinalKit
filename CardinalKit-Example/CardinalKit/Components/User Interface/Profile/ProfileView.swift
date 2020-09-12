@@ -21,13 +21,16 @@ struct ProfileView: View {
                 }
 
                 Section {
+                    ConsentDocumentView()
+                }
+
+                Section {
                     HelpView(site: config.read(query: "Website"))
                     SupportView(color: color, phone: config.read(query: "Phone"))
                     ReportView(color: color, email: config.read(query: "Email"))
                 }
 
                 Section(footer: footer) {
-                    ConsentDocumentView()
                     WithdrawView()
                 }
             }

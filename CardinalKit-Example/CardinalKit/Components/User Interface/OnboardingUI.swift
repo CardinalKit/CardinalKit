@@ -45,10 +45,12 @@ struct OnboardingUI: View {
             } else {
                 Spacer()
 
-                Text(config.read(query: "Team Name")).padding(.leading, 20).padding(.trailing, 20)
+                Text(config.read(query: "Team Name"))
+                    .padding(.horizontal, 20)
                 Text(config.read(query: "Study Title"))
-                    .foregroundColor(self.color)
-                    .font(.system(size: 35, weight: .bold, design: .default)).padding(.leading, 20).padding(.trailing, 20)
+                    .foregroundColor(color)
+                    .font(.title)
+                    .padding(.horizontal, 20)
 
                 Spacer()
 
