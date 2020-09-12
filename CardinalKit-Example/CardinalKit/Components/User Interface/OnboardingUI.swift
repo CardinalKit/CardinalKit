@@ -41,13 +41,14 @@ struct OnboardingUI: View {
         VStack(spacing: 10) {
             if showingStudyTasks {
                 StudiesUI()
+                    .environmentObject(config)
             } else {
                 Spacer()
 
                 Text(config.read(query: "Team Name")).padding(.leading, 20).padding(.trailing, 20)
                 Text(config.read(query: "Study Title"))
-                 .foregroundColor(self.color)
-                 .font(.system(size: 35, weight: .bold, design: .default)).padding(.leading, 20).padding(.trailing, 20)
+                    .foregroundColor(self.color)
+                    .font(.system(size: 35, weight: .bold, design: .default)).padding(.leading, 20).padding(.trailing, 20)
 
                 Spacer()
 
@@ -60,14 +61,14 @@ struct OnboardingUI: View {
                     Button(action: {
                         self.showingDetail.toggle()
                     }, label: {
-                         Text("Join Study")
+                        Text("Join Study")
                             .padding(20).frame(maxWidth: .infinity)
-                             .foregroundColor(.white).background(self.color)
-                             .cornerRadius(15).font(.system(size: 20, weight: .bold, design: .default))
+                            .foregroundColor(.white).background(self.color)
+                            .cornerRadius(15).font(.system(size: 20, weight: .bold, design: .default))
                     }).sheet(isPresented: $showingDetail, onDismiss: {
-                         if let completed = UserDefaults.standard.object(forKey: "didCompleteOnboarding") {
+                        if let completed = UserDefaults.standard.object(forKey: "didCompleteOnboarding") {
                             self.showingStudyTasks = completed as! Bool
-                         }
+                        }
                     }, content: {
                         OnboardingVC()
                     })
@@ -78,7 +79,7 @@ struct OnboardingUI: View {
             }
         }.onAppear(perform: {
             if let completed = UserDefaults.standard.object(forKey: "didCompleteOnboarding") {
-               self.showingStudyTasks = completed as! Bool
+                self.showingStudyTasks = completed as! Bool
             }
         })
         
@@ -96,17 +97,17 @@ struct OnboardingVC: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> ORKTaskViewController {
 
         let config = CKPropertyReader(file: "CKConfiguration")
-            
+
         /* **************************************************************
-        *  STEP (1): get user consent
-        **************************************************************/
+         *  STEP (1): get user consent
+         **************************************************************/
         // use the `ORKVisualConsentStep` from ResearchKit
         let consentDocument = ConsentDocument()
         let consentStep = ORKVisualConsentStep(identifier: "VisualConsentStep", document: consentDocument)
         
         /* **************************************************************
-        *  STEP (2): ask user to review and sign consent document
-        **************************************************************/
+         *  STEP (2): ask user to review and sign consent document
+         **************************************************************/
         // use the `ORKConsentReviewStep` from ResearchKit
         let signature = consentDocument.signatures!.first!
         signature.title = "Patient"
@@ -115,14 +116,14 @@ struct OnboardingVC: UIViewControllerRepresentable {
         reviewConsentStep.reasonForConsent = config.read(query: "Reason for Consent Text")
         
         /* **************************************************************
-        *  STEP (3): get permission to collect HealthKit data
-        **************************************************************/
+         *  STEP (3): get permission to collect HealthKit data
+         **************************************************************/
         // see `HealthDataStep` to configure!
         let healthDataStep = CKHealthDataStep(identifier: "Health")
         
         /* **************************************************************
-        *  STEP (4): ask user to enter their email address for login
-        **************************************************************/
+         *  STEP (4): ask user to enter their email address for login
+         **************************************************************/
         // the `LoginStep` collects and email address, and
         // the `LoginCustomWaitStep` waits for email verification.
         
@@ -131,15 +132,15 @@ struct OnboardingVC: UIViewControllerRepresentable {
         let registerStep = ORKRegistrationStep(identifier: "RegistrationStep", title: "Registration", text: "Sign up for this study.", passcodeValidationRegularExpression: regexp, passcodeInvalidMessage: "Your password does not meet the following criteria: minimum 8 characters with at least 1 Uppercase Alphabet, 1 Lowercase Alphabet, 1 Number and 1 Special Character", options: .init())
         
         let loginStep = ORKLoginStep(identifier: "LoginStep", title: "Login", text: "Log into this study.", loginViewControllerClass: LoginViewController.self)
-    
+
         
-//        let loginStep = PasswordlessLoginStep(identifier: PasswordlessLoginStep.identifier)
-//        let loginVerificationStep = LoginCustomWaitStep(identifier: LoginCustomWaitStep.identifier)
+        //        let loginStep = PasswordlessLoginStep(identifier: PasswordlessLoginStep.identifier)
+        //        let loginVerificationStep = LoginCustomWaitStep(identifier: LoginCustomWaitStep.identifier)
         
         /* **************************************************************
-        *  STEP (5): ask the user to create a security passcode
-        *  that will be required to use this app!
-        **************************************************************/
+         *  STEP (5): ask the user to create a security passcode
+         *  that will be required to use this app!
+         **************************************************************/
         // use the `ORKPasscodeStep` from ResearchKit.
         let passcodeStep = ORKPasscodeStep(identifier: "Passcode") //NOTE: requires NSFaceIDUsageDescription in info.plist
         let type = config.read(query: "Passcode Type")
@@ -151,16 +152,16 @@ struct OnboardingVC: UIViewControllerRepresentable {
         passcodeStep.text = config.read(query: "Passcode Text")
         
         /* **************************************************************
-        *  STEP (6): inform the user that they are done with sign-up!
-        **************************************************************/
+         *  STEP (6): inform the user that they are done with sign-up!
+         **************************************************************/
         // use the `ORKCompletionStep` from ResearchKit
         let completionStep = ORKCompletionStep(identifier: "CompletionStep")
         completionStep.title = config.read(query: "Completion Step Title")
         completionStep.text = config.read(query: "Completion Step Text")
         
         /* **************************************************************
-        * finally, CREATE an array with the steps to show the user
-        **************************************************************/
+         * finally, CREATE an array with the steps to show the user
+         **************************************************************/
         
         // given intro steps that the user should review and consent to
         let introSteps = [consentStep, reviewConsentStep]
@@ -178,8 +179,8 @@ struct OnboardingVC: UIViewControllerRepresentable {
         }
         
         /* **************************************************************
-        * and SHOW the user these steps!
-        **************************************************************/
+         * and SHOW the user these steps!
+         **************************************************************/
         // create a task with each step
         let orderedTask = ORKOrderedTask(identifier: "StudyOnboardingTask", steps: stepsToUse)
         
@@ -194,7 +195,7 @@ struct OnboardingVC: UIViewControllerRepresentable {
 
     func updateUIViewController(_ taskViewController: ORKTaskViewController, context: Context) {
 
-        }
+    }
 
     class Coordinator: NSObject, ORKTaskViewControllerDelegate {
         public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
@@ -215,7 +216,7 @@ struct OnboardingVC: UIViewControllerRepresentable {
                 consentDocument.makePDF { (data, error) -> Void in
                     
                     let config = CKPropertyReader(file: "CKConfiguration")
-                        
+
                     var docURL = (FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)).last as NSURL?
                     docURL = docURL?.appendingPathComponent("\(config.read(query: "Consent File Name")).pdf") as NSURL?
                     
@@ -252,8 +253,8 @@ struct OnboardingVC: UIViewControllerRepresentable {
             if stepViewController.step?.identifier == PasswordlessLoginStep.identifier {
                 
                 /* **************************************************************
-                * When the login step appears, asking for the patient's email
-                **************************************************************/
+                 * When the login step appears, asking for the patient's email
+                 **************************************************************/
                 if let _ = CKStudyUser.shared.currentUser?.email {
                     // if we already have an email, go forward and continue.
                     DispatchQueue.main.async {
@@ -286,32 +287,25 @@ struct OnboardingVC: UIViewControllerRepresentable {
                     taskViewController.present(alert, animated: true, completion: nil)
                     
                     let stepResult = taskViewController.result.stepResult(forStepIdentifier: "RegistrationStep")
-                    if let emailRes = stepResult?.results?.first as? ORKTextQuestionResult, let email = emailRes.textAnswer {
-                        if let passwordRes = stepResult?.results?[1] as? ORKTextQuestionResult, let pass = passwordRes.textAnswer {
-                            Auth.auth().createUser(withEmail: email, password: pass) { (res, error) in
-                                DispatchQueue.main.async {
-                                    if error != nil {
-                                        alert.dismiss(animated: true, completion: nil)
-                                        if let errCode = AuthErrorCode(rawValue: error!._code) {
-
-                                            switch errCode {
-                                                default:
-                                                    let alert = UIAlertController(title: "Registration Error!", message: error?.localizedDescription, preferredStyle: .alert)
-                                                    alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-
-                                                    taskViewController.present(alert, animated: true)
-                                            }
-                                        }
-                                        
+                    if let emailRes = stepResult?.results?.first as? ORKTextQuestionResult, let email = emailRes.textAnswer,
+                       let passwordRes = stepResult?.results?[1] as? ORKTextQuestionResult, let pass = passwordRes.textAnswer {
+                        Auth.auth().createUser(withEmail: email, password: pass) { (_, error) in
+                            DispatchQueue.main.async {
+                                alert.dismiss(animated: true, completion: nil)
+                                guard let error = error else {
+                                    return print("Created user!")
+                                }
+                                switch AuthErrorCode(rawValue: error._code) {
+                                case .emailAlreadyInUse:
+                                    return print("User already exists!")
+                                default:
+                                    let alert = UIAlertController(title: "Registration Error!", message: error.localizedDescription, preferredStyle: .alert)
+                                    alert.addAction(UIAlertAction(title: "OK", style: .cancel) { _ in
                                         stepViewController.goBackward()
-
-                                    } else {
-                                        alert.dismiss(animated: true, completion: nil)
-                                        print("Created user!")
-                                    }
+                                    })
+                                    taskViewController.present(alert, animated: true)
                                 }
                             }
-                            
                         }
                     }
                 }
@@ -328,40 +322,27 @@ struct OnboardingVC: UIViewControllerRepresentable {
                 taskViewController.present(alert, animated: true, completion: nil)
                 
                 let stepResult = taskViewController.result.stepResult(forStepIdentifier: "LoginStep")
-                if let emailRes = stepResult?.results?.first as? ORKTextQuestionResult, let email = emailRes.textAnswer {
-                    if let passwordRes = stepResult?.results?[1] as? ORKTextQuestionResult, let pass = passwordRes.textAnswer {
-                        Auth.auth().signIn(withEmail: email, password: pass) { (res, error) in
-                            DispatchQueue.main.async {
-                                if error != nil {
-                                    alert.dismiss(animated: true, completion: nil)
-                                    if let errCode = AuthErrorCode(rawValue: error!._code) {
-
-                                        switch errCode {
-                                            default:
-                                                let alert = UIAlertController(title: "Login Error!", message: error?.localizedDescription, preferredStyle: .alert)
-                                                alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-
-                                                taskViewController.present(alert, animated: true)
-                                        }
-                                    }
-                                    
-                                    stepViewController.goBackward()
-
-                                } else {
-                                    alert.dismiss(animated: true, completion: nil)
-                                    print("successfully signed in!")
-                                }
+                if let emailRes = stepResult?.results?.first as? ORKTextQuestionResult, let email = emailRes.textAnswer,
+                   let passwordRes = stepResult?.results?[1] as? ORKTextQuestionResult, let pass = passwordRes.textAnswer {
+                    Auth.auth().signIn(withEmail: email, password: pass) { (res, error) in
+                        DispatchQueue.main.async {
+                            alert.dismiss(animated: true, completion: nil)
+                            guard let error = error else {
+                                return print("successfully signed in!")
                             }
+                            let alert = UIAlertController(title: "Login Error!", message: error.localizedDescription, preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "OK", style: .cancel) { _ in
+                                stepViewController.goBackward()
+                            })
+                            taskViewController.present(alert, animated: true)
                         }
                     }
                 }
-
-                
             } else if stepViewController.step?.identifier == LoginCustomWaitStep.identifier {
                 
                 /* **************************************************************
-                * When the email verification step appears, send email in background!
-                **************************************************************/
+                 * When the email verification step appears, send email in background!
+                 **************************************************************/
                 
                 let stepResult = taskViewController.result.stepResult(forStepIdentifier: PasswordlessLoginStep.identifier)
                 if let emailRes = stepResult?.results?.first as? ORKTextQuestionResult, let email = emailRes.textAnswer {
@@ -511,7 +492,7 @@ struct PageViewController: UIViewControllerRepresentable {
 
     func updateUIViewController(_ pageViewController: UIPageViewController, context: Context) {
         pageViewController.setViewControllers(
-        [self.controllers[self.currentPage]], direction: .forward, animated: true)
+            [self.controllers[self.currentPage]], direction: .forward, animated: true)
     }
 
     class Coordinator: NSObject, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
@@ -547,8 +528,8 @@ struct PageViewController: UIViewControllerRepresentable {
 
         func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
             if completed,
-                let visibleViewController = pageViewController.viewControllers?.first,
-                let index = parent.controllers.firstIndex(of: visibleViewController) {
+               let visibleViewController = pageViewController.viewControllers?.first,
+               let index = parent.controllers.firstIndex(of: visibleViewController) {
                 parent.currentPage = index
             }
         }

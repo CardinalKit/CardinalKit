@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SwiftUI
 
-public class CKPropertyReader {
+public class CKPropertyReader: ObservableObject {
     
     var data: [String: AnyObject] = [:]
     
@@ -24,7 +24,6 @@ public class CKPropertyReader {
         // convert plist file into dictionary
         do {
             self.data = try PropertyListSerialization.propertyList(from: plistXML, options: .mutableContainersAndLeaves, format: &propertyListFormat) as! [String:AnyObject]
-
         } catch {
             print("Error reading plist: \(error), format: \(propertyListFormat)")
         }
@@ -51,46 +50,25 @@ public class CKPropertyReader {
     
     // read color from stored dictionary
     func readColor(query: String) -> UIColor {
-        let hex = self.read(query: query)
-        var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+        let hex = read(query: query)
+        var cString = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
 
-        if (cString.hasPrefix("#")) {
+        if cString.hasPrefix("#") {
             cString.remove(at: cString.startIndex)
         }
 
-        if ((cString.count) != 6) {
-            return UIColor.gray
+        if cString.count != 6 {
+            return .gray
         }
 
-        var rgbValue:UInt32 = 0
-        Scanner(string: cString).scanHexInt32(&rgbValue)
+        var rgbValue: UInt64 = 0
+        Scanner(string: cString).scanHexInt64(&rgbValue)
 
         return UIColor(
-            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
-            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
-            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
-            alpha: CGFloat(1.0)
+            displayP3Red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255,
+            alpha: 1
         )
-    }
-}
-
-extension UIColor {
-    var rgba: (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
-        var red: CGFloat = 0
-        var green: CGFloat = 0
-        var blue: CGFloat = 0
-        var alpha: CGFloat = 0
-        getRed(&red, green: &green, blue: &blue, alpha: &alpha)
-
-        return (red, green, blue, alpha)
-    }
-}
-
-extension Color {
-    init(uiColor: UIColor) {
-        self.init(red: Double(uiColor.rgba.red),
-                  green: Double(uiColor.rgba.green),
-                  blue: Double(uiColor.rgba.blue),
-                  opacity: Double(uiColor.rgba.alpha))
     }
 }

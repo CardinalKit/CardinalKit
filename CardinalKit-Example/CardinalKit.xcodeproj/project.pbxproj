@@ -34,6 +34,16 @@
 		8E40DC042471E5940027536B /* CKNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E40DC032471E5940027536B /* CKNetworkManager.swift */; };
 		8E67519C24B7ACB7004EC405 /* StudyTableViewController+CardinalKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E67519B24B7ACB7004EC405 /* StudyTableViewController+CardinalKit.swift */; };
 		8EBE6F9C24B3C0E60093D07C /* AppDelegate+CardinalKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE6F9B24B3C0E60093D07C /* AppDelegate+CardinalKit.swift */; };
+		D253D115250CA2FF00A363E4 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D253D114250CA2FF00A363E4 /* ProfileView.swift */; };
+		D253D117250CA73100A363E4 /* ChangePasscodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D253D116250CA73100A363E4 /* ChangePasscodeView.swift */; };
+		D253D119250CA7C400A363E4 /* PasscodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D253D118250CA7C400A363E4 /* PasscodeVC.swift */; };
+		D253D11D250CAAD200A363E4 /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D253D11C250CAAD200A363E4 /* HelpView.swift */; };
+		D253D11F250CAC8E00A363E4 /* ConsentDocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D253D11E250CAC8E00A363E4 /* ConsentDocumentView.swift */; };
+		D253D121250CB22400A363E4 /* PatientIDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D253D120250CB22400A363E4 /* PatientIDView.swift */; };
+		D253D123250CB31F00A363E4 /* WithdrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D253D122250CB31F00A363E4 /* WithdrawView.swift */; };
+		D253D125250CB3AF00A363E4 /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D253D124250CB3AF00A363E4 /* ReportView.swift */; };
+		D253D127250CB57600A363E4 /* WithdrawalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D253D126250CB57600A363E4 /* WithdrawalVC.swift */; };
+		D253D129250CBF2800A363E4 /* SupportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D253D128250CBF2800A363E4 /* SupportView.swift */; };
 		E235077724F7082700CC1899 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E235077624F7082700CC1899 /* SceneDelegate.swift */; };
 		E290FB1D24FF4BBA00D19BE9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E290FB1C24FF4BBA00D19BE9 /* GoogleService-Info.plist */; };
 		E29143FC24E74AD100EE97B2 /* OnboardingUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29143FB24E74AD100EE97B2 /* OnboardingUI.swift */; };
@@ -87,6 +97,16 @@
 		8EBE6F9B24B3C0E60093D07C /* AppDelegate+CardinalKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+CardinalKit.swift"; sourceTree = "<group>"; };
 		CB97C14C759E56B88E4E3941 /* Pods_CardinalKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CardinalKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE9A73F2B93DE400D855AADD /* Pods-TrialX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrialX.release.xcconfig"; path = "Target Support Files/Pods-TrialX/Pods-TrialX.release.xcconfig"; sourceTree = "<group>"; };
+		D253D114250CA2FF00A363E4 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		D253D116250CA73100A363E4 /* ChangePasscodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasscodeView.swift; sourceTree = "<group>"; };
+		D253D118250CA7C400A363E4 /* PasscodeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeVC.swift; sourceTree = "<group>"; };
+		D253D11C250CAAD200A363E4 /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
+		D253D11E250CAC8E00A363E4 /* ConsentDocumentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsentDocumentView.swift; sourceTree = "<group>"; };
+		D253D120250CB22400A363E4 /* PatientIDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientIDView.swift; sourceTree = "<group>"; };
+		D253D122250CB31F00A363E4 /* WithdrawView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawView.swift; sourceTree = "<group>"; };
+		D253D124250CB3AF00A363E4 /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
+		D253D126250CB57600A363E4 /* WithdrawalVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalVC.swift; sourceTree = "<group>"; };
+		D253D128250CBF2800A363E4 /* SupportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportView.swift; sourceTree = "<group>"; };
 		DF8FAFB3C7221261A7397AFD /* Pods-TrialX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrialX.debug.xcconfig"; path = "Target Support Files/Pods-TrialX/Pods-TrialX.debug.xcconfig"; sourceTree = "<group>"; };
 		E235077624F7082700CC1899 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		E290FB1C24FF4BBA00D19BE9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -307,11 +327,29 @@
 			name = "Recovered References";
 			sourceTree = "<group>";
 		};
+		D253D113250CA2D800A363E4 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				D253D114250CA2FF00A363E4 /* ProfileView.swift */,
+				D253D120250CB22400A363E4 /* PatientIDView.swift */,
+				D253D116250CA73100A363E4 /* ChangePasscodeView.swift */,
+				D253D118250CA7C400A363E4 /* PasscodeVC.swift */,
+				D253D11C250CAAD200A363E4 /* HelpView.swift */,
+				D253D124250CB3AF00A363E4 /* ReportView.swift */,
+				D253D128250CBF2800A363E4 /* SupportView.swift */,
+				D253D11E250CAC8E00A363E4 /* ConsentDocumentView.swift */,
+				D253D122250CB31F00A363E4 /* WithdrawView.swift */,
+				D253D126250CB57600A363E4 /* WithdrawalVC.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		E29143FA24E74AB700EE97B2 /* User Interface */ = {
 			isa = PBXGroup;
 			children = (
 				E29143FB24E74AD100EE97B2 /* OnboardingUI.swift */,
 				E29143FD24E769F000EE97B2 /* StudiesUI.swift */,
+				D253D113250CA2D800A363E4 /* Profile */,
 			);
 			path = "User Interface";
 			sourceTree = "<group>";
@@ -350,6 +388,7 @@
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = 2H866F22W7;
 						LastSwiftMigration = 1120;
 					};
 				};
@@ -474,21 +513,30 @@
 			files = (
 				E2DF9F0A2500C9CE00A93B93 /* LoginViewController.swift in Sources */,
 				8E0A43A8244A4A0400656518 /* StaticProfileViewController.swift in Sources */,
+				D253D119250CA7C400A363E4 /* PasscodeVC.swift in Sources */,
 				E29143FC24E74AD100EE97B2 /* OnboardingUI.swift in Sources */,
 				8E0A43C0244A4A0400656518 /* PasswordlessLoginStep.swift in Sources */,
+				D253D11D250CAAD200A363E4 /* HelpView.swift in Sources */,
+				D253D127250CB57600A363E4 /* WithdrawalVC.swift in Sources */,
 				8E0A43B3244A4A0400656518 /* StudyTasks.swift in Sources */,
 				8E40DC042471E5940027536B /* CKNetworkManager.swift in Sources */,
+				D253D11F250CAC8E00A363E4 /* ConsentDocumentView.swift in Sources */,
 				8E0A43BC244A4A0400656518 /* OnboardingViewController.swift in Sources */,
 				8E0A43BD244A4A0400656518 /* IntroductionViewController.swift in Sources */,
 				E2DF9F062500B9F000A93B93 /* LoginStep.swift in Sources */,
 				8EBE6F9C24B3C0E60093D07C /* AppDelegate+CardinalKit.swift in Sources */,
+				D253D129250CBF2800A363E4 /* SupportView.swift in Sources */,
 				8E0A43B9244A4A0400656518 /* AppDelegate.swift in Sources */,
 				E29143FE24E769F000EE97B2 /* StudiesUI.swift in Sources */,
+				D253D115250CA2FF00A363E4 /* ProfileView.swift in Sources */,
 				8E0A43B4244A4A0400656518 /* StudyTableViewCell.swift in Sources */,
 				8E0A43A7244A4A0400656518 /* ProfileTableItem.swift in Sources */,
+				D253D125250CB3AF00A363E4 /* ReportView.swift in Sources */,
 				8E0A43B5244A4A0400656518 /* StudyTableItem.swift in Sources */,
 				8E0A43AD244A4A0400656518 /* Constants.swift in Sources */,
 				8E0A43BE244A4A0400656518 /* CKHealthDataStepViewController.swift in Sources */,
+				D253D121250CB22400A363E4 /* PatientIDView.swift in Sources */,
+				D253D117250CA73100A363E4 /* ChangePasscodeView.swift in Sources */,
 				8E0A43AE244A4A0400656518 /* ORKESerialization.m in Sources */,
 				8E0A43B2244A4A0400656518 /* StudyTableViewController.swift in Sources */,
 				8E0A43AC244A4A0400656518 /* CKStudyUser.swift in Sources */,
@@ -498,6 +546,7 @@
 				8E67519C24B7ACB7004EC405 /* StudyTableViewController+CardinalKit.swift in Sources */,
 				8E0A43AA244A4A0400656518 /* WithdrawalViewController.swift in Sources */,
 				8E0A43BA244A4A0400656518 /* LaunchContainerViewController.swift in Sources */,
+				D253D123250CB31F00A363E4 /* WithdrawView.swift in Sources */,
 				8E0A43C2244A4A0400656518 /* ConsentDocument.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -630,7 +679,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = TrialX.entitlements;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 2H866F22W7;
 				INFOPLIST_FILE = "CardinalKit/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -651,7 +700,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = TrialX.entitlements;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 2H866F22W7;
 				INFOPLIST_FILE = "CardinalKit/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
