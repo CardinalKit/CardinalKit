@@ -1408,7 +1408,7 @@ encondingTable =
             PROPERTY(timestamp, NSNumber, NSObject, NO, nil, nil),
             PROPERTY(fileResult, ORKResult, NSObject, NO, nil, nil)
             })),
-   ENTRY(ORKSpeechRecognitonResult,
+   ENTRY(ORKSpeechRecognitionResult,
          nil,
          (@{
             PROPERTY(transcription, SFTranscription, NSObject, NO, nil, nil)
@@ -1560,10 +1560,10 @@ encondingTable =
    ENTRY(ORKLocation,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
              CLLocationCoordinate2D coordinate = coordinateFromDictionary(dict[@ESTRINGIFY(coordinate)]);
-             return [[ORKLocation alloc] initWithCoordinate:coordinate
-                                                     region:GETPROP(dict, region)
-                                                  userInput:GETPROP(dict, userInput)
-                                          addressDictionary:GETPROP(dict, addressDictionary)];
+            return [[ORKLocation alloc] initWithCoordinate:coordinate
+                                                    region:GETPROP(dict, region)
+                                                    userInput:GETPROP(dict, userInput)
+                                                    postalAddress:GETPROP(dict, addressDictionary)];
          },
          (@{
             PROPERTY(userInput, NSString, NSObject, NO, nil, nil),

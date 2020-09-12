@@ -326,7 +326,7 @@ PODS:
   - Realm/Headers (4.4.1)
   - RealmSwift (4.4.1):
     - Realm (= 4.4.1)
-  - ResearchKit (2.0.0)
+  - ResearchKit (2.1.0-beta)
   - SAMKeychain (1.5.3)
   - SwiftyJSON (4.1.0)
   - Zip (1.1.0)
@@ -337,7 +337,7 @@ DEPENDENCIES:
   - Firebase/DynamicLinks
   - Firebase/Firestore
   - Firebase/Storage
-  - ResearchKit (from `https://github.com/ResearchKit/ResearchKit.git`, branch `stable`)
+  - ResearchKit (from `https://github.com/ResearchKit/ResearchKit.git`, branch `master`)
 
 SPEC REPOS:
   trunk:
@@ -370,12 +370,12 @@ EXTERNAL SOURCES:
   CardinalKit:
     :path: "../"
   ResearchKit:
-    :branch: stable
+    :branch: master
     :git: https://github.com/ResearchKit/ResearchKit.git
 
 CHECKOUT OPTIONS:
   ResearchKit:
-    :commit: ae9b9e57cb37931c880a7815d24b434fada7f283
+    :commit: 68f9d29b669dd3ac27b548f7c9c28342218cf72e
     :git: https://github.com/ResearchKit/ResearchKit.git
 
 SPEC CHECKSUMS:
@@ -401,11 +401,11 @@ SPEC CHECKSUMS:
   ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
   Realm: 4eb04d7487bd43c0581256f40b424eafb711deff
   RealmSwift: 3eb8924ff7100df5928c7602f71d0fec51e7c9c5
-  ResearchKit: 28ec6e1b13b18e880e337dcf2855f45ddb76c249
+  ResearchKit: 449f96824c4e71c70a9278953c3b279f0fe10805
   SAMKeychain: 483e1c9f32984d50ca961e26818a534283b4cd5c
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
   Zip: 8877eede3dda76bcac281225c20e71c25270774c
 
-PODFILE CHECKSUM: dc95f202b9f63a07cdaf610f7bed97b809f34cf5
+PODFILE CHECKSUM: 0ad0769a52a51e52ffd074a15b0e3aa5f050ca9d
 
 COCOAPODS: 1.9.3
