@@ -3,34 +3,34 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>267563013930-esrpvvdn6429pbd50qfpo2rgh1rgsl9e.apps.googleusercontent.com</string>
+	<string>521698724653-jm0ha6cigbc4f6r5fir9t5a4nck2un03.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.267563013930-esrpvvdn6429pbd50qfpo2rgh1rgsl9e</string>
+	<string>com.googleusercontent.apps.521698724653-jm0ha6cigbc4f6r5fir9t5a4nck2un03</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDZFphOPsibFOO40SdVJfRF-lVgH21riJk</string>
+	<string>AIzaSyAwsnyN4BSeUAnSbGdnHvaPGhkeDbTWGZA</string>
 	<key>GCM_SENDER_ID</key>
-	<string>267563013930</string>
+	<string>521698724653</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>edu.stanford.cardinalkit</string>
+	<string>edu.uw.appdev.trialx</string>
 	<key>PROJECT_ID</key>
-	<string>cs342-master-sample</string>
+	<string>trialx-7c085</string>
 	<key>STORAGE_BUCKET</key>
-	<string>cs342-master-sample.appspot.com</string>
+	<string>trialx-7c085.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_GCM_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:267563013930:ios:d1af91089e477416ccb053</string>
+	<string>1:521698724653:ios:18faddd3ebb1b370dd21a4</string>
 	<key>DATABASE_URL</key>
-	<string>https://cs342-master-sample.firebaseio.com</string>
+	<string>https://trialx-7c085.firebaseio.com</string>
 </dict>
 </plist>
