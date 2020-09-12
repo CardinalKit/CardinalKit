@@ -30,7 +30,6 @@
 		8E0A43C2244A4A0400656518 /* ConsentDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A43A2244A4A0400656518 /* ConsentDocument.swift */; };
 		8E0A43C3244A4A0400656518 /* LoginCustomWaitStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A43A3244A4A0400656518 /* LoginCustomWaitStepViewController.swift */; };
 		8E0A43CD244A4D7C00656518 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E0A43CB244A4D7C00656518 /* Main.storyboard */; };
-		8E0A43CF244A60D800656518 /* Pods_CardinalKit_Example.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1D31556B648F48DA664CEE80 /* Pods_CardinalKit_Example.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8E0A43D5244A693D00656518 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E0A43D4244A693D00656518 /* HealthKit.framework */; };
 		8E40DC042471E5940027536B /* CKNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E40DC032471E5940027536B /* CKNetworkManager.swift */; };
 		8E67519C24B7ACB7004EC405 /* StudyTableViewController+CardinalKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E67519B24B7ACB7004EC405 /* StudyTableViewController+CardinalKit.swift */; };
@@ -46,20 +45,6 @@
 		E2F1FD7824D62064006C39DF /* CKConfiguration.plist in Resources */ = {isa = PBXBuildFile; fileRef = E2F1FD7724D62064006C39DF /* CKConfiguration.plist */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		8E0A43D0244A60D800656518 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				8E0A43CF244A60D800656518 /* Pods_CardinalKit_Example.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
 		00480E2D79186BE9405F0F72 /* Pods-CardinalKit_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardinalKit_Tests.release.xcconfig"; path = "Target Support Files/Pods-CardinalKit_Tests/Pods-CardinalKit_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		07D78DA16FC9C3C7709EA243 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
@@ -70,7 +55,7 @@
 		62AA5CD1C2188D392530510F /* CardinalKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = CardinalKit.podspec; path = ../CardinalKit.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		630884219A5CB1E45383122C /* Pods-CardinalKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardinalKit_Example.release.xcconfig"; path = "Target Support Files/Pods-CardinalKit_Example/Pods-CardinalKit_Example.release.xcconfig"; sourceTree = "<group>"; };
 		67775C73890913676E2A3907 /* Pods_TrialX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TrialX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8E0A4378244A4A0300656518 /* CardinalKit_Example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CardinalKit_Example-Bridging-Header.h"; sourceTree = "<group>"; };
+		8E0A4378244A4A0300656518 /* TrialX-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TrialX-Bridging-Header.h"; sourceTree = "<group>"; };
 		8E0A437A244A4A0400656518 /* ProfileTableItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableItem.swift; sourceTree = "<group>"; };
 		8E0A437B244A4A0400656518 /* StaticProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticProfileViewController.swift; sourceTree = "<group>"; };
 		8E0A437F244A4A0400656518 /* WithdrawalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WithdrawalViewController.swift; sourceTree = "<group>"; };
@@ -147,6 +132,7 @@
 				607FACD11AFB9204008FA782 /* Products */,
 				A562A578C883F67F0DAE1385 /* Pods */,
 				2C45A885E8BD0CAC5349997A /* Frameworks */,
+				D253D112250C90F600A363E4 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -214,7 +200,7 @@
 				8E0A4385244A4A0400656518 /* ResearchKit */,
 				8E0A4389244A4A0400656518 /* LaunchScreen.storyboard */,
 				8E0A4384244A4A0400656518 /* Constants.swift */,
-				8E0A4378244A4A0300656518 /* CardinalKit_Example-Bridging-Header.h */,
+				8E0A4378244A4A0300656518 /* TrialX-Bridging-Header.h */,
 				8E0A43C9244A4C6500656518 /* Info.plist */,
 				E290FB1C24FF4BBA00D19BE9 /* GoogleService-Info.plist */,
 				E2F1FD7524D61EDA006C39DF /* CKPropertyReader.swift */,
@@ -313,6 +299,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		D253D112250C90F600A363E4 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				1D31556B648F48DA664CEE80 /* Pods_CardinalKit_Example.framework */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		E29143FA24E74AB700EE97B2 /* User Interface */ = {
 			isa = PBXGroup;
 			children = (
@@ -334,7 +328,6 @@
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
 				8E740AF552D1351413D250C9 /* [CP] Embed Pods Frameworks */,
-				8E0A43D0244A60D800656518 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -357,7 +350,6 @@
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = 2H866F22W7;
 						LastSwiftMigration = 1120;
 					};
 				};
@@ -638,7 +630,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = TrialX.entitlements;
-				DEVELOPMENT_TEAM = 2H866F22W7;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "CardinalKit/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -659,7 +651,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = TrialX.entitlements;
-				DEVELOPMENT_TEAM = 2H866F22W7;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "CardinalKit/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
