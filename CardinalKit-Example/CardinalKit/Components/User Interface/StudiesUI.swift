@@ -195,8 +195,12 @@ struct VisualizationView: View {
 struct VisualizationInspectionView: View {
     var data: VisualizationData
     
+    // only supporting PieCharts currently
+    var chart: PieChart
+    
     init (data: VisualizationData) {
         self.data = data
+        self.chart = PieChart(visualizationData: data)
     }
     
     @Environment(\.presentationMode) var presentationMode
@@ -210,6 +214,8 @@ struct VisualizationInspectionView: View {
                 }
                 Text(self.data.type)
             }
+            Spacer()
+            self.chart
             Spacer()
             Button(action: { self.presentationMode.wrappedValue.dismiss() })
             { Text("Back") }
@@ -231,6 +237,66 @@ struct VisualizationData: Identifiable {
     }
 }
 
+struct PieChart: UIViewRepresentable {
+    // required
+    func makeUIView(context: UIViewRepresentableContext<PieChart>) -> ORKPieChartView {
+        return self.chart
+    }
+    
+    // required
+    func updateUIView(_ uiView: ORKPieChartView, context: UIViewRepresentableContext<PieChart>) {
+        // no-operation
+    }
+    
+    typealias UIViewType = ORKPieChartView
+    var chart: ORKPieChartView
+    var dataSource: ORKPieChartViewDataSource
+    
+    class PieChartDataSource: NSObject, ORKPieChartViewDataSource {
+        // placeholder
+        let colors = [
+            UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1),
+            UIColor(red: 100/255, green: 255/255, blue: 255/255, alpha: 1),
+            UIColor(red: 0/255, green: 255/255, blue: 255/255, alpha: 1),
+            UIColor(red: 255/255, green: 0/255, blue: 255/255, alpha: 1)
+        ]
+        
+        // needs to be loaded dynamically
+        let values = [
+            10, 10, 10, 70
+        ]
+        
+        func numberOfSegments(in pieChartView: ORKPieChartView) -> Int {
+            return values.count
+        }
+        
+        func pieChartView(_ pieChartView: ORKPieChartView, valueForSegmentAt index: Int) -> CGFloat {
+            return CGFloat(values[index])
+        }
+        
+        func pieChartView(_ pieChartView: ORKPieChartView, colorForSegmentAt index: Int) -> UIColor {
+            return colors[index]
+        }
+        
+        func pieChartView(_ pieChartView: ORKPieChartView, titleForSegmentAt index: Int) -> String {
+            switch index {
+                default:
+                    return "task \(index + 1)"
+            }
+        }
+    }
+    
+    init (visualizationData: VisualizationData) {
+        // make a new Chart and it's dataSource, then bind
+        self.chart = ORKPieChartView()
+        self.dataSource = PieChartDataSource()
+        self.chart.dataSource = self.dataSource
+        
+        // binding Chart props from visualizationData
+        self.chart.text = visualizationData.description
+        self.chart.title = visualizationData.title
+    }
+}
 
 struct WithdrawView: View {
     let color: Color
