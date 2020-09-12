@@ -168,7 +168,7 @@ struct OnboardingVC: UIViewControllerRepresentable {
             identifier: "SignInWithApple",
             title: "Sign in with Apple",
             text: "The fast, easy way to sign in. All accounts are protected with two-factor authentication for superior security, and Apple will not track your activity in your app or website.",
-            requestedScopes: [.email, .fullName]
+            requestedScopes: [.email]
         )
 
         // let loginStep = PasswordlessLoginStep(identifier: PasswordlessLoginStep.identifier)
@@ -431,8 +431,24 @@ struct OnboardingVC: UIViewControllerRepresentable {
                 return nil
             }
         }
+
+        func taskViewController(_ taskViewController: ORKTaskViewController,
+                                hasLearnMoreFor step: ORKStep) -> Bool {
+            // Indicates the step should display learn more button.
+            if step is CKSignInWithAppleStep {
+                return true
+            }
+            return false
+        }
+
+        func taskViewController(_ taskViewController: ORKTaskViewController,
+                                learnMoreForStep stepViewController: ORKStepViewController) {
+            // Presents the "How to use Sign in with Apple" guide.
+            if stepViewController is CKSignInWithAppleStepViewController {
+                UIApplication.shared.open(URL(string: "https://support.apple.com/HT210318")!)
+            }
+        }
     }
-    
 }
 
 struct infoView: View {
