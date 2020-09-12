@@ -42,6 +42,7 @@ struct OnboardingUI: View {
             if showingStudyTasks {
                 StudiesUI()
                     .environmentObject(config)
+                    .environmentObject(NotificationsAndResults())
             } else {
                 Spacer()
 

@@ -14,6 +14,7 @@ import Firebase
 
 struct StudiesUI: View {
     @EnvironmentObject var config: CKPropertyReader
+    @EnvironmentObject var data: NotificationsAndResults
     var color: Color {
         return Color(config.readColor(query: "Primary Color"))
     }
@@ -26,6 +27,8 @@ struct StudiesUI: View {
                         .renderingMode(.template)
                     Text("Activities")
                 }
+                
+
 
             ProfileView(color: color)
                 .tabItem {
