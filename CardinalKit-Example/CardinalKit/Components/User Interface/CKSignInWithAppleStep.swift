@@ -7,45 +7,49 @@
 //
 
 import ResearchKit
+import CardinalKit
 import CryptoKit
 import FirebaseAuth
 import AuthenticationServices
-import CardinalKit
+
+extension CKPropertyReader {
+    public static let `default` = CKPropertyReader(file: "CKConfiguration")
+}
 
 /// https://developer.apple.com/sign-in-with-apple/
-class CKSignInWithAppleStep: ORKInstructionStep {
-    override init(identifier: String) {
+public class CKSignInWithAppleStep: ORKInstructionStep {
+    public var requestedScopes: [ASAuthorization.Scope]
+
+    public init(identifier: String,
+         title: String = CKPropertyReader.default.read(query: "Sign-in with Apple Title"),
+         text: String? = CKPropertyReader.default.read(query: "Sign-in with Apple Text"),
+         requestedScopes: [ASAuthorization.Scope] = [.email]) {
+        self.requestedScopes = requestedScopes
         super.init(identifier: identifier)
-        setup()
+        self.title = title
+        self.text = text
     }
 
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setup()
-    }
-
-    private func setup() {
-        // let config = CKPropertyReader(file: "CKConfiguration")
-        // title = config.read(query: "Sign-in with Apple Title")
-        // text = config.read(query: "Sign-in with Apple Text")
-        title = NSLocalizedString("Sign-in with Apple", comment: "")
-        text = NSLocalizedString("The fast, easy way to sign in. All accounts are protected with two-factor authentication for superior security, and Apple will not track your activity in your app or website.", comment: "")
+    @available(*, unavailable)
+    public required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 
-class CKSignInWithAppleStepViewController: ORKInstructionStepViewController, ASAuthorizationControllerDelegate {
-    var signInWithAppleStep: CKSignInWithAppleStep? {
+public class CKSignInWithAppleStepViewController: ORKInstructionStepViewController,
+                                                  ASAuthorizationControllerDelegate {
+    public var signInWithAppleStep: CKSignInWithAppleStep! {
         return step as? CKSignInWithAppleStep
     }
 
     /// Unhashed nonce.
-    fileprivate var currentNonce: String!
+    private var currentNonce: String!
 
-    override func goForward() {
+    public override func goForward() {
         currentNonce = .makeRandomNonce()
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let request = appleIDProvider.createRequest()
-        request.requestedScopes = [.fullName, .email]
+        request.requestedScopes = signInWithAppleStep?.requestedScopes ?? [.email]
         request.nonce = currentNonce.sha256
 
         let authorizationController = ASAuthorizationController(authorizationRequests: [request])
@@ -53,7 +57,8 @@ class CKSignInWithAppleStepViewController: ORKInstructionStepViewController, ASA
         authorizationController.performRequests()
     }
 
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+    public func authorizationController(controller: ASAuthorizationController,
+                                        didCompleteWithAuthorization authorization: ASAuthorization) {
         guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential else {
             print("Unable to obtain AppleID credentials")
             return
@@ -75,27 +80,33 @@ class CKSignInWithAppleStepViewController: ORKInstructionStepViewController, ASA
                                                   rawNonce: nonce)
         // Sign in with Firebase.
         Auth.auth().signIn(with: credential) { (authResult, error) in
-            guard let error = error else {
+            if let error = error {
+                self.showError(error)
+            } else {
                 // User is signed in to Firebase with Apple.
                 super.goForward()
-                return
             }
-            // Error. If error.code == .MissingOrInvalidNonce, make sure
-            // you're sending the SHA256-hashed nonce as a hex string with
-            // your request to Apple.
-            print("Sign in with Apple errored: \(error)")
-            Alerts.showInfo(title: "Failed to Sign in with Apple", message: error.localizedDescription)
         }
     }
 
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-        // Handle error.
+    public func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        showError(error)
+    }
+
+    /// Handle error.
+    private func showError(_ error: Error) {
+        // If error.code == .missingOrInvalidNonce,
+        // make sure you're sending the SHA256-hashed nonce as a hex string
+        // with your request to Apple.
         print("Sign in with Apple errored: \(error)")
-        Alerts.showInfo(title: "Failed to Sign in with Apple", message: error.localizedDescription)
+        Alerts.showInfo(
+            title: NSLocalizedString("Failed to Sign in with Apple", comment: ""),
+            message: error.localizedDescription
+        )
     }
 }
 
-extension String {
+fileprivate extension String {
     var sha256: String {
         return SHA256.hash(data: Data(utf8))
             .compactMap { String(format: "%02x", $0) }
@@ -119,9 +130,9 @@ extension String {
                 return random
             }
 
-            randoms.forEach { random in
+            for random in randoms {
                 if remainingLength == 0 {
-                    return
+                    break
                 }
 
                 if random < charset.count {

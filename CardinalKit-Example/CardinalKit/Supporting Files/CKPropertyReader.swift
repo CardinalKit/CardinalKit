@@ -12,10 +12,9 @@ import SwiftUI
 
 public class CKPropertyReader: ObservableObject {
     
-    var data: [String: AnyObject] = [:]
+    private var data: [String: AnyObject] = [:]
     
-    init(file: String) {
-        
+    public init(file: String) {
         // read input plist file
         var propertyListFormat =  PropertyListSerialization.PropertyListFormat.xml
         let plistPath: String? = Bundle.main.path(forResource: file, ofType: "plist")!
@@ -30,26 +29,26 @@ public class CKPropertyReader: ObservableObject {
     }
     
     // read from stored value
-    func read(query: String) -> String {
+    public func read(query: String) -> String {
         return data[query] as! String
     }
     
-    func readAny(query: String) -> AnyObject {
+    public func readAny(query: String) -> AnyObject {
         return data[query]!
     }
     
     // read from stored dictionary
-    func readDict(query: String) -> [String:String] {
+    public func readDict(query: String) -> [String:String] {
         return data[query] as! [String:String]
     }
     
     // read from stored dictionary
-    func readArray(query: String) -> [String] {
+    public func readArray(query: String) -> [String] {
         return data[query] as! [String]
     }
     
     // read color from stored dictionary
-    func readColor(query: String) -> UIColor {
+    public func readColor(query: String) -> UIColor {
         let hex = read(query: query)
         var cString = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
 
@@ -64,11 +63,6 @@ public class CKPropertyReader: ObservableObject {
         var rgbValue: UInt64 = 0
         Scanner(string: cString).scanHexInt64(&rgbValue)
 
-        return UIColor(
-            displayP3Red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255,
-            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255,
-            blue: CGFloat(rgbValue & 0x0000FF) / 255,
-            alpha: 1
-        )
+        return UIColor(netHex: Int(rgbValue))
     }
 }

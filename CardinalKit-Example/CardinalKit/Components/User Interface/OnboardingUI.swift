@@ -159,12 +159,17 @@ struct OnboardingVC: UIViewControllerRepresentable {
         
         let regexp = try! NSRegularExpression(pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[d$@$!%*?&#])[A-Za-z\\dd$@$!%*?&#]{8,}")
         
-        let registerStep = ORKRegistrationStep(identifier: "RegistrationStep", title: "Registration", text: "Sign up for this study.", passcodeValidationRegularExpression: regexp, passcodeInvalidMessage: "Your password does not meet the following criteria: minimum 8 characters with at least 1 Uppercase Alphabet, 1 Lowercase Alphabet, 1 Number and 1 Special Character", options: .init())
+        let registerStep = ORKRegistrationStep(identifier: "RegistrationStep", title: "Registration", text: "Sign up for this study.", passcodeValidationRegularExpression: regexp, passcodeInvalidMessage: "Your password does not meet the following criteria: minimum 8 characters with at least 1 Uppercase Alphabet, 1 Lowercase Alphabet, 1 Number and 1 Special Character", options: [])
 
 
         let loginStep = ORKLoginStep(identifier: "LoginStep", title: "Login", text: "Log into this study.", loginViewControllerClass: LoginViewController.self)
 
-        let signInWithAppleStep = CKSignInWithAppleStep(identifier: "SignInWithApple")
+        let signInWithAppleStep = CKSignInWithAppleStep(
+            identifier: "SignInWithApple",
+            title: NSLocalizedString("Sign-in with Apple", comment: ""),
+            text: NSLocalizedString("The fast, easy way to sign in. All accounts are protected with two-factor authentication for superior security, and Apple will not track your activity in your app or website.", comment: ""),
+            requestedScopes: [.email, .fullName]
+        )
 
         // let loginStep = PasswordlessLoginStep(identifier: PasswordlessLoginStep.identifier)
         // let loginVerificationStep = LoginCustomWaitStep(identifier: LoginCustomWaitStep.identifier)
