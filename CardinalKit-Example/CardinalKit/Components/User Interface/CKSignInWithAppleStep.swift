@@ -21,8 +21,8 @@ public class CKSignInWithAppleStep: ORKInstructionStep {
     public var requestedScopes: [ASAuthorization.Scope]
 
     public init(identifier: String,
-         title: String = CKPropertyReader.default.read(query: "Sign-in with Apple Title"),
-         text: String? = CKPropertyReader.default.read(query: "Sign-in with Apple Text"),
+         title: String = CKPropertyReader.default.read(query: "Sign in with Apple Title"),
+         text: String? = CKPropertyReader.default.read(query: "Sign in with Apple Text"),
          requestedScopes: [ASAuthorization.Scope] = [.email]) {
         self.requestedScopes = requestedScopes
         super.init(identifier: identifier)
@@ -40,6 +40,14 @@ public class CKSignInWithAppleStepViewController: ORKInstructionStepViewControll
                                                   ASAuthorizationControllerDelegate {
     public var signInWithAppleStep: CKSignInWithAppleStep! {
         return step as? CKSignInWithAppleStep
+    }
+
+    public override func viewDidLoad() {
+        super.viewDidLoad()
+        continueButtonTitle = NSLocalizedString(
+            " Sign in with Apple",
+            comment: "Please use Apple's official translations"
+        )
     }
 
     /// Unhashed nonce.

@@ -166,8 +166,8 @@ struct OnboardingVC: UIViewControllerRepresentable {
 
         let signInWithAppleStep = CKSignInWithAppleStep(
             identifier: "SignInWithApple",
-            title: NSLocalizedString("Sign-in with Apple", comment: ""),
-            text: NSLocalizedString("The fast, easy way to sign in. All accounts are protected with two-factor authentication for superior security, and Apple will not track your activity in your app or website.", comment: ""),
+            title: "Sign in with Apple",
+            text: "The fast, easy way to sign in. All accounts are protected with two-factor authentication for superior security, and Apple will not track your activity in your app or website.",
             requestedScopes: [.email, .fullName]
         )
 
