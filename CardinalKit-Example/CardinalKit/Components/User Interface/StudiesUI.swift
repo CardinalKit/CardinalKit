@@ -28,6 +28,12 @@ struct StudiesUI: View {
                     Image("tab_activities").renderingMode(.template)
                     Text("Activities")
             }
+            
+            VisualizationView(color: self.color)
+                .tabItem {
+                    Image("tab_profile").renderingMode(.template)
+                    Text("Visualize")
+            }
 
             ProfileView(color: self.color)
                 .tabItem {
@@ -88,6 +94,23 @@ struct ActivitiesView: View {
                     
                 }.listRowBackground(Color.white)
             }.listStyle(GroupedListStyle())
+        }
+    }
+}
+
+struct VisualizationView: View {
+    let color: Color
+    let config = CKPropertyReader(file: "CKConfiguration")
+    var date = ""
+    var activities: [StudyItem] = []
+    
+    init(color: Color) {
+        self.color = color
+    }
+    
+    var body: some View {
+        VStack {
+            Text("Hello there!")
         }
     }
 }
