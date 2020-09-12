@@ -164,7 +164,8 @@ struct OnboardingVC: UIViewControllerRepresentable {
 
         let loginStep = ORKLoginStep(identifier: "LoginStep", title: "Login", text: "Log into this study.", loginViewControllerClass: LoginViewController.self)
 
-        
+        let signInWithAppleStep = CKSignInWithAppleStep(identifier: "SignInWithApple")
+
         // let loginStep = PasswordlessLoginStep(identifier: PasswordlessLoginStep.identifier)
         // let loginVerificationStep = LoginCustomWaitStep(identifier: LoginCustomWaitStep.identifier)
         
@@ -198,7 +199,10 @@ struct OnboardingVC: UIViewControllerRepresentable {
         let introSteps = [consentStep, reviewConsentStep]
         
         // and steps regarding login / security
-        let emailVerificationSteps = [chooseEnrollMethodStep, registerStep, loginStep, passcodeStep, healthDataStep, completionStep]
+        let emailVerificationSteps = [
+            chooseEnrollMethodStep, registerStep, loginStep, signInWithAppleStep,
+            passcodeStep, healthDataStep, completionStep
+        ]
 
         // let stepsToUse = true // DEBUG ONLY
         let stepsToUse = CKStudyUser.shared.email != nil
@@ -214,6 +218,7 @@ struct OnboardingVC: UIViewControllerRepresentable {
         let toPasscode = ORKDirectStepNavigationRule(destinationStepIdentifier: passcodeStep.identifier)
         orderedTask.setNavigationRule(toPasscode, forTriggerStepIdentifier: registerStep.identifier)
         orderedTask.setNavigationRule(toPasscode, forTriggerStepIdentifier: loginStep.identifier)
+        orderedTask.setNavigationRule(toPasscode, forTriggerStepIdentifier: signInWithAppleStep.identifier)
 
         let enrollMethodResultSelector = ORKResultSelector(resultIdentifier: chooseEnrollMethodStep.identifier)
         let toRegister = ORKResultPredicate
@@ -222,10 +227,14 @@ struct OnboardingVC: UIViewControllerRepresentable {
         let toLogin = ORKResultPredicate
             .predicateForChoiceQuestionResult(with: enrollMethodResultSelector,
                                               expectedAnswerValue: EnrollMethods.login.rawValue)
+        let toSignInWithApple = ORKResultPredicate
+            .predicateForChoiceQuestionResult(with: enrollMethodResultSelector,
+                                              expectedAnswerValue: EnrollMethods.signInWithApple.rawValue)
 
         let toAppropriateEnrollMethod = ORKPredicateStepNavigationRule(resultPredicatesAndDestinationStepIdentifiers: [
             (toRegister, registerStep.identifier),
-            (toLogin, loginStep.identifier)
+            (toLogin, loginStep.identifier),
+            (toSignInWithApple, signInWithAppleStep.identifier)
         ])
         orderedTask.setNavigationRule(toAppropriateEnrollMethod, forTriggerStepIdentifier: chooseEnrollMethodStep.identifier)
 
@@ -403,19 +412,19 @@ struct OnboardingVC: UIViewControllerRepresentable {
             // Overriding the view controller of an ORKStep
             // lets us run our own code on top of what
             // ResearchKit already provides!
-            
-            if step is CKHealthDataStep {
+            switch step {
+            case is CKHealthDataStep:
                 // this step lets us run custom logic to ask for
                 // HealthKit permissins when this step appears on screen.
                 return CKHealthDataStepViewController(step: step)
-            }
-            
-            if step is LoginCustomWaitStep {
+            case is LoginCustomWaitStep:
                 // run custom code to send an email for login!
                 return LoginCustomWaitStepViewController(step: step)
+            case is CKSignInWithAppleStep:
+                return CKSignInWithAppleStepViewController(step: step)
+            default:
+                return nil
             }
-            
-            return nil
         }
     }
     
