@@ -286,19 +286,20 @@ struct VisualizationInspectionView: View {
     var body: some View {
         VStack {
             Spacer()
-
-            VStack(alignment: .leading) {
+            Spacer()
+            Spacer()
+            VStack {
                 Text(self.data.title).font(.system(size: 18, weight: .semibold, design: .default))
                 Text(self.data.description).font(.system(size: 14, weight: .light, design: .default))
             }
-
             Spacer()
-
-            // 'render' visualization
-            self.visualization
-
-            // close and print modal
-
+            HStack {
+                Spacer()
+                // 'render' visualization
+                self.visualization
+                Spacer()
+            }
+            Spacer()
             HStack {
                 Spacer()
                 Spacer()
@@ -795,7 +796,7 @@ class FirebaseHelper: NSObject {
             case "TappingTask":
                 print("processing TappingTask")
 
-                let title = ""
+                let title = identifier as String
                 let description = ""
                 let type = "LineGraph"
                 var values = [[ORKValueRange(value: 0)]]
@@ -813,12 +814,24 @@ class FirebaseHelper: NSObject {
             case "Hanoi":
                 print("processing Hanoi task")
 
-                let title = ""
-                let description = ""
-                let type = "LineGraph"
-                var values = [[ORKValueRange(value: 0)]]
-
+                let title = identifier as String
+                let description = "Time taken in seconds."
+                let type = "DiscreteGraph"
+                var values = [[],[]]
+                
                 // processess && update values
+                for surveys in (surveysDict[identifier])! {
+                    let results = surveys["results"] as! NSArray
+                    let result = results[2] as! NSDictionary
+                    let resultOfResults = result["results"] as! NSArray
+                    let resultOfResultOfResults = resultOfResults[0] as! NSDictionary
+                    let moves = resultOfResultOfResults["moves"] as! NSArray
+                    let move = moves[moves.count - 1] as! NSDictionary
+                    let ts = move["timestamp"] as! Double
+                    
+                    values[0].append(ORKValueRange(value: 0))
+                    values[1].append(ORKValueRange(value: ts))
+                }
 
                 let data = VisualizationData(
                     title: title,
@@ -831,7 +844,8 @@ class FirebaseHelper: NSObject {
             case "ShortWalkTask":
                 print("processing ShortWalkTask")
 
-                let title = ""
+                // This is a typical starting point
+                let title = identifier as String
                 let description = ""
                 let type = "LineGraph"
                 var values = [[ORKValueRange(value: 0)]]
@@ -849,12 +863,22 @@ class FirebaseHelper: NSObject {
             case "SurveyTask-SF12":
                 print("processing SurveyTask-SF12")
 
-                let title = ""
-                let description = ""
+                let title = identifier as String
+                let description = "Personal Health Scale"
                 let type = "LineGraph"
-                var values = [[ORKValueRange(value: 0)]]
-
+                var values = [[],[]]
+                
                 // processess && update values
+                for surveys in (surveysDict[identifier])! {
+                    let results = surveys["results"] as! NSArray
+                    let result = results[1] as! NSDictionary
+                    let healthScaleResults = result["results"] as! NSArray
+                    let healthScaleResultsDict = healthScaleResults[0] as! NSDictionary
+                    let healthScaleResult = healthScaleResultsDict["scaleAnswer"] as! Double
+                    
+                    values[0].append(ORKValueRange(value: 0))
+                    values[1].append(ORKValueRange(value: healthScaleResult))
+                }
 
                 let data = VisualizationData(
                     title: title,
