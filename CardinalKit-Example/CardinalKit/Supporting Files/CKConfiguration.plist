@@ -3,27 +3,27 @@
 <plist version="1.0">
 <dict>
 	<key>Study Title</key>
-	<string>Caffeine Consumption Study</string>
+	<string>CardinalKit Sample App</string>
 	<key>Team Name</key>
-	<string>Stanford Department of Coffee Consumption</string>
+	<string>Stanford Department of Medicine</string>
 	<key>Email</key>
-	<string>coffee@stanford.edu</string>
+	<string>contact@stanford.edu</string>
 	<key>Phone</key>
 	<string>650-123-4567</string>
 	<key>Copyright</key>
-	<string>Made at Stanford with (❤️ &amp;&amp; ☕️)</string>
+	<string>Made at Stanford with ❤️</string>
 	<key>Website</key>
 	<string>https://cardinalkit.org</string>
 	<key>Tint Color</key>
-	<string>#6D4C41</string>
+	<string>#b6133f</string>
 	<key>Primary Color</key>
-	<string>#40739e</string>
+	<string>#ff3961</string>
 	<key>Review Consent Step Text</key>
 	<string>Review Consent Form</string>
 	<key>Reason for Consent Text</key>
-	<string>Consent to join the Caffeine Consumption Study.</string>
+	<string>Consent to join the Developer Health Research Study.</string>
 	<key>Consent File Name</key>
-	<string>Coffee Consent Form</string>
+	<string>My Consent Form</string>
 	<key>Passcode Text</key>
 	<string>Now you will create a passcode to identify yourself to the app and protect access to information you&apos;ve entered.</string>
 	<key>Passcode Type</key>
@@ -45,7 +45,7 @@
 	<key>Sign in with Apple</key>
 	<dict>
 		<key>Enabled</key>
-		<true/>
+		<false/>
 		<key>Title</key>
 		<string>Sign in with Apple</string>
 		<key>Text</key>
@@ -62,62 +62,62 @@
 	<key>Withdraw Title</key>
 	<string>We appreciate your time.</string>
 	<key>Withdraw Text</key>
-	<string>Thank you for your contribution to this study. We are sorry that you could not continue.</string>
+	<string>Thank you for your contribution to this study. We are sorry that you could not continue. The app will now close.</string>
 	<key>Passcode On Return Text</key>
 	<string>Welcome back!</string>
 	<key>Consent Title</key>
 	<string>Research Health Study Consent Form</string>
 	<key>HealthKit Data to Read</key>
 	<array>
+		<string>StepCount</string>
+		<string>DistanceWalkingRunning</string>
+		<string>FlightsClimbed</string>
 		<string>HeartRate</string>
-		<string>DietaryEnergyConsumed</string>
-		<string>BloodPressureDiastolic</string>
-		<string>BloodPressureSystolic</string>
 	</array>
 	<key>Consent Form</key>
 	<dict>
 		<key>Overview</key>
-		<string>Welcome to our Coffee Study. Blue mountain, wings sweet body cup id mocha percolator cream. Sweet dripper coffee, brewed, galão coffee so variety breve. Blue mountain and ristretto ut extra brewed blue mountain organic saucer crema.
-</string>
+		<string>Welcome to CardinalKit. Vivamus laoreet erat sit amet tincidunt scelerisque. Maecenas odio sapien, molestie eu vulputate sodales, tincidunt at neque. Nunc venenatis velit et ligula dictum, eget accumsan felis consectetur. Donec scelerisque fermentum vestibulum. Nam molestie finibus mauris, id congue lectus ultrices eu. Nunc et odio vitae dui interdum dictum. Proin sagittis leo quam. Proin vulputate massa ac orci pulvinar, eget rhoncus urna congue. Sed ut vehicula tellus, eget scelerisque enim. Cras lobortis diam at faucibus scelerisque. Curabitur pharetra arcu erat, nec tincidunt mi eleifend ut. Nunc suscipit risus vitae consectetur sodales. Aenean vitae lectus odio. Phasellus diam orci, accumsan non elementum at, finibus condimentum mauris. Nullam est enim, rhoncus a rutrum sed, laoreet a magna.</string>
+		<key>Data Gathering</key>
+		<string>Your Data Gathering Section: Vivamus laoreet erat sit amet tincidunt scelerisque. Maecenas odio sapien, molestie eu vulputate sodales, tincidunt at neque. Nunc venenatis velit et ligula dictum, eget accumsan felis consectetur. Donec scelerisque fermentum vestibulum. Nam molestie finibus mauris, id congue lectus ultrices eu. Nunc et odio vitae dui interdum dictum. Proin sagittis leo quam. Proin vulputate massa ac orci pulvinar, eget rhoncus urna congue. Sed ut vehicula tellus, eget scelerisque enim. Cras lobortis diam at faucibus scelerisque. Curabitur pharetra arcu erat, nec tincidunt mi eleifend ut. Nunc suscipit risus vitae consectetur sodales. Aenean vitae lectus odio. Phasellus diam orci, accumsan non elementum at, finibus condimentum mauris. Nullam est enim, rhoncus a rutrum sed, laoreet a magna.</string>
+		<key>Privacy</key>
+		<string>Your Privacy Section: Vivamus laoreet erat sit amet tincidunt scelerisque. Maecenas odio sapien, molestie eu vulputate sodales, tincidunt at neque. Nunc venenatis velit et ligula dictum, eget accumsan felis consectetur. Donec scelerisque fermentum vestibulum. Nam molestie finibus mauris, id congue lectus ultrices eu. Nunc et odio vitae dui interdum dictum. Proin sagittis leo quam. Proin vulputate massa ac orci pulvinar, eget rhoncus urna congue. Sed ut vehicula tellus, eget scelerisque enim. Cras lobortis diam at faucibus scelerisque. Curabitur pharetra arcu erat, nec tincidunt mi eleifend ut. Nunc suscipit risus vitae consectetur sodales. Aenean vitae lectus odio. Phasellus diam orci, accumsan non elementum at, finibus condimentum mauris. Nullam est enim, rhoncus a rutrum sed, laoreet a magna.</string>
+		<key>Data Use</key>
+		<string>Your Data Use Section: Vivamus laoreet erat sit amet tincidunt scelerisque. Maecenas odio sapien, molestie eu vulputate sodales, tincidunt at neque. Nunc venenatis velit et ligula dictum, eget accumsan felis consectetur. Donec scelerisque fermentum vestibulum. Nam molestie finibus mauris, id congue lectus ultrices eu. Nunc et odio vitae dui interdum dictum. Proin sagittis leo quam. Proin vulputate massa ac orci pulvinar, eget rhoncus urna congue. Sed ut vehicula tellus, eget scelerisque enim. Cras lobortis diam at faucibus scelerisque. Curabitur pharetra arcu erat, nec tincidunt mi eleifend ut. Nunc suscipit risus vitae consectetur sodales. Aenean vitae lectus odio. Phasellus diam orci, accumsan non elementum at, finibus condimentum mauris. Nullam est enim, rhoncus a rutrum sed, laoreet a magna.</string>
 		<key>Time Commitment</key>
-		<string>Your Time Commitment Section: White carajillo foam, so plunger pot white galão coffee. Dripper, black, con panna brewed, french press kopi-luwak ut turkish frappuccino. Strong, caffeine cappuccino eu con panna coffee ristretto and barista.
-</string>
+		<string>Your Time Commitment Section: Vivamus laoreet erat sit amet tincidunt scelerisque. Maecenas odio sapien, molestie eu vulputate sodales, tincidunt at neque. Nunc venenatis velit et ligula dictum, eget accumsan felis consectetur. Donec scelerisque fermentum vestibulum. Nam molestie finibus mauris, id congue lectus ultrices eu. Nunc et odio vitae dui interdum dictum. Proin sagittis leo quam. Proin vulputate massa ac orci pulvinar, eget rhoncus urna congue. Sed ut vehicula tellus, eget scelerisque enim. Cras lobortis diam at faucibus scelerisque. Curabitur pharetra arcu erat, nec tincidunt mi eleifend ut. Nunc suscipit risus vitae consectetur sodales. Aenean vitae lectus odio. Phasellus diam orci, accumsan non elementum at, finibus condimentum mauris. Nullam est enim, rhoncus a rutrum sed, laoreet a magna.</string>
+		<key>Study Survey</key>
+		<string>Your Study Survey Section: Vivamus laoreet erat sit amet tincidunt scelerisque. Maecenas odio sapien, molestie eu vulputate sodales, tincidunt at neque. Nunc venenatis velit et ligula dictum, eget accumsan felis consectetur. Donec scelerisque fermentum vestibulum. Nam molestie finibus mauris, id congue lectus ultrices eu. Nunc et odio vitae dui interdum dictum. Proin sagittis leo quam. Proin vulputate massa ac orci pulvinar, eget rhoncus urna congue. Sed ut vehicula tellus, eget scelerisque enim. Cras lobortis diam at faucibus scelerisque. Curabitur pharetra arcu erat, nec tincidunt mi eleifend ut. Nunc suscipit risus vitae consectetur sodales. Aenean vitae lectus odio. Phasellus diam orci, accumsan non elementum at, finibus condimentum mauris. Nullam est enim, rhoncus a rutrum sed, laoreet a magna.</string>
+		<key>Study Tasks</key>
+		<string>Your Study Tasks Section: Vivamus laoreet erat sit amet tincidunt scelerisque. Maecenas odio sapien, molestie eu vulputate sodales, tincidunt at neque. Nunc venenatis velit et ligula dictum, eget accumsan felis consectetur. Donec scelerisque fermentum vestibulum. Nam molestie finibus mauris, id congue lectus ultrices eu. Nunc et odio vitae dui interdum dictum. Proin sagittis leo quam. Proin vulputate massa ac orci pulvinar, eget rhoncus urna congue. Sed ut vehicula tellus, eget scelerisque enim. Cras lobortis diam at faucibus scelerisque. Curabitur pharetra arcu erat, nec tincidunt mi eleifend ut. Nunc suscipit risus vitae consectetur sodales. Aenean vitae lectus odio. Phasellus diam orci, accumsan non elementum at, finibus condimentum mauris. Nullam est enim, rhoncus a rutrum sed, laoreet a magna.</string>
 		<key>Withdrawing</key>
-		<string>Your Withdrawing Section: Filter, et grounds, skinny whipped carajillo café au lait fair trade. Chicory seasonal frappuccino, lungo extra crema so turkish chicory foam affogato caramelization. Aged mocha variety spoon, extra strong seasonal irish id medium.</string>
+		<string>Your Withdrawing Section: Vivamus laoreet erat sit amet tincidunt scelerisque. Maecenas odio sapien, molestie eu vulputate sodales, tincidunt at neque. Nunc venenatis velit et ligula dictum, eget accumsan felis consectetur. Donec scelerisque fermentum vestibulum. Nam molestie finibus mauris, id congue lectus ultrices eu. Nunc et odio vitae dui interdum dictum. Proin sagittis leo quam. Proin vulputate massa ac orci pulvinar, eget rhoncus urna congue. Sed ut vehicula tellus, eget scelerisque enim. Cras lobortis diam at faucibus scelerisque. Curabitur pharetra arcu erat, nec tincidunt mi eleifend ut. Nunc suscipit risus vitae consectetur sodales. Aenean vitae lectus odio. Phasellus diam orci, accumsan non elementum at, finibus condimentum mauris. Nullam est enim, rhoncus a rutrum sed, laoreet a magna.</string>
 	</dict>
 	<key>Onboarding</key>
 	<array>
 		<dict>
 			<key>Title</key>
-			<string>Caffeine and the Brain</string>
+			<string>First Title</string>
 			<key>Description</key>
-			<string>We want to study caffeine and its effects on your brain.</string>
+			<string>Lorem Ipsum is simply dummy text of the printing and typesetting industry</string>
 			<key>Logo</key>
-			<string>🧠</string>
+			<string>😁</string>
 		</dict>
 		<dict>
 			<key>Title</key>
-			<string>Your job?</string>
+			<string>Second Title</string>
 			<key>Description</key>
-			<string>Complete a coffee-related task each day.</string>
+			<string>Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</string>
 			<key>Logo</key>
-			<string>☕️</string>
+			<string>🦠</string>
 		</dict>
 		<dict>
 			<key>Title</key>
-			<string>Log your Intake</string>
+			<string>Third Title</string>
 			<key>Description</key>
-			<string>How much are you drinking?</string>
+			<string>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</string>
 			<key>Logo</key>
-			<string>🧐</string>
-		</dict>
-		<dict>
-			<key>Title</key>
-			<string>Complete Surveys</string>
-			<key>Description</key>
-			<string>&lt; 1 minute each</string>
-			<key>Logo</key>
-			<string>📝</string>
+			<string>🙉</string>
 		</dict>
 	</array>
 </dict>
