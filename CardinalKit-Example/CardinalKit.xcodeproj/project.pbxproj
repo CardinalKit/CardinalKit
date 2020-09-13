@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		69DC6BB1DB8FF78AE696891C /* Pods_TrialX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67775C73890913676E2A3907 /* Pods_TrialX.framework */; };
+		6BCA5EE4250DFA4E00940CE2 /* images.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BCA5EE3250DFA4E00940CE2 /* images.png */; };
+		6BCA5EE6250DFA8700940CE2 /* download.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BCA5EE5250DFA8700940CE2 /* download.png */; };
+		6BCA5EE8250DFAC200940CE2 /* download.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6BCA5EE7250DFAC100940CE2 /* download.jpg */; };
+		6BCA5EEA250DFADD00940CE2 /* download-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BCA5EE9250DFADD00940CE2 /* download-1.png */; };
+		6BCA5EEC250DFAE700940CE2 /* download-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BCA5EEB250DFAE700940CE2 /* download-2.png */; };
+		6BCA5EF0250DFE9600940CE2 /* download-3.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BCA5EEF250DFE9600940CE2 /* download-3.png */; };
 		8E0A43AC244A4A0400656518 /* CKStudyUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4382244A4A0400656518 /* CKStudyUser.swift */; };
 		8E0A43AD244A4A0400656518 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4384244A4A0400656518 /* Constants.swift */; };
 		8E0A43AE244A4A0400656518 /* ORKESerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4386244A4A0400656518 /* ORKESerialization.m */; };
@@ -61,6 +67,12 @@
 		62AA5CD1C2188D392530510F /* CardinalKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = CardinalKit.podspec; path = ../CardinalKit.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		630884219A5CB1E45383122C /* Pods-CardinalKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardinalKit_Example.release.xcconfig"; path = "Target Support Files/Pods-CardinalKit_Example/Pods-CardinalKit_Example.release.xcconfig"; sourceTree = "<group>"; };
 		67775C73890913676E2A3907 /* Pods_TrialX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TrialX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6BCA5EE3250DFA4E00940CE2 /* images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = images.png; path = ../../../../../Desktop/images.png; sourceTree = "<group>"; };
+		6BCA5EE5250DFA8700940CE2 /* download.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = download.png; path = ../../../../../Desktop/download.png; sourceTree = "<group>"; };
+		6BCA5EE7250DFAC100940CE2 /* download.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = download.jpg; path = ../../../../../Desktop/download.jpg; sourceTree = "<group>"; };
+		6BCA5EE9250DFADD00940CE2 /* download-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "download-1.png"; path = "../../../../../Desktop/download-1.png"; sourceTree = "<group>"; };
+		6BCA5EEB250DFAE700940CE2 /* download-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "download-2.png"; path = "../../../../../Desktop/download-2.png"; sourceTree = "<group>"; };
+		6BCA5EEF250DFE9600940CE2 /* download-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "download-3.png"; path = "../../../../../Desktop/download-3.png"; sourceTree = "<group>"; };
 		8E0A4378244A4A0300656518 /* TrialX-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TrialX-Bridging-Header.h"; sourceTree = "<group>"; };
 		8E0A4382244A4A0400656518 /* CKStudyUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKStudyUser.swift; sourceTree = "<group>"; };
 		8E0A4384244A4A0400656518 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -197,6 +209,12 @@
 			isa = PBXGroup;
 			children = (
 				8E0A4388244A4A0400656518 /* Assets.xcassets */,
+				6BCA5EEF250DFE9600940CE2 /* download-3.png */,
+				6BCA5EEB250DFAE700940CE2 /* download-2.png */,
+				6BCA5EE9250DFADD00940CE2 /* download-1.png */,
+				6BCA5EE7250DFAC100940CE2 /* download.jpg */,
+				6BCA5EE5250DFA8700940CE2 /* download.png */,
+				6BCA5EE3250DFA4E00940CE2 /* images.png */,
 				8E0A4385244A4A0400656518 /* ResearchKit */,
 				8E0A4389244A4A0400656518 /* LaunchScreen.storyboard */,
 				8E0A4384244A4A0400656518 /* Constants.swift */,
@@ -414,9 +432,15 @@
 			files = (
 				8E0A43AF244A4A0400656518 /* Assets.xcassets in Resources */,
 				8E0A43B0244A4A0400656518 /* LaunchScreen.storyboard in Resources */,
+				6BCA5EF0250DFE9600940CE2 /* download-3.png in Resources */,
 				E2F1FD7824D62064006C39DF /* CKConfiguration.plist in Resources */,
+				6BCA5EE8250DFAC200940CE2 /* download.jpg in Resources */,
+				6BCA5EEC250DFAE700940CE2 /* download-2.png in Resources */,
+				6BCA5EE4250DFA4E00940CE2 /* images.png in Resources */,
 				8E0A43C1244A4A0400656518 /* LoginCustomWaitStepView.xib in Resources */,
+				6BCA5EE6250DFA8700940CE2 /* download.png in Resources */,
 				E290FB1D24FF4BBA00D19BE9 /* GoogleService-Info.plist in Resources */,
+				6BCA5EEA250DFADD00940CE2 /* download-1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

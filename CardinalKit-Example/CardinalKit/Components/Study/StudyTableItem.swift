@@ -60,28 +60,28 @@ enum StudyTableItem: Int, CaseIterable {
         case .speechRecognition:
             return "This activity records your speech"
         case .amslerGrid:
-            return "This activity helps with detecting pronlems in your vision"
+            return "This activity helps with detecting problems in your vision"
         }
     }
 
     var image: UIImage? {
         switch self {
         case .survey:
-            return UIImage(named: "Screen Shot 2020-07-29 at 6.28.25 PM.png")!
+            return UIImage(named: "survey.png")!
         case .trailMakingA:
             //return UIImage(named: "Trail Making A")
-            return UIImage(named: "Screen Shot 2020-07-29 at 6.28.25 PM.png")!
+            return UIImage(named: "trailA.png")!
         case .trailMakingB:
             //return UIImage(named: "Trail Making B")
-            return UIImage(named: "Screen Shot 2020-07-29 at 6.28.25 PM.png")!
+            return UIImage(named: "trailB.png")!
         case .spatial:
             //return UIImage(named: "Spatial Memory Test")
-            return UIImage(named: "Screen Shot 2020-07-29 at 6.28.25 PM.png")!
+            return UIImage(named: "spatial.png")!
         case .speechRecognition:
         //return UIImage(named: "Spatial Memory Test")
-            return UIImage(named: "Screen Shot 2020-07-29 at 6.28.25 PM.png")!
+            return UIImage(named: "speech.png")!
         case .amslerGrid:
-            return UIImage(named: "Screen Shot 2020-07-29 at 6.28.25 PM.png")!
+            return UIImage(named: "amsler.png")!
         }
     }
     
