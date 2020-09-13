@@ -12,22 +12,81 @@ import CryptoKit
 import FirebaseAuth
 import AuthenticationServices
 
-extension CKPropertyReader {
-    public static let `default` = CKPropertyReader(file: "CKConfiguration")
-}
-
-/// https://developer.apple.com/sign-in-with-apple/
+/// A step that presents information about and performes
+/// [Sign in with Apple](https://developer.apple.com/sign-in-with-apple/).
+///
+/// ```
+/// // Initates the Sign in with Apple step:
+/// let signInWithAppleStep = CKSignInWithAppleStep(identifier: "SignInApple")
+/// // Adds the above step (with all other steps) into a task:
+/// let orderedTask = ORKOrderedTask(identifier: "StudyOnboardingTask", steps: [
+///     signInWithAppleStep, ...
+/// ])
+///
+/// // Then, in the delegate for the task view controller presenting such task:
+/// func taskViewController(_ taskViewController: ORKTaskViewController,
+///                         viewControllerFor step: ORKStep) -> ORKStepViewController? {
+///     // Use the correct view controller for this step.
+///     if step is CKSignInWithAppleStep {
+///         return CKSignInWithAppleStepViewController(step: step)
+///     }
+///     ...
+/// }
+///
+/// // That's it!
+/// ```
+///
+/// Additionally, you can direct the user to learn more about Sign in with Apple:
+///
+/// ```
+/// func taskViewController(_ taskViewController: ORKTaskViewController,
+///                         hasLearnMoreFor step: ORKStep) -> Bool {
+///     // Indicates the step should display learn more button.
+///     if step is CKSignInWithAppleStep {
+///         return true
+///     }
+///     ...
+/// }
+///
+///
+/// func taskViewController(_ taskViewController: ORKTaskViewController,
+///                         learnMoreForStep stepViewController: ORKStepViewController) {
+///     // Presents the "How to use Sign in with Apple" guide.
+///     if stepViewController is CKSignInWithAppleStepViewController {
+///         UIApplication.shared.open(URL(string: "https://support.apple.com/HT210318")!)
+///     }
+///     ...
+/// }
+/// ```
+///
+/// - Requires: View controller for this step is `CKSignInWithAppleStepViewController`.
+/// - Important: Though you don't have to write any code, you do need to setup Firebase and Xcode project
+/// following the [Firebase setup tutorial](https://firebase.google.com/docs/auth/ios/apple)
+/// - Note: [How to use Sign in with Apple](https://support.apple.com/HT210318) might be useful
+/// as the "Learn More" destination for this step.
 public class CKSignInWithAppleStep: ORKInstructionStep {
+    /// The contact information to be requested from the user during authentication.
     public var requestedScopes: [ASAuthorization.Scope]
 
+    /// Returns a new step initialized with the specified parameters.
+    ///
+    /// - Parameters:
+    ///   - identifier: The unique identifier of the step.
+    ///   - title: The primary text to display for the step in a localized string.
+    ///   Defaults to the value of "Sign in with Apple Title" entry from `CKConfiguration.plist`.
+    ///   - text: Additional text to display for the step in a localized string.
+    ///   Defaults to the value of "Sign in with Apple Text" entry from `CKConfiguration.plist`.
+    ///   - requestedScopes: The contact information to be requested from the user during authentication.
+    ///   Defaults to email only.
     public init(identifier: String,
-         title: String = CKPropertyReader.default.read(query: "Sign in with Apple Title"),
-         text: String? = CKPropertyReader.default.read(query: "Sign in with Apple Text"),
+         title: String! = nil,
+         text: String! = nil,
          requestedScopes: [ASAuthorization.Scope] = [.email]) {
+        let config = CKPropertyReader(file: "CKConfiguration")
         self.requestedScopes = requestedScopes
         super.init(identifier: identifier)
-        self.title = title
-        self.text = text
+        self.title = title ?? config.read(query: "Sign in with Apple Title")
+        self.text = text ?? config.read(query: "Sign in with Apple Text")
     }
 
     @available(*, unavailable)
@@ -38,6 +97,7 @@ public class CKSignInWithAppleStep: ORKInstructionStep {
 
 public class CKSignInWithAppleStepViewController: ORKInstructionStepViewController,
                                                   ASAuthorizationControllerDelegate {
+    /// The step presented by the step view controller.
     public var signInWithAppleStep: CKSignInWithAppleStep! {
         return step as? CKSignInWithAppleStep
     }
@@ -53,6 +113,7 @@ public class CKSignInWithAppleStepViewController: ORKInstructionStepViewControll
     /// Unhashed nonce.
     private var currentNonce: String!
 
+    /// Initiates Sign in / up with Apple attempt.
     public override func goForward() {
         currentNonce = .makeRandomNonce()
         let appleIDProvider = ASAuthorizationAppleIDProvider()
