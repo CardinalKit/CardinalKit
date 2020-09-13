@@ -21,7 +21,7 @@ struct Notification: Identifiable {
 struct Result: Identifiable {
     let id = UUID()
     let testName: String
-    let scores: [Int]
+    let scores: [Double]
 }
 
 class NotificationsAndResults: ObservableObject {
@@ -95,16 +95,18 @@ class NotificationsAndResults: ObservableObject {
                     }
                 }
 
-                self.results = studies
+                self.results = studies.lazy
+                    .filter { $0.score != nil }
                     .grouped { $0.name }
                     .map { (key, value) in
                         Result(
                             testName: key,
                             scores: value
                                 .sorted { $0.date < $1.date }
-                                .map { Int($0.score * 10) }
+                                .map { floor($0.score! * 100) / 10 }
                         )
                     }
+                    .sorted { $0.testName < $1.testName }
             }
     }
     
@@ -121,8 +123,9 @@ class NotificationsAndResults: ObservableObject {
         }
     }
     
-    func getLastestScore(scores: [Int]) -> Int {
-        return scores.last! // change based on the method used to sort the scores array by time (old->new OR new-> old)
+    func getLastestScore<T>(scores: [T]) -> T {
+        // change based on the method used to sort the scores array by time (old->new OR new-> old)
+        return scores.last!
     }
 
     enum Study {
@@ -133,25 +136,27 @@ class NotificationsAndResults: ObservableObject {
         case speech(info: Info, text: String)
         case amsler(info: Info)
 
-        var score: Double {
-            return min(1, max(0, 1 - error))
+        var score: Double? {
+            return error.map {
+                return min(1, max(0, 1 - $0))
+            }
         }
 
-        private var error: Double {
+        private var error: Double? {
             switch self {
             case .survey:
-                return 0
+                return nil
             case .trailA(_, numberOfErrors: let errors):
                 return Double(errors) / 13
             case .trailB(_, numberOfErrors: let errors):
                 return Double(errors) / 13
             case .memory(info: let info):
-                return 0
+                return -1
             case .speech(_, text: let text):
                 let target = StudyTasks.speechRecognitionText
                 return Double(text.levenshtein(from: target)) / Double(target.count)
             case .amsler(info: let info):
-                return 0
+                return -1
             }
         }
 

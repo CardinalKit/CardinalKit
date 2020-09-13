@@ -15,20 +15,28 @@ struct StatisticsBubble: View {
     let textColor: Color
     
     var body: some View {
-        HStack() {
-            VStack {
+        NavigationLink(destination: DetailGraphView(result: result, color: textColor)) {
+            HStack {
                 Text(result.testName)
                     .foregroundColor(textColor)
                     .font(Font.title.weight(.heavy))
-                Text("Most recent score: \(String(data.getLastestScore(scores: result.scores)))")
+                    .padding(.vertical)
+                    .padding(.leading)
+                Spacer()
+                HStack(spacing: 8) {
+                    Text("\(String(format: "%.1f", data.getLastestScore(scores: result.scores)))")
+                        .font(Font.largeTitle.monospacedDigit())
+                    Image(systemName: "chevron.right.square.fill")
+                        .accessibility(label: Text("Show all scores"))
+                }
+                .foregroundColor(backGroundColor)
+                .padding()
+                .fixedSize(horizontal: true, vertical: false)
+                .frame(maxHeight: .infinity)
+                .background(textColor)
+
             }
-            NavigationLink(destination: DetailGraphView(result: result, color: textColor)) {
-                Text("All scores").multilineTextAlignment(.center)
-            }
-            .frame(width: 70)
         }
-        .padding(.vertical)
-        .padding(.horizontal, 20)
         .frame(maxWidth: .infinity)
         .background(self.backGroundColor)
         .cornerRadius(15)
