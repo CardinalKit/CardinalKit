@@ -11,6 +11,7 @@ import MessageUI
 import CardinalKit
 import ResearchKit
 import Firebase
+import PDFKit
 
 struct StudiesUI: View {
 
@@ -140,7 +141,26 @@ struct VisualizationsView: View {
 
     init(color: Color) {
         self.color = color
-        self.visualizations = FirebaseHelper.shared.processGroupedSurveys()
+        //self.visualizations = FirebaseHelper.shared.processGroupedSurveys()
+        self.visualizations = [
+          VisualizationData(
+            title: "Plot1",
+            description: "This should be a pie chart",
+            type: "Pie Chart",
+            values: [
+              [ORKValueRange(value: 200), ORKValueRange(value: 300)],
+              [ORKValueRange(value: 100), ORKValueRange(value: 666)]
+            ]
+          ), VisualizationData(
+            title: "Plot2",
+            description: "this should be a line graph",
+            type: "LineGraph",
+            values: [
+              [ORKValueRange(value: 200), ORKValueRange(value: 300)],
+              [ORKValueRange(value: 100), ORKValueRange(value: 666)]
+            ]
+          )
+        ]
     }
 
     var body: some View {
@@ -211,7 +231,7 @@ struct VisualizationInspectionView: View {
 
     // samples
     var visualization: AnyView
-
+        
     init (data: VisualizationData) {
         self.data = data
         
@@ -226,6 +246,43 @@ struct VisualizationInspectionView: View {
             default:
                 visualization = AnyView(Spacer()) //noop
         }
+    }
+    
+    func exportToPDF() {
+
+        let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let outputFileURL = documentDirectory.appendingPathComponent("Chart.pdf")
+
+        //Normal with
+        let width: CGFloat = 8.5 * 72.0
+        //Estimate the height of your view
+        let height: CGFloat = 1000
+        let charts = body
+
+        let pdfVC = UIHostingController(rootView: charts)
+        pdfVC.view.frame = CGRect(x: 0, y: 0, width: width, height: height)
+
+        //Render the view behind all other views
+        let rootVC = UIApplication.shared.windows.first?.rootViewController
+        rootVC?.addChild(pdfVC)
+        rootVC?.view.insertSubview(pdfVC.view, at: 0)
+
+        //Render the PDF
+        let pdfRenderer = UIGraphicsPDFRenderer(bounds: CGRect(x: 0, y: 0, width: 8.5 * 72.0, height: height))
+        DispatchQueue.main.async {
+            do {
+                try pdfRenderer.writePDF(to: outputFileURL, withActions: { (context) in
+                    context.beginPage()
+                    rootVC!.view.layer.render(in: context.cgContext)
+                })
+                print("wrote file to: \(outputFileURL.path)")
+            } catch {
+                print("Could not create PDF file: \(error.localizedDescription)")
+            }
+        }
+
+        pdfVC.removeFromParent()
+        pdfVC.view.removeFromSuperview()
     }
 
     @Environment(\.presentationMode) var presentationMode
@@ -243,10 +300,18 @@ struct VisualizationInspectionView: View {
             // 'render' visualization
             self.visualization
             
-            // close modal
-            Button(action: { self.presentationMode.wrappedValue.dismiss() })
-            {
-                Text("Close")
+            // close and print modal
+            
+            HStack {
+                Spacer()
+                Spacer()
+                Button(action: { self.presentationMode.wrappedValue.dismiss() })
+                { Text("Back") }
+                Spacer()
+                Button(action: { self.exportToPDF()})
+                { Text("Export to PDF") }
+                Spacer()
+                Spacer()
             }
 
             Spacer()
