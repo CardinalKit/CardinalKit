@@ -22,6 +22,12 @@ struct StudyTasks {
         return ORKOrderedTask.twoFingerTappingIntervalTask(withIdentifier: "TappingTask", intendedUseDescription: intendedUseDescription, duration: 10, handOptions: .both, options: ORKPredefinedTaskOption())
     }()
     
+    static let towerTask: ORKOrderedTask = {
+        let intendedUseDescription = "Demo of data."
+        
+        return ORKOrderedTask.towerOfHanoiTask(withIdentifier: "Games", intendedUseDescription: intendedUseDescription, numberOfDisks: 4, options: ORKPredefinedTaskOption())
+    }()
+    
     static let walkingTask: ORKOrderedTask = {
         let intendedUseDescription = "Tests ability to walk"
         

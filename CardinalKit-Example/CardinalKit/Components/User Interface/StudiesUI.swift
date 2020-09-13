@@ -141,8 +141,8 @@ struct VisualizationsView: View {
     init(color: Color) {
         self.color = color
         self.visualizations = [
-            VisualizationData(description: "This is the survey data about how much coffee you drink.", type: "bar", title: "Coffee Survey"),
-            VisualizationData(description: "This is a set-survey", type: "line", title: "Step Survey")
+            VisualizationData(description: "This is the survey data about how much coffee you drink.", type: "DiscreteGraph", title: "Coffee Survey"),
+            VisualizationData(description: "This is a performance review", type: "LineGraph", title: "tower of Hanoi")
         ]
     }
     
@@ -164,7 +164,7 @@ struct VisualizationsView: View {
 }
 
 struct VisualizationView: View {
-    var data: VisualizationData    
+    var data: VisualizationData
     var type: String
     var title: String
     var description: String
@@ -226,15 +226,28 @@ struct VisualizationInspectionView: View {
             }
             
             // 'render' samples
+            if self.data.type == "LineGraph" {
             Group {
+                //Spacer()
+                //self.pieChart
+                //Spacer()
+                //self.discreteGraph
                 Spacer()
-                self.pieChart
+                self.lineGraph
+                Spacer()
+            }
+            }
+            if self.data.type == "DiscreteGraph" {
+            Group {
+                //Spacer()
+                //self.pieChart
                 Spacer()
                 self.discreteGraph
                 Spacer()
-                self.lineGraph
+                //self.lineGraph
+                //Spacer()
             }
-
+            }
             Button(action: { self.presentationMode.wrappedValue.dismiss() })
             { Text("Back") }
             
