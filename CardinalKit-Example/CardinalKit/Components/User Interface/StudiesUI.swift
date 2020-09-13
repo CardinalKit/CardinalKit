@@ -11,6 +11,7 @@ import MessageUI
 import CardinalKit
 import ResearchKit
 import Firebase
+import UIKit
 import PDFKit
 
 struct StudiesUI: View {
@@ -250,10 +251,10 @@ struct VisualizationInspectionView: View {
         let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         let outputFileURL = documentDirectory.appendingPathComponent("Chart.pdf")
 
-        //Normal with
-        let width: CGFloat = 8.5 * 72.0
-        //Estimate the height of your view
-        let height: CGFloat = 1000
+        //Determine exactly the height of the phone view
+        let width: CGFloat = UIScreen.main.bounds.width
+        let height: CGFloat = UIScreen.main.bounds.height
+        //define the object whose root view will be rendered
         let charts = body
 
         let pdfVC = UIHostingController(rootView: charts)
@@ -265,7 +266,7 @@ struct VisualizationInspectionView: View {
         rootVC?.view.insertSubview(pdfVC.view, at: 0)
 
         //Render the PDF
-        let pdfRenderer = UIGraphicsPDFRenderer(bounds: CGRect(x: 0, y: 0, width: 8.5 * 72.0, height: height))
+        let pdfRenderer = UIGraphicsPDFRenderer(bounds: CGRect(x: 0, y: 0, width: width, height: height))
         DispatchQueue.main.async {
             do {
                 try pdfRenderer.writePDF(to: outputFileURL, withActions: { (context) in
