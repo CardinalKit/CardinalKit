@@ -140,10 +140,11 @@ struct VisualizationsView: View {
     
     init(color: Color) {
         self.color = color
-        self.visualizations = [
-            VisualizationData(description: "This is the survey data about how much coffee you drink.", type: "DiscreteGraph", title: "Coffee Survey"),
-            VisualizationData(description: "This is a performance review", type: "LineGraph", title: "tower of Hanoi")
-        ]
+        self.visualizations = FirebaseHelper.shared.processGroupedSurveys()
+//        [
+//            VisualizationData(description: "This is the survey data about how much coffee you drink.", type: "DiscreteGraph", title: "Coffee Survey"),
+//            VisualizationData(description: "This is a performance review", type: "LineGraph", title: "tower of Hanoi")
+//        ]
     }
     
     var body: some View {
@@ -698,12 +699,16 @@ class FirebaseHelper: NSObject {
     public static let shared = FirebaseHelper()
     
     /**
-     Generate a dictionary where key is the survey identifier and value is the survey payload.
+     Generate a dictionary where key is the survey identifier and value is an array of survey payloads.
      */
-    func getGroupedSurveys() {
+    func getGroupedSurveys(completion: @escaping ([NSString: [NSDictionary]]?, Error?) -> ()) {
         var surveysDict = [NSString: [NSDictionary]]()
+        
         db.collection(authCollection! + "\(Constants.dataBucketSurveys)").getDocuments() { (querySnapshot, err) in
             if let err = err {
+                DispatchQueue.main.async {
+                    completion(nil, err)
+                }
                 print("Error getting documents: \(err)")
             } else {
                 for document in querySnapshot!.documents {
@@ -717,16 +722,28 @@ class FirebaseHelper: NSObject {
                         surveysDict[identifier!] = surveyList
                     }
                 }
-                print(surveysDict)
+                DispatchQueue.main.async {
+                    completion(surveysDict, err)
+                }
             }
         }
     }
-    
+
     /**
     Process the grouped surveys into VisualationData objects.
      */
-    func processGroupedSurveys(surveys: [NSString: [NSDictionary]]) -> [VisualizationData] {
-        return [VisualizationData]()
+    func processGroupedSurveys() -> [VisualizationData] {
+        var visDataArray = [VisualizationData]()
+        
+        getGroupedSurveys { surveysDict, err in
+            guard let surveysDict = surveysDict, err == nil else {
+                // Handle error...
+                return
+            }
+            // Do the processing...
+            
+        }
+        return visDataArray
     }
 }
 
