@@ -125,13 +125,21 @@ struct OnboardingVC: UIViewControllerRepresentable {
         **************************************************************/
         // the `LoginStep` collects and email address, and
         // the `LoginCustomWaitStep` waits for email verification.
-        
-        let regexp = try! NSRegularExpression(pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[d$@$!%*?&#])[A-Za-z\\dd$@$!%*?&#]{8,}")
-        
-        let registerStep = ORKRegistrationStep(identifier: "RegistrationStep", title: "Registration", text: "Sign up for this study.", passcodeValidationRegularExpression: regexp, passcodeInvalidMessage: "Your password does not meet the following criteria: minimum 8 characters with at least 1 Uppercase Alphabet, 1 Lowercase Alphabet, 1 Number and 1 Special Character", options: .init())
-        
-        let loginStep = ORKLoginStep(identifier: "LoginStep", title: "Login", text: "Log into this study.", loginViewControllerClass: LoginViewController.self)
-    
+
+        var loginSteps: [ORKStep]
+
+        if config["Sign in with Apple"]["Enabled"] as? Bool == true {
+            let signInWithAppleStep = CKSignInWithAppleStep(identifier: "SignInWithApple")
+            loginSteps = [signInWithAppleStep]
+        } else {
+            let regexp = try! NSRegularExpression(pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[d$@$!%*?&#])[A-Za-z\\dd$@$!%*?&#]{8,}")
+
+            let registerStep = ORKRegistrationStep(identifier: "RegistrationStep", title: "Registration", text: "Sign up for this study.", passcodeValidationRegularExpression: regexp, passcodeInvalidMessage: "Your password does not meet the following criteria: minimum 8 characters with at least 1 Uppercase Alphabet, 1 Lowercase Alphabet, 1 Number and 1 Special Character", options: [])
+
+            let loginStep = ORKLoginStep(identifier: "LoginStep", title: "Login", text: "Log into this study.", loginViewControllerClass: LoginViewController.self)
+
+            loginSteps = [registerStep, loginStep]
+        }
         
 //        let loginStep = PasswordlessLoginStep(identifier: PasswordlessLoginStep.identifier)
 //        let loginVerificationStep = LoginCustomWaitStep(identifier: LoginCustomWaitStep.identifier)
@@ -166,7 +174,7 @@ struct OnboardingVC: UIViewControllerRepresentable {
         let introSteps = [consentStep, reviewConsentStep]
         
         // and steps regarding login / security
-        let emailVerificationSteps = [registerStep, loginStep, passcodeStep, healthDataStep, completionStep]
+        let emailVerificationSteps = loginSteps + [passcodeStep, healthDataStep, completionStep]
         
         // guide the user through ALL steps
         let fullSteps = introSteps + emailVerificationSteps
@@ -315,48 +323,6 @@ struct OnboardingVC: UIViewControllerRepresentable {
                         }
                     }
                 }
-            } else if (stepViewController.step?.identifier == "Passcode") {
-
-                let alert = UIAlertController(title: nil, message: "Logging in...", preferredStyle: .alert)
-
-                let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
-                loadingIndicator.hidesWhenStopped = true
-                loadingIndicator.style = UIActivityIndicatorView.Style.medium
-                loadingIndicator.startAnimating();
-
-                alert.view.addSubview(loadingIndicator)
-                taskViewController.present(alert, animated: true, completion: nil)
-                
-                let stepResult = taskViewController.result.stepResult(forStepIdentifier: "LoginStep")
-                if let emailRes = stepResult?.results?.first as? ORKTextQuestionResult, let email = emailRes.textAnswer {
-                    if let passwordRes = stepResult?.results?[1] as? ORKTextQuestionResult, let pass = passwordRes.textAnswer {
-                        Auth.auth().signIn(withEmail: email, password: pass) { (res, error) in
-                            DispatchQueue.main.async {
-                                if error != nil {
-                                    alert.dismiss(animated: true, completion: nil)
-                                    if let errCode = AuthErrorCode(rawValue: error!._code) {
-
-                                        switch errCode {
-                                            default:
-                                                let alert = UIAlertController(title: "Login Error!", message: error?.localizedDescription, preferredStyle: .alert)
-                                                alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-
-                                                taskViewController.present(alert, animated: true)
-                                        }
-                                    }
-                                    
-                                    stepViewController.goBackward()
-
-                                } else {
-                                    alert.dismiss(animated: true, completion: nil)
-                                    print("successfully signed in!")
-                                }
-                            }
-                        }
-                    }
-                }
-
-                
             } else if stepViewController.step?.identifier == LoginCustomWaitStep.identifier {
                 
                 /* **************************************************************
@@ -395,19 +361,21 @@ struct OnboardingVC: UIViewControllerRepresentable {
             // Overriding the view controller of an ORKStep
             // lets us run our own code on top of what
             // ResearchKit already provides!
-            
-            if step is CKHealthDataStep {
+
+            switch step {
+            case is CKHealthDataStep:
                 // this step lets us run custom logic to ask for
                 // HealthKit permissins when this step appears on screen.
                 return CKHealthDataStepViewController(step: step)
-            }
-            
-            if step is LoginCustomWaitStep {
+            case is LoginCustomWaitStep:
                 // run custom code to send an email for login!
                 return LoginCustomWaitStepViewController(step: step)
+            case is CKSignInWithAppleStep:
+                // handle Sign in with Apple
+                return CKSignInWithAppleStepViewController(step: step)
+            default:
+                return nil
             }
-            
-            return nil
         }
     }
     

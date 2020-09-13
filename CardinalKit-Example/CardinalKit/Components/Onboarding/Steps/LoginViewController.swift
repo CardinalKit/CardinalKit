@@ -9,10 +9,35 @@ import ResearchKit
 import Firebase
 
 class LoginViewController: ORKLoginStepViewController {
+    override func goForward() {
+        if let emailRes = result?.results?.first as? ORKTextQuestionResult, let email = emailRes.textAnswer,
+           let passwordRes = result?.results?[1] as? ORKTextQuestionResult, let pass = passwordRes.textAnswer {
+            let alert = UIAlertController(title: nil, message: "Logging in...", preferredStyle: .alert)
+
+            let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+            loadingIndicator.hidesWhenStopped = true
+            loadingIndicator.style = UIActivityIndicatorView.Style.medium
+            loadingIndicator.startAnimating()
+            alert.view.addSubview(loadingIndicator)
+
+            taskViewController?.present(alert, animated: true, completion: nil)
+
+            Auth.auth().signIn(withEmail: email, password: pass) { (res, error) in
+                if let error = error {
+                    alert.dismiss(animated: true) {
+                        let alert = UIAlertController(title: "Login Error!", message: error.localizedDescription, preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
+                        self.taskViewController?.present(alert, animated: true)
+                    }
+                } else {
+                    alert.dismiss(animated: true, completion: nil)
+                    super.goForward()
+                }
+            }
+        }
+    }
     
     override func forgotPasswordButtonTapped() {
-        let config = CKPropertyReader(file: "CKConfiguration")
-        
         let alert = UIAlertController(title: "Reset Password", message: "Enter your email to get a link for password reset.", preferredStyle: .alert)
         
         alert.addTextField { (textField) in
