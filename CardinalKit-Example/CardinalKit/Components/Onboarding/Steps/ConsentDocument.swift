@@ -51,7 +51,7 @@ class ConsentDocument: ORKConsentDocument {
         sections = []
         
         for sectionType in keys {
-            let section = ORKConsentSection(type: sectionTypes[keys.index(of: sectionType)!])
+            let section = ORKConsentSection(type: sectionTypes[keys.firstIndex(of: sectionType)!])
             
             if let consentSectionText = consentForm[sectionType] {
                 let localizedStep = NSLocalizedString(consentSectionText, comment: "")
@@ -109,6 +109,9 @@ extension ORKConsentSectionType: CustomStringConvertible {
             
         case .onlyInDocument:
             return "OnlyInDocument"
+
+        @unknown default:
+            return "???"
         }
     }
 }

@@ -19,23 +19,22 @@ struct OnboardingElement {
 }
 
 struct OnboardingUI: View {
-    
-    var onboardingElements: [OnboardingElement] = []
-    let color: Color
-    let config = CKPropertyReader(file: "CKConfiguration")
+    var onboardingElements: [OnboardingElement] {
+        let onboardingData = config.readAny(query: "Onboarding") as! [[String:String]]
+        return onboardingData.map { data in
+            OnboardingElement(
+                logo: data["Logo"]!,
+                title: data["Title"]!,
+                description: data["Description"]!
+            )
+        }
+    }
+    var color: Color {
+        return config.readColor(query: "Primary Color")
+    }
+    @EnvironmentObject var config: CKPropertyReader
     @State var showingDetail = false
     @State var showingStudyTasks = false
-    
-    init() {
-        let onboardingData = config.readAny(query: "Onboarding") as! [[String:String]]
-        
-        self.color = Color(config.readColor(query: "Primary Color"))
-        
-        for data in onboardingData {
-            self.onboardingElements.append(OnboardingElement(logo: data["Logo"]!, title: data["Title"]!, description: data["Description"]!))
-        }
-        
-    }
 
     var body: some View {
         VStack(spacing: 10) {
@@ -56,7 +55,10 @@ struct OnboardingUI: View {
                 Spacer()
 
                 PageView(onboardingElements.map {
-                    infoView(logo: $0.logo, title: $0.title, description: $0.description, color: self.color)
+                    infoView(logo: $0.logo,
+                             title: $0.title,
+                             description: $0.description,
+                             color: self.color)
                 })
 
                 Spacer()
@@ -112,14 +114,11 @@ struct OnboardingVC: UIViewControllerRepresentable {
         Coordinator()
     }
 
-
     typealias UIViewControllerType = ORKTaskViewController
 
     @EnvironmentObject var config: CKPropertyReader
 
     func makeUIViewController(context: Context) -> ORKTaskViewController {
-        let config = CKPropertyReader(file: "CKConfiguration")
-
         /* **************************************************************
          * MARK: - STEP (1): get user consent
          **************************************************************/
@@ -169,7 +168,7 @@ struct OnboardingVC: UIViewControllerRepresentable {
             identifier: "SignInWithApple",
             title: "Sign in with Apple",
             text: "The fast, easy way to sign in. All accounts are protected with two-factor authentication for superior security, and Apple will not track your activity in your app or website.",
-            requestedScopes: [.email, .fullName]
+            requestedScopes: [.email]
         )
 
         // let loginStep = PasswordlessLoginStep(identifier: PasswordlessLoginStep.identifier)
@@ -432,8 +431,24 @@ struct OnboardingVC: UIViewControllerRepresentable {
                 return nil
             }
         }
+
+        func taskViewController(_ taskViewController: ORKTaskViewController,
+                                hasLearnMoreFor step: ORKStep) -> Bool {
+            // Indicates the step should display learn more button.
+            if step is CKSignInWithAppleStep {
+                return true
+            }
+            return false
+        }
+
+        func taskViewController(_ taskViewController: ORKTaskViewController,
+                                learnMoreForStep stepViewController: ORKStepViewController) {
+            // Presents the "How to use Sign in with Apple" guide.
+            if stepViewController is CKSignInWithAppleStepViewController {
+                UIApplication.shared.open(URL(string: "https://support.apple.com/HT210318")!)
+            }
+        }
     }
-    
 }
 
 struct infoView: View {
