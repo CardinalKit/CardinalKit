@@ -28,7 +28,7 @@ struct StudiesUI: View {
                     Text("Activities")
                 }
                 
-
+            
 
             ProfileView(color: color)
                 .tabItem {
