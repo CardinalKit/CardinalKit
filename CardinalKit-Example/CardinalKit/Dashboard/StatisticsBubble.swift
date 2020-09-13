@@ -15,10 +15,7 @@ struct StatisticsBubble: View {
     let textColor: Color
     
     var body: some View {
-        ZStack {
-            NavigationLink(destination: DetailGraphView(result: result, color: textColor)) {
-                EmptyView()
-            }
+        PlainNavigationLink(destination: DetailGraphView(result: result, color: textColor)) {
             HStack {
                 Text(result.testName)
                     .foregroundColor(textColor)
@@ -37,7 +34,6 @@ struct StatisticsBubble: View {
                 .fixedSize(horizontal: true, vertical: false)
                 .frame(maxHeight: .infinity)
                 .background(textColor)
-
             }
         }
         .frame(maxWidth: .infinity)
