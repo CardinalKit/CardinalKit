@@ -22,7 +22,7 @@ struct WelcomeNotificationView: View {
     var body: some View {
         PlainList {
             Section(header: Text("Avaliable Test(s)")) {
-                ForEach(data.currNotifications) { notification in
+                ForEach(self.data.currNotifications) { notification in
                     NotificationBubble(
                         showingPopup: self.$showingPopup,
                         showingTestDetail: self.$showingTestDetail,
@@ -36,7 +36,7 @@ struct WelcomeNotificationView: View {
             }
             
             Section(header: Text("Upcoming Test(s) and Cautions")) {
-                ForEach(data.upcomingNotifications) { notification in
+                ForEach(self.data.upcomingNotifications) { notification in
                     NotificationBubble(
                         showingPopup: self.$showingPopup,
                         showingTestDetail: self.$showingTestDetail,

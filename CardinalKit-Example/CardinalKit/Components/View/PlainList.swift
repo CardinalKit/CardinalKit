@@ -9,23 +9,31 @@
 import SwiftUI
 
 struct PlainList<Content: View>: View {
+    var iOS13: some View {
+        List(content: content)
+            .onAppear{
+                UITableView.appearance().separatorStyle = .none
+            }
+            .onDisappear{
+                UITableView.appearance().separatorStyle = .singleLine
+            }
+    }
+
     var body: some View {
+        #if canImport(UniformTypeIdentifiers)
         Group {
             if #available(iOS 14, *) {
                 ScrollView(showsIndicators: false) {
                     LazyVStack(content: content)
-                    .padding()
+                        .padding()
                 }
             } else {
-                List(content: content)
-                    .onAppear{
-                        UITableView.appearance().separatorStyle = .none
-                    }
-                    .onDisappear{
-                        UITableView.appearance().separatorStyle = .singleLine
-                    }
+                iOS13
             }
         }
+        #else
+        return iOS13
+        #endif
     }
 
     let content: () -> Content
@@ -47,7 +55,7 @@ extension PlainList {
     }
 
     init<Data, RowContent>(_ data: Data,
-               @ViewBuilder content: @escaping (Data.Element) -> RowContent)
+                           @ViewBuilder content: @escaping (Data.Element) -> RowContent)
     where Data: RandomAccessCollection, Data.Element : Identifiable,
           Content == ForEach<Data, Data.Element.ID, RowContent> {
         self.init(data, id: \.id, content: content)
@@ -56,7 +64,7 @@ extension PlainList {
 
 extension PlainList {
     init<RowContent>(_ data: Range<Int>,
-         @ViewBuilder content: @escaping (Int) -> RowContent)
+                     @ViewBuilder content: @escaping (Int) -> RowContent)
     where Content == ForEach<Range<Int>, Int, RowContent> {
         self.init(data, id: \.self, content: content)
     }
