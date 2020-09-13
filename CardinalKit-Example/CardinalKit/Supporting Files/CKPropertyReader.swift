@@ -63,6 +63,6 @@ public class CKPropertyReader: ObservableObject {
         var rgbValue: UInt64 = 0
         Scanner(string: cString).scanHexInt64(&rgbValue)
 
-        return UIColor(netHex: Int(rgbValue))
+        return UIColor(netHex: Int(rgbValue)) // or return any universal color, we can alter this a bit
     }
 }

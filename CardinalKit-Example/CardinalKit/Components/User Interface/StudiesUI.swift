@@ -21,15 +21,22 @@ struct StudiesUI: View {
 
     var body: some View {
         TabView {
+            NavigationView {
+                WelcomeNotificationView(color: color).navigationBarTitle("Home")
+            }
+            .tabItem {
+                Image(systemName: "house")
+                    .renderingMode(.template)
+                Text("Home")
+            }
+
             ActivitiesView(color: color)
                 .tabItem {
                     Image("tab_activities")
                         .renderingMode(.template)
-                    Text("Activities")
+                    Text("Testing Activities")
                 }
-                
             
-
             ProfileView(color: color)
                 .tabItem {
                     Image("tab_profile")
@@ -71,7 +78,7 @@ struct ActivitiesView: View {
     var body: some View {
         NavigationView {
             List {
-                Section(header: Text("Current Activities")) {
+                Section(header: Text("Testing activities")) {
                     ForEach(0 ..< self.activities.count) {
                         ActivityView(icon: self.activities[$0].image, title: self.activities[$0].title, description: self.activities[$0].description, tasks: self.activities[$0].task)
                     }
