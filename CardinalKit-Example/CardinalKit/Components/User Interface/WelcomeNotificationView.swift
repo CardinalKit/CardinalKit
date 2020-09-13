@@ -25,23 +25,36 @@ struct WelcomeNotificationView: View {
     }
     
     var body: some View {
-        List {
+        PlainList {
             Section(header: Text("Avaliable Test(s)")) {
-                ForEach(data.currNotifications) {notification in
-                    NotificationBubble(showingPopup: self.$showingPopup, showingTestDetail: self.$showingTestDetail, currTestIndex: self.$currTestIndex, notification: notification, backGroundColor: self.color, textColor: .white).environmentObject(NotificationsAndResults())
+                ForEach(data.currNotifications) { notification in
+                    NotificationBubble(
+                        showingPopup: self.$showingPopup,
+                        showingTestDetail: self.$showingTestDetail,
+                        currTestIndex: self.$currTestIndex,
+                        notification: notification,
+                        backGroundColor: self.color,
+                        textColor: .white
+                    )
                     .padding(4)
                 }
             }
             
             Section(header: Text("Upcoming Test(s) and Cautions")) {
-                ForEach(data.upcomingNotifications){ notification in
-                    NotificationBubble(showingPopup: self.$showingPopup, showingTestDetail: self.$showingTestDetail, currTestIndex: self.$currTestIndex, notification: notification, backGroundColor: .white, textColor: self.color).environmentObject(NotificationsAndResults())
+                ForEach(data.upcomingNotifications) { notification in
+                    NotificationBubble(
+                        showingPopup: self.$showingPopup,
+                        showingTestDetail: self.$showingTestDetail,
+                        currTestIndex: self.$currTestIndex,
+                        notification: notification,
+                        backGroundColor: Color(UIColor.systemGroupedBackground),
+                        textColor: self.color
+                    )
                     .padding(3)
                 }
             }
         }
-        .onAppear{ UITableView.appearance().separatorStyle = .none }
-        .onDisappear{ UITableView.appearance().separatorStyle = .singleLine }
+        .environmentObject(NotificationsAndResults())
         .navigationBarItems(trailing: Text(date).foregroundColor(color))
         .sheet(isPresented: $showingTestDetail) {
             TaskVC(tasks: self.activities[self.currTestIndex].task)
