@@ -21,7 +21,7 @@ struct WelcomeNotificationView: View {
     init(color: Color) {
         self.color = color
         self.date = DateFormatter.mediumDate.string(from: Date())
-        self.activities = StudyTableItem.allValues.map { StudyItem(study: $0) }
+        self.activities = StudyTableItem.allCases.map { StudyItem(study: $0) }
     }
     
     var body: some View {
