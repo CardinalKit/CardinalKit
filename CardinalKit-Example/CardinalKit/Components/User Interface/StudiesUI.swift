@@ -11,6 +11,7 @@ import MessageUI
 import CardinalKit
 import ResearchKit
 import Firebase
+import PDFKit
 
 struct StudiesUI: View {
 
@@ -138,7 +139,7 @@ struct VisualizationsView: View {
     // For bonus points: add hooks to the CKConfiguration.plist file to customize the data visualization.
     let config = CKPropertyReader(file: "CKConfiguration")
     var visualizationConfig: [String: String] = [:]
-    
+
 
     init(color: Color) {
         self.color = color
@@ -170,19 +171,19 @@ struct VisualizationView: View {
     var description: String
     var visualization: AnyView
     var showThumbnail: Bool = false
-    
+
 
     init(data: VisualizationData, config: [String: String]) {
         self.data = data
         self.type = data.type
         self.title = data.title
         self.description = data.description
-        
+
         // set visualization config
         if (config["showThumbnail"]) != nil && (config["showThumbnail"]) == "true" {
             self.showThumbnail = true
         }
-        
+
         // prepare the appropriate visualization
         switch self.data.type {
             case "LineGraph":
@@ -202,7 +203,7 @@ struct VisualizationView: View {
                 Text(self.title).font(.system(size: 18, weight: .semibold, design: .default))
                 Text(self.description).font(.system(size: 14, weight: .light, design: .default))
             }
-            
+
             // show thumbnail visualization
             if self.showThumbnail {
                 Group {
@@ -230,7 +231,7 @@ struct VisualizationInspectionView: View {
 
     init (data: VisualizationData) {
         self.data = data
-        
+
         // prepare the appropriate visualization
         switch self.data.type {
             case "LineGraph":
@@ -244,6 +245,43 @@ struct VisualizationInspectionView: View {
         }
     }
 
+    func exportToPDF() {
+
+        let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let outputFileURL = documentDirectory.appendingPathComponent("Chart.pdf")
+
+        //Normal with
+        let width: CGFloat = 8.5 * 72.0
+        //Estimate the height of your view
+        let height: CGFloat = 1000
+        let charts = body
+
+        let pdfVC = UIHostingController(rootView: charts)
+        pdfVC.view.frame = CGRect(x: 0, y: 0, width: width, height: height)
+
+        //Render the view behind all other views
+        let rootVC = UIApplication.shared.windows.first?.rootViewController
+        rootVC?.addChild(pdfVC)
+        rootVC?.view.insertSubview(pdfVC.view, at: 0)
+
+        //Render the PDF
+        let pdfRenderer = UIGraphicsPDFRenderer(bounds: CGRect(x: 0, y: 0, width: 8.5 * 72.0, height: height))
+        DispatchQueue.main.async {
+            do {
+                try pdfRenderer.writePDF(to: outputFileURL, withActions: { (context) in
+                    context.beginPage()
+                    rootVC!.view.layer.render(in: context.cgContext)
+                })
+                print("wrote file to: \(outputFileURL.path)")
+            } catch {
+                print("Could not create PDF file: \(error.localizedDescription)")
+            }
+        }
+
+        pdfVC.removeFromParent()
+        pdfVC.view.removeFromSuperview()
+    }
+
     @Environment(\.presentationMode) var presentationMode
     var body: some View {
         VStack {
@@ -253,16 +291,24 @@ struct VisualizationInspectionView: View {
                 Text(self.data.title).font(.system(size: 18, weight: .semibold, design: .default))
                 Text(self.data.description).font(.system(size: 14, weight: .light, design: .default))
             }
-            
+
             Spacer()
 
             // 'render' visualization
             self.visualization
-            
-            // close modal
-            Button(action: { self.presentationMode.wrappedValue.dismiss() })
-            {
-                Text("Close")
+
+            // close and print modal
+
+            HStack {
+                Spacer()
+                Spacer()
+                Button(action: { self.presentationMode.wrappedValue.dismiss() })
+                { Text("Back") }
+                Spacer()
+                Button(action: { self.exportToPDF()})
+                { Text("Export to PDF") }
+                Spacer()
+                Spacer()
             }
 
             Spacer()
@@ -345,8 +391,8 @@ struct PieChart: UIViewRepresentable {
         func pieChartView(_ pieChartView: ORKPieChartView, colorForSegmentAt index: Int) -> UIColor {
             return colors[(index % colors.count)]
         }
-        
-        
+
+
     }
 }
 
@@ -382,7 +428,7 @@ struct LineGraph: UIViewRepresentable {
             self.data = visualizationData
             self.values = visualizationData.values as! [[ORKValueRange]]
         }
-        
+
         // todo: @uRiley
         let colors = [
             UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1),
@@ -428,7 +474,7 @@ struct DiscreteGraph: UIViewRepresentable {
     func makeUIView(context: UIViewRepresentableContext<DiscreteGraph>) -> ORKDiscreteGraphChartView {
         return self.chart
     }
-    
+
     func updateUIView(_ uiView: ORKDiscreteGraphChartView, context: UIViewRepresentableContext<DiscreteGraph>) {
         // no-operation
     }
@@ -449,7 +495,7 @@ struct DiscreteGraph: UIViewRepresentable {
             UIColor(red: 0/255, green: 255/255, blue: 255/255, alpha: 1),
             UIColor(red: 255/255, green: 0/255, blue: 255/255, alpha: 1)
         ]
-        
+
         func graphChartView(_ graphChartView: ORKGraphChartView, dataPointForPointIndex pointIndex: Int, plotIndex: Int) -> ORKValueRange {
             return values[plotIndex][pointIndex]
         }
@@ -686,11 +732,11 @@ class FirebaseHelper: NSObject {
     private let db = Firestore.firestore()
     private let authCollection = CKStudyUser.shared.authCollection
     public static let shared = FirebaseHelper()
-    
+
     class Payload: ObservableObject {
         @Published var data = []
     }
-    
+
     /**
      Generate a dictionary where key is the survey identifier and value is an array of survey payloads.
      Uses completion handler paradigm to resolve async call to firebase.
@@ -698,11 +744,11 @@ class FirebaseHelper: NSObject {
     func getGroupedSurveys() -> Payload {
         var surveysDict = [NSString: [NSDictionary]]()
         let payload = Payload()
-        
-        
+
+
         // if we're not signed in, don't even bother.
         if authCollection != nil {
-            
+
             // Grab survey documents from firebase.
             db.collection(authCollection! + "\(Constants.dataBucketSurveys)").getDocuments() { (querySnapshot, err) in
                 if let err = err {
@@ -728,7 +774,7 @@ class FirebaseHelper: NSObject {
                 }
             }
         }
-        
+
         return payload
     }
 
@@ -737,7 +783,7 @@ class FirebaseHelper: NSObject {
      */
     func processGroupedSurveys(surveysDict: [NSString: [NSDictionary]]) -> [VisualizationData] {
         var visDataArray = [VisualizationData]()
-        
+
         /**
          Do the processing...
          Note: Switch statement could be replaced with a `ProcessSurveyHandler` class, allowing you to move all the processing implementations for different surveys into separate files/functions.
@@ -748,14 +794,14 @@ class FirebaseHelper: NSObject {
             switch identifier {
             case "TappingTask":
                 print("processing TappingTask")
-                
+
                 let title = ""
                 let description = ""
                 let type = "LineGraph"
                 var values = [[ORKValueRange(value: 0)]]
-                
+
                 // processess && update values
-                
+
                 let data = VisualizationData(
                     title: title,
                     description: description,
@@ -763,17 +809,17 @@ class FirebaseHelper: NSObject {
                     values: values
                 )
                 visDataArray.append(data)
-                
+
             case "Hanoi":
                 print("processing Hanoi task")
-                
+
                 let title = ""
                 let description = ""
                 let type = "LineGraph"
                 var values = [[ORKValueRange(value: 0)]]
-                
+
                 // processess && update values
-                
+
                 let data = VisualizationData(
                     title: title,
                     description: description,
@@ -781,17 +827,17 @@ class FirebaseHelper: NSObject {
                     values: values
                 )
                 visDataArray.append(data)
-                
+
             case "ShortWalkTask":
                 print("processing ShortWalkTask")
-                
+
                 let title = ""
                 let description = ""
                 let type = "LineGraph"
                 var values = [[ORKValueRange(value: 0)]]
-                
+
                 // processess && update values
-                
+
                 let data = VisualizationData(
                     title: title,
                     description: description,
@@ -799,17 +845,17 @@ class FirebaseHelper: NSObject {
                     values: values
                 )
                 visDataArray.append(data)
-                
+
             case "SurveyTask-SF12":
                 print("processing SurveyTask-SF12")
-                
+
                 let title = ""
                 let description = ""
                 let type = "LineGraph"
                 var values = [[ORKValueRange(value: 0)]]
-                
+
                 // processess && update values
-                
+
                 let data = VisualizationData(
                     title: title,
                     description: description,
@@ -822,7 +868,7 @@ class FirebaseHelper: NSObject {
 
             }
         }
-        
+
         return visDataArray
     }
 }
