@@ -41,13 +41,27 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)signatureViewDidEditImage:(ORKSignatureView *)signatureView;
 
+@optional
+- (void)signatureViewDidEndEditingWithTimeInterval;
+
+@end
+
+@class ORKCustomSignatureFooterView;
+
+@protocol ORKCustomSignatureFooterViewStatusDelegate <NSObject>
+
+- (void)signatureFooterView:(nonnull ORKCustomSignatureFooterView *)footerView didChangeCompletedStatus:(BOOL)isComplete;
+
 @end
 
 
 @interface ORKSignatureView : UIView
 
+- (instancetype)initWithoutDefaultWidth;
+
 @property (nonatomic, strong, nullable) UIColor *lineColor;
 @property (nonatomic) CGFloat lineWidth;
+@property (nonatomic) BOOL enabled;
 
 /**
  lineWidthVariation defines the max amount by which the line
@@ -70,6 +84,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) BOOL signatureExists;
 
 - (void)clear;
+- (void)cancelAutoScrollTimer;
 
 @end
 

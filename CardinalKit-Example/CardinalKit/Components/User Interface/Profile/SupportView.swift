@@ -21,7 +21,7 @@ struct SupportView: View {
         }
         .padding(.vertical)
         .onTapGesture {
-            guard let url = URL(string: "tel://\(phone)") else { return }
+            guard let url = URL(string: "tel://\(self.phone)") else { return }
             UIApplication.shared.open(url)
 
         }

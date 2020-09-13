@@ -23,41 +23,69 @@ enum StudyTableItem: Int {
     }
 
     // table items
-    case survey, activeTask
+    case trailMakingA, trailMakingB, spatial, speechRecognition, amslerGrid
 
     var task: ORKOrderedTask {
         switch self {
-        case .survey:
-            return StudyTasks.sf12Task
-        case .activeTask:
-            return StudyTasks.walkingTask
+        case .trailMakingA:
+            return StudyTasks.trailMakingA
+        case .trailMakingB:
+            return StudyTasks.trailMakingB
+        case .spatial:
+            return StudyTasks.spatial
+        case .speechRecognition:
+            return StudyTasks.speechRecognition
+        case .amslerGrid:
+            return StudyTasks.amslerGrid
         }
     }
 
     var title: String {
         switch self {
-        case .survey:
-            return "Survey Sample"
-        case .activeTask:
-            return "Active Task Sample"
+        case .trailMakingA:
+            return "Trail Making A"
+        case .trailMakingB:
+            return "Trail Making B"
+        case .spatial:
+            return "Spatial"
+        case .speechRecognition:
+            return "Speech Recognition"
+        case .amslerGrid:
+            return "Amsler Grid"
         }
     }
 
     var subtitle: String {
         switch self {
-        case .survey:
+        case .trailMakingA:
             return "Answer some short questions."
-        case .activeTask:
+        case .trailMakingB:
             return "Perform an action."
+        case .spatial:
+            return "something"
+        case .speechRecognition:
+            return "something"
+        case .amslerGrid:
+            return "something"
         }
     }
 
     var image: UIImage? {
         switch self {
-        case .survey:
-            return UIImage(named: "SurveyIcon")
-        default:
-            return UIImage(named: "ActivityIcon")
+        case .trailMakingA:
+            //return UIImage(named: "Trail Making A")
+            return UIImage(named: "Screen Shot 2020-07-29 at 6.28.25 PM.png")!
+        case .trailMakingB:
+            //return UIImage(named: "Trail Making B")
+            return UIImage(named: "Screen Shot 2020-07-29 at 6.28.25 PM.png")!
+        case .spatial:
+            //return UIImage(named: "Spatial Memory Test")
+            return UIImage(named: "Screen Shot 2020-07-29 at 6.28.25 PM.png")!
+        case .speechRecognition:
+        //return UIImage(named: "Spatial Memory Test")
+            return UIImage(named: "Screen Shot 2020-07-29 at 6.28.25 PM.png")!
+        case .amslerGrid:
+            return UIImage(named: "Screen Shot 2020-07-29 at 6.28.25 PM.png")!
         }
     }
     
