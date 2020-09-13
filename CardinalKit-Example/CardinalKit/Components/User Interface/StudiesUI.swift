@@ -762,6 +762,7 @@ class FirebaseHelper: NSObject {
                         let identifier = data!["identifier"]! as? NSString
                         if var surveyList: [NSDictionary] = surveysDict[identifier!] {
                             surveyList.append(data!)
+                            surveysDict[identifier!] = surveyList
                         } else {
                             var surveyList = [NSDictionary]()
                             surveyList.append(data!)
@@ -774,7 +775,6 @@ class FirebaseHelper: NSObject {
                 }
             }
         }
-
         return payload
     }
 
