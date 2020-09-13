@@ -25,7 +25,7 @@ struct StudyTasks {
     static let towerTask: ORKOrderedTask = {
         let intendedUseDescription = "Demo of data."
         
-        return ORKOrderedTask.towerOfHanoiTask(withIdentifier: "Games", intendedUseDescription: intendedUseDescription, numberOfDisks: 4, options: ORKPredefinedTaskOption())
+        return ORKOrderedTask.towerOfHanoiTask(withIdentifier: "Hanoi", intendedUseDescription: intendedUseDescription, numberOfDisks: 4, options: ORKPredefinedTaskOption())
     }()
     
     static let walkingTask: ORKOrderedTask = {

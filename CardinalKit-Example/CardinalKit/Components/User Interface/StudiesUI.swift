@@ -673,10 +673,12 @@ class FirebaseHelper: NSObject {
     
     /**
      Generate a dictionary where key is the survey identifier and value is an array of survey payloads.
+     Uses completion handler paradigm to resolve async call to firebase.
      */
     func getGroupedSurveys(completion: @escaping ([NSString: [NSDictionary]]?, Error?) -> ()) {
         var surveysDict = [NSString: [NSDictionary]]()
         
+        // Grab survey documents from firebase.
         db.collection(authCollection! + "\(Constants.dataBucketSurveys)").getDocuments() { (querySnapshot, err) in
             if let err = err {
                 DispatchQueue.main.async {
@@ -703,7 +705,7 @@ class FirebaseHelper: NSObject {
     }
 
     /**
-    Process the grouped surveys into VisualationData objects.
+    Process the grouped surveys into an array of `VisualizationData` objects.
      */
     func processGroupedSurveys() -> [VisualizationData] {
         var visDataArray = [VisualizationData]()
@@ -711,10 +713,36 @@ class FirebaseHelper: NSObject {
         getGroupedSurveys { surveysDict, err in
             guard let surveysDict = surveysDict, err == nil else {
                 // Handle error...
+                print("Could not process surveys, \(err!)")
                 return
             }
-            // Do the processing...
-            
+            /**
+             Do the processing...
+             Note: Switch statement could be replaced with a `ProcessSurveyHandler` class, allowing you to move all the processing implementations for different surveys into separate files/functions.
+             This would modularize the code and reduce the size of the `StudiesUI` file.
+             */
+            for identifier in surveysDict.keys {
+                switch identifier {
+                case "TappingTask":
+                    print("processing TappingTask")
+                    
+                    
+                case "Hanoi":
+                    print("processing Hanoi task")
+                    
+                    
+                case "ShortWalkTask":
+                    print("processing ShortWalkTask")
+                    
+                    
+                case "SurveyTask-SF12":
+                    print("processing SurveyTask-SF12")
+                    
+                    
+                default:
+                    print("Unable to process surveys, unknown identifier")
+                }
+            }
         }
         return visDataArray
     }
