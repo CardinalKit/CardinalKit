@@ -84,13 +84,13 @@ struct StudyTasks {
     static let trailMakingA: ORKOrderedTask = {
         let intendedUseDescription = "Trail Making A"
         
-        return ORKOrderedTask.trailmakingTask(withIdentifier: "Trail making A", intendedUseDescription: intendedUseDescription, trailmakingInstruction: "....", trailType: .A, options: ORKPredefinedTaskOption())
+        return ORKOrderedTask.trailmakingTask(withIdentifier: "Trail making A", intendedUseDescription: intendedUseDescription, trailmakingInstruction: "", trailType: .A, options: ORKPredefinedTaskOption())
     }()
     
     static let trailMakingB: ORKOrderedTask = {
         let intendedUseDescription = "Trail Making B"
         
-        return ORKOrderedTask.trailmakingTask(withIdentifier: "Trail making B", intendedUseDescription: intendedUseDescription, trailmakingInstruction: "blah blah", trailType: .B, options: ORKPredefinedTaskOption())
+        return ORKOrderedTask.trailmakingTask(withIdentifier: "Trail making B", intendedUseDescription: intendedUseDescription, trailmakingInstruction: "", trailType: .B, options: ORKPredefinedTaskOption())
     }()
     
     static let spatial: ORKOrderedTask = {
