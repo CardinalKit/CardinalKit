@@ -36,7 +36,6 @@ struct OnboardingUI: View {
         VStack(spacing: 10) {
             if showingStudyTasks {
                 StudiesUI()
-                    .environmentObject(config)
             } else {
                 Spacer()
 
@@ -72,7 +71,9 @@ struct OnboardingUI: View {
                         self.showingStudyTasks = UserDefaults.standard.bool(forKey: "didCompleteOnboarding")
                     }, content: {
                         OnboardingVC()
+                            .environmentObject(self.config)
                     })
+                    
                     Spacer()
                 }
                 
@@ -129,10 +130,11 @@ struct OnboardingVC: UIViewControllerRepresentable {
         reviewConsentStep.reasonForConsent = config.read(query: "Reason for Consent Text")
         
         /* **************************************************************
-         * MARK: - STEP (3): get permission to collect HealthKit data
+         * MARK: - STEP (3): get permission to collect HealthKit data, read-only
          **************************************************************/
         // see `HealthDataStep` to configure!
         let healthDataStep = CKHealthDataStep(identifier: "Health")
+
         
         /* **************************************************************
          * MARK: - STEP (4): ask user to enter their email address for login
