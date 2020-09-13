@@ -54,10 +54,10 @@ enum StudyTableItem: Int {
 
     var image: UIImage? {
         switch self {
-        case .survey:
-            return UIImage(named: "SurveyIcon")
-        default:
+        case .activeTask:
             return UIImage(named: "ActivityIcon")
+        default:
+            return UIImage(named: "SurveyIcon")
         }
     }
     
