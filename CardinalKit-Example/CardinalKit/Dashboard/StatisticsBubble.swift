@@ -15,7 +15,10 @@ struct StatisticsBubble: View {
     let textColor: Color
     
     var body: some View {
-        NavigationLink(destination: DetailGraphView(result: result, color: textColor)) {
+        ZStack {
+            NavigationLink(destination: DetailGraphView(result: result, color: textColor)) {
+                EmptyView()
+            }
             HStack {
                 Text(result.testName)
                     .foregroundColor(textColor)
@@ -40,7 +43,7 @@ struct StatisticsBubble: View {
         .frame(maxWidth: .infinity)
         .background(self.backGroundColor)
         .cornerRadius(15)
-        .shadow(color: Color(UIColor.placeholderText), radius: 5, x: 3, y: 3)
+        .shadow(radius: 5)
     }
 }
 
