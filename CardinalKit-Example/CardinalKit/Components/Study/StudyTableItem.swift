@@ -47,7 +47,7 @@ enum StudyTableItem: Int {
         case .trailMakingB:
             return "Trail Making B"
         case .spatial:
-            return "Spatial"
+            return "Spatial Memory"
         case .speechRecognition:
             return "Speech Recognition"
         case .amslerGrid:
@@ -58,15 +58,15 @@ enum StudyTableItem: Int {
     var subtitle: String {
         switch self {
         case .trailMakingA:
-            return "Answer some short questions."
+            return "This activity evaluates your visual activity and task"
         case .trailMakingB:
-            return "Perform an action."
+            return "This activity evaluates your visual activity and task"
         case .spatial:
-            return "something"
+            return "This activity measures your short term spacial memory"
         case .speechRecognition:
-            return "something"
+            return "This activity records your speech"
         case .amslerGrid:
-            return "something"
+            return "This activity helps with detecting pronlems in your vision"
         }
     }
 
