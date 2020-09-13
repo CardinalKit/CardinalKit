@@ -43,7 +43,11 @@ public class CKPropertyReader {
     func readDict(query: String) -> [String:String] {
         return data[query] as! [String:String]
     }
-    
+
+    subscript(query: String) -> [String: AnyObject] {
+        return data[query] as! [String: AnyObject]
+    }
+
     // read from stored dictionary
     func readArray(query: String) -> [String] {
         return data[query] as! [String]
