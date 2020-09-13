@@ -46,7 +46,7 @@ struct StudyItem: Identifiable {
     let task: ORKOrderedTask
     
     init(study: StudyTableItem) {
-        self.image = study.image ?? UIImage(systemName: "questionmark.square")
+        self.image = study.image ?? UIImage(systemName: "questionmark.square")!
         self.title = study.title
         self.description = study.subtitle
         self.task = study.task
