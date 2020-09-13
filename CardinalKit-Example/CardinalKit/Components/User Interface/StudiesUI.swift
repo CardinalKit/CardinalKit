@@ -692,6 +692,44 @@ public extension UIColor {
     }
 }
 
+class FirebaseHelper: NSObject {
+    private let db = Firestore.firestore()
+    private let authCollection = CKStudyUser.shared.authCollection
+    public static let shared = FirebaseHelper()
+    
+    /**
+     Generate a dictionary where key is the survey identifier and value is the survey payload.
+     */
+    func getGroupedSurveys() {
+        var surveysDict = [NSString: [NSDictionary]]()
+        db.collection(authCollection! + "\(Constants.dataBucketSurveys)").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    let data = document.data()["payload"] as? NSDictionary
+                    let identifier = data!["identifier"]! as? NSString
+                    if var surveyList: [NSDictionary] = surveysDict[identifier!] {
+                        surveyList.append(data!)
+                    } else {
+                        var surveyList = [NSDictionary]()
+                        surveyList.append(data!)
+                        surveysDict[identifier!] = surveyList
+                    }
+                }
+                print(surveysDict)
+            }
+        }
+    }
+    
+    /**
+    Process the grouped surveys into VisualationData objects.
+     */
+    func processGroupedSurveys(surveys: [NSString: [NSDictionary]]) -> [VisualizationData] {
+        return [VisualizationData]()
+    }
+}
+
 class EmailHelper: NSObject, MFMailComposeViewControllerDelegate {
     public static let shared = EmailHelper()
 
