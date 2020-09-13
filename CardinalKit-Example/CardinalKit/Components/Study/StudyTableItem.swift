@@ -9,19 +9,7 @@ import Foundation
 import UIKit
 import ResearchKit
 
-enum StudyTableItem: Int {
-    
-    static var allValues: [StudyTableItem] {
-        var index = 0
-        return Array (
-            AnyIterator {
-                let returnedElement = self.init(rawValue: index)
-                index = index + 1
-                return returnedElement
-            }
-        )
-    }
-
+enum StudyTableItem: Int, CaseIterable {
     // table items
     case trailMakingA, trailMakingB, spatial, speechRecognition, amslerGrid
 

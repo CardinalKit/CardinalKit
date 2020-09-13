@@ -18,7 +18,7 @@ extension AppDelegate {
     func CKAppLaunch() {
         
         // (1) lock the app and prompt for passcode before continuing
-        CKLockApp()
+        #warning("CKLockApp()")
         
         // (2) setup the CardinalKit SDK
         var options = CKAppOptions()
@@ -95,6 +95,7 @@ extension AppDelegate {
 
 
 // MARK: - Passcode Functionality
+/*
 extension AppDelegate: ORKPasscodeDelegate {
     
     /**
@@ -137,3 +138,4 @@ extension AppDelegate: ORKPasscodeDelegate {
     }
     
 }
+*/

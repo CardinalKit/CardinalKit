@@ -16,7 +16,7 @@ struct StudiesUI: View {
     @EnvironmentObject var config: CKPropertyReader
     @EnvironmentObject var data: NotificationsAndResults
     var color: Color {
-        return Color(config.readColor(query: "Primary Color"))
+        return config.readColor(query: "Primary Color")
     }
 
     var body: some View {
@@ -72,7 +72,7 @@ struct ActivitiesView: View {
     init(color: Color) {
         self.color = color
         self.date = DateFormatter.mediumDate.string(from: Date())
-        self.activities = StudyTableItem.allValues.map { StudyItem(study: $0) }
+        self.activities = StudyTableItem.allCases.map { StudyItem(study: $0) }
     }
     
     var body: some View {
