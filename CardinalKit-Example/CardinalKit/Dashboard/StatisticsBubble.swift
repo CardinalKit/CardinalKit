@@ -19,7 +19,7 @@ struct StatisticsBubble: View {
             HStack {
                 Text(result.testName)
                     .foregroundColor(textColor)
-                    .font(Font.title.weight(.heavy))
+                    .font(Font.headline.weight(.heavy))
                     .padding(.vertical)
                     .padding(.leading)
                 Spacer()

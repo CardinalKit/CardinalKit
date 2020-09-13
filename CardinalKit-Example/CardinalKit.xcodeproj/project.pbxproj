@@ -14,7 +14,6 @@
 		8E0A43AF244A4A0400656518 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E0A4388244A4A0400656518 /* Assets.xcassets */; };
 		8E0A43B0244A4A0400656518 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E0A4389244A4A0400656518 /* LaunchScreen.storyboard */; };
 		8E0A43B3244A4A0400656518 /* StudyTasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A438F244A4A0400656518 /* StudyTasks.swift */; };
-		8E0A43B4244A4A0400656518 /* StudyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4390244A4A0400656518 /* StudyTableViewCell.swift */; };
 		8E0A43B5244A4A0400656518 /* StudyTableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4391244A4A0400656518 /* StudyTableItem.swift */; };
 		8E0A43B9244A4A0400656518 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4396244A4A0400656518 /* AppDelegate.swift */; };
 		8E0A43BE244A4A0400656518 /* CKHealthDataStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A439D244A4A0400656518 /* CKHealthDataStepViewController.swift */; };
@@ -80,7 +79,6 @@
 		8E0A438A244A4A0400656518 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8E0A438B244A4A0400656518 /* TrialX.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = TrialX.entitlements; sourceTree = "<group>"; };
 		8E0A438F244A4A0400656518 /* StudyTasks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyTasks.swift; sourceTree = "<group>"; };
-		8E0A4390244A4A0400656518 /* StudyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyTableViewCell.swift; sourceTree = "<group>"; };
 		8E0A4391244A4A0400656518 /* StudyTableItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyTableItem.swift; sourceTree = "<group>"; };
 		8E0A4396244A4A0400656518 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8E0A439D244A4A0400656518 /* CKHealthDataStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKHealthDataStepViewController.swift; sourceTree = "<group>"; };
@@ -249,7 +247,6 @@
 				D286ECBB250E0A1500815EED /* ActivitiesView.swift */,
 				D286ECBD250E0A4800815EED /* StudyItem.swift */,
 				8E0A438F244A4A0400656518 /* StudyTasks.swift */,
-				8E0A4390244A4A0400656518 /* StudyTableViewCell.swift */,
 				8E0A4391244A4A0400656518 /* StudyTableItem.swift */,
 			);
 			path = Study;
@@ -566,7 +563,6 @@
 				D286ECC5250E0E0700815EED /* Extensions.swift in Sources */,
 				D253D115250CA2FF00A363E4 /* ProfileView.swift in Sources */,
 				A04B9C63250E9B57006D0D3F /* DetailGraphView.swift in Sources */,
-				8E0A43B4244A4A0400656518 /* StudyTableViewCell.swift in Sources */,
 				D253D125250CB3AF00A363E4 /* ReportView.swift in Sources */,
 				8E0A43B5244A4A0400656518 /* StudyTableItem.swift in Sources */,
 				8E0A43AD244A4A0400656518 /* Constants.swift in Sources */,
