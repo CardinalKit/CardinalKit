@@ -48,7 +48,7 @@ public class CKPropertyReader: ObservableObject {
     }
     
     // read color from stored dictionary
-    public func readColor(query: String) -> UIColor {
+    public func readUIColor(query: String) -> UIColor {
         let hex = read(query: query)
         var cString = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
 
@@ -56,13 +56,15 @@ public class CKPropertyReader: ObservableObject {
             cString.remove(at: cString.startIndex)
         }
 
-        if cString.count != 6 {
-            return .gray
-        }
+        assert(cString.count == 6, "Invalid color string")
 
         var rgbValue: UInt64 = 0
         Scanner(string: cString).scanHexInt64(&rgbValue)
 
         return UIColor(netHex: Int(rgbValue))
+    }
+
+    public func readColor(query: String) -> Color {
+        return Color(readUIColor(query: query))
     }
 }

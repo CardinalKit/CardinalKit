@@ -22,11 +22,15 @@ struct OnboardingUI: View {
     var onboardingElements: [OnboardingElement] {
         let onboardingData = config.readAny(query: "Onboarding") as! [[String:String]]
         return onboardingData.map { data in
-            OnboardingElement(logo: data["Logo"]!, title: data["Title"]!, description: data["Description"]!)
+            OnboardingElement(
+                logo: data["Logo"]!,
+                title: data["Title"]!,
+                description: data["Description"]!
+            )
         }
     }
     var color: Color {
-        return Color(config.readColor(query: "Primary Color"))
+        return config.readColor(query: "Primary Color")
     }
     @EnvironmentObject var config: CKPropertyReader
     @State var showingDetail = false
@@ -51,7 +55,10 @@ struct OnboardingUI: View {
                 Spacer()
 
                 PageView(onboardingElements.map {
-                    infoView(logo: $0.logo, title: $0.title, description: $0.description, color: self.color)
+                    infoView(logo: $0.logo,
+                             title: $0.title,
+                             description: $0.description,
+                             color: self.color)
                 })
 
                 Spacer()
