@@ -90,8 +90,8 @@ class CKHealthDataStepViewController: ORKInstructionStepViewController {
     */
     override func goForward() {
         healthDataStep?.getHealthAuthorization() { succeeded, _ in
-            guard succeeded else { return }
-            
+            guard succeeded || !HKHealthStore.isHealthDataAvailable() else { return }
+
             OperationQueue.main.addOperation {
                 super.goForward()
             }

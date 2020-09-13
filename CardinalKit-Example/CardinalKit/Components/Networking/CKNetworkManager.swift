@@ -6,7 +6,7 @@
 //
 
 import CardinalKit
-import Firebase
+import FirebaseFirestore
 
 class CKAppNetworkManager: CKAPIDeliveryDelegate {
     

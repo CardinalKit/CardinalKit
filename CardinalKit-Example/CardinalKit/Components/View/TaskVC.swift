@@ -7,8 +7,9 @@
 //
 
 import SwiftUI
-import Firebase
 import ResearchKit
+import FirebaseStorage
+import FirebaseFirestore
 
 struct TaskVC: UIViewControllerRepresentable {
 
