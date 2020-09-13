@@ -23,10 +23,12 @@ enum StudyTableItem: Int {
     }
 
     // table items
-    case trailMakingA, trailMakingB, spatial, speechRecognition, amslerGrid
+    case survey, trailMakingA, trailMakingB, spatial, speechRecognition, amslerGrid
 
     var task: ORKOrderedTask {
         switch self {
+        case .survey:
+            return StudyTasks.survey
         case .trailMakingA:
             return StudyTasks.trailMakingA
         case .trailMakingB:
@@ -42,6 +44,8 @@ enum StudyTableItem: Int {
 
     var title: String {
         switch self {
+        case .survey:
+            return "Patient Survey"
         case .trailMakingA:
             return "Trail Making A"
         case .trailMakingB:
@@ -57,6 +61,8 @@ enum StudyTableItem: Int {
 
     var subtitle: String {
         switch self {
+        case .survey:
+            return "Survey of basic health information"
         case .trailMakingA:
             return "This activity evaluates your visual activity and task"
         case .trailMakingB:
@@ -72,6 +78,8 @@ enum StudyTableItem: Int {
 
     var image: UIImage? {
         switch self {
+        case .survey:
+            return UIImage(named: "Screen Shot 2020-07-29 at 6.28.25 PM.png")!
         case .trailMakingA:
             //return UIImage(named: "Trail Making A")
             return UIImage(named: "Screen Shot 2020-07-29 at 6.28.25 PM.png")!
