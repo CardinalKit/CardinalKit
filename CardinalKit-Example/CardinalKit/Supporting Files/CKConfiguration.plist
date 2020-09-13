@@ -3,15 +3,15 @@
 <plist version="1.0">
 <dict>
 	<key>Study Title</key>
-	<string>CardinalKit Sample App</string>
+	<string>TrialX</string>
 	<key>Team Name</key>
-	<string>Stanford Department of Medicine</string>
+	<string>UWAppDev x Stanford</string>
 	<key>Email</key>
-	<string>contact@stanford.edu</string>
+	<string>trialx@uwdev.app</string>
 	<key>Phone</key>
 	<string>650-123-4567</string>
 	<key>Copyright</key>
-	<string>Made at Stanford with ❤️</string>
+	<string>Made at Biodesign with 💜♥️</string>
 	<key>Website</key>
 	<string>https://cardinalkit.org</string>
 	<key>Tint Color</key>
@@ -21,7 +21,7 @@
 	<key>Review Consent Step Text</key>
 	<string>Review Consent Form</string>
 	<key>Reason for Consent Text</key>
-	<string>Consent to join the Developer Health Research Study.</string>
+	<string>Consent to join the TrialX Study.</string>
 	<key>Consent File Name</key>
 	<string>My Consent Form</string>
 	<key>Passcode Text</key>
@@ -31,7 +31,7 @@
 	<key>Completion Step Title</key>
 	<string>Welcome aboard.</string>
 	<key>Completion Step Text</key>
-	<string>Thank you for joining this study.</string>
+	<string>Thank you for joining TrialX.</string>
 	<key>Failed Login Title</key>
 	<string>Unable to Login 😔</string>
 	<key>Failed Login Text</key>
@@ -68,47 +68,47 @@
 	<key>Consent Form</key>
 	<dict>
 		<key>Overview</key>
-		<string>Welcome to CardinalKit. Vivamus laoreet erat sit amet tincidunt scelerisque. Maecenas odio sapien, molestie eu vulputate sodales, tincidunt at neque. Nunc venenatis velit et ligula dictum, eget accumsan felis consectetur. Donec scelerisque fermentum vestibulum. Nam molestie finibus mauris, id congue lectus ultrices eu. Nunc et odio vitae dui interdum dictum. Proin sagittis leo quam. Proin vulputate massa ac orci pulvinar, eget rhoncus urna congue. Sed ut vehicula tellus, eget scelerisque enim. Cras lobortis diam at faucibus scelerisque. Curabitur pharetra arcu erat, nec tincidunt mi eleifend ut. Nunc suscipit risus vitae consectetur sodales. Aenean vitae lectus odio. Phasellus diam orci, accumsan non elementum at, finibus condimentum mauris. Nullam est enim, rhoncus a rutrum sed, laoreet a magna.</string>
+		<string>Welcome to TrialX study. Enrollment for cognitive impairment clinical trials, such as Parkinson’s and Alzhiemer’s, is time consuming and requires in person meetings which is costly and especially difficult during COVID-19. TrialX&apos;s goal is to provide a digital, simpler way to screen candidates for clinical trials for neuro-degenerative diseases. You would be able to access this consent form in settings at any time.
+</string>
 		<key>Data Gathering</key>
-		<string>Your Data Gathering Section: Vivamus laoreet erat sit amet tincidunt scelerisque. Maecenas odio sapien, molestie eu vulputate sodales, tincidunt at neque. Nunc venenatis velit et ligula dictum, eget accumsan felis consectetur. Donec scelerisque fermentum vestibulum. Nam molestie finibus mauris, id congue lectus ultrices eu. Nunc et odio vitae dui interdum dictum. Proin sagittis leo quam. Proin vulputate massa ac orci pulvinar, eget rhoncus urna congue. Sed ut vehicula tellus, eget scelerisque enim. Cras lobortis diam at faucibus scelerisque. Curabitur pharetra arcu erat, nec tincidunt mi eleifend ut. Nunc suscipit risus vitae consectetur sodales. Aenean vitae lectus odio. Phasellus diam orci, accumsan non elementum at, finibus condimentum mauris. Nullam est enim, rhoncus a rutrum sed, laoreet a magna.</string>
+		<string>Your Data Gathering Section: This study collects your touch activity, completion time, raw audio recording, eye side and area of distortions.</string>
 		<key>Privacy</key>
-		<string>Your Privacy Section: Vivamus laoreet erat sit amet tincidunt scelerisque. Maecenas odio sapien, molestie eu vulputate sodales, tincidunt at neque. Nunc venenatis velit et ligula dictum, eget accumsan felis consectetur. Donec scelerisque fermentum vestibulum. Nam molestie finibus mauris, id congue lectus ultrices eu. Nunc et odio vitae dui interdum dictum. Proin sagittis leo quam. Proin vulputate massa ac orci pulvinar, eget rhoncus urna congue. Sed ut vehicula tellus, eget scelerisque enim. Cras lobortis diam at faucibus scelerisque. Curabitur pharetra arcu erat, nec tincidunt mi eleifend ut. Nunc suscipit risus vitae consectetur sodales. Aenean vitae lectus odio. Phasellus diam orci, accumsan non elementum at, finibus condimentum mauris. Nullam est enim, rhoncus a rutrum sed, laoreet a magna.</string>
+		<string>Your Privacy Section: Your data privacy matters the most to us. We use information to help improve the safety and reliability of our services. This includes detecting, preventing, and responding to fraud, abuse, security risks and technical issues that could harm TrialX, our users or the public.</string>
 		<key>Data Use</key>
-		<string>Your Data Use Section: Vivamus laoreet erat sit amet tincidunt scelerisque. Maecenas odio sapien, molestie eu vulputate sodales, tincidunt at neque. Nunc venenatis velit et ligula dictum, eget accumsan felis consectetur. Donec scelerisque fermentum vestibulum. Nam molestie finibus mauris, id congue lectus ultrices eu. Nunc et odio vitae dui interdum dictum. Proin sagittis leo quam. Proin vulputate massa ac orci pulvinar, eget rhoncus urna congue. Sed ut vehicula tellus, eget scelerisque enim. Cras lobortis diam at faucibus scelerisque. Curabitur pharetra arcu erat, nec tincidunt mi eleifend ut. Nunc suscipit risus vitae consectetur sodales. Aenean vitae lectus odio. Phasellus diam orci, accumsan non elementum at, finibus condimentum mauris. Nullam est enim, rhoncus a rutrum sed, laoreet a magna.</string>
-		<key>Time Commitment</key>
-		<string>Your Time Commitment Section: Vivamus laoreet erat sit amet tincidunt scelerisque. Maecenas odio sapien, molestie eu vulputate sodales, tincidunt at neque. Nunc venenatis velit et ligula dictum, eget accumsan felis consectetur. Donec scelerisque fermentum vestibulum. Nam molestie finibus mauris, id congue lectus ultrices eu. Nunc et odio vitae dui interdum dictum. Proin sagittis leo quam. Proin vulputate massa ac orci pulvinar, eget rhoncus urna congue. Sed ut vehicula tellus, eget scelerisque enim. Cras lobortis diam at faucibus scelerisque. Curabitur pharetra arcu erat, nec tincidunt mi eleifend ut. Nunc suscipit risus vitae consectetur sodales. Aenean vitae lectus odio. Phasellus diam orci, accumsan non elementum at, finibus condimentum mauris. Nullam est enim, rhoncus a rutrum sed, laoreet a magna.</string>
+		<string>Your Data Use Section: Focusing on preventive care, TrialX looks beyond your symptoms to consider how environmental and lifestyle factors impact your health.</string>
 		<key>Study Survey</key>
-		<string>Your Study Survey Section: Vivamus laoreet erat sit amet tincidunt scelerisque. Maecenas odio sapien, molestie eu vulputate sodales, tincidunt at neque. Nunc venenatis velit et ligula dictum, eget accumsan felis consectetur. Donec scelerisque fermentum vestibulum. Nam molestie finibus mauris, id congue lectus ultrices eu. Nunc et odio vitae dui interdum dictum. Proin sagittis leo quam. Proin vulputate massa ac orci pulvinar, eget rhoncus urna congue. Sed ut vehicula tellus, eget scelerisque enim. Cras lobortis diam at faucibus scelerisque. Curabitur pharetra arcu erat, nec tincidunt mi eleifend ut. Nunc suscipit risus vitae consectetur sodales. Aenean vitae lectus odio. Phasellus diam orci, accumsan non elementum at, finibus condimentum mauris. Nullam est enim, rhoncus a rutrum sed, laoreet a magna.</string>
+		<string>Your Study Survey Section: Study surveys provide more information to your health condition and help TrialX identify and track cognitive performance.</string>
 		<key>Study Tasks</key>
-		<string>Your Study Tasks Section: Vivamus laoreet erat sit amet tincidunt scelerisque. Maecenas odio sapien, molestie eu vulputate sodales, tincidunt at neque. Nunc venenatis velit et ligula dictum, eget accumsan felis consectetur. Donec scelerisque fermentum vestibulum. Nam molestie finibus mauris, id congue lectus ultrices eu. Nunc et odio vitae dui interdum dictum. Proin sagittis leo quam. Proin vulputate massa ac orci pulvinar, eget rhoncus urna congue. Sed ut vehicula tellus, eget scelerisque enim. Cras lobortis diam at faucibus scelerisque. Curabitur pharetra arcu erat, nec tincidunt mi eleifend ut. Nunc suscipit risus vitae consectetur sodales. Aenean vitae lectus odio. Phasellus diam orci, accumsan non elementum at, finibus condimentum mauris. Nullam est enim, rhoncus a rutrum sed, laoreet a magna.</string>
+		<string>Your Study Tasks Section: You will be asked to complete tasks contained in this study from Trailmaking, Part A / B, Spatial Memory, Speech Recognition and Amsler Grid.</string>
 		<key>Withdrawing</key>
-		<string>Your Withdrawing Section: Vivamus laoreet erat sit amet tincidunt scelerisque. Maecenas odio sapien, molestie eu vulputate sodales, tincidunt at neque. Nunc venenatis velit et ligula dictum, eget accumsan felis consectetur. Donec scelerisque fermentum vestibulum. Nam molestie finibus mauris, id congue lectus ultrices eu. Nunc et odio vitae dui interdum dictum. Proin sagittis leo quam. Proin vulputate massa ac orci pulvinar, eget rhoncus urna congue. Sed ut vehicula tellus, eget scelerisque enim. Cras lobortis diam at faucibus scelerisque. Curabitur pharetra arcu erat, nec tincidunt mi eleifend ut. Nunc suscipit risus vitae consectetur sodales. Aenean vitae lectus odio. Phasellus diam orci, accumsan non elementum at, finibus condimentum mauris. Nullam est enim, rhoncus a rutrum sed, laoreet a magna.</string>
+		<string>Your Withdrawing Section: At any time of using TrialX, you can opt to withdraw from the study. You will have the option to entirely erase your test data. </string>
 	</dict>
 	<key>Onboarding</key>
 	<array>
 		<dict>
 			<key>Title</key>
-			<string>First Title</string>
+			<string>Welcome to TrialX</string>
 			<key>Description</key>
-			<string>Lorem Ipsum is simply dummy text of the printing and typesetting industry</string>
+			<string>Current clinical trials have ~50-70% failure rate (costing $5.7B for Alzheimer disease) because the participant does not meet the inclusion/exclusion criteria, not to mention the time consumption and requirements of costly in-person meetings</string>
 			<key>Logo</key>
-			<string>😁</string>
+			<string>💵</string>
 		</dict>
 		<dict>
 			<key>Title</key>
-			<string>Second Title</string>
+			<string>Population</string>
 			<key>Description</key>
-			<string>Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</string>
+			<string>General populations who are at risk of developing dementia, such as age 60 or above. Patients of neuro-degenerative disease, such as Parkinson’s and Alzhiemer’s.
+</string>
 			<key>Logo</key>
-			<string>🦠</string>
+			<string>👵</string>
 		</dict>
 		<dict>
 			<key>Title</key>
-			<string>Third Title</string>
+			<string>Outcome</string>
 			<key>Description</key>
-			<string>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</string>
+			<string>Remotely identify and monitor patients’ cognitive performance. If necessary, refer patients for further clinical evaluation and to provide data for clinical or observational trials for early intervention and therapy. </string>
 			<key>Logo</key>
-			<string>🙉</string>
+			<string>🩺</string>
 		</dict>
 	</array>
 </dict>

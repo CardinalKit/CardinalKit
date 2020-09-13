@@ -36,6 +36,7 @@
 @import ResearchKit.Swift;
 
 @import MapKit;
+@import Speech;
 
 
 static NSString *ORKEStringFromDateISO8601(NSDate *date) {
@@ -1413,6 +1414,40 @@ encondingTable =
          (@{
             PROPERTY(transcription, SFTranscription, NSObject, NO, nil, nil)
             })),
+   ENTRY(SFTranscription,
+        nil,
+         (@{
+             PROPERTY(formattedString, NSString, NSObject, NO, nil, nil),
+             PROPERTY(segments, NSArray, NSObject, NO, nil, nil),
+             PROPERTY(speakingRate, NSNumber, NSObject, NO, nil, nil),
+             PROPERTY(averagePauseDuration, NSNumber, NSObject, NO, nil, nil)
+          })),
+   ENTRY(SFTranscriptionSegment,
+         nil,
+         (@{
+             #warning Need to figure out if / how to include substringRange
+             // PROPERTY(substringRange, NSRange, NSObject, NO, nil, nil),
+             PROPERTY(timestamp, NSNumber, NSObject, NO, nil, nil),
+             PROPERTY(duration, NSNumber, NSObject, NO, nil, nil),
+             PROPERTY(confidence, NSNumber, NSObject, NO, nil, nil),
+             PROPERTY(substring, NSString, NSObject, NO, nil, nil),
+             PROPERTY(alternativeSubstrings, NSArray, NSObject, NO, nil, nil),
+             PROPERTY(voiceAnalytics, SFVoiceAnalytics, NSObject, NO, nil, nil)
+          })),
+   ENTRY(SFVoiceAnalytics,
+         nil,
+         (@{
+             PROPERTY(jitter, SFAcousticFeature, NSObject, NO, nil, nil),
+             PROPERTY(shimmer, SFAcousticFeature, NSObject, NO, nil, nil),
+             PROPERTY(pitch, SFAcousticFeature, NSObject, NO, nil, nil),
+             PROPERTY(voicing, SFAcousticFeature, NSObject, NO, nil, nil)
+          })),
+   ENTRY(SFAcousticFeature,
+         nil,
+         (@{
+             PROPERTY(acousticFeatureValuePerFrame, NSArray, NSObject, NO, nil, nil),
+             PROPERTY(frameDuration, NSNumber, NSObject, NO, nil, nil)
+          })),
    ENTRY(ORKStroopResult,
          nil,
          (@{
@@ -1611,7 +1646,8 @@ encondingTable =
          nil,
          (@{
             PROPERTY(enabledAssistiveTechnology, NSString, NSObject, YES, nil, nil),
-            PROPERTY(isPreviousResult, NSNumber, NSObject, YES, nil, nil),
+            #warning Need to figure out if including _isPreviousResult is necessary
+            // PROPERTY(_isPreviousResult, NSNumber, NSObject, YES, nil, nil),
             })),
    ENTRY(ORKPageResult,
          nil,
