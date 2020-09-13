@@ -133,14 +133,16 @@ struct ActivityView: View {
 
 struct VisualizationsView: View {
     let color: Color
-    var visualizations: [VisualizationData] = []
+    @ObservedObject var visualizations = FirebaseHelper.shared.getGroupedSurveys()
 
     // For bonus points: add hooks to the CKConfiguration.plist file to customize the data visualization.
     let config = CKPropertyReader(file: "CKConfiguration")
+    var visualizationConfig: [String: String] = [:]
+    
 
     init(color: Color) {
         self.color = color
-        self.visualizations = FirebaseHelper.shared.processGroupedSurveys()
+        self.visualizationConfig = config.readDict(query: "Visualizations")
     }
 
     var body: some View {
@@ -150,8 +152,8 @@ struct VisualizationsView: View {
             List {
                 Section(header: Text("Patient Data")) {
 
-                    ForEach(0 ..< self.visualizations.count) {
-                        VisualizationView(data: self.visualizations[$0])
+                    ForEach(0 ..< self.visualizations.data.count) {
+                        VisualizationView(data: self.visualizations.data[$0] as! VisualizationData, config: self.visualizationConfig)
                     }
 
                 }.listRowBackground(Color.white)
@@ -161,18 +163,25 @@ struct VisualizationsView: View {
 }
 
 struct VisualizationView: View {
+    @State var showingDetail = false
     var data: VisualizationData
     var type: String
     var title: String
     var description: String
     var visualization: AnyView
-    @State var showingDetail = false
+    var showThumbnail: Bool = false
+    
 
-    init(data: VisualizationData) {
+    init(data: VisualizationData, config: [String: String]) {
         self.data = data
         self.type = data.type
         self.title = data.title
         self.description = data.description
+        
+        // set visualization config
+        if (config["showThumbnail"]) != nil && (config["showThumbnail"]) == "true" {
+            self.showThumbnail = true
+        }
         
         // prepare the appropriate visualization
         switch self.data.type {
@@ -183,7 +192,7 @@ struct VisualizationView: View {
             case "PieChart":
                 self.visualization = AnyView(PieChart(visualizationData: data, thumbnail: true))
             default:
-                self.visualization = AnyView(Spacer()) //noop
+                self.visualization = AnyView(EmptyView()) //noop
         }
     }
 
@@ -193,9 +202,16 @@ struct VisualizationView: View {
                 Text(self.title).font(.system(size: 18, weight: .semibold, design: .default))
                 Text(self.description).font(.system(size: 14, weight: .light, design: .default))
             }
-            Spacer()
-            self.visualization
-            Spacer()
+            
+            // show thumbnail visualization
+            if self.showThumbnail {
+                Group {
+                    Spacer()
+                    self.visualization
+                    Spacer()
+                }
+            }
+
         }.frame(height: 130).contentShape(Rectangle()).gesture(TapGesture().onEnded({
             self.showingDetail.toggle()
         })).sheet(isPresented: $showingDetail, onDismiss: {
@@ -224,7 +240,7 @@ struct VisualizationInspectionView: View {
             case "PieChart":
                 visualization = AnyView(PieChart(visualizationData: data, thumbnail: false))
             default:
-                visualization = AnyView(Spacer()) //noop
+                visualization = AnyView(EmptyView()) //noop
         }
     }
 
@@ -671,79 +687,142 @@ class FirebaseHelper: NSObject {
     private let authCollection = CKStudyUser.shared.authCollection
     public static let shared = FirebaseHelper()
     
+    class Payload: ObservableObject {
+        @Published var data = []
+    }
+    
     /**
      Generate a dictionary where key is the survey identifier and value is an array of survey payloads.
      Uses completion handler paradigm to resolve async call to firebase.
      */
-    func getGroupedSurveys(completion: @escaping ([NSString: [NSDictionary]]?, Error?) -> ()) {
+    func getGroupedSurveys() -> Payload {
         var surveysDict = [NSString: [NSDictionary]]()
+        let payload = Payload()
         
-        // Grab survey documents from firebase.
-        db.collection(authCollection! + "\(Constants.dataBucketSurveys)").getDocuments() { (querySnapshot, err) in
-            if let err = err {
-                DispatchQueue.main.async {
-                    completion(nil, err)
-                }
-                print("Error getting documents: \(err)")
-            } else {
-                for document in querySnapshot!.documents {
-                    let data = document.data()["payload"] as? NSDictionary
-                    let identifier = data!["identifier"]! as? NSString
-                    if var surveyList: [NSDictionary] = surveysDict[identifier!] {
-                        surveyList.append(data!)
-                    } else {
-                        var surveyList = [NSDictionary]()
-                        surveyList.append(data!)
-                        surveysDict[identifier!] = surveyList
+        
+        // if we're not signed in, don't even bother.
+        if authCollection != nil {
+            
+            // Grab survey documents from firebase.
+            db.collection(authCollection! + "\(Constants.dataBucketSurveys)").getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    DispatchQueue.main.async {
+                        // todo: @tlaskey3
                     }
-                }
-                DispatchQueue.main.async {
-                    completion(surveysDict, err)
+                    print("Error getting documents: \(err)")
+                } else {
+                    for document in querySnapshot!.documents {
+                        let data = document.data()["payload"] as? NSDictionary
+                        let identifier = data!["identifier"]! as? NSString
+                        if var surveyList: [NSDictionary] = surveysDict[identifier!] {
+                            surveyList.append(data!)
+                        } else {
+                            var surveyList = [NSDictionary]()
+                            surveyList.append(data!)
+                            surveysDict[identifier!] = surveyList
+                        }
+                    }
+                    DispatchQueue.main.async {
+                        payload.data = self.processGroupedSurveys(surveysDict: surveysDict)
+                    }
                 }
             }
         }
+        
+        return payload
     }
 
     /**
     Process the grouped surveys into an array of `VisualizationData` objects.
      */
-    func processGroupedSurveys() -> [VisualizationData] {
+    func processGroupedSurveys(surveysDict: [NSString: [NSDictionary]]) -> [VisualizationData] {
         var visDataArray = [VisualizationData]()
         
-        getGroupedSurveys { surveysDict, err in
-            guard let surveysDict = surveysDict, err == nil else {
-                // Handle error...
-                print("Could not process surveys, \(err!)")
-                return
-            }
-            /**
-             Do the processing...
-             Note: Switch statement could be replaced with a `ProcessSurveyHandler` class, allowing you to move all the processing implementations for different surveys into separate files/functions.
-             This would modularize the code and reduce the size of the `StudiesUI` file.
-             */
-            for identifier in surveysDict.keys {
-                switch identifier {
-                case "TappingTask":
-                    print("processing TappingTask")
-                    
-                    
-                case "Hanoi":
-                    print("processing Hanoi task")
-                    
-                    
-                case "ShortWalkTask":
-                    print("processing ShortWalkTask")
-                    
-                    
-                case "SurveyTask-SF12":
-                    print("processing SurveyTask-SF12")
-                    
-                    
-                default:
-                    print("Unable to process surveys, unknown identifier")
-                }
+        /**
+         Do the processing...
+         Note: Switch statement could be replaced with a `ProcessSurveyHandler` class, allowing you to move all the processing implementations for different surveys into separate files/functions.
+         This would modularize the code and reduce the size of the `StudiesUI` file.
+            - @Tlaskey3
+         */
+        for identifier in surveysDict.keys {
+            switch identifier {
+            case "TappingTask":
+                print("processing TappingTask")
+                
+                let title = ""
+                let description = ""
+                let type = "LineGraph"
+                var values = [[ORKValueRange(value: 0)]]
+                
+                // processess && update values
+                
+                let data = VisualizationData(
+                    title: title,
+                    description: description,
+                    type: type,
+                    values: values
+                )
+                visDataArray.append(data)
+                
+            case "Hanoi":
+                print("processing Hanoi task")
+                
+                let title = ""
+                let description = ""
+                let type = "LineGraph"
+                var values = [[ORKValueRange(value: 0)]]
+                
+                // processess && update values
+                
+                let data = VisualizationData(
+                    title: title,
+                    description: description,
+                    type: type,
+                    values: values
+                )
+                visDataArray.append(data)
+                
+            case "ShortWalkTask":
+                print("processing ShortWalkTask")
+                
+                let title = ""
+                let description = ""
+                let type = "LineGraph"
+                var values = [[ORKValueRange(value: 0)]]
+                
+                // processess && update values
+                
+                let data = VisualizationData(
+                    title: title,
+                    description: description,
+                    type: type,
+                    values: values
+                )
+                visDataArray.append(data)
+                
+            case "SurveyTask-SF12":
+                print("processing SurveyTask-SF12")
+                
+                let title = ""
+                let description = ""
+                let type = "LineGraph"
+                var values = [[ORKValueRange(value: 0)]]
+                
+                // processess && update values
+                
+                let data = VisualizationData(
+                    title: title,
+                    description: description,
+                    type: type,
+                    values: values
+                )
+                visDataArray.append(data)
+            default:
+                print("Unable to process surveys, unknown identifier")
+
             }
         }
+        
         return visDataArray
     }
 }
