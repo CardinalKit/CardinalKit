@@ -47,7 +47,7 @@ struct WelcomeNotificationView: View {
                         showingTestDetail: self.$showingTestDetail,
                         currTestIndex: self.$currTestIndex,
                         notification: notification,
-                        backGroundColor: .white,
+                        backGroundColor: Color(UIColor.systemGroupedBackground),
                         textColor: self.color
                     )
                     .padding(3)

@@ -18,39 +18,40 @@ struct NotificationBubble: View {
     let textColor: Color
     
     var body: some View {
-        HStack {
-                Spacer()
-                VStack(spacing: 10) {
-                    VStack {
-                        Text(notification.testName)
-                            .foregroundColor(textColor)
-                            .font(.system(size: 20, weight: .heavy, design: .default))
-                        Text(notification.text).foregroundColor(textColor)
-                    }
-                    if notification.action {
-                        Button(action: {
-                            self.showingPopup = true
-                        }) {
-                            Text("Take Test").foregroundColor(.black)
-                        }
-                        .padding(10)
-                        .background(Color.white)
-                        .cornerRadius(8)
-                        .alert(isPresented: self.$showingPopup) {
-                            Alert(title: Text("Are you sure you want to take the test?"), message: Text("You may only take the test if you are in an adequate mental state"), primaryButton: .default(Text("Take Test"), action: {
-                                self.currTestIndex = self.data.getTestIndex(testName: self.notification.testName)
-                                self.showingTestDetail = true
-                            }), secondaryButton: .cancel())
-                        }
-                    }
+        VStack(spacing: 10) {
+            Text(notification.testName)
+                .foregroundColor(textColor)
+                .font(Font.title.weight(.heavy))
+            Text(notification.text)
+                .foregroundColor(textColor)
+
+            if notification.action {
+                Button("Take Test") {
+                    self.showingPopup = true
                 }
-                Spacer()
+                .foregroundColor(.black)
+                .padding(10)
+                .background(Color.white)
+                .cornerRadius(8)
+                .alert(isPresented: self.$showingPopup) {
+                    Alert(
+                        title: Text("Are you sure you want to take the test?"),
+                        message: Text("You may only take the test if you are in an adequate mental state"),
+                        primaryButton: .default(Text("Take Test"), action: {
+                            self.currTestIndex = self.data.getTestIndex(testName: self.notification.testName)
+                            self.showingTestDetail = true
+                        }),
+                        secondaryButton: .cancel())
+                }
             }
-            .padding()
-            .background(self.backGroundColor)
-            .cornerRadius(15)
-            .shadow(radius: 5)
-            .blur(radius: self.showingPopup ? 4 : 0)
+        }
+        .padding(.vertical)
+        .padding(.horizontal, 20)
+        .frame(maxWidth: .infinity)
+        .background(self.backGroundColor)
+        .cornerRadius(15)
+        .shadow(color: Color(UIColor.placeholderText), radius: 5, x: 3, y: 3)
+        .blur(radius: self.showingPopup ? 4 : 0)
     }
 }
 
