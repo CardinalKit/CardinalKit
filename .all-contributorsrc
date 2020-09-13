@@ -43,6 +43,15 @@
         "content",
         "video"
       ]
+    },
+    {
+      "login": "ApolloZhu",
+      "name": "Zhiyu Zhu/朱智语",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/10842684?v=4",
+      "profile": "http://apollozhu.github.io/en",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
