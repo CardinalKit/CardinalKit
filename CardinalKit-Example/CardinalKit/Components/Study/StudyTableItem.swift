@@ -23,12 +23,16 @@ enum StudyTableItem: Int {
     }
 
     // table items
-    case survey, activeTask
+    case survey, activeTask, tapping, tower
 
     var task: ORKOrderedTask {
         switch self {
         case .survey:
             return StudyTasks.sf12Task
+        case .tapping:
+            return StudyTasks.tappingTask
+        case .tower:
+            return StudyTasks.towerTask
         case .activeTask:
             return StudyTasks.walkingTask
         }
@@ -38,6 +42,10 @@ enum StudyTableItem: Int {
         switch self {
         case .survey:
             return "Survey Sample"
+        case .tapping:
+            return "Tapping Sample"
+        case .tower:
+            return "Tower of Hanoi"
         case .activeTask:
             return "Active Task Sample"
         }
@@ -47,6 +55,10 @@ enum StudyTableItem: Int {
         switch self {
         case .survey:
             return "Answer some short questions."
+        case .tapping:
+            return "Smash that Like button."
+        case .tower:
+            return "Unwind with some game time."
         case .activeTask:
             return "Perform an action."
         }
@@ -56,6 +68,10 @@ enum StudyTableItem: Int {
         switch self {
         case .survey:
             return UIImage(named: "SurveyIcon")
+        case .tapping:
+            return UIImage(named: "ActivityIcon")
+        case .tower:
+            return UIImage(named: "ActivityIcon")
         default:
             return UIImage(named: "ActivityIcon")
         }
