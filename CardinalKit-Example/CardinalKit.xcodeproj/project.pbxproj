@@ -8,22 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		69DC6BB1DB8FF78AE696891C /* Pods_TrialX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67775C73890913676E2A3907 /* Pods_TrialX.framework */; };
-		8E0A43A7244A4A0400656518 /* ProfileTableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A437A244A4A0400656518 /* ProfileTableItem.swift */; };
-		8E0A43A8244A4A0400656518 /* StaticProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A437B244A4A0400656518 /* StaticProfileViewController.swift */; };
-		8E0A43AA244A4A0400656518 /* WithdrawalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A437F244A4A0400656518 /* WithdrawalViewController.swift */; };
 		8E0A43AC244A4A0400656518 /* CKStudyUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4382244A4A0400656518 /* CKStudyUser.swift */; };
 		8E0A43AD244A4A0400656518 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4384244A4A0400656518 /* Constants.swift */; };
 		8E0A43AE244A4A0400656518 /* ORKESerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4386244A4A0400656518 /* ORKESerialization.m */; };
 		8E0A43AF244A4A0400656518 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E0A4388244A4A0400656518 /* Assets.xcassets */; };
 		8E0A43B0244A4A0400656518 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E0A4389244A4A0400656518 /* LaunchScreen.storyboard */; };
-		8E0A43B2244A4A0400656518 /* StudyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A438E244A4A0400656518 /* StudyTableViewController.swift */; };
 		8E0A43B3244A4A0400656518 /* StudyTasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A438F244A4A0400656518 /* StudyTasks.swift */; };
 		8E0A43B4244A4A0400656518 /* StudyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4390244A4A0400656518 /* StudyTableViewCell.swift */; };
 		8E0A43B5244A4A0400656518 /* StudyTableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4391244A4A0400656518 /* StudyTableItem.swift */; };
 		8E0A43B9244A4A0400656518 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4396244A4A0400656518 /* AppDelegate.swift */; };
-		8E0A43BA244A4A0400656518 /* LaunchContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4397244A4A0400656518 /* LaunchContainerViewController.swift */; };
-		8E0A43BC244A4A0400656518 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A439A244A4A0400656518 /* OnboardingViewController.swift */; };
-		8E0A43BD244A4A0400656518 /* IntroductionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A439B244A4A0400656518 /* IntroductionViewController.swift */; };
 		8E0A43BE244A4A0400656518 /* CKHealthDataStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A439D244A4A0400656518 /* CKHealthDataStepViewController.swift */; };
 		8E0A43C0244A4A0400656518 /* PasswordlessLoginStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A439F244A4A0400656518 /* PasswordlessLoginStep.swift */; };
 		8E0A43C1244A4A0400656518 /* LoginCustomWaitStepView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E0A43A1244A4A0400656518 /* LoginCustomWaitStepView.xib */; };
@@ -31,7 +24,6 @@
 		8E0A43C3244A4A0400656518 /* LoginCustomWaitStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A43A3244A4A0400656518 /* LoginCustomWaitStepViewController.swift */; };
 		8E0A43D5244A693D00656518 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E0A43D4244A693D00656518 /* HealthKit.framework */; };
 		8E40DC042471E5940027536B /* CKNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E40DC032471E5940027536B /* CKNetworkManager.swift */; };
-		8E67519C24B7ACB7004EC405 /* StudyTableViewController+CardinalKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E67519B24B7ACB7004EC405 /* StudyTableViewController+CardinalKit.swift */; };
 		8EBE6F9C24B3C0E60093D07C /* AppDelegate+CardinalKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE6F9B24B3C0E60093D07C /* AppDelegate+CardinalKit.swift */; };
 		A04B9C59250D8D1F006D0D3F /* UIData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04B9C58250D8D1F006D0D3F /* UIData.swift */; };
 		A04B9C5B250D9162006D0D3F /* WelcomeNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04B9C5A250D9162006D0D3F /* WelcomeNotificationView.swift */; };
@@ -47,6 +39,7 @@
 		D253D129250CBF2800A363E4 /* SupportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D253D128250CBF2800A363E4 /* SupportView.swift */; };
 		D253D12B250CD16400A363E4 /* PageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D253D12A250CD16400A363E4 /* PageView.swift */; };
 		D253D12D250CF9C400A363E4 /* CKSignInWithAppleStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = D253D12C250CF9C400A363E4 /* CKSignInWithAppleStep.swift */; };
+		D286EC97250DC02F00815EED /* LaunchContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D286EC96250DC02F00815EED /* LaunchContainerView.swift */; };
 		E235077724F7082700CC1899 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E235077624F7082700CC1899 /* SceneDelegate.swift */; };
 		E290FB1D24FF4BBA00D19BE9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E290FB1C24FF4BBA00D19BE9 /* GoogleService-Info.plist */; };
 		E29143FC24E74AD100EE97B2 /* OnboardingUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29143FB24E74AD100EE97B2 /* OnboardingUI.swift */; };
@@ -68,9 +61,6 @@
 		630884219A5CB1E45383122C /* Pods-CardinalKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardinalKit_Example.release.xcconfig"; path = "Target Support Files/Pods-CardinalKit_Example/Pods-CardinalKit_Example.release.xcconfig"; sourceTree = "<group>"; };
 		67775C73890913676E2A3907 /* Pods_TrialX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TrialX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E0A4378244A4A0300656518 /* TrialX-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TrialX-Bridging-Header.h"; sourceTree = "<group>"; };
-		8E0A437A244A4A0400656518 /* ProfileTableItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableItem.swift; sourceTree = "<group>"; };
-		8E0A437B244A4A0400656518 /* StaticProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticProfileViewController.swift; sourceTree = "<group>"; };
-		8E0A437F244A4A0400656518 /* WithdrawalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WithdrawalViewController.swift; sourceTree = "<group>"; };
 		8E0A4382244A4A0400656518 /* CKStudyUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKStudyUser.swift; sourceTree = "<group>"; };
 		8E0A4384244A4A0400656518 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8E0A4386244A4A0400656518 /* ORKESerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKESerialization.m; sourceTree = "<group>"; };
@@ -78,14 +68,10 @@
 		8E0A4388244A4A0400656518 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8E0A438A244A4A0400656518 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8E0A438B244A4A0400656518 /* TrialX.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = TrialX.entitlements; sourceTree = "<group>"; };
-		8E0A438E244A4A0400656518 /* StudyTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyTableViewController.swift; sourceTree = "<group>"; };
 		8E0A438F244A4A0400656518 /* StudyTasks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyTasks.swift; sourceTree = "<group>"; };
 		8E0A4390244A4A0400656518 /* StudyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyTableViewCell.swift; sourceTree = "<group>"; };
 		8E0A4391244A4A0400656518 /* StudyTableItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyTableItem.swift; sourceTree = "<group>"; };
 		8E0A4396244A4A0400656518 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8E0A4397244A4A0400656518 /* LaunchContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchContainerViewController.swift; sourceTree = "<group>"; };
-		8E0A439A244A4A0400656518 /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
-		8E0A439B244A4A0400656518 /* IntroductionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroductionViewController.swift; sourceTree = "<group>"; };
 		8E0A439D244A4A0400656518 /* CKHealthDataStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKHealthDataStepViewController.swift; sourceTree = "<group>"; };
 		8E0A439F244A4A0400656518 /* PasswordlessLoginStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordlessLoginStep.swift; sourceTree = "<group>"; };
 		8E0A43A1244A4A0400656518 /* LoginCustomWaitStepView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginCustomWaitStepView.xib; sourceTree = "<group>"; };
@@ -94,7 +80,6 @@
 		8E0A43C9244A4C6500656518 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8E0A43D4244A693D00656518 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		8E40DC032471E5940027536B /* CKNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKNetworkManager.swift; sourceTree = "<group>"; };
-		8E67519B24B7ACB7004EC405 /* StudyTableViewController+CardinalKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StudyTableViewController+CardinalKit.swift"; sourceTree = "<group>"; };
 		8EBE6F9B24B3C0E60093D07C /* AppDelegate+CardinalKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+CardinalKit.swift"; sourceTree = "<group>"; };
 		A04B9C58250D8D1F006D0D3F /* UIData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIData.swift; sourceTree = "<group>"; };
 		A04B9C5A250D9162006D0D3F /* WelcomeNotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeNotificationView.swift; sourceTree = "<group>"; };
@@ -112,6 +97,7 @@
 		D253D128250CBF2800A363E4 /* SupportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportView.swift; sourceTree = "<group>"; };
 		D253D12A250CD16400A363E4 /* PageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageView.swift; sourceTree = "<group>"; };
 		D253D12C250CF9C400A363E4 /* CKSignInWithAppleStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKSignInWithAppleStep.swift; sourceTree = "<group>"; };
+		D286EC96250DC02F00815EED /* LaunchContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchContainerView.swift; sourceTree = "<group>"; };
 		DF8FAFB3C7221261A7397AFD /* Pods-TrialX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrialX.debug.xcconfig"; path = "Target Support Files/Pods-TrialX/Pods-TrialX.debug.xcconfig"; sourceTree = "<group>"; };
 		E235077624F7082700CC1899 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		E290FB1C24FF4BBA00D19BE9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -173,9 +159,6 @@
 			children = (
 				8E0A4383244A4A0400656518 /* Supporting Files */,
 				8E0A43C5244A4A5700656518 /* Components */,
-				8E0A4396244A4A0400656518 /* AppDelegate.swift */,
-				8EBE6F9B24B3C0E60093D07C /* AppDelegate+CardinalKit.swift */,
-				E235077624F7082700CC1899 /* SceneDelegate.swift */,
 			);
 			name = "CardinalKit-Example";
 			path = CardinalKit;
@@ -194,26 +177,18 @@
 		8E0A4379244A4A0400656518 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				8E0A437A244A4A0400656518 /* ProfileTableItem.swift */,
-				8E0A437B244A4A0400656518 /* StaticProfileViewController.swift */,
+				D253D114250CA2FF00A363E4 /* ProfileView.swift */,
+				D253D120250CB22400A363E4 /* PatientIDView.swift */,
+				D253D116250CA73100A363E4 /* ChangePasscodeView.swift */,
+				D253D118250CA7C400A363E4 /* PasscodeVC.swift */,
+				D253D11C250CAAD200A363E4 /* HelpView.swift */,
+				D253D124250CB3AF00A363E4 /* ReportView.swift */,
+				D253D128250CBF2800A363E4 /* SupportView.swift */,
+				D253D11E250CAC8E00A363E4 /* ConsentDocumentView.swift */,
+				D253D122250CB31F00A363E4 /* WithdrawView.swift */,
+				D253D126250CB57600A363E4 /* WithdrawalVC.swift */,
 			);
 			path = Profile;
-			sourceTree = "<group>";
-		};
-		8E0A437E244A4A0400656518 /* Withdrawal */ = {
-			isa = PBXGroup;
-			children = (
-				8E0A437F244A4A0400656518 /* WithdrawalViewController.swift */,
-			);
-			path = Withdrawal;
-			sourceTree = "<group>";
-		};
-		8E0A4380244A4A0400656518 /* Account */ = {
-			isa = PBXGroup;
-			children = (
-				8E0A4382244A4A0400656518 /* CKStudyUser.swift */,
-			);
-			path = Account;
 			sourceTree = "<group>";
 		};
 		8E0A4383244A4A0400656518 /* Supporting Files */ = {
@@ -244,8 +219,6 @@
 		8E0A438D244A4A0400656518 /* Study */ = {
 			isa = PBXGroup;
 			children = (
-				8E0A438E244A4A0400656518 /* StudyTableViewController.swift */,
-				8E67519B24B7ACB7004EC405 /* StudyTableViewController+CardinalKit.swift */,
 				8E0A438F244A4A0400656518 /* StudyTasks.swift */,
 				8E0A4390244A4A0400656518 /* StudyTableViewCell.swift */,
 				8E0A4391244A4A0400656518 /* StudyTableItem.swift */,
@@ -256,8 +229,6 @@
 		8E0A4399244A4A0400656518 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				8E0A439A244A4A0400656518 /* OnboardingViewController.swift */,
-				8E0A439B244A4A0400656518 /* IntroductionViewController.swift */,
 				8E0A439C244A4A0400656518 /* Steps */,
 			);
 			path = Onboarding;
@@ -266,36 +237,33 @@
 		8E0A439C244A4A0400656518 /* Steps */ = {
 			isa = PBXGroup;
 			children = (
-				8E0A43A0244A4A0400656518 /* Views */,
+				D286EC94250DBD6100815EED /* PasswordlessLogin */,
+				D286EC95250DBD7400815EED /* LoginStep */,
 				8E0A439D244A4A0400656518 /* CKHealthDataStepViewController.swift */,
-				8E0A439F244A4A0400656518 /* PasswordlessLoginStep.swift */,
-				E2DF9F052500B9F000A93B93 /* LoginStep.swift */,
-				8E0A43A3244A4A0400656518 /* LoginCustomWaitStepViewController.swift */,
 				8E0A43A2244A4A0400656518 /* ConsentDocument.swift */,
-				E2DF9F092500C9CE00A93B93 /* LoginViewController.swift */,
 			);
 			path = Steps;
 			sourceTree = "<group>";
 		};
-		8E0A43A0244A4A0400656518 /* Views */ = {
+		8E0A43A0244A4A0400656518 /* LoginCustomWaitStep */ = {
 			isa = PBXGroup;
 			children = (
+				8E0A43A3244A4A0400656518 /* LoginCustomWaitStepViewController.swift */,
 				8E0A43A1244A4A0400656518 /* LoginCustomWaitStepView.xib */,
 			);
-			path = Views;
+			path = LoginCustomWaitStep;
 			sourceTree = "<group>";
 		};
 		8E0A43C5244A4A5700656518 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				E29143FA24E74AB700EE97B2 /* User Interface */,
-				8E40DC022471E5590027536B /* Networking */,
-				8E0A4379244A4A0400656518 /* Profile */,
+				D286EC98250DC03D00815EED /* Setup */,
 				8E0A4399244A4A0400656518 /* Onboarding */,
-				8E0A437E244A4A0400656518 /* Withdrawal */,
-				8E0A4380244A4A0400656518 /* Account */,
 				8E0A438D244A4A0400656518 /* Study */,
-				8E0A4397244A4A0400656518 /* LaunchContainerViewController.swift */,
+				E29143FA24E74AB700EE97B2 /* User Interface */,
+				8E0A4379244A4A0400656518 /* Profile */,
+				D286EC99250DC07C00815EED /* Account */,
+				8E40DC022471E5590027536B /* Networking */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -329,21 +297,41 @@
 			name = "Recovered References";
 			sourceTree = "<group>";
 		};
-		D253D113250CA2D800A363E4 /* Profile */ = {
+		D286EC94250DBD6100815EED /* PasswordlessLogin */ = {
 			isa = PBXGroup;
 			children = (
-				D253D114250CA2FF00A363E4 /* ProfileView.swift */,
-				D253D120250CB22400A363E4 /* PatientIDView.swift */,
-				D253D116250CA73100A363E4 /* ChangePasscodeView.swift */,
-				D253D118250CA7C400A363E4 /* PasscodeVC.swift */,
-				D253D11C250CAAD200A363E4 /* HelpView.swift */,
-				D253D124250CB3AF00A363E4 /* ReportView.swift */,
-				D253D128250CBF2800A363E4 /* SupportView.swift */,
-				D253D11E250CAC8E00A363E4 /* ConsentDocumentView.swift */,
-				D253D122250CB31F00A363E4 /* WithdrawView.swift */,
-				D253D126250CB57600A363E4 /* WithdrawalVC.swift */,
+				8E0A439F244A4A0400656518 /* PasswordlessLoginStep.swift */,
+				8E0A43A0244A4A0400656518 /* LoginCustomWaitStep */,
 			);
-			path = Profile;
+			path = PasswordlessLogin;
+			sourceTree = "<group>";
+		};
+		D286EC95250DBD7400815EED /* LoginStep */ = {
+			isa = PBXGroup;
+			children = (
+				E2DF9F052500B9F000A93B93 /* LoginStep.swift */,
+				E2DF9F092500C9CE00A93B93 /* LoginViewController.swift */,
+			);
+			path = LoginStep;
+			sourceTree = "<group>";
+		};
+		D286EC98250DC03D00815EED /* Setup */ = {
+			isa = PBXGroup;
+			children = (
+				8E0A4396244A4A0400656518 /* AppDelegate.swift */,
+				8EBE6F9B24B3C0E60093D07C /* AppDelegate+CardinalKit.swift */,
+				E235077624F7082700CC1899 /* SceneDelegate.swift */,
+				D286EC96250DC02F00815EED /* LaunchContainerView.swift */,
+			);
+			path = Setup;
+			sourceTree = "<group>";
+		};
+		D286EC99250DC07C00815EED /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				8E0A4382244A4A0400656518 /* CKStudyUser.swift */,
+			);
+			path = Account;
 			sourceTree = "<group>";
 		};
 		E29143FA24E74AB700EE97B2 /* User Interface */ = {
@@ -355,7 +343,6 @@
 				E29143FD24E769F000EE97B2 /* StudiesUI.swift */,
 				A04B9C58250D8D1F006D0D3F /* UIData.swift */,
 				A04B9C5A250D9162006D0D3F /* WelcomeNotificationView.swift */,
-				D253D113250CA2D800A363E4 /* Profile */,
 			);
 			path = "User Interface";
 			sourceTree = "<group>";
@@ -516,7 +503,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2DF9F0A2500C9CE00A93B93 /* LoginViewController.swift in Sources */,
-				8E0A43A8244A4A0400656518 /* StaticProfileViewController.swift in Sources */,
 				D253D119250CA7C400A363E4 /* PasscodeVC.swift in Sources */,
 				E29143FC24E74AD100EE97B2 /* OnboardingUI.swift in Sources */,
 				8E0A43C0244A4A0400656518 /* PasswordlessLoginStep.swift in Sources */,
@@ -526,8 +512,6 @@
 				8E0A43B3244A4A0400656518 /* StudyTasks.swift in Sources */,
 				8E40DC042471E5940027536B /* CKNetworkManager.swift in Sources */,
 				D253D11F250CAC8E00A363E4 /* ConsentDocumentView.swift in Sources */,
-				8E0A43BC244A4A0400656518 /* OnboardingViewController.swift in Sources */,
-				8E0A43BD244A4A0400656518 /* IntroductionViewController.swift in Sources */,
 				E2DF9F062500B9F000A93B93 /* LoginStep.swift in Sources */,
 				8EBE6F9C24B3C0E60093D07C /* AppDelegate+CardinalKit.swift in Sources */,
 				D253D129250CBF2800A363E4 /* SupportView.swift in Sources */,
@@ -535,7 +519,6 @@
 				E29143FE24E769F000EE97B2 /* StudiesUI.swift in Sources */,
 				D253D115250CA2FF00A363E4 /* ProfileView.swift in Sources */,
 				8E0A43B4244A4A0400656518 /* StudyTableViewCell.swift in Sources */,
-				8E0A43A7244A4A0400656518 /* ProfileTableItem.swift in Sources */,
 				D253D125250CB3AF00A363E4 /* ReportView.swift in Sources */,
 				8E0A43B5244A4A0400656518 /* StudyTableItem.swift in Sources */,
 				8E0A43AD244A4A0400656518 /* Constants.swift in Sources */,
@@ -543,7 +526,6 @@
 				D253D121250CB22400A363E4 /* PatientIDView.swift in Sources */,
 				D253D117250CA73100A363E4 /* ChangePasscodeView.swift in Sources */,
 				8E0A43AE244A4A0400656518 /* ORKESerialization.m in Sources */,
-				8E0A43B2244A4A0400656518 /* StudyTableViewController.swift in Sources */,
 				8E0A43AC244A4A0400656518 /* CKStudyUser.swift in Sources */,
 				8E0A43C3244A4A0400656518 /* LoginCustomWaitStepViewController.swift in Sources */,
 				A04B9C59250D8D1F006D0D3F /* UIData.swift in Sources */,
@@ -551,9 +533,7 @@
 				E2F1FD7624D61EDA006C39DF /* CKPropertyReader.swift in Sources */,
 				E235077724F7082700CC1899 /* SceneDelegate.swift in Sources */,
 				D253D12D250CF9C400A363E4 /* CKSignInWithAppleStep.swift in Sources */,
-				8E67519C24B7ACB7004EC405 /* StudyTableViewController+CardinalKit.swift in Sources */,
-				8E0A43AA244A4A0400656518 /* WithdrawalViewController.swift in Sources */,
-				8E0A43BA244A4A0400656518 /* LaunchContainerViewController.swift in Sources */,
+				D286EC97250DC02F00815EED /* LaunchContainerView.swift in Sources */,
 				D253D123250CB31F00A363E4 /* WithdrawView.swift in Sources */,
 				8E0A43C2244A4A0400656518 /* ConsentDocument.swift in Sources */,
 			);
