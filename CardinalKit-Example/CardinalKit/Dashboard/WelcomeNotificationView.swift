@@ -59,6 +59,7 @@ struct WelcomeNotificationView: View {
 
 struct WelcomeNotificationView_Previews: PreviewProvider {
     static var previews: some View {
-        WelcomeNotificationView(color: .gray).environmentObject(NotificationsAndResults())
+        WelcomeNotificationView(color: .gray)
+            .environmentObject(NotificationsAndResults())
     }
 }

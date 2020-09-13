@@ -28,19 +28,28 @@ class NotificationsAndResults: ObservableObject {
     @Published var results: [Result]
     
     init() {
-        currNotifications = [Notification(testName: "Trailmaking B", text: "test is avalible now", action: true)]
-        upcomingNotifications = [Notification(testName: "Trailmaking A", text: "test can be taken starting 'Date'", action: false), Notification(testName: "Spacital Memory", text: "test is coming up 'Date', please consume a moderate amount of caffine only", action: false), Notification(testName: "Amsler Grid", text: "test is coming up 'Date', please be mindful of eyes usage", action: false)]
-        results = [Result(testName: "Trailmaking A", scores: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10])]
+        currNotifications = [
+            Notification(testName: "Trailmaking B", text: "test is avalible now", action: true)
+        ]
+        upcomingNotifications = [
+            Notification(testName: "Trailmaking A", text: "test can be taken starting 'Date'", action: false),
+            Notification(testName: "Spatial Memory", text: "test is coming up 'Date', please consume a moderate amount of caffine only", action: false),
+            Notification(testName: "Amsler Grid", text: "test is coming up 'Date', please be mindful of eyes usage", action: false)
+        ]
+        results = [
+            Result(testName: "Trailmaking A", scores: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+        ]
     }
     
     func getTestIndex(testName: String) -> Int {
         switch testName {
-            case "Trailmaking A": return 0
-            case "Trailmaking B": return 1
-            case "Spatial Memory": return 2
-            case "Speech Recognition:": return 3
-            case "Amsler Grid": return 4
-            default: return 0
+            case "Trailmaking A": return 1
+            case "Trailmaking B": return 2
+            case "Spatial Memory": return 3
+            case "Speech Recognition:": return 4
+            case "Amsler Grid": return 5
+            default:
+                fatalError("Unrecognized test \(testName)")
         }
     }
 }
