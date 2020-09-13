@@ -26,8 +26,9 @@ struct NotificationBubble: View {
                 .foregroundColor(textColor)
 
             if notification.action {
-                Button("Take Test") {
-                    self.showingPopup = true
+                Button(action: {self.showingPopup = true}) {
+                    Text("Take Test")
+                        .fixedSize()
                 }
                 .foregroundColor(.black)
                 .padding(10)
@@ -50,7 +51,7 @@ struct NotificationBubble: View {
         .frame(maxWidth: .infinity)
         .background(self.backGroundColor)
         .cornerRadius(15)
-        .shadow(color: Color(UIColor.placeholderText), radius: 5, x: 3, y: 3)
+        .shadow(radius: 5)
         .blur(radius: self.showingPopup ? 4 : 0)
     }
 }

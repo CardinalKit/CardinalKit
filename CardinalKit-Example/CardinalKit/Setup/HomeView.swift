@@ -35,12 +35,12 @@ struct HomeView: View {
                 Text("Statistics")
             }
 
-            ActivitiesView(color: color)
-                .tabItem {
-                    Image("tab_activities")
-                        .renderingMode(.template)
-                    Text("Testing Activities")
-                }
+//            ActivitiesView(color: color)
+//                .tabItem {
+//                    Image("tab_activities")
+//                        .renderingMode(.template)
+//                    Text("Testing Activities")
+//                }
 
             ProfileView(color: color)
                 .tabItem {

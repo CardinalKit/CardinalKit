@@ -42,7 +42,7 @@ struct WelcomeNotificationView: View {
                         showingTestDetail: self.$showingTestDetail,
                         currTestIndex: self.$currTestIndex,
                         notification: notification,
-                        backGroundColor: Color(UIColor.systemGroupedBackground),
+                        backGroundColor: .white /*Color(UIColor.systemGroupedBackground)*/,
                         textColor: self.color
                     )
                     .padding(3)
