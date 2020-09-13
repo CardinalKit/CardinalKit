@@ -33,9 +33,9 @@ struct NotificationBubble: View {
                         }) {
                             Text("Take Test").foregroundColor(.black)
                         }
-                        .padding(1)
+                        .padding(10)
                         .background(Color.white)
-                        .cornerRadius(10)
+                        .cornerRadius(8)
                         .alert(isPresented: self.$showingPopup) {
                             Alert(title: Text("Are you sure you want to take the test?"), message: Text("You may only take the test if you are in an adequate mental state"), primaryButton: .default(Text("Take Test"), action: {
                                 self.currTestIndex = self.data.getTestIndex(testName: self.notification.testName)
