@@ -19,23 +19,18 @@ struct OnboardingElement {
 }
 
 struct OnboardingUI: View {
-    
-    var onboardingElements: [OnboardingElement] = []
-    let color: Color
-    let config = CKPropertyReader(file: "CKConfiguration")
+    var onboardingElements: [OnboardingElement] {
+        let onboardingData = config.readAny(query: "Onboarding") as! [[String:String]]
+        return onboardingData.map { data in
+            OnboardingElement(logo: data["Logo"]!, title: data["Title"]!, description: data["Description"]!)
+        }
+    }
+    var color: Color {
+        return Color(config.readColor(query: "Primary Color"))
+    }
+    @EnvironmentObject var config: CKPropertyReader
     @State var showingDetail = false
     @State var showingStudyTasks = false
-    
-    init() {
-        let onboardingData = config.readAny(query: "Onboarding") as! [[String:String]]
-        
-        self.color = Color(config.readColor(query: "Primary Color"))
-        
-        for data in onboardingData {
-            self.onboardingElements.append(OnboardingElement(logo: data["Logo"]!, title: data["Title"]!, description: data["Description"]!))
-        }
-        
-    }
 
     var body: some View {
         VStack(spacing: 10) {
@@ -111,14 +106,11 @@ struct OnboardingVC: UIViewControllerRepresentable {
         Coordinator()
     }
 
-
     typealias UIViewControllerType = ORKTaskViewController
 
     @EnvironmentObject var config: CKPropertyReader
 
     func makeUIViewController(context: Context) -> ORKTaskViewController {
-        let config = CKPropertyReader(file: "CKConfiguration")
-
         /* **************************************************************
          * MARK: - STEP (1): get user consent
          **************************************************************/
