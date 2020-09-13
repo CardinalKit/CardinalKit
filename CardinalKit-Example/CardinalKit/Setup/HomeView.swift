@@ -25,6 +25,15 @@ struct HomeView: View {
                     .renderingMode(.template)
                 Text("Home")
             }
+            
+            NavigationView {
+                StatisticsView(color: color).navigationBarTitle("Statistics")
+            }
+            .tabItem {
+                Image(systemName: "gauge")
+                    .renderingMode(.template)
+                Text("Statistics")
+            }
 
             ActivitiesView(color: color)
                 .tabItem {

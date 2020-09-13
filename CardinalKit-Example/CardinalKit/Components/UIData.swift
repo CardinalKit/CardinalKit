@@ -19,7 +19,7 @@ struct Notification: Identifiable {
 struct Result: Identifiable {
     let id = UUID()
     let testName: String
-    let scores: [Any]
+    let scores: [Int]
 }
 
 class NotificationsAndResults: ObservableObject {
@@ -51,5 +51,9 @@ class NotificationsAndResults: ObservableObject {
             default:
                 fatalError("Unrecognized test \(testName)")
         }
+    }
+    
+    func getLastestScore(scores: [Int]) -> Int {
+        return scores[0] // change based on the method used to sort the scores array by time (old->new OR new-> old)
     }
 }
