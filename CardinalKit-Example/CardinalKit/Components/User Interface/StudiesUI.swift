@@ -29,6 +29,7 @@ struct StudiesUI: View {
                     Text("Activities")
             }
             
+            // add a visualizations tab to your app!
             VisualizationsView(color: self.color)
                 .tabItem {
                     Image("tab_dashboard").renderingMode(.template)
@@ -151,9 +152,11 @@ struct VisualizationsView: View {
             Text(config.read(query: "Team Name")).font(.system(size: 15, weight:.light))
             List {
                 Section(header: Text("Patient Data")) {
+                    
                     ForEach(0 ..< self.visualizations.count) {
                         VisualizationView(data: self.visualizations[$0])
                     }
+                    
                 }.listRowBackground(Color.white)
             }.listStyle(GroupedListStyle())
         }
@@ -195,18 +198,25 @@ struct VisualizationView: View {
 struct VisualizationInspectionView: View {
     var data: VisualizationData
     
-    // only supporting PieCharts currently
-    var chart: PieChart
+    // samples
+    var pieChart: PieChart
+    var discreteGraph: DiscreteGraph
+    var lineGraph: LineGraph
     
     init (data: VisualizationData) {
         self.data = data
-        self.chart = PieChart(visualizationData: data)
+        
+        // init samples
+        self.pieChart = PieChart(visualizationData: data)
+        self.discreteGraph = DiscreteGraph(visualizationData: data)
+        self.lineGraph = LineGraph(visualizationData: data)
     }
     
     @Environment(\.presentationMode) var presentationMode
     var body: some View {
         VStack {
             Spacer()
+            
             HStack {
                 VStack {
                     Text(self.data.title)
@@ -214,11 +224,20 @@ struct VisualizationInspectionView: View {
                 }
                 Text(self.data.type)
             }
-            Spacer()
-            self.chart
-            Spacer()
+            
+            // 'render' samples
+            Group {
+                Spacer()
+                self.pieChart
+                Spacer()
+                self.discreteGraph
+                Spacer()
+                self.lineGraph
+            }
+
             Button(action: { self.presentationMode.wrappedValue.dismiss() })
             { Text("Back") }
+            
             Spacer()
         }
     }
@@ -237,20 +256,31 @@ struct VisualizationData: Identifiable {
     }
 }
 
+// reference: http://researchkit.org/docs/Classes/ORKPieChartView.html
 struct PieChart: UIViewRepresentable {
-    // required
-    func makeUIView(context: UIViewRepresentableContext<PieChart>) -> ORKPieChartView {
-        return self.chart
-    }
-    
-    // required
-    func updateUIView(_ uiView: ORKPieChartView, context: UIViewRepresentableContext<PieChart>) {
-        // no-operation
-    }
     
     typealias UIViewType = ORKPieChartView
     var chart: ORKPieChartView
     var dataSource: ORKPieChartViewDataSource
+    
+    init (visualizationData: VisualizationData) {
+        // make a new Chart and it's dataSource, then bind
+        self.chart = ORKPieChartView()
+        self.dataSource = PieChartDataSource()
+        self.chart.dataSource = self.dataSource
+        
+        // binding Chart props from visualizationData
+        self.chart.text = visualizationData.description
+        self.chart.title = visualizationData.title
+    }
+    
+    func makeUIView(context: UIViewRepresentableContext<PieChart>) -> ORKPieChartView {
+        return self.chart
+    }
+    
+    func updateUIView(_ uiView: ORKPieChartView, context: UIViewRepresentableContext<PieChart>) {
+        // noop
+    }
     
     class PieChartDataSource: NSObject, ORKPieChartViewDataSource {
         // placeholder
@@ -285,16 +315,153 @@ struct PieChart: UIViewRepresentable {
             }
         }
     }
+}
+
+// reference: http://researchkit.org/docs/Classes/ORKLineGraphChartView.html
+struct LineGraph: UIViewRepresentable {
+    
+    typealias UIViewType = ORKLineGraphChartView
+    var chart: ORKLineGraphChartView
+    var dataSource: ORKValueRangeGraphChartViewDataSource
     
     init (visualizationData: VisualizationData) {
-        // make a new Chart and it's dataSource, then bind
-        self.chart = ORKPieChartView()
-        self.dataSource = PieChartDataSource()
+        // make a new Graph and it's dataSource, then bind
+        self.chart = ORKLineGraphChartView()
+        self.dataSource = LineGraphDataSource()
         self.chart.dataSource = self.dataSource
         
-        // binding Chart props from visualizationData
-        self.chart.text = visualizationData.description
-        self.chart.title = visualizationData.title
+        // binding Graph props from visualizationData
+    }
+    
+    func makeUIView(context: UIViewRepresentableContext<LineGraph>) -> ORKLineGraphChartView {
+        return self.chart
+    }
+    
+    func updateUIView(_ uiView: ORKLineGraphChartView, context: UIViewRepresentableContext<LineGraph>) {
+        // noop
+    }
+    
+    class LineGraphDataSource: NSObject, ORKValueRangeGraphChartViewDataSource {
+        // placeholder
+        let colors = [
+            UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1),
+            UIColor(red: 100/255, green: 255/255, blue: 255/255, alpha: 1),
+            UIColor(red: 0/255, green: 255/255, blue: 255/255, alpha: 1),
+            UIColor(red: 255/255, green: 0/255, blue: 255/255, alpha: 1)
+        ]
+        
+        // needs to be loaded dynamically
+        let values = [
+            [
+                ORKValueRange(value: 200),
+                ORKValueRange(value: 450),
+                ORKValueRange(value: 500),
+                ORKValueRange(value: 250),
+                ORKValueRange(value: 300),
+                ORKValueRange(value: 600),
+                ORKValueRange(value: 300),
+            ],
+            [
+                ORKValueRange(value: 100),
+                ORKValueRange(value: 350),
+                ORKValueRange(value: 400),
+                ORKValueRange(value: 150),
+                ORKValueRange(value: 200),
+                ORKValueRange(value: 500),
+                ORKValueRange(value: 400),
+            ]
+        ]
+        
+        func graphChartView(_ graphChartView: ORKGraphChartView, dataPointForPointIndex pointIndex: Int, plotIndex: Int) -> ORKValueRange {
+            return values[plotIndex][pointIndex]
+        }
+        
+        func graphChartView(_ graphChartView: ORKGraphChartView, numberOfDataPointsForPlotIndex plotIndex: Int) -> Int {
+            return values[plotIndex].count
+        }
+        
+        func numberOfPlots(in graphChartView: ORKGraphChartView) -> Int {
+            return values.count
+        }
+        
+        func graphChartView(_ graphChartView: ORKGraphChartView, colorForPlotIndex plotIndex: Int) -> UIColor {
+            return colors[plotIndex]
+        }
+    }
+}
+
+// reference: http://researchkit.org/docs/Classes/ORKDiscreteGraphChartView.html
+struct DiscreteGraph: UIViewRepresentable {
+    
+    typealias UIViewType = ORKDiscreteGraphChartView
+    var chart: ORKDiscreteGraphChartView
+    var dataSource: ORKValueRangeGraphChartViewDataSource
+    
+    init (visualizationData: VisualizationData) {
+        // make a new Graph and it's dataSource, then bind
+        self.chart = ORKDiscreteGraphChartView()
+        self.dataSource = DiscreteGraphDataSource()
+        self.chart.dataSource = self.dataSource
+        
+        // binding Graph props from visualizationData
+    }
+    
+    // required
+    func makeUIView(context: UIViewRepresentableContext<DiscreteGraph>) -> ORKDiscreteGraphChartView {
+        return self.chart
+    }
+    
+    // required
+    func updateUIView(_ uiView: ORKDiscreteGraphChartView, context: UIViewRepresentableContext<DiscreteGraph>) {
+        // no-operation
+    }
+    
+    class DiscreteGraphDataSource: NSObject, ORKValueRangeGraphChartViewDataSource {
+        // placeholder
+        let colors = [
+            UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1),
+            UIColor(red: 100/255, green: 255/255, blue: 255/255, alpha: 1),
+            UIColor(red: 0/255, green: 255/255, blue: 255/255, alpha: 1),
+            UIColor(red: 255/255, green: 0/255, blue: 255/255, alpha: 1)
+        ]
+        
+        // needs to be loaded dynamically
+        let values = [
+            [
+                ORKValueRange(value: 200),
+                ORKValueRange(value: 450),
+                ORKValueRange(value: 500),
+                ORKValueRange(value: 250),
+                ORKValueRange(value: 300),
+                ORKValueRange(value: 600),
+                ORKValueRange(value: 300),
+            ],
+            [
+                ORKValueRange(value: 100),
+                ORKValueRange(value: 350),
+                ORKValueRange(value: 400),
+                ORKValueRange(value: 150),
+                ORKValueRange(value: 200),
+                ORKValueRange(value: 500),
+                ORKValueRange(value: 400),
+            ]
+        ]
+        
+        func graphChartView(_ graphChartView: ORKGraphChartView, dataPointForPointIndex pointIndex: Int, plotIndex: Int) -> ORKValueRange {
+            return values[plotIndex][pointIndex]
+        }
+        
+        func graphChartView(_ graphChartView: ORKGraphChartView, numberOfDataPointsForPlotIndex plotIndex: Int) -> Int {
+            return values[plotIndex].count
+        }
+        
+        func numberOfPlots(in graphChartView: ORKGraphChartView) -> Int {
+            return values.count
+        }
+        
+        func graphChartView(_ graphChartView: ORKGraphChartView, colorForPlotIndex plotIndex: Int) -> UIColor {
+            return colors[plotIndex]
+        }
     }
 }
 
