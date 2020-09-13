@@ -41,6 +41,7 @@
 		D253D12B250CD16400A363E4 /* PageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D253D12A250CD16400A363E4 /* PageView.swift */; };
 		D253D12D250CF9C400A363E4 /* CKSignInWithAppleStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = D253D12C250CF9C400A363E4 /* CKSignInWithAppleStep.swift */; };
 		D286EC97250DC02F00815EED /* LaunchContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D286EC96250DC02F00815EED /* LaunchContainerView.swift */; };
+		D286ECB6250DE9EF00815EED /* PlainList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D286ECB5250DE9EF00815EED /* PlainList.swift */; };
 		E235077724F7082700CC1899 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E235077624F7082700CC1899 /* SceneDelegate.swift */; };
 		E290FB1D24FF4BBA00D19BE9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E290FB1C24FF4BBA00D19BE9 /* GoogleService-Info.plist */; };
 		E29143FC24E74AD100EE97B2 /* OnboardingUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29143FB24E74AD100EE97B2 /* OnboardingUI.swift */; };
@@ -100,6 +101,7 @@
 		D253D12A250CD16400A363E4 /* PageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageView.swift; sourceTree = "<group>"; };
 		D253D12C250CF9C400A363E4 /* CKSignInWithAppleStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKSignInWithAppleStep.swift; sourceTree = "<group>"; };
 		D286EC96250DC02F00815EED /* LaunchContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchContainerView.swift; sourceTree = "<group>"; };
+		D286ECB5250DE9EF00815EED /* PlainList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainList.swift; sourceTree = "<group>"; };
 		DF8FAFB3C7221261A7397AFD /* Pods-TrialX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrialX.debug.xcconfig"; path = "Target Support Files/Pods-TrialX/Pods-TrialX.debug.xcconfig"; sourceTree = "<group>"; };
 		E235077624F7082700CC1899 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		E290FB1C24FF4BBA00D19BE9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -259,6 +261,8 @@
 		8E0A43C5244A4A5700656518 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				D253D12A250CD16400A363E4 /* PageView.swift */,
+				D286ECB5250DE9EF00815EED /* PlainList.swift */,
 				D286EC98250DC03D00815EED /* Setup */,
 				8E0A4399244A4A0400656518 /* Onboarding */,
 				8E0A438D244A4A0400656518 /* Study */,
@@ -341,7 +345,6 @@
 			children = (
 				E29143FB24E74AD100EE97B2 /* OnboardingUI.swift */,
 				D253D12C250CF9C400A363E4 /* CKSignInWithAppleStep.swift */,
-				D253D12A250CD16400A363E4 /* PageView.swift */,
 				E29143FD24E769F000EE97B2 /* StudiesUI.swift */,
 				A04B9C58250D8D1F006D0D3F /* UIData.swift */,
 				A04B9C5A250D9162006D0D3F /* WelcomeNotificationView.swift */,
@@ -511,6 +514,7 @@
 				D253D11D250CAAD200A363E4 /* HelpView.swift in Sources */,
 				D253D127250CB57600A363E4 /* WithdrawalVC.swift in Sources */,
 				D253D12B250CD16400A363E4 /* PageView.swift in Sources */,
+				D286ECB6250DE9EF00815EED /* PlainList.swift in Sources */,
 				8E0A43B3244A4A0400656518 /* StudyTasks.swift in Sources */,
 				8E40DC042471E5940027536B /* CKNetworkManager.swift in Sources */,
 				D253D11F250CAC8E00A363E4 /* ConsentDocumentView.swift in Sources */,
