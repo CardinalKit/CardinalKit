@@ -13,17 +13,12 @@ struct WelcomeNotificationView: View {
     @EnvironmentObject var config: CKPropertyReader
     @State private var showingPopup = false
     @State private var showingTestDetail = false
-    let color: Color
-    let date: String
-    let activities: [StudyItem]
-    @State var currTestIndex = 0
+    @State private var currTestIndex = 0
+    let date = DateFormatter.mediumDate.string(from: Date())
+    let activities = StudyTableItem.allCases.map { StudyItem(study: $0) }
 
-    init(color: Color) {
-        self.color = color
-        self.date = DateFormatter.mediumDate.string(from: Date())
-        self.activities = StudyTableItem.allCases.map { StudyItem(study: $0) }
-    }
-    
+    let color: Color
+
     var body: some View {
         PlainList {
             Section(header: Text("Avaliable Test(s)")) {

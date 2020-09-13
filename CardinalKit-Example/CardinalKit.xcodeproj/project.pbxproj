@@ -8,12 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		69DC6BB1DB8FF78AE696891C /* Pods_TrialX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67775C73890913676E2A3907 /* Pods_TrialX.framework */; };
-		6BCA5EE4250DFA4E00940CE2 /* images.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BCA5EE3250DFA4E00940CE2 /* images.png */; };
-		6BCA5EE6250DFA8700940CE2 /* download.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BCA5EE5250DFA8700940CE2 /* download.png */; };
-		6BCA5EE8250DFAC200940CE2 /* download.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6BCA5EE7250DFAC100940CE2 /* download.jpg */; };
-		6BCA5EEA250DFADD00940CE2 /* download-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BCA5EE9250DFADD00940CE2 /* download-1.png */; };
-		6BCA5EEC250DFAE700940CE2 /* download-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BCA5EEB250DFAE700940CE2 /* download-2.png */; };
-		6BCA5EF0250DFE9600940CE2 /* download-3.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BCA5EEF250DFE9600940CE2 /* download-3.png */; };
 		8E0A43AC244A4A0400656518 /* CKStudyUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4382244A4A0400656518 /* CKStudyUser.swift */; };
 		8E0A43AD244A4A0400656518 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4384244A4A0400656518 /* Constants.swift */; };
 		8E0A43AE244A4A0400656518 /* ORKESerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4386244A4A0400656518 /* ORKESerialization.m */; };
@@ -48,10 +42,16 @@
 		D253D12D250CF9C400A363E4 /* CKSignInWithAppleStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = D253D12C250CF9C400A363E4 /* CKSignInWithAppleStep.swift */; };
 		D286EC97250DC02F00815EED /* LaunchContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D286EC96250DC02F00815EED /* LaunchContainerView.swift */; };
 		D286ECB6250DE9EF00815EED /* PlainList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D286ECB5250DE9EF00815EED /* PlainList.swift */; };
+		D286ECB8250E087F00815EED /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D286ECB7250E087F00815EED /* HomeView.swift */; };
+		D286ECBA250E091500815EED /* EmailHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D286ECB9250E091500815EED /* EmailHelper.swift */; };
+		D286ECBC250E0A1500815EED /* ActivitiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D286ECBB250E0A1500815EED /* ActivitiesView.swift */; };
+		D286ECBE250E0A4800815EED /* StudyItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D286ECBD250E0A4800815EED /* StudyItem.swift */; };
+		D286ECC0250E0A6500815EED /* DocumentPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = D286ECBF250E0A6500815EED /* DocumentPreview.swift */; };
+		D286ECC3250E0ABF00815EED /* TaskVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D286ECC2250E0ABF00815EED /* TaskVC.swift */; };
+		D286ECC5250E0E0700815EED /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D286ECC4250E0E0700815EED /* Extensions.swift */; };
 		E235077724F7082700CC1899 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E235077624F7082700CC1899 /* SceneDelegate.swift */; };
 		E290FB1D24FF4BBA00D19BE9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E290FB1C24FF4BBA00D19BE9 /* GoogleService-Info.plist */; };
 		E29143FC24E74AD100EE97B2 /* OnboardingUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29143FB24E74AD100EE97B2 /* OnboardingUI.swift */; };
-		E29143FE24E769F000EE97B2 /* StudiesUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29143FD24E769F000EE97B2 /* StudiesUI.swift */; };
 		E2DF9F062500B9F000A93B93 /* LoginStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DF9F052500B9F000A93B93 /* LoginStep.swift */; };
 		E2DF9F0A2500C9CE00A93B93 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DF9F092500C9CE00A93B93 /* LoginViewController.swift */; };
 		E2F1FD7624D61EDA006C39DF /* CKPropertyReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F1FD7524D61EDA006C39DF /* CKPropertyReader.swift */; };
@@ -68,12 +68,6 @@
 		62AA5CD1C2188D392530510F /* CardinalKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = CardinalKit.podspec; path = ../CardinalKit.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		630884219A5CB1E45383122C /* Pods-CardinalKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardinalKit_Example.release.xcconfig"; path = "Target Support Files/Pods-CardinalKit_Example/Pods-CardinalKit_Example.release.xcconfig"; sourceTree = "<group>"; };
 		67775C73890913676E2A3907 /* Pods_TrialX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TrialX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6BCA5EE3250DFA4E00940CE2 /* images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = images.png; path = ../../../../../Desktop/images.png; sourceTree = "<group>"; };
-		6BCA5EE5250DFA8700940CE2 /* download.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = download.png; path = ../../../../../Desktop/download.png; sourceTree = "<group>"; };
-		6BCA5EE7250DFAC100940CE2 /* download.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = download.jpg; path = ../../../../../Desktop/download.jpg; sourceTree = "<group>"; };
-		6BCA5EE9250DFADD00940CE2 /* download-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "download-1.png"; path = "../../../../../Desktop/download-1.png"; sourceTree = "<group>"; };
-		6BCA5EEB250DFAE700940CE2 /* download-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "download-2.png"; path = "../../../../../Desktop/download-2.png"; sourceTree = "<group>"; };
-		6BCA5EEF250DFE9600940CE2 /* download-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "download-3.png"; path = "../../../../../Desktop/download-3.png"; sourceTree = "<group>"; };
 		8E0A4378244A4A0300656518 /* TrialX-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TrialX-Bridging-Header.h"; sourceTree = "<group>"; };
 		8E0A4382244A4A0400656518 /* CKStudyUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKStudyUser.swift; sourceTree = "<group>"; };
 		8E0A4384244A4A0400656518 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -114,11 +108,17 @@
 		D253D12C250CF9C400A363E4 /* CKSignInWithAppleStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKSignInWithAppleStep.swift; sourceTree = "<group>"; };
 		D286EC96250DC02F00815EED /* LaunchContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchContainerView.swift; sourceTree = "<group>"; };
 		D286ECB5250DE9EF00815EED /* PlainList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainList.swift; sourceTree = "<group>"; };
+		D286ECB7250E087F00815EED /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		D286ECB9250E091500815EED /* EmailHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailHelper.swift; sourceTree = "<group>"; };
+		D286ECBB250E0A1500815EED /* ActivitiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesView.swift; sourceTree = "<group>"; };
+		D286ECBD250E0A4800815EED /* StudyItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyItem.swift; sourceTree = "<group>"; };
+		D286ECBF250E0A6500815EED /* DocumentPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPreview.swift; sourceTree = "<group>"; };
+		D286ECC2250E0ABF00815EED /* TaskVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskVC.swift; sourceTree = "<group>"; };
+		D286ECC4250E0E0700815EED /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		DF8FAFB3C7221261A7397AFD /* Pods-TrialX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrialX.debug.xcconfig"; path = "Target Support Files/Pods-TrialX/Pods-TrialX.debug.xcconfig"; sourceTree = "<group>"; };
 		E235077624F7082700CC1899 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		E290FB1C24FF4BBA00D19BE9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E29143FB24E74AD100EE97B2 /* OnboardingUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingUI.swift; sourceTree = "<group>"; };
-		E29143FD24E769F000EE97B2 /* StudiesUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudiesUI.swift; sourceTree = "<group>"; };
 		E2DF9F052500B9F000A93B93 /* LoginStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginStep.swift; sourceTree = "<group>"; };
 		E2DF9F092500C9CE00A93B93 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E2F1FD7524D61EDA006C39DF /* CKPropertyReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKPropertyReader.swift; sourceTree = "<group>"; };
@@ -174,6 +174,11 @@
 			isa = PBXGroup;
 			children = (
 				8E0A4383244A4A0400656518 /* Supporting Files */,
+				D286EC98250DC03D00815EED /* Setup */,
+				8E0A4399244A4A0400656518 /* Onboarding */,
+				8E0A438D244A4A0400656518 /* Study */,
+				E29143FA24E74AB700EE97B2 /* Dashboard */,
+				8E0A4379244A4A0400656518 /* Profile */,
 				8E0A43C5244A4A5700656518 /* Components */,
 			);
 			name = "CardinalKit-Example";
@@ -211,12 +216,6 @@
 			isa = PBXGroup;
 			children = (
 				8E0A4388244A4A0400656518 /* Assets.xcassets */,
-				6BCA5EEF250DFE9600940CE2 /* download-3.png */,
-				6BCA5EEB250DFAE700940CE2 /* download-2.png */,
-				6BCA5EE9250DFADD00940CE2 /* download-1.png */,
-				6BCA5EE7250DFAC100940CE2 /* download.jpg */,
-				6BCA5EE5250DFA8700940CE2 /* download.png */,
-				6BCA5EE3250DFA4E00940CE2 /* images.png */,
 				8E0A4385244A4A0400656518 /* ResearchKit */,
 				8E0A4389244A4A0400656518 /* LaunchScreen.storyboard */,
 				8E0A4384244A4A0400656518 /* Constants.swift */,
@@ -241,6 +240,8 @@
 		8E0A438D244A4A0400656518 /* Study */ = {
 			isa = PBXGroup;
 			children = (
+				D286ECBB250E0A1500815EED /* ActivitiesView.swift */,
+				D286ECBD250E0A4800815EED /* StudyItem.swift */,
 				8E0A438F244A4A0400656518 /* StudyTasks.swift */,
 				8E0A4390244A4A0400656518 /* StudyTableViewCell.swift */,
 				8E0A4391244A4A0400656518 /* StudyTableItem.swift */,
@@ -251,6 +252,7 @@
 		8E0A4399244A4A0400656518 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				E29143FB24E74AD100EE97B2 /* OnboardingUI.swift */,
 				8E0A439C244A4A0400656518 /* Steps */,
 			);
 			path = Onboarding;
@@ -261,6 +263,7 @@
 			children = (
 				D286EC94250DBD6100815EED /* PasswordlessLogin */,
 				D286EC95250DBD7400815EED /* LoginStep */,
+				D253D12C250CF9C400A363E4 /* CKSignInWithAppleStep.swift */,
 				8E0A439D244A4A0400656518 /* CKHealthDataStepViewController.swift */,
 				8E0A43A2244A4A0400656518 /* ConsentDocument.swift */,
 			);
@@ -279,15 +282,12 @@
 		8E0A43C5244A4A5700656518 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				D253D12A250CD16400A363E4 /* PageView.swift */,
-				D286ECB5250DE9EF00815EED /* PlainList.swift */,
-				D286EC98250DC03D00815EED /* Setup */,
-				8E0A4399244A4A0400656518 /* Onboarding */,
-				8E0A438D244A4A0400656518 /* Study */,
-				E29143FA24E74AB700EE97B2 /* User Interface */,
-				8E0A4379244A4A0400656518 /* Profile */,
+				A04B9C58250D8D1F006D0D3F /* UIData.swift */,
 				D286EC99250DC07C00815EED /* Account */,
 				8E40DC022471E5590027536B /* Networking */,
+				D286ECC1250E0A8700815EED /* View */,
+				D286ECB9250E091500815EED /* EmailHelper.swift */,
+				D286ECC4250E0E0700815EED /* Extensions.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -346,6 +346,7 @@
 				8EBE6F9B24B3C0E60093D07C /* AppDelegate+CardinalKit.swift */,
 				E235077624F7082700CC1899 /* SceneDelegate.swift */,
 				D286EC96250DC02F00815EED /* LaunchContainerView.swift */,
+				D286ECB7250E087F00815EED /* HomeView.swift */,
 			);
 			path = Setup;
 			sourceTree = "<group>";
@@ -358,17 +359,24 @@
 			path = Account;
 			sourceTree = "<group>";
 		};
-		E29143FA24E74AB700EE97B2 /* User Interface */ = {
+		D286ECC1250E0A8700815EED /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E29143FB24E74AD100EE97B2 /* OnboardingUI.swift */,
-				D253D12C250CF9C400A363E4 /* CKSignInWithAppleStep.swift */,
-				E29143FD24E769F000EE97B2 /* StudiesUI.swift */,
-				A04B9C58250D8D1F006D0D3F /* UIData.swift */,
+				D253D12A250CD16400A363E4 /* PageView.swift */,
+				D286ECB5250DE9EF00815EED /* PlainList.swift */,
+				D286ECBF250E0A6500815EED /* DocumentPreview.swift */,
+				D286ECC2250E0ABF00815EED /* TaskVC.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E29143FA24E74AB700EE97B2 /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
 				A04B9C5A250D9162006D0D3F /* WelcomeNotificationView.swift */,
 				A04B9C5C250DEB61006D0D3F /* NotificationBubble.swift */,
 			);
-			path = "User Interface";
+			path = Dashboard;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -435,15 +443,9 @@
 			files = (
 				8E0A43AF244A4A0400656518 /* Assets.xcassets in Resources */,
 				8E0A43B0244A4A0400656518 /* LaunchScreen.storyboard in Resources */,
-				6BCA5EF0250DFE9600940CE2 /* download-3.png in Resources */,
 				E2F1FD7824D62064006C39DF /* CKConfiguration.plist in Resources */,
-				6BCA5EE8250DFAC200940CE2 /* download.jpg in Resources */,
-				6BCA5EEC250DFAE700940CE2 /* download-2.png in Resources */,
-				6BCA5EE4250DFA4E00940CE2 /* images.png in Resources */,
 				8E0A43C1244A4A0400656518 /* LoginCustomWaitStepView.xib in Resources */,
-				6BCA5EE6250DFA8700940CE2 /* download.png in Resources */,
 				E290FB1D24FF4BBA00D19BE9 /* GoogleService-Info.plist in Resources */,
-				6BCA5EEA250DFADD00940CE2 /* download-1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -533,10 +535,14 @@
 			files = (
 				E2DF9F0A2500C9CE00A93B93 /* LoginViewController.swift in Sources */,
 				D253D119250CA7C400A363E4 /* PasscodeVC.swift in Sources */,
+				D286ECBE250E0A4800815EED /* StudyItem.swift in Sources */,
+				D286ECC3250E0ABF00815EED /* TaskVC.swift in Sources */,
 				E29143FC24E74AD100EE97B2 /* OnboardingUI.swift in Sources */,
 				8E0A43C0244A4A0400656518 /* PasswordlessLoginStep.swift in Sources */,
+				D286ECC0250E0A6500815EED /* DocumentPreview.swift in Sources */,
 				D253D11D250CAAD200A363E4 /* HelpView.swift in Sources */,
 				D253D127250CB57600A363E4 /* WithdrawalVC.swift in Sources */,
+				D286ECBC250E0A1500815EED /* ActivitiesView.swift in Sources */,
 				D253D12B250CD16400A363E4 /* PageView.swift in Sources */,
 				D286ECB6250DE9EF00815EED /* PlainList.swift in Sources */,
 				8E0A43B3244A4A0400656518 /* StudyTasks.swift in Sources */,
@@ -546,7 +552,7 @@
 				8EBE6F9C24B3C0E60093D07C /* AppDelegate+CardinalKit.swift in Sources */,
 				D253D129250CBF2800A363E4 /* SupportView.swift in Sources */,
 				8E0A43B9244A4A0400656518 /* AppDelegate.swift in Sources */,
-				E29143FE24E769F000EE97B2 /* StudiesUI.swift in Sources */,
+				D286ECC5250E0E0700815EED /* Extensions.swift in Sources */,
 				D253D115250CA2FF00A363E4 /* ProfileView.swift in Sources */,
 				8E0A43B4244A4A0400656518 /* StudyTableViewCell.swift in Sources */,
 				D253D125250CB3AF00A363E4 /* ReportView.swift in Sources */,
@@ -554,8 +560,10 @@
 				8E0A43AD244A4A0400656518 /* Constants.swift in Sources */,
 				8E0A43BE244A4A0400656518 /* CKHealthDataStepViewController.swift in Sources */,
 				D253D121250CB22400A363E4 /* PatientIDView.swift in Sources */,
+				D286ECB8250E087F00815EED /* HomeView.swift in Sources */,
 				D253D117250CA73100A363E4 /* ChangePasscodeView.swift in Sources */,
 				8E0A43AE244A4A0400656518 /* ORKESerialization.m in Sources */,
+				D286ECBA250E091500815EED /* EmailHelper.swift in Sources */,
 				A04B9C5D250DEB61006D0D3F /* NotificationBubble.swift in Sources */,
 				8E0A43AC244A4A0400656518 /* CKStudyUser.swift in Sources */,
 				8E0A43C3244A4A0400656518 /* LoginCustomWaitStepViewController.swift in Sources */,

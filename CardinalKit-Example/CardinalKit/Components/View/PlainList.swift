@@ -12,14 +12,18 @@ struct PlainList<Content: View>: View {
     var body: some View {
         Group {
             if #available(iOS 14, *) {
-                ScrollView {
+                ScrollView(showsIndicators: false) {
                     LazyVStack(content: content)
                     .padding()
                 }
             } else {
                 List(content: content)
-                    .onAppear{ UITableView.appearance().separatorStyle = .none }
-                    .onDisappear{ UITableView.appearance().separatorStyle = .singleLine }
+                    .onAppear{
+                        UITableView.appearance().separatorStyle = .none
+                    }
+                    .onDisappear{
+                        UITableView.appearance().separatorStyle = .singleLine
+                    }
             }
         }
     }

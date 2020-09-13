@@ -44,10 +44,7 @@ struct WithdrawalVC: UIViewControllerRepresentable {
 
     class Coordinator: NSObject, ORKTaskViewControllerDelegate {
         public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
-            switch reason {
-            case .completed:
-                UserDefaults.standard.set(false, forKey: "didCompleteOnboarding")
-
+            if case .completed = reason {
                 do {
                     try Auth.auth().signOut()
 
@@ -55,18 +52,15 @@ struct WithdrawalVC: UIViewControllerRepresentable {
                         ORKPasscodeViewController.removePasscodeFromKeychain()
                     }
 
-                    taskViewController.dismiss(animated: true, completion: {
-                        exit(EXIT_SUCCESS)
-                    })
-
+                    return taskViewController.dismiss(animated: true) {
+                        UserDefaults.standard.showHomeScreen = false
+                    }
                 } catch {
                     print(error.localizedDescription)
                     Alerts.showInfo(title: "Error", message: error.localizedDescription)
                 }
-            default:
-                // otherwise dismiss onboarding without proceeding.
-                taskViewController.dismiss(animated: true, completion: nil)
             }
+            taskViewController.dismiss(animated: true)
         }
     }
 }

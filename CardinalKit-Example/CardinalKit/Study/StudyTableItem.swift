@@ -69,49 +69,15 @@ enum StudyTableItem: Int, CaseIterable {
         case .survey:
             return UIImage(named: "survey.png")!
         case .trailMakingA:
-            //return UIImage(named: "Trail Making A")
             return UIImage(named: "trailA.png")!
         case .trailMakingB:
-            //return UIImage(named: "Trail Making B")
             return UIImage(named: "trailB.png")!
         case .spatial:
-            //return UIImage(named: "Spatial Memory Test")
             return UIImage(named: "spatial.png")!
         case .speechRecognition:
-        //return UIImage(named: "Spatial Memory Test")
             return UIImage(named: "speech.png")!
         case .amslerGrid:
             return UIImage(named: "amsler.png")!
         }
     }
-    
-//    case coffee
-//
-//    var task: ORKOrderedTask {
-//        switch self {
-//        case .coffee:
-//            return StudyTasks.coffeeTask
-//        }
-//    }
-//
-//    var title: String {
-//        switch self {
-//        case .coffee:
-//            return "Coffee Task"
-//        }
-//    }
-//
-//    var subtitle: String {
-//        switch self {
-//        case .coffee:
-//            return "Record your coffee intake for the day."
-//        }
-//    }
-//
-//    var image: UIImage? {
-//        switch self {
-//        case .coffee:
-//            return UIImage(named: "CoffeeIcon")
-//        }
-//    }
 }

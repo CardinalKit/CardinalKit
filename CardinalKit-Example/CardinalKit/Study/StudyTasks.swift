@@ -84,31 +84,31 @@ struct StudyTasks {
     static let trailMakingA: ORKOrderedTask = {
         let intendedUseDescription = "Trail Making A"
         
-        return ORKOrderedTask.trailmakingTask(withIdentifier: "Trail making A", intendedUseDescription: intendedUseDescription, trailmakingInstruction: "", trailType: .A, options: ORKPredefinedTaskOption())
+        return ORKOrderedTask.trailmakingTask(withIdentifier: "Trail making A", intendedUseDescription: intendedUseDescription, trailmakingInstruction: nil, trailType: .A, options: [])
     }()
     
     static let trailMakingB: ORKOrderedTask = {
         let intendedUseDescription = "Trail Making B"
         
-        return ORKOrderedTask.trailmakingTask(withIdentifier: "Trail making B", intendedUseDescription: intendedUseDescription, trailmakingInstruction: "", trailType: .B, options: ORKPredefinedTaskOption())
+        return ORKOrderedTask.trailmakingTask(withIdentifier: "Trail making B", intendedUseDescription: intendedUseDescription, trailmakingInstruction: nil, trailType: .B, options: [])
     }()
     
     static let spatial: ORKOrderedTask = {
         let intendedUseDescription = "Spatial Memory Test"
         
-        return ORKOrderedTask.spatialSpanMemoryTask(withIdentifier: "Spatial Memory", intendedUseDescription: intendedUseDescription, initialSpan: 4, minimumSpan: 2, maximumSpan: 8, playSpeed: 20, maximumTests: 3, maximumConsecutiveFailures: 5, customTargetImage: nil, customTargetPluralName: nil, requireReversal: false, options: ORKPredefinedTaskOption())
+        return ORKOrderedTask.spatialSpanMemoryTask(withIdentifier: "Spatial Memory", intendedUseDescription: intendedUseDescription, initialSpan: 4, minimumSpan: 2, maximumSpan: 8, playSpeed: 20, maximumTests: 3, maximumConsecutiveFailures: 5, customTargetImage: nil, customTargetPluralName: nil, requireReversal: false, options: [])
     }()
     
    static let speechRecognition: ORKOrderedTask = {
        let intendedUseDescription = "Speech Recognition"
 
-    return ORKOrderedTask.speechRecognitionTask(withIdentifier: "Speech Recognition", intendedUseDescription: intendedUseDescription, speechRecognizerLocale: ORKSpeechRecognizerLocale(rawValue: "en-US"), speechRecognitionImage: nil, speechRecognitionText: "Today is Monday and the air is smokey and grey.", shouldHideTranscript: true, allowsEdittingTranscript: false, options: ORKPredefinedTaskOption())
+    return ORKOrderedTask.speechRecognitionTask(withIdentifier: "Speech Recognition", intendedUseDescription: intendedUseDescription, speechRecognizerLocale: ORKSpeechRecognizerLocale(rawValue: "en-US"), speechRecognitionImage: nil, speechRecognitionText: "Today is Monday and the air is smokey and grey.", shouldHideTranscript: true, allowsEdittingTranscript: false, options: [])
    }()
 
    static let amslerGrid: ORKOrderedTask = {
        let intendedUseDescription = "Amsler Grid"
 
-       return ORKOrderedTask.amslerGridTask(withIdentifier: "Amsler Grid", intendedUseDescription: intendedUseDescription, options: ORKPredefinedTaskOption())
+       return ORKOrderedTask.amslerGridTask(withIdentifier: "Amsler Grid", intendedUseDescription: intendedUseDescription, options: [])
    }()
     
     

@@ -18,6 +18,17 @@ struct OnboardingElement {
     let description: String
 }
 
+extension UserDefaults {
+    @objc dynamic var showHomeScreen: Bool {
+        get {
+            return bool(forKey: "didCompleteOnboarding")
+        }
+        set {
+            set(newValue, forKey: "didCompleteOnboarding")
+        }
+    }
+}
+
 struct OnboardingUI: View {
     var onboardingElements: [OnboardingElement] {
         let onboardingData = config.readAny(query: "Onboarding") as! [[String:String]]
@@ -34,12 +45,12 @@ struct OnboardingUI: View {
     }
     @EnvironmentObject var config: CKPropertyReader
     @State var showingDetail = false
-    @State var showingStudyTasks = false
+    @State var showHomeScreen: Bool = false
 
     var body: some View {
         VStack(spacing: 10) {
-            if showingStudyTasks {
-                StudiesUI()
+            if showHomeScreen {
+                HomeView()
                     .environmentObject(NotificationsAndResults())
             } else {
                 Spacer()
@@ -75,20 +86,19 @@ struct OnboardingUI: View {
                             .cornerRadius(15)
                             .font(.system(size: 20, weight: .bold, design: .default))
                     })
-                    .sheet(isPresented: $showingDetail, onDismiss: {
-                        self.showingStudyTasks = UserDefaults.standard.bool(forKey: "didCompleteOnboarding")
-                    }, content: {
+                    .sheet(isPresented: $showingDetail) {
                         OnboardingVC()
                             .environmentObject(self.config)
-                    })
+                    }
                     
                     Spacer()
                 }
                 
                 Spacer()
             }
-        }.onAppear {
-            self.showingStudyTasks = UserDefaults.standard.bool(forKey: "didCompleteOnboarding")
+        }
+        .onReceive(UserDefaults.standard.publisher(for: \.showHomeScreen)) {
+            self.showHomeScreen = $0
         }
     }
 }
@@ -261,15 +271,9 @@ struct OnboardingVC: UIViewControllerRepresentable {
         public func taskViewController(_ taskViewController: ORKTaskViewController,
                                        didFinishWith reason: ORKTaskViewControllerFinishReason,
                                        error: Error?) {
-            switch reason {
-            case .completed:
-                // if we completed the onboarding task view controller, go to study.
-                // performSegue(withIdentifier: "unwindToStudy", sender: nil)
-                
-                // TODO: where to go next?
-                // trigger "Studies UI"
-                UserDefaults.standard.set(true, forKey: "didCompleteOnboarding")
-                
+            if case .completed = reason {
+                UserDefaults.standard.showHomeScreen = true
+
                 let signatureResult = taskViewController.result.stepResult(forStepIdentifier: "ConsentReviewStep")?.results?.first as! ORKConsentSignatureResult
                 
                 let consentDocument = ConsentDocument()
@@ -289,10 +293,7 @@ struct OnboardingVC: UIViewControllerRepresentable {
                         print(error.localizedDescription)
                     }
                 }
-
                 print("Login successful! task: \(taskViewController.task?.identifier ?? "(no ID)")")
-            default:
-                break
             }
             taskViewController.dismiss(animated: true, completion: nil)
         }

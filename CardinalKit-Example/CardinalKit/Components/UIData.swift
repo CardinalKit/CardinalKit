@@ -10,17 +10,10 @@ import Foundation
 
 struct Notification: Identifiable {
     let id = UUID()
+    let dateSent = Date()
     let testName: String
     let text: String
-    let dateSent: Date
     let action: Bool
-    
-    init(testName: String, text: String, action: Bool) {
-        self.testName = testName
-        self.text = text
-        self.dateSent = Date()
-        self.action = action
-    }
 }
 
 struct Result: Identifiable {
