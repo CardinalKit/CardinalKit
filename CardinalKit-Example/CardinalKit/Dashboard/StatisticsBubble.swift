@@ -17,23 +17,23 @@ struct StatisticsBubble: View {
     var body: some View {
         PlainNavigationLink(destination: DetailGraphView(result: result, color: textColor)) {
             HStack {
-                Text(result.testName)
-                    .foregroundColor(textColor)
+                Text(self.result.testName)
+                    .foregroundColor(self.textColor)
                     .font(Font.headline.weight(.heavy))
                     .padding(.vertical)
                     .padding(.leading)
                 Spacer()
                 HStack(spacing: 8) {
-                    Text("\(String(format: "%.1f", data.getLastestScore(scores: result.scores)))")
+                    Text("\(String(format: "%.1f", self.data.getLastestScore(scores: self.result.scores)))")
                         .font(Font.largeTitle.monospacedDigit())
                     Image(systemName: "chevron.right.square.fill")
                         .accessibility(label: Text("Show all scores"))
                 }
-                .foregroundColor(backGroundColor)
+                .foregroundColor(self.backGroundColor)
                 .padding()
                 .fixedSize(horizontal: true, vertical: false)
                 .frame(maxHeight: .infinity)
-                .background(textColor)
+                .background(self.textColor)
             }
         }
         .frame(maxWidth: .infinity)
