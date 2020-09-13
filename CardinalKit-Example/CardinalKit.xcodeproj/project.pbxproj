@@ -34,6 +34,8 @@
 		8E40DC042471E5940027536B /* CKNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E40DC032471E5940027536B /* CKNetworkManager.swift */; };
 		8E67519C24B7ACB7004EC405 /* StudyTableViewController+CardinalKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E67519B24B7ACB7004EC405 /* StudyTableViewController+CardinalKit.swift */; };
 		8EBE6F9C24B3C0E60093D07C /* AppDelegate+CardinalKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE6F9B24B3C0E60093D07C /* AppDelegate+CardinalKit.swift */; };
+		A04B9C59250D8D1F006D0D3F /* UIData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04B9C58250D8D1F006D0D3F /* UIData.swift */; };
+		A04B9C5B250D9162006D0D3F /* WelcomeNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04B9C5A250D9162006D0D3F /* WelcomeNotificationView.swift */; };
 		D253D115250CA2FF00A363E4 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D253D114250CA2FF00A363E4 /* ProfileView.swift */; };
 		D253D117250CA73100A363E4 /* ChangePasscodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D253D116250CA73100A363E4 /* ChangePasscodeView.swift */; };
 		D253D119250CA7C400A363E4 /* PasscodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D253D118250CA7C400A363E4 /* PasscodeVC.swift */; };
@@ -96,6 +98,8 @@
 		8E40DC032471E5940027536B /* CKNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKNetworkManager.swift; sourceTree = "<group>"; };
 		8E67519B24B7ACB7004EC405 /* StudyTableViewController+CardinalKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StudyTableViewController+CardinalKit.swift"; sourceTree = "<group>"; };
 		8EBE6F9B24B3C0E60093D07C /* AppDelegate+CardinalKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+CardinalKit.swift"; sourceTree = "<group>"; };
+		A04B9C58250D8D1F006D0D3F /* UIData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIData.swift; sourceTree = "<group>"; };
+		A04B9C5A250D9162006D0D3F /* WelcomeNotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeNotificationView.swift; sourceTree = "<group>"; };
 		CB97C14C759E56B88E4E3941 /* Pods_CardinalKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CardinalKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE9A73F2B93DE400D855AADD /* Pods-TrialX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrialX.release.xcconfig"; path = "Target Support Files/Pods-TrialX/Pods-TrialX.release.xcconfig"; sourceTree = "<group>"; };
 		D253D114250CA2FF00A363E4 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -352,6 +356,8 @@
 				D253D12C250CF9C400A363E4 /* CKSignInWithAppleStep.swift */,
 				D253D12A250CD16400A363E4 /* PageView.swift */,
 				E29143FD24E769F000EE97B2 /* StudiesUI.swift */,
+				A04B9C58250D8D1F006D0D3F /* UIData.swift */,
+				A04B9C5A250D9162006D0D3F /* WelcomeNotificationView.swift */,
 				D253D113250CA2D800A363E4 /* Profile */,
 			);
 			path = "User Interface";
@@ -544,6 +550,8 @@
 				8E0A43B2244A4A0400656518 /* StudyTableViewController.swift in Sources */,
 				8E0A43AC244A4A0400656518 /* CKStudyUser.swift in Sources */,
 				8E0A43C3244A4A0400656518 /* LoginCustomWaitStepViewController.swift in Sources */,
+				A04B9C59250D8D1F006D0D3F /* UIData.swift in Sources */,
+				A04B9C5B250D9162006D0D3F /* WelcomeNotificationView.swift in Sources */,
 				E2F1FD7624D61EDA006C39DF /* CKPropertyReader.swift in Sources */,
 				E235077724F7082700CC1899 /* SceneDelegate.swift in Sources */,
 				D253D12D250CF9C400A363E4 /* CKSignInWithAppleStep.swift in Sources */,

@@ -36,6 +36,7 @@ struct OnboardingUI: View {
         VStack(spacing: 10) {
             if showingStudyTasks {
                 StudiesUI()
+                    .environmentObject(NotificationsAndResults())
             } else {
                 Spacer()
 
