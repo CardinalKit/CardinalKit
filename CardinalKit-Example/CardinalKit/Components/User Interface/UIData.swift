@@ -30,11 +30,13 @@ struct Result: Identifiable {
 }
 
 class NotificationsAndResults: ObservableObject {
-    @Published var notifications: [Notification]
+    @Published var currNotifications: [Notification]
+    @Published var upcomingNotifications: [Notification]
     @Published var results: [Result]
     
     init() {
-        notifications = [Notification(testName: "Trailmaking B", text: "test is avalible now", action: true), Notification(testName: "Trailmaking A", text: "test can be taken starting 'Date'", action: false), Notification(testName: "Spacital Memory", text: "test is coming up 'Date', please consume a moderate amount of caffine only", action: false), Notification(testName: "Amsler Grid", text: "test is coming up 'Date', please be mindful of eyes usage", action: false)]
+        currNotifications = [Notification(testName: "Trailmaking B", text: "test is avalible now", action: true)]
+        upcomingNotifications = [Notification(testName: "Trailmaking A", text: "test can be taken starting 'Date'", action: false), Notification(testName: "Spacital Memory", text: "test is coming up 'Date', please consume a moderate amount of caffine only", action: false), Notification(testName: "Amsler Grid", text: "test is coming up 'Date', please be mindful of eyes usage", action: false)]
         results = [Result(testName: "Trailmaking A", scores: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10])]
     }
     
