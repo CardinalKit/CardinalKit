@@ -32,7 +32,7 @@ struct ProfileUIView: View {
                 Section {
                     ReportView(color: self.color, email: config.read(query: "Email"))
                     SupportView(color: self.color, phone: config.read(query: "Phone"))
-                    DocumentPreviewView()
+                    DocumentView()
                 }
                 
                 Section {
@@ -44,5 +44,11 @@ struct ProfileUIView: View {
                 }
             }.listStyle(GroupedListStyle())
         }
+    }
+}
+
+struct ProfileUIView_Previews: PreviewProvider {
+    static var previews: some View {
+        ProfileUIView(color: Color.red)
     }
 }

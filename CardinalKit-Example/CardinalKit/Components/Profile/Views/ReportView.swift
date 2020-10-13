@@ -30,3 +30,9 @@ struct ReportView: View {
         }))
     }
 }
+
+struct ReportView_Previews: PreviewProvider {
+    static var previews: some View {
+        ReportView(color: Color.red, email: "support@cardinalkit.org")
+    }
+}

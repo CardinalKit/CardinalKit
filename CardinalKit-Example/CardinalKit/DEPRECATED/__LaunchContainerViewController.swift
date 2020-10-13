@@ -20,7 +20,6 @@ class LaunchContainerViewController: UIViewController {
     }
 
     override func viewDidLoad() {
-        print("LaunchContainerViewController viewDidLoad")
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         

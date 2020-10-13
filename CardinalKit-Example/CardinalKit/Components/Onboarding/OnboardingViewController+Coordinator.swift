@@ -20,7 +20,7 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
             
             // TODO: where to go next?
             // trigger "Studies UI"
-            UserDefaults.standard.set(true, forKey: "didCompleteOnboarding")
+            UserDefaults.standard.set(true, forKey: Constants.onboardingDidComplete)
             
             let signatureResult = taskViewController.result.stepResult(forStepIdentifier: "ConsentReviewStep")?.results?.first as! ORKConsentSignatureResult
             

@@ -65,3 +65,9 @@ struct StudyItem: Identifiable {
         self.task = study.task
     }
 }
+
+struct StudyActivitiesUIView_Previews: PreviewProvider {
+    static var previews: some View {
+        StudyActivitiesUIView(color: Color.red)
+    }
+}

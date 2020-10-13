@@ -40,3 +40,9 @@ struct StudyActivityListItemView: View {
             })
     }
 }
+
+struct StudyActivityListItemView_Previews: PreviewProvider {
+    static var previews: some View {
+        StudyActivityListItemView(icon: UIImage(named: "CoffeeIcon")!, title: "Preview Item", description: "This item is just for preview.", tasks: StudyTasks.coffeeTask)
+    }
+}

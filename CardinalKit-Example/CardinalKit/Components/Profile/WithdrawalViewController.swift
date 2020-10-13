@@ -49,25 +49,23 @@ struct WithdrawalViewController: UIViewControllerRepresentable {
         public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
             switch reason {
             case .completed:
-                UserDefaults.standard.set(false, forKey: "didCompleteOnboarding")
                 
                 do {
-                    try Auth.auth().signOut()
+                    try CKStudyUser.shared.signOut()
                     
                     if (ORKPasscodeViewController.isPasscodeStoredInKeychain()) {
                         ORKPasscodeViewController.removePasscodeFromKeychain()
                     }
                     
-                    taskViewController.dismiss(animated: true, completion: {
-                        //TODO: recover app without error
-                        fatalError()
-                    })
-                    
+                    NotificationCenter.default.post(name: NSNotification.Name(Constants.onboardingDidComplete), object: false)
+
+                    UserDefaults.standard.set(false, forKey: Constants.onboardingDidComplete)
                 } catch {
                     print(error.localizedDescription)
                     Alerts.showInfo(title: "Error", message: error.localizedDescription)
                 }
                 
+                fallthrough
             default:
                 
                 // otherwise dismiss onboarding without proceeding.

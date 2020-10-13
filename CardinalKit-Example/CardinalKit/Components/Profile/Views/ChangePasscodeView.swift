@@ -29,3 +29,9 @@ struct ChangePasscodeView: View {
         })
     }
 }
+
+struct ChangePasscodeView_Previews: PreviewProvider {
+    static var previews: some View {
+        ChangePasscodeView()
+    }
+}

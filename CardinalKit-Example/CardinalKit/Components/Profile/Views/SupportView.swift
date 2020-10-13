@@ -33,3 +33,9 @@ struct SupportView: View {
         }))
     }
 }
+
+struct SupportView_Previews: PreviewProvider {
+    static var previews: some View {
+        SupportView(color: Color.red, phone: "+1 (650)-000-0000")
+    }
+}

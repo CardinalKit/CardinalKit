@@ -12,11 +12,13 @@ import SwiftUI
 struct DocumentPreviewViewController: UIViewControllerRepresentable {
     private var isActive: Binding<Bool>
     private let viewController = UIViewController()
-    private let docController: UIDocumentInteractionController
+    private var docController: UIDocumentInteractionController? = nil
 
-    init(_ isActive: Binding<Bool>, url: URL) {
+    init(_ isActive: Binding<Bool>, url: URL?) {
         self.isActive = isActive
-        self.docController = UIDocumentInteractionController(url: url)
+        if let url = url {
+            self.docController = UIDocumentInteractionController(url: url)
+        }
     }
 
     func makeUIViewController(context: UIViewControllerRepresentableContext<DocumentPreviewViewController>) -> UIViewController {
@@ -24,9 +26,9 @@ struct DocumentPreviewViewController: UIViewControllerRepresentable {
     }
 
     func updateUIViewController(_ uiViewController: UIViewController, context: UIViewControllerRepresentableContext<DocumentPreviewViewController>) {
-        if self.isActive.wrappedValue && docController.delegate == nil { // to not show twice
-            docController.delegate = context.coordinator
-            self.docController.presentPreview(animated: true)
+        if self.isActive.wrappedValue && docController?.delegate == nil { // to not show twice
+            self.docController?.delegate = context.coordinator
+            self.docController?.presentPreview(animated: true)
         }
     }
 

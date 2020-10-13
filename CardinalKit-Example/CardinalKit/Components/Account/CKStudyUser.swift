@@ -106,4 +106,12 @@ class CKStudyUser {
         }
     }
     
+    /**
+    Remove the current user's auth parameters from storage.
+    */
+    func signOut() throws {
+        email = nil
+        try Auth.auth().signOut()
+    }
+    
 }

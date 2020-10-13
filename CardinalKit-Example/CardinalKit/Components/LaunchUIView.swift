@@ -14,29 +14,35 @@ import Firebase
 
 struct LaunchUIView: View {
     
-    @State var showingStudyTasks = false
+    @State var didCompleteOnboarding = false
     
     init() {
-
+        
     }
 
     var body: some View {
         VStack(spacing: 10) {
-            if showingStudyTasks {
+            if didCompleteOnboarding {
                 MainUIView()
             } else {
                 OnboardingUIView() {
                     //on complete
-                    if let completed = UserDefaults.standard.object(forKey: "didCompleteOnboarding") {
-                       self.showingStudyTasks = completed as! Bool
+                    if let completed = UserDefaults.standard.object(forKey: Constants.onboardingDidComplete) as? Bool {
+                       self.didCompleteOnboarding = completed
                     }
                 }
             }
         }.onAppear(perform: {
-            if let completed = UserDefaults.standard.object(forKey: "didCompleteOnboarding") {
-               self.showingStudyTasks = completed as! Bool
+            if let completed = UserDefaults.standard.object(forKey: Constants.onboardingDidComplete) as? Bool {
+               self.didCompleteOnboarding = completed
             }
-        })
+        }).onReceive(NotificationCenter.default.publisher(for: NSNotification.Name(Constants.onboardingDidComplete))) { notification in
+            if let newValue = notification.object as? Bool {
+                self.didCompleteOnboarding = newValue
+            } else if let completed = UserDefaults.standard.object(forKey: Constants.onboardingDidComplete) as? Bool {
+               self.didCompleteOnboarding = completed
+            }
+        }
         
     }
 }

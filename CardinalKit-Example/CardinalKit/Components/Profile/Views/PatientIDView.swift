@@ -30,3 +30,9 @@ struct PatientIDView: View {
         }.frame(height: 100)
     }
 }
+
+struct PatientIDView_Previews: PreviewProvider {
+    static var previews: some View {
+        PatientIDView()
+    }
+}

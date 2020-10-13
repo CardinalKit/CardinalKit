@@ -32,3 +32,9 @@ struct WithdrawView: View {
             })
     }
 }
+
+struct WithdrawView_Previews: PreviewProvider {
+    static var previews: some View {
+        WithdrawView(color: Color.red)
+    }
+}
