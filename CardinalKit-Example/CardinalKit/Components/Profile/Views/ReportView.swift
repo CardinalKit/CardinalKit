@@ -2,8 +2,8 @@
 //  ReportView.swift
 //  CardinalKit_Example
 //
-//  Created by Santiago Gutierrez on 10/12/20.
-//  Copyright © 2020 CocoaPods. All rights reserved.
+//  Created for the CardinalKit Framework.
+//  Copyright © 2019 Stanford University. All rights reserved.
 //
 
 import SwiftUI

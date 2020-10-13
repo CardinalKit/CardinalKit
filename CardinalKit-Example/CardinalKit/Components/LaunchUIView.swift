@@ -23,7 +23,7 @@ struct LaunchUIView: View {
     var body: some View {
         VStack(spacing: 10) {
             if showingStudyTasks {
-                StudiesUI()
+                MainUIView()
             } else {
                 OnboardingUIView() {
                     //on complete

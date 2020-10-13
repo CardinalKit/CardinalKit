@@ -23,7 +23,6 @@ struct CKTaskViewController: UIViewControllerRepresentable {
         Coordinator()
     }
 
-
     typealias UIViewControllerType = ORKTaskViewController
     
     func updateUIViewController(_ taskViewController: ORKTaskViewController, context: Context) { }

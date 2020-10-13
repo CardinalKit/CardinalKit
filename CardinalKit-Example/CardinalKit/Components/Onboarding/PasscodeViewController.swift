@@ -9,6 +9,7 @@
 import UIKit
 import SwiftUI
 import ResearchKit
+import CardinalKit
 
 struct PasscodeViewController: UIViewControllerRepresentable {
     
@@ -37,12 +38,18 @@ struct PasscodeViewController: UIViewControllerRepresentable {
     }
 
     class Coordinator: NSObject, ORKPasscodeDelegate {
+        func passcodeViewControllerDidCancel(_ viewController: UIViewController) {
+            viewController.dismiss(animated: true, completion: nil)
+        }
+        
         func passcodeViewControllerDidFinish(withSuccess viewController: UIViewController) {
             viewController.dismiss(animated: true, completion: nil)
         }
         
         func passcodeViewControllerDidFailAuthentication(_ viewController: UIViewController) {
             viewController.dismiss(animated: true, completion: nil)
+            
+            Alerts.showInfo(title: "Wrong passcode entered", message: "Okay")
         }
     }
     

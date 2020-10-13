@@ -24,12 +24,14 @@ struct OnboardingUIView: View {
     let color: Color
     let config = CKPropertyReader(file: "CKConfiguration")
     @State var showingDetail = false
-    @State var showingStudyTasks = false
+    
+    var onComplete: (() -> Void)? = nil
     
     init(onComplete: (() -> Void)? = nil) {
         let onboardingData = config.readAny(query: "Onboarding") as! [[String:String]]
         
         self.color = Color(config.readColor(query: "Primary Color"))
+        self.onComplete = onComplete
         
         for data in onboardingData {
             self.onboardingElements.append(OnboardingElement(logo: data["Logo"]!, title: data["Title"]!, description: data["Description"]!))
@@ -61,9 +63,7 @@ struct OnboardingUIView: View {
                          .foregroundColor(.white).background(self.color)
                          .cornerRadius(15).font(.system(size: 20, weight: .bold, design: .default))
                 }).sheet(isPresented: $showingDetail, onDismiss: {
-                     if let completed = UserDefaults.standard.object(forKey: "didCompleteOnboarding") {
-                        self.showingStudyTasks = completed as! Bool
-                     }
+                    self.onComplete?()
                 }, content: {
                     OnboardingViewController()
                 })

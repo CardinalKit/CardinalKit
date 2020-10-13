@@ -17,7 +17,7 @@
 		8E0A43B0244A4A0400656518 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E0A4389244A4A0400656518 /* LaunchScreen.storyboard */; };
 		8E0A43B2244A4A0400656518 /* _StudyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A438E244A4A0400656518 /* _StudyTableViewController.swift */; };
 		8E0A43B3244A4A0400656518 /* StudyTasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A438F244A4A0400656518 /* StudyTasks.swift */; };
-		8E0A43B4244A4A0400656518 /* StudyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4390244A4A0400656518 /* StudyTableViewCell.swift */; };
+		8E0A43B4244A4A0400656518 /* _StudyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4390244A4A0400656518 /* _StudyTableViewCell.swift */; };
 		8E0A43B5244A4A0400656518 /* StudyTableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4391244A4A0400656518 /* StudyTableItem.swift */; };
 		8E0A43B9244A4A0400656518 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4396244A4A0400656518 /* AppDelegate.swift */; };
 		8E0A43BA244A4A0400656518 /* __LaunchContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4397244A4A0400656518 /* __LaunchContainerViewController.swift */; };
@@ -46,12 +46,19 @@
 		8E6E1E1E253528F50024B8DF /* SupportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E1E1D253528F50024B8DF /* SupportView.swift */; };
 		8E6E1E20253529760024B8DF /* DocumentPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E1E1F253529760024B8DF /* DocumentPreviewView.swift */; };
 		8E6E1E2225352C780024B8DF /* OnboardingUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E1E2125352C780024B8DF /* OnboardingUIView.swift */; };
+		8E6E1E24253537580024B8DF /* MainUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E1E23253537580024B8DF /* MainUIView.swift */; };
+		8E6E1E26253537E40024B8DF /* StudyActivitiesUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E1E25253537E40024B8DF /* StudyActivitiesUIView.swift */; };
+		8E6E1E28253538CC0024B8DF /* StudyActivityListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E1E27253538CC0024B8DF /* StudyActivityListItemView.swift */; };
+		8E6E1E2A2535398D0024B8DF /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E1E292535398D0024B8DF /* HelpView.swift */; };
+		8E6E1E2C253539AE0024B8DF /* ChangePasscodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E1E2B253539AE0024B8DF /* ChangePasscodeView.swift */; };
+		8E6E1E2E25353A1E0024B8DF /* PatientIDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E1E2D25353A1E0024B8DF /* PatientIDView.swift */; };
+		8E6E1E3225353ABE0024B8DF /* ProfileUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E1E3125353ABE0024B8DF /* ProfileUIView.swift */; };
+		8E6E1E3425353AFE0024B8DF /* EmailHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E1E3325353AFE0024B8DF /* EmailHelper.swift */; };
 		8EBE6F9C24B3C0E60093D07C /* AppDelegate+CardinalKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE6F9B24B3C0E60093D07C /* AppDelegate+CardinalKit.swift */; };
 		D253D132250D1BDB00A363E4 /* CKSignInWithAppleStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = D253D131250D1BDB00A363E4 /* CKSignInWithAppleStep.swift */; };
 		E235077724F7082700CC1899 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E235077624F7082700CC1899 /* SceneDelegate.swift */; };
 		E290FB1D24FF4BBA00D19BE9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E290FB1C24FF4BBA00D19BE9 /* GoogleService-Info.plist */; };
 		E29143FC24E74AD100EE97B2 /* LaunchUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29143FB24E74AD100EE97B2 /* LaunchUIView.swift */; };
-		E29143FE24E769F000EE97B2 /* StudiesUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29143FD24E769F000EE97B2 /* StudiesUI.swift */; };
 		E2CB7FE524F730C80039C24A /* CKConfiguration-new.plist in Resources */ = {isa = PBXBuildFile; fileRef = E2CB7FE424F730C80039C24A /* CKConfiguration-new.plist */; };
 		E2DF9F0A2500C9CE00A93B93 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DF9F092500C9CE00A93B93 /* LoginViewController.swift */; };
 		E2F1FD7624D61EDA006C39DF /* CKPropertyReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F1FD7524D61EDA006C39DF /* CKPropertyReader.swift */; };
@@ -94,7 +101,7 @@
 		8E0A438B244A4A0400656518 /* CardinalKit-Example.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "CardinalKit-Example.entitlements"; sourceTree = "<group>"; };
 		8E0A438E244A4A0400656518 /* _StudyTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _StudyTableViewController.swift; sourceTree = "<group>"; };
 		8E0A438F244A4A0400656518 /* StudyTasks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyTasks.swift; sourceTree = "<group>"; };
-		8E0A4390244A4A0400656518 /* StudyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyTableViewCell.swift; sourceTree = "<group>"; };
+		8E0A4390244A4A0400656518 /* _StudyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _StudyTableViewCell.swift; sourceTree = "<group>"; };
 		8E0A4391244A4A0400656518 /* StudyTableItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyTableItem.swift; sourceTree = "<group>"; };
 		8E0A4396244A4A0400656518 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8E0A4397244A4A0400656518 /* __LaunchContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = __LaunchContainerViewController.swift; sourceTree = "<group>"; };
@@ -122,13 +129,20 @@
 		8E6E1E1D253528F50024B8DF /* SupportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportView.swift; sourceTree = "<group>"; };
 		8E6E1E1F253529760024B8DF /* DocumentPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPreviewView.swift; sourceTree = "<group>"; };
 		8E6E1E2125352C780024B8DF /* OnboardingUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingUIView.swift; sourceTree = "<group>"; };
+		8E6E1E23253537580024B8DF /* MainUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainUIView.swift; sourceTree = "<group>"; };
+		8E6E1E25253537E40024B8DF /* StudyActivitiesUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyActivitiesUIView.swift; sourceTree = "<group>"; };
+		8E6E1E27253538CC0024B8DF /* StudyActivityListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyActivityListItemView.swift; sourceTree = "<group>"; };
+		8E6E1E292535398D0024B8DF /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
+		8E6E1E2B253539AE0024B8DF /* ChangePasscodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasscodeView.swift; sourceTree = "<group>"; };
+		8E6E1E2D25353A1E0024B8DF /* PatientIDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientIDView.swift; sourceTree = "<group>"; };
+		8E6E1E3125353ABE0024B8DF /* ProfileUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUIView.swift; sourceTree = "<group>"; };
+		8E6E1E3325353AFE0024B8DF /* EmailHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailHelper.swift; sourceTree = "<group>"; };
 		8EBE6F9B24B3C0E60093D07C /* AppDelegate+CardinalKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+CardinalKit.swift"; sourceTree = "<group>"; };
 		CB97C14C759E56B88E4E3941 /* Pods_CardinalKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CardinalKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D253D131250D1BDB00A363E4 /* CKSignInWithAppleStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKSignInWithAppleStep.swift; sourceTree = "<group>"; };
 		E235077624F7082700CC1899 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		E290FB1C24FF4BBA00D19BE9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E29143FB24E74AD100EE97B2 /* LaunchUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchUIView.swift; sourceTree = "<group>"; };
-		E29143FD24E769F000EE97B2 /* StudiesUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudiesUI.swift; sourceTree = "<group>"; };
 		E2CB7FE424F730C80039C24A /* CKConfiguration-new.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "CKConfiguration-new.plist"; sourceTree = "<group>"; };
 		E2DF9F092500C9CE00A93B93 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E2F1FD7524D61EDA006C39DF /* CKPropertyReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKPropertyReader.swift; sourceTree = "<group>"; };
@@ -185,6 +199,7 @@
 				8E0A4383244A4A0400656518 /* Supporting Files */,
 				8E0A43C5244A4A5700656518 /* Components */,
 				8E6E1E0E25351E390024B8DF /* Utils */,
+				8E6E1E3525353B710024B8DF /* DEPRECATED */,
 				8E0A4396244A4A0400656518 /* AppDelegate.swift */,
 				8EBE6F9B24B3C0E60093D07C /* AppDelegate+CardinalKit.swift */,
 				E235077624F7082700CC1899 /* SceneDelegate.swift */,
@@ -207,24 +222,13 @@
 		8E0A4379244A4A0400656518 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				8E0A437A244A4A0400656518 /* _ProfileTableItem.swift */,
-				8E0A437B244A4A0400656518 /* _StaticProfileViewController.swift */,
+				8E6E1E3025353AA70024B8DF /* Views */,
+				8E6E1E3125353ABE0024B8DF /* ProfileUIView.swift */,
 				8E6E1E1F253529760024B8DF /* DocumentPreviewView.swift */,
 				8E6E1E1125351F830024B8DF /* DocumentPreviewViewController.swift */,
 				8E6E1E15253524500024B8DF /* WithdrawalViewController.swift */,
-				8E6E1E19253528450024B8DF /* WithdrawView.swift */,
-				8E6E1E1B253528D70024B8DF /* ReportView.swift */,
-				8E6E1E1D253528F50024B8DF /* SupportView.swift */,
 			);
 			path = Profile;
-			sourceTree = "<group>";
-		};
-		8E0A437E244A4A0400656518 /* Withdrawal */ = {
-			isa = PBXGroup;
-			children = (
-				8E0A437F244A4A0400656518 /* _WithdrawalViewController.swift */,
-			);
-			path = Withdrawal;
 			sourceTree = "<group>";
 		};
 		8E0A4380244A4A0400656518 /* Account */ = {
@@ -263,11 +267,9 @@
 		8E0A438D244A4A0400656518 /* Study */ = {
 			isa = PBXGroup;
 			children = (
-				E29143FD24E769F000EE97B2 /* StudiesUI.swift */,
-				8E0A438E244A4A0400656518 /* _StudyTableViewController.swift */,
-				8E67519B24B7ACB7004EC405 /* _StudyTableViewController+CardinalKit.swift */,
+				8E6E1E2F25353A550024B8DF /* Views */,
+				8E6E1E25253537E40024B8DF /* StudyActivitiesUIView.swift */,
 				8E0A438F244A4A0400656518 /* StudyTasks.swift */,
-				8E0A4390244A4A0400656518 /* StudyTableViewCell.swift */,
 				8E0A4391244A4A0400656518 /* StudyTableItem.swift */,
 				8E6E1E172535263F0024B8DF /* CKTaskViewController.swift */,
 			);
@@ -282,7 +284,6 @@
 				8E6E1E0A2534FF640024B8DF /* OnboardingViewController+Coordinator.swift */,
 				8E6E1E0C25351D8F0024B8DF /* PageViewController.swift */,
 				8E6E1E13253520440024B8DF /* PasscodeViewController.swift */,
-				8E0A439B244A4A0400656518 /* _IntroductionViewController.swift */,
 				8E0A439C244A4A0400656518 /* Steps */,
 			);
 			path = Onboarding;
@@ -296,7 +297,6 @@
 				8E0A439D244A4A0400656518 /* CKHealthDataStepViewController.swift */,
 				8E0A439F244A4A0400656518 /* PasswordlessLoginStep.swift */,
 				8E0A43A3244A4A0400656518 /* LoginCustomWaitStepViewController.swift */,
-				8E0A43A2244A4A0400656518 /* ConsentDocument.swift */,
 				E2DF9F092500C9CE00A93B93 /* LoginViewController.swift */,
 			);
 			path = Steps;
@@ -313,14 +313,13 @@
 		8E0A43C5244A4A5700656518 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				8E6E1E23253537580024B8DF /* MainUIView.swift */,
 				E29143FB24E74AD100EE97B2 /* LaunchUIView.swift */,
 				8E40DC022471E5590027536B /* Networking */,
 				8E0A4379244A4A0400656518 /* Profile */,
 				8E0A4399244A4A0400656518 /* Onboarding */,
-				8E0A437E244A4A0400656518 /* Withdrawal */,
 				8E0A4380244A4A0400656518 /* Account */,
 				8E0A438D244A4A0400656518 /* Study */,
-				8E0A4397244A4A0400656518 /* __LaunchContainerViewController.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -338,8 +337,46 @@
 			children = (
 				E2F1FD7524D61EDA006C39DF /* CKPropertyReader.swift */,
 				8E6E1E0F25351E890024B8DF /* Extensions+UIColor.swift */,
+				8E0A43A2244A4A0400656518 /* ConsentDocument.swift */,
+				8E6E1E3325353AFE0024B8DF /* EmailHelper.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		8E6E1E2F25353A550024B8DF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8E6E1E27253538CC0024B8DF /* StudyActivityListItemView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		8E6E1E3025353AA70024B8DF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8E6E1E19253528450024B8DF /* WithdrawView.swift */,
+				8E6E1E1B253528D70024B8DF /* ReportView.swift */,
+				8E6E1E1D253528F50024B8DF /* SupportView.swift */,
+				8E6E1E292535398D0024B8DF /* HelpView.swift */,
+				8E6E1E2B253539AE0024B8DF /* ChangePasscodeView.swift */,
+				8E6E1E2D25353A1E0024B8DF /* PatientIDView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		8E6E1E3525353B710024B8DF /* DEPRECATED */ = {
+			isa = PBXGroup;
+			children = (
+				8E0A4397244A4A0400656518 /* __LaunchContainerViewController.swift */,
+				8E0A438E244A4A0400656518 /* _StudyTableViewController.swift */,
+				8E67519B24B7ACB7004EC405 /* _StudyTableViewController+CardinalKit.swift */,
+				8E0A437F244A4A0400656518 /* _WithdrawalViewController.swift */,
+				8E0A439B244A4A0400656518 /* _IntroductionViewController.swift */,
+				8E0A437A244A4A0400656518 /* _ProfileTableItem.swift */,
+				8E0A437B244A4A0400656518 /* _StaticProfileViewController.swift */,
+				8E0A4390244A4A0400656518 /* _StudyTableViewCell.swift */,
+			);
+			path = DEPRECATED;
 			sourceTree = "<group>";
 		};
 		A562A578C883F67F0DAE1385 /* Pods */ = {
@@ -516,24 +553,30 @@
 				8E0A43A8244A4A0400656518 /* _StaticProfileViewController.swift in Sources */,
 				E29143FC24E74AD100EE97B2 /* LaunchUIView.swift in Sources */,
 				8E0A43C0244A4A0400656518 /* PasswordlessLoginStep.swift in Sources */,
+				8E6E1E28253538CC0024B8DF /* StudyActivityListItemView.swift in Sources */,
 				8E0A43B3244A4A0400656518 /* StudyTasks.swift in Sources */,
 				8E6E1E2225352C780024B8DF /* OnboardingUIView.swift in Sources */,
 				8E6E1E1A253528450024B8DF /* WithdrawView.swift in Sources */,
+				8E6E1E2E25353A1E0024B8DF /* PatientIDView.swift in Sources */,
 				8E6E1E0B2534FF640024B8DF /* OnboardingViewController+Coordinator.swift in Sources */,
 				8E40DC042471E5940027536B /* CKNetworkManager.swift in Sources */,
 				8E6E1E092534F4100024B8DF /* OnboardingViewController.swift in Sources */,
 				8E0A43BD244A4A0400656518 /* _IntroductionViewController.swift in Sources */,
 				8EBE6F9C24B3C0E60093D07C /* AppDelegate+CardinalKit.swift in Sources */,
 				8E0A43B9244A4A0400656518 /* AppDelegate.swift in Sources */,
-				E29143FE24E769F000EE97B2 /* StudiesUI.swift in Sources */,
+				8E6E1E3225353ABE0024B8DF /* ProfileUIView.swift in Sources */,
 				8E6E1E1E253528F50024B8DF /* SupportView.swift in Sources */,
 				8E6E1E1C253528D70024B8DF /* ReportView.swift in Sources */,
-				8E0A43B4244A4A0400656518 /* StudyTableViewCell.swift in Sources */,
+				8E6E1E26253537E40024B8DF /* StudyActivitiesUIView.swift in Sources */,
+				8E6E1E3425353AFE0024B8DF /* EmailHelper.swift in Sources */,
+				8E6E1E24253537580024B8DF /* MainUIView.swift in Sources */,
+				8E0A43B4244A4A0400656518 /* _StudyTableViewCell.swift in Sources */,
 				8E0A43A7244A4A0400656518 /* _ProfileTableItem.swift in Sources */,
 				8E6E1E182535263F0024B8DF /* CKTaskViewController.swift in Sources */,
 				8E6E1E1225351F830024B8DF /* DocumentPreviewViewController.swift in Sources */,
 				8E6E1E20253529760024B8DF /* DocumentPreviewView.swift in Sources */,
 				8E0A43B5244A4A0400656518 /* StudyTableItem.swift in Sources */,
+				8E6E1E2C253539AE0024B8DF /* ChangePasscodeView.swift in Sources */,
 				8E0A43AD244A4A0400656518 /* Constants.swift in Sources */,
 				8E0A43BE244A4A0400656518 /* CKHealthDataStepViewController.swift in Sources */,
 				8E0A43AE244A4A0400656518 /* ORKESerialization.m in Sources */,
@@ -548,6 +591,7 @@
 				8E67519C24B7ACB7004EC405 /* _StudyTableViewController+CardinalKit.swift in Sources */,
 				8E0A43AA244A4A0400656518 /* _WithdrawalViewController.swift in Sources */,
 				8E6E1E16253524500024B8DF /* WithdrawalViewController.swift in Sources */,
+				8E6E1E2A2535398D0024B8DF /* HelpView.swift in Sources */,
 				8E0A43BA244A4A0400656518 /* __LaunchContainerViewController.swift in Sources */,
 				8E0A43C2244A4A0400656518 /* ConsentDocument.swift in Sources */,
 			);
