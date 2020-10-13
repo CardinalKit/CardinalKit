@@ -7,11 +7,9 @@
 
 import Foundation
 import UIKit
+import ResearchKit
 
 enum StudyTableItem: Int {
-    
-    // table items
-    case survey, activeTask
     
     static var allValues: [StudyTableItem] {
         var index = 0
@@ -23,7 +21,19 @@ enum StudyTableItem: Int {
             }
         )
     }
-    
+
+    // table items
+    case survey, activeTask
+
+    var task: ORKOrderedTask {
+        switch self {
+        case .survey:
+            return StudyTasks.sf12Task
+        case .activeTask:
+            return StudyTasks.walkingTask
+        }
+    }
+
     var title: String {
         switch self {
         case .survey:
@@ -32,7 +42,7 @@ enum StudyTableItem: Int {
             return "Active Task Sample"
         }
     }
-    
+
     var subtitle: String {
         switch self {
         case .survey:
@@ -41,13 +51,43 @@ enum StudyTableItem: Int {
             return "Perform an action."
         }
     }
-    
+
     var image: UIImage? {
         switch self {
-        case .survey:
-            return UIImage(named: "SurveyIcon")
-        default:
+        case .activeTask:
             return UIImage(named: "ActivityIcon")
+        default:
+            return UIImage(named: "SurveyIcon")
         }
     }
+    
+//    case coffee
+//
+//    var task: ORKOrderedTask {
+//        switch self {
+//        case .coffee:
+//            return StudyTasks.coffeeTask
+//        }
+//    }
+//
+//    var title: String {
+//        switch self {
+//        case .coffee:
+//            return "Coffee Task"
+//        }
+//    }
+//
+//    var subtitle: String {
+//        switch self {
+//        case .coffee:
+//            return "Record your coffee intake for the day."
+//        }
+//    }
+//
+//    var image: UIImage? {
+//        switch self {
+//        case .coffee:
+//            return UIImage(named: "CoffeeIcon")
+//        }
+//    }
 }

@@ -32,10 +32,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         CKAppLaunch()
         
         let config = CKPropertyReader(file: "CKConfiguration")
-        
         UIView.appearance(whenContainedInInstancesOf: [ORKTaskViewController.self]).tintColor = config.readColor(query: "Tint Color")
         
         return true
+    }
+    
+    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+        return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {

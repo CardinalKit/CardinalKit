@@ -65,37 +65,37 @@ extension StudyTableViewController {
     /**
      What should we do when we select a specific item on the list?
     */
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        // did we assign a `StudyTableItem` element for this row?
-        guard let activity = StudyTableItem(rawValue: (indexPath as NSIndexPath).row) else { return }
-        
-        // If so, find out which kind of element
-        let taskViewController: ORKTaskViewController
-        switch activity {
-        case .survey:
-            /**
-              If we selected this element in our table, then wrap our `StudyTasks.sf12Task` in a
-             `ResearchKit` task view controller. See `StudyTasks` for `ORKTask` implementation.
-             */
-            taskViewController = ORKTaskViewController(task: StudyTasks.sf12Task, taskRun: NSUUID() as UUID)
-        case .activeTask:
-            /**
-             Wrap this element in a `StudyTasks.walkingTask`.
-             Separately, we set an `outputDirectory` since this step stores activity information.
-             
-             See documentation for `outputDirectory`: ~
-             If no output directory is specified, active steps that require writing data to disk, such as those with recorders, will typically fail at runtime.
-            */
-            taskViewController = ORKTaskViewController(task: StudyTasks.walkingTask, taskRun: NSUUID() as UUID)
-            taskViewController.outputDirectory = CKGetTaskOutputDirectory(taskViewController)
-        }
-        
-        // setting a delegate lets us override what happens when this ORKTaskViewController finishes
-        taskViewController.delegate = self
-        navigationController?.present(taskViewController, animated: true, completion: nil)
-    }
+//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        tableView.deselectRow(at: indexPath, animated: true)
+//        
+//        // did we assign a `StudyTableItem` element for this row?
+//        guard let activity = StudyTableItem(rawValue: (indexPath as NSIndexPath).row) else { return }
+//        
+//        // If so, find out which kind of element
+//        let taskViewController: ORKTaskViewController
+//        switch activity {
+//        case .survey:
+//            /**
+//              If we selected this element in our table, then wrap our `StudyTasks.sf12Task` in a
+//             `ResearchKit` task view controller. See `StudyTasks` for `ORKTask` implementation.
+//             */
+//            taskViewController = ORKTaskViewController(task: StudyTasks.sf12Task, taskRun: NSUUID() as UUID)
+//        case .activeTask:
+//            /**
+//             Wrap this element in a `StudyTasks.walkingTask`.
+//             Separately, we set an `outputDirectory` since this step stores activity information.
+//             
+//             See documentation for `outputDirectory`: ~
+//             If no output directory is specified, active steps that require writing data to disk, such as those with recorders, will typically fail at runtime.
+//            */
+//            taskViewController = ORKTaskViewController(task: StudyTasks.walkingTask, taskRun: NSUUID() as UUID)
+//            taskViewController.outputDirectory = CKGetTaskOutputDirectory(taskViewController)
+//        }
+//        
+//        // setting a delegate lets us override what happens when this ORKTaskViewController finishes
+//        taskViewController.delegate = self
+//        navigationController?.present(taskViewController, animated: true, completion: nil)
+//    }
     
 }
 

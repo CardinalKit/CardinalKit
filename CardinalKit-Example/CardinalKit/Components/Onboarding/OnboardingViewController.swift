@@ -1,34 +1,30 @@
 //
 //  OnboardingViewController.swift
+//  CardinalKit_Example
 //
-//  Created for the CardinalKit Framework.
-//  Copyright © 2019 Stanford University. All rights reserved.
+//  Created by Santiago Gutierrez on 10/12/20.
+//  Copyright © 2020 CocoaPods. All rights reserved.
 //
 
+import SwiftUI
 import UIKit
 import ResearchKit
 import CardinalKit
+import Firebase
 
-class OnboardingViewController: UIViewController {
+struct OnboardingViewController: UIViewControllerRepresentable {
     
-    /**
-    Assign this action to a "join" button in your storyboard.
-    */
-    @IBAction func joinButtonTapped(_ sender: UIButton) {
-        self.presentOnboarding()
+    func makeCoordinator() -> OnboardingViewCoordinator {
+        OnboardingViewCoordinator()
     }
+
+    typealias UIViewControllerType = ORKTaskViewController
     
-    /**
-     Presents a view controller that is optimized to guide the
-     onboarding experience of a patient.
-     
-     Uses `present()` to trigger an `ORKTaskViewController`
-     as provided by the `ResearchKit` framework.
-    */
-    fileprivate func presentOnboarding() {
-        
+    func updateUIViewController(_ taskViewController: ORKTaskViewController, context: Context) {}
+    func makeUIViewController(context: Context) -> ORKTaskViewController {
+
         let config = CKPropertyReader(file: "CKConfiguration")
-        
+            
         /* **************************************************************
         *  STEP (1): get user consent
         **************************************************************/
@@ -41,6 +37,7 @@ class OnboardingViewController: UIViewController {
         **************************************************************/
         // use the `ORKConsentReviewStep` from ResearchKit
         let signature = consentDocument.signatures!.first!
+        signature.title = "Patient"
         let reviewConsentStep = ORKConsentReviewStep(identifier: "ConsentReviewStep", signature: signature, in: consentDocument)
         reviewConsentStep.text = config.read(query: "Review Consent Step Text")
         reviewConsentStep.reasonForConsent = config.read(query: "Reason for Consent Text")
@@ -56,8 +53,25 @@ class OnboardingViewController: UIViewController {
         **************************************************************/
         // the `LoginStep` collects and email address, and
         // the `LoginCustomWaitStep` waits for email verification.
-        let loginStep = LoginStep(identifier: LoginStep.identifier)
-        let loginVerificationStep = LoginCustomWaitStep(identifier: LoginCustomWaitStep.identifier)
+
+        var loginSteps: [ORKStep]
+        if config["Login-Sign-In-With-Apple"]["Enabled"] as? Bool == true {
+            let signInWithAppleStep = CKSignInWithAppleStep(identifier: "SignInWithApple")
+            loginSteps = [signInWithAppleStep]
+        } else if config.readBool(query: "Login-Passwordless") == true {
+            let loginStep = PasswordlessLoginStep(identifier: PasswordlessLoginStep.identifier)
+            let loginVerificationStep = LoginCustomWaitStep(identifier: LoginCustomWaitStep.identifier)
+            
+            loginSteps = [loginStep, loginVerificationStep]
+        } else {
+            let regexp = try! NSRegularExpression(pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[d$@$!%*?&#])[A-Za-z\\dd$@$!%*?&#]{8,}")
+
+            let registerStep = ORKRegistrationStep(identifier: "RegistrationStep", title: "Registration", text: "Sign up for this study.", passcodeValidationRegularExpression: regexp, passcodeInvalidMessage: "Your password does not meet the following criteria: minimum 8 characters with at least 1 Uppercase Alphabet, 1 Lowercase Alphabet, 1 Number and 1 Special Character", options: [])
+
+            let loginStep = ORKLoginStep(identifier: "LoginStep", title: "Login", text: "Log into this study.", loginViewControllerClass: LoginViewController.self)
+
+            loginSteps = [registerStep, loginStep]
+        }
         
         /* **************************************************************
         *  STEP (5): ask the user to create a security passcode
@@ -78,8 +92,8 @@ class OnboardingViewController: UIViewController {
         **************************************************************/
         // use the `ORKCompletionStep` from ResearchKit
         let completionStep = ORKCompletionStep(identifier: "CompletionStep")
-        completionStep.title = config.read(query: "Completition Step Title")
-        completionStep.text = config.read(query: "Completition Step Text")
+        completionStep.title = config.read(query: "Completion Step Title")
+        completionStep.text = config.read(query: "Completion Step Text")
         
         /* **************************************************************
         * finally, CREATE an array with the steps to show the user
@@ -89,7 +103,7 @@ class OnboardingViewController: UIViewController {
         let introSteps = [consentStep, reviewConsentStep]
         
         // and steps regarding login / security
-        let emailVerificationSteps = [loginStep, loginVerificationStep, passcodeStep, healthDataStep, completionStep]
+        let emailVerificationSteps = loginSteps + [passcodeStep, healthDataStep, completionStep]
         
         // guide the user through ALL steps
         let fullSteps = introSteps + emailVerificationSteps
@@ -108,97 +122,10 @@ class OnboardingViewController: UIViewController {
         
         // wrap that task on a view controller
         let taskViewController = ORKTaskViewController(task: orderedTask, taskRun: nil)
-        taskViewController.delegate = self // enables `ORKTaskViewControllerDelegate` below
+        taskViewController.delegate = context.coordinator // enables `ORKTaskViewControllerDelegate` below
         
         // & present the VC!
-        present(taskViewController, animated: true, completion: nil)
-    }
-    
-}
-
-extension OnboardingViewController : ORKTaskViewControllerDelegate {
-    
-    public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
-        
-        switch reason {
-        case .completed:
-            // if we completed the onboarding task view controller, go to study.
-            performSegue(withIdentifier: "unwindToStudy", sender: nil)
-        default:
-            // otherwise dismiss onboarding without proceeding.
-            dismiss(animated: true, completion: nil)
-        }
-    }
-    
-    func taskViewController(_ taskViewController: ORKTaskViewController, stepViewControllerWillAppear stepViewController: ORKStepViewController) {
-        
-        // MARK: - Advanced Concepts
-        // Sometimes we might want some custom logic
-        // to run when a step appears 🎩
-        
-        if stepViewController.step?.identifier == LoginStep.identifier {
-            
-            /* **************************************************************
-            * When the login step appears, asking for the patient's email
-            **************************************************************/
-            if let _ = CKStudyUser.shared.currentUser?.email {
-                // if we already have an email, go forward and continue.
-                DispatchQueue.main.async {
-                    stepViewController.goForward()
-                }
-            }
-            
-        } else if stepViewController.step?.identifier == LoginCustomWaitStep.identifier {
-            
-            /* **************************************************************
-            * When the email verification step appears, send email in background!
-            **************************************************************/
-            
-            let stepResult = taskViewController.result.stepResult(forStepIdentifier: LoginStep.identifier)
-            if let emailRes = stepResult?.results?.first as? ORKTextQuestionResult, let email = emailRes.textAnswer {
-                
-                // if we received a valid email
-                CKStudyUser.shared.sendLoginLink(email: email) { (success) in
-                    // send a login link
-                    guard success else {
-                        // and react accordingly if we ran into an error.
-                        DispatchQueue.main.async {
-                            let config = CKPropertyReader(file: "CKConfiguration")
-                            
-                            Alerts.showInfo(title: config.read(query: "Failed Login Title"), message: config.read(query: "Failed Login Text"))
-                            stepViewController.goBackward()
-                        }
-                        return
-                    }
-                    
-                    CKStudyUser.shared.email = email
-                }
-                
-            }
-            
-        }
-        
-    }
-    
-    func taskViewController(_ taskViewController: ORKTaskViewController, viewControllerFor step: ORKStep) -> ORKStepViewController? {
-        
-        // MARK: - Advanced Concepts
-        // Overriding the view controller of an ORKStep
-        // lets us run our own code on top of what
-        // ResearchKit already provides!
-        
-        if step is CKHealthDataStep {
-            // this step lets us run custom logic to ask for
-            // HealthKit permissins when this step appears on screen.
-            return CKHealthDataStepViewController(step: step)
-        }
-        
-        if step is LoginCustomWaitStep {
-            // run custom code to send an email for login!
-            return LoginCustomWaitStepViewController(step: step)
-        }
-        
-        return nil
+        return taskViewController
     }
     
 }

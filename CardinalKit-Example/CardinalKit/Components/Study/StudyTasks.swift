@@ -29,6 +29,36 @@ struct StudyTasks {
     }()
     
     /**
+        Coffee Task Example for 9/2 Workshop
+     */
+    static let coffeeTask: ORKOrderedTask = {
+        var steps = [ORKStep]()
+        
+        // Instruction step
+        let instructionStep = ORKInstructionStep(identifier: "IntroStep")
+        instructionStep.title = "Patient Questionnaire"
+        instructionStep.text = "This information will help your doctors keep track of how you feel and how well you are able to do your usual activities. If you are unsure about how to answer a question, please give the best answer you can and make a written comment beside your answer."
+        
+        steps += [instructionStep]
+        
+        // Coffee Step
+        let healthScaleAnswerFormat = ORKAnswerFormat.scale(withMaximumValue: 5, minimumValue: 0, defaultValue: 3, step: 1, vertical: false, maximumValueDescription: "A Lot 😬", minimumValueDescription: "None 😴")
+        let healthScaleQuestionStep = ORKQuestionStep(identifier: "HealthScaleQuestionStep", title: "Coffee Intake", question: "How many cups of coffee did you have today?", answer: healthScaleAnswerFormat)
+        
+        steps += [healthScaleQuestionStep]
+        
+        //SUMMARY
+        let summaryStep = ORKCompletionStep(identifier: "SummaryStep")
+        summaryStep.title = "Thank you for tracking your coffee."
+        summaryStep.text = "We appreciate your time."
+        
+        steps += [summaryStep]
+        
+        return ORKOrderedTask(identifier: "SurveyTask-Coffee", steps: steps)
+        
+    }()
+    
+    /**
      Sample task created step-by-step!
     */
     static let sf12Task: ORKOrderedTask = {
@@ -70,7 +100,7 @@ struct StudyTasks {
         
         steps += [booleanQuestionStep]
         
-        //SUMARY
+        //SUMMARY
         let summaryStep = ORKCompletionStep(identifier: "SummaryStep")
         summaryStep.title = "Thank you."
         summaryStep.text = "We appreciate your time."
