@@ -32,7 +32,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         CKAppLaunch()
         
         let config = CKPropertyReader(file: "CKConfiguration")
-        
         UIView.appearance(whenContainedInInstancesOf: [ORKTaskViewController.self]).tintColor = config.readColor(query: "Tint Color")
         
         return true

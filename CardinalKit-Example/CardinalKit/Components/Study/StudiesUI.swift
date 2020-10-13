@@ -76,7 +76,10 @@ struct ActivitiesView: View {
     
     var body: some View {
         VStack {
-            Text(config.read(query: "Study Title")).font(.system(size: 25, weight:.bold)).foregroundColor(self.color)
+            Text(config.read(query: "Study Title"))
+                .font(.system(size: 25, weight:.bold))
+                .foregroundColor(self.color)
+                .padding(.top, 10)
             Text(config.read(query: "Team Name")).font(.system(size: 15, weight:.light))
             Text(self.date).font(.system(size: 18, weight: .regular)).padding()
             List {
@@ -119,103 +122,8 @@ struct ActivityView: View {
             })).sheet(isPresented: $showingDetail, onDismiss: {
                 
             }, content: {
-                TaskVC(tasks: self.tasks)
+                CKTaskViewController(tasks: self.tasks)
             })
-    }
-}
-
-
-
-struct WithdrawView: View {
-    let color: Color
-    @State var showWithdraw = false
-    
-    init(color: Color) {
-        self.color = color
-    }
-    
-    var body: some View {
-        HStack {
-            Text("Withdraw from Study").foregroundColor(self.color)
-            Spacer()
-            Text("›").foregroundColor(self.color)
-        }.frame(height: 60)
-            .contentShape(Rectangle())
-            .gesture(TapGesture().onEnded({
-            self.showWithdraw.toggle()
-            })).sheet(isPresented: $showWithdraw, onDismiss: {
-                
-            }, content: {
-                WithdrawalVC()
-            })
-    }
-}
-
-struct ReportView: View {
-    let color: Color
-    var email = ""
-    
-    init(color: Color, email: String) {
-        self.color = color
-        self.email = email
-    }
-    
-    var body: some View {
-        HStack {
-            Text("Report a Problem")
-            Spacer()
-            Text(self.email).foregroundColor(self.color)
-        }.frame(height: 60).contentShape(Rectangle())
-            .gesture(TapGesture().onEnded({
-            EmailHelper.shared.sendEmail(subject: "App Support Request", body: "Enter your support request here.", to: self.email)
-        }))
-    }
-}
-
-struct SupportView: View {
-    let color: Color
-    var phone = ""
-    
-    init(color: Color, phone: String) {
-        self.color = color
-        self.phone = phone
-    }
-    
-    var body: some View {
-        HStack {
-            Text("Support")
-            Spacer()
-            Text(self.phone).foregroundColor(self.color)
-        }.frame(height: 60).contentShape(Rectangle())
-            .gesture(TapGesture().onEnded({
-            let telephone = "tel://"
-                let formattedString = telephone + self.phone
-            guard let url = URL(string: formattedString) else { return }
-            UIApplication.shared.open(url)
-        }))
-    }
-}
-
-struct DocumentView: View {
-    @State private var showPreview = false
-    let documentsURL: URL!
-    
-    init() {
-        let documentsPath = UserDefaults.standard.object(forKey: "consentFormURL")
-        self.documentsURL = URL(fileURLWithPath: documentsPath as! String, isDirectory: false)
-        print(self.documentsURL.path)
-    }
-    
-    var body: some View {
-        HStack {
-            Text("View Consent Document")
-            Spacer()
-            Text("›")
-        }.frame(height: 60).contentShape(Rectangle())
-            .gesture(TapGesture().onEnded({
-                self.showPreview = true
-                
-        })).background(DocumentPreview(self.$showPreview, url: self.documentsURL))
     }
 }
 
@@ -256,7 +164,7 @@ struct ChangePasscodeView: View {
         })).sheet(isPresented: $showPasscode, onDismiss: {
             
         }, content: {
-            PasscodeVC()
+            PasscodeViewController()
         })
     }
 }
@@ -308,7 +216,7 @@ struct ProfileView: View {
                 Section {
                     ReportView(color: self.color, email: config.read(query: "Email"))
                     SupportView(color: self.color, phone: config.read(query: "Phone"))
-                    DocumentView()
+                    DocumentPreviewView()
                 }
                 
                 Section {

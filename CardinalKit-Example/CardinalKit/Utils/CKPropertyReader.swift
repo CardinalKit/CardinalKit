@@ -35,6 +35,10 @@ public class CKPropertyReader {
         return data[query] as! String
     }
     
+    func readBool(query: String) -> Bool {
+        return data[query] as! Bool
+    }
+    
     func readAny(query: String) -> AnyObject {
         return data[query]!
     }
