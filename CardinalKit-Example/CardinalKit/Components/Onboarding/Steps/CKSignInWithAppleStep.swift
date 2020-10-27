@@ -84,8 +84,8 @@ public class CKSignInWithAppleStep: ORKInstructionStep {
         let config = CKPropertyReader(file: "CKConfiguration")
         self.requestedScopes = requestedScopes
         super.init(identifier: identifier)
-        self.title = title ?? config["Sign in with Apple"]["Title"] as! String
-        self.text = text ?? config["Sign in with Apple"]["Text"] as! String
+        self.title = title ?? config["Login-Sign-In-With-Apple"]["Title"] as! String
+        self.text = text ?? config["Login-Sign-In-With-Apple"]["Text"] as! String
     }
 
     @available(*, unavailable)

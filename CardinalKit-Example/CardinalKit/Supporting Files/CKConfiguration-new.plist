@@ -120,5 +120,7 @@
 			<string>📝</string>
 		</dict>
 	</array>
+	<key>Login-Passwordless</key>
+	<false/>
 </dict>
 </plist>
