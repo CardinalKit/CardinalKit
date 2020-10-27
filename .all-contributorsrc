@@ -52,6 +52,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "TEST",
+      "name": "ZTEST",
+      "avatar_url": "TEST",
+      "profile": "TEST",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
