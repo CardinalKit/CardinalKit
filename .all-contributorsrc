@@ -54,6 +54,17 @@
       ]
     }
   ],
+   {
+      "login": "griffinac",
+      "name": "Ashley Griffin",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/14243141?s=460&u=203a5408c41deaae65c2416b3043e777bdf9de0e&v=4",
+      "profile": "https://github.com/griffinac",
+      "contributions": [
+        "ideas",
+        "code"
+      ]
+    }
+    ],
   "contributorsPerLine": 7,
   "projectName": "CardinalKit",
   "projectOwner": "CardinalKit",
