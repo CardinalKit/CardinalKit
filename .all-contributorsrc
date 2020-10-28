@@ -44,6 +44,16 @@
         "video"
       ]
     },
+        {
+      "login": "sprague",
+      "name": "Richard Sprague",
+      "avatar_url": "https://en.gravatar.com/sprague",
+      "profile": "https://github.com/richardsprague",
+      "contributions": [
+        "ideas",
+        "code"
+      ]
+    },
     {
       "login": "ApolloZhu",
       "name": "Zhiyu Zhu/朱智语",
