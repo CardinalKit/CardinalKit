@@ -22,29 +22,30 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
             // trigger "Studies UI"
             UserDefaults.standard.set(true, forKey: Constants.onboardingDidComplete)
             
-            let signatureResult = taskViewController.result.stepResult(forStepIdentifier: "ConsentReviewStep")?.results?.first as! ORKConsentSignatureResult
-            
-            let consentDocument = ConsentDocument()
-            signatureResult.apply(to: consentDocument)
-
-            consentDocument.makePDF { (data, error) -> Void in
+            if let signatureResult = taskViewController.result.stepResult(forStepIdentifier: "ConsentReviewStep")?.results?.first as? ORKConsentSignatureResult {
                 
-                let config = CKPropertyReader(file: "CKConfiguration")
+                let consentDocument = ConsentDocument()
+                signatureResult.apply(to: consentDocument)
+
+                consentDocument.makePDF { (data, error) -> Void in
                     
-                var docURL = (FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)).last as NSURL?
-                docURL = docURL?.appendingPathComponent("\(config.read(query: "Consent File Name")).pdf") as NSURL?
-                
-
-                do {
-                    let url = docURL! as URL
-                    try data?.write(to: url)
+                    let config = CKPropertyReader(file: "CKConfiguration")
+                        
+                    var docURL = (FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)).last as NSURL?
+                    docURL = docURL?.appendingPathComponent("\(config.read(query: "Consent File Name")).pdf") as NSURL?
                     
-                    UserDefaults.standard.set(url.path, forKey: "consentFormURL")
-                    print(url.path)
 
-                } catch let error {
+                    do {
+                        let url = docURL! as URL
+                        try data?.write(to: url)
+                        
+                        UserDefaults.standard.set(url.path, forKey: "consentFormURL")
+                        print(url.path)
 
-                    print(error.localizedDescription)
+                    } catch let error {
+
+                        print(error.localizedDescription)
+                    }
                 }
             }
             
