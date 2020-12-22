@@ -7,9 +7,9 @@
 	<key>Team Name</key>
 	<string>Stanford Department of Medicine</string>
 	<key>Email</key>
-	<string>contact@stanford.edu</string>
+	<string>contact@domain.com</string>
 	<key>Phone</key>
-	<string>650-123-4567</string>
+	<string>123-456-7890</string>
 	<key>Copyright</key>
 	<string>Made at Stanford with ❤️</string>
 	<key>Website</key>
@@ -69,6 +69,8 @@
 	<string>Welcome back!</string>
 	<key>Consent Title</key>
 	<string>Research Health Study Consent Form</string>
+	<key>Use CareKit</key>
+	<true/>
 	<key>HealthKit Data to Read</key>
 	<array>
 		<string>StepCount</string>

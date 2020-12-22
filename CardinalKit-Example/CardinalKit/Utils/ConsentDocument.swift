@@ -53,6 +53,8 @@ class ConsentDocument: ORKConsentDocument {
         }
         
         let signature = ORKConsentSignature(forPersonWithTitle: nil, dateFormatString: nil, identifier: "ConsentDocumentParticipantSignature")
+        signature.title = title
+        signaturePageTitle = title
         addSignature(signature)
     }
     

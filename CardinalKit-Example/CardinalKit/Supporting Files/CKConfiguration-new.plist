@@ -122,5 +122,7 @@
 	</array>
 	<key>Login-Passwordless</key>
 	<false/>
+	<key>Use CareKit</key>
+	<false/>
 </dict>
 </plist>
