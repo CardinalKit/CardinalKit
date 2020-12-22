@@ -12,6 +12,15 @@ import ResearchKit
 extension SceneDelegate: ORKPasscodeDelegate {
     
     /**
+     Hide content so it doesn't appear in the app switcher.
+    */
+    func toggleContainer(hidden: Bool) {
+        if let isViewLoaded = window?.rootViewController?.isViewLoaded, isViewLoaded {
+            window?.rootViewController?.view.isHidden = hidden
+        }
+    }
+    
+    /**
      Blocks the app from use until a validated passcode is entered.
      
      Uses `present()` to trigger an `ORKPasscodeViewController`
@@ -29,8 +38,19 @@ extension SceneDelegate: ORKPasscodeDelegate {
         window?.rootViewController?.present(passcodeViewController, animated: false, completion: nil)
     }
     
+    /**
+     Run this code when the application enters the background
+     to hide app content from the iOS App Switcher (Privacy/Security).
+    */
+    func CKLockDidEnterBackground() {
+        if ORKPasscodeViewController.isPasscodeStoredInKeychain() {
+            toggleContainer(hidden: true)
+        }
+    }
+    
     func passcodeViewControllerDidFinish(withSuccess viewController: UIViewController) {
         // dismiss passcode prompt screen
+        toggleContainer(hidden: false)
         viewController.dismiss(animated: true, completion: nil)
     }
     
