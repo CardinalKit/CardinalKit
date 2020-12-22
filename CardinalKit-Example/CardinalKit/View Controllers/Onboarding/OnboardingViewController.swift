@@ -36,8 +36,7 @@ struct OnboardingViewController: UIViewControllerRepresentable {
         *  STEP (2): ask user to review and sign consent document
         **************************************************************/
         // use the `ORKConsentReviewStep` from ResearchKit
-        let signature = consentDocument.signatures!.first!
-        signature.title = "Patient"
+        let signature = consentDocument.signatures?.first
         let reviewConsentStep = ORKConsentReviewStep(identifier: "ConsentReviewStep", signature: signature, in: consentDocument)
         reviewConsentStep.text = config.read(query: "Review Consent Step Text")
         reviewConsentStep.reasonForConsent = config.read(query: "Reason for Consent Text")
@@ -100,7 +99,7 @@ struct OnboardingViewController: UIViewControllerRepresentable {
         **************************************************************/
         
         // given intro steps that the user should review and consent to
-        let introSteps = [consentStep, reviewConsentStep]
+        let introSteps: [ORKStep] = [consentStep, reviewConsentStep]
         
         // and steps regarding login / security
         let emailVerificationSteps = loginSteps + [passcodeStep, healthDataStep, completionStep]

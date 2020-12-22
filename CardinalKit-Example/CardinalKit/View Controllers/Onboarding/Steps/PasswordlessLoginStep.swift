@@ -36,11 +36,13 @@ class PasswordlessLoginStep: ORKFormStep {
      - Returns a `ORKFormItem` array with questions to show.
     */
     fileprivate func createFormItems() -> [ORKFormItem] {
-        let emailAnswerFormat = ORKEmailAnswerFormat()
-        let idStepTitle = "Enter your email address:"
-        let idQuestionStep = ORKFormItem(identifier: PasswordlessLoginStep.idStepIdentifier, text: idStepTitle, answerFormat: emailAnswerFormat, optional: false)
+        let idStepTitle = "Email:"
         
-        return [idQuestionStep]
+        let titleStep = ORKFormItem(sectionTitle: "Form")
+        
+        let idQuestionStep = ORKFormItem(identifier: PasswordlessLoginStep.idStepIdentifier, text: idStepTitle, answerFormat: ORKEmailAnswerFormat(), optional: false)
+        
+        return [titleStep, idQuestionStep]
     }
     
 }
