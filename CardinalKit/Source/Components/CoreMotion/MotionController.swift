@@ -13,7 +13,7 @@ import CoreMotion
 import HealthKit
 #endif
 
-protocol MotionDelegate : class {
+public protocol MotionDelegate : class {
     func pedometer(_ result: PedometerPayload)
     func pedometer(didStallAfter timeout: Double)
 }
@@ -24,8 +24,19 @@ class MotionController {
     
     var delegate : MotionDelegate?//s = [MotionDelegate]()
     
+    var automaticStreaming: Bool = false
+    
+    var syncId: String = ""
+    var device: DataProcessor.Device = .phone
+    
+    public var isActive: Bool {
+        get {
+            return isRunning
+        }
+    }
+    
     /// parent for real-time data analysis
-    var motionAnalyzer = MotionAnalyzer()
+    fileprivate var motionAnalyzer = MotionAnalyzer()
     
     fileprivate let pedometer = CMPedometer()
     fileprivate let motionManager = CMMotionManager()
@@ -45,24 +56,18 @@ class MotionController {
     fileprivate var isStreaming: Bool = false
     fileprivate var streamTimer: Timer?
     
-    var automaticStreaming: Bool = false
+    fileprivate var startDate = Date()
+    fileprivate var lastStreamDate = Date()
+    fileprivate var startTime = CFAbsoluteTimeGetCurrent()
+    fileprivate var streamSize = maxStreamSize
     
-    var startDate = Date()
-    var lastStreamDate = Date()
-    var startTime = CFAbsoluteTimeGetCurrent()
-    var streamSize = maxStreamSize
-    
-    var syncId: String = ""
-    var device: DataProcessor.Device = .phone
-    
-    var pedometerItems = [PedometerPayload]()
-    var rawAccelerationItems = [AccelerationPayload]()
-    var rawGyroItems = [GyroPayload]()
-    var deviceMotionAttitude = [DMAttitudePayload]()
-    var deviceMotionRotation = [DMRotationRatePayload]()
-    var deviceMotionGravity = [DMGravityPayload]()
-    var deviceMotionUserAcceleration = [DMUserAccelerationPayload]()
-    
+    fileprivate var pedometerItems = [PedometerPayload]()
+    fileprivate  var rawAccelerationItems = [AccelerationPayload]()
+    fileprivate  var rawGyroItems = [GyroPayload]()
+    fileprivate  var deviceMotionAttitude = [DMAttitudePayload]()
+    fileprivate  var deviceMotionRotation = [DMRotationRatePayload]()
+    fileprivate  var deviceMotionGravity = [DMGravityPayload]()
+    fileprivate var deviceMotionUserAcceleration = [DMUserAccelerationPayload]()
     
     init() {
         semaphores = [pedometerSemaphore, rawAccelSemaphore, rawGyroSemaphore, dmAttitudeSemaphore, dmRotationSemaphore, dmGravitySemaphore, dmUserAccelSemaphore, chestStrapSemaphore, heartRateSemaphore, locationSemaphore]
