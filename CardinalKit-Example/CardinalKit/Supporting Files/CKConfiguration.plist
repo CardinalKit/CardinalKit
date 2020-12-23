@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>Study Title</key>
-	<string>CardinalKit Sample App</string>
+	<string>CardinalKit Study</string>
 	<key>Team Name</key>
 	<string>Stanford Department of Medicine</string>
 	<key>Email</key>
@@ -31,15 +31,15 @@
 	<key>Completion Step Title</key>
 	<string>Welcome aboard.</string>
 	<key>Completion Step Text</key>
-	<string>Thank you for joining this study.</string>
+	<string>This step concludes the onboarding and consent process of the CardinalKit framework. Next up, you will see main app functionality.</string>
 	<key>Failed Login Title</key>
 	<string>Unable to Login 😔</string>
 	<key>Failed Login Text</key>
 	<string>Please try again in five minutes.</string>
 	<key>Health Permissions Title</key>
-	<string>Health Data</string>
+	<string>Health App Permission</string>
 	<key>Health Permissions Text</key>
-	<string>On the next screen, you will be prompted to grant access to read and write some of your general and health information, such as height, weight, and steps taken so you don&apos;t have to enter it again.</string>
+	<string>Use this text to provide an explanation to your app participants about what data you intend to read from the Health app and why. This sample will read step count, distance, heart rate, and flights climbed data.</string>
 	<key>Background Read Frequency</key>
 	<string>immediate</string>
 	<key>Login-Sign-In-With-Apple</key>
@@ -81,21 +81,77 @@
 	<key>Consent Form</key>
 	<dict>
 		<key>Overview</key>
-		<string>Welcome to CardinalKit. Vivamus laoreet erat sit amet tincidunt scelerisque. Maecenas odio sapien, molestie eu vulputate sodales, tincidunt at neque. Nunc venenatis velit et ligula dictum, eget accumsan felis consectetur. Donec scelerisque fermentum vestibulum. Nam molestie finibus mauris, id congue lectus ultrices eu. Nunc et odio vitae dui interdum dictum. Proin sagittis leo quam. Proin vulputate massa ac orci pulvinar, eget rhoncus urna congue. Sed ut vehicula tellus, eget scelerisque enim. Cras lobortis diam at faucibus scelerisque. Curabitur pharetra arcu erat, nec tincidunt mi eleifend ut. Nunc suscipit risus vitae consectetur sodales. Aenean vitae lectus odio. Phasellus diam orci, accumsan non elementum at, finibus condimentum mauris. Nullam est enim, rhoncus a rutrum sed, laoreet a magna.</string>
-		<key>Data Gathering</key>
-		<string>Your Data Gathering Section: Vivamus laoreet erat sit amet tincidunt scelerisque. Maecenas odio sapien, molestie eu vulputate sodales, tincidunt at neque. Nunc venenatis velit et ligula dictum, eget accumsan felis consectetur. Donec scelerisque fermentum vestibulum. Nam molestie finibus mauris, id congue lectus ultrices eu. Nunc et odio vitae dui interdum dictum. Proin sagittis leo quam. Proin vulputate massa ac orci pulvinar, eget rhoncus urna congue. Sed ut vehicula tellus, eget scelerisque enim. Cras lobortis diam at faucibus scelerisque. Curabitur pharetra arcu erat, nec tincidunt mi eleifend ut. Nunc suscipit risus vitae consectetur sodales. Aenean vitae lectus odio. Phasellus diam orci, accumsan non elementum at, finibus condimentum mauris. Nullam est enim, rhoncus a rutrum sed, laoreet a magna.</string>
+		<dict>
+			<key>Title</key>
+			<string>Hi there! 👋🏽</string>
+			<key>Summary</key>
+			<string>CardinalKit is a suite of tools designed to help you build a digital health app experience from the ground up. It integrates with Firebase to provide full-stack solutions. We hope you enjoy the love poured into this sample and make many great things with it!</string>
+			<key>Content</key>
+			<string>CardinalKit is a suite of tools designed to help you build a digital health app experience from the ground up. It integrates with Firebase to provide full-stack solutions. We hope you enjoy the love poured into this sample and make many great things with it!</string>
+		</dict>
+		<key>DataGathering</key>
+		<dict>
+			<key>Title</key>
+			<string>Data Gathering</string>
+			<key>Summary</key>
+			<string>Here you should write a bit about what data you are collecting, and why.</string>
+			<key>Content</key>
+			<string>Here you should write a bit about what data you are collecting, and why. Additional content written here will show in final consent review form and generated PDF.</string>
+		</dict>
 		<key>Privacy</key>
-		<string>Your Privacy Section: Vivamus laoreet erat sit amet tincidunt scelerisque. Maecenas odio sapien, molestie eu vulputate sodales, tincidunt at neque. Nunc venenatis velit et ligula dictum, eget accumsan felis consectetur. Donec scelerisque fermentum vestibulum. Nam molestie finibus mauris, id congue lectus ultrices eu. Nunc et odio vitae dui interdum dictum. Proin sagittis leo quam. Proin vulputate massa ac orci pulvinar, eget rhoncus urna congue. Sed ut vehicula tellus, eget scelerisque enim. Cras lobortis diam at faucibus scelerisque. Curabitur pharetra arcu erat, nec tincidunt mi eleifend ut. Nunc suscipit risus vitae consectetur sodales. Aenean vitae lectus odio. Phasellus diam orci, accumsan non elementum at, finibus condimentum mauris. Nullam est enim, rhoncus a rutrum sed, laoreet a magna.</string>
-		<key>Data Use</key>
-		<string>Your Data Use Section: Vivamus laoreet erat sit amet tincidunt scelerisque. Maecenas odio sapien, molestie eu vulputate sodales, tincidunt at neque. Nunc venenatis velit et ligula dictum, eget accumsan felis consectetur. Donec scelerisque fermentum vestibulum. Nam molestie finibus mauris, id congue lectus ultrices eu. Nunc et odio vitae dui interdum dictum. Proin sagittis leo quam. Proin vulputate massa ac orci pulvinar, eget rhoncus urna congue. Sed ut vehicula tellus, eget scelerisque enim. Cras lobortis diam at faucibus scelerisque. Curabitur pharetra arcu erat, nec tincidunt mi eleifend ut. Nunc suscipit risus vitae consectetur sodales. Aenean vitae lectus odio. Phasellus diam orci, accumsan non elementum at, finibus condimentum mauris. Nullam est enim, rhoncus a rutrum sed, laoreet a magna.</string>
-		<key>Time Commitment</key>
-		<string>Your Time Commitment Section: Vivamus laoreet erat sit amet tincidunt scelerisque. Maecenas odio sapien, molestie eu vulputate sodales, tincidunt at neque. Nunc venenatis velit et ligula dictum, eget accumsan felis consectetur. Donec scelerisque fermentum vestibulum. Nam molestie finibus mauris, id congue lectus ultrices eu. Nunc et odio vitae dui interdum dictum. Proin sagittis leo quam. Proin vulputate massa ac orci pulvinar, eget rhoncus urna congue. Sed ut vehicula tellus, eget scelerisque enim. Cras lobortis diam at faucibus scelerisque. Curabitur pharetra arcu erat, nec tincidunt mi eleifend ut. Nunc suscipit risus vitae consectetur sodales. Aenean vitae lectus odio. Phasellus diam orci, accumsan non elementum at, finibus condimentum mauris. Nullam est enim, rhoncus a rutrum sed, laoreet a magna.</string>
-		<key>Study Survey</key>
-		<string>Your Study Survey Section: Vivamus laoreet erat sit amet tincidunt scelerisque. Maecenas odio sapien, molestie eu vulputate sodales, tincidunt at neque. Nunc venenatis velit et ligula dictum, eget accumsan felis consectetur. Donec scelerisque fermentum vestibulum. Nam molestie finibus mauris, id congue lectus ultrices eu. Nunc et odio vitae dui interdum dictum. Proin sagittis leo quam. Proin vulputate massa ac orci pulvinar, eget rhoncus urna congue. Sed ut vehicula tellus, eget scelerisque enim. Cras lobortis diam at faucibus scelerisque. Curabitur pharetra arcu erat, nec tincidunt mi eleifend ut. Nunc suscipit risus vitae consectetur sodales. Aenean vitae lectus odio. Phasellus diam orci, accumsan non elementum at, finibus condimentum mauris. Nullam est enim, rhoncus a rutrum sed, laoreet a magna.</string>
-		<key>Study Tasks</key>
-		<string>Your Study Tasks Section: Vivamus laoreet erat sit amet tincidunt scelerisque. Maecenas odio sapien, molestie eu vulputate sodales, tincidunt at neque. Nunc venenatis velit et ligula dictum, eget accumsan felis consectetur. Donec scelerisque fermentum vestibulum. Nam molestie finibus mauris, id congue lectus ultrices eu. Nunc et odio vitae dui interdum dictum. Proin sagittis leo quam. Proin vulputate massa ac orci pulvinar, eget rhoncus urna congue. Sed ut vehicula tellus, eget scelerisque enim. Cras lobortis diam at faucibus scelerisque. Curabitur pharetra arcu erat, nec tincidunt mi eleifend ut. Nunc suscipit risus vitae consectetur sodales. Aenean vitae lectus odio. Phasellus diam orci, accumsan non elementum at, finibus condimentum mauris. Nullam est enim, rhoncus a rutrum sed, laoreet a magna.</string>
+		<dict>
+			<key>Title</key>
+			<string>Privacy</string>
+			<key>Summary</key>
+			<string>What is your commitment in terms of data protection to your app participants? Who will have access to data?</string>
+			<key>Content</key>
+			<string>What is your commitment in terms of data protection to your app participants? Who will have access to data? Additional content written here will show in final consent review form and generated PDF.</string>
+		</dict>
+		<key>DataUse</key>
+		<dict>
+			<key>Title</key>
+			<string>Data Use</string>
+			<key>Summary</key>
+			<string>Information about your team&apos;s use of data.</string>
+			<key>Content</key>
+			<string>Information about your team&apos;s use of data. Additional content.</string>
+		</dict>
+		<key>TimeCommitment</key>
+		<dict>
+			<key>Title</key>
+			<string>Time Commitment</string>
+			<key>Summary</key>
+			<string>Information about the expected time commitment per app participant.</string>
+			<key>Content</key>
+			<string>Information about the expected time commitment per app participant. Additional content.</string>
+		</dict>
+		<key>StudySurvey</key>
+		<dict>
+			<key>Title</key>
+			<string>Study Survey</string>
+			<key>Summary</key>
+			<string>Information about any survey(s) in the app.</string>
+			<key>Content</key>
+			<string>Information about any survey(s) in the app. Additional content.</string>
+		</dict>
+		<key>StudyTasks</key>
+		<dict>
+			<key>Title</key>
+			<string>Study Tasks</string>
+			<key>Summary</key>
+			<string>Information about any task(s) in the app.</string>
+			<key>Content</key>
+			<string>Information about any task(s) in the app. Additional content.</string>
+		</dict>
 		<key>Withdrawing</key>
-		<string>Your Withdrawing Section: Vivamus laoreet erat sit amet tincidunt scelerisque. Maecenas odio sapien, molestie eu vulputate sodales, tincidunt at neque. Nunc venenatis velit et ligula dictum, eget accumsan felis consectetur. Donec scelerisque fermentum vestibulum. Nam molestie finibus mauris, id congue lectus ultrices eu. Nunc et odio vitae dui interdum dictum. Proin sagittis leo quam. Proin vulputate massa ac orci pulvinar, eget rhoncus urna congue. Sed ut vehicula tellus, eget scelerisque enim. Cras lobortis diam at faucibus scelerisque. Curabitur pharetra arcu erat, nec tincidunt mi eleifend ut. Nunc suscipit risus vitae consectetur sodales. Aenean vitae lectus odio. Phasellus diam orci, accumsan non elementum at, finibus condimentum mauris. Nullam est enim, rhoncus a rutrum sed, laoreet a magna.</string>
+		<dict>
+			<key>Title</key>
+			<string>Withdrawing</string>
+			<key>Summary</key>
+			<string>What should your study participants know about the withdrawing process of your study?</string>
+			<key>Content</key>
+			<string>What should your study participants know about the withdrawing process of your study? Additional content.</string>
+		</dict>
 	</dict>
 	<key>Onboarding</key>
 	<array>
@@ -105,7 +161,7 @@
 			<key>Description</key>
 			<string>Lorem Ipsum is simply dummy text of the printing and typesetting industry</string>
 			<key>Logo</key>
-			<string>😁</string>
+			<string>1️⃣</string>
 		</dict>
 		<dict>
 			<key>Title</key>
@@ -113,7 +169,7 @@
 			<key>Description</key>
 			<string>Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</string>
 			<key>Logo</key>
-			<string>🦠</string>
+			<string>2️⃣</string>
 		</dict>
 		<dict>
 			<key>Title</key>
@@ -121,7 +177,7 @@
 			<key>Description</key>
 			<string>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</string>
 			<key>Logo</key>
-			<string>🙉</string>
+			<string>3️⃣</string>
 		</dict>
 	</array>
 </dict>

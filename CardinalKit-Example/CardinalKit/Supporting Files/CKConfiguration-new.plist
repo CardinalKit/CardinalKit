@@ -77,13 +77,36 @@
 	<key>Consent Form</key>
 	<dict>
 		<key>Overview</key>
-		<string>Welcome to our Coffee Study. Blue mountain, wings sweet body cup id mocha percolator cream. Sweet dripper coffee, brewed, galão coffee so variety breve. Blue mountain and ristretto ut extra brewed blue mountain organic saucer crema.
+		<dict>
+			<key>Title</key>
+			<string>Hi there! 👋🏽</string>
+			<key>Summary</key>
+			<string>Welcome to our Coffee Study. 
 </string>
-		<key>Time Commitment</key>
-		<string>Your Time Commitment Section: White carajillo foam, so plunger pot white galão coffee. Dripper, black, con panna brewed, french press kopi-luwak ut turkish frappuccino. Strong, caffeine cappuccino eu con panna coffee ristretto and barista.
+			<key>Content</key>
+			<string>Welcome to our Coffee Study. Blue mountain, wings sweet body cup id mocha percolator cream. Sweet dripper coffee, brewed, galão coffee so variety breve. Blue mountain and ristretto ut extra brewed blue mountain organic saucer crema.
 </string>
+		</dict>
+		<key>TimeCommitment</key>
+		<dict>
+			<key>Title</key>
+			<string>Time Commitment</string>
+			<key>Summary</key>
+			<string>Your Time Commitment Section: White carajillo foam, so plunger pot white galão coffee. 
+</string>
+			<key>Content</key>
+			<string>Your Time Commitment Section: White carajillo foam, so plunger pot white galão coffee. Dripper, black, con panna brewed, french press kopi-luwak ut turkish frappuccino. Strong, caffeine cappuccino eu con panna coffee ristretto and barista.
+</string>
+		</dict>
 		<key>Withdrawing</key>
-		<string>Your Withdrawing Section: Filter, et grounds, skinny whipped carajillo café au lait fair trade. Chicory seasonal frappuccino, lungo extra crema so turkish chicory foam affogato caramelization. Aged mocha variety spoon, extra strong seasonal irish id medium.</string>
+		<dict>
+			<key>Title</key>
+			<string>Withdrawing</string>
+			<key>Summary</key>
+			<string>Your Withdrawing Section: Filter, et grounds, skinny whipped carajillo café au lait fair trade. </string>
+			<key>Content</key>
+			<string>Your Withdrawing Section: Filter, et grounds, skinny whipped carajillo café au lait fair trade. Chicory seasonal frappuccino, lungo extra crema so turkish chicory foam affogato caramelization. Aged mocha variety spoon, extra strong seasonal irish id medium.</string>
+		</dict>
 	</dict>
 	<key>Onboarding</key>
 	<array>
