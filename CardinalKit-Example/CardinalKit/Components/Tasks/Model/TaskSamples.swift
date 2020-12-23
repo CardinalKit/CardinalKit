@@ -11,18 +11,18 @@ import ResearchKit
  This file contains some sample `ResearchKit` tasks
  that you can modify and use throughout your project!
 */
-struct StudyTasks {
+struct TaskSamples {
     
     /**
      Active tasks created with short-hand constructors from `ORKOrderedTask`
     */
-    static let tappingTask: ORKOrderedTask = {
+    static let sampleTappingTask: ORKOrderedTask = {
         let intendedUseDescription = "Finger tapping is a universal way to communicate."
         
         return ORKOrderedTask.twoFingerTappingIntervalTask(withIdentifier: "TappingTask", intendedUseDescription: intendedUseDescription, duration: 10, handOptions: .both, options: ORKPredefinedTaskOption())
     }()
     
-    static let walkingTask: ORKOrderedTask = {
+    static let sampleWalkingTask: ORKOrderedTask = {
         let intendedUseDescription = "Tests ability to walk"
         
         return ORKOrderedTask.shortWalk(withIdentifier: "ShortWalkTask", intendedUseDescription: intendedUseDescription, numberOfStepsPerLeg: 20, restDuration: 30, options: ORKPredefinedTaskOption())
@@ -31,26 +31,19 @@ struct StudyTasks {
     /**
         Coffee Task Example for 9/2 Workshop
      */
-    static let coffeeTask: ORKOrderedTask = {
+    static let sampleCoffeeTask: ORKOrderedTask = {
         var steps = [ORKStep]()
-        
-        // Instruction step
-        let instructionStep = ORKInstructionStep(identifier: "IntroStep")
-        instructionStep.title = "Patient Questionnaire"
-        instructionStep.text = "This information will help your doctors keep track of how you feel and how well you are able to do your usual activities. If you are unsure about how to answer a question, please give the best answer you can and make a written comment beside your answer."
-        
-        steps += [instructionStep]
         
         // Coffee Step
         let healthScaleAnswerFormat = ORKAnswerFormat.scale(withMaximumValue: 5, minimumValue: 0, defaultValue: 3, step: 1, vertical: false, maximumValueDescription: "A Lot 😬", minimumValueDescription: "None 😴")
-        let healthScaleQuestionStep = ORKQuestionStep(identifier: "HealthScaleQuestionStep", title: "Coffee Intake", question: "How many cups of coffee did you have today?", answer: healthScaleAnswerFormat)
+        let healthScaleQuestionStep = ORKQuestionStep(identifier: "CoffeeScaleQuestionStep", title: "Coffee Intake", question: "How many cups of coffee did you have today?", answer: healthScaleAnswerFormat)
         
         steps += [healthScaleQuestionStep]
         
         //SUMMARY
         let summaryStep = ORKCompletionStep(identifier: "SummaryStep")
         summaryStep.title = "Thank you for tracking your coffee."
-        summaryStep.text = "We appreciate your time."
+        summaryStep.text = "We appreciate your time (and caffeinated energy)!"
         
         steps += [summaryStep]
         
@@ -61,7 +54,7 @@ struct StudyTasks {
     /**
      Sample task created step-by-step!
     */
-    static let sf12Task: ORKOrderedTask = {
+    static let sampleSurveyTask: ORKOrderedTask = {
         var steps = [ORKStep]()
         
         // Instruction step
@@ -107,6 +100,6 @@ struct StudyTasks {
         
         steps += [summaryStep]
         
-        return ORKOrderedTask(identifier: "SurveyTask-SF12", steps: steps)
+        return ORKOrderedTask(identifier: "SurveyTask-Assessment", steps: steps)
     }()
 }

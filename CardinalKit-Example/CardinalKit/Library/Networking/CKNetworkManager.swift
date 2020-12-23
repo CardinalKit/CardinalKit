@@ -10,12 +10,30 @@ import Firebase
 
 class CKAppNetworkManager: CKAPIDeliveryDelegate {
     
+    // MARK: - CKAPIDeliveryDelegate
+    func send(file: URL, package: Package, onCompletion: @escaping (Bool) -> Void) {
+        switch package.type {
+        case .hkdata:
+            sendHealthKit(file, package, onCompletion)
+            break
+        case .sensorData:
+            sendSensorData(file, package, onCompletion)
+            break
+        default:
+            fatalError("Sending data of type \(package.type.description) is NOT supported.")
+            break
+        }
+        
+    }
+    
+}
+
+extension CKAppNetworkManager {
+    
     /**
-     Override the CardinalKit networking engine to
-     send HealthKit data using Firebase
+     Send HealthKit data using Firebase
     */
     fileprivate func sendHealthKit(_ file: URL, _ package: Package, _ onCompletion: @escaping (Bool) -> Void) {
-        
         do {
             let data = try Data(contentsOf: file)
             guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
@@ -44,20 +62,26 @@ class CKAppNetworkManager: CKAPIDeliveryDelegate {
             onCompletion(false)
             return
         }
-        
     }
     
-    // MARK: - CKAPIDeliveryDelegate
-    func send(file: URL, package: Package, onCompletion: @escaping (Bool) -> Void) {
-        switch package.type {
-        case .hkdata:
-            sendHealthKit(file, package, onCompletion)
-            break
-        default:
-            fatalError("Sending data of type \(package.type.description) is NOT supported.")
-            break
+    /**
+     Send Sensor data using Cloud Storage
+    */
+    fileprivate func sendSensorData(_ file: URL, _ package: Package, _ onCompletion: @escaping (Bool) -> Void) {
+        
+        guard let stanfordRITBucket = CKStudyUser.shared.authCollection else { return }
+        
+        let storageRef = Storage.storage().reference()
+        let ref = storageRef.child("\(stanfordRITBucket)\(Constants.dataBucketStorage)/coremotion/\(package.fileName)/\(file.lastPathComponent)")
+        
+        let uploadTask = ref.putFile(from: file, metadata: nil)
+        uploadTask.observe(.success) { snapshot in
+            print("[sendSensorData] file uploaded successfully!")
         }
         
+        uploadTask.observe(.failure) { snapshot in
+            print("[sendSensorData] error uploading file!")
+        }
     }
     
 }

@@ -11,10 +11,10 @@ import CareKitStore
 import Contacts
 import UIKit
 
-private extension OCKStore {
+internal extension OCKStore {
 
     // Adds tasks and contacts into the store
-    internal func populateSampleData() {
+    func populateSampleData() {
 
         let thisMorning = Calendar.current.startOfDay(for: Date())
         let aFewDaysAgo = Calendar.current.date(byAdding: .day, value: -4, to: thisMorning)!

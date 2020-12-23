@@ -13,42 +13,40 @@ class ConsentDocument: ORKConsentDocument {
     override init() {
         super.init()
         
-        let config = CKPropertyReader(file: "CKConfiguration")
-        
+        let config = CKConfig.shared
         let consentTitle = config.read(query: "Consent Title")
         
         title = NSLocalizedString(consentTitle, comment: "")
-        
-        let sectionTypes: [ORKConsentSectionType] = [
-            .overview,
-            .dataGathering,
-            .privacy,
-            .dataUse,
-            .timeCommitment,
-            .studySurvey,
-            .studyTasks,
-            .withdrawing
-        ]
-        
-        let keys = ["Overview", "Data Gathering", "Privacy", "Data Use", "Time Commitment", "Study Survey", "Study Tasks", "Withdrawing"]
-        
-        let consentForm = config.readDict(query: "Consent Form")
         sections = []
         
-        for sectionType in keys {
-            let section = ORKConsentSection(type: sectionTypes[keys.index(of: sectionType)!])
+        let sectionTypes: [ORKConsentSectionType] = [
+            // see ORKConsentSectionType.description for CKConfiguration.plist keys
+            .overview, // "Overview"
+            .dataGathering, // "DataGathering"
+            .privacy, // "Privacy"
+            .dataUse, // "DataUse"
+            .timeCommitment, // "TimeCommitment"
+            .studySurvey, // "StudySurvey"
+            .studyTasks, // "StudyTasks"
+            .withdrawing, // "Withdrawing"
+        ]
+        
+        guard let consentForm = config.readAny(query: "Consent Form") as? [String:[String:String]] else {
+            return
+        }
+        
+        for type in sectionTypes {
+            let section = ORKConsentSection(type: type)
             
-            if let consentSectionText = consentForm[sectionType] {
-                let localizedStep = NSLocalizedString(consentSectionText, comment: "")
-                let localizedSummary = localizedStep.components(separatedBy: ".")[0] + "."
+            if let consentSection = consentForm[type.description] {
                 
-                section.summary = localizedSummary
-                section.content = localizedStep
-                if sections == nil {
-                    sections = [section]
-                } else {
-                    sections!.append(section)
-                }
+                let errorMessage = "We didn't find a consent form for your project. Did you configure the CKConfiguration.plist file already?"
+            
+                section.title = NSLocalizedString(consentSection["Title"] ?? ":(", comment: "")
+                section.summary = NSLocalizedString(consentSection["Summary"] ?? errorMessage, comment: "")
+                section.content = NSLocalizedString(consentSection["Content"] ?? errorMessage, comment: "")
+                
+                sections?.append(section)
             }
         }
         

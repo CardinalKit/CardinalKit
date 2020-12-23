@@ -21,19 +21,17 @@ struct MainUIView: View {
     
     var body: some View {
         TabView {
-            if useCareKit {
-                ScheduleViewControllerRepresentable().tabItem {
-                    Image("tab_schedule").renderingMode(.template)
-                    Text("Schedule")
-                }
-            }
-            
-            StudyActivitiesUIView(color: self.color).tabItem {
+            TasksUIView(color: self.color).tabItem {
                 Image("tab_tasks").renderingMode(.template)
                 Text("Tasks")
             }
             
             if useCareKit {
+                ScheduleViewControllerRepresentable().tabItem {
+                    Image("tab_schedule").renderingMode(.template)
+                    Text("Schedule")
+                }
+                
                 CareTeamViewControllerRepresentable().tabItem {
                     Image("tab_care").renderingMode(.template)
                     Text("Contact")

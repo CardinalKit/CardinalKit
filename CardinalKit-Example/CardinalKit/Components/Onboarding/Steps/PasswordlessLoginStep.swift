@@ -38,7 +38,7 @@ class PasswordlessLoginStep: ORKFormStep {
     fileprivate func createFormItems() -> [ORKFormItem] {
         let idStepTitle = "Email:"
         
-        let titleStep = ORKFormItem(sectionTitle: "Form")
+        let titleStep = ORKFormItem(sectionTitle: "✉️ 🌎")
         
         let idQuestionStep = ORKFormItem(identifier: PasswordlessLoginStep.idStepIdentifier, text: idStepTitle, answerFormat: ORKEmailAnswerFormat(), optional: false)
         

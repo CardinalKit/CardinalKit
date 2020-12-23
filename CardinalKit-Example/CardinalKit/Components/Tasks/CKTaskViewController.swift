@@ -10,6 +10,7 @@ import UIKit
 import SwiftUI
 import ResearchKit
 import Firebase
+import CardinalKit
 
 struct CKTaskViewController: UIViewControllerRepresentable {
     
@@ -39,6 +40,7 @@ struct CKTaskViewController: UIViewControllerRepresentable {
     }
 
     class Coordinator: NSObject, ORKTaskViewControllerDelegate {
+        
         public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
             switch reason {
             case .completed:
