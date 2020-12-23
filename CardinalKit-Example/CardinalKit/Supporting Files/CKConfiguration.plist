@@ -37,9 +37,18 @@
 	<key>Failed Login Text</key>
 	<string>Please try again in five minutes.</string>
 	<key>Health Permissions Title</key>
-	<string>Health App Permission</string>
+	<string>Permission to read Activity Data 🏃🏽‍♀️</string>
 	<key>Health Permissions Text</key>
-	<string>Use this text to provide an explanation to your app participants about what data you intend to read from the Health app and why. This sample will read step count, distance, heart rate, and flights climbed data.</string>
+	<string>Use this text to provide an explanation to your app participants about what activity data you intend to read from the Health app and why. This sample will read step count, distance, heart rate, and flights climbed data.</string>
+	<key>Health Records</key>
+	<dict>
+		<key>Enabled</key>
+		<true/>
+		<key>Permissions Text</key>
+		<string>Use this text to provide an explanation to your app participants about what electronic health records (EHR) you intend to collect from the Health app and why. This sample will read all available records (for which permission is granted).</string>
+		<key>Permissions Title</key>
+		<string>Permission to read Health Records 🏥</string>
+	</dict>
 	<key>Background Read Frequency</key>
 	<string>immediate</string>
 	<key>Login-Sign-In-With-Apple</key>
