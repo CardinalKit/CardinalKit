@@ -57,7 +57,7 @@ class CKHealthRecordsStepViewController: ORKInstructionStepViewController {
         manager.getAuth { succeeded, _ in
             guard succeeded else { return }
             
-            manager.collect()
+            manager.upload()
             OperationQueue.main.addOperation {
                 super.goForward()
             }

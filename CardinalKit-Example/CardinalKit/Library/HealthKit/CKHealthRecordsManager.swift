@@ -45,42 +45,34 @@ class CKHealthRecordsManager: NSObject {
         }
     }
     
-    func collect() {
+    func upload(_ onCompletion: ((Bool, Error?) -> Void)? = nil) {
         for type in types {
             let query = HKSampleQuery(sampleType: type, predicate: nil, limit: HKObjectQueryNoLimit, sortDescriptors: nil) { (query, samples, error) in
                 
                 guard let samples = samples as? [HKClinicalRecord] else {
                     print("*** An error occurred: \(error?.localizedDescription ?? "nil") ***")
+                    onCompletion?(false, error)
                     return
                 }
                 
-                print("[CKHealthRecordsManager] collect() - sending \(samples.count) sample(s)")
+                print("[CKHealthRecordsManager] upload() - sending \(samples.count) sample(s)")
                 for sample in samples {
                     guard let resource = sample.fhirResource else { continue }
-                    
-                    // https://github.com/apple/FHIRModels
                     do {
                         let data = resource.data
+                        let identifier = resource.resourceType.rawValue + "-" + resource.identifier
                         
                         if let json = try CKSendHelper.jsonDataAsDict(data) {
-                            try CKSendHelper.sendToFirestore(json, collection: "health-records")
+                            try CKSendHelper.sendToFirestore(json, collection: "health-records", withIdentifier: identifier)
                         }
-                        
-                        /* let jsonDictionary = try JSONSerialization.jsonObject(with: data, options: [])
-                        print(jsonDictionary)
-                        
-                        let resourceData = OCKFHIRResourceData<R4, JSON>(data: data)
-                        let coder = OCKR4PatientCoder()
-                    
-                        let patient: OCKPatient = try coder.decode(resourceData)
-                        print(patient)*/
                     } catch {
                         print(error)
                     }
                     print("------")
                 }
                 
-                
+                UserDefaults.standard.set(Date(), forKey: Constants.prefHealthRecordsLastUploaded)
+                onCompletion?(true, nil)
             }
             healthStore.execute(query)
         }
