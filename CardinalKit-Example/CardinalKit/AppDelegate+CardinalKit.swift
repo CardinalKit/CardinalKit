@@ -30,9 +30,8 @@ extension AppDelegate {
             CKStudyUser.shared.save()
             
             // (4) then start the requested HK data collection (if any).
-            // TODO: make frequency configurable
-            let healthStep = CKHealthDataStep(identifier: UUID().uuidString)
-            healthStep.getHealthAuthorization { (success, error) in
+            let manager = CKHealthKitManager.shared
+            manager.getHealthAuthorization { (success, error) in
                 if let error = error {
                     print(error)
                 }
