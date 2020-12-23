@@ -18,6 +18,7 @@ struct TasksUIView: View {
     
     let listItems = TaskItem.allValues
     var listItemsPerHeader = [String:[TaskItem]]()
+    var listItemsSections = [String]()
     
     init(color: Color) {
         self.color = color
@@ -26,12 +27,15 @@ struct TasksUIView: View {
         formatter.dateFormat = "MMM. d, YYYY"
         self.date = formatter.string(from: Date())
         
-        for item in listItems {
-            if listItemsPerHeader[item.section] == nil {
-                listItemsPerHeader[item.section] = [TaskItem]()
+        if listItemsPerHeader.count <= 0 { // init
+            for item in listItems {
+                if listItemsPerHeader[item.section] == nil {
+                    listItemsPerHeader[item.section] = [TaskItem]()
+                    listItemsSections.append(item.section)
+                }
+                
+                listItemsPerHeader[item.section]?.append(item)
             }
-            
-            listItemsPerHeader[item.section]?.append(item)
         }
     }
     
@@ -44,7 +48,7 @@ struct TasksUIView: View {
             Text(config.read(query: "Team Name")).font(.system(size: 15, weight:.light))
             Text(self.date).font(.system(size: 18, weight: .regular)).padding()
             List {
-                ForEach(Array(listItemsPerHeader.keys), id: \.self) { key in
+                ForEach(listItemsSections, id: \.self) { key in
                     Section(header: Text(key)) {
                         ForEach(listItemsPerHeader[key]!, id: \.self) { item in
                             TaskListItemView(item: item)
