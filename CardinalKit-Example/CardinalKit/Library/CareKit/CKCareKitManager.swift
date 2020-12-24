@@ -11,8 +11,8 @@ import CareKitStore
 
 class CKCareKitManager: NSObject {
     
-    let coreDataStore = OCKStore(name: "CKCareKitStore", type: .inMemory)
-    let healthKitStore = OCKHealthKitPassthroughStore(name: "CKCareKitHealthKitStore", type: .inMemory)
+    let coreDataStore = OCKStore(name: "CKCareKitStore", type: .onDisk)
+    let healthKitStore = OCKHealthKitPassthroughStore(name: "CKCareKitHealthKitStore", type: .onDisk)
     private(set) var synchronizedStoreManager: OCKSynchronizedStoreManager!
     
     static let shared = CKCareKitManager()
@@ -20,7 +20,7 @@ class CKCareKitManager: NSObject {
     override init() {
         super.init()
         
-        initStore(forceUpdate: true)
+        initStore()
 
         let coordinator = OCKStoreCoordinator()
         coordinator.attach(eventStore: healthKitStore)

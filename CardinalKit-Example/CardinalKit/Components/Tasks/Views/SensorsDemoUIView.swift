@@ -84,6 +84,12 @@ struct SensorsDemoUIView: View {
             
             Spacer()
             
+            Image("SBDLogoGrey")
+                .resizable()
+                .scaledToFit()
+                .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN*4)
+                .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN*4)
+            
             if useAppleWatch {
                 HStack(spacing: 10) {
                     Image("WatchIcon")

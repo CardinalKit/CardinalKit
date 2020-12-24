@@ -34,7 +34,10 @@ struct SendRecordsView: View {
         
         isSending = true
         CKHealthRecordsManager.shared.getAuth { (success, _) in
-            guard success else { return }
+            guard success else {
+                isSending = false
+                return
+            }
             
             CKHealthRecordsManager.shared.upload() { success, _ in
                 isSending = false

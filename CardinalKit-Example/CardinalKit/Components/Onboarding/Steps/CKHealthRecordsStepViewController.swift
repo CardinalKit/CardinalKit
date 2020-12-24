@@ -55,9 +55,10 @@ class CKHealthRecordsStepViewController: ORKInstructionStepViewController {
     override func goForward() {
         let manager = CKHealthRecordsManager.shared
         manager.getAuth { succeeded, _ in
-            guard succeeded else { return }
+            if succeeded {
+                manager.upload()
+            }
             
-            manager.upload()
             OperationQueue.main.addOperation {
                 super.goForward()
             }

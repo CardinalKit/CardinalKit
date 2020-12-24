@@ -46,9 +46,7 @@ class CKHealthDataStepViewController: ORKInstructionStepViewController {
     */
     override func goForward() {
         let manager = CKHealthKitManager.shared
-        manager.getHealthAuthorization() { succeeded, _ in
-            guard succeeded else { return }
-            
+        manager.getHealthAuthorization() { _,_ in
             OperationQueue.main.addOperation {
                 super.goForward()
             }

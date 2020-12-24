@@ -62,13 +62,12 @@ class CKHealthRecordsManager: NSObject {
                         let data = resource.data
                         let identifier = resource.resourceType.rawValue + "-" + resource.identifier
                         
-                        if let json = try CKSendHelper.jsonDataAsDict(data) {
-                            try CKSendHelper.sendToFirestore(json, collection: "health-records", withIdentifier: identifier)
+                        if let dict = try CKSendHelper.jsonDataAsDict(data) {
+                            try CKSendHelper.sendToFirestore(json: dict, collection: "health-records", withIdentifier: identifier)
                         }
                     } catch {
-                        print(error)
+                        print("[upload] ERROR " + error.localizedDescription)
                     }
-                    print("------")
                 }
                 
                 UserDefaults.standard.set(Date(), forKey: Constants.prefHealthRecordsLastUploaded)

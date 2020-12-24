@@ -68,6 +68,7 @@
 		8EA664AD2593380D00B6A45A /* SendRecordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA664AC2593380D00B6A45A /* SendRecordsView.swift */; };
 		8EA664B025941A4D00B6A45A /* SurveyItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA664AF25941A4D00B6A45A /* SurveyItemViewController.swift */; };
 		8EA664B2259422E400B6A45A /* CKCareKitRemoteSynchronizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA664B1259422E400B6A45A /* CKCareKitRemoteSynchronizable.swift */; };
+		8EA664B42594387900B6A45A /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA664B32594387900B6A45A /* Errors.swift */; };
 		8EBE6F9C24B3C0E60093D07C /* AppDelegate+CardinalKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE6F9B24B3C0E60093D07C /* AppDelegate+CardinalKit.swift */; };
 		D253D132250D1BDB00A363E4 /* CKSignInWithAppleStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = D253D131250D1BDB00A363E4 /* CKSignInWithAppleStep.swift */; };
 		E235077724F7082700CC1899 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E235077624F7082700CC1899 /* SceneDelegate.swift */; };
@@ -161,6 +162,7 @@
 		8EA664AC2593380D00B6A45A /* SendRecordsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendRecordsView.swift; sourceTree = "<group>"; };
 		8EA664AF25941A4D00B6A45A /* SurveyItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyItemViewController.swift; sourceTree = "<group>"; };
 		8EA664B1259422E400B6A45A /* CKCareKitRemoteSynchronizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKCareKitRemoteSynchronizable.swift; sourceTree = "<group>"; };
+		8EA664B32594387900B6A45A /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		8EBE6F9B24B3C0E60093D07C /* AppDelegate+CardinalKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+CardinalKit.swift"; sourceTree = "<group>"; };
 		CB97C14C759E56B88E4E3941 /* Pods_CardinalKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CardinalKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D253D131250D1BDB00A363E4 /* CKSignInWithAppleStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKSignInWithAppleStep.swift; sourceTree = "<group>"; };
@@ -339,6 +341,7 @@
 				8E6E1E0F25351E890024B8DF /* Extensions+UIColor.swift */,
 				8E6E1E3325353AFE0024B8DF /* EmailHelper.swift */,
 				8E9CDFAD2592B79900C8A228 /* Metrics.swift */,
+				8EA664B32594387900B6A45A /* Errors.swift */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -690,6 +693,7 @@
 				8E6E1E24253537580024B8DF /* MainUIView.swift in Sources */,
 				8E6E1E182535263F0024B8DF /* CKTaskViewController.swift in Sources */,
 				8E9CDF142591B73900C8A228 /* CKHealthRecordsManager.swift in Sources */,
+				8EA664B42594387900B6A45A /* Errors.swift in Sources */,
 				8E6E1E1225351F830024B8DF /* DocumentPreviewViewController.swift in Sources */,
 				8E6E1E20253529760024B8DF /* DocumentView.swift in Sources */,
 				8E0A43B5244A4A0400656518 /* TaskItem.swift in Sources */,
