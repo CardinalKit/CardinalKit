@@ -29,6 +29,10 @@ class CKCareKitManager: NSObject {
         synchronizedStoreManager = OCKSynchronizedStoreManager(wrapping: coordinator)
     }
     
+    func wipe() throws {
+        try coreDataStore.delete()
+    }
+    
     fileprivate func initStore(forceUpdate: Bool = false) {
         if forceUpdate || UserDefaults.standard.object(forKey: Constants.prefCareKitCoreDataInitDate) == nil {
             coreDataStore.populateSampleData()

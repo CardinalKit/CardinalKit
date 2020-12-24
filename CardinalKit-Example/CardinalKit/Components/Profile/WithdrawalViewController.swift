@@ -51,6 +51,7 @@ struct WithdrawalViewController: UIViewControllerRepresentable {
             case .completed:
                 
                 do {
+                    try CKCareKitManager.shared.wipe()
                     try CKStudyUser.shared.signOut()
                     
                     if (ORKPasscodeViewController.isPasscodeStoredInKeychain()) {

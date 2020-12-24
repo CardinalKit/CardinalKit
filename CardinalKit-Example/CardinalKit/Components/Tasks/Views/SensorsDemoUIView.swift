@@ -46,11 +46,13 @@ struct SensorsDemoUIView: View {
                 .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN*4)
             
             Text("This DEMO is a CoreMotion sensors test. Press a button from below to get started.")
+                .multilineTextAlignment(.leading)
                 .font(.system(size: 18, weight: .bold, design: .default))
                 .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN)
                 .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN)
             
             Text("Data from the following sensors will be collected and uploaded into Google Cloud Storage: (1) accelerometer, (2) gyro, (3) device motion")
+                .multilineTextAlignment(.leading)
                 .font(.system(size: 18, weight: .regular, design: .default))
                 .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN)
                 .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN)
