@@ -15,6 +15,7 @@ struct SensorsDemoUIView: View {
     let timer = CKTimer()
     
     @State var isMotionActive = false
+    @State var useAppleWatch = false
     
     @ObservedObject var timerDelegate = TimerObservable()
     
@@ -45,11 +46,12 @@ struct SensorsDemoUIView: View {
                 .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN*4)
             
             Text("This DEMO is a CoreMotion sensors test. Press a button from below to get started.")
-                .fontWeight(.bold)
+                .font(.system(size: 18, weight: .bold, design: .default))
                 .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN)
                 .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN)
             
             Text("Data from the following sensors will be collected and uploaded into Google Cloud Storage: (1) accelerometer, (2) gyro, (3) device motion")
+                .font(.system(size: 18, weight: .regular, design: .default))
                 .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN)
                 .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN)
             
@@ -82,14 +84,16 @@ struct SensorsDemoUIView: View {
             
             Spacer()
             
-            HStack(spacing: 10) {
-                Image("WatchIcon")
-                    .resizable()
-                    .frame(width: 50, height: 50, alignment: .center)
-                
-                Text("Apple Watch NOT connected")
-                    .fontWeight(.bold)
-                    .foregroundColor(.red)
+            if useAppleWatch {
+                HStack(spacing: 10) {
+                    Image("WatchIcon")
+                        .resizable()
+                        .frame(width: 50, height: 50, alignment: .center)
+                    
+                    Text("Apple Watch NOT connected")
+                        .fontWeight(.bold)
+                        .foregroundColor(.red)
+                }
             }
         }.onAppear(perform: {
             self.isMotionActive = motionManager.isActive

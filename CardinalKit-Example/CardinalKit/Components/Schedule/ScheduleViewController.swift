@@ -13,9 +13,14 @@ import SwiftUI
 
 class ScheduleViewController: OCKDailyPageViewController {
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        title = "Schedule"
+    }
+    
     override func dailyPageViewController(_ dailyPageViewController: OCKDailyPageViewController, prepare listViewController: OCKListViewController, for date: Date) {
         
-        let identifiers = ["doxylamine", "nausea", "kegels", "steps", "heartRate"]
+        let identifiers = ["doxylamine", "nausea", "coffee", "survey", "steps", "heartRate"]
         var query = OCKTaskQuery(for: date)
         query.ids = identifiers
         query.excludesTasksWithNoEvents = true
@@ -26,15 +31,15 @@ class ScheduleViewController: OCKDailyPageViewController {
             case .success(let tasks):
 
                 // Add a non-CareKit view into the list
-                let tipTitle = "Benefits of exercising"
-                let tipText = "Learn how activity can promote a healthy pregnancy."
+                let tipTitle = "Customize your app!"
+                let tipText = "Start with the CKConfiguration.plist file."
 
                 // Only show the tip view on the current date
                 if Calendar.current.isDate(date, inSameDayAs: Date()) {
                     let tipView = TipView()
                     tipView.headerView.titleLabel.text = tipTitle
                     tipView.headerView.detailLabel.text = tipText
-                    tipView.imageView.image = UIImage(named: "exercise.jpg")
+                    tipView.imageView.image = UIImage(named: "GraphicOperatingSystem")
                     listViewController.appendView(tipView, animated: false)
                 }
 
@@ -49,15 +54,25 @@ class ScheduleViewController: OCKDailyPageViewController {
                     listViewController.appendViewController(view.formattedHostingController(), animated: false)
                 }
 
-                // Since the kegel task is only scheduled every other day, there will be cases
+                // Since the coffee task is only scheduled every other day, there will be cases
                 // where it is not contained in the tasks array returned from the query.
-                if let kegelsTask = tasks.first(where: { $0.id == "kegels" }) {
-                    let kegelsCard = OCKSimpleTaskViewController(task: kegelsTask, eventQuery: .init(for: date),
+                if let coffeeTask = tasks.first(where: { $0.id == "coffee" }) {
+                    let coffeeCard = OCKSimpleTaskViewController(task: coffeeTask, eventQuery: .init(for: date),
                                                                  storeManager: self.storeManager)
-                    listViewController.appendViewController(kegelsCard, animated: false)
+                    listViewController.appendViewController(coffeeCard, animated: false)
+                }
+                
+                if let surveyTask = tasks.first(where: { $0.id == "survey" }) {
+                    let surveyCard = SurveyItemViewController(
+                        viewSynchronizer: SurveyItemViewSynchronizer(),
+                        task: surveyTask,
+                        eventQuery: .init(for: date),
+                        storeManager: self.storeManager)
+                    
+                    listViewController.appendViewController(surveyCard, animated: false)
                 }
 
-                // Create a card for the doxylamine task if there are events for it on this day.
+                // Create a card for the water task if there are events for it on this day.
                 if let doxylamineTask = tasks.first(where: { $0.id == "doxylamine" }) {
 
                     let doxylamineCard = OCKChecklistTaskViewController(

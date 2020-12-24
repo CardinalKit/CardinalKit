@@ -54,7 +54,7 @@
 	<key>Login-Sign-In-With-Apple</key>
 	<dict>
 		<key>Enabled</key>
-		<false/>
+		<true/>
 		<key>Title</key>
 		<string>Sign in with Apple</string>
 		<key>Text</key>

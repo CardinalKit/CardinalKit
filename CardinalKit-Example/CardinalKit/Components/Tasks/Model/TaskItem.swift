@@ -51,7 +51,7 @@ enum TaskItem: Int {
         case .sampleResearchKitActiveTask:
             return "Sample sensor/data collection activities."
         case .sampleCoreMotionAppleWatch:
-            return "CoreMotion + Apple Watch"
+            return "CoreMotion to Cloud Storage"
 //        case .sampleFunCoffeeSurvey:
 //            return "How do you like your coffee?"
         case .sampleLearnItem:

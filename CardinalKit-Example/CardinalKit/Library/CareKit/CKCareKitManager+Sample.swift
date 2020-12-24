@@ -17,24 +17,39 @@ internal extension OCKStore {
     func populateSampleData() {
 
         let thisMorning = Calendar.current.startOfDay(for: Date())
-        let aFewDaysAgo = Calendar.current.date(byAdding: .day, value: -4, to: thisMorning)!
+        let aFewDaysAgo = Calendar.current.date(byAdding: .day, value: -3, to: thisMorning)!
         let beforeBreakfast = Calendar.current.date(byAdding: .hour, value: 8, to: aFewDaysAgo)!
         let afterLunch = Calendar.current.date(byAdding: .hour, value: 14, to: aFewDaysAgo)!
 
-        let schedule = OCKSchedule(composing: [
+        let coffeeElement = OCKScheduleElement(start: beforeBreakfast, end: nil, interval: DateComponents(day: 1))
+        let coffeeSchedule = OCKSchedule(composing: [coffeeElement])
+        var coffee = OCKTask(id: "coffee", title: "Drink Coffee ☕️", carePlanUUID: nil, schedule: coffeeSchedule)
+        coffee.impactsAdherence = true
+        coffee.instructions = "Drink coffee for good spirits!"
+        
+        let surveyElement = OCKScheduleElement(start: afterLunch, end: nil, interval: DateComponents(day: 1))
+        let surveySchedule = OCKSchedule(composing: [surveyElement])
+        var survey = OCKTask(id: "survey", title: "Take a Survey 📝", carePlanUUID: nil, schedule: surveySchedule)
+        survey.impactsAdherence = true
+        survey.instructions = "You can schedule any ResearchKit survey in your app."
+        
+        /*
+         Doxylamine and Nausea DEMO.
+         */
+        let doxylamineSchedule = OCKSchedule(composing: [
             OCKScheduleElement(start: beforeBreakfast, end: nil,
-                               interval: DateComponents(day: 1)),
+                               interval: DateComponents(day: 2)),
 
             OCKScheduleElement(start: afterLunch, end: nil,
-                               interval: DateComponents(day: 2))
+                               interval: DateComponents(day: 4))
         ])
 
         var doxylamine = OCKTask(id: "doxylamine", title: "Take Doxylamine",
-                                 carePlanUUID: nil, schedule: schedule)
+                                 carePlanUUID: nil, schedule: doxylamineSchedule)
         doxylamine.instructions = "Take 25mg of doxylamine when you experience nausea."
 
         let nauseaSchedule = OCKSchedule(composing: [
-            OCKScheduleElement(start: beforeBreakfast, end: nil, interval: DateComponents(day: 1),
+            OCKScheduleElement(start: beforeBreakfast, end: nil, interval: DateComponents(day: 2),
                                text: "Anytime throughout the day", targetValues: [], duration: .allDay)
             ])
 
@@ -42,51 +57,51 @@ internal extension OCKStore {
                              carePlanUUID: nil, schedule: nauseaSchedule)
         nausea.impactsAdherence = false
         nausea.instructions = "Tap the button below anytime you experience nausea."
+        /* ---- */
 
-        let kegelElement = OCKScheduleElement(start: beforeBreakfast, end: nil, interval: DateComponents(day: 2))
-        let kegelSchedule = OCKSchedule(composing: [kegelElement])
-        var kegels = OCKTask(id: "kegels", title: "Kegel Exercises", carePlanUUID: nil, schedule: kegelSchedule)
-        kegels.impactsAdherence = true
-        kegels.instructions = "Perform kegel exercies"
+        addTasks([nausea, doxylamine, survey, coffee], callbackQueue: .main, completion: nil)
 
-        addTasks([nausea, doxylamine, kegels], callbackQueue: .main, completion: nil)
-
-        var contact1 = OCKContact(id: "jane", givenName: "Jane",
-                                  familyName: "Daniels", carePlanUUID: nil)
-        contact1.asset = "JaneDaniels"
-        contact1.title = "Family Practice Doctor"
-        contact1.role = "Dr. Daniels is a family practice doctor with 8 years of experience."
-        contact1.emailAddresses = [OCKLabeledValue(label: CNLabelEmailiCloud, value: "janedaniels@icloud.com")]
-        contact1.phoneNumbers = [OCKLabeledValue(label: CNLabelWork, value: "(324) 555-7415")]
-        contact1.messagingNumbers = [OCKLabeledValue(label: CNLabelWork, value: "(324) 555-7415")]
+        createContacts()
+    }
+    
+    func createContacts() {
+        var contact1 = OCKContact(id: "oliver", givenName: "Oliver",
+                                  familyName: "Aalami", carePlanUUID: nil)
+        contact1.asset = "OliverAalami"
+        contact1.title = "Vascular Surgeon"
+        contact1.role = "Dr. Aalami is the director of the CardinalKit project."
+        contact1.emailAddresses = [OCKLabeledValue(label: CNLabelEmailiCloud, value: "aalami@stanford.edu")]
+        contact1.phoneNumbers = [OCKLabeledValue(label: CNLabelWork, value: "(111) 111-1111")]
+        contact1.messagingNumbers = [OCKLabeledValue(label: CNLabelWork, value: "(111) 111-1111")]
 
         contact1.address = {
             let address = OCKPostalAddress()
-            address.street = "2598 Reposa Way"
-            address.city = "San Francisco"
+            address.street = "318 Campus Drive"
+            address.city = "Stanford"
             address.state = "CA"
-            address.postalCode = "94127"
+            address.postalCode = "94305"
             return address
         }()
 
-        var contact2 = OCKContact(id: "matthew", givenName: "Matthew",
-                                  familyName: "Reiff", carePlanUUID: nil)
-        contact2.asset = "MatthewReiff"
+        var contact2 = OCKContact(id: "johnny", givenName: "Johnny",
+                                  familyName: "Appleseed", carePlanUUID: nil)
+        contact2.asset = "JohnnyAppleseed"
         contact2.title = "OBGYN"
-        contact2.role = "Dr. Reiff is an OBGYN with 13 years of experience."
+        contact2.role = "Dr. Appleseed is an OBGYN with 13 years of experience."
         contact2.phoneNumbers = [OCKLabeledValue(label: CNLabelWork, value: "(324) 555-7415")]
         contact2.messagingNumbers = [OCKLabeledValue(label: CNLabelWork, value: "(324) 555-7415")]
         contact2.address = {
             let address = OCKPostalAddress()
-            address.street = "396 El Verano Way"
-            address.city = "San Francisco"
+            address.street = "318 Campus Drive"
+            address.city = "Stanford"
             address.state = "CA"
-            address.postalCode = "94127"
+            address.postalCode = "94305"
             return address
         }()
 
-        addContacts([contact1, contact2])
+        addContacts([contact2, contact1])
     }
+    
 }
 
 extension OCKHealthKitPassthroughStore {
@@ -99,7 +114,7 @@ extension OCKHealthKitPassthroughStore {
 
         let steps = OCKHealthKitTask(
             id: "steps",
-            title: "Steps",
+            title: "Daily Steps Goal 🏃🏽‍♂️",
             carePlanUUID: nil,
             schedule: schedule,
             healthKitLinkage: OCKHealthKitLinkage(

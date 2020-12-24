@@ -14,6 +14,7 @@ class Constants {
     static let prefFirstRunWasMarked = "PREF_FIRST_RUN"
     static let prefUserEmail = "PREF_USER_EMAIL"
     
+    static let prefCareKitCoreDataInitDate = "PREF_CORE_DATA_INIT_DATE"
     static let prefHealthRecordsLastUploaded = "PREF_HEALTH_LAST_UPLOAD"
     
     static let notificationUserLogin = "NOTIFICATION_USER_LOGIN"

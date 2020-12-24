@@ -18,8 +18,9 @@ class CKCareKitManager: NSObject {
     static let shared = CKCareKitManager()
     
     override init() {
-        coreDataStore.populateSampleData()
-        // healthKitStore.populateSampleData()
+        super.init()
+        
+        initStore(forceUpdate: true)
 
         let coordinator = OCKStoreCoordinator()
         coordinator.attach(eventStore: healthKitStore)
@@ -28,5 +29,13 @@ class CKCareKitManager: NSObject {
         synchronizedStoreManager = OCKSynchronizedStoreManager(wrapping: coordinator)
     }
     
+    fileprivate func initStore(forceUpdate: Bool = false) {
+        if forceUpdate || UserDefaults.standard.object(forKey: Constants.prefCareKitCoreDataInitDate) == nil {
+            coreDataStore.populateSampleData()
+            healthKitStore.populateSampleData()
+            
+            UserDefaults.standard.set(Date(), forKey: Constants.prefCareKitCoreDataInitDate)
+        }
+    }
     
 }
