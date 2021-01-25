@@ -29,13 +29,14 @@ struct TaskListItemView: View {
                 Text(item.subtitle).font(.system(size: 14, weight: .light, design: .default))
             }
             Spacer()
-            }.frame(height: 65).contentShape(Rectangle()).gesture(TapGesture().onEnded({
-                self.showingDetail.toggle()
-            })).sheet(isPresented: $showingDetail, onDismiss: {
-                
-            }, content: {
+        }
+        .frame(height: 65)
+        .contentShape(Rectangle()).gesture(TapGesture().onEnded({
+            self.showingDetail.toggle()
+        }))
+        .sheet(isPresented: $showingDetail, onDismiss: {}, content: {
                 item.action
-            })
+        })
     }
 }
 

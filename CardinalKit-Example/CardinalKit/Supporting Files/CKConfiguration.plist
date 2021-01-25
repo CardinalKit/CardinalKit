@@ -61,7 +61,7 @@
 		<string>Sign in using your Apple ID is fast and easy, and Apple will not track any of your activities.</string>
 	</dict>
 	<key>Login-Passwordless</key>
-	<true/>
+	<false/>
 	<key>Login Step Title</key>
 	<string>Almost done!</string>
 	<key>Login Step Text</key>
