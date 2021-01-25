@@ -1,14 +1,22 @@
 <img src="https://github.com/CardinalKit/CardinalKit/blob/master/CardinalKit-Web-Assets/header.png?raw=true" alt="cardinalkit logo">
 
-[![CI Status](https://img.shields.io/travis/ssgutierrez42/CardinalKit.svg?style=flat)](https://travis-ci.org/ssgutierrez42/CardinalKit)
-[![Version](https://img.shields.io/cocoapods/v/CardinalKit.svg?style=flat)](https://cocoapods.org/pods/CardinalKit)
-[![License](https://img.shields.io/cocoapods/l/CardinalKit.svg?style=flat)](https://cocoapods.org/pods/CardinalKit)
-[![Platform](https://img.shields.io/cocoapods/p/CardinalKit.svg?style=flat)](https://cocoapods.org/pods/CardinalKit)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END --> 
 
 ---
+
+<img src="https://github.com/CardinalKit/CardinalKit/blob/main/CardinalKit-Web-Assets/CK_Map.jpg?raw=true" alt="cardinalkit map">
+
+Includes:
+* Informed consent process using ResearchKit.
+* Track day-to-day adherence with CareKit.
+* Monitor health data with HealthKit.
+* Collect and upload EHR data.
+* CoreMotion data demo.
+* Awesome SwiftUI templates.
+* Zero-code [customizable configuration file.](https://cardinalkit.org/docs/ckconfig)
+* GCP Firebase Integration.
 
 Please visit https://cardinalkit.org to get started with our documentation 🙌
 
