@@ -8,17 +8,19 @@
 
 import Foundation
 
-protocol TimerDelegate {
+public protocol TimerDelegate {
     func tick(_ timer: TimerController)
     func tickMinute(_ timer: TimerController)
     func limitReached()
 }
 
-class TimerController : NSObject {
+public class TimerController : NSObject {
     
-    fileprivate var startTime: Double = 0.0
-    fileprivate var timer: Timer?
-    fileprivate var minuteTimer: Timer?
+    public var elapsedSeconds: Int {
+        get {
+            return Int(elapsedTime)
+        }
+    }
     
     var timerLimit: Int = -1
     var elapsedTime: Double = 0.0
@@ -28,19 +30,19 @@ class TimerController : NSObject {
     var startDate: Date {
         return Date(timeIntervalSinceReferenceDate: startTime)
     }
-    var endDate: Date?
     
-    var elapsedSeconds: Int {
-        get {
-            return Int(elapsedTime)
-        }
-    }
+    fileprivate var startTime: Double = 0.0
+    fileprivate var timer: Timer?
+    fileprivate var minuteTimer: Timer?
     
-    var reachedLimit: Bool {
+    fileprivate var endDate: Date?
+    
+    
+    fileprivate var reachedLimit: Bool {
         return elapsedSeconds >= timerLimit
     }
     
-    var isRunning: Bool {
+    fileprivate var isRunning: Bool {
         return timer?.isValid ?? false
     }
     

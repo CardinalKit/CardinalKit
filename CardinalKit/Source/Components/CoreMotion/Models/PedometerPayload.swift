@@ -9,7 +9,7 @@
 import Foundation
 import CoreMotion
 
-class PedometerPayload : CSVExporting {
+public class PedometerPayload : CSVExporting {
     
     var m_WallTime: CFAbsoluteTime = 0
     var m_Timer: Double = 0
@@ -58,11 +58,11 @@ class PedometerPayload : CSVExporting {
         return iterationData
     }
     
-    static func templateString() -> String {
+    public static func templateString() -> String {
         return "WallTime,Timer,StartDate,EndDate,Steps,Distance,Cadence,Pace,FloorsAscended,FloorsDescended\n"
     }
     
-    func exportAsCommaSeparatedString() -> String {
+    public func exportAsCommaSeparatedString() -> String {
         return "\(m_WallTime),\(m_Timer),\(m_StartDate),\(m_EndDate),\(m_Steps),\(m_Distance),\(m_Cadence),\(m_Pace),\(m_FloorsAscended),\(m_FloorsDescended)\n"
     }
     

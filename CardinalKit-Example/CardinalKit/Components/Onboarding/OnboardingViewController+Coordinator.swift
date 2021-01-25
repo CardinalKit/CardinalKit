@@ -175,6 +175,8 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
             // this step lets us run custom logic to ask for
             // HealthKit permissins when this step appears on screen.
             return CKHealthDataStepViewController(step: step)
+        case is CKHealthRecordsStep:
+            return CKHealthRecordsStepViewController(step: step)
         case is LoginCustomWaitStep:
             // run custom code to send an email for login!
             return LoginCustomWaitStepViewController(step: step)

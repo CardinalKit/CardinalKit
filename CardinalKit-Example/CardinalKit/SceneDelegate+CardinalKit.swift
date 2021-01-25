@@ -9,7 +9,18 @@
 import SwiftUI
 import ResearchKit
 
+// Extensions add new functionality to an existing class, structure, enumeration, or protocol type.
+// https://docs.swift.org/swift-book/LanguageGuide/Extensions.html
 extension SceneDelegate: ORKPasscodeDelegate {
+    
+    /**
+     Hide content so it doesn't appear in the app switcher.
+    */
+    func toggleContainer(hidden: Bool) {
+        if let isViewLoaded = window?.rootViewController?.isViewLoaded, isViewLoaded {
+            window?.rootViewController?.view.isHidden = hidden
+        }
+    }
     
     /**
      Blocks the app from use until a validated passcode is entered.
@@ -29,8 +40,19 @@ extension SceneDelegate: ORKPasscodeDelegate {
         window?.rootViewController?.present(passcodeViewController, animated: false, completion: nil)
     }
     
+    /**
+     Run this code when the application enters the background
+     to hide app content from the iOS App Switcher (Privacy/Security).
+    */
+    func CKLockDidEnterBackground() {
+        if ORKPasscodeViewController.isPasscodeStoredInKeychain() {
+            toggleContainer(hidden: true)
+        }
+    }
+    
     func passcodeViewControllerDidFinish(withSuccess viewController: UIViewController) {
         // dismiss passcode prompt screen
+        toggleContainer(hidden: false)
         viewController.dismiss(animated: true, completion: nil)
     }
     

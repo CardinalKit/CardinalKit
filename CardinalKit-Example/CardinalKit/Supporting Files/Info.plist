@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Sample Study</string>
+	<string>CardinalKit</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -32,7 +32,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>2</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>FirebaseDynamicLinksCustomDomains</key>
 	<array>
 		<string>https://cs342.page.link</string>
@@ -44,10 +44,16 @@
 	<string>Used In ResearchKit Active Tasks.</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Used for data security purposes.</string>
+	<key>NSHealthClinicalHealthRecordsShareUsageDescription</key>
+	<string>Used for CareKit collection sample.</string>
 	<key>NSHealthShareUsageDescription</key>
 	<string>Used for data security purposes.</string>
 	<key>NSHealthUpdateUsageDescription</key>
 	<string>Used for data security purposes.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Used for sensor collection demo tasks.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Used for sensor collection demo tasks.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Used In ResearchKit Active Tasks.</string>
 	<key>NSMotionUsageDescription</key>
@@ -71,6 +77,13 @@
 			</array>
 		</dict>
 	</dict>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>audio</string>
+		<string>fetch</string>
+		<string>location</string>
+		<string>remote-notification</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>

@@ -51,6 +51,7 @@ struct WithdrawalViewController: UIViewControllerRepresentable {
             case .completed:
                 
                 do {
+                    try CKCareKitManager.shared.wipe()
                     try CKStudyUser.shared.signOut()
                     
                     if (ORKPasscodeViewController.isPasscodeStoredInKeychain()) {
@@ -59,6 +60,8 @@ struct WithdrawalViewController: UIViewControllerRepresentable {
                     
                     NotificationCenter.default.post(name: NSNotification.Name(Constants.onboardingDidComplete), object: false)
 
+                    UserDefaults.standard.set(nil, forKey: Constants.prefCareKitCoreDataInitDate)
+                    UserDefaults.standard.set(nil, forKey: Constants.prefHealthRecordsLastUploaded)
                     UserDefaults.standard.set(false, forKey: Constants.onboardingDidComplete)
                 } catch {
                     print(error.localizedDescription)

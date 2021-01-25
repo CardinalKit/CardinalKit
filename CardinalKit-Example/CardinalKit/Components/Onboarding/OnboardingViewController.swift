@@ -36,8 +36,7 @@ struct OnboardingViewController: UIViewControllerRepresentable {
         *  STEP (2): ask user to review and sign consent document
         **************************************************************/
         // use the `ORKConsentReviewStep` from ResearchKit
-        let signature = consentDocument.signatures!.first!
-        signature.title = "Patient"
+        let signature = consentDocument.signatures?.first
         let reviewConsentStep = ORKConsentReviewStep(identifier: "ConsentReviewStep", signature: signature, in: consentDocument)
         reviewConsentStep.text = config.read(query: "Review Consent Step Text")
         reviewConsentStep.reasonForConsent = config.read(query: "Reason for Consent Text")
@@ -46,7 +45,12 @@ struct OnboardingViewController: UIViewControllerRepresentable {
         *  STEP (3): get permission to collect HealthKit data
         **************************************************************/
         // see `HealthDataStep` to configure!
-        let healthDataStep = CKHealthDataStep(identifier: "Health")
+        let healthDataStep = CKHealthDataStep(identifier: "Healthkit")
+        
+        /* **************************************************************
+        *  STEP (3.5): get permission to collect HealthKit health records data
+        **************************************************************/
+        let healthRecordsStep = CKHealthRecordsStep(identifier: "HealthRecords")
         
         /* **************************************************************
         *  STEP (4): ask user to enter their email address for login
@@ -100,10 +104,10 @@ struct OnboardingViewController: UIViewControllerRepresentable {
         **************************************************************/
         
         // given intro steps that the user should review and consent to
-        let introSteps = [consentStep, reviewConsentStep]
+        let introSteps: [ORKStep] = [consentStep, reviewConsentStep]
         
         // and steps regarding login / security
-        let emailVerificationSteps = loginSteps + [passcodeStep, healthDataStep, completionStep]
+        let emailVerificationSteps = loginSteps + [passcodeStep, healthDataStep, healthRecordsStep, completionStep]
         
         // guide the user through ALL steps
         let fullSteps = introSteps + emailVerificationSteps

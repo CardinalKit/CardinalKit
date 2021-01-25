@@ -191,14 +191,6 @@ The default value of this property is `NO`.
 @property (nonatomic, copy, nullable) NSString *finishedSpokenInstruction;
 
 /**
- An image to be displayed below the instructions for the step.
- 
- The image can be stretched to fit the available space. When choosing a size
- for this asset, be sure to take into account the variations in device form factors.
- */
-@property (nonatomic, strong, nullable) UIImage *image;
-
-/**
  An array of recorder configurations that define the parameters for recorders to be
  run during a step to collect sensor or other data.
  
@@ -213,15 +205,6 @@ The default value of this property is `NO`.
  See also: `ORKRecorderConfiguration` and `ORKRecorder`.
  */
 @property (nonatomic, copy, nullable) NSArray<ORKRecorderConfiguration *> *recorderConfigurations;
-
-/**
- A Boolean value that determines if a step is a practice  step or not.
- 
- When the value of this property is `YES`, the ResearchKit framework sets the allowsBackNavigation property to 'YES'
- 
- The default value of this property is `NO`.
-*/
-@property (nonatomic, assign) BOOL isPractice;
 
 @end
 

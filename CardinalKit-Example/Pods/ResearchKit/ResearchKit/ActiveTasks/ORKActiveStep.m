@@ -102,8 +102,6 @@
     step.spokenInstruction = self.spokenInstruction;
     step.finishedSpokenInstruction = self.finishedSpokenInstruction;
     step.recorderConfigurations = [self.recorderConfigurations copy];
-    step.image = self.image;
-    step.isPractice = self.isPractice;
     return step;
 }
 
@@ -123,9 +121,7 @@
         ORK_DECODE_BOOL(aDecoder, shouldContinueOnFinish);
         ORK_DECODE_OBJ_CLASS(aDecoder, spokenInstruction, NSString);
         ORK_DECODE_OBJ_CLASS(aDecoder, finishedSpokenInstruction, NSString);
-        ORK_DECODE_IMAGE(aDecoder, image);
         ORK_DECODE_OBJ_ARRAY(aDecoder, recorderConfigurations, ORKRecorderConfiguration);
-        ORK_DECODE_BOOL(aDecoder, isPractice);
     }
     return self;
 }
@@ -143,11 +139,9 @@
     ORK_ENCODE_BOOL(aCoder, shouldVibrateOnFinish);
     ORK_ENCODE_BOOL(aCoder, shouldUseNextAsSkipButton);
     ORK_ENCODE_BOOL(aCoder, shouldContinueOnFinish);
-    ORK_ENCODE_IMAGE(aCoder, image);
     ORK_ENCODE_OBJ(aCoder, spokenInstruction);
     ORK_ENCODE_OBJ(aCoder, finishedSpokenInstruction);
     ORK_ENCODE_OBJ(aCoder, recorderConfigurations);
-    ORK_ENCODE_BOOL(aCoder, isPractice);
 }
 
 - (BOOL)isEqual:(id)object {
@@ -158,7 +152,6 @@
             ORKEqualObjects(self.spokenInstruction, castObject.spokenInstruction) &&
             ORKEqualObjects(self.finishedSpokenInstruction, castObject.finishedSpokenInstruction) &&
             ORKEqualObjects(self.recorderConfigurations, castObject.recorderConfigurations) &&
-            ORKEqualObjects(self.image, castObject.image) &&
             (self.stepDuration == castObject.stepDuration) &&
             (self.shouldShowDefaultTimer == castObject.shouldShowDefaultTimer) &&
             (self.shouldStartTimerAutomatically == castObject.shouldStartTimerAutomatically) &&
@@ -169,8 +162,7 @@
             (self.shouldVibrateOnStart == castObject.shouldVibrateOnStart) &&
             (self.shouldVibrateOnFinish == castObject.shouldVibrateOnFinish) &&
             (self.shouldContinueOnFinish == castObject.shouldContinueOnFinish) &&
-            (self.shouldUseNextAsSkipButton == castObject.shouldUseNextAsSkipButton) &&
-            (self.isPractice == castObject.isPractice));
+            (self.shouldUseNextAsSkipButton == castObject.shouldUseNextAsSkipButton));
 }
 
 - (NSSet<HKObjectType *> *)requestedHealthKitTypesForReading {
@@ -190,10 +182,6 @@
         mask |= [config requestedPermissionMask];
     }
     return mask;
-}
-
-- (BOOL)allowsBackNavigation {
-    return self.isPractice;
 }
 
 @end

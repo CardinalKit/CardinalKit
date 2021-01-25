@@ -51,22 +51,23 @@
         self.shouldShowDefaultTimer = NO;
         self.shouldContinueOnFinish = YES;
         self.stepDuration = NSIntegerMax;
-        self.randomizeVisualAndColorAlignment = YES;
-        self.useTextForStimuli = YES;
-        self.useGridLayoutForButtons = NO;
     }
     return self;
 }
 
 - (void)validateParameters {
     [super validateParameters];
-    NSInteger minimumAttempts = 3;
+    NSInteger minimumAttempts = 10;
     if (self.numberOfAttempts < minimumAttempts) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"number of attempts should be greater or equal to %ld.", (long)minimumAttempts]  userInfo:nil];
     }
 }
 
 - (BOOL)startsFinished {
+    return NO;
+}
+
+- (BOOL)allowsBackNavigation {
     return NO;
 }
 

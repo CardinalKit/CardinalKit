@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Study Title</key>
+	<string>Caffeine Consumption Study</string>
+	<key>Team Name</key>
+	<string>Stanford Department of Coffee Consumption</string>
+	<key>Email</key>
+	<string>coffee@stanford.edu</string>
+	<key>Phone</key>
+	<string>650-123-4567</string>
+	<key>Copyright</key>
+	<string>Made at Stanford with (❤️ &amp;&amp; ☕️)</string>
+	<key>Website</key>
+	<string>https://cardinalkit.org</string>
+	<key>Tint Color</key>
+	<string>#6D4C41</string>
+	<key>Primary Color</key>
+	<string>#40739e</string>
+	<key>Review Consent Step Text</key>
+	<string>Review Consent Form</string>
+	<key>Reason for Consent Text</key>
+	<string>Consent to join the Caffeine Consumption Study.</string>
+	<key>Consent File Name</key>
+	<string>Coffee Consent Form</string>
+	<key>Passcode Text</key>
+	<string>Now you will create a passcode to identify yourself to the app and protect access to information you&apos;ve entered.</string>
+	<key>Passcode Type</key>
+	<string>4</string>
+	<key>Completion Step Title</key>
+	<string>Welcome aboard.</string>
+	<key>Completion Step Text</key>
+	<string>Thank you for joining this study.</string>
+	<key>Failed Login Title</key>
+	<string>Unable to Login 😔</string>
+	<key>Failed Login Text</key>
+	<string>Please try again in five minutes.</string>
+	<key>Health Permissions Title</key>
+	<string>Health Data</string>
+	<key>Health Permissions Text</key>
+	<string>On the next screen, you will be prompted to grant access to read and write some of your general and health information, such as height, weight, and steps taken so you don&apos;t have to enter it again.</string>
+	<key>Background Read Frequency</key>
+	<string>immediate</string>
+	<key>Login-Sign-In-With-Apple</key>
+	<dict>
+		<key>Enabled</key>
+		<true/>
+		<key>Title</key>
+		<string>Sign in with Apple</string>
+		<key>Text</key>
+		<string>Sign in using your Apple ID is fast and easy, and Apple will not track any of your activities.</string>
+	</dict>
+	<key>Login Step Title</key>
+	<string>Almost done!</string>
+	<key>Login Step Text</key>
+	<string>We need to confirm your email address and send you a copy of the consent you just signed.</string>
+	<key>Withdrawal Instruction Title</key>
+	<string>Are you sure you want to withdraw?</string>
+	<key>Withdrawal Instruction Text</key>
+	<string>Withdrawing from the study will reset the app to the state it was in prior to you originally joining the study.</string>
+	<key>Withdraw Title</key>
+	<string>We appreciate your time.</string>
+	<key>Withdraw Text</key>
+	<string>Thank you for your contribution to this study. We are sorry that you could not continue.</string>
+	<key>Passcode On Return Text</key>
+	<string>Welcome back!</string>
+	<key>Consent Title</key>
+	<string>Research Health Study Consent Form</string>
+	<key>HealthKit Data to Read</key>
+	<array>
+		<string>HeartRate</string>
+		<string>DietaryEnergyConsumed</string>
+		<string>BloodPressureDiastolic</string>
+		<string>BloodPressureSystolic</string>
+	</array>
+	<key>Consent Form</key>
+	<dict>
+		<key>Overview</key>
+		<dict>
+			<key>Title</key>
+			<string>Hi there! 👋🏽</string>
+			<key>Summary</key>
+			<string>Welcome to our Coffee Study. 
+</string>
+			<key>Content</key>
+			<string>Welcome to our Coffee Study. Blue mountain, wings sweet body cup id mocha percolator cream. Sweet dripper coffee, brewed, galão coffee so variety breve. Blue mountain and ristretto ut extra brewed blue mountain organic saucer crema.
+</string>
+		</dict>
+		<key>TimeCommitment</key>
+		<dict>
+			<key>Title</key>
+			<string>Time Commitment</string>
+			<key>Summary</key>
+			<string>Your Time Commitment Section: White carajillo foam, so plunger pot white galão coffee. 
+</string>
+			<key>Content</key>
+			<string>Your Time Commitment Section: White carajillo foam, so plunger pot white galão coffee. Dripper, black, con panna brewed, french press kopi-luwak ut turkish frappuccino. Strong, caffeine cappuccino eu con panna coffee ristretto and barista.
+</string>
+		</dict>
+		<key>Withdrawing</key>
+		<dict>
+			<key>Title</key>
+			<string>Withdrawing</string>
+			<key>Summary</key>
+			<string>Your Withdrawing Section: Filter, et grounds, skinny whipped carajillo café au lait fair trade. </string>
+			<key>Content</key>
+			<string>Your Withdrawing Section: Filter, et grounds, skinny whipped carajillo café au lait fair trade. Chicory seasonal frappuccino, lungo extra crema so turkish chicory foam affogato caramelization. Aged mocha variety spoon, extra strong seasonal irish id medium.</string>
+		</dict>
+	</dict>
+	<key>Onboarding</key>
+	<array>
+		<dict>
+			<key>Title</key>
+			<string>Caffeine and the Brain</string>
+			<key>Description</key>
+			<string>We want to study caffeine and its effects on your brain.</string>
+			<key>Logo</key>
+			<string>🧠</string>
+		</dict>
+		<dict>
+			<key>Title</key>
+			<string>Your job?</string>
+			<key>Description</key>
+			<string>Complete a coffee-related task each day.</string>
+			<key>Logo</key>
+			<string>☕️</string>
+		</dict>
+		<dict>
+			<key>Title</key>
+			<string>Log your Intake</string>
+			<key>Description</key>
+			<string>How much are you drinking?</string>
+			<key>Logo</key>
+			<string>🧐</string>
+		</dict>
+		<dict>
+			<key>Title</key>
+			<string>Complete Surveys</string>
+			<key>Description</key>
+			<string>&lt; 1 minute each</string>
+			<key>Logo</key>
+			<string>📝</string>
+		</dict>
+	</array>
+	<key>Login-Passwordless</key>
+	<false/>
+	<key>Use CareKit</key>
+	<false/>
+</dict>
+</plist>
