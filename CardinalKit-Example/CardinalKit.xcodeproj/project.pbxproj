@@ -81,6 +81,8 @@
 		DC2DC54B25CA5FB4002DBFA6 /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2DC54825CA5FB0002DBFA6 /* CircleImage.swift */; };
 		DC2DC54F25CA6046002DBFA6 /* HarryMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2DC54E25CA6046002DBFA6 /* HarryMapView.swift */; };
 		DC2DC55125CA6066002DBFA6 /* HarryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2DC55025CA6066002DBFA6 /* HarryView.swift */; };
+		DC2DC55425CAF385002DBFA6 /* MedicationQuestionnaire.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2DC55225CAF383002DBFA6 /* MedicationQuestionnaire.swift */; };
+		DC2DC55525CAF385002DBFA6 /* GeneralPatientQuestionnaire.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2DC55325CAF385002DBFA6 /* GeneralPatientQuestionnaire.swift */; };
 		E235077724F7082700CC1899 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E235077624F7082700CC1899 /* SceneDelegate.swift */; };
 		E290FB1D24FF4BBA00D19BE9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E290FB1C24FF4BBA00D19BE9 /* GoogleService-Info.plist */; };
 		E29143FC24E74AD100EE97B2 /* LaunchUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29143FB24E74AD100EE97B2 /* LaunchUIView.swift */; };
@@ -186,6 +188,8 @@
 		DC2DC54825CA5FB0002DBFA6 /* CircleImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
 		DC2DC54E25CA6046002DBFA6 /* HarryMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HarryMapView.swift; sourceTree = "<group>"; };
 		DC2DC55025CA6066002DBFA6 /* HarryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HarryView.swift; sourceTree = "<group>"; };
+		DC2DC55225CAF383002DBFA6 /* MedicationQuestionnaire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicationQuestionnaire.swift; sourceTree = "<group>"; };
+		DC2DC55325CAF385002DBFA6 /* GeneralPatientQuestionnaire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralPatientQuestionnaire.swift; sourceTree = "<group>"; };
 		E235077624F7082700CC1899 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		E290FB1C24FF4BBA00D19BE9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E29143FB24E74AD100EE97B2 /* LaunchUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchUIView.swift; sourceTree = "<group>"; };
@@ -463,6 +467,8 @@
 		8E9CDF7F2591E62000C8A228 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				DC2DC55325CAF385002DBFA6 /* GeneralPatientQuestionnaire.swift */,
+				DC2DC55225CAF383002DBFA6 /* MedicationQuestionnaire.swift */,
 				8E0A438F244A4A0400656518 /* TaskSamples.swift */,
 				8E0A4391244A4A0400656518 /* TaskItem.swift */,
 			);
@@ -733,6 +739,7 @@
 				8EA664AD2593380D00B6A45A /* SendRecordsView.swift in Sources */,
 				8E6E1E28253538CC0024B8DF /* TaskListItemView.swift in Sources */,
 				8E0A43B3244A4A0400656518 /* TaskSamples.swift in Sources */,
+				DC2DC55425CAF385002DBFA6 /* MedicationQuestionnaire.swift in Sources */,
 				8E6E1E2225352C780024B8DF /* OnboardingUIView.swift in Sources */,
 				8E6E1E1A253528450024B8DF /* WithdrawView.swift in Sources */,
 				8E6E1E2E25353A1E0024B8DF /* PatientIDView.swift in Sources */,
@@ -775,6 +782,7 @@
 				8E9CDEB6259181B400C8A228 /* CareTeamViewControllerRepresentable.swift in Sources */,
 				8E9CDEAF259172C200C8A228 /* CKCareKitManager+Sample.swift in Sources */,
 				8E9CDEA925916E6600C8A228 /* ScheduleViewController.swift in Sources */,
+				DC2DC55525CAF385002DBFA6 /* GeneralPatientQuestionnaire.swift in Sources */,
 				D253D132250D1BDB00A363E4 /* CKSignInWithAppleStep.swift in Sources */,
 				8E6E1E0D25351D8F0024B8DF /* PageViewController.swift in Sources */,
 				8E0A43AC244A4A0400656518 /* CKStudyUser.swift in Sources */,

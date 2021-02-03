@@ -16,10 +16,8 @@ enum TaskItem: Int {
      * STEP (1) APPEND TABLE ITEMS HERE,
      * Give each item a recognizable name!
      */
-    case sampleResearchKitSurvey,
-         sampleResearchKitActiveTask,
-         sampleCoreMotionAppleWatch,
-         // sampleFunCoffeeSurvey,
+    case GeneralPatientSurvey,
+         MedicineSurvey,
          sampleLearnItem
     
     /*
@@ -28,14 +26,10 @@ enum TaskItem: Int {
      */
     var title: String {
         switch self {
-        case .sampleResearchKitSurvey:
-            return "Survey (ResearchKit)"
-        case .sampleResearchKitActiveTask:
-            return "Active Task (ResearchKit)"
-        case .sampleCoreMotionAppleWatch:
-            return "Sensors Demo"
-//        case .sampleFunCoffeeSurvey:
-//            return "Coffee Survey"
+        case .GeneralPatientSurvey:
+            return "Patient Questionaire"
+        case .MedicineSurvey:
+            return "Medical Questionaire"
         case .sampleLearnItem:
             return "About CardinalKit"
         }
@@ -46,14 +40,10 @@ enum TaskItem: Int {
      */
     var subtitle: String {
         switch self {
-        case .sampleResearchKitSurvey:
-            return "Sample questions and forms."
-        case .sampleResearchKitActiveTask:
-            return "Sample sensor/data collection activities."
-        case .sampleCoreMotionAppleWatch:
-            return "CoreMotion & Cloud Storage"
-//        case .sampleFunCoffeeSurvey:
-//            return "How do you like your coffee?"
+        case .GeneralPatientSurvey:
+            return "Check in on your general health"
+        case .MedicineSurvey:
+            return "Check in on your current medical situation"
         case .sampleLearnItem:
             return "Visit cardinalkit.org"
         }
@@ -66,12 +56,6 @@ enum TaskItem: Int {
      */
     var image: UIImage? {
         switch self {
-        case .sampleResearchKitActiveTask:
-            return getImage(named: "ActivityIcon")
-//        case .sampleFunCoffeeSurvey:
-//            return getImage(named: "CoffeeIcon")
-        case .sampleCoreMotionAppleWatch:
-            return getImage(named: "WatchIcon")
         case .sampleLearnItem:
             return getImage(named: "CKLogoIcon")
         default:
@@ -84,10 +68,8 @@ enum TaskItem: Int {
      */
     var section: String {
         switch self {
-        case .sampleResearchKitSurvey, .sampleResearchKitActiveTask, .sampleCoreMotionAppleWatch:
+        case .GeneralPatientSurvey, .MedicineSurvey:
             return "Current Tasks"
-//        case .sampleFunCoffeeSurvey:
-//            return "Your Interests"
         case .sampleLearnItem:
             return "Learn"
         }
@@ -99,14 +81,10 @@ enum TaskItem: Int {
      */
     var action: some View {
         switch self {
-        case .sampleResearchKitSurvey:
-            return AnyView(CKTaskViewController(tasks: TaskSamples.sampleSurveyTask))
-        case .sampleResearchKitActiveTask:
-            return AnyView(CKTaskViewController(tasks: TaskSamples.sampleWalkingTask))
-        case .sampleCoreMotionAppleWatch:
-            return AnyView(SensorsDemoUIView())
-//        case .sampleFunCoffeeSurvey:
-//            return AnyView(CKTaskViewController(tasks: TaskSamples.sampleCoffeeTask))
+        case .GeneralPatientSurvey:
+            return AnyView(CKTaskViewController(tasks: GeneralPatientQuestionnaire.form))
+        case .MedicineSurvey:
+            return AnyView(CKTaskViewController(tasks: MedicationQuestionnaire.form))
         case .sampleLearnItem:
             return AnyView(LearnUIView())
         }
