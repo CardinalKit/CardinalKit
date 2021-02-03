@@ -3,15 +3,15 @@
 <plist version="1.0">
 <dict>
 	<key>Study Title</key>
-	<string>CardinalKit Study</string>
+	<string>Cardiology Study</string>
 	<key>Team Name</key>
-	<string>Stanford Department of Medicine</string>
+	<string>BeatHeartDisease</string>
 	<key>Email</key>
-	<string>contact@domain.com</string>
+	<string>mbabakha@stanford.edu</string>
 	<key>Phone</key>
 	<string>123-456-7890</string>
 	<key>Copyright</key>
-	<string>Made at Stanford with ❤️</string>
+	<string>Stanford-CS342</string>
 	<key>Website</key>
 	<string>https://cardinalkit.org</string>
 	<key>Tint Color</key>

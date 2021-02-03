@@ -37,11 +37,17 @@ struct MainUIView: View {
                     Text("Contact")
                 }
             }
+            
+            AboutUsView(dotColor: self.color).tabItem {
+                Image(systemName: "book").renderingMode(.template)
+                Text("About")
+            }
 
             ProfileUIView(color: self.color).tabItem {
                 Image("tab_profile").renderingMode(.template)
                 Text("Profile")
             }
+
         }
         .accentColor(self.color)
         .onAppear(perform: {
