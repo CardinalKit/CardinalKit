@@ -17,8 +17,7 @@ enum TaskItem: Int {
      * Give each item a recognizable name!
      */
     case GeneralPatientSurvey,
-         MedicineSurvey,
-         sampleLearnItem
+         MedicineSurvey
     
     /*
      * STEP (2) for each item, what should its
@@ -30,8 +29,6 @@ enum TaskItem: Int {
             return "Patient Questionaire"
         case .MedicineSurvey:
             return "Medical Questionaire"
-        case .sampleLearnItem:
-            return "About CardinalKit"
         }
     }
     
@@ -44,8 +41,6 @@ enum TaskItem: Int {
             return "Check in on your general health"
         case .MedicineSurvey:
             return "Check in on your current medical situation"
-        case .sampleLearnItem:
-            return "Visit cardinalkit.org"
         }
     }
     
@@ -56,8 +51,6 @@ enum TaskItem: Int {
      */
     var image: UIImage? {
         switch self {
-        case .sampleLearnItem:
-            return getImage(named: "CKLogoIcon")
         default:
             return getImage(named: "SurveyIcon")
         }
@@ -70,8 +63,6 @@ enum TaskItem: Int {
         switch self {
         case .GeneralPatientSurvey, .MedicineSurvey:
             return "Current Tasks"
-        case .sampleLearnItem:
-            return "Learn"
         }
     }
 
@@ -85,8 +76,6 @@ enum TaskItem: Int {
             return AnyView(CKTaskViewController(tasks: GeneralPatientQuestionnaire.form))
         case .MedicineSurvey:
             return AnyView(CKTaskViewController(tasks: MedicationQuestionnaire.form))
-        case .sampleLearnItem:
-            return AnyView(LearnUIView())
         }
     }
     
