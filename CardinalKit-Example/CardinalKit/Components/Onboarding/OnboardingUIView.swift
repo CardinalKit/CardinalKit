@@ -41,19 +41,21 @@ struct OnboardingUIView: View {
     var body: some View {
         VStack(spacing: 10) {
             Spacer()
-            
+            /*
             Image("SBDLogoGrey")
                 .resizable()
                 .scaledToFit()
                 .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN*4)
                 .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN*4)
-            
-            Spacer(minLength: 2)
+            */
+            Spacer(minLength: 20)
+             
             
             Text(config.read(query: "Study Title"))
                 .foregroundColor(self.color)
                 .multilineTextAlignment(.center)
                 .font(.system(size: 35, weight: .bold, design: .default))
+                .padding(.top)
                 .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN)
                 .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN)
             
@@ -70,7 +72,7 @@ struct OnboardingUIView: View {
                 Button(action: {
                     self.showingDetail.toggle()
                 }, label: {
-                     Text("Join Study")
+                     Text("Start")
                         .padding(Metrics.PADDING_BUTTON_LABEL)
                         .frame(maxWidth: .infinity)
                         .foregroundColor(.white)
@@ -100,29 +102,27 @@ struct InfoView: View {
     let color: Color
     var body: some View {
         VStack(spacing: 10) {
-            Circle()
-                .fill(color)
-                .frame(width: 100, height: 100, alignment: .center)
-                .padding(6)
-                .overlay(
-                    Text(logo)
-                        .foregroundColor(.white)
-                        .font(.system(size: 42, weight: .light, design: .default))
-                )
+            Image(logo)
+                .resizable()
+                .padding()
+                .frame(width: 250, height: 250, alignment: .center)
 
-            Text(title).font(.title)
-            
-            Text(description)
-                .font(.body)
-                .multilineTextAlignment(.center)
-                .padding(.leading, 40)
-                .padding(.trailing, 40)
+                Text(title).font(.title)
+                
+                Text(description)
+                    .font(.body)
+                    .multilineTextAlignment(.center)
+                    .padding(.leading, 40)
+                    .padding(.trailing, 40)
         }
+        .offset(y: -20)
     }
 }
 
 struct OnboardingUIView_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingUIView()
+        Group {
+            OnboardingUIView()
+        }
     }
 }

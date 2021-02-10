@@ -49,6 +49,8 @@ struct LaunchUIView: View {
 
 struct LaunchUIView_Previews: PreviewProvider {
     static var previews: some View {
-        LaunchUIView()
+        Group {
+            LaunchUIView()
+        }
     }
 }

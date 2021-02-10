@@ -1,0 +1,25 @@
+[
+    {
+        "name": "Kabir Jolly",
+        "id": 1001,
+        "bio": "Kabir is a frosh from The Woodlands, TX interested in AI and app development. He is really excited about the intersection of computer science with healthcare and business, and am currently exploring both of these ideas at Stanford. He loves to play tennis, watch all types of good movies, and spend time with friends.",
+        "location": "THE WOODLANDS, TEXAS",
+        "imageName": "Kabir",
+        "email": "kjolly@stanford.edu"
+    },
+    {
+        "name": "Amrita Kaur",
+        "id": 1002,
+        "bio": "Amrita (she/her) is a MS student in Computer Science, with a BS in Biology. She isn't sure yet what her future career will look like, but knows that she wants to work on creating a more equitable, just world. She loves watching TV and film (Aziz Ansari's Master of None is a perfect show!) and playing tennis in her free time.",
+        "location": "CLARKSVILLE, MARYLAND",
+        "imageName": "Amrita",
+        "email": "amritak@stanford.edu"
+    },{
+        "name": "Rachel Naidich",
+        "id": 1003,
+        "bio": "Rachel is a sophomore at Stanford studying computer science, and is passionate about startups and creating technologies that have positive impact. In my free time, She enjoys going for runs and playing chess.",
+        "location": "STANFORD, CALIFORNIA",
+        "imageName": "Rachel",
+        "email": "rnaidich@stanford.edu"
+    }
+]
