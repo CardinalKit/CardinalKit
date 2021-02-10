@@ -17,7 +17,7 @@
 	<key>Tint Color</key>
 	<string>#b6133f</string>
 	<key>Primary Color</key>
-	<string>#ff3961</string>
+	<string>#ff0000</string>
 	<key>Review Consent Step Text</key>
 	<string>Review Consent Form</string>
 	<key>Reason for Consent Text</key>
@@ -157,27 +157,27 @@
 	<array>
 		<dict>
 			<key>Title</key>
-			<string>First Title</string>
+			<string>Welcome!</string>
 			<key>Description</key>
-			<string>Lorem Ipsum is simply dummy text of the printing and typesetting industry</string>
+			<string>We hope this app will help you live a healthy life post-kidney transplant.</string>
 			<key>Logo</key>
-			<string>1️⃣</string>
+			<string>white_logo</string>
 		</dict>
 		<dict>
 			<key>Title</key>
-			<string>Second Title</string>
+			<string>Medication</string>
 			<key>Description</key>
-			<string>Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</string>
+			<string>You can manage all of your medications and set personalized alarms as reminders within the app.</string>
 			<key>Logo</key>
-			<string>2️⃣</string>
+			<string>capsules</string>
 		</dict>
 		<dict>
 			<key>Title</key>
-			<string>Third Title</string>
+			<string>Health Records</string>
 			<key>Description</key>
-			<string>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</string>
+			<string>You can store medical data within the app to share with your doctors.</string>
 			<key>Logo</key>
-			<string>3️⃣</string>
+			<string>doctor</string>
 		</dict>
 	</array>
 </dict>
