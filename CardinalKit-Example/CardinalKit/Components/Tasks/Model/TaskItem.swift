@@ -25,7 +25,8 @@ enum TaskItem: Int {
          onboardingSurvey,
          sf12Survey,
          gaitAndBalance,
-         timedWalk
+         timedWalk,
+         tremor
     
     
     
@@ -53,6 +54,8 @@ enum TaskItem: Int {
             return "Gait and Balance Test"
         case .timedWalk:
             return "Timed Walk Test"
+        case .tremor:
+            return "Tremor Test"
         }
     }
     
@@ -79,6 +82,8 @@ enum TaskItem: Int {
             return "Gait and Balance Test"
         case .timedWalk:
             return "Timed Walk Test"
+        case .tremor:
+            return "Tremor Test"
         }
     }
     
@@ -101,6 +106,8 @@ enum TaskItem: Int {
             return getImage(named: "ActivityIcon")
         case .timedWalk:
             return getImage(named: "ActivityIcon")
+        case .tremor:
+            return getImage(named: "ActivityIcon")
         default:
             return getImage(named: "SurveyIcon")
         }
@@ -113,7 +120,7 @@ enum TaskItem: Int {
         switch self {
         case
             //.sampleResearchKitSurvey, .sampleResearchKitActiveTask, .sampleCoreMotionAppleWatch,
-             .onboardingSurvey, .gaitAndBalance, .timedWalk, .sf12Survey:
+            .onboardingSurvey, .gaitAndBalance, .timedWalk, .sf12Survey, .tremor:
             return "Current Tasks"
 //        case .sampleFunCoffeeSurvey:
 //            return "Your Interests"
@@ -146,6 +153,8 @@ enum TaskItem: Int {
             return AnyView(CKTaskViewController(tasks: TaskSamples.gaitAndBalanceTask))
         case .timedWalk:
             return AnyView(CKTaskViewController(tasks: TaskSamples.timedWalkTask))
+        case .tremor:
+            return AnyView(CKTaskViewController(tasks: TaskSamples.tremorTask))
         }
     }
     

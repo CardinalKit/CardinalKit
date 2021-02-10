@@ -459,4 +459,21 @@ struct TaskSamples {
         let task = ORKNavigableOrderedTask(identifier: "SurveyActiveTasks-Assessment", steps: steps)
         return task
     }()
+    
+    static let tremorTask: ORKOrderedTask = {
+        var steps = [ORKStep]()
+ 
+        // Tremor Task
+        let tremorTask = ORKOrderedTask.tremorTest(withIdentifier: "TremorTask", intendedUseDescription: "Please complete this task", activeStepDuration: 10, activeTaskOptions: ORKTremorActiveTaskOption(), handOptions: [.both], options: ORKPredefinedTaskOption())
+        steps += tremorTask.steps
+ 
+        // Summary step
+        let summaryStep = ORKCompletionStep(identifier: "ActiveSummaryStep")
+        summaryStep.title = "Thank you."
+        summaryStep.text = "All done!"
+        steps += [summaryStep]
+
+        let task = ORKNavigableOrderedTask(identifier: "SurveyActiveTasks-Assessment", steps: steps)
+        return task
+    }()
 }
