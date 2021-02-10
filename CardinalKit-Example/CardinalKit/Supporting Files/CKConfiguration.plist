@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>Study Title</key>
-	<string>CardinalKit Study</string>
+	<string>Kidney Care</string>
 	<key>Team Name</key>
 	<string>Stanford Department of Medicine</string>
 	<key>Email</key>
@@ -21,7 +21,7 @@
 	<key>Review Consent Step Text</key>
 	<string>Review Consent Form</string>
 	<key>Reason for Consent Text</key>
-	<string>Consent to join the Developer Health Research Study.</string>
+	<string>Consent to proceed with Kidney Care.</string>
 	<key>Consent File Name</key>
 	<string>My Consent Form</string>
 	<key>Passcode Text</key>
@@ -92,74 +92,65 @@
 		<key>Overview</key>
 		<dict>
 			<key>Title</key>
-			<string>Hi there! 👋🏽</string>
+			<string>Welcome to Kidney Care!</string>
 			<key>Summary</key>
-			<string>CardinalKit is a suite of tools designed to help you build a digital health app experience from the ground up. It integrates with Firebase to provide full-stack solutions. We hope you enjoy the love poured into this sample and make many great things with it!</string>
+			<string>Kidney Care is an application focused on assisting doctors with the post-transplant operation care process.</string>
 			<key>Content</key>
-			<string>CardinalKit is a suite of tools designed to help you build a digital health app experience from the ground up. It integrates with Firebase to provide full-stack solutions. We hope you enjoy the love poured into this sample and make many great things with it!</string>
+			<string>Kidney Care is an application focused on assisting doctors with the post-transplant operation care process.</string>
 		</dict>
 		<key>DataGathering</key>
 		<dict>
 			<key>Title</key>
 			<string>Data Gathering</string>
 			<key>Summary</key>
-			<string>Here you should write a bit about what data you are collecting, and why.</string>
+			<string>Within the application, we will be collecting a variety of data to best assist you in the recovery process. We will start by collecting patient information, including age, gender, and ethnicity. Then we will ask for details regarding your operation, such as date of surgery, comorbidities, and the cause of kidney disease. All of this information will only be collected once, and then beyond that the app will consist of tasks and surveys that will better help them track your condition and progress during recovery.</string>
 			<key>Content</key>
-			<string>Here you should write a bit about what data you are collecting, and why. Additional content written here will show in final consent review form and generated PDF.</string>
+			<string>Within the application, we will be collecting a variety of data to best assist you in the recovery process. We will start by collecting patient information, including age, gender, and ethnicity. Then we will ask for details regarding your operation, such as date of surgery, comorbidities, and the cause of kidney disease. All of this information will only be collected once, and then beyond that the app will consist of tasks and surveys that will better help them track your condition and progress during recovery.</string>
 		</dict>
 		<key>Privacy</key>
 		<dict>
 			<key>Title</key>
 			<string>Privacy</string>
 			<key>Summary</key>
-			<string>What is your commitment in terms of data protection to your app participants? Who will have access to data?</string>
+			<string>Data protection and privacy is of utmost importance to the Kidney Care team. The only people that will have access to your data is yourself and the doctors you choose to grant access to your medical information.</string>
 			<key>Content</key>
-			<string>What is your commitment in terms of data protection to your app participants? Who will have access to data? Additional content written here will show in final consent review form and generated PDF.</string>
+			<string>Data protection and privacy is of utmost importance to the Kidney Care team. The only people that will have access to your data is yourself and the doctors you choose to grant access to your medical information.</string>
 		</dict>
 		<key>DataUse</key>
 		<dict>
 			<key>Title</key>
 			<string>Data Use</string>
 			<key>Summary</key>
-			<string>Information about your team&apos;s use of data.</string>
+			<string>Your data will be used to track progress during the road to recovery post transplant surgery. Information will be sent to your doctor for patient management and ensuring you are recieving the care you need.</string>
 			<key>Content</key>
-			<string>Information about your team&apos;s use of data. Additional content.</string>
+			<string>Your data will be used to track progress during the road to recovery post transplant surgery. Information will be sent to your doctor for patient management and ensuring you are recieving the care you need.</string>
 		</dict>
 		<key>TimeCommitment</key>
 		<dict>
 			<key>Title</key>
 			<string>Time Commitment</string>
 			<key>Summary</key>
-			<string>Information about the expected time commitment per app participant.</string>
+			<string>The account creation and onboarding process should take less than 5 minutes of your time! Beyond that, your engagement with the app relies on the outpatient care plan of you and your doctor.</string>
 			<key>Content</key>
-			<string>Information about the expected time commitment per app participant. Additional content.</string>
+			<string>The account creation and onboarding process should take less than 5 minutes of your time! Beyond that, your engagement with the app relies on the outpatient care plan of you and your doctor.</string>
 		</dict>
 		<key>StudySurvey</key>
 		<dict>
 			<key>Title</key>
 			<string>Study Survey</string>
 			<key>Summary</key>
-			<string>Information about any survey(s) in the app.</string>
+			<string>Beyond onboarding information, surveys include the SF-12 Health Survey and a daily 1-2 minute check-in regarding your condition that day.</string>
 			<key>Content</key>
-			<string>Information about any survey(s) in the app. Additional content.</string>
+			<string>Beyond onboarding information, surveys include the SF-12 Health Survey and a daily 1-2 minute check-in regarding your condition that day.</string>
 		</dict>
 		<key>StudyTasks</key>
 		<dict>
 			<key>Title</key>
 			<string>Study Tasks</string>
 			<key>Summary</key>
-			<string>Information about any task(s) in the app.</string>
+			<string>Certain active tasks may involve gait and balance tests, walking tests, tremor tests, and cognition tests.</string>
 			<key>Content</key>
-			<string>Information about any task(s) in the app. Additional content.</string>
-		</dict>
-		<key>Withdrawing</key>
-		<dict>
-			<key>Title</key>
-			<string>Withdrawing</string>
-			<key>Summary</key>
-			<string>What should your study participants know about the withdrawing process of your study?</string>
-			<key>Content</key>
-			<string>What should your study participants know about the withdrawing process of your study? Additional content.</string>
+			<string>Certain active tasks may involve gait and balance tests, walking tests, tremor tests, and cognition tests.</string>
 		</dict>
 	</dict>
 	<key>Onboarding</key>
