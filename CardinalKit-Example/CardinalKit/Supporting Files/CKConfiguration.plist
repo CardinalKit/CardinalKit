@@ -106,115 +106,128 @@ tests, electrolyte lab tests, race/ethnicity, age, weight, and pregnancy informa
 			<key>Summary</key>
 			<string>You are invited to participate in a research study on using a new technology to manage high blood pressure (hypertension) at home without requiring clinic visits, using a mobile application and a home blood pressure cuff. You will be asked to record your blood pressure at home twice a week, for a total of 12 weeks, using a blood pressure cuff that will be provided to you, which will then collect and send readings to your doctor. Your doctor may then modify your blood pressure medications, including changing doses or adding new medications, based on your blood pressure readings. You will also be asked to fill out surveys on this technology, which will be de-identified and used for research purposes to improve the technology.</string>
 			<key>Content</key>
-			<string>You are invited to participate in a research study on using a new technology to manage high blood pressure (hypertension) at home without requiring clinic visits, using a mobile application and a home blood pressure cuff. You will be asked to record your blood pressure at home twice a week, for a total of 12 weeks, using a blood pressure cuff that will be provided to you, which will then collect and send readings to your doctor. Your doctor may then modify your blood pressure medications, including changing doses or adding new medications, based on your blood pressure readings. You will also be asked to fill out surveys on this technology, which will be de-identified and used for research purposes to improve the technology.</string>
+			<string>You are invited to participate in a research study on using a new technology to manage high blood pressure (hypertension) at home without requiring clinic visits, using a mobile application and a home blood pressure cuff. You will be asked to record your blood pressure at home twice a week, for a total of 12 weeks, using a blood pressure cuff that will be provided to you, which will then collect and send readings to your doctor. Your doctor may then modify your blood pressure medications, including changing doses or adding new medications, based on your blood pressure readings. You will also be asked to fill out surveys on this technology, which will be de-identified and used for research purposes to improve the technology.
+
+American Heart Association is providing financial support and/or material for this study.
+
+Identifiers might be removed from identifiable private information and, after such removal, the information could be used for future research studies or distributed to another investigator for future research studies without additional informed consent from you. 
+
+Any of your survey responses which are used in research may result in new products, tests or discoveries. In some instances, these may have potential commercial value and may be developed and owned by the Investigators, Stanford University and/or others.  However, participants do not retain any property rights to the materials.  Therefore, you would not share in any financial benefits from these products, tests or discoveries.
+
+If you have read this form and have decided to participate in this project, please understand your participation is voluntary and you have the right to withdraw your consent or discontinue participation at any time without penalty or loss of benefits to which you are otherwise entitled. 
+
+The results of this research study may be presented at scientific or professional meetings or published in scientific journals.  However, your identity will not be disclosed.
+
+You have the right to refuse to answer particular questions. 
+
+			</string>
 		</dict>
 		<key>DataGathering</key>
 		<dict>
 			<key>Title</key>
 			<string>Data Gathering</string>
 			<key>Summary</key>
-			<string>The purpose of the research study is to evaluate the feasibility of a mobile
-technology to manage blood pressure (hypertension) at home without requiring
-you to come into a doctor’s office. This involves using a home blood pressure cuff,
-direct transmission of readings to your doctor. Your health information will be
-used only in the context of your doctor changing your blood pressure medications
-based on your home blood pressure readings. You will also fill out surveys on the
-technology which will not contain your health information and will be de-identified
-and used to improve the technology.</string>
+			<string>The purpose of the research study is to evaluate the feasibility of a mobile technology to manage blood pressure (hypertension) at home without requiring you to come into a doctor’s office. This involves using a home blood pressure cuff, direct transmission of readings to your doctor. Your health information will be used only in the context of your doctor changing your blood pressure medications based on your home blood pressure readings. You will also fill out surveys on the technology which will not contain your health information and will be de-identified and used to improve the technology.</string>
 			<key>Content</key>
-			<string>The purpose of the research study is to evaluate the feasibility of a mobile
-technology to manage blood pressure (hypertension) at home without requiring
-you to come into a doctor’s office. This involves using a home blood pressure cuff,
-direct transmission of readings to your doctor. Your health information will be
-used only in the context of your doctor changing your blood pressure medications
-based on your home blood pressure readings. You will also fill out surveys on the
-technology which will not contain your health information and will be de-identified
-and used to improve the technology.</string>
+			<string>The purpose of the research study is to evaluate the feasibility of a mobile technology to manage blood pressure (hypertension) at home without requiring you to come into a doctor’s office. This involves using a home blood pressure cuff, direct transmission of readings to your doctor. Your health information will be used only in the context of your doctor changing your blood pressure medications based on your home blood pressure readings. You will also fill out surveys on the technology which will not contain your health information and will be de-identified and used to improve the technology.</string>
 		</dict>
 		<key>Privacy</key>
 		<dict>
 			<key>Title</key>
 			<string>Privacy</string>
 			<key>Summary</key>
-			<string>The following parties are authorized to use and/or disclose your health information
-in connection with this research study:
-The Protocol Director (Dr. Paul Wang)
-The Stanford University Administrative Panel on Human Subjects in Medical
-Research and any other unit of Stanford University as necessary
-Research Staff
-</string>
+			<string>The following parties are authorized to use and/or disclose your health information in connection with this research study: 
+- The Protocol Director (Dr. Paul Wang) 
+- The Stanford University Administrative Panel on Human Subjects in Medical Research 
+- and any other unit of Stanford University as necessary Research Staff</string>
 			<key>Content</key>
-			<string>The following parties are authorized to use and/or disclose your health information
-in connection with this research study:
-The Protocol Director (Dr. Paul Wang)
-The Stanford University Administrative Panel on Human Subjects in Medical
-Research and any other unit of Stanford University as necessary
-Research Staff
-</string>
+			<string>The following parties are authorized to use and/or disclose your health information in connection with this research study: 
+- The Protocol Director (Dr. Paul Wang) 
+- The Stanford University Administrative Panel on Human Subjects in Medical Research 
+- and any other unit of Stanford University as necessary Research Staff</string>
 		</dict>
 		<key>DataUse</key>
 		<dict>
 			<key>Title</key>
 			<string>Data Use</string>
 			<key>Summary</key>
-			<string>Your health information related to this study, may be used or disclosed in
-connection with this research study, including, but not limited to information
-pertaining to blood pressure management. This includes blood pressure readings,
-blood pressure medications and other information that your doctor will use to
-make blood pressure management decisions, which include kidney function lab
-tests, electrolyte lab tests, race/ethnicity, age, weight, and pregnancy information.</string>
+			<string>Your health information related to this study, may be used or disclosed in connection with this research study, including, but not limited to information pertaining to blood pressure management. This includes blood pressure readings, blood pressure medications and other information that your doctor will use to make blood pressure management decisions, which include kidney function lab tests, electrolyte lab tests, race/ethnicity, age, weight, and pregnancy information.</string>
 			<key>Content</key>
-			<string>Your health information related to this study, may be used or disclosed in
-connection with this research study, including, but not limited to information
-pertaining to blood pressure management. This includes blood pressure readings,
-blood pressure medications and other information that your doctor will use to
-make blood pressure management decisions, which include kidney function lab
-tests, electrolyte lab tests, race/ethnicity, age, weight, and pregnancy information.</string>
+			<string>Your health information related to this study, may be used or disclosed in connection with this research study, including, but not limited to information pertaining to blood pressure management. This includes blood pressure readings, blood pressure medications and other information that your doctor will use to make blood pressure management decisions, which include kidney function lab tests, electrolyte lab tests, race/ethnicity, age, weight, and pregnancy information.
+			
+Your health information related to this study, may be used or disclosed in connection with this research study, including, but not limited to information pertaining to blood pressure management. This includes blood pressure readings, blood pressure medications and other information that your doctor will use to make blood pressure management decisions, which include kidney function lab tests, electrolyte lab tests, race/ethnicity, age, weight, and pregnancy information. 
+
+The following parties are authorized to use and/or disclose your health information in connection with this research study:
+•	The Protocol Director (Dr. Paul Wang)
+•	The Stanford University Administrative Panel on Human Subjects in Medical Research and any other unit of Stanford University as necessary
+•	Research Staff
+
+The parties listed in the preceding paragraph may disclose your health information to the following persons and organizations for their use in connection with this research study: 
+
+•	The Office for Human Research Protections in the U.S. Department of Health and Human Services
+•	The American Heart Association
+•	The Food and Drug Administration
+
+The study team will purchase material from Omron HealthCare, Inc, for this study.
+
+Your information may be re-disclosed by the recipients described above, if they are not required by law to protect the privacy of the information.
+
+Your authorization for the use and/or disclosure of your health information will end on December 31, 2050 or when the research project ends, whichever is earlier. 
+			</string>
 		</dict>
 		<key>TimeCommitment</key>
 		<dict>
 			<key>Title</key>
 			<string>Time Commitment</string>
 			<key>Summary</key>
-			<string>Your participation in this experiment will take approximately 3
-months.</string>
+			<string>Your participation in this experiment will take approximately 3 months.</string>
 			<key>Content</key>
-			<string>Your participation in this experiment will take approximately 3
-months.</string>
+			<string>Your participation in this experiment will take approximately 3 months.</string>
 		</dict>
 		<key>StudySurvey</key>
 		<dict>
 			<key>Title</key>
 			<string>Study Survey</string>
 			<key>Summary</key>
-			<string>To maintain the integrity of this research study, you may not have access to any
-health information developed as part of this study until it is completed. At that
-point, you would have access to such health information if it was used to make a
-medical or billing decision about you (e.g., if included in your official medical
-record).</string>
+			<string>To maintain the integrity of this research study, you may not have access to any health information developed as part of this study until it is completed. At that point, you would have access to such health information if it was used to make a medical or billing decision about you (e.g., if included in your official medical record).</string>
 			<key>Content</key>
-			<string>To maintain the integrity of this research study, you may not have access to any
-health information developed as part of this study until it is completed. At that
-point, you would have access to such health information if it was used to make a
-medical or billing decision about you (e.g., if included in your official medical
-record).</string>
+			<string>To maintain the integrity of this research study, you may not have access to any health information developed as part of this study until it is completed. At that point, you would have access to such health information if it was used to make a medical or billing decision about you (e.g., if included in your official medical record).</string>
 		</dict>
 		<key>StudyTasks</key>
 		<dict>
 			<key>Title</key>
-			<string>Study Tasks</string>
+			<string>Risks and Benefits</string>
 			<key>Summary</key>
-			<string>Information about any task(s) in the app.</string>
+			<string>Although you will use an FDA-approved home blood pressure monitor, there is a risk that the home blood pressure may not be accurate, and you may receive an incorrect medication dose change or new medication. The benefits which may reasonably be expected to result from this study are regular blood pressure management without requiring physical visits to a doctor’s office, minimizing daily life disruptions and costs associated with visiting doctors’ offices for blood pressure measurement or medication changes, and obtaining more regular home blood pressure readings. These may lead to better blood pressure control, which is associated with improved long-term outcomes such as reducing the risk of heart and kidney complications. We cannot and do not guarantee or promise that you will receive any benefits from this study.  Your decision whether or not to participate in this study will not affect your employment/medical care.
+
+You will receive no reimbursement as payment for your participation. 
+
+All forms of medical diagnosis and treatment – whether routine or experimental – involve some risk of injury. In spite of all precautions, you might develop medical complications from participating in this study. If such complications arise, the Protocol Director and the research study staff will assist you in obtaining appropriate medical treatment. In the event that you have an injury or illness that is directly caused by your participation in this study, reimbursement for all related costs of care first will be sought from your insurer, managed care plan, or other benefits program. You will be responsible for any associated co-payments or deductibles as required by your insurance.
+
+If costs of care related to such an injury are not covered by your insurer, managed care plan or other benefits program, you may be responsible for these costs. If you are unable to pay for such costs, the Protocol Director will assist you in applying for supplemental benefits and explain how to apply for patient financial assistance from the hospital.
+
+You do not waive any liability rights for personal injury by signing this form.
+			</string>
 			<key>Content</key>
-			<string>Information about any task(s) in the app. Additional content.</string>
+			<string>Although you will use an FDA-approved home blood pressure monitor, there is a risk that the home blood pressure may not be accurate, and you may receive an incorrect medication dose change or new medication. The benefits which may reasonably be expected to result from this study are regular blood pressure management without requiring physical visits to a doctor’s office, minimizing daily life disruptions and costs associated with visiting doctors’ offices for blood pressure measurement or medication changes, and obtaining more regular home blood pressure readings. These may lead to better blood pressure control, which is associated with improved long-term outcomes such as reducing the risk of heart and kidney complications. We cannot and do not guarantee or promise that you will receive any benefits from this study.  Your decision whether or not to participate in this study will not affect your employment/medical care.
+
+You will receive no reimbursement as payment for your participation. 
+
+All forms of medical diagnosis and treatment – whether routine or experimental – involve some risk of injury. In spite of all precautions, you might develop medical complications from participating in this study. If such complications arise, the Protocol Director and the research study staff will assist you in obtaining appropriate medical treatment. In the event that you have an injury or illness that is directly caused by your participation in this study, reimbursement for all related costs of care first will be sought from your insurer, managed care plan, or other benefits program. You will be responsible for any associated co-payments or deductibles as required by your insurance.
+
+If costs of care related to such an injury are not covered by your insurer, managed care plan or other benefits program, you may be responsible for these costs. If you are unable to pay for such costs, the Protocol Director will assist you in applying for supplemental benefits and explain how to apply for patient financial assistance from the hospital.
+
+You do not waive any liability rights for personal injury by signing this form.</string>
 		</dict>
 		<key>Withdrawing</key>
 		<dict>
 			<key>Title</key>
 			<string>Withdrawing</string>
 			<key>Summary</key>
-			<string>The Protocol Director may also withdraw you from the study without your consent for one
-or more of the following reasons
+			<string>
+			If you decide to participate, you are free to withdraw your authorization regarding the use and disclosure of your health information (and to discontinue any other participation in the study) at any time.  After any revocation, your health information will no longer be used or disclosed in the study, except to the extent that the law allows us to continue using your information (e.g., necessary to maintain integrity of research).  If you wish to revoke your authorization for the research use or disclosure of your health information in this study, you must write to: Dr. Paul Wang, 300 Pasteur Drive, Room A260, MC 5233, Stanford, CA 94305, Phone: (650) 723-9363
+			
+The Protocol Director may also withdraw you from the study without your consent for one or more of the following reasons
 o Failure to follow the instructions of the Protocol Director and study staff.
 o The Protocol Director decides that continuing your participation could be
 harmful to you.
@@ -222,10 +235,12 @@ o Pregnancy
 o You need treatment not allowed in the study.
 o The study is cancelled.
 o Other administrative reasons.
-o Unanticipated circumstances.</string>
+o Unanticipated circumstances.
+			</string>
 			<key>Content</key>
-			<string>The Protocol Director may also withdraw you from the study without your consent for one
-or more of the following reasons
+			<string>If you decide to participate, you are free to withdraw your authorization regarding the use and disclosure of your health information (and to discontinue any other participation in the study) at any time.  After any revocation, your health information will no longer be used or disclosed in the study, except to the extent that the law allows us to continue using your information (e.g., necessary to maintain integrity of research).  If you wish to revoke your authorization for the research use or disclosure of your health information in this study, you must write to: Dr. Paul Wang, 300 Pasteur Drive, Room A260, MC 5233, Stanford, CA 94305, Phone: (650) 723-9363
+
+The Protocol Director may also withdraw you from the study without your consent for one or more of the following reasons
 o Failure to follow the instructions of the Protocol Director and study staff.
 o The Protocol Director decides that continuing your participation could be
 harmful to you.
@@ -233,7 +248,8 @@ o Pregnancy
 o You need treatment not allowed in the study.
 o The study is cancelled.
 o Other administrative reasons.
-o Unanticipated circumstances.</string>
+o Unanticipated circumstances.
+			</string>
 		</dict>
 	</dict>
 	<key>Onboarding</key>
