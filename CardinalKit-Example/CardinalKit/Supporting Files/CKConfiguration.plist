@@ -16,6 +16,8 @@
 	<string>https://cardinalkit.org</string>
 	<key>Tint Color</key>
 	<string>#b6133f</string>
+	<key>New item</key>
+	<string></string>
 	<key>Primary Color</key>
 	<string>#ff3961</string>
 	<key>Review Consent Step Text</key>
