@@ -9,7 +9,7 @@
 	<key>Email</key>
 	<string>mbabakha@stanford.edu</string>
 	<key>Phone</key>
-	<string>123-456-7890</string>
+	<string>(650) 723-9363</string>
 	<key>Copyright</key>
 	<string>Stanford-CS342</string>
 	<key>Website</key>
@@ -33,30 +33,40 @@
 	<key>Completion Step Title</key>
 	<string>Welcome aboard.</string>
 	<key>Completion Step Text</key>
-	<string>This step concludes the onboarding and consent process of the CardinalKit framework. Next up, you will see main app functionality.</string>
+	<string>Onboarding has concluded. Moving to research dashboard.</string>
 	<key>Failed Login Title</key>
-	<string>Unable to Login 😔</string>
+	<string>Unable to Login</string>
 	<key>Failed Login Text</key>
 	<string>Please try again in five minutes.</string>
 	<key>Health Permissions Title</key>
-	<string>Permission to read Activity Data 🏃🏽‍♀️</string>
+	<string>Permission to read Activity Data</string>
 	<key>Health Permissions Text</key>
-	<string>Use this text to provide an explanation to your app participants about what activity data you intend to read from the Health app and why. This sample will read step count, distance, heart rate, and flights climbed data.</string>
+	<string>Your health information related to this study, may be used or disclosed in
+connection with this research study, including, but not limited to information
+pertaining to blood pressure management. This includes blood pressure readings,
+blood pressure medications and other information that your doctor will use to
+make blood pressure management decisions, which include kidney function lab
+tests, electrolyte lab tests, race/ethnicity, age, weight, and pregnancy information.</string>
 	<key>Health Records</key>
 	<dict>
 		<key>Enabled</key>
 		<true/>
 		<key>Permissions Text</key>
-		<string>Use this text to provide an explanation to your app participants about what electronic health records (EHR) you intend to collect from the Health app and why. This sample will read all available records (for which permission is granted).</string>
+		<string>Your health information related to this study, may be used or disclosed in
+connection with this research study, including, but not limited to information
+pertaining to blood pressure management. This includes blood pressure readings,
+blood pressure medications and other information that your doctor will use to
+make blood pressure management decisions, which include kidney function lab
+tests, electrolyte lab tests, race/ethnicity, age, weight, and pregnancy information.</string>
 		<key>Permissions Title</key>
-		<string>Permission to read Health Records 🏥</string>
+		<string>Permission to read Health Records</string>
 	</dict>
 	<key>Background Read Frequency</key>
 	<string>immediate</string>
 	<key>Login-Sign-In-With-Apple</key>
 	<dict>
 		<key>Enabled</key>
-		<false/>
+		<true/>
 		<key>Title</key>
 		<string>Sign in with Apple</string>
 		<key>Text</key>
@@ -94,56 +104,102 @@
 		<key>Overview</key>
 		<dict>
 			<key>Title</key>
-			<string>Hi there! 👋🏽</string>
+			<string>Description</string>
 			<key>Summary</key>
-			<string>CardinalKit is a suite of tools designed to help you build a digital health app experience from the ground up. It integrates with Firebase to provide full-stack solutions. We hope you enjoy the love poured into this sample and make many great things with it!</string>
+			<string>You are invited to participate in a research study on using a new technology to manage high blood pressure (hypertension) at home without requiring clinic visits, using a mobile application and a home blood pressure cuff. You will be asked to record your blood pressure at home twice a week, for a total of 12 weeks, using a blood pressure cuff that will be provided to you, which will then collect and send readings to your doctor. Your doctor may then modify your blood pressure medications, including changing doses or adding new medications, based on your blood pressure readings. You will also be asked to fill out surveys on this technology, which will be de-identified and used for research purposes to improve the technology.</string>
 			<key>Content</key>
-			<string>CardinalKit is a suite of tools designed to help you build a digital health app experience from the ground up. It integrates with Firebase to provide full-stack solutions. We hope you enjoy the love poured into this sample and make many great things with it!</string>
+			<string>You are invited to participate in a research study on using a new technology to manage high blood pressure (hypertension) at home without requiring clinic visits, using a mobile application and a home blood pressure cuff. You will be asked to record your blood pressure at home twice a week, for a total of 12 weeks, using a blood pressure cuff that will be provided to you, which will then collect and send readings to your doctor. Your doctor may then modify your blood pressure medications, including changing doses or adding new medications, based on your blood pressure readings. You will also be asked to fill out surveys on this technology, which will be de-identified and used for research purposes to improve the technology.</string>
 		</dict>
 		<key>DataGathering</key>
 		<dict>
 			<key>Title</key>
 			<string>Data Gathering</string>
 			<key>Summary</key>
-			<string>Here you should write a bit about what data you are collecting, and why.</string>
+			<string>The purpose of the research study is to evaluate the feasibility of a mobile
+technology to manage blood pressure (hypertension) at home without requiring
+you to come into a doctor’s office. This involves using a home blood pressure cuff,
+direct transmission of readings to your doctor. Your health information will be
+used only in the context of your doctor changing your blood pressure medications
+based on your home blood pressure readings. You will also fill out surveys on the
+technology which will not contain your health information and will be de-identified
+and used to improve the technology.</string>
 			<key>Content</key>
-			<string>Here you should write a bit about what data you are collecting, and why. Additional content written here will show in final consent review form and generated PDF.</string>
+			<string>The purpose of the research study is to evaluate the feasibility of a mobile
+technology to manage blood pressure (hypertension) at home without requiring
+you to come into a doctor’s office. This involves using a home blood pressure cuff,
+direct transmission of readings to your doctor. Your health information will be
+used only in the context of your doctor changing your blood pressure medications
+based on your home blood pressure readings. You will also fill out surveys on the
+technology which will not contain your health information and will be de-identified
+and used to improve the technology.</string>
 		</dict>
 		<key>Privacy</key>
 		<dict>
 			<key>Title</key>
 			<string>Privacy</string>
 			<key>Summary</key>
-			<string>What is your commitment in terms of data protection to your app participants? Who will have access to data?</string>
+			<string>The following parties are authorized to use and/or disclose your health information
+in connection with this research study:
+The Protocol Director (Dr. Paul Wang)
+The Stanford University Administrative Panel on Human Subjects in Medical
+Research and any other unit of Stanford University as necessary
+Research Staff
+</string>
 			<key>Content</key>
-			<string>What is your commitment in terms of data protection to your app participants? Who will have access to data? Additional content written here will show in final consent review form and generated PDF.</string>
+			<string>The following parties are authorized to use and/or disclose your health information
+in connection with this research study:
+The Protocol Director (Dr. Paul Wang)
+The Stanford University Administrative Panel on Human Subjects in Medical
+Research and any other unit of Stanford University as necessary
+Research Staff
+</string>
 		</dict>
 		<key>DataUse</key>
 		<dict>
 			<key>Title</key>
 			<string>Data Use</string>
 			<key>Summary</key>
-			<string>Information about your team&apos;s use of data.</string>
+			<string>Your health information related to this study, may be used or disclosed in
+connection with this research study, including, but not limited to information
+pertaining to blood pressure management. This includes blood pressure readings,
+blood pressure medications and other information that your doctor will use to
+make blood pressure management decisions, which include kidney function lab
+tests, electrolyte lab tests, race/ethnicity, age, weight, and pregnancy information.</string>
 			<key>Content</key>
-			<string>Information about your team&apos;s use of data. Additional content.</string>
+			<string>Your health information related to this study, may be used or disclosed in
+connection with this research study, including, but not limited to information
+pertaining to blood pressure management. This includes blood pressure readings,
+blood pressure medications and other information that your doctor will use to
+make blood pressure management decisions, which include kidney function lab
+tests, electrolyte lab tests, race/ethnicity, age, weight, and pregnancy information.</string>
 		</dict>
 		<key>TimeCommitment</key>
 		<dict>
 			<key>Title</key>
 			<string>Time Commitment</string>
 			<key>Summary</key>
-			<string>Information about the expected time commitment per app participant.</string>
+			<string>Your participation in this experiment will take approximately 3
+months.</string>
 			<key>Content</key>
-			<string>Information about the expected time commitment per app participant. Additional content.</string>
+			<string>Your participation in this experiment will take approximately 3
+months.</string>
 		</dict>
 		<key>StudySurvey</key>
 		<dict>
 			<key>Title</key>
 			<string>Study Survey</string>
 			<key>Summary</key>
-			<string>Information about any survey(s) in the app.</string>
+			<string>To maintain the integrity of this research study, you may not have access to any
+health information developed as part of this study until it is completed. At that
+point, you would have access to such health information if it was used to make a
+medical or billing decision about you (e.g., if included in your official medical
+record).</string>
 			<key>Content</key>
-			<string>Information about any survey(s) in the app. Additional content.</string>
+			<string>To maintain the integrity of this research study, you may not have access to any
+health information developed as part of this study until it is completed. At that
+point, you would have access to such health information if it was used to make a
+medical or billing decision about you (e.g., if included in your official medical
+record).</string>
 		</dict>
 		<key>StudyTasks</key>
 		<dict>
@@ -159,9 +215,27 @@
 			<key>Title</key>
 			<string>Withdrawing</string>
 			<key>Summary</key>
-			<string>What should your study participants know about the withdrawing process of your study?</string>
+			<string>The Protocol Director may also withdraw you from the study without your consent for one
+or more of the following reasons
+o Failure to follow the instructions of the Protocol Director and study staff.
+o The Protocol Director decides that continuing your participation could be
+harmful to you.
+o Pregnancy
+o You need treatment not allowed in the study.
+o The study is cancelled.
+o Other administrative reasons.
+o Unanticipated circumstances.</string>
 			<key>Content</key>
-			<string>What should your study participants know about the withdrawing process of your study? Additional content.</string>
+			<string>The Protocol Director may also withdraw you from the study without your consent for one
+or more of the following reasons
+o Failure to follow the instructions of the Protocol Director and study staff.
+o The Protocol Director decides that continuing your participation could be
+harmful to you.
+o Pregnancy
+o You need treatment not allowed in the study.
+o The study is cancelled.
+o Other administrative reasons.
+o Unanticipated circumstances.</string>
 		</dict>
 	</dict>
 	<key>Onboarding</key>
