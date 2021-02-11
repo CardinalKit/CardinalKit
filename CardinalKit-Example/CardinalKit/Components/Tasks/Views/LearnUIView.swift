@@ -11,15 +11,18 @@ import SwiftUI
 struct LearnUIView: View {
     var body: some View {
         VStack(spacing: 10) {
-            Image("CKLogo")
-                .resizable()
-                .scaledToFit()
-                .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN*4)
-                .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN*4)
-            
-            Text("CardinalKit is a suite of tools designed to help you build a digital health app experience from the ground up. It integrates with Firebase to provide full-stack solutions. We hope you enjoy the love poured into this sample and make many great things with it!")
+//            Image("CKLogo")
+//                .resizable()
+//                .scaledToFit()
+//                .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN*4)
+//                .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN*4)
+            Spacer()
+            Text("Digital Professional Development")
+                .font(.system(size: 18))
+                .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN*2)
+            Text("Digital Professional Development (“Digital-PD”), is a Stanford University study on designing efficient professional development activities. Over the course of each workday, you have been asked to complete a series of additional activities designed to resemble tasks which would ordinarily be part of your workflow. Additionally, you have been asked to complete questionnaires asking opinions of the training exercises at various times throughout the day. You have been asked to wear a device on your wrist to monitor physiological activity during the training exercises, and this application will be used to track where and when you choose to complete your professional development exercises. If you have any questions, do not hesitate to reach out to Michael by email at coopermj@stanford.edu, or by phone at 555-555-5555.")
                 .multilineTextAlignment(.leading)
-                .font(.system(size: 18, weight: .regular, design: .default))
+                .font(.system(size: 16, weight: .regular, design: .default))
                 .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN*2)
                 .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN*2)
             

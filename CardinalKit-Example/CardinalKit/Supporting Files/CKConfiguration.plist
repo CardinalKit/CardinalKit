@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>Study Title</key>
-	<string>CardinalKit Study</string>
+	<string>Digital Professional Development</string>
 	<key>Team Name</key>
-	<string>Stanford Department of Medicine</string>
+	<string>Stanford Department of Computer Science</string>
 	<key>Email</key>
-	<string>contact@domain.com</string>
+	<string>coopermj@stanford.edu</string>
 	<key>Phone</key>
-	<string>123-456-7890</string>
+	<string>555-555-5555</string>
 	<key>Copyright</key>
-	<string>Made at Stanford with ❤️</string>
+	<string>Made with ❤️ by the Stanford HCI Lab</string>
 	<key>Website</key>
-	<string>https://cardinalkit.org</string>
+	<string>https://digitalpd.stanford.edu</string>
 	<key>Tint Color</key>
-	<string>#b6133f</string>
+	<string>#DE7B44</string>
 	<key>Primary Color</key>
-	<string>#ff3961</string>
+	<string>#234930</string>
 	<key>Review Consent Step Text</key>
 	<string>Review Consent Form</string>
 	<key>Reason for Consent Text</key>
@@ -31,7 +31,7 @@
 	<key>Completion Step Title</key>
 	<string>Welcome aboard.</string>
 	<key>Completion Step Text</key>
-	<string>This step concludes the onboarding and consent process of the CardinalKit framework. Next up, you will see main app functionality.</string>
+	<string>This step concludes the onboarding and consent process for the study. Next up, you will see main app functionality.</string>
 	<key>Failed Login Title</key>
 	<string>Unable to Login 😔</string>
 	<key>Failed Login Text</key>
@@ -54,7 +54,7 @@
 	<key>Login-Sign-In-With-Apple</key>
 	<dict>
 		<key>Enabled</key>
-		<true/>
+		<false/>
 		<key>Title</key>
 		<string>Sign in with Apple</string>
 		<key>Text</key>
@@ -92,101 +92,177 @@
 		<key>Overview</key>
 		<dict>
 			<key>Title</key>
-			<string>Hi there! 👋🏽</string>
+			<string>Welcome to Digital-PD!</string>
 			<key>Summary</key>
-			<string>CardinalKit is a suite of tools designed to help you build a digital health app experience from the ground up. It integrates with Firebase to provide full-stack solutions. We hope you enjoy the love poured into this sample and make many great things with it!</string>
+			<string>You are invited to participate in Digital Professional Development (“Digital-PD”),  a Stanford University study on designing efficient professional development activities. Over the course of each workday, you will be asked to complete a series of additional activities designed to resemble tasks which would ordinarily be part of your workflow. Additionally, you will be asked to complete questionnaires asking opinions of the training exercises at various times throughout the day. You will be asked to wear a device on your wrist to monitor physiological activity during the training exercises, and this application will be used to track where and when you choose to complete your professional development exercises.</string>
 			<key>Content</key>
-			<string>CardinalKit is a suite of tools designed to help you build a digital health app experience from the ground up. It integrates with Firebase to provide full-stack solutions. We hope you enjoy the love poured into this sample and make many great things with it!</string>
+			<string>You are invited to participate in Digital Professional Development (“Digital-PD”),  a Stanford University study on designing efficient professional development activities. Over the course of each workday, you will be asked to complete a series of additional activities designed to resemble tasks which would ordinarily be part of your workflow. Additionally, you will be asked to complete questionnaires asking opinions of the training exercises at various times throughout the day. You will be asked to wear a device on your wrist to monitor physiological activity during the training exercises, and this application will be used to track where and when you choose to complete your professional development exercises.</string>
 		</dict>
 		<key>DataGathering</key>
 		<dict>
 			<key>Title</key>
-			<string>Data Gathering</string>
+			<string>Participation and Time Commitment</string>
 			<key>Summary</key>
-			<string>Here you should write a bit about what data you are collecting, and why.</string>
+			<string>Your participation in this program is entirely voluntary.  You can decide to participate now, and withdraw your consent later and stop being in the program without any loss of benefits or compensation.  
+This study will be administered at your place of work, and your primary interactions with the study will take place through this mobile platform. Your participation in the program will last for a period of 90 days.
+</string>
 			<key>Content</key>
-			<string>Here you should write a bit about what data you are collecting, and why. Additional content written here will show in final consent review form and generated PDF.</string>
+			<string>Your participation in this program is entirely voluntary.  You can decide to participate now, and withdraw your consent later and stop being in the program without any loss of benefits or compensation.  
+This study will be administered at your place of work, and your primary interactions with the study will take place through this mobile platform. Your participation in the program will last for a period of 90 days.
+</string>
 		</dict>
 		<key>Privacy</key>
 		<dict>
 			<key>Title</key>
-			<string>Privacy</string>
+			<string>Privacy and Confidentiality</string>
 			<key>Summary</key>
-			<string>What is your commitment in terms of data protection to your app participants? Who will have access to data?</string>
+			<string>As we are collecting biometric data, we take privacy and confidentiality seriously.  Health information will be anonymized and presented to researchers in a de-identified fashion.  The biometric data we collect will be stored on a secure HIPAA compliant server and the Stanford HCI Lab will follow HIPAA guidelines whenever interacting with the data. 
+Data from this program may be presented at scientific meetings or published in scientific journals. Your identity and/or your personal health information will not be disclosed except as authorized by you or as required by law.  However, there is always some risk that even de-identified information might be re-identified.
+Data collected from or about you as part of theDigital-PD that can directly identify you (including your name and address) is called “Protected Personal Information.”  Your Protected Personal Information will be held confidential by the staff and access limited to those who need access in order to administer and conduct the program activities (eg., if the core research team needs to contact you during the study).
+ 
+Your remaining data will be separated from your Protected Personal Information and will be assigned a key code (we call this “Coded Study Data”). Information about the Coded Data will be kept in a secure location and access will be limited as described in this consent.
+ 
+Finally, aggregated, non-identifiable data, may be reviewed for quality assurance and to evaluate effectiveness of the program.
+</string>
 			<key>Content</key>
-			<string>What is your commitment in terms of data protection to your app participants? Who will have access to data? Additional content written here will show in final consent review form and generated PDF.</string>
+			<string>As we are collecting biometric data, we take privacy and confidentiality seriously.  Health information will be anonymized and presented to researchers in a de-identified fashion.  The biometric data we collect will be stored on a secure HIPAA compliant server and the Stanford HCI Lab will follow HIPAA guidelines whenever interacting with the data. 
+Data from this program may be presented at scientific meetings or published in scientific journals. Your identity and/or your personal health information will not be disclosed except as authorized by you or as required by law.  However, there is always some risk that even de-identified information might be re-identified.
+Data collected from or about you as part of theDigital-PD that can directly identify you (including your name and address) is called “Protected Personal Information.”  Your Protected Personal Information will be held confidential by the staff and access limited to those who need access in order to administer and conduct the program activities (eg., if the core research team needs to contact you during the study).
+ 
+Your remaining data will be separated from your Protected Personal Information and will be assigned a key code (we call this “Coded Study Data”). Information about the Coded Data will be kept in a secure location and access will be limited as described in this consent.
+ 
+Finally, aggregated, non-identifiable data, may be reviewed for quality assurance and to evaluate effectiveness of the program.
+</string>
 		</dict>
 		<key>DataUse</key>
 		<dict>
 			<key>Title</key>
-			<string>Data Use</string>
+			<string>Monitoring and Data Collection</string>
 			<key>Summary</key>
-			<string>Information about your team&apos;s use of data.</string>
+			<string>Your contact information (e.g. name, email address, phone number and zip code) and demographic information (e.g. age, gender, height, and weight) will be collected upon the start of the program.
+
+Additional data may be collected via Apple’s Health Kit from your smartphone and/or connected wearables such as a smartwatch with your permission:
+
+	•	Sensor information  (e.g. accelerometer, gyroscope, heart rate)
+	•	Device metadata (e.g. Timezone, device operating system version, on/off wrist status)
+	•	Activity (e.g step count, distance walking/running, stride length, passive 6MWT, distance cycling, wheelchair push count, distance wheelchair, swimming stroke count, distance swimming, distance downhill snow sports, basal energy burned, active energy burned, flights climbed, Nike fuel, Apple exercise time, Apple stand time, Apple stand hours)
+	•	Body Measures (e.g. height, weight, BMI, lean body mass, body fat percentage, waist circumference)
+	•	Vital Signs (e.g. heart rate, low or high HR event, irregular heart rate event, resting HR, HR variability, walking HR, heartbeat series, oxygen saturation, body temperature, blood pressure, respiratory rate, VO2 max)
+	•	Nutrition (e.g. identifiers regarding diet, water intake)
+	•	Mindfulness &amp; Sleep (e.g. mindful session, sleep analysis)
+	•	Audio Exposure (e.g. audio exposure event, environmental audio exposure, headphone audio exposure)
+	•	UV Exposure
+	•	Self-Care (e.g. toothbrushing)
+	•	Workout type identifier, workout route identifier
+	•	Apple Health Clinical Records (e.g. clinical visits, blood pressure, lab tests, medications, procedures, immunizations, conditions)
+
+If available we may query these data from a timepoint prior to your onboarding to help establish baseline metrics.
+</string>
 			<key>Content</key>
-			<string>Information about your team&apos;s use of data. Additional content.</string>
+			<string>Your contact information (e.g. name, email address, phone number and zip code) and demographic information (e.g. age, gender, height, and weight) will be collected upon the start of the program.
+
+Additional data may be collected via Apple’s Health Kit from your smartphone and/or connected wearables such as a smartwatch with your permission:
+
+	•	Sensor information  (e.g. accelerometer, gyroscope, heart rate)
+	•	Device metadata (e.g. Timezone, device operating system version, on/off wrist status)
+	•	Activity (e.g step count, distance walking/running, stride length, passive 6MWT, distance cycling, wheelchair push count, distance wheelchair, swimming stroke count, distance swimming, distance downhill snow sports, basal energy burned, active energy burned, flights climbed, Nike fuel, Apple exercise time, Apple stand time, Apple stand hours)
+	•	Body Measures (e.g. height, weight, BMI, lean body mass, body fat percentage, waist circumference)
+	•	Vital Signs (e.g. heart rate, low or high HR event, irregular heart rate event, resting HR, HR variability, walking HR, heartbeat series, oxygen saturation, body temperature, blood pressure, respiratory rate, VO2 max)
+	•	Nutrition (e.g. identifiers regarding diet, water intake)
+	•	Mindfulness &amp; Sleep (e.g. mindful session, sleep analysis)
+	•	Audio Exposure (e.g. audio exposure event, environmental audio exposure, headphone audio exposure)
+	•	UV Exposure
+	•	Self-Care (e.g. toothbrushing)
+	•	Workout type identifier, workout route identifier
+	•	Apple Health Clinical Records (e.g. clinical visits, blood pressure, lab tests, medications, procedures, immunizations, conditions)
+
+If available we may query these data from a timepoint prior to your onboarding to help establish baseline metrics.
+</string>
 		</dict>
 		<key>TimeCommitment</key>
 		<dict>
 			<key>Title</key>
-			<string>Time Commitment</string>
+			<string>Participant Risks and Discomforts</string>
 			<key>Summary</key>
-			<string>Information about the expected time commitment per app participant.</string>
+			<string>We anticipate this program to contain minimal risks to the participants.
+This program involves the following additional risks, and possible inconveniences: Your health information related to this program may be used or disclosed in connection with this program, including, but not limited to name, email, gender, ethnicity, and previous medical and surgical treatments as described in the Confidentiality section above. Although we will take steps to maintain the confidentiality of your Study Data, complete confidentiality cannot be assured. By law, we are obligated to report any data breach.
+</string>
 			<key>Content</key>
-			<string>Information about the expected time commitment per app participant. Additional content.</string>
+			<string>We anticipate this program to contain minimal risks to the participants.
+This program involves the following additional risks, and possible inconveniences: Your health information related to this program may be used or disclosed in connection with this program, including, but not limited to name, email, gender, ethnicity, and previous medical and surgical treatments as described in the Confidentiality section above. Although we will take steps to maintain the confidentiality of your Study Data, complete confidentiality cannot be assured. By law, we are obligated to report any data breach.
+</string>
 		</dict>
 		<key>StudySurvey</key>
 		<dict>
 			<key>Title</key>
-			<string>Study Survey</string>
+			<string>Anticipated Benefits</string>
 			<key>Summary</key>
-			<string>Information about any survey(s) in the app.</string>
+			<string>You will be financially compensated for your participation in this study.
+</string>
 			<key>Content</key>
-			<string>Information about any survey(s) in the app. Additional content.</string>
+			<string>You will be financially compensated for your participation in this study.
+</string>
 		</dict>
 		<key>StudyTasks</key>
 		<dict>
 			<key>Title</key>
-			<string>Study Tasks</string>
+			<string>Participant&apos;s Rights</string>
 			<key>Summary</key>
-			<string>Information about any task(s) in the app.</string>
+			<string>You should not feel obligated to agree to participate.  Your questions should be answered clearly and to your satisfaction.  
+ 
+You will be told of any important new information that is learned during the course of this program, which might affect your condition or your willingness to continue participation in this program.
+ 
+You have the right to refuse to answer particular questions.
+</string>
 			<key>Content</key>
-			<string>Information about any task(s) in the app. Additional content.</string>
+			<string>You should not feel obligated to agree to participate.  Your questions should be answered clearly and to your satisfaction.  
+ 
+You will be told of any important new information that is learned during the course of this program, which might affect your condition or your willingness to continue participation in this program.
+ 
+You have the right to refuse to answer particular questions.
+</string>
 		</dict>
 		<key>Withdrawing</key>
 		<dict>
 			<key>Title</key>
-			<string>Withdrawing</string>
+			<string>Inquiries</string>
 			<key>Summary</key>
-			<string>What should your study participants know about the withdrawing process of your study?</string>
+			<string>Any questions about the Digital-PD study are welcome. If you have any doubts or questions, please ask us for further explanation.  Our contact information is
+Email: coopermj@stanford.edu
+Phone number: 555-555-5555
+</string>
 			<key>Content</key>
-			<string>What should your study participants know about the withdrawing process of your study? Additional content.</string>
+			<string>Any questions about the Digital-PD study are welcome. If you have any doubts or questions, please ask us for further explanation.  Our contact information is
+Email: coopermj@stanford.edu
+Phone number: 555-555-5555
+</string>
 		</dict>
 	</dict>
 	<key>Onboarding</key>
 	<array>
 		<dict>
 			<key>Title</key>
-			<string>First Title</string>
+			<string>Active Professional Development</string>
 			<key>Description</key>
-			<string>Lorem Ipsum is simply dummy text of the printing and typesetting industry</string>
+			<string>Meeting Professionals Where They Are</string>
 			<key>Logo</key>
-			<string>1️⃣</string>
+			<string>👨🏽‍💻</string>
 		</dict>
 		<dict>
 			<key>Title</key>
-			<string>Second Title</string>
+			<string>Passive Analytics</string>
 			<key>Description</key>
-			<string>Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</string>
+			<string>Background Analysis of Biometric Data Enhances Recommendations</string>
 			<key>Logo</key>
-			<string>2️⃣</string>
+			<string>🧬</string>
 		</dict>
 		<dict>
 			<key>Title</key>
-			<string>Third Title</string>
+			<string>Mobile Solution</string>
 			<key>Description</key>
-			<string>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</string>
+			<string>Professional Development Lives in Your Pocket</string>
 			<key>Logo</key>
-			<string>3️⃣</string>
+			<string>📱</string>
 		</dict>
 	</array>
 </dict>

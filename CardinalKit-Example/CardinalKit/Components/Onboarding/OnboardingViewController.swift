@@ -107,7 +107,9 @@ struct OnboardingViewController: UIViewControllerRepresentable {
         let introSteps: [ORKStep] = [consentStep, reviewConsentStep]
         
         // and steps regarding login / security
-        let emailVerificationSteps = loginSteps + [passcodeStep, healthDataStep, healthRecordsStep, completionStep]
+        let emailVerificationSteps = loginSteps// + [passcodeStep, healthDataStep, healthRecordsStep, completionStep]
+//        let emailVerificationSteps = loginSteps + [healthDataStep, completionStep]
+
         
         // guide the user through ALL steps
         let fullSteps = introSteps + emailVerificationSteps

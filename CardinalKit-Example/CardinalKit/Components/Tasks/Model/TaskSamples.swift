@@ -59,47 +59,63 @@ struct TaskSamples {
         
         // Instruction step
         let instructionStep = ORKInstructionStep(identifier: "IntroStep")
-        instructionStep.title = "Patient Questionnaire"
-        instructionStep.text = "This information will help your doctors keep track of how you feel and how well you are able to do your usual activities. If you are unsure about how to answer a question, please give the best answer you can and make a written comment beside your answer."
+        instructionStep.title = "Experience Sampling Questionnaire"
+        instructionStep.text = "This information will give us information about your mental and emotional state at various times throughout your workday, so that professional development activities can be most effectively administered."
         
         steps += [instructionStep]
         
-        //In general, would you say your health is:
-        let healthScaleAnswerFormat = ORKAnswerFormat.scale(withMaximumValue: 5, minimumValue: 1, defaultValue: 3, step: 1, vertical: false, maximumValueDescription: "Excellent", minimumValueDescription: "Poor")
-        let healthScaleQuestionStep = ORKQuestionStep(identifier: "HealthScaleQuestionStep", title: "Question #1", question: "In general, would you say your health is:", answer: healthScaleAnswerFormat)
+        // OUTCOME 1: Belonging.
         
-        steps += [healthScaleQuestionStep]
+        // Question 1.1 - Sliding Scale of Belonging
+        let belongingAnswer = ORKScaleAnswerFormat(maximumValue: 7, minimumValue: 1, defaultValue: 4, step: 1)
+        let belongingStep = ORKQuestionStep(identifier: "belongingQuestion", title: "Experience Sampling", question: "I feel like I belong in this space.", answer: belongingAnswer)
         
-        let textChoices = [
-            ORKTextChoice(text: "Yes, Limited A lot", value: 0 as NSCoding & NSCopying & NSObjectProtocol),
-            ORKTextChoice(text: "Yes, Limited A Little", value: 1 as NSCoding & NSCopying & NSObjectProtocol),
-            ORKTextChoice(text: "No, Not Limited At All", value: 2 as NSCoding & NSCopying & NSObjectProtocol)
-        ]
-        let textChoiceAnswerFormat = ORKAnswerFormat.choiceAnswerFormat(with: .singleChoice, textChoices: textChoices)
-        let textStep = ORKQuestionStep(identifier: "TextStep", title: "Daily Activities", question: "MODERATE ACTIVITIES, such as moving a table, pushing a vacuum cleaner, bowling, or playing golf:", answer: textChoiceAnswerFormat)
+        steps += [belongingStep]
         
-        steps += [textStep]
+        // Question 1.2 - Sliding Scale of Connection to Coworkers
+        let coworkerConnectionAnswer = ORKScaleAnswerFormat(maximumValue: 7, minimumValue: 1, defaultValue: 4, step: 1)
+        let coworkerConnectionStep = ORKQuestionStep(identifier: "corowkerConnectionQuestion", title: "Experience Sampling", question: "I feel connected to my co-workers.", answer: coworkerConnectionAnswer)
         
+        steps += [coworkerConnectionStep]
         
-        let formItem = ORKFormItem(identifier: "FormItem1", text: "MODERATE ACTIVITIES, such as moving a table, pushing a vacuum cleaner, bowling, or playing golf:", answerFormat: textChoiceAnswerFormat)
-        let formItem2 = ORKFormItem(identifier: "FormItem2", text: "Climbing SEVERAL flights of stairs:", answerFormat: textChoiceAnswerFormat)
-        let formStep = ORKFormStep(identifier: "FormStep", title: "Daily Activities", text: "The following two questions are about activities you might do during a typical day. Does YOUR HEALTH NOW LIMIT YOU in these activities? If so, how much?")
-        formStep.formItems = [formItem, formItem2]
+        // OUTCOME 2: Stress
         
-        steps += [formStep]
+        // Question 2.1 - Sliding Scale of Stress
+        let stressAnswer = ORKScaleAnswerFormat(maximumValue: 7, minimumValue: 1, defaultValue: 4, step: 1)
+        let stressStep = ORKQuestionStep(identifier: "stressQuestion", title: "Experience Sampling", question: "I currently feel stressed.", answer: stressAnswer)
         
-        let booleanAnswer = ORKBooleanAnswerFormat(yesString: "Yes", noString: "No")
-        let booleanQuestionStep = ORKQuestionStep(identifier: "QuestionStep", title: nil, question: "In the past four weeks, did you feel limited in the kind of work that you can accomplish?", answer: booleanAnswer)
+        steps += [stressStep]
         
-        steps += [booleanQuestionStep]
+        // Question 2.2 - Sliding Scale of Overwhelmed
+        let overwhelmedAnswer = ORKScaleAnswerFormat(maximumValue: 7, minimumValue: 1, defaultValue: 4, step: 1)
+        let overwhelmedStep = ORKQuestionStep(identifier: "overwhelmedQuestion", title: "Experience Sampling", question: "I currently feel overwhelmed.", answer: overwhelmedAnswer)
         
-        //SUMMARY
-        let summaryStep = ORKCompletionStep(identifier: "SummaryStep")
-        summaryStep.title = "Thank you."
-        summaryStep.text = "We appreciate your time."
+        steps += [overwhelmedStep]
         
-        steps += [summaryStep]
+        // OUTCOME 3: Environmental Sttitudes
         
-        return ORKOrderedTask(identifier: "SurveyTask-Assessment", steps: steps)
+        // Question 3.1 - Sliding Scale of Caring about Environment
+        let environmentalAttitudesAnswer = ORKScaleAnswerFormat(maximumValue: 7, minimumValue: 1, defaultValue: 4, step: 1)
+        let environmentalAttitudesStep = ORKQuestionStep(identifier: "environmentalAttitudesQuestion", title: "Experience Sampling", question: "I care about the wellbeing of the environment I occupy.", answer: environmentalAttitudesAnswer)
+        
+        steps += [environmentalAttitudesStep]
+        
+        // Questoin 3.2 - Sliding Scale of Environmental Attunement
+        let environmentalAttunementAnswer = ORKScaleAnswerFormat(maximumValue: 7, minimumValue: 1, defaultValue: 4, step: 1)
+        let environmentalAttunementStep = ORKQuestionStep(identifier: "environmentalAttunementQuestion", title: "Experience Sampling", question: "I feel attuned to my environment.", answer: environmentalAttunementAnswer)
+        
+        steps += [environmentalAttunementStep]
+        
+        // OUTCOME 4: Creativity
+        
+        // Question 4.1 - Text Box for Creativity (will be evaluated by coders after the study)
+        let creativityAnswer = ORKTextAnswerFormat()
+        let creativityStep = ORKQuestionStep(identifier: "creativityQuestion", title: "Experience Sampling", question: "If you have seen a problem in a new way since your last experience sampling survey, explain in the box below.", answer: creativityAnswer)
+        
+        steps += [creativityStep]
+        
+        let task = ORKNavigableOrderedTask(identifier: "SurveyTask-Assessment", steps: steps)
+        
+        return task
     }()
 }

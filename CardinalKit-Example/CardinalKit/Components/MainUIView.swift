@@ -32,9 +32,9 @@ struct MainUIView: View {
                     Text("Schedule")
                 }
                 
-                CareTeamViewControllerRepresentable().tabItem {
+                TeamBiosView().tabItem {
                     Image("tab_care").renderingMode(.template)
-                    Text("Contact")
+                    Text("Your Team")
                 }
             }
 
