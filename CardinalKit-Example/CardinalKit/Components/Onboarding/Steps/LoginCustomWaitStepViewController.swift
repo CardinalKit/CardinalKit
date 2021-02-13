@@ -75,7 +75,7 @@ class LoginCustomWaitStepViewController: ORKStepViewController {
         let backItem = UIBarButtonItem()
         backItem.title = "wrong email?"
         
-        self.navigationItem.backBarButtonItem = backItem 
+        self.navigationItem.backBarButtonItem = backItem
     }
     
     @IBAction func wrongEmail(_ sender: UIButton) {

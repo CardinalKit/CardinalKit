@@ -107,10 +107,79 @@ struct OnboardingViewController: UIViewControllerRepresentable {
         let introSteps: [ORKStep] = [consentStep, reviewConsentStep]
         
         // and steps regarding login / security
-        let emailVerificationSteps = loginSteps + [passcodeStep, healthDataStep, healthRecordsStep, completionStep]
+        let emailVerificationSteps = loginSteps + [passcodeStep]
         
+        var onbardingSurveySteps = [ORKStep]()
+        let answerFormatEmail = ORKAnswerFormat.emailAnswerFormat()
+                let stringAnswerFormat = ORKTextAnswerFormat()
+                let numberAnswerFormat = ORKNumericAnswerFormat(style: .integer, unit: nil, minimum: 18 as NSNumber, maximum: 100 as NSNumber)
+
+                // Question 1 is getting name, email, and age
+                let AboutYouFormItem = ORKFormItem(sectionTitle: "Personal information")
+                let firstNameFormItem = ORKFormItem(identifier: "RegistrationForm-FirstName", text: "First Name", answerFormat: stringAnswerFormat)
+                let lastNameFormItem = ORKFormItem(identifier: "RegistrationForm-LastName", text: "Last Name", answerFormat: stringAnswerFormat)
+                let ageFromItem = ORKFormItem(identifier: "RegistrationForm-Age", text: "Age", answerFormat: numberAnswerFormat)
+                let emailFormItem = ORKFormItem(identifier: "RegistrationForm-Email", text: "Email", answerFormat: answerFormatEmail)
+                // registration form
+                let formStep = ORKFormStep(identifier: "RegistrationForm", title: "About you", text: "Before we get started, tell us a little bit about yourself")
+                formStep.formItems = [AboutYouFormItem, firstNameFormItem, lastNameFormItem, ageFromItem, emailFormItem]
+        onbardingSurveySteps += [formStep]
+
+                // Question 2 is asking about skin type (oily, combination, dry)
+                let skinTypes = [
+                  ORKTextChoice(text: "Oily", value: 0 as NSNumber),
+                  ORKTextChoice(text: "Combination", value: 1 as NSNumber),
+                  ORKTextChoice(text: "Dry", value: 2 as NSNumber)
+                ]
+                let skinTypeAnswerFormat: ORKTextChoiceAnswerFormat = ORKAnswerFormat.choiceAnswerFormat(with: .singleChoice, textChoices: skinTypes)
+                let skinTypeQuestionStep = ORKQuestionStep(identifier: "SkinTypeQuestionStep", title: "Skin Type", question: "How would you describe your skin?", answer: skinTypeAnswerFormat)
+        onbardingSurveySteps += [skinTypeQuestionStep]
+
+                // Question 3 is aking about main concern (clogged pores, control breakouts, acne scars)
+                let skinIssues = [
+                  ORKTextChoice(text: "Control breakouts", value: 0 as NSNumber),
+                  ORKTextChoice(text: "Clean clogged pores", value: 1 as NSNumber),
+                  ORKTextChoice(text: "Reduce acne scars", value: 2 as NSNumber),
+                  ORKTextChoice(text: "Fade dark spots", value: 3 as NSNumber),
+                  ORKTextChoice(text: "Fight wrinkles", value: 4 as NSNumber),
+                  ORKTextChoice(text: "Reduce fine lines", value: 5 as NSNumber),
+                ]
+                let skinConcernAnswerFormat: ORKTextChoiceAnswerFormat = ORKAnswerFormat.choiceAnswerFormat(with: .multipleChoice, textChoices: skinIssues)
+                let skinIssuesQuestionStep = ORKQuestionStep(identifier: "SkinIssuesQuestionStep", title: "Goals", question: "What would you like to improve about your skin?", answer: skinConcernAnswerFormat)
+        onbardingSurveySteps += [skinIssuesQuestionStep]
+
+                // Question 4 is asking about allergies
+                let booleanAnswer = ORKBooleanAnswerFormat(yesString: "Yes", noString: "No")
+                let booleanStep = ORKQuestionStep(identifier: "Allergies-Boolean", title: "Allergies", question: "Do you have any allergies?", answer: booleanAnswer)
+                booleanStep.isOptional = true
+        onbardingSurveySteps += [booleanStep]
+
+                // if yes then we ask the user to enter them in a text box
+                let allergiesAnswerFormat = ORKTextAnswerFormat(maximumLength: 200)
+                allergiesAnswerFormat.multipleLines = true
+                let allergiesQuestionStep = ORKQuestionStep(identifier: "AllergiesQuestionStep", title: "Allergies", question: "Please describe your allergies.", answer: allergiesAnswerFormat)
+        onbardingSurveySteps += [allergiesQuestionStep]
+
+                // Question 5 is asking to upload a photo
+                let instructionStep = ORKInstructionStep(identifier: "imageCaptureInstructionStep")
+                instructionStep.title = NSLocalizedString("Time to take a selfie", comment: "")
+                instructionStep.text = "Please take a photo of yourself, position your face as indicated and make sure you have good lighting."
+        let handSolidImage = UIImage(systemName: "person.fill")!
+                instructionStep.image = handSolidImage.withRenderingMode(.alwaysTemplate)
+                instructionStep.isOptional = false
+                let imageCaptureStep = ORKImageCaptureStep(identifier: "imageCaptureStep")
+                imageCaptureStep.title = NSLocalizedString("Image Capture", comment: "")
+                imageCaptureStep.isOptional = true
+                imageCaptureStep.accessibilityInstructions = NSLocalizedString("Your instructions for capturing the image", comment: "")
+                imageCaptureStep.accessibilityHint = NSLocalizedString("Captures the image visible in the preview", comment: "")
+
+                imageCaptureStep.templateImage = UIImage(systemName: "person.fill")!
+
+                imageCaptureStep.templateImageInsets = UIEdgeInsets(top: 0.05, left: 0.05, bottom: 0.05, right: 0.05)
+        onbardingSurveySteps += [instructionStep, imageCaptureStep]
+
         // guide the user through ALL steps
-        let fullSteps = introSteps + emailVerificationSteps
+        let fullSteps = introSteps + emailVerificationSteps + onbardingSurveySteps + [completionStep]
         
         // unless they have already gotten as far as to enter an email address
         var stepsToUse = fullSteps
@@ -121,12 +190,19 @@ struct OnboardingViewController: UIViewControllerRepresentable {
         /* **************************************************************
         * and SHOW the user these steps!
         **************************************************************/
+        // create navigable rule for allergy question
+        let resultBooleanSelector = ORKResultSelector(resultIdentifier: booleanStep.identifier)
+        let predicate = ORKResultPredicate.predicateForBooleanQuestionResult(with: resultBooleanSelector, expectedAnswer: false)
+        let navigableRule = ORKPredicateStepNavigationRule(resultPredicatesAndDestinationStepIdentifiers: [(resultPredicate: predicate, destinationStepIdentifier: instructionStep.identifier)])
+               
         // create a task with each step
-        let orderedTask = ORKOrderedTask(identifier: "StudyOnboardingTask", steps: stepsToUse)
+        let orderedTask = ORKNavigableOrderedTask(identifier: "StudyOnboardingTask", steps: stepsToUse)
         
         // wrap that task on a view controller
         let taskViewController = ORKTaskViewController(task: orderedTask, taskRun: nil)
         taskViewController.delegate = context.coordinator // enables `ORKTaskViewControllerDelegate` below
+        
+        orderedTask.setNavigationRule(navigableRule, forTriggerStepIdentifier: booleanStep.identifier)
         
         // & present the VC!
         return taskViewController

@@ -15,7 +15,7 @@ struct PasscodeViewController: UIViewControllerRepresentable {
     
     func makeCoordinator() -> Coordinator {
         Coordinator()
-    } 
+    }
 
     typealias UIViewControllerType = ORKPasscodeViewController
     
