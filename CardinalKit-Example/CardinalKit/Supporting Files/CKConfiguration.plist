@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Study Title</key>
+	<string>Hygeia</string>
+	<key>Team Name</key>
+	<string>AI based skin care tracker</string>
+	<key>Email</key>
+	<string>contact@domain.com</string>
+	<key>Phone</key>
+	<string>123-456-7890</string>
+	<key>Copyright</key>
+	<string>Made at Stanford with ❤️</string>
+	<key>Website</key>
+	<string>https://cardinalkit.org</string>
+	<key>Tint Color</key>
+	<string>#b6133f</string>
+	<key>Primary Color</key>
+	<string>#387ff2</string>
+	<key>Review Consent Step Text</key>
+	<string>Review Consent Form</string>
+	<key>Reason for Consent Text</key>
+	<string>Consent to join the Developer Health Research Study.</string>
+	<key>Consent File Name</key>
+	<string>My Consent Form</string>
+	<key>Passcode Text</key>
+	<string>Now you will create a passcode to identify yourself to the app and protect access to information you&apos;ve entered.</string>
+	<key>Passcode Type</key>
+	<string>4</string>
+	<key>Completion Step Title</key>
+	<string>Welcome aboard.</string>
+	<key>Completion Step Text</key>
+	<string>All done! Our AI will review this information and create a customized skincare routine for you!</string>
+	<key>Failed Login Title</key>
+	<string>Unable to Login 😔</string>
+	<key>Failed Login Text</key>
+	<string>Please try again in five minutes.</string>
+	<key>Health Permissions Title</key>
+	<string>Permission to read Activity Data 🏃🏽‍♀️</string>
+	<key>Health Permissions Text</key>
+	<string>Use this text to provide an explanation to your app participants about what activity data you intend to read from the Health app and why. This sample will read step count, distance, heart rate, and flights climbed data.</string>
+	<key>Health Records</key>
+	<dict>
+		<key>Enabled</key>
+		<true/>
+		<key>Permissions Text</key>
+		<string>Use this text to provide an explanation to your app participants about what electronic health records (EHR) you intend to collect from the Health app and why. This sample will read all available records (for which permission is granted).</string>
+		<key>Permissions Title</key>
+		<string>Permission to read Health Records 🏥</string>
+	</dict>
+	<key>Background Read Frequency</key>
+	<string>immediate</string>
+	<key>Login-Sign-In-With-Apple</key>
+	<dict>
+		<key>Enabled</key>
+		<false/>
+		<key>Title</key>
+		<string>Sign in with Apple</string>
+		<key>Text</key>
+		<string>Sign in using your Apple ID is fast and easy, and Apple will not track any of your activities.</string>
+	</dict>
+	<key>Login-Passwordless</key>
+	<false/>
+	<key>Login Step Title</key>
+	<string>Almost done!</string>
+	<key>Login Step Text</key>
+	<string>We need to confirm your email address and send you a copy of the consent you just signed.</string>
+	<key>Withdrawal Instruction Title</key>
+	<string>Are you sure you want to withdraw?</string>
+	<key>Withdrawal Instruction Text</key>
+	<string>Withdrawing from the study will reset the app to the state it was in prior to you originally joining the study.</string>
+	<key>Withdraw Title</key>
+	<string>We appreciate your time.</string>
+	<key>Withdraw Text</key>
+	<string>Thank you for your contribution to this study. We are sorry that you could not continue. The app will now close.</string>
+	<key>Passcode On Return Text</key>
+	<string>Welcome back!</string>
+	<key>Consent Title</key>
+	<string>Research Health Study Consent Form</string>
+	<key>Use CareKit</key>
+	<true/>
+	<key>HealthKit Data to Read</key>
+	<array>
+		<string>StepCount</string>
+		<string>DistanceWalkingRunning</string>
+		<string>FlightsClimbed</string>
+		<string>HeartRate</string>
+	</array>
+	<key>Consent Form</key>
+	<dict>
+		<key>FreedomConsent</key>
+		<dict>
+			<key>Content</key>
+			<string>I agree to voluntarily participate in the Hygeia program. I understand that I am free to deny any consent if I so desire, both now and at any point in the program. I acknowledge that I have read this form in its entirety or it has been read to me, and I understand my responsibility in the Hygia program in which I will be engaged. I accept the risks, rules and regulations set forth. Knowing these, and having had an opportunity to ask questions that have been answered to my satisfaction, I consent to participate in this Hygia program. </string>
+			<key>Summary</key>
+			<string>I agree to voluntarily participate in the Hygeia program. I understand that I am free to deny any consent if I so desire, both now and at any point in the program. I acknowledge that I have read this form in its entirety or it has been read to me, and I understand my responsibility in the Hygia program in which I will be engaged. I accept the risks, rules and regulations set forth. Knowing these, and having had an opportunity to ask questions that have been answered to my satisfaction, I consent to participate in this Hygia program. </string>
+			<key>Title</key>
+			<string>Freedom of Consent</string>
+		</dict>
+		<key>Overview</key>
+		<dict>
+			<key>Title</key>
+			<string>Hi there! 👋🏽</string>
+			<key>Summary</key>
+			<string>Hygia is a tool designed to help you improve your skin condition. It is fully personalized and private!</string>
+			<key>Content</key>
+			<string>Hygia is a tool designed to help you improve your skin condition. It is fully personalized and private!</string>
+		</dict>
+		<key>Custom</key>
+		<dict>
+			<key>Title</key>
+			<string>Participation</string>
+			<key>Summary</key>
+			<string>Your participation in this program is entirely voluntary.  You can decide to participate now, and withdraw your consent later and stop being in the program without any loss of benefits or medical care you are entitled to.  </string>
+			<key>Content</key>
+			<string>Your participation in this program is entirely voluntary.  You can decide to participate now, and withdraw your consent later and stop being in the program without any loss of benefits or medical care you are entitled to.  </string>
+		</dict>
+		<key>TimeCommitment</key>
+		<dict>
+			<key>Title</key>
+			<string>Time Commitment</string>
+			<key>Summary</key>
+			<string>This is a fully remote program administered on your mobile device. Your participation in this program will last for XYZ
+</string>
+			<key>Content</key>
+			<string>This is a fully remote program administered on your mobile device. Your participation in this program will last for XYZ
+</string>
+		</dict>
+		<key>Privacy</key>
+		<dict>
+			<key>Title</key>
+			<string>Confidentiality</string>
+			<key>Summary</key>
+			<string>We take confidentiality seriously.  Only Hygia will have access to identifiable health information.  Information and data is otherwise stored and presented in a de-identified fashion.  
+Data collected from or about you as part of the Hygia Program that can directly identify you (including your name and address) is called “Protected Personal Information.”  Your Protected Personal Information will be held confidential by the staff and access limited to those who need access in order to administer and conduct the program activities (eg., dermatologist). 
+ 
+Your remaining data will be separated from your Protected Personal Information and will be assigned a key code (we call this “Coded Study Data”). Information about the Coded Data will be kept in a secure location and access will be limited as described in this consent.
+ 
+Finally, aggregated, non-identifiable data, may be reviewed for quality assurance and to evaluate effectiveness of the program. These data may be shared with your healthcare institution, including your providers, Hygia, or other organizations supporting this program. </string>
+			<key>Content</key>
+			<string>We take confidentiality seriously.  Only Hygia will have access to identifiable health information.  Information and data is otherwise stored and presented in a de-identified fashion.  
+Data collected from or about you as part of the Hygia Program that can directly identify you (including your name and address) is called “Protected Personal Information.”  Your Protected Personal Information will be held confidential by the staff and access limited to those who need access in order to administer and conduct the program activities (eg., dermatologist). 
+ 
+Your remaining data will be separated from your Protected Personal Information and will be assigned a key code (we call this “Coded Study Data”). Information about the Coded Data will be kept in a secure location and access will be limited as described in this consent.
+ 
+Finally, aggregated, non-identifiable data, may be reviewed for quality assurance and to evaluate effectiveness of the program. These data may be shared with your healthcare institution, including your providers, Hygia, or other organizations supporting this program. </string>
+		</dict>
+		<key>DataGathering</key>
+		<dict>
+			<key>Title</key>
+			<string>Monitoring &amp; Data Collection
+</string>
+			<key>Summary</key>
+			<string>Your contact information (e.g. name, email address, phone number and zip code) and demographic information (e.g. age, gender, height, and weight) will be collected upon the start of the Hygia program.  
+Additional data may be collected via Apple’s Health Kit from your smartphone and/or connected wearables such as a smartwatch with your permission:  (1) Medical history (medical history/surgical history) either through surveys or from your medical record (2) Self-reported medical history, surgical history and current symptom information (e.g. medical diagnosis, test results, medications, symptoms, surgeries)
+If available we may query these data from a timepoint prior to your onboarding to help establish a baseline. 
+</string>
+			<key>Content</key>
+			<string>Your contact information (e.g. name, email address, phone number and zip code) and demographic information (e.g. age, gender, height, and weight) will be collected upon the start of the Hygia program.  
+Additional data may be collected via Apple’s Health Kit from your smartphone and/or connected wearables such as a smartwatch with your permission:  (1) Medical history (medical history/surgical history) either through surveys or from your medical record (2) Self-reported medical history, surgical history and current symptom information (e.g. medical diagnosis, test results, medications, symptoms, surgeries)
+If available we may query these data from a timepoint prior to your onboarding to help establish a baseline. 
+</string>
+		</dict>
+		<key>DataUse</key>
+		<dict>
+			<key>Title</key>
+			<string>Data Storage</string>
+			<key>Summary</key>
+			<string>The data collected to monitor your health status will be stored on a secure HIPAA compliant server and Hygia  will follow HIPAA guidelines whenever interacting with the data. </string>
+			<key>Content</key>
+			<string>The data collected to monitor your health status will be stored on a secure HIPAA compliant server and Hygia  will follow HIPAA guidelines whenever interacting with the data. </string>
+		</dict>
+		<key>StudySurvey</key>
+		<dict>
+			<key>Title</key>
+			<string>Benefits to be Expected </string>
+			<key>Summary</key>
+			<string>Improvements in skin condition over a few months. 
+</string>
+			<key>Content</key>
+			<string>Improvements in skin condition over a few months. </string>
+		</dict>
+		<key>StudyTasks</key>
+		<dict>
+			<key>Title</key>
+			<string>Participant&apos;s Rights</string>
+			<key>Summary</key>
+			<string>You should not feel obligated to agree to participate.  Your questions should be answered clearly and to your satisfaction.  
+ 
+You will be told of any important new information that is learned during the course of this program , which might affect your condition or your willingness to continue participation in this program. You have the right to refuse to answer particular questions.</string>
+			<key>Content</key>
+			<string>You should not feel obligated to agree to participate.  Your questions should be answered clearly and to your satisfaction.  You have the right to refuse to answer particular questions.
+
+You will be told of any important new information that is learned during the course of this program , which might affect your condition or your willingness to continue participation in this program.
+</string>
+		</dict>
+		<key>Withdrawing</key>
+		<dict>
+			<key>Title</key>
+			<string>Inquiries</string>
+			<key>Summary</key>
+			<string>Any questions about the Hygia are welcome. If you have any doubts or questions, please ask us for further explanation.  Our contact information is
+Email: hygia@hygia.com
+Phone number: (000)-000-0000
+</string>
+			<key>Content</key>
+			<string>Any questions about the Hygia are welcome. If you have any doubts or questions, please ask us for further explanation.  Our contact information is
+Email: hygia@hygia.com
+Phone number: (000)-000-0000
+</string>
+		</dict>
+	</dict>
+	<key>Onboarding</key>
+	<array>
+		<dict>
+			<key>Title</key>
+			<string>Data Collection</string>
+			<key>Description</key>
+			<string>Upload a photo of your skin and tell us about your goals. Don&apos;t worry, your data never leaves your phone and remains private! </string>
+			<key>Logo</key>
+			<string>1️⃣</string>
+		</dict>
+		<dict>
+			<key>Title</key>
+			<string>Machine Learning</string>
+			<key>Description</key>
+			<string>Our algorithm will analyze your results are prepare a skincare routine made exclusively for you!</string>
+			<key>Logo</key>
+			<string>2️⃣</string>
+		</dict>
+		<dict>
+			<key>Title</key>
+			<string>Regular Check-ins</string>
+			<key>Description</key>
+			<string>Use our bi-weekly survey to let us know about your skin evolution, we&apos;ll update your routine to always meet your needs. </string>
+			<key>Logo</key>
+			<string>3️⃣</string>
+		</dict>
+	</array>
+</dict>
+</plist>
