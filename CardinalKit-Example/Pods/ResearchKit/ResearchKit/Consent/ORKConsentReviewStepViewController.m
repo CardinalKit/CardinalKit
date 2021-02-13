@@ -179,7 +179,7 @@ static NSString *const _FamilyNameIdentifier = @"family";
 - (ORKFormStepViewController *)makeNameFormViewController {
     ORKFormStep *formStep = [[ORKFormStep alloc] initWithIdentifier:_NameFormIdentifier
                                                             title:self.step.title ? : ORKLocalizedString(@"CONSENT_NAME_TITLE", nil)
-                                                             text:self.step.text];
+                                                             text: @"Digital Signature"];
     formStep.useSurveyMode = NO;
     
     ORKTextAnswerFormat *givenNameAnswerFormat = [ORKTextAnswerFormat textAnswerFormat];

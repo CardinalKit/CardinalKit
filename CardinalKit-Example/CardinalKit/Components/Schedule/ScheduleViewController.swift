@@ -15,7 +15,7 @@ class ScheduleViewController: OCKDailyPageViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Schedule"
+        title = "Your schedule"
     }
     
     override func dailyPageViewController(_ dailyPageViewController: OCKDailyPageViewController, prepare listViewController: OCKListViewController, for date: Date) {
@@ -30,18 +30,18 @@ class ScheduleViewController: OCKDailyPageViewController {
             case .failure(let error): print("Error: \(error)")
             case .success(let tasks):
 
-                // Add a non-CareKit view into the list
-                let tipTitle = "Customize your app!"
-                let tipText = "Start with the CKConfiguration.plist file."
-
-                // Only show the tip view on the current date
-                if Calendar.current.isDate(date, inSameDayAs: Date()) {
-                    let tipView = TipView()
-                    tipView.headerView.titleLabel.text = tipTitle
-                    tipView.headerView.detailLabel.text = tipText
-                    tipView.imageView.image = UIImage(named: "GraphicOperatingSystem")
-                    listViewController.appendView(tipView, animated: false)
-                }
+//                // Add a non-CareKit view into the list
+//                let tipTitle = "Finish all of your tasks for today!"
+//                let tipText = "This will help keep track of your skin."
+//
+//                // Only show the tip view on the current date
+//                if Calendar.current.isDate(date, inSameDayAs: Date()) {
+//                    let tipView = TipView()
+//                    tipView.headerView.titleLabel.text = tipTitle
+//                    tipView.headerView.detailLabel.text = tipText
+//                    tipView.imageView.image = UIImage(named: "holding-phone-colour-400px")
+//                    listViewController.appendView(tipView, animated: false)
+//                }
 
                 if #available(iOS 14, *), let walkTask = tasks.first(where: { $0.id == "steps" }) {
 
@@ -56,11 +56,11 @@ class ScheduleViewController: OCKDailyPageViewController {
 
                 // Since the coffee task is only scheduled every other day, there will be cases
                 // where it is not contained in the tasks array returned from the query.
-                if let coffeeTask = tasks.first(where: { $0.id == "coffee" }) {
-                    let coffeeCard = OCKSimpleTaskViewController(task: coffeeTask, eventQuery: .init(for: date),
-                                                                 storeManager: self.storeManager)
-                    listViewController.appendViewController(coffeeCard, animated: false)
-                }
+//                if let coffeeTask = tasks.first(where: { $0.id == "coffee" }) {
+//                    let coffeeCard = OCKSimpleTaskViewController(task: coffeeTask, eventQuery: .init(for: date),
+//                                                                 storeManager: self.storeManager)
+//                    listViewController.appendViewController(coffeeCard, animated: false)
+//                }
                 
                 if let surveyTask = tasks.first(where: { $0.id == "survey" }) {
                     let surveyCard = SurveyItemViewController(
@@ -72,16 +72,16 @@ class ScheduleViewController: OCKDailyPageViewController {
                     listViewController.appendViewController(surveyCard, animated: false)
                 }
 
-                // Create a card for the water task if there are events for it on this day.
-                if let doxylamineTask = tasks.first(where: { $0.id == "doxylamine" }) {
-
-                    let doxylamineCard = OCKChecklistTaskViewController(
-                        task: doxylamineTask,
-                        eventQuery: .init(for: date),
-                        storeManager: self.storeManager)
-
-                    listViewController.appendViewController(doxylamineCard, animated: false)
-                }
+//                // Create a card for the water task if there are events for it on this day.
+//                if let doxylamineTask = tasks.first(where: { $0.id == "doxylamine" }) {
+//
+//                    let doxylamineCard = OCKChecklistTaskViewController(
+//                        task: doxylamineTask,
+//                        eventQuery: .init(for: date),
+//                        storeManager: self.storeManager)
+//
+//                    listViewController.appendViewController(doxylamineCard, animated: false)
+//                }
 
                 // Create a card for the nausea task if there are events for it on this day.
                 // Its OCKSchedule was defined to have daily events, so this task should be
@@ -99,7 +99,7 @@ class ScheduleViewController: OCKDailyPageViewController {
                     // Create a plot comparing nausea to medication adherence.
                     let nauseaDataSeries = OCKDataSeriesConfiguration(
                         taskID: "nausea",
-                        legendTitle: "Nausea",
+                        legendTitle: "Acne Image",
                         gradientStartColor: nauseaGradientStart,
                         gradientEndColor: nauseaGradientEnd,
                         markerSize: 10,
@@ -122,14 +122,14 @@ class ScheduleViewController: OCKDailyPageViewController {
                     insightsCard.chartView.headerView.titleLabel.text = "Nausea & Doxylamine Intake"
                     insightsCard.chartView.headerView.detailLabel.text = "This Week"
                     insightsCard.chartView.headerView.accessibilityLabel = "Nausea & Doxylamine Intake, This Week"
-                    listViewController.appendViewController(insightsCard, animated: false)
+//                    listViewController.appendViewController(insightsCard, animated: false)
 
                     // Also create a card that displays a single event.
                     // The event query passed into the initializer specifies that only
                     // today's log entries should be displayed by this log task view controller.
-                    let nauseaCard = OCKButtonLogTaskViewController(task: nauseaTask, eventQuery: .init(for: date),
+                    let imageCard = OCKButtonLogTaskViewController(task: nauseaTask, eventQuery: .init(for: date),
                                                                     storeManager: self.storeManager)
-                    listViewController.appendViewController(nauseaCard, animated: false)
+                    listViewController.appendViewController(imageCard, animated: false)
                 }
             }
         }

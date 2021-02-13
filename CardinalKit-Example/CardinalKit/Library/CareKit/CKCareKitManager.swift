@@ -36,7 +36,7 @@ class CKCareKitManager: NSObject {
     fileprivate func initStore(forceUpdate: Bool = false) {
         if forceUpdate || UserDefaults.standard.object(forKey: Constants.prefCareKitCoreDataInitDate) == nil {
             coreDataStore.populateSampleData()
-            healthKitStore.populateSampleData()
+//            healthKitStore.populateSampleData()
             
             UserDefaults.standard.set(Date(), forKey: Constants.prefCareKitCoreDataInitDate)
         }

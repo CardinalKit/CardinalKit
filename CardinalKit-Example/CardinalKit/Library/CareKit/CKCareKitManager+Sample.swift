@@ -29,9 +29,9 @@ internal extension OCKStore {
         
         let surveyElement = OCKScheduleElement(start: afterLunch, end: nil, interval: DateComponents(day: 1))
         let surveySchedule = OCKSchedule(composing: [surveyElement])
-        var survey = OCKTask(id: "survey", title: "Take a Survey 📝", carePlanUUID: nil, schedule: surveySchedule)
+        var survey = OCKTask(id: "survey", title: "Take your survey", carePlanUUID: nil, schedule: surveySchedule)
         survey.impactsAdherence = true
-        survey.instructions = "You can schedule any ResearchKit survey in your app."
+        survey.instructions = "Answer symptamtic related questions to help keep better track of your skin progression."
         
         /*
          Doxylamine and Nausea DEMO.
@@ -49,7 +49,7 @@ internal extension OCKStore {
         doxylamine.instructions = "Take 25mg of doxylamine when you experience nausea."
 
         let nauseaSchedule = OCKSchedule(composing: [
-            OCKScheduleElement(start: beforeBreakfast, end: nil, interval: DateComponents(day: 2),
+            OCKScheduleElement(start: beforeBreakfast, end: nil, interval: DateComponents(day: 1),
                                text: "Anytime throughout the day", targetValues: [], duration: .allDay)
             ])
 
@@ -59,7 +59,7 @@ internal extension OCKStore {
         nausea.instructions = "Tap the button below anytime you experience nausea."
         /* ---- */
 
-        addTasks([nausea, doxylamine, survey, coffee], callbackQueue: .main, completion: nil)
+        addTasks([survey], callbackQueue: .main, completion: nil)
 
         createContacts()
     }
@@ -104,29 +104,29 @@ internal extension OCKStore {
     
 }
 
-extension OCKHealthKitPassthroughStore {
-
-    internal func populateSampleData() {
-
-        let schedule = OCKSchedule.dailyAtTime(
-            hour: 8, minutes: 0, start: Date(), end: nil, text: nil,
-            duration: .hours(12), targetValues: [OCKOutcomeValue(2000.0, units: "Steps")])
-
-        let steps = OCKHealthKitTask(
-            id: "steps",
-            title: "Daily Steps Goal 🏃🏽‍♂️",
-            carePlanUUID: nil,
-            schedule: schedule,
-            healthKitLinkage: OCKHealthKitLinkage(
-                quantityIdentifier: .stepCount,
-                quantityType: .cumulative,
-                unit: .count()))
-
-        addTasks([steps]) { result in
-            switch result {
-            case .success: print("Added tasks into HealthKitPassthroughStore!")
-            case .failure(let error): print("Error: \(error)")
-            }
-        }
-    }
-}
+//extension OCKHealthKitPassthroughStore {
+//
+//    internal func populateSampleData() {
+//
+//        let schedule = OCKSchedule.dailyAtTime(
+//            hour: 8, minutes: 0, start: Date(), end: nil, text: nil,
+//            duration: .hours(12), targetValues: [OCKOutcomeValue(2000.0, units: "Steps")])
+//
+//        let steps = OCKHealthKitTask(
+//            id: "steps",
+//            title: "Daily Steps Goal 🏃🏽‍♂️",
+//            carePlanUUID: nil,
+//            schedule: schedule,
+//            healthKitLinkage: OCKHealthKitLinkage(
+//                quantityIdentifier: .stepCount,
+//                quantityType: .cumulative,
+//                unit: .count()))
+//
+//        addTasks([steps]) { result in
+//            switch result {
+//            case .success: print("Added tasks into HealthKitPassthroughStore!")
+//            case .failure(let error): print("Error: \(error)")
+//            }
+//        }
+//    }
+//}

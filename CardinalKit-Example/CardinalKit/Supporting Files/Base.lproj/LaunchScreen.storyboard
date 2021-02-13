@@ -16,39 +16,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CKLogo" translatesAutoresizingMaskIntoConstraints="NO" id="kYd-Gy-c9g">
-                                <rect key="frame" x="20" y="373" width="374" height="150"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="150" id="5xE-uK-f9c"/>
-                                </constraints>
-                            </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SBDLogoWhite" translatesAutoresizingMaskIntoConstraints="NO" id="Mvz-9v-0cy">
-                                <rect key="frame" x="50" y="712" width="314" height="150"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="150" id="RDO-NW-Fwe"/>
-                                </constraints>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="appicon.png" translatesAutoresizingMaskIntoConstraints="NO" id="kYd-Gy-c9g">
+                                <rect key="frame" x="86" y="350" width="243" height="196"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" red="0.14901960784313725" green="0.12941176470588234" blue="0.14509803921568626" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Mvz-9v-0cy" secondAttribute="bottom" id="A1K-rM-EOX"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="kYd-Gy-c9g" secondAttribute="trailing" constant="20" id="ChU-Ez-e4W"/>
-                            <constraint firstItem="kYd-Gy-c9g" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="CtZ-8l-0wb"/>
-                            <constraint firstItem="Mvz-9v-0cy" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="DbT-u1-Nld"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Mvz-9v-0cy" secondAttribute="trailing" constant="50" id="K76-Kz-ljE"/>
-                            <constraint firstItem="kYd-Gy-c9g" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="bp7-Bg-3EK"/>
-                            <constraint firstItem="kYd-Gy-c9g" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="krx-oK-OSg"/>
+                            <constraint firstItem="kYd-Gy-c9g" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="FNt-Qx-5zb"/>
+                            <constraint firstItem="kYd-Gy-c9g" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="86" id="JMJ-3h-Moc"/>
+                            <constraint firstItem="kYd-Gy-c9g" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="hKr-6Z-hWV"/>
+                            <constraint firstItem="kYd-Gy-c9g" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="306" id="jGj-l6-YYb"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52.173913043478265" y="375"/>
         </scene>
     </scenes>
     <resources>
-        <image name="CKLogo" width="720" height="360"/>
-        <image name="SBDLogoWhite" width="683" height="569"/>
+        <image name="appicon.png" width="1024" height="1024"/>
     </resources>
 </document>
