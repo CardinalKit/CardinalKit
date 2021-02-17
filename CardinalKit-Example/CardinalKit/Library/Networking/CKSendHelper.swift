@@ -84,6 +84,43 @@ class CKSendHelper {
     }
     
     /**
+     This function updates an array in Firestore!
+    */
+    static func appendCareKitArrayInFirestore(json: [String:Any], collection: String, withIdentifier identifier: String, overwriteRemote: Bool = false, onCompletion: ((Bool, Error?) -> Void)? = nil) {
+        guard let authCollection = CKStudyUser.shared.authCollection else {
+            onCompletion?(false, CKError.unauthorized)
+            return
+        }
+        
+        let db = Firestore.firestore()
+        db.collection(authCollection + collection).document(identifier).setData(["updatedAt": Date()], merge: true)
+        let ref = db.collection(authCollection + collection).document(identifier)
+        if !json.isEmpty {
+            
+            func completion(_ err: Error?) {
+                if let err = err {
+                    print("[appendCareKitArrayInFirestore] sendToFirestore() - error writing document: \(err)")
+                    onCompletion?(false, err)
+                } else {
+                    print("[appendCareKitArrayInFirestore] sendToFirestore() - document successfully written!")
+                    onCompletion?(true, nil)
+                }
+            }
+            
+            if overwriteRemote {
+                ref.updateData([
+                    "revisions": [json]
+                ], completion: completion)
+            } else {
+                ref.updateData([
+                    "revisions": FieldValue.arrayUnion([json])
+                ], completion: completion)
+            }
+            print("[appendCareKitArrayInFirestore] updating revisions with overwriteRemote \(overwriteRemote)")
+        }
+    }
+    
+    /**
      Given a file, use the Firebase SDK to store it in Google Storage.
     */
     static func sendToCloudStorage(_ files: URL, collection: String, withIdentifier identifier: String? = nil) throws {

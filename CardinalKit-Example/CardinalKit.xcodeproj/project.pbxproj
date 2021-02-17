@@ -65,7 +65,7 @@
 		8EA664892593213000B6A45A /* CKSendHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA664882593213000B6A45A /* CKSendHelper.swift */; };
 		8EA664AD2593380D00B6A45A /* SendRecordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA664AC2593380D00B6A45A /* SendRecordsView.swift */; };
 		8EA664B025941A4D00B6A45A /* SurveyItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA664AF25941A4D00B6A45A /* SurveyItemViewController.swift */; };
-		8EA664B2259422E400B6A45A /* CKCareKitRemoteSynchronizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA664B1259422E400B6A45A /* CKCareKitRemoteSynchronizable.swift */; };
+		8EA664B2259422E400B6A45A /* CKCareKitRemoteSyncWithFirestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA664B1259422E400B6A45A /* CKCareKitRemoteSyncWithFirestore.swift */; };
 		8EA664B42594387900B6A45A /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA664B32594387900B6A45A /* Errors.swift */; };
 		8EBE6F9C24B3C0E60093D07C /* AppDelegate+CardinalKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE6F9B24B3C0E60093D07C /* AppDelegate+CardinalKit.swift */; };
 		D253D132250D1BDB00A363E4 /* CKSignInWithAppleStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = D253D131250D1BDB00A363E4 /* CKSignInWithAppleStep.swift */; };
@@ -157,7 +157,7 @@
 		8EA664882593213000B6A45A /* CKSendHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKSendHelper.swift; sourceTree = "<group>"; };
 		8EA664AC2593380D00B6A45A /* SendRecordsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendRecordsView.swift; sourceTree = "<group>"; };
 		8EA664AF25941A4D00B6A45A /* SurveyItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyItemViewController.swift; sourceTree = "<group>"; };
-		8EA664B1259422E400B6A45A /* CKCareKitRemoteSynchronizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKCareKitRemoteSynchronizable.swift; sourceTree = "<group>"; };
+		8EA664B1259422E400B6A45A /* CKCareKitRemoteSyncWithFirestore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKCareKitRemoteSyncWithFirestore.swift; sourceTree = "<group>"; };
 		8EA664B32594387900B6A45A /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		8EBE6F9B24B3C0E60093D07C /* AppDelegate+CardinalKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+CardinalKit.swift"; sourceTree = "<group>"; };
 		CB97C14C759E56B88E4E3941 /* Pods_CardinalKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CardinalKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -404,7 +404,7 @@
 			children = (
 				8E9CDEAC259170AD00C8A228 /* CKCareKitManager.swift */,
 				8E9CDEAE259172C200C8A228 /* CKCareKitManager+Sample.swift */,
-				8EA664B1259422E400B6A45A /* CKCareKitRemoteSynchronizable.swift */,
+				8EA664B1259422E400B6A45A /* CKCareKitRemoteSyncWithFirestore.swift */,
 			);
 			path = CareKit;
 			sourceTree = "<group>";
@@ -661,7 +661,7 @@
 				E29143FC24E74AD100EE97B2 /* LaunchUIView.swift in Sources */,
 				8EA6648725930B6B00B6A45A /* CKHealthRecordsStepViewController.swift in Sources */,
 				8E0A43C0244A4A0400656518 /* PasswordlessLoginStep.swift in Sources */,
-				8EA664B2259422E400B6A45A /* CKCareKitRemoteSynchronizable.swift in Sources */,
+				8EA664B2259422E400B6A45A /* CKCareKitRemoteSyncWithFirestore.swift in Sources */,
 				8EA664AD2593380D00B6A45A /* SendRecordsView.swift in Sources */,
 				8E6E1E28253538CC0024B8DF /* TaskListItemView.swift in Sources */,
 				8E0A43B3244A4A0400656518 /* TaskSamples.swift in Sources */,
@@ -837,7 +837,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "CardinalKit-Example.entitlements";
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = CQRZ4E7K9U;
 				INFOPLIST_FILE = "CardinalKit/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -845,7 +845,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.3.0;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = edu.stanford.cardinalkit;
 				PRODUCT_NAME = "CardinalKit Example";
@@ -863,7 +863,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "CardinalKit-Example.entitlements";
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = CQRZ4E7K9U;
 				INFOPLIST_FILE = "CardinalKit/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -871,7 +871,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.3.0;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = edu.stanford.cardinalkit;
 				PRODUCT_NAME = "CardinalKit Example";
