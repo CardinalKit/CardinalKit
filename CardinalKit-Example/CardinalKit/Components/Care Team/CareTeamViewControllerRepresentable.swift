@@ -16,7 +16,7 @@ struct CareTeamViewControllerRepresentable: UIViewControllerRepresentable {
     
     func updateUIViewController(_ taskViewController: UIViewController, context: Context) {}
     func makeUIViewController(context: Context) -> UIViewController {
-        let manager = CKCareKitManager()
+        let manager = CKCareKitManager.shared
         
         let viewController = OCKContactsListViewController(storeManager: manager.synchronizedStoreManager)
         viewController.title = "Care Team"
