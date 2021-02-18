@@ -27,6 +27,7 @@ class BLEManager: NSObject, CBCentralManagerDelegate, ObservableObject, CBPeriph
     
     @Published var isSwitchedOn = false
     @Published var peripherals = [Peripheral]()
+    @Published var connectedPeripherals = [Peripheral]()
     @Published var stateText: String = "Waiting for initialisation"
     
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
@@ -80,9 +81,9 @@ class BLEManager: NSObject, CBCentralManagerDelegate, ObservableObject, CBPeriph
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         print("Yay!  Connected!")
         // TODO: extend the logic to non-blood pressure stuff
-        bloodPressurePeripheral = peripheral
-        bloodPressurePeripheral.delegate = self
-        bloodPressurePeripheral.discoverServices(nil)
+        let newPeripheral = Peripheral(id: connectedPeripherals.count, name: peripheral.name ?? "Unknown Device", rssi: -1, corePeripheral: peripheral)
+        newPeripheral.corePeripheral.delegate = self
+        connectedPeripherals.append(newPeripheral)
     }
     
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
@@ -118,6 +119,10 @@ class BLEManager: NSObject, CBCentralManagerDelegate, ObservableObject, CBPeriph
         print(characteristic.value ?? "no value")
     }
     
+    func discoverServices(peripheral: CBPeripheral) {
+        peripheral.discoverServices(nil)
+    }
+    
     override init() {
         super.init()
         myCentral = CBCentralManager(delegate: self, queue: nil)
@@ -131,7 +136,7 @@ struct AddDeviceView: View {
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             Text("Searching for Bluetooth Devices").font(.title)
             
             List(bleManager.peripherals) { peripheral in
@@ -151,7 +156,7 @@ struct AddDeviceView: View {
         }.onDisappear {
             print("Add Bluetooth Device Menu Disappeared")
             self.bleManager.stopScanning()
-        }
+        }.padding()
     }
 }
 
@@ -168,6 +173,16 @@ struct DevicesView: View {
             
             Spacer()
             
+            List(bleManager.peripherals) { peripheral in
+                HStack {
+                    Text(peripheral.name)
+                    Spacer()
+                    Text(String(peripheral.rssi))
+                }.onTapGesture {
+                    bleManager.discoverServices(peripheral: peripheral.corePeripheral)
+                }
+            }
+            
             if bleManager.isSwitchedOn {
                 Text("Bluetooth is switched on")
                     .foregroundColor(.green)
@@ -180,25 +195,6 @@ struct DevicesView: View {
             Button("Add Device", action: {
                 presentAddDeviceMenu = true
             })
-            
-            // Status goes here
-            Text("Bluetooth status: " + bleManager.stateText)
-                .foregroundColor(.red)
-            
-            Spacer()
-            
-            VStack (spacing: 10) {
-                Button(action: {
-                    self.bleManager.startScanning()
-                }) {
-                    Text("Start Scanning")
-                }
-                Button(action: {
-                    self.bleManager.stopScanning()
-                }) {
-                    Text("Stop Scanning")
-                }
-            }.padding()
             
             Spacer()
         }.sheet(isPresented: $presentAddDeviceMenu, onDismiss: {presentAddDeviceMenu = false}, content: {
