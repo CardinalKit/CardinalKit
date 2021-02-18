@@ -38,10 +38,15 @@ struct MainUIView: View {
                 }
             }
             
-            AboutUsView(dotColor: self.color).tabItem {
-                Image(systemName: "book").renderingMode(.template)
-                Text("About")
+            DevicesView().tabItem {
+                Image(systemName: "rectangle.connected.to.line.below").renderingMode(.template)
+                Text("My Devices")
             }
+            
+//            AboutUsView(dotColor: self.color).tabItem {
+//                Image(systemName: "book").renderingMode(.template)
+//                Text("About")
+//            }
 
             ProfileUIView(color: self.color).tabItem {
                 Image("tab_profile").renderingMode(.template)

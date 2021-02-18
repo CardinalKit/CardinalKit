@@ -103,6 +103,8 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>This app uses Bluetooth to connect to health devices, such as scales and blood pressure monitors</string>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
 </dict>
