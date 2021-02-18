@@ -18,8 +18,9 @@ enum TaskItem: Int {
      */
     case sampleResearchKitSurvey,
          sampleResearchKitActiveTask,
+         sampleFunCoffeeSurvey,
+         sampleFunCoffeeResult,
          sampleCoreMotionAppleWatch,
-         // sampleFunCoffeeSurvey,
          sampleLearnItem
     
     /*
@@ -34,8 +35,10 @@ enum TaskItem: Int {
             return "Active Task (ResearchKit)"
         case .sampleCoreMotionAppleWatch:
             return "Sensors Demo"
-//        case .sampleFunCoffeeSurvey:
-//            return "Coffee Survey"
+        case .sampleFunCoffeeSurvey:
+            return "Coffee Survey"
+        case .sampleFunCoffeeResult:
+            return "Coffee Results"
         case .sampleLearnItem:
             return "About CardinalKit"
         }
@@ -52,8 +55,10 @@ enum TaskItem: Int {
             return "Sample sensor/data collection activities."
         case .sampleCoreMotionAppleWatch:
             return "CoreMotion & Cloud Storage"
-//        case .sampleFunCoffeeSurvey:
-//            return "How do you like your coffee?"
+        case .sampleFunCoffeeSurvey:
+            return "How do you like your coffee?"
+        case .sampleFunCoffeeResult:
+            return "ResearchKit Charts"
         case .sampleLearnItem:
             return "Visit cardinalkit.org"
         }
@@ -68,8 +73,10 @@ enum TaskItem: Int {
         switch self {
         case .sampleResearchKitActiveTask:
             return getImage(named: "ActivityIcon")
-//        case .sampleFunCoffeeSurvey:
-//            return getImage(named: "CoffeeIcon")
+        case .sampleFunCoffeeSurvey:
+            return getImage(named: "CoffeeIcon")
+        case .sampleFunCoffeeResult:
+            return getImage(named: "DataIcon")
         case .sampleCoreMotionAppleWatch:
             return getImage(named: "WatchIcon")
         case .sampleLearnItem:
@@ -84,11 +91,11 @@ enum TaskItem: Int {
      */
     var section: String {
         switch self {
-        case .sampleResearchKitSurvey, .sampleResearchKitActiveTask, .sampleCoreMotionAppleWatch:
+        case .sampleResearchKitSurvey, .sampleResearchKitActiveTask:
             return "Current Tasks"
-//        case .sampleFunCoffeeSurvey:
-//            return "Your Interests"
-        case .sampleLearnItem:
+        case .sampleFunCoffeeSurvey, .sampleFunCoffeeResult:
+            return "Your Interests"
+        case .sampleLearnItem, .sampleCoreMotionAppleWatch:
             return "Learn"
         }
     }
@@ -105,8 +112,10 @@ enum TaskItem: Int {
             return AnyView(CKTaskViewController(tasks: TaskSamples.sampleWalkingTask))
         case .sampleCoreMotionAppleWatch:
             return AnyView(SensorsDemoUIView())
-//        case .sampleFunCoffeeSurvey:
-//            return AnyView(CKTaskViewController(tasks: TaskSamples.sampleCoffeeTask))
+        case .sampleFunCoffeeSurvey:
+            return AnyView(CKTaskViewController(tasks: TaskSamples.sampleCoffeeTask))
+        case .sampleFunCoffeeResult:
+            return AnyView(CoffeeUIView())
         case .sampleLearnItem:
             return AnyView(LearnUIView())
         }
