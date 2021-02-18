@@ -1,21 +1,23 @@
 {
   "images" : [
     {
+      "filename" : "Screen Shot 2021-02-05 at 9.08.11 AM.png",
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "image@1x.png"
+      "scale" : "1x"
     },
     {
+      "filename" : "Screen Shot 2021-02-05 at 9.08.11 AM-1.png",
       "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "image@2x.png"
+      "scale" : "2x"
     },
     {
+      "filename" : "Screen Shot 2021-02-05 at 9.08.11 AM-2.png",
       "idiom" : "universal",
-      "scale" : "3x",
-      "filename" : "image@3x.png"
+      "scale" : "3x"
     }
   ],
-  "author" : "Iconizer",
-  "version" : "2020.11.0"
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
 }

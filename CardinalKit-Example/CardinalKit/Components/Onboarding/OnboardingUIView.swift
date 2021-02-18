@@ -48,7 +48,21 @@ struct OnboardingUIView: View {
                 .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN*4)
                 .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN*4)
             
-            Spacer(minLength: 2)
+            Image("StanfordMedicine")
+                .resizable()
+                .scaledToFit()
+                .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN*4)
+                .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN*4)
+                
+            
+            Spacer()
+                .frame(height: 30)
+            
+            Image("HomeIcon")
+                .resizable()
+                .scaledToFit()
+                .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN*5)
+                .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN*5)
             
             Text(config.read(query: "Study Title"))
                 .foregroundColor(self.color)
@@ -61,7 +75,7 @@ struct OnboardingUIView: View {
                 .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN)
                 .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN)
 
-            PageView(self.onboardingElements.map { InfoView(logo: $0.logo, title: $0.title, description: $0.description, color: self.color) })
+//            PageView(self.onboardingElements.map { InfoView(logo: $0.logo, title: $0.title, description: $0.description, color: self.color) })
 
             Spacer()
             
@@ -89,6 +103,7 @@ struct OnboardingUIView: View {
             }
             
             Spacer()
+                .frame(height: 50)
         }
     }
 }
