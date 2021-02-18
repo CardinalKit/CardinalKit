@@ -63,7 +63,7 @@ class CKHealthRecordsManager: NSObject {
                         let identifier = resource.resourceType.rawValue + "-" + resource.identifier
                         
                         if let dict = try CKSendHelper.jsonDataAsDict(data) {
-                            try CKSendHelper.sendToFirestore(json: dict, collection: "health-records", withIdentifier: identifier)
+                            try CKSendHelper.sendToFirestoreWithUUID(json: dict, collection: "health-records", withIdentifier: identifier)
                         }
                     } catch {
                         print("[upload] ERROR " + error.localizedDescription)

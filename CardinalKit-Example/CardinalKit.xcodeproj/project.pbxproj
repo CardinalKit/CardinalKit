@@ -45,6 +45,7 @@
 		8E6E1E2E25353A1E0024B8DF /* PatientIDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E1E2D25353A1E0024B8DF /* PatientIDView.swift */; };
 		8E6E1E3225353ABE0024B8DF /* ProfileUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E1E3125353ABE0024B8DF /* ProfileUIView.swift */; };
 		8E6E1E3425353AFE0024B8DF /* EmailHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E1E3325353AFE0024B8DF /* EmailHelper.swift */; };
+		8E7FFFB425DCE9B7002982B4 /* CKUploadToGCPTaskViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7FFFB325DCE9B7002982B4 /* CKUploadToGCPTaskViewControllerDelegate.swift */; };
 		8E9CDE912591534B00C8A228 /* CareKitStore in Frameworks */ = {isa = PBXBuildFile; productRef = 8E9CDE902591534B00C8A228 /* CareKitStore */; };
 		8E9CDE932591534B00C8A228 /* CareKitFHIR in Frameworks */ = {isa = PBXBuildFile; productRef = 8E9CDE922591534B00C8A228 /* CareKitFHIR */; };
 		8E9CDE952591534B00C8A228 /* CareKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8E9CDE942591534B00C8A228 /* CareKit */; };
@@ -141,6 +142,7 @@
 		8E6E1E2D25353A1E0024B8DF /* PatientIDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientIDView.swift; sourceTree = "<group>"; };
 		8E6E1E3125353ABE0024B8DF /* ProfileUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUIView.swift; sourceTree = "<group>"; };
 		8E6E1E3325353AFE0024B8DF /* EmailHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailHelper.swift; sourceTree = "<group>"; };
+		8E7FFFB325DCE9B7002982B4 /* CKUploadToGCPTaskViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKUploadToGCPTaskViewControllerDelegate.swift; sourceTree = "<group>"; };
 		8E9CDEA625916B2800C8A228 /* ScheduleViewControllerRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleViewControllerRepresentable.swift; sourceTree = "<group>"; };
 		8E9CDEA825916E6600C8A228 /* ScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleViewController.swift; sourceTree = "<group>"; };
 		8E9CDEAC259170AD00C8A228 /* CKCareKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKCareKitManager.swift; sourceTree = "<group>"; };
@@ -284,7 +286,6 @@
 				8E9CDF7F2591E62000C8A228 /* Model */,
 				8E6E1E2F25353A550024B8DF /* Views */,
 				8E6E1E25253537E40024B8DF /* TasksUIView.swift */,
-				8E6E1E172535263F0024B8DF /* CKTaskViewController.swift */,
 			);
 			path = Tasks;
 			sourceTree = "<group>";
@@ -459,6 +460,8 @@
 				8E0A4386244A4A0400656518 /* ORKESerialization.m */,
 				8E0A4387244A4A0400656518 /* ORKESerialization.h */,
 				8E0A43A2244A4A0400656518 /* ConsentDocument.swift */,
+				8E6E1E172535263F0024B8DF /* CKTaskViewController.swift */,
+				8E7FFFB325DCE9B7002982B4 /* CKUploadToGCPTaskViewControllerDelegate.swift */,
 			);
 			path = ResearchKit;
 			sourceTree = "<group>";
@@ -675,6 +678,7 @@
 				2F94C5F22536543600DF8866 /* SceneDelegate+CardinalKit.swift in Sources */,
 				8E9CDFAE2592B79900C8A228 /* Metrics.swift in Sources */,
 				8E6E1E092534F4100024B8DF /* OnboardingViewController.swift in Sources */,
+				8E7FFFB425DCE9B7002982B4 /* CKUploadToGCPTaskViewControllerDelegate.swift in Sources */,
 				8EBE6F9C24B3C0E60093D07C /* AppDelegate+CardinalKit.swift in Sources */,
 				8E0A43B9244A4A0400656518 /* AppDelegate.swift in Sources */,
 				8EA664232592E57200B6A45A /* SensorsDemoUIView.swift in Sources */,

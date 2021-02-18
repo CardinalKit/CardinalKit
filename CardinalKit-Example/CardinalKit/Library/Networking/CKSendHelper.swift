@@ -47,15 +47,15 @@ class CKSendHelper {
     /**
      Given a JSON dictionary (as Data), use the Firebase SDK to store it in Firestore.
     */
-    static func sendToFirestore(data: Data, collection: String, withIdentifier identifier: String? = nil, onCompletion: ((Bool, Error?) -> Void)? = nil) throws {
+    static func sendToFirestoreWithUUID(data: Data, collection: String, withIdentifier identifier: String? = nil, onCompletion: ((Bool, Error?) -> Void)? = nil) throws {
         let dictionary = try CKSendHelper.jsonDataAsDict(data)
-        return try CKSendHelper.sendToFirestore(json: dictionary!, collection: collection, withIdentifier: identifier, onCompletion: onCompletion)
+        return try CKSendHelper.sendToFirestoreWithUUID(json: dictionary!, collection: collection, withIdentifier: identifier, onCompletion: onCompletion)
     }
     
     /**
      Given a JSON dictionary, use the Firebase SDK to store it in Firestore.
     */
-    static func sendToFirestore(json: [String:Any], collection: String, withIdentifier identifier: String? = nil, onCompletion: ((Bool, Error?) -> Void)? = nil) throws {
+    static func sendToFirestoreWithUUID(json: [String:Any], collection: String, withIdentifier identifier: String? = nil, onCompletion: ((Bool, Error?) -> Void)? = nil) throws {
         guard let authCollection = CKStudyUser.shared.authCollection,
               let userId = CKStudyUser.shared.currentUser?.uid else {
             onCompletion?(false, CKError.unauthorized)
@@ -74,13 +74,47 @@ class CKSendHelper {
             .setData(dataPayload) { err in
             
             if let err = err {
-                print("[CKSendHelper] sendToFirestore() - error writing document: \(err)")
+                print("[CKSendHelper] sendToFirestoreWithUUID() - error writing document: \(err)")
                 onCompletion?(false, err)
             } else {
-                print("[CKSendHelper] sendToFirestore() - document successfully written!")
+                print("[CKSendHelper] sendToFirestoreWithUUID() - document successfully written!")
                 onCompletion?(true, nil)
             }
         }
+    }
+    
+    /**
+     Given a JSON dictionary, use the Firebase SDK to store it in Firestore.
+    */
+    static func appendResearchKitResultToFirestore(json: [String:Any], collection: String, withIdentifier identifier: String? = nil, onCompletion: ((Bool, Error?) -> Void)? = nil) throws {
+        guard let authCollection = CKStudyUser.shared.authCollection,
+              let userId = CKStudyUser.shared.currentUser?.uid,
+              let identifier = identifier,
+              !json.isEmpty else {
+            onCompletion?(false, CKError.unauthorized)
+            return
+        }
+            
+        let dataPayload: [String:Any] = ["userId":"\(userId)", "updatedAt": Date()]
+        
+        let db = Firestore.firestore()
+        db.collection(authCollection + collection).document(identifier).setData(dataPayload, merge: true)
+        
+        func completion(_ err: Error?) {
+            if let err = err {
+                print("[appendResultToFirestore] error writing document: \(err)")
+                onCompletion?(false, err)
+            } else {
+                print("[appendResultToFirestore] document successfully written!")
+                onCompletion?(true, nil)
+            }
+        }
+        
+        let ref = db.collection(authCollection + collection).document(identifier)
+        ref.updateData([
+            "results": FieldValue.arrayUnion([json])
+        ], completion: completion)
+        
     }
     
     /**
@@ -99,10 +133,10 @@ class CKSendHelper {
             
             func completion(_ err: Error?) {
                 if let err = err {
-                    print("[appendCareKitArrayInFirestore] sendToFirestore() - error writing document: \(err)")
+                    print("[appendCareKitArrayInFirestore] error writing document: \(err)")
                     onCompletion?(false, err)
                 } else {
-                    print("[appendCareKitArrayInFirestore] sendToFirestore() - document successfully written!")
+                    print("[appendCareKitArrayInFirestore] document successfully written!")
                     onCompletion?(true, nil)
                 }
             }
