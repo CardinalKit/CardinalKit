@@ -9,127 +9,6 @@
 import SwiftUI
 import CoreBluetooth
 
-struct Peripheral: Identifiable {
-    let id: Int
-    let name: String
-    let rssi: Int
-    let corePeripheral: CBPeripheral
-}
-
-//let heartRateServiceCBUUID = CBUUID(string: "0x180D")
-
-let acceptableDeviceCBUUIDList = [CBUUID(string: "0x180D"), CBUUID(string: "0x1810"), CBUUID(string: "0x2B34"), CBUUID(string: "0x181D")]
-
-class BLEManager: NSObject, CBCentralManagerDelegate, ObservableObject, CBPeripheralDelegate {
-    
-    var myCentral: CBCentralManager!
-    var bloodPressurePeripheral: CBPeripheral!
-    
-    @Published var isSwitchedOn = false
-    @Published var peripherals = [Peripheral]()
-    @Published var connectedPeripherals = [Peripheral]()
-    @Published var stateText: String = "Waiting for initialisation"
-    
-    func centralManagerDidUpdateState(_ central: CBCentralManager) {
-        switch central.state {
-        case .unknown:
-            stateText = "unknown"
-        case .resetting:
-            stateText = "resetting"
-        case .unsupported:
-            stateText = "unsupported"
-        case .unauthorized:
-            stateText = "unauthorized"
-        case .poweredOff:
-            stateText = "poweredOff"
-            isSwitchedOn = false
-        case .poweredOn:
-            stateText = "poweredOn"
-            isSwitchedOn = true
-        }
-    }
-    
-    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        var peripheralName: String!
-        
-        if let name = advertisementData[CBAdvertisementDataLocalNameKey] as? String {
-            peripheralName = name
-        }
-        else {
-            peripheralName = "Unknown Device"
-        }
-        
-        let newPeripheral = Peripheral(id: peripherals.count, name: peripheralName, rssi: RSSI.intValue, corePeripheral: peripheral)
-        peripherals.append(newPeripheral)
-    }
-    
-    func startScanning() {
-        print("startScanning")
-        myCentral.scanForPeripherals(withServices: acceptableDeviceCBUUIDList, options: nil)
-    }
-    
-    func stopScanning() {
-        print("stopScanning")
-        myCentral.stopScan()
-    }
-    
-    func connect(peripheral: CBPeripheral) {
-        print("Attempting Connection")
-        myCentral.connect(peripheral)
-    }
-    
-    func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
-        print("Yay!  Connected!")
-        // TODO: extend the logic to non-blood pressure stuff
-        let newPeripheral = Peripheral(id: connectedPeripherals.count, name: peripheral.name ?? "Unknown Device", rssi: -1, corePeripheral: peripheral)
-        newPeripheral.corePeripheral.delegate = self
-        connectedPeripherals.append(newPeripheral)
-    }
-    
-    func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
-        print("Hmm, failed to connect")
-    }
-    
-    func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
-        guard let services = peripheral.services else { return }
-        print("SERVICES!!!!!")
-        for service in services {
-            peripheral.discoverCharacteristics(nil, for: service)
-        }
-    }
-    
-    func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
-        guard let characteristics = service.characteristics else { return }
-        print(service)
-        for characteristic in characteristics {
-            print(characteristic)
-            if characteristic.properties.contains(.read) {
-                peripheral.readValue(for: characteristic)
-//              print("\(characteristic.uuid): properties contains .read")
-            }
-//            if characteristic.properties.contains(.notify) {
-//              print("\(characteristic.uuid): properties contains .notify")
-//            }
-            
-        }
-    }
-    
-    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic,
-                    error: Error?) {
-        print(characteristic.value ?? "no value")
-    }
-    
-    func discoverServices(peripheral: CBPeripheral) {
-        peripheral.discoverServices(nil)
-    }
-    
-    override init() {
-        super.init()
-        myCentral = CBCentralManager(delegate: self, queue: nil)
-        myCentral.delegate = self
-    }
-}
-
 struct AddDeviceView: View {
     
     @ObservedObject var bleManager: BLEManager
@@ -144,7 +23,9 @@ struct AddDeviceView: View {
                     Text(peripheral.name)
                     Spacer()
                     Text(String(peripheral.rssi))
-                }.onTapGesture {
+                }
+                .contentShape(Rectangle())
+                .onTapGesture {
                     bleManager.connect(peripheral: peripheral.corePeripheral)
                     presentationMode.wrappedValue.dismiss()
                 }
@@ -157,6 +38,54 @@ struct AddDeviceView: View {
             print("Add Bluetooth Device Menu Disappeared")
             self.bleManager.stopScanning()
         }.padding()
+    }
+}
+
+struct ConnectedDeviceView: View {
+    @ObservedObject var bleManager: BLEManager
+    var peripheral: Peripheral
+    
+    var body: some View {
+        VStack(alignment: .leading) {
+            HStack {
+                Text(peripheral.name)
+                Spacer()
+//                Text(String(peripheral.rssi))
+            }
+//            Text("Available Services:")
+//            ForEach(0..<peripheral.services.keys.count) { index in
+//                Text(peripheral.services.keys[index])
+//            }
+            HStack {
+                if (peripheral.heartRate) {
+                    Image(systemName: "suit.heart.fill")
+                }
+                if (peripheral.weight) {
+                    Image(systemName: "scalemass.fill")
+                }
+                if (peripheral.bloodPressure) {
+                    Image(systemName: "arrow.up.heart.fill")
+                }
+                Spacer()
+                if (peripheral.batteryLevel >= 0 && peripheral.batteryLevel < 20) {
+                    Image(systemName: "battery.0")
+                } else if peripheral.batteryLevel < 40 {
+                    Image(systemName: "battery.25")
+                } else {
+                    Image(systemName: "battery.100")
+                }
+//                Image(systemName: "battery.0")
+                Text("\(peripheral.batteryLevel)%")
+            }
+            
+        }
+        .contentShape(Rectangle())
+        .onTapGesture {
+            print("Click detected")
+            print(acceptableDeviceCBUUIDList)
+            print(peripheral.services)
+//            bleManager.discoverServices(peripheral: peripheral.corePeripheral)
+        }
     }
 }
 
@@ -173,33 +102,37 @@ struct DevicesView: View {
             
             Spacer()
             
-            List(bleManager.peripherals) { peripheral in
+            List(bleManager.connectedPeripherals) { peripheral in
+                ConnectedDeviceView(bleManager: bleManager, peripheral: peripheral)
+            }
+            
+//            if bleManager.isSwitchedOn {
+//                Text("Bluetooth is switched on")
+//                    .foregroundColor(.green)
+//            }
+//            else {
+//                Text("Bluetooth is NOT switched on")
+//                    .foregroundColor(.red)
+//            }
+            
+            Button(action: {
+                presentAddDeviceMenu = true
+            }) {
                 HStack {
-                    Text(peripheral.name)
                     Spacer()
-                    Text(String(peripheral.rssi))
-                }.onTapGesture {
-                    bleManager.discoverServices(peripheral: peripheral.corePeripheral)
+                    Text("Add Device")
+                    Spacer()
                 }
             }
-            
-            if bleManager.isSwitchedOn {
-                Text("Bluetooth is switched on")
-                    .foregroundColor(.green)
-            }
-            else {
-                Text("Bluetooth is NOT switched on")
-                    .foregroundColor(.red)
-            }
-            
-            Button("Add Device", action: {
-                presentAddDeviceMenu = true
-            })
+            .buttonStyle(RoundedCornerGradientButtonStyle())
             
             Spacer()
         }.sheet(isPresented: $presentAddDeviceMenu, onDismiss: {presentAddDeviceMenu = false}, content: {
             AddDeviceView(bleManager: bleManager)
         })
+        .onAppear {
+            bleManager.refreshConnectedDevices()
+        }.padding()
     }
 }
 
