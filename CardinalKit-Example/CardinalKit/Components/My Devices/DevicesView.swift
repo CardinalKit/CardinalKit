@@ -67,6 +67,10 @@ struct ConnectedDeviceView: View {
                     Image(systemName: "arrow.up.heart.fill")
                 }
                 Spacer()
+                
+//                Image(systemName: "battery.0")
+                Text("\(peripheral.batteryLevel)%")
+                
                 if (peripheral.batteryLevel >= 0 && peripheral.batteryLevel < 20) {
                     Image(systemName: "battery.0")
                 } else if peripheral.batteryLevel < 40 {
@@ -74,8 +78,6 @@ struct ConnectedDeviceView: View {
                 } else {
                     Image(systemName: "battery.100")
                 }
-//                Image(systemName: "battery.0")
-                Text("\(peripheral.batteryLevel)%")
             }
             
         }
@@ -93,6 +95,7 @@ struct DevicesView: View {
     
     @ObservedObject var bleManager = BLEManager()
     @State var presentAddDeviceMenu = false
+    @State var firstLoad = true
     
     var body: some View {
         VStack (spacing: 10) {
