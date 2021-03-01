@@ -37,6 +37,8 @@ extension SceneDelegate: ORKPasscodeDelegate {
         let config = CKPropertyReader(file: "CKConfiguration")
         
         let passcodeViewController = ORKPasscodeViewController.passcodeAuthenticationViewController(withText: config.read(query: "Passcode On Return Text"), delegate: self)
+        passcodeViewController.isModalInPresentation = true
+        
         window?.rootViewController?.present(passcodeViewController, animated: false, completion: nil)
     }
     
