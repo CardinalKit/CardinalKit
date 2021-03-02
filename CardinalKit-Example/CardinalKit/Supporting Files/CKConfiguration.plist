@@ -281,5 +281,10 @@ o Unanticipated circumstances.
 			<string>3️⃣</string>
 		</dict>
 	</array>
+	<key>Sign-In-With-Email-Provision</key>
+	<dict>
+		<key>Enabled</key>
+		<true/>
+	</dict>
 </dict>
 </plist>

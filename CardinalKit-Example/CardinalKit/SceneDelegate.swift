@@ -9,6 +9,13 @@
 import SwiftUI
 import Firebase
 
+class DynamicLinkLogin: ObservableObject {
+    @Published var link: String = ""
+    @Published var email: String = ""
+}
+
+var dynamicLinkLogin = DynamicLinkLogin()
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
@@ -67,28 +74,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             
             let email = continueUrl?.queryItems?.first(where: { $0.name == "email" })?.value
             
-            print("WE ARE NOW CHECKING THE DYNAMIC LINK")
+            dynamicLinkLogin.link = link!
+            dynamicLinkLogin.email = email!
             
-            // (2) & if this link is authorized to sign the user in
-            if Auth.auth().isSignIn(withEmailLink: link!) {
-                print("WE HAVE A VALID SIGN IN LINK")
-                // (3) process sign-in
-                Auth.auth().signIn(withEmail: email!, link: link!, completion: { (result, error) in
-                    if let error = error {
-                        print(error.localizedDescription)
-                    }
-                    
-                    if let confirmedEmail = result?.user.email {
-                        // (4) confirm email and inform app of authorization as needed.
-                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: Constants.notificationUserLogin), object: confirmedEmail)
-                        UserDefaults.standard.set(true, forKey: Constants.prefConfirmedLogin)
-                        print("confirmed!")
-                    }
-                    
-                })
-            } else {
-                print("THE LINK IS INVALID")
-            }
+            
+            
+            // return early because we will log in later on; probably delete this code later
         }
     }
 

@@ -24,6 +24,7 @@ struct OnboardingUIView: View {
     let color: Color
     let config = CKPropertyReader(file: "CKConfiguration")
     @State var showingDetail = false
+    @ObservedObject var dynamicLoginDetails = dynamicLinkLogin
     
     var onComplete: (() -> Void)? = nil
     
@@ -36,6 +37,10 @@ struct OnboardingUIView: View {
         for data in onboardingData {
             self.onboardingElements.append(OnboardingElement(logo: data["Logo"]!, title: data["Title"]!, description: data["Description"]!))
         }
+    }
+    
+    func signInWithEmailLink() {
+        print("Test")
     }
 
     var body: some View {
@@ -81,24 +86,31 @@ struct OnboardingUIView: View {
             
             HStack {
                 Spacer()
-                Button(action: {
-                    self.showingDetail.toggle()
-                }, label: {
-                     Text("Join Study")
-                        .padding(Metrics.PADDING_BUTTON_LABEL)
-                        .frame(maxWidth: .infinity)
-                        .foregroundColor(.white)
-                        .background(self.color)
-                        .cornerRadius(Metrics.RADIUS_CORNER_BUTTON)
-                        .font(.system(size: 20, weight: .bold, design: .default))
-                })
-                .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN)
-                .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN)
-                .sheet(isPresented: $showingDetail, onDismiss: {
-                    self.onComplete?()
-                }, content: {
-                    OnboardingViewController()
-                })
+                
+                if dynamicLoginDetails.email == "" {
+                    Text("Please open the link in the email from your provider")
+                } else {
+                    Button(action: {
+                        self.signInWithEmailLink()
+                        self.showingDetail.toggle()
+                    }, label: {
+                             Text("Join Study")
+                                .padding(Metrics.PADDING_BUTTON_LABEL)
+                                .frame(maxWidth: .infinity)
+                                .foregroundColor(.white)
+                                .background(self.color)
+                                .cornerRadius(Metrics.RADIUS_CORNER_BUTTON)
+                                .font(.system(size: 20, weight: .bold, design: .default))
+                    })
+                    .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN)
+                    .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN)
+                    .sheet(isPresented: $showingDetail, onDismiss: {
+                        self.onComplete?()
+                    }, content: {
+                        OnboardingViewController()
+                    })
+                }
+                
                 Spacer()
             }
             

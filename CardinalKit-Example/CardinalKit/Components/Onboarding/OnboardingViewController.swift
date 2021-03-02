@@ -59,7 +59,11 @@ struct OnboardingViewController: UIViewControllerRepresentable {
         // the `LoginCustomWaitStep` waits for email verification.
 
         var loginSteps: [ORKStep]
-        if config["Login-Sign-In-With-Apple"]["Enabled"] as? Bool == true {
+        
+        if config["Sign-In-With-Email-Provision"]["Enabled"] as? Bool == true {
+            let signInWithEmailStep = SignInWithEmailStep(identifier: "SignInWithEmailProvision")
+            loginSteps = [signInWithEmailStep]
+        } else if config["Login-Sign-In-With-Apple"]["Enabled"] as? Bool == true {
             let signInWithAppleStep = CKSignInWithAppleStep(identifier: "SignInWithApple")
             loginSteps = [signInWithAppleStep]
         } else if config.readBool(query: "Login-Passwordless") == true {
