@@ -30,23 +30,50 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
     }
     
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity,
+                     restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        let handled = DynamicLinks.dynamicLinks().handleUniversalLink(userActivity.webpageURL!) { (dynamiclink, error) in
+        }
+        
+        return handled
+    }
+    
+    @available(iOS 9.0, *)
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
+        return application(app, open: url,
+                           sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
+                           annotation: "")
+    }
+    
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        if let dynamicLink = DynamicLinks.dynamicLinks().dynamicLink(fromCustomSchemeURL: url) {
+            // Handle the deep link. For example, show the deep-linked content or
+            // apply a promotional offer to the user's account.
+            // ...
+            print(dynamicLink)
+            return true
+        }
         return false
     }
     
     func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
         DynamicLinks.dynamicLinks().handleUniversalLink(userActivity.webpageURL!) { (dynamiclink, error) in
             
-            // (1) check to see if we have a valid login link
-            guard let link = dynamiclink?.url?.absoluteString,
-                let email = CKStudyUser.shared.email else { // (1.5) and the learner has entered an email
-                return
-            }
+            let link = dynamiclink?.url?.absoluteString
+            
+            let components = URLComponents(string: (dynamiclink?.url?.absoluteString.removingPercentEncoding)!)
+            
+            let continueUrl = URLComponents(string: (components?.queryItems?.first(where: { $0.name == "continueUrl" })?.value)!)
+            
+            let email = continueUrl?.queryItems?.first(where: { $0.name == "email" })?.value
+            
+            print("WE ARE NOW CHECKING THE DYNAMIC LINK")
             
             // (2) & if this link is authorized to sign the user in
-            if Auth.auth().isSignIn(withEmailLink: link) {
+            if Auth.auth().isSignIn(withEmailLink: link!) {
+                print("WE HAVE A VALID SIGN IN LINK")
                 // (3) process sign-in
-                Auth.auth().signIn(withEmail: email, link: link, completion: { (result, error) in
+                Auth.auth().signIn(withEmail: email!, link: link!, completion: { (result, error) in
                     if let error = error {
                         print(error.localizedDescription)
                     }
@@ -59,6 +86,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     }
                     
                 })
+            } else {
+                print("THE LINK IS INVALID")
             }
         }
     }

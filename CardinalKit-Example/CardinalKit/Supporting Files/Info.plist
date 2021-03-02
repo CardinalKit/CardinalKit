@@ -30,6 +30,16 @@
 				<string>edu.stanford.cardinalkit</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>firebaseemailauth</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>edu.stanford.cs342-alpha-cardiology</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
@@ -40,6 +50,8 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>This app uses Bluetooth to connect to health devices, such as scales and blood pressure monitors</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Used In ResearchKit Active Tasks.</string>
 	<key>NSFaceIDUsageDescription</key>
@@ -103,8 +115,6 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>NSBluetoothAlwaysUsageDescription</key>
-	<string>This app uses Bluetooth to connect to health devices, such as scales and blood pressure monitors</string>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
 </dict>
