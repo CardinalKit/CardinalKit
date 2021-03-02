@@ -20,7 +20,7 @@ class ScheduleViewController: OCKDailyPageViewController {
     
     override func dailyPageViewController(_ dailyPageViewController: OCKDailyPageViewController, prepare listViewController: OCKListViewController, for date: Date) {
         
-        let identifiers = ["doxylamine", "nausea", "coffee", "survey", "steps", "heartRate"]
+        let identifiers = ["doxylamine", "nausea", "coffee", "heartRate", "survey", "steps", "heartRate", "heartrate-2", "bloodpressure"]
         var query = OCKTaskQuery(for: date)
         query.ids = identifiers
         query.excludesTasksWithNoEvents = true
@@ -81,6 +81,28 @@ class ScheduleViewController: OCKDailyPageViewController {
                         storeManager: self.storeManager)
 
                     listViewController.appendViewController(doxylamineCard, animated: false)
+                }
+                
+                if let heartrateTask = tasks.first(where: { $0.id == "heartrate-2" }) {
+                    let surveyCard = BloodPressureItemViewController(
+                        viewSynchronizer: BloodPressureItemViewSynchronizer(),
+                        task: heartrateTask,
+                        eventQuery: .init(for: date),
+                        storeManager: self.storeManager)
+                    
+                    listViewController.appendViewController(surveyCard, animated: false)
+                }
+                
+                if let bloodpressureTask = tasks.first(where: { $0.id == "bloodpressure" }) {
+                    let surveyCard = BloodPressureItemViewController(
+                        viewSynchronizer: BloodPressureItemViewSynchronizer(),
+                        task: bloodpressureTask,
+                        eventQuery: .init(for: date),
+                        storeManager: self.storeManager)
+                    
+                    listViewController.appendViewController(surveyCard, animated: false)
+                } else {
+                    print("Couldn't find the task!")
                 }
 
                 // Create a card for the nausea task if there are events for it on this day.

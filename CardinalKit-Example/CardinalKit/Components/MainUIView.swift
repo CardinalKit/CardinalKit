@@ -7,6 +7,8 @@
 //
 
 import SwiftUI
+import CareKit
+import CareKitStore
 
 struct MainUIView: View {
     
@@ -43,20 +45,42 @@ struct MainUIView: View {
                 Text("My Devices")
             }
             
-//            AboutUsView(dotColor: self.color).tabItem {
-//                Image(systemName: "book").renderingMode(.template)
-//                Text("About")
-//            }
-
+            //            AboutUsView(dotColor: self.color).tabItem {
+            //                Image(systemName: "book").renderingMode(.template)
+            //                Text("About")
+            //            }
+            
             ProfileUIView(color: self.color).tabItem {
                 Image("tab_profile").renderingMode(.template)
                 Text("Profile")
             }
-
+            
         }
         .accentColor(self.color)
         .onAppear(perform: {
             self.useCareKit = config.readBool(query: "Use CareKit")
+            
+            let startOfDay = Calendar.current.startOfDay(for: Date())
+            let atBreakfast = Calendar.current.date(byAdding: .hour, value: 8, to: startOfDay)!
+            
+            let dailyAtBreakfast = OCKScheduleElement(start: atBreakfast, end: nil, interval: DateComponents(day: 1))
+            
+            let schedule = OCKSchedule(composing: [dailyAtBreakfast])
+            
+            var task = OCKTask(id: "bloodpressure", title: "Test Blood Pressure", carePlanUUID: nil, schedule: schedule)
+            
+            task.instructions = "Test Blood Pressure"
+            
+            let store = OCKStore(name: "CKCareKitStore")
+            store.addTasks([task], callbackQueue: DispatchQueue.main, completion: {result in
+                switch result {
+                case .failure(let error) :
+                    print(error.localizedDescription)
+                case .success( _) :
+                    print("Success!")
+                }
+                
+            })
         })
     }
 }

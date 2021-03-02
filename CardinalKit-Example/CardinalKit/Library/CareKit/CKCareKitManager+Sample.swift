@@ -33,6 +33,25 @@ internal extension OCKStore {
         survey.impactsAdherence = true
         survey.instructions = "You can schedule any ResearchKit survey in your app."
         
+        let heartRateElement = OCKScheduleElement(start: beforeBreakfast, end: nil,
+                                                  interval: DateComponents(day: 1))
+        let heartRateSchedule = OCKSchedule(composing: [heartRateElement])
+        var heartRateSurvey = OCKTask(id: "heartRate", title: "Report your heartrate", carePlanUUID: nil, schedule: heartRateSchedule)
+        heartRateSurvey.impactsAdherence = true
+        heartRateSurvey.instructions = "Reeeeeee"
+        
+        let startOfDay = Calendar.current.startOfDay(for: Date())
+        let atBreakfast = Calendar.current.date(byAdding: .hour, value: 8, to: startOfDay)!
+        
+        let dailyAtBreakfast = OCKScheduleElement(start: atBreakfast, end: nil, interval: DateComponents(day: 1))
+        
+        let schedule = OCKSchedule(composing: [dailyAtBreakfast])
+        
+        var bloodPressureTask = OCKTask(id: "bloodpressure", title: "Blood Pressure", carePlanUUID: nil, schedule: schedule)
+        
+        bloodPressureTask.instructions = "Take your daily blood pressure"
+        
+        
         /*
          Doxylamine and Nausea DEMO.
          */
@@ -59,7 +78,12 @@ internal extension OCKStore {
         nausea.instructions = "Tap the button below anytime you experience nausea."
         /* ---- */
 
-        addTasks([nausea, doxylamine, survey, coffee], callbackQueue: .main, completion: nil)
+        addTasks([nausea, doxylamine, survey, heartRateSurvey, coffee, bloodPressureTask], callbackQueue: .main){ result in
+            switch result {
+            case .success: print("Added tasks")
+            case .failure(let error): print("Error: \(error)")
+            }
+        }
 
         createContacts()
     }

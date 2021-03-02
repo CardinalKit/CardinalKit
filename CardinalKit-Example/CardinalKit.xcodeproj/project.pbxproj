@@ -92,6 +92,7 @@
 		E2F1FD7824D62064006C39DF /* CKConfiguration.plist in Resources */ = {isa = PBXBuildFile; fileRef = E2F1FD7724D62064006C39DF /* CKConfiguration.plist */; };
 		FD20148225DDE05500661445 /* DevicesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD20148125DDE05500661445 /* DevicesView.swift */; };
 		FD72DED325DF3B0D00805D54 /* BLEManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD72DED225DF3B0D00805D54 /* BLEManager.swift */; };
+		FD7A58FB25E595DC00DCDF0B /* BloodPressureSurveyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7A58FA25E595DC00DCDF0B /* BloodPressureSurveyViewController.swift */; };
 		FDDB2B7325E046460076C3CB /* RoundedCornerGradientButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDDB2B7225E046460076C3CB /* RoundedCornerGradientButtonStyle.swift */; };
 /* End PBXBuildFile section */
 
@@ -203,6 +204,7 @@
 		F30ABA7020E91EBA421A80F9 /* Pods-CardinalKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardinalKit_Example.debug.xcconfig"; path = "Target Support Files/Pods-CardinalKit_Example/Pods-CardinalKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		FD20148125DDE05500661445 /* DevicesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicesView.swift; sourceTree = "<group>"; };
 		FD72DED225DF3B0D00805D54 /* BLEManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEManager.swift; sourceTree = "<group>"; };
+		FD7A58FA25E595DC00DCDF0B /* BloodPressureSurveyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BloodPressureSurveyViewController.swift; sourceTree = "<group>"; };
 		FDDB2B7225E046460076C3CB /* RoundedCornerGradientButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCornerGradientButtonStyle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -315,6 +317,7 @@
 		8E0A438D244A4A0400656518 /* Tasks */ = {
 			isa = PBXGroup;
 			children = (
+				FD7A58F925E595C000DCDF0B /* Data Gathering Tasks */,
 				8E9CDF7F2591E62000C8A228 /* Model */,
 				8E6E1E2F25353A550024B8DF /* Views */,
 				8E6E1E25253537E40024B8DF /* TasksUIView.swift */,
@@ -565,6 +568,14 @@
 			path = "My Devices";
 			sourceTree = "<group>";
 		};
+		FD7A58F925E595C000DCDF0B /* Data Gathering Tasks */ = {
+			isa = PBXGroup;
+			children = (
+				FD7A58FA25E595DC00DCDF0B /* BloodPressureSurveyViewController.swift */,
+			);
+			path = "Data Gathering Tasks";
+			sourceTree = "<group>";
+		};
 		FDDB2B7125E046330076C3CB /* Component Styles */ = {
 			isa = PBXGroup;
 			children = (
@@ -772,6 +783,7 @@
 				8E40DC042471E5940027536B /* CKNetworkManager.swift in Sources */,
 				DC2DC54525CA59D7002DBFA6 /* CollinMapView.swift in Sources */,
 				8EA664B025941A4D00B6A45A /* SurveyItemViewController.swift in Sources */,
+				FD7A58FB25E595DC00DCDF0B /* BloodPressureSurveyViewController.swift in Sources */,
 				8E9CDEBA2591843200C8A228 /* CKConfig.swift in Sources */,
 				2F94C5F22536543600DF8866 /* SceneDelegate+CardinalKit.swift in Sources */,
 				DC2DC53A25CA4C23002DBFA6 /* Picture.swift in Sources */,
