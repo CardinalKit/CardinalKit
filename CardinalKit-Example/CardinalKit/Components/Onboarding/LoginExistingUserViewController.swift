@@ -36,6 +36,18 @@ struct LoginExistingUserViewController: UIViewControllerRepresentable {
             loginSteps = [loginStep]
         }
         
+        // use the `ORKPasscodeStep` from ResearchKit.
+        let passcodeStep = ORKPasscodeStep(identifier: "Passcode") //NOTE: requires NSFaceIDUsageDescription in info.plist
+        let type = config.read(query: "Passcode Type")
+        if type == "6" {
+            passcodeStep.passcodeType = .type6Digit
+        } else {
+            passcodeStep.passcodeType = .type4Digit
+        }
+        passcodeStep.text = config.read(query: "Passcode Text")
+        
+        loginSteps += [passcodeStep]
+        
         // create a task with each step
         let orderedTask = ORKOrderedTask(identifier: "StudyLoginTask", steps: loginSteps)
         
