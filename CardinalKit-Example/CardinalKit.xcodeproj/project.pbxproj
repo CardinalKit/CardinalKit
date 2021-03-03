@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2F94C5F22536543600DF8866 /* SceneDelegate+CardinalKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F94C5F12536543600DF8866 /* SceneDelegate+CardinalKit.swift */; };
+		706D8DEBB680D42EC1F369EE /* Pods_CardinalKit_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AB1CBD581C519350E81C752 /* Pods_CardinalKit_Example.framework */; };
 		8E0A43AC244A4A0400656518 /* CKStudyUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4382244A4A0400656518 /* CKStudyUser.swift */; };
 		8E0A43AD244A4A0400656518 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4384244A4A0400656518 /* Constants.swift */; };
 		8E0A43AE244A4A0400656518 /* ORKESerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4386244A4A0400656518 /* ORKESerialization.m */; };
@@ -21,7 +22,6 @@
 		8E0A43C1244A4A0400656518 /* LoginCustomWaitStepView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E0A43A1244A4A0400656518 /* LoginCustomWaitStepView.xib */; };
 		8E0A43C2244A4A0400656518 /* ConsentDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A43A2244A4A0400656518 /* ConsentDocument.swift */; };
 		8E0A43C3244A4A0400656518 /* LoginCustomWaitStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A43A3244A4A0400656518 /* LoginCustomWaitStepViewController.swift */; };
-		8E0A43CE244A60D800656518 /* Pods_CardinalKit_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D31556B648F48DA664CEE80 /* Pods_CardinalKit_Example.framework */; };
 		8E0A43D5244A693D00656518 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E0A43D4244A693D00656518 /* HealthKit.framework */; };
 		8E40DC042471E5940027536B /* CKNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E40DC032471E5940027536B /* CKNetworkManager.swift */; };
 		8E6E1E092534F4100024B8DF /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E1E082534F4100024B8DF /* OnboardingViewController.swift */; };
@@ -45,10 +45,10 @@
 		8E6E1E2E25353A1E0024B8DF /* PatientIDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E1E2D25353A1E0024B8DF /* PatientIDView.swift */; };
 		8E6E1E3225353ABE0024B8DF /* ProfileUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E1E3125353ABE0024B8DF /* ProfileUIView.swift */; };
 		8E6E1E3425353AFE0024B8DF /* EmailHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E1E3325353AFE0024B8DF /* EmailHelper.swift */; };
-		8E9CDE912591534B00C8A228 /* CareKitStore in Frameworks */ = {isa = PBXBuildFile; productRef = 8E9CDE902591534B00C8A228 /* CareKitStore */; };
-		8E9CDE932591534B00C8A228 /* CareKitFHIR in Frameworks */ = {isa = PBXBuildFile; productRef = 8E9CDE922591534B00C8A228 /* CareKitFHIR */; };
-		8E9CDE952591534B00C8A228 /* CareKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8E9CDE942591534B00C8A228 /* CareKit */; };
-		8E9CDE972591534B00C8A228 /* CareKitUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8E9CDE962591534B00C8A228 /* CareKitUI */; };
+		8E9CDE912591534B00C8A228 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 8E9CDE902591534B00C8A228 /* SwiftPackageProductDependency */; };
+		8E9CDE932591534B00C8A228 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 8E9CDE922591534B00C8A228 /* SwiftPackageProductDependency */; };
+		8E9CDE952591534B00C8A228 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 8E9CDE942591534B00C8A228 /* SwiftPackageProductDependency */; };
+		8E9CDE972591534B00C8A228 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 8E9CDE962591534B00C8A228 /* SwiftPackageProductDependency */; };
 		8E9CDEA725916B2800C8A228 /* ScheduleViewControllerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9CDEA625916B2800C8A228 /* ScheduleViewControllerRepresentable.swift */; };
 		8E9CDEA925916E6600C8A228 /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9CDEA825916E6600C8A228 /* ScheduleViewController.swift */; };
 		8E9CDEAD259170AD00C8A228 /* CKCareKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9CDEAC259170AD00C8A228 /* CKCareKitManager.swift */; };
@@ -112,15 +112,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		00480E2D79186BE9405F0F72 /* Pods-CardinalKit_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardinalKit_Tests.release.xcconfig"; path = "Target Support Files/Pods-CardinalKit_Tests/Pods-CardinalKit_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		07D78DA16FC9C3C7709EA243 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		1D31556B648F48DA664CEE80 /* Pods_CardinalKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CardinalKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F94C5F12536543600DF8866 /* SceneDelegate+CardinalKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SceneDelegate+CardinalKit.swift"; sourceTree = "<group>"; };
 		41DC264876E45FE5A3FD8701 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		58275A0CAB0C7223B21F375D /* Pods-CardinalKit_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardinalKit_Tests.debug.xcconfig"; path = "Target Support Files/Pods-CardinalKit_Tests/Pods-CardinalKit_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* CardinalKit Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CardinalKit Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		62AA5CD1C2188D392530510F /* CardinalKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = CardinalKit.podspec; path = ../CardinalKit.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		630884219A5CB1E45383122C /* Pods-CardinalKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardinalKit_Example.release.xcconfig"; path = "Target Support Files/Pods-CardinalKit_Example/Pods-CardinalKit_Example.release.xcconfig"; sourceTree = "<group>"; };
+		7BEB66FD843F7CFA8AA363DE /* Pods-CardinalKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardinalKit_Example.release.xcconfig"; path = "Target Support Files/Pods-CardinalKit_Example/Pods-CardinalKit_Example.release.xcconfig"; sourceTree = "<group>"; };
+		8AB1CBD581C519350E81C752 /* Pods_CardinalKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CardinalKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E0A4378244A4A0300656518 /* CardinalKit_Example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CardinalKit_Example-Bridging-Header.h"; sourceTree = "<group>"; };
 		8E0A4382244A4A0400656518 /* CKStudyUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKStudyUser.swift; sourceTree = "<group>"; };
 		8E0A4384244A4A0400656518 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -180,7 +178,7 @@
 		8EA664B1259422E400B6A45A /* CKCareKitRemoteSynchronizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKCareKitRemoteSynchronizable.swift; sourceTree = "<group>"; };
 		8EA664B32594387900B6A45A /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		8EBE6F9B24B3C0E60093D07C /* AppDelegate+CardinalKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+CardinalKit.swift"; sourceTree = "<group>"; };
-		CB97C14C759E56B88E4E3941 /* Pods_CardinalKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CardinalKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9ECEF82C93BCB59D6969E16 /* Pods-CardinalKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardinalKit_Example.debug.xcconfig"; path = "Target Support Files/Pods-CardinalKit_Example/Pods-CardinalKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		D253D131250D1BDB00A363E4 /* CKSignInWithAppleStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKSignInWithAppleStep.swift; sourceTree = "<group>"; };
 		DC2DC52B25CA4B93002DBFA6 /* AboutUsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsView.swift; sourceTree = "<group>"; };
 		DC2DC53025CA4C1A002DBFA6 /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
@@ -203,7 +201,6 @@
 		E2DF9F092500C9CE00A93B93 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E2F1FD7524D61EDA006C39DF /* CKPropertyReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKPropertyReader.swift; sourceTree = "<group>"; };
 		E2F1FD7724D62064006C39DF /* CKConfiguration.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = CKConfiguration.plist; sourceTree = "<group>"; };
-		F30ABA7020E91EBA421A80F9 /* Pods-CardinalKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardinalKit_Example.debug.xcconfig"; path = "Target Support Files/Pods-CardinalKit_Example/Pods-CardinalKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		FD20148125DDE05500661445 /* DevicesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicesView.swift; sourceTree = "<group>"; };
 		FD62213125EEF80D006F6488 /* SignInWithEmailAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithEmailAuth.swift; sourceTree = "<group>"; };
 		FD62213325EF21B7006F6488 /* ReadBloodPressureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadBloodPressureView.swift; sourceTree = "<group>"; };
@@ -217,12 +214,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E9CDE952591534B00C8A228 /* CareKit in Frameworks */,
-				8E0A43CE244A60D800656518 /* Pods_CardinalKit_Example.framework in Frameworks */,
-				8E9CDE972591534B00C8A228 /* CareKitUI in Frameworks */,
+				8E9CDE952591534B00C8A228 /* BuildFile in Frameworks */,
+				8E9CDE972591534B00C8A228 /* BuildFile in Frameworks */,
 				8E0A43D5244A693D00656518 /* HealthKit.framework in Frameworks */,
-				8E9CDE912591534B00C8A228 /* CareKitStore in Frameworks */,
-				8E9CDE932591534B00C8A228 /* CareKitFHIR in Frameworks */,
+				8E9CDE912591534B00C8A228 /* BuildFile in Frameworks */,
+				8E9CDE932591534B00C8A228 /* BuildFile in Frameworks */,
+				706D8DEBB680D42EC1F369EE /* Pods_CardinalKit_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -233,8 +230,7 @@
 			isa = PBXGroup;
 			children = (
 				8E0A43D4244A693D00656518 /* HealthKit.framework */,
-				1D31556B648F48DA664CEE80 /* Pods_CardinalKit_Example.framework */,
-				CB97C14C759E56B88E4E3941 /* Pods_CardinalKit_Tests.framework */,
+				8AB1CBD581C519350E81C752 /* Pods_CardinalKit_Example.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -514,10 +510,8 @@
 		A562A578C883F67F0DAE1385 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				F30ABA7020E91EBA421A80F9 /* Pods-CardinalKit_Example.debug.xcconfig */,
-				630884219A5CB1E45383122C /* Pods-CardinalKit_Example.release.xcconfig */,
-				58275A0CAB0C7223B21F375D /* Pods-CardinalKit_Tests.debug.xcconfig */,
-				00480E2D79186BE9405F0F72 /* Pods-CardinalKit_Tests.release.xcconfig */,
+				A9ECEF82C93BCB59D6969E16 /* Pods-CardinalKit_Example.debug.xcconfig */,
+				7BEB66FD843F7CFA8AA363DE /* Pods-CardinalKit_Example.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -597,12 +591,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "CardinalKit_Example" */;
 			buildPhases = (
-				8A9C87B89C8DE46EAC03121F /* [CP] Check Pods Manifest.lock */,
+				8363BD89C1016E4D6146728C /* [CP] Check Pods Manifest.lock */,
 				607FACCC1AFB9204008FA782 /* Sources */,
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
-				8E740AF552D1351413D250C9 /* [CP] Embed Pods Frameworks */,
 				8E0A43D0244A60D800656518 /* Embed Frameworks */,
+				5750942D2A462CD20313EADE /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -610,10 +604,10 @@
 			);
 			name = CardinalKit_Example;
 			packageProductDependencies = (
-				8E9CDE902591534B00C8A228 /* CareKitStore */,
-				8E9CDE922591534B00C8A228 /* CareKitFHIR */,
-				8E9CDE942591534B00C8A228 /* CareKit */,
-				8E9CDE962591534B00C8A228 /* CareKitUI */,
+				8E9CDE902591534B00C8A228 /* SwiftPackageProductDependency */,
+				8E9CDE922591534B00C8A228 /* SwiftPackageProductDependency */,
+				8E9CDE942591534B00C8A228 /* SwiftPackageProductDependency */,
+				8E9CDE962591534B00C8A228 /* SwiftPackageProductDependency */,
 			);
 			productName = CardinalKit;
 			productReference = 607FACD01AFB9204008FA782 /* CardinalKit Example.app */;
@@ -646,7 +640,7 @@
 			);
 			mainGroup = 607FACC71AFB9204008FA782;
 			packageReferences = (
-				8E9CDE8F2591534B00C8A228 /* XCRemoteSwiftPackageReference "CareKit" */,
+				8E9CDE8F2591534B00C8A228 /* RemoteSwiftPackageReference */,
 			);
 			productRefGroup = 607FACD11AFB9204008FA782 /* Products */;
 			projectDirPath = "";
@@ -674,29 +668,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		8A9C87B89C8DE46EAC03121F /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-CardinalKit_Example-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8E740AF552D1351413D250C9 /* [CP] Embed Pods Frameworks */ = {
+		5750942D2A462CD20313EADE /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -762,6 +734,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CardinalKit_Example/Pods-CardinalKit_Example-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8363BD89C1016E4D6146728C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CardinalKit_Example-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -967,7 +961,7 @@
 		};
 		607FACF01AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F30ABA7020E91EBA421A80F9 /* Pods-CardinalKit_Example.debug.xcconfig */;
+			baseConfigurationReference = A9ECEF82C93BCB59D6969E16 /* Pods-CardinalKit_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -993,7 +987,7 @@
 		};
 		607FACF11AFB9204008FA782 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 630884219A5CB1E45383122C /* Pods-CardinalKit_Example.release.xcconfig */;
+			baseConfigurationReference = 7BEB66FD843F7CFA8AA363DE /* Pods-CardinalKit_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -1040,7 +1034,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		8E9CDE8F2591534B00C8A228 /* XCRemoteSwiftPackageReference "CareKit" */ = {
+		8E9CDE8F2591534B00C8A228 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/carekit-apple/CareKit";
 			requirement = {
@@ -1051,24 +1045,24 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		8E9CDE902591534B00C8A228 /* CareKitStore */ = {
+		8E9CDE902591534B00C8A228 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8E9CDE8F2591534B00C8A228 /* XCRemoteSwiftPackageReference "CareKit" */;
+			package = 8E9CDE8F2591534B00C8A228 /* RemoteSwiftPackageReference */;
 			productName = CareKitStore;
 		};
-		8E9CDE922591534B00C8A228 /* CareKitFHIR */ = {
+		8E9CDE922591534B00C8A228 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8E9CDE8F2591534B00C8A228 /* XCRemoteSwiftPackageReference "CareKit" */;
+			package = 8E9CDE8F2591534B00C8A228 /* RemoteSwiftPackageReference */;
 			productName = CareKitFHIR;
 		};
-		8E9CDE942591534B00C8A228 /* CareKit */ = {
+		8E9CDE942591534B00C8A228 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8E9CDE8F2591534B00C8A228 /* XCRemoteSwiftPackageReference "CareKit" */;
+			package = 8E9CDE8F2591534B00C8A228 /* RemoteSwiftPackageReference */;
 			productName = CareKit;
 		};
-		8E9CDE962591534B00C8A228 /* CareKitUI */ = {
+		8E9CDE962591534B00C8A228 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8E9CDE8F2591534B00C8A228 /* XCRemoteSwiftPackageReference "CareKit" */;
+			package = 8E9CDE8F2591534B00C8A228 /* RemoteSwiftPackageReference */;
 			productName = CareKitUI;
 		};
 /* End XCSwiftPackageProductDependency section */
