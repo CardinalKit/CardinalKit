@@ -94,7 +94,7 @@
 			<key>Title</key>
 			<string>Welcome to Digital-PD!</string>
 			<key>Summary</key>
-			<string>You are invited to participate in Digital Professional Development (“Digital-PD”),  a Stanford University study on designing efficient professional development activities. Over the course of each workday, you will be asked to complete a series of additional activities designed to resemble tasks which would ordinarily be part of your workflow. Additionally, you will be asked to complete questionnaires asking opinions of the training exercises at various times throughout the day. You will be asked to wear a device on your wrist to monitor physiological activity during the training exercises, and this application will be used to track where and when you choose to complete your professional development exercises.</string>
+			<string>Welcome to &quot;Digital-PD&quot;, a Stanford University study on designint efficient professional development activities.</string>
 			<key>Content</key>
 			<string>You are invited to participate in Digital Professional Development (“Digital-PD”),  a Stanford University study on designing efficient professional development activities. Over the course of each workday, you will be asked to complete a series of additional activities designed to resemble tasks which would ordinarily be part of your workflow. Additionally, you will be asked to complete questionnaires asking opinions of the training exercises at various times throughout the day. You will be asked to wear a device on your wrist to monitor physiological activity during the training exercises, and this application will be used to track where and when you choose to complete your professional development exercises.</string>
 		</dict>
@@ -103,9 +103,7 @@
 			<key>Title</key>
 			<string>Participation and Time Commitment</string>
 			<key>Summary</key>
-			<string>Your participation in this program is entirely voluntary.  You can decide to participate now, and withdraw your consent later and stop being in the program without any loss of benefits or compensation.  
-This study will be administered at your place of work, and your primary interactions with the study will take place through this mobile platform. Your participation in the program will last for a period of 90 days.
-</string>
+			<string>Your participation in this program is voluntary, and you can withdraw consent to participate at any time without loss of benefits.</string>
 			<key>Content</key>
 			<string>Your participation in this program is entirely voluntary.  You can decide to participate now, and withdraw your consent later and stop being in the program without any loss of benefits or compensation.  
 This study will be administered at your place of work, and your primary interactions with the study will take place through this mobile platform. Your participation in the program will last for a period of 90 days.
@@ -116,14 +114,7 @@ This study will be administered at your place of work, and your primary interact
 			<key>Title</key>
 			<string>Privacy and Confidentiality</string>
 			<key>Summary</key>
-			<string>As we are collecting biometric data, we take privacy and confidentiality seriously.  Health information will be anonymized and presented to researchers in a de-identified fashion.  The biometric data we collect will be stored on a secure HIPAA compliant server and the Stanford HCI Lab will follow HIPAA guidelines whenever interacting with the data. 
-Data from this program may be presented at scientific meetings or published in scientific journals. Your identity and/or your personal health information will not be disclosed except as authorized by you or as required by law.  However, there is always some risk that even de-identified information might be re-identified.
-Data collected from or about you as part of theDigital-PD that can directly identify you (including your name and address) is called “Protected Personal Information.”  Your Protected Personal Information will be held confidential by the staff and access limited to those who need access in order to administer and conduct the program activities (eg., if the core research team needs to contact you during the study).
- 
-Your remaining data will be separated from your Protected Personal Information and will be assigned a key code (we call this “Coded Study Data”). Information about the Coded Data will be kept in a secure location and access will be limited as described in this consent.
- 
-Finally, aggregated, non-identifiable data, may be reviewed for quality assurance and to evaluate effectiveness of the program.
-</string>
+			<string>Your data privacy is extremely important to us: the data we collect from you will be anonymized and stored in an encrypted, de-identified fashion.</string>
 			<key>Content</key>
 			<string>As we are collecting biometric data, we take privacy and confidentiality seriously.  Health information will be anonymized and presented to researchers in a de-identified fashion.  The biometric data we collect will be stored on a secure HIPAA compliant server and the Stanford HCI Lab will follow HIPAA guidelines whenever interacting with the data. 
 Data from this program may be presented at scientific meetings or published in scientific journals. Your identity and/or your personal health information will not be disclosed except as authorized by you or as required by law.  However, there is always some risk that even de-identified information might be re-identified.
@@ -139,25 +130,7 @@ Finally, aggregated, non-identifiable data, may be reviewed for quality assuranc
 			<key>Title</key>
 			<string>Monitoring and Data Collection</string>
 			<key>Summary</key>
-			<string>Your contact information (e.g. name, email address, phone number and zip code) and demographic information (e.g. age, gender, height, and weight) will be collected upon the start of the program.
-
-Additional data may be collected via Apple’s Health Kit from your smartphone and/or connected wearables such as a smartwatch with your permission:
-
-	•	Sensor information  (e.g. accelerometer, gyroscope, heart rate)
-	•	Device metadata (e.g. Timezone, device operating system version, on/off wrist status)
-	•	Activity (e.g step count, distance walking/running, stride length, passive 6MWT, distance cycling, wheelchair push count, distance wheelchair, swimming stroke count, distance swimming, distance downhill snow sports, basal energy burned, active energy burned, flights climbed, Nike fuel, Apple exercise time, Apple stand time, Apple stand hours)
-	•	Body Measures (e.g. height, weight, BMI, lean body mass, body fat percentage, waist circumference)
-	•	Vital Signs (e.g. heart rate, low or high HR event, irregular heart rate event, resting HR, HR variability, walking HR, heartbeat series, oxygen saturation, body temperature, blood pressure, respiratory rate, VO2 max)
-	•	Nutrition (e.g. identifiers regarding diet, water intake)
-	•	Mindfulness &amp; Sleep (e.g. mindful session, sleep analysis)
-	•	Audio Exposure (e.g. audio exposure event, environmental audio exposure, headphone audio exposure)
-	•	UV Exposure
-	•	Self-Care (e.g. toothbrushing)
-	•	Workout type identifier, workout route identifier
-	•	Apple Health Clinical Records (e.g. clinical visits, blood pressure, lab tests, medications, procedures, immunizations, conditions)
-
-If available we may query these data from a timepoint prior to your onboarding to help establish baseline metrics.
-</string>
+			<string>We will collect your contact information and demographic information at the start of the program, and throughout the program, we will collect additional biometric and indoor location data from your smartphone.</string>
 			<key>Content</key>
 			<string>Your contact information (e.g. name, email address, phone number and zip code) and demographic information (e.g. age, gender, height, and weight) will be collected upon the start of the program.
 

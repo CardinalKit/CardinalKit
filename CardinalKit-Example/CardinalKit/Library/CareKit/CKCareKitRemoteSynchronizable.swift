@@ -65,7 +65,8 @@ class CKCareKitRemoteSynchronizable: OCKRemoteSynchronizable {
     }
     
     func chooseConflictResolutionPolicy(_ conflict: OCKMergeConflictDescription, completion: @escaping (OCKMergeConflictResolutionPolicy) -> Void) {
-        completion(.keepRemote)
+        // Could inspect what the conclict is and how to handle that.
+        completion(.keepDevice)
     }
     
 }

@@ -61,14 +61,14 @@ class ScheduleViewController: OCKDailyPageViewController {
                                                                  storeManager: self.storeManager)
                     listViewController.appendViewController(coffeeCard, animated: false)
                 }
-                
+
                 if let surveyTask = tasks.first(where: { $0.id == "survey" }) {
                     let surveyCard = SurveyItemViewController(
                         viewSynchronizer: SurveyItemViewSynchronizer(),
                         task: surveyTask,
                         eventQuery: .init(for: date),
                         storeManager: self.storeManager)
-                    
+
                     listViewController.appendViewController(surveyCard, animated: false)
                 }
 

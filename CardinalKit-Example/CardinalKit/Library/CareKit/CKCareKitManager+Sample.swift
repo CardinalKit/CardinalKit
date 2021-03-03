@@ -44,9 +44,9 @@ internal extension OCKStore {
                                interval: DateComponents(day: 4))
         ])
 
-        var doxylamine = OCKTask(id: "doxylamine", title: "Take Doxylamine",
+        var doxylamine = OCKTask(id: "doxylamine", title: "Take an Experience Sampling Survey",
                                  carePlanUUID: nil, schedule: doxylamineSchedule)
-        doxylamine.instructions = "Take 25mg of doxylamine when you experience nausea."
+        doxylamine.instructions = "Take an experience sampling survey twice daily!"
 
         let nauseaSchedule = OCKSchedule(composing: [
             OCKScheduleElement(start: beforeBreakfast, end: nil, interval: DateComponents(day: 2),

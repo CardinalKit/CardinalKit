@@ -14,44 +14,6 @@ import ResearchKit
 struct TaskSamples {
     
     /**
-     Active tasks created with short-hand constructors from `ORKOrderedTask`
-    */
-    static let sampleTappingTask: ORKOrderedTask = {
-        let intendedUseDescription = "Finger tapping is a universal way to communicate."
-        
-        return ORKOrderedTask.twoFingerTappingIntervalTask(withIdentifier: "TappingTask", intendedUseDescription: intendedUseDescription, duration: 10, handOptions: .both, options: ORKPredefinedTaskOption())
-    }()
-    
-    static let sampleWalkingTask: ORKOrderedTask = {
-        let intendedUseDescription = "Tests ability to walk"
-        
-        return ORKOrderedTask.shortWalk(withIdentifier: "ShortWalkTask", intendedUseDescription: intendedUseDescription, numberOfStepsPerLeg: 20, restDuration: 30, options: ORKPredefinedTaskOption())
-    }()
-    
-    /**
-        Coffee Task Example for 9/2 Workshop
-     */
-    static let sampleCoffeeTask: ORKOrderedTask = {
-        var steps = [ORKStep]()
-        
-        // Coffee Step
-        let healthScaleAnswerFormat = ORKAnswerFormat.scale(withMaximumValue: 5, minimumValue: 0, defaultValue: 3, step: 1, vertical: false, maximumValueDescription: "A Lot 😬", minimumValueDescription: "None 😴")
-        let healthScaleQuestionStep = ORKQuestionStep(identifier: "CoffeeScaleQuestionStep", title: "Coffee Intake", question: "How many cups of coffee did you have today?", answer: healthScaleAnswerFormat)
-        
-        steps += [healthScaleQuestionStep]
-        
-        //SUMMARY
-        let summaryStep = ORKCompletionStep(identifier: "SummaryStep")
-        summaryStep.title = "Thank you for tracking your coffee."
-        summaryStep.text = "We appreciate your time (and caffeinated energy)!"
-        
-        steps += [summaryStep]
-        
-        return ORKOrderedTask(identifier: "SurveyTask-Coffee", steps: steps)
-        
-    }()
-    
-    /**
      Sample task created step-by-step!
     */
     static let sampleSurveyTask: ORKOrderedTask = {

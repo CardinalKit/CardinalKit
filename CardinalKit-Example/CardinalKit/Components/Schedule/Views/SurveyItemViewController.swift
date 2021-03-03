@@ -25,9 +25,9 @@ class SurveyItemViewController: OCKInstructionsTaskViewController, ORKTaskViewCo
         }
 
         // 2b. If the user attempted to mark the task complete, display a ResearchKit survey.
-        let answerFormat = ORKAnswerFormat.scale(withMaximumValue: 5, minimumValue: 1, defaultValue: 5, step: 1, vertical: false, maximumValueDescription: "A LOT!", minimumValueDescription: "a little")
-        let feedbackStep = ORKQuestionStep(identifier: "feedback", title: "Feedback", question: "How are you liking CardinalKit?", answer: answerFormat)
-        let surveyTask = ORKOrderedTask(identifier: "feedback", steps: [feedbackStep])
+//        let answerFormat = ORKAnswerFormat.scale(withMaximumValue: 5, minimumValue: 1, defaultValue: 5, step: 1, vertical: false, maximumValueDescription: "A LOT!", minimumValueDescription: "a little")
+//        let feedbackStep = ORKQuestionStep(identifier: "feedback", title: "Feedback", question: "How are you liking CardinalKit?", answer: answerFormat)
+        let surveyTask = TaskSamples.sampleSurveyTask
         let surveyViewController = ORKTaskViewController(task: surveyTask, taskRun: nil)
         surveyViewController.delegate = self
 
@@ -44,12 +44,12 @@ class SurveyItemViewController: OCKInstructionsTaskViewController, ORKTaskViewCo
         }
 
         // 4a. Retrieve the result from the ResearchKit survey
-        let survey = taskViewController.result.results!.first(where: { $0.identifier == "feedback" }) as! ORKStepResult
-        let feedbackResult = survey.results!.first as! ORKScaleQuestionResult
-        let answer = Int(truncating: feedbackResult.scaleAnswer!)
-
-        // 4b. Save the result into CareKit's store
-        controller.appendOutcomeValue(value: answer, at: IndexPath(item: 0, section: 0), completion: nil)
+//        let survey = taskViewController.result.results!.first(where: { $0.identifier == "feedback" }) as! ORKStepResult
+//        let feedbackResult = survey.results!.first as! ORKScaleQuestionResult
+//        let answer = Int(truncating: feedbackResult.scaleAnswer!)
+//
+//        // 4b. Save the result into CareKit's store
+//        controller.appendOutcomeValue(value: answer, at: IndexPath(item: 0, section: 0), completion: nil)
     }
 }
 
