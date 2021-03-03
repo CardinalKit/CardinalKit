@@ -49,7 +49,6 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
                 }
             }
             
-            
             print("Login successful! task: \(taskViewController.task?.identifier ?? "(no ID)")")
             
             fallthrough

@@ -11,6 +11,7 @@ import CareKit
 import ResearchKit
 import CareKitUI
 import CareKitStore
+import SwiftUI
 
 // 1. Subclass a task view controller to customize the control flow and present a ResearchKit survey!
 class BloodPressureItemViewController: OCKInstructionsTaskViewController, ORKTaskViewControllerDelegate {
@@ -24,15 +25,18 @@ class BloodPressureItemViewController: OCKInstructionsTaskViewController, ORKTas
             return
         }
 
-        // 2b. If the user attempted to mark the task complete, display a ResearchKit survey.
-        let answerFormat = ORKAnswerFormat.scale(withMaximumValue: 5, minimumValue: 1, defaultValue: 5, step: 1, vertical: false, maximumValueDescription: "A LOT!", minimumValueDescription: "a little")
-        let feedbackStep = ORKQuestionStep(identifier: "feedback", title: "Feedback", question: "How pressured is your blood, bro?", answer: answerFormat)
-        let surveyTask = ORKOrderedTask(identifier: "feedback", steps: [feedbackStep])
-        let surveyViewController = ORKTaskViewController(task: surveyTask, taskRun: nil)
-        surveyViewController.delegate = self
+//        // 2b. If the user attempted to mark the task complete, display a ResearchKit survey.
+//        let answerFormat = ORKAnswerFormat.scale(withMaximumValue: 5, minimumValue: 1, defaultValue: 5, step: 1, vertical: false, maximumValueDescription: "A LOT!", minimumValueDescription: "a little")
+//        let feedbackStep = ORKQuestionStep(identifier: "feedback", title: "Feedback", question: "How pressured is your blood, bro?", answer: answerFormat)
+//        let surveyTask = ORKOrderedTask(identifier: "feedback", steps: [feedbackStep])
+//        let surveyViewController = ORKTaskViewController(task: surveyTask, taskRun: nil)
+//        surveyViewController.delegate = self
+        
+        let view = ReadBloodPressureView(parent: self)
+        let hostedView = UIHostingController(rootView: view)
 
         // 3a. Present the survey to the user
-        present(surveyViewController, animated: true, completion: nil)
+        present(hostedView, animated: true, completion: nil)
     }
 
     // 3b. This method will be called when the user completes the survey.

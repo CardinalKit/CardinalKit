@@ -92,6 +92,7 @@
 		E2F1FD7824D62064006C39DF /* CKConfiguration.plist in Resources */ = {isa = PBXBuildFile; fileRef = E2F1FD7724D62064006C39DF /* CKConfiguration.plist */; };
 		FD20148225DDE05500661445 /* DevicesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD20148125DDE05500661445 /* DevicesView.swift */; };
 		FD62213225EEF80D006F6488 /* SignInWithEmailAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD62213125EEF80D006F6488 /* SignInWithEmailAuth.swift */; };
+		FD62213425EF21B7006F6488 /* ReadBloodPressureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD62213325EF21B7006F6488 /* ReadBloodPressureView.swift */; };
 		FD72DED325DF3B0D00805D54 /* BLEManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD72DED225DF3B0D00805D54 /* BLEManager.swift */; };
 		FD7A58FB25E595DC00DCDF0B /* BloodPressureSurveyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7A58FA25E595DC00DCDF0B /* BloodPressureSurveyViewController.swift */; };
 		FDDB2B7325E046460076C3CB /* RoundedCornerGradientButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDDB2B7225E046460076C3CB /* RoundedCornerGradientButtonStyle.swift */; };
@@ -205,6 +206,7 @@
 		F30ABA7020E91EBA421A80F9 /* Pods-CardinalKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardinalKit_Example.debug.xcconfig"; path = "Target Support Files/Pods-CardinalKit_Example/Pods-CardinalKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		FD20148125DDE05500661445 /* DevicesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicesView.swift; sourceTree = "<group>"; };
 		FD62213125EEF80D006F6488 /* SignInWithEmailAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithEmailAuth.swift; sourceTree = "<group>"; };
+		FD62213325EF21B7006F6488 /* ReadBloodPressureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadBloodPressureView.swift; sourceTree = "<group>"; };
 		FD72DED225DF3B0D00805D54 /* BLEManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEManager.swift; sourceTree = "<group>"; };
 		FD7A58FA25E595DC00DCDF0B /* BloodPressureSurveyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BloodPressureSurveyViewController.swift; sourceTree = "<group>"; };
 		FDDB2B7225E046460076C3CB /* RoundedCornerGradientButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCornerGradientButtonStyle.swift; sourceTree = "<group>"; };
@@ -457,6 +459,7 @@
 			children = (
 				8E9CDEB12591739A00C8A228 /* TipView.swift */,
 				8EA664AF25941A4D00B6A45A /* SurveyItemViewController.swift */,
+				FD62213325EF21B7006F6488 /* ReadBloodPressureView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -826,6 +829,7 @@
 				8E9CDEAF259172C200C8A228 /* CKCareKitManager+Sample.swift in Sources */,
 				8E9CDEA925916E6600C8A228 /* ScheduleViewController.swift in Sources */,
 				DC2DC55525CAF385002DBFA6 /* GeneralPatientQuestionnaire.swift in Sources */,
+				FD62213425EF21B7006F6488 /* ReadBloodPressureView.swift in Sources */,
 				D253D132250D1BDB00A363E4 /* CKSignInWithAppleStep.swift in Sources */,
 				8E6E1E0D25351D8F0024B8DF /* PageViewController.swift in Sources */,
 				8E0A43AC244A4A0400656518 /* CKStudyUser.swift in Sources */,
