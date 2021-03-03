@@ -58,8 +58,16 @@ internal extension OCKStore {
         nausea.impactsAdherence = false
         nausea.instructions = "Tap the button below anytime you experience nausea."
         /* ---- */
+        
+        // Kidney Care
+        let sf12Element = OCKScheduleElement(start: afterLunch, end: nil, interval: DateComponents(month:1))
+        let sf12Schedule = OCKSchedule(composing: [sf12Element])
+        var sf12 = OCKTask(id: "sf12", title: "SF-12 Health Survey", carePlanUUID: nil, schedule: sf12Schedule)
+        sf12.impactsAdherence = true
+        sf12.instructions = "Take a few minutes to fill out the SF-12 survey to help your doctor keep track of how you feel!"
+        
 
-        addTasks([nausea, doxylamine, survey, coffee], callbackQueue: .main, completion: nil)
+        addTasks([nausea, doxylamine, survey, coffee, sf12], callbackQueue: .main, completion: nil)
 
         createContacts()
     }

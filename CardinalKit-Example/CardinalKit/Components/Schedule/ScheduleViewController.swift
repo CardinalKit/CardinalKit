@@ -20,7 +20,7 @@ class ScheduleViewController: OCKDailyPageViewController {
     
     override func dailyPageViewController(_ dailyPageViewController: OCKDailyPageViewController, prepare listViewController: OCKListViewController, for date: Date) {
         
-        let identifiers = ["doxylamine", "nausea", "coffee", "survey", "steps", "heartRate"]
+        let identifiers = ["doxylamine", "nausea", "coffee", "survey", "steps", "heartRate", "sf12"]
         var query = OCKTaskQuery(for: date)
         query.ids = identifiers
         query.excludesTasksWithNoEvents = true
@@ -52,6 +52,17 @@ class ScheduleViewController: OCKDailyPageViewController {
                         .padding([.vertical], 10)
 
                     listViewController.appendViewController(view.formattedHostingController(), animated: false)
+                }
+                
+                // KidneyCare
+                if let sf12Task = tasks.first(where: { $0.id == "sf12" }) {
+                    let sf12Card = SurveyItemViewController(
+                        viewSynchronizer: SurveyItemViewSynchronizer(),
+                        task: sf12Task,
+                        eventQuery: .init(for: date),
+                        storeManager: self.storeManager)
+                    
+                    listViewController.appendViewController(sf12Card, animated: false)
                 }
 
                 // Since the coffee task is only scheduled every other day, there will be cases
