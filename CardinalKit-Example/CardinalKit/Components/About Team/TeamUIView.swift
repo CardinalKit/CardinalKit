@@ -10,6 +10,7 @@ import SwiftUI
 
 struct TeamUIView: View {
     var body: some View {
+        
         VStack (alignment: .leading){
             NavigationView {
                 List(profiles) { profile in
@@ -20,6 +21,7 @@ struct TeamUIView: View {
                 .navigationBarTitle("Our Team")
             }
         }
+        
     }
 }
 

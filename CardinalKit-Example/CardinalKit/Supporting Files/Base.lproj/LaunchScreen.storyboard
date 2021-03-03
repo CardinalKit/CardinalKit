@@ -16,16 +16,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CKLogo" translatesAutoresizingMaskIntoConstraints="NO" id="kYd-Gy-c9g">
-                                <rect key="frame" x="20" y="373" width="374" height="150"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="150" id="5xE-uK-f9c"/>
-                                </constraints>
-                            </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SBDLogoWhite" translatesAutoresizingMaskIntoConstraints="NO" id="Mvz-9v-0cy">
                                 <rect key="frame" x="50" y="712" width="314" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="RDO-NW-Fwe"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="logo_transparent" translatesAutoresizingMaskIntoConstraints="NO" id="kYd-Gy-c9g">
+                                <rect key="frame" x="70" y="327" width="275" height="243"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="243" id="5xE-uK-f9c"/>
                                 </constraints>
                             </imageView>
                         </subviews>
@@ -44,11 +44,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52.173913043478265" y="375"/>
         </scene>
     </scenes>
     <resources>
-        <image name="CKLogo" width="720" height="360"/>
         <image name="SBDLogoWhite" width="683" height="569"/>
+        <image name="logo_transparent" width="900" height="795"/>
     </resources>
 </document>
