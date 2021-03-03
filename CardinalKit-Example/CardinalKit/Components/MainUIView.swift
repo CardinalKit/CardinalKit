@@ -31,16 +31,14 @@ struct MainUIView: View {
                     Image("tab_schedule").renderingMode(.template)
                     Text("Schedule")
                 }
-                /*
                 CareTeamViewControllerRepresentable().tabItem {
                     Image("tab_care").renderingMode(.template)
                     Text("Care Team")
                 }
-                 */
             }
             TeamUIView().tabItem {
                 Image("tab_care").renderingMode(.template)
-                Text("Our Team")
+                Text("Dev Team")
             }
 
             ProfileUIView(color: self.color).tabItem {
