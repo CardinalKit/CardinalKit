@@ -111,9 +111,9 @@ internal extension OCKStore {
                                   familyName: "Babakhanian", carePlanUUID: nil)
         contact2.asset = "MegBabakhanian"
         contact2.title = "PhD"
-        contact2.role = "Dr. Babakhanian is a......."
+        contact2.role = "Dr. Babakhanian is an R&D Scientist Engineer."
         //contact2.phoneNumbers = [OCKLabeledValue(label: CNLabelWork, value: "(324) 555-7415")]
-        contact1.emailAddresses = [OCKLabeledValue(label: CNLabelEmailiCloud, value: "mbabakha@stanford.edu")]
+        contact2.emailAddresses = [OCKLabeledValue(label: CNLabelEmailiCloud, value: "mbabakha@stanford.edu")]
         //contact2.messagingNumbers = [OCKLabeledValue(label: CNLabelWork, value: "(324) 555-7415")]
         contact2.address = {
             let address = OCKPostalAddress()
