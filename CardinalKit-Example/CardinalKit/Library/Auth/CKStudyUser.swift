@@ -36,11 +36,12 @@ class CKStudyUser {
     }
     
     fileprivate var rootAuthCollection: String? {
-        if let bundleId = Bundle.main.bundleIdentifier {
-            return "/studies/\(bundleId)/users/"
-        }
-        
-        return nil
+        return "/registered-patients/\(Auth.auth().currentUser?.email ?? "")/studies/"
+//        if let bundleId = Bundle.main.bundleIdentifier {
+//            return "/studies/\(bundleId)/users/"
+//        }
+//
+//        return nil
     }
 
     var email: String? {
