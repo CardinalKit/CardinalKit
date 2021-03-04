@@ -7,6 +7,8 @@
 //
 
 import SwiftUI
+import HealthKit
+import HealthKitUI
 
 struct ReadBloodPressureView: View {
     @Environment(\.presentationMode) var presentationMode
@@ -54,6 +56,36 @@ struct ReadBloodPressureView: View {
             }
             Button(action: {
                 print("Blood Pressure Submitted")
+                if #available(iOS 14.0, *) {
+                    let systolicPressureMeasurement = HKQuantity(unit: .millimeterOfMercury(), doubleValue: Double(self.systolicPressure) ?? -1.0)
+                    let diastolicPressureMeasurement = HKQuantity(unit: .millimeterOfMercury(), doubleValue: Double(self.diastolicPressure) ?? -1.0)
+                    
+                    print(systolicPressureMeasurement)
+                    print(diastolicPressureMeasurement)
+                    
+                    let systolicPressureDataObject = HKQuantitySample(type: HKQuantityType.quantityType(forIdentifier: .bloodPressureSystolic)!, quantity: systolicPressureMeasurement, start: Date(), end: Date())
+                    let diastolicPressureDataObject = HKQuantitySample(type: HKQuantityType.quantityType(forIdentifier: .bloodPressureDiastolic)!, quantity: diastolicPressureMeasurement, start: Date(), end: Date())
+                    
+                    HKHealthStore().save(systolicPressureDataObject) { success, error in
+                        if error != nil {
+                            print("Error: \(String(describing: error))")
+                        }
+                        if success {
+                            print("Saved systolic successfully")
+                        }
+                    }
+                    
+                    HKHealthStore().save(diastolicPressureDataObject) { success, error in
+                        if error != nil {
+                            print("Error: \(String(describing: error))")
+                        }
+                        if success {
+                            print("Saved diastolic successfully")
+                        }
+                    }
+                } else {
+                    // Fallback on earlier versions
+                }
             }) {
                 HStack {
                     Spacer()
