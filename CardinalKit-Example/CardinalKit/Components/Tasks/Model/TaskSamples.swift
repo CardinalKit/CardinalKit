@@ -110,11 +110,6 @@ struct TaskSamples {
     static let onboardingSurveyTask: ORKOrderedTask = {
         var steps = [ORKStep]()
         
-//        let booleanAnswer = ORKBooleanAnswerFormat(yesString: "Yes", noString: "Not now")
-//        let booleanStep = ORKQuestionStep(identifier: "AreYouReady-Boolean", title: "Before we get started...", question: "Are you ready to start the test?", answer: booleanAnswer)
-//
-//        steps += [booleanStep]
-        
         // About you
         // Age
         let numberAnswerFormat = ORKNumericAnswerFormat(style: .integer, unit: nil, minimum: 0 as NSNumber, maximum: 120 as NSNumber)
@@ -198,18 +193,7 @@ struct TaskSamples {
                 comorbiditiesChoices.append(comorbiditiesChoice)
             }
         }
-//        let comorbiditiesChoiceOneText = NSLocalizedString("Diabetes", comment: "")
-//        let comorbiditiesChoiceTwoText = NSLocalizedString("Hypertension", comment: "")
-//        let comorbiditiesChoiceThreeText = NSLocalizedString("Congestive Heart Failure", comment: "")
-//        let comorbiditiesChoiceFourText = NSLocalizedString("COPD", comment: "")
-//        let comorbiditiesChoiceFiveText = NSLocalizedString("Other", comment: "")
-//        let comorbiditiesChoices = [
-//            ORKTextChoice(text: comorbiditiesChoiceOneText, value: "diabetes" as NSCoding & NSCopying & NSObjectProtocol),
-//            ORKTextChoice(text: comorbiditiesChoiceTwoText, value: "choice_2" as NSCoding & NSCopying & NSObjectProtocol),
-//            ORKTextChoice(text: comorbiditiesChoiceThreeText, value: "choice_3" as NSCoding & NSCopying & NSObjectProtocol),
-//            ORKTextChoice(text: comorbiditiesChoiceFourText, value: "choice_4" as NSCoding & NSCopying & NSObjectProtocol),
-//            ORKTextChoiceOther.choice(withText: comorbiditiesChoiceFiveText, detailText: nil, value: "choice_5" as NSCoding & NSCopying & NSObjectProtocol, exclusive: true, textViewPlaceholderText: "Enter text here")
-//        ]
+
         let comorbiditiesAnswerFormat = ORKAnswerFormat.choiceAnswerFormat(with: .multipleChoice, textChoices: comorbiditiesChoices)
         let comorbiditiesFormItem = ORKFormItem(identifier: "MedicalOnboardingForm-Comorbidities", text: "What related conditions (comorbidities) do you have?", answerFormat: comorbiditiesAnswerFormat, optional: false)
         
