@@ -12,6 +12,12 @@ class CKAppNetworkManager: CKAPIDeliveryDelegate {
     
     // MARK: - CKAPIDeliveryDelegate
     func send(file: URL, package: Package, onCompletion: @escaping (Bool) -> Void) {
+        DispatchQueue.main.async {
+            self._send(file: file, package: package, onCompletion: onCompletion)
+        }
+    }
+    
+    fileprivate func _send(file: URL, package: Package, onCompletion: @escaping (Bool) -> Void) {
         switch package.type {
         case .hkdata:
             sendHealthKit(file, package, onCompletion)
@@ -23,7 +29,6 @@ class CKAppNetworkManager: CKAPIDeliveryDelegate {
             fatalError("Sending data of type \(package.type.description) is NOT supported.")
             break
         }
-        
     }
     
 }
@@ -37,7 +42,7 @@ extension CKAppNetworkManager {
         do {
             let data = try Data(contentsOf: file)
             guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
-                let authPath = CKSession.shared.getAuthCollection() else {
+                let authPath = CKStudyUser.shared.authCollection else {
                 onCompletion(false)
                 return
             }
@@ -53,7 +58,7 @@ extension CKAppNetworkManager {
                     print("Error writing document: \(err)")
                 } else {
                     onCompletion(true)
-                    print("Document successfully written!")
+                    print("[sendHealthKit] \(trimmedIdentifier) - successfully written!")
                 }
             }
             

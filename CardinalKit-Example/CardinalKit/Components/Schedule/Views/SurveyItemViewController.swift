@@ -50,6 +50,10 @@ class SurveyItemViewController: OCKInstructionsTaskViewController, ORKTaskViewCo
 
         // 4b. Save the result into CareKit's store
         controller.appendOutcomeValue(value: answer, at: IndexPath(item: 0, section: 0), completion: nil)
+        
+        // 5. Upload results to GCP, using the CKTaskViewControllerDelegate class.
+        let gcpDelegate = CKUploadToGCPTaskViewControllerDelegate()
+        gcpDelegate.taskViewController(taskViewController, didFinishWith: reason, error: error)
     }
 }
 

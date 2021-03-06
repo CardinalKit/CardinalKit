@@ -27,9 +27,7 @@ enum TaskItem: Int {
          gaitAndBalance,
          timedWalk,
          tremor
-    
-    
-    
+
     /*
      * STEP (2) for each item, what should its
      * title on the list be?

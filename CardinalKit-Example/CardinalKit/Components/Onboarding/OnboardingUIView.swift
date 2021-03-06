@@ -23,12 +23,14 @@ struct OnboardingUIView: View {
     var onboardingElements: [OnboardingElement] = []
     let color: Color
     let config = CKPropertyReader(file: "CKConfiguration")
-    @State var showingDetail = false
+    @State var showingOnboard = false
+    @State var showingLogin = false
     
     var onComplete: (() -> Void)? = nil
     
     init(onComplete: (() -> Void)? = nil) {
         let onboardingData = config.readAny(query: "Onboarding") as! [[String:String]]
+        
         
         self.color = Color(config.readColor(query: "Primary Color"))
         self.onComplete = onComplete
@@ -70,7 +72,7 @@ struct OnboardingUIView: View {
             HStack {
                 Spacer()
                 Button(action: {
-                    self.showingDetail.toggle()
+                    self.showingOnboard.toggle()
                 }, label: {
                      Text("Start")
                         .padding(Metrics.PADDING_BUTTON_LABEL)
@@ -82,11 +84,38 @@ struct OnboardingUIView: View {
                 })
                 .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN)
                 .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN)
-                .sheet(isPresented: $showingDetail, onDismiss: {
+                .sheet(isPresented: $showingOnboard, onDismiss: {
                     self.onComplete?()
                 }, content: {
                     OnboardingViewController()
                 })
+        
+                Spacer()
+            }
+            
+            HStack {
+                Spacer()
+                Button(action: {
+                    self.showingLogin.toggle()
+                }, label: {
+                     Text("I'm a Returning User")
+                        .padding(Metrics.PADDING_BUTTON_LABEL)
+                        .frame(maxWidth: .infinity)
+                        .foregroundColor(self.color)
+                        .font(.system(size: 20, weight: .bold, design: .default))
+                        .overlay(
+                                    RoundedRectangle(cornerRadius: Metrics.RADIUS_CORNER_BUTTON)
+                                        .stroke(self.color, lineWidth: 2)
+                            )
+                })
+                .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN)
+                .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN)
+                .sheet(isPresented: $showingLogin, onDismiss: {
+                    self.onComplete?()
+                }, content: {
+                    LoginExistingUserViewController()
+                })
+        
                 Spacer()
             }
             
