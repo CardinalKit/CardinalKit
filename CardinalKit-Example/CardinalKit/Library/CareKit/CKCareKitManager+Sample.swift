@@ -23,7 +23,7 @@ internal extension OCKStore {
 
         let coffeeElement = OCKScheduleElement(start: beforeBreakfast, end: nil, interval: DateComponents(day: 1))
         let coffeeSchedule = OCKSchedule(composing: [coffeeElement])
-        var coffee = OCKTask(id: "coffee", title: "Drink Coffee ☕️", carePlanUUID: nil, schedule: coffeeSchedule)
+        var coffee = OCKTask(id: "coffee", title: "Drink Water ☕️", carePlanUUID: nil, schedule: coffeeSchedule)
         coffee.impactsAdherence = true
         coffee.instructions = "Drink coffee for good spirits!"
         
@@ -60,14 +60,31 @@ internal extension OCKStore {
         /* ---- */
         
         // Kidney Care
-        let sf12Element = OCKScheduleElement(start: afterLunch, end: nil, interval: DateComponents(month:1))
+        let sf12Element = OCKScheduleElement(start: afterLunch, end: nil, interval: DateComponents(month: 1))
         let sf12Schedule = OCKSchedule(composing: [sf12Element])
-        var sf12 = OCKTask(id: "sf12", title: "SF-12 Health Survey", carePlanUUID: nil, schedule: sf12Schedule)
+        var sf12 = OCKTask(id: "sf12", title: "SF-12 Health Survey 🩺", carePlanUUID: nil, schedule: sf12Schedule)
         sf12.impactsAdherence = true
         sf12.instructions = "Take a few minutes to fill out the SF-12 survey to help your doctor keep track of how you feel!"
         
-
-        addTasks([nausea, doxylamine, survey, coffee, sf12], callbackQueue: .main, completion: nil)
+        let medicationElement = OCKScheduleElement(start: beforeBreakfast, end: nil, interval: DateComponents(day: 1))
+        let medicationSchedule = OCKSchedule(composing: [medicationElement])
+        var medication = OCKTask(id: "medication", title: "Take Medication 💊", carePlanUUID: nil, schedule: medicationSchedule)
+        medication.impactsAdherence = true
+        medication.instructions = "Take your medication!"
+        
+        let checkInElement = OCKScheduleElement(start: beforeBreakfast, end: nil, interval: DateComponents(day: 1))
+        let checkInSchedule = OCKSchedule(composing: [checkInElement])
+        var checkIn = OCKTask(id: "check-in", title: "Check In ✅", carePlanUUID: nil, schedule: checkInSchedule)
+        checkIn.impactsAdherence = true
+        checkIn.instructions = "Make sure to check in to keep a tab on how you feel and your weight!"
+        
+        let tremorElement = OCKScheduleElement(start: beforeBreakfast, end: nil, interval: DateComponents(day: 7))
+        let tremorSchedule = OCKSchedule(composing: [tremorElement])
+        var tremor = OCKTask(id: "tremor", title: "Tremor Active Task 👋", carePlanUUID: nil, schedule: tremorSchedule)
+        tremor.impactsAdherence = true
+        tremor.instructions = "Conduct the tremor active task to monitor the side effects to Prograf!"
+        
+        addTasks([nausea, doxylamine, survey, coffee, sf12, medication, checkIn, tremor], callbackQueue: .main, completion: nil)
 
         createContacts()
     }
