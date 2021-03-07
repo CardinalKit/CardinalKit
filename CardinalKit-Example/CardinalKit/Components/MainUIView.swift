@@ -59,6 +59,7 @@ struct MainUIView: View {
         .accentColor(self.color)
         .onAppear(perform: {
             self.useCareKit = config.readBool(query: "Use CareKit")
+            CKStudyUser.shared.save()
             
             let startOfDay = Calendar.current.startOfDay(for: Date())
             let atBreakfast = Calendar.current.date(byAdding: .hour, value: 8, to: startOfDay)!
