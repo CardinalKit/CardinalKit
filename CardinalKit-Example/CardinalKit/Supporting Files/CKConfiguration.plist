@@ -94,6 +94,8 @@ tests, electrolyte lab tests, race/ethnicity, age, weight, and pregnancy informa
 	<true/>
 	<key>HealthKit Data to Read</key>
 	<array>
+		<string>BloodPressureSystolic</string>
+		<string>BloodPressureDiastolic</string>
 		<string>StepCount</string>
 		<string>DistanceWalkingRunning</string>
 		<string>FlightsClimbed</string>
