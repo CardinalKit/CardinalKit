@@ -20,6 +20,7 @@ internal extension OCKStore {
         let aFewDaysAgo = Calendar.current.date(byAdding: .day, value: -3, to: thisMorning)!
         let beforeBreakfast = Calendar.current.date(byAdding: .hour, value: 8, to: aFewDaysAgo)!
         let afterLunch = Calendar.current.date(byAdding: .hour, value: 14, to: aFewDaysAgo)!
+        let afterDinner = Calendar.current.date(byAdding: .hour, value: 20, to: aFewDaysAgo)!
 
         let coffeeElement = OCKScheduleElement(start: beforeBreakfast, end: nil, interval: DateComponents(day: 1))
         let coffeeSchedule = OCKSchedule(composing: [coffeeElement])
@@ -72,6 +73,29 @@ internal extension OCKStore {
         medication.impactsAdherence = true
         medication.instructions = "Take your medication!"
         
+        let prografSchedule = OCKSchedule(composing: [
+            OCKScheduleElement(start: beforeBreakfast, end: nil,
+                               interval: DateComponents(day: 1)),
+
+            OCKScheduleElement(start: afterDinner, end: nil,
+                               interval: DateComponents(day: 1))
+        ])
+
+        var prograf = OCKTask(id: "prograf", title: "Take Prograf",
+                                 carePlanUUID: nil, schedule: prografSchedule)
+        prograf.instructions = "Remember to take Prograf!"
+        prograf.impactsAdherence = true
+        
+        let tremorLogSchedule = OCKSchedule(composing: [
+            OCKScheduleElement(start: beforeBreakfast, end: nil, interval: DateComponents(day: 1),
+                               text: "Anytime throughout the day", targetValues: [], duration: .allDay)
+            ])
+
+        var tremorLog = OCKTask(id: "tremor-log", title: "Track your tremor",
+                             carePlanUUID: nil, schedule: tremorLogSchedule)
+        tremorLog.impactsAdherence = false
+        tremorLog.instructions = "Tap the button below anytime you experience tremor."
+        
         let checkInElement = OCKScheduleElement(start: beforeBreakfast, end: nil, interval: DateComponents(day: 1))
         let checkInSchedule = OCKSchedule(composing: [checkInElement])
         var checkIn = OCKTask(id: "check-in", title: "Check In ✅", carePlanUUID: nil, schedule: checkInSchedule)
@@ -84,7 +108,7 @@ internal extension OCKStore {
         tremor.impactsAdherence = true
         tremor.instructions = "Conduct the tremor active task to monitor the side effects to Prograf!"
         
-        addTasks([nausea, doxylamine, survey, coffee, sf12, medication, checkIn, tremor], callbackQueue: .main, completion: nil)
+        addTasks([nausea, doxylamine, survey, coffee, sf12, medication, checkIn, tremor, prograf, tremorLog], callbackQueue: .main, completion: nil)
 
         createContacts()
     }
