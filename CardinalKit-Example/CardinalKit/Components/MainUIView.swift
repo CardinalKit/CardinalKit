@@ -69,8 +69,6 @@ struct MainUIView: View {
             
             var task = OCKTask(id: "bloodpressure", title: "Test Blood Pressure", carePlanUUID: nil, schedule: schedule)
             
-            task.instructions = "Test Blood Pressure"
-            
             let store = OCKStore(name: "CKCareKitStore")
             store.addTasks([task], callbackQueue: DispatchQueue.main, completion: {result in
                 switch result {
