@@ -28,7 +28,7 @@ extension AppDelegate {
         CKApp.configure(options)
         
         // (3) if we have already logged in
-        if CKStudyUser.shared.isLoggedIn {
+//        if CKStudyUser.shared.isLoggedIn {
             CKStudyUser.shared.save()
             
             // (4) then start the requested HK data collection (if any).
@@ -38,7 +38,7 @@ extension AppDelegate {
                     print(error)
                 }
             }
-        }
+//        }
     }
     
 }
