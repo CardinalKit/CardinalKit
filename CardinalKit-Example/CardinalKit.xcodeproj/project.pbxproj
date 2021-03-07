@@ -82,6 +82,7 @@
 		DA52062625F1FDBB00D7D0A7 /* TremorTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA52062525F1FDBB00D7D0A7 /* TremorTaskViewController.swift */; };
 		DA52062825F3242400D7D0A7 /* CheckInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA52062725F3242400D7D0A7 /* CheckInViewController.swift */; };
 		DA52062A25F32D1A00D7D0A7 /* SF12ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA52062925F32D1900D7D0A7 /* SF12ViewController.swift */; };
+		DA52064C25F45DAE00D7D0A7 /* DaysSinceSurgeryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA52064B25F45DAE00D7D0A7 /* DaysSinceSurgeryView.swift */; };
 		DAEFF13F25EF428500BC36B1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DAEFF13E25EF428500BC36B1 /* GoogleService-Info.plist */; };
 		E235077724F7082700CC1899 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E235077624F7082700CC1899 /* SceneDelegate.swift */; };
 		E29143FC24E74AD100EE97B2 /* LaunchUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29143FB24E74AD100EE97B2 /* LaunchUIView.swift */; };
@@ -188,6 +189,7 @@
 		DA52062525F1FDBB00D7D0A7 /* TremorTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TremorTaskViewController.swift; sourceTree = "<group>"; };
 		DA52062725F3242400D7D0A7 /* CheckInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInViewController.swift; sourceTree = "<group>"; };
 		DA52062925F32D1900D7D0A7 /* SF12ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SF12ViewController.swift; sourceTree = "<group>"; };
+		DA52064B25F45DAE00D7D0A7 /* DaysSinceSurgeryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysSinceSurgeryView.swift; sourceTree = "<group>"; };
 		DAEFF13E25EF428500BC36B1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E235077624F7082700CC1899 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		E29143FB24E74AD100EE97B2 /* LaunchUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchUIView.swift; sourceTree = "<group>"; };
@@ -411,6 +413,7 @@
 				8E6E1E2B253539AE0024B8DF /* ChangePasscodeView.swift */,
 				8E6E1E2D25353A1E0024B8DF /* PatientIDView.swift */,
 				8EA664AC2593380D00B6A45A /* SendRecordsView.swift */,
+				DA52064B25F45DAE00D7D0A7 /* DaysSinceSurgeryView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -723,6 +726,7 @@
 				8E40DC042471E5940027536B /* CKNetworkManager.swift in Sources */,
 				DA52062625F1FDBB00D7D0A7 /* TremorTaskViewController.swift in Sources */,
 				8EA664B025941A4D00B6A45A /* SurveyItemViewController.swift in Sources */,
+				DA52064C25F45DAE00D7D0A7 /* DaysSinceSurgeryView.swift in Sources */,
 				8E9CDEBA2591843200C8A228 /* CKConfig.swift in Sources */,
 				2F94C5F22536543600DF8866 /* SceneDelegate+CardinalKit.swift in Sources */,
 				8E9CDFAE2592B79900C8A228 /* Metrics.swift in Sources */,

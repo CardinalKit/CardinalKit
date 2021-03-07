@@ -20,7 +20,7 @@ class ScheduleViewController: OCKDailyPageViewController {
     
     override func dailyPageViewController(_ dailyPageViewController: OCKDailyPageViewController, prepare listViewController: OCKListViewController, for date: Date) {
         
-        let identifiers = ["doxylamine", "medication", "nausea", "coffee", "survey", "steps", "heartRate", "sf12", "check-in", "tremor"]
+        let identifiers = ["doxylamine", "medication", "nausea", "coffee", "survey", "steps", "heartRate", "sf12", "check-in", "tremor", "prograf", "tremor-log"]
         var query = OCKTaskQuery(for: date)
         query.ids = identifiers
         query.excludesTasksWithNoEvents = true
@@ -88,6 +88,59 @@ class ScheduleViewController: OCKDailyPageViewController {
                         storeManager: self.storeManager)
                     
                     listViewController.appendViewController(tremorCard, animated: false)
+                }
+                
+                if let prografTask = tasks.first(where: { $0.id == "prograf" }) {
+
+                    let prografCard = OCKChecklistTaskViewController(
+                        task: prografTask,
+                        eventQuery: .init(for: date),
+                        storeManager: self.storeManager)
+
+                    listViewController.appendViewController(prografCard, animated: false)
+                }
+
+                if let tremorLogTask = tasks.first(where: { $0.id == "tremor-log" }) {
+
+                    // dynamic gradient colors
+                    let tremorLogGradientStart = UIColor { traitCollection -> UIColor in
+                        return traitCollection.userInterfaceStyle == .light ? #colorLiteral(red: 0.9960784314, green: 0.3725490196, blue: 0.368627451, alpha: 1) : #colorLiteral(red: 0.8627432641, green: 0.2630574384, blue: 0.2592858295, alpha: 1)
+                    }
+                    let tremorLogGradientEnd = UIColor { traitCollection -> UIColor in
+                        return traitCollection.userInterfaceStyle == .light ? #colorLiteral(red: 0.9960784314, green: 0.4732026144, blue: 0.368627451, alpha: 1) : #colorLiteral(red: 0.8627432641, green: 0.3598620686, blue: 0.2592858295, alpha: 1)
+                    }
+
+                    // Create a plot comparing nausea to medication adherence.
+                    let tremorLogDataSeries = OCKDataSeriesConfiguration(
+                        taskID: "tremor-log",
+                        legendTitle: "Tremor",
+                        gradientStartColor: tremorLogGradientStart,
+                        gradientEndColor: tremorLogGradientEnd,
+                        markerSize: 3,
+                        eventAggregator: OCKEventAggregator.countOutcomeValues)
+
+                    let prografDataSeries = OCKDataSeriesConfiguration(
+                        taskID: "prograf",
+                        legendTitle: "Prograf",
+                        gradientStartColor: .systemGray2,
+                        gradientEndColor: .systemGray,
+                        markerSize: 3,
+                        eventAggregator: OCKEventAggregator.countOutcomeValues)
+
+                    let insightsCard = OCKCartesianChartViewController(
+                        plotType: .line,
+                        selectedDate: date,
+                        configurations: [prografDataSeries, tremorLogDataSeries],
+                        storeManager: self.storeManager)
+
+                    insightsCard.chartView.headerView.titleLabel.text = "Prograf and Tremor Tracking"
+                    insightsCard.chartView.headerView.detailLabel.text = "This Week"
+                    insightsCard.chartView.headerView.accessibilityLabel = "Prograf and Tremor Tracking, This Week"
+                    
+                    let tremorLogCard = OCKButtonLogTaskViewController(task: tremorLogTask, eventQuery: .init(for: date),
+                                                                    storeManager: self.storeManager)
+                    listViewController.appendViewController(tremorLogCard, animated: false)
+                    listViewController.appendViewController(insightsCard, animated: false)
                 }
 
                 // Since the coffee task is only scheduled every other day, there will be cases

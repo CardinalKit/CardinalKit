@@ -93,31 +93,31 @@ struct OnboardingUIView: View {
                 Spacer()
             }
             
-            HStack {
-                Spacer()
-                Button(action: {
-                    self.showingLogin.toggle()
-                }, label: {
-                     Text("I'm a Returning User")
-                        .padding(Metrics.PADDING_BUTTON_LABEL)
-                        .frame(maxWidth: .infinity)
-                        .foregroundColor(self.color)
-                        .font(.system(size: 20, weight: .bold, design: .default))
-                        .overlay(
-                                    RoundedRectangle(cornerRadius: Metrics.RADIUS_CORNER_BUTTON)
-                                        .stroke(self.color, lineWidth: 2)
-                            )
-                })
-                .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN)
-                .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN)
-                .sheet(isPresented: $showingLogin, onDismiss: {
-                    self.onComplete?()
-                }, content: {
-                    LoginExistingUserViewController()
-                })
-        
-                Spacer()
-            }
+//            HStack {
+//                Spacer()
+//                Button(action: {
+//                    self.showingLogin.toggle()
+//                }, label: {
+//                     Text("I'm a Returning User")
+//                        .padding(Metrics.PADDING_BUTTON_LABEL)
+//                        .frame(maxWidth: .infinity)
+//                        .foregroundColor(self.color)
+//                        .font(.system(size: 20, weight: .bold, design: .default))
+//                        .overlay(
+//                                    RoundedRectangle(cornerRadius: Metrics.RADIUS_CORNER_BUTTON)
+//                                        .stroke(self.color, lineWidth: 2)
+//                            )
+//                })
+//                .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN)
+//                .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN)
+//                .sheet(isPresented: $showingLogin, onDismiss: {
+//                    self.onComplete?()
+//                }, content: {
+//                    LoginExistingUserViewController()
+//                })
+//
+//                Spacer()
+//            }
             
             Spacer()
         }
