@@ -35,46 +35,26 @@ internal extension OCKStore {
         pd2.impactsAdherence = true
         pd2.instructions = "Storyboarding your work can help promote retention - try summarizing one of your meetings in visual storyboard format today."
         
-//        let coffeeElement = OCKScheduleElement(start: beforeBreakfast, end: nil, interval: DateComponents(day: 1))
-//        let coffeeSchedule = OCKSchedule(composing: [coffeeElement])
-//        var coffee = OCKTask(id: "coffee", title: "Drink Coffee ☕️", carePlanUUID: nil, schedule: coffeeSchedule)
-//        coffee.impactsAdherence = true
-//        coffee.instructions = "Drink coffee for good spirits!"
-        
-        
-        let surveyElement = OCKScheduleElement(start: afterLunch, end: nil, interval: DateComponents(day: 1))
-        let surveySchedule = OCKSchedule(composing: [surveyElement])
-        var survey = OCKTask(id: "survey", title: "Take a Survey 📝", carePlanUUID: nil, schedule: surveySchedule)
-        survey.impactsAdherence = true
-        survey.instructions = "You can schedule any ResearchKit survey in your app."
-        
-        /*
-         Doxylamine and Nausea DEMO.
-         */
-        let doxylamineSchedule = OCKSchedule(composing: [
+        // Experience sampling surveys are scheduled twice daily
+        let emaSchedule = OCKSchedule(composing: [
             OCKScheduleElement(start: beforeBreakfast, end: nil,
-                               interval: DateComponents(day: 2)),
+                               interval: DateComponents(day: 1)),
 
             OCKScheduleElement(start: afterLunch, end: nil,
-                               interval: DateComponents(day: 4))
+                               interval: DateComponents(day: 1))
         ])
+        var survey = OCKTask(id: "survey", title: "Take a Experience Sampling Survey", carePlanUUID: nil, schedule: emaSchedule)
+        survey.impactsAdherence = true
+        survey.instructions = "Please take the experience sampling survey twice daily."
+        
+        // Checklist to track completion of EMA surveys
+        var emaChecklist = OCKTask(id: "emaChecklist", title: "Track Daily Survey Completion",
+                                 carePlanUUID: nil, schedule: emaSchedule)
+        emaChecklist.instructions = "Track completion of the experience sampling survey here."
 
-        var doxylamine = OCKTask(id: "doxylamine", title: "Take an Experience Sampling Survey",
-                                 carePlanUUID: nil, schedule: doxylamineSchedule)
-        doxylamine.instructions = "Take an experience sampling survey twice daily!"
-
-        let nauseaSchedule = OCKSchedule(composing: [
-            OCKScheduleElement(start: beforeBreakfast, end: nil, interval: DateComponents(day: 2),
-                               text: "Anytime throughout the day", targetValues: [], duration: .allDay)
-            ])
-
-        var nausea = OCKTask(id: "nausea", title: "Track your nausea",
-                             carePlanUUID: nil, schedule: nauseaSchedule)
-        nausea.impactsAdherence = false
-        nausea.instructions = "Tap the button below anytime you experience nausea."
         /* ---- */
 
-        addTasks([nausea, doxylamine, survey, pd1, pd2], callbackQueue: .main, completion: nil)
+        addTasks([emaChecklist, survey, pd1, pd2], callbackQueue: .main, completion: nil)
 
         createContacts()
     }
