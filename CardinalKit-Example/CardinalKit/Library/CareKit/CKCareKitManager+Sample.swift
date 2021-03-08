@@ -65,39 +65,22 @@ internal extension OCKStore {
     }
     
     func createContacts() {
-        var contact1 = OCKContact(id: "oliver", givenName: "Oliver",
-                                  familyName: "Aalami", carePlanUUID: nil)
-        contact1.asset = "OliverAalami"
-        contact1.title = "Vascular Surgeon"
-        contact1.role = "Dr. Aalami is the director of the CardinalKit project."
-        contact1.emailAddresses = [OCKLabeledValue(label: CNLabelEmailiCloud, value: "aalami@stanford.edu")]
-        contact1.phoneNumbers = [OCKLabeledValue(label: CNLabelWork, value: "(111) 111-1111")]
-        contact1.messagingNumbers = [OCKLabeledValue(label: CNLabelWork, value: "(111) 111-1111")]
+        var contact1 = OCKContact(id: "michael", givenName: "Michael",
+                                  familyName: "Cooper", carePlanUUID: nil)
+        contact1.asset = "MichaelCooper"
+        contact1.title = "Researcher"
+        contact1.role = "Michael Cooper is the lead developer of the application infrastructure for this research project."
+        contact1.emailAddresses = [OCKLabeledValue(label: CNLabelEmailiCloud, value: "coopermj@stanford.edu")]
+        contact1.phoneNumbers = [OCKLabeledValue(label: CNLabelWork, value: "(555) 555-5555")]
+        contact1.messagingNumbers = [OCKLabeledValue(label: CNLabelWork, value: "(555) 555-5555")]
 
-        contact1.address = {
-            let address = OCKPostalAddress()
-            address.street = "318 Campus Drive"
-            address.city = "Stanford"
-            address.state = "CA"
-            address.postalCode = "94305"
-            return address
-        }()
-
-        var contact2 = OCKContact(id: "johnny", givenName: "Johnny",
-                                  familyName: "Appleseed", carePlanUUID: nil)
-        contact2.asset = "JohnnyAppleseed"
-        contact2.title = "OBGYN"
-        contact2.role = "Dr. Appleseed is an OBGYN with 13 years of experience."
-        contact2.phoneNumbers = [OCKLabeledValue(label: CNLabelWork, value: "(324) 555-7415")]
-        contact2.messagingNumbers = [OCKLabeledValue(label: CNLabelWork, value: "(324) 555-7415")]
-        contact2.address = {
-            let address = OCKPostalAddress()
-            address.street = "318 Campus Drive"
-            address.city = "Stanford"
-            address.state = "CA"
-            address.postalCode = "94305"
-            return address
-        }()
+        var contact2 = OCKContact(id: "james", givenName: "James",
+                                  familyName: "Landay", carePlanUUID: nil)
+        contact2.asset = "JamesLanday"
+        contact2.title = "Professor of Computer Science"
+        contact2.role = "Dr. Landay is a Professor of Computer Science (Human-Computer Interaction) at Stanford University."
+        contact2.phoneNumbers = [OCKLabeledValue(label: CNLabelWork, value: "(555) 555-5555")]
+        contact2.messagingNumbers = [OCKLabeledValue(label: CNLabelWork, value: "(555) 555-5555")]
 
         addContacts([contact2, contact1])
     }
