@@ -21,7 +21,7 @@ class ScheduleViewController: OCKDailyPageViewController {
     
     override func dailyPageViewController(_ dailyPageViewController: OCKDailyPageViewController, prepare listViewController: OCKListViewController, for date: Date) {
         
-        let identifiers = ["emaChecklist", "pd1", "pd2", "survey"]
+        let identifiers = ["emaChecklist", "pd1", "pd2", "survey", "steps"]
         var query = OCKTaskQuery(for: date)
         query.ids = identifiers
         query.excludesTasksWithNoEvents = true
@@ -31,18 +31,6 @@ class ScheduleViewController: OCKDailyPageViewController {
             case .failure(let error): print("Error: \(error)")
             case .success(let tasks):
                     
-                // Debating whether to keep in depending on if we want fitness tracking too - might be a good visual
-                if #available(iOS 14, *), let walkTask = tasks.first(where: { $0.id == "steps" }) {
-
-                    let view = NumericProgressTaskView(
-                        task: walkTask,
-                        eventQuery: OCKEventQuery(for: date),
-                        storeManager: self.storeManager)
-                        .padding([.vertical], 10)
-
-                    listViewController.appendViewController(view.formattedHostingController(), animated: false)
-                }
-
 
                 // This was an experiment - an outstanding TODO is better understanding the link between OCKInstructionsTaskView, and
                 // OCKInstructionsTaskViewController. Hopefully this can be a point of discussion during our code review. :)
@@ -106,7 +94,19 @@ class ScheduleViewController: OCKDailyPageViewController {
                     insightsCard.chartView.headerView.accessibilityLabel = "Survey Completion Progress, This Week"
                     listViewController.appendViewController(insightsCard, animated: false)
                 }
+                
+                
+                // Debating whether to keep in depending on if we want fitness tracking too - might be a good visual
+                if #available(iOS 14, *), let walkTask = tasks.first(where: { $0.id == "steps" }) {
 
+                    let view = NumericProgressTaskView(
+                        task: walkTask,
+                        eventQuery: OCKEventQuery(for: date),
+                        storeManager: self.storeManager)
+                        .padding([.vertical], 10)
+
+                    listViewController.appendViewController(view.formattedHostingController(), animated: false)
+                }
             }
         }
     }
