@@ -21,11 +21,26 @@ internal extension OCKStore {
         let beforeBreakfast = Calendar.current.date(byAdding: .hour, value: 8, to: aFewDaysAgo)!
         let afterLunch = Calendar.current.date(byAdding: .hour, value: 14, to: aFewDaysAgo)!
 
-        let coffeeElement = OCKScheduleElement(start: beforeBreakfast, end: nil, interval: DateComponents(day: 1))
-        let coffeeSchedule = OCKSchedule(composing: [coffeeElement])
-        var coffee = OCKTask(id: "coffee", title: "Drink Coffee ☕️", carePlanUUID: nil, schedule: coffeeSchedule)
-        coffee.impactsAdherence = true
-        coffee.instructions = "Drink coffee for good spirits!"
+        // Professional Development Activity 1
+        let pd1Element = OCKScheduleElement(start: beforeBreakfast, end: nil, interval: DateComponents(day: 1))
+        let pd1Schedule = OCKSchedule(composing: [pd1Element])
+        var pd1 = OCKTask(id: "pd1", title: "Work In a New Location", carePlanUUID: nil, schedule: pd1Schedule)
+        pd1.impactsAdherence = true
+        pd1.instructions = "Working in a new location can promote creativity - try working in a new location today!"
+        
+        // Professional Development Activity 2
+        let pd2Element = OCKScheduleElement(start: beforeBreakfast, end: nil, interval: DateComponents(day: 1))
+        let pd2Schedule = OCKSchedule(composing: [pd2Element])
+        var pd2 = OCKTask(id: "pd2", title: "Storyboard Your Insights from a Meeting Today", carePlanUUID: nil, schedule: pd2Schedule)
+        pd2.impactsAdherence = true
+        pd2.instructions = "Storyboarding your work can help promote retention - try summarizing one of your meetings in visual storyboard format today."
+        
+//        let coffeeElement = OCKScheduleElement(start: beforeBreakfast, end: nil, interval: DateComponents(day: 1))
+//        let coffeeSchedule = OCKSchedule(composing: [coffeeElement])
+//        var coffee = OCKTask(id: "coffee", title: "Drink Coffee ☕️", carePlanUUID: nil, schedule: coffeeSchedule)
+//        coffee.impactsAdherence = true
+//        coffee.instructions = "Drink coffee for good spirits!"
+        
         
         let surveyElement = OCKScheduleElement(start: afterLunch, end: nil, interval: DateComponents(day: 1))
         let surveySchedule = OCKSchedule(composing: [surveyElement])
@@ -59,7 +74,7 @@ internal extension OCKStore {
         nausea.instructions = "Tap the button below anytime you experience nausea."
         /* ---- */
 
-        addTasks([nausea, doxylamine, survey, coffee], callbackQueue: .main, completion: nil)
+        addTasks([nausea, doxylamine, survey, pd1, pd2], callbackQueue: .main, completion: nil)
 
         createContacts()
     }

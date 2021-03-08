@@ -10,6 +10,7 @@ import CareKit
 import CareKitStore
 import UIKit
 import SwiftUI
+import CareKitUI
 
 class ScheduleViewController: OCKDailyPageViewController {
     
@@ -20,7 +21,7 @@ class ScheduleViewController: OCKDailyPageViewController {
     
     override func dailyPageViewController(_ dailyPageViewController: OCKDailyPageViewController, prepare listViewController: OCKListViewController, for date: Date) {
         
-        let identifiers = ["doxylamine", "nausea", "coffee", "survey", "steps", "heartRate"]
+        let identifiers = ["doxylamine", "nausea", "pd1", "pd2", "survey", "steps", "heartRate"]
         var query = OCKTaskQuery(for: date)
         query.ids = identifiers
         query.excludesTasksWithNoEvents = true
@@ -30,18 +31,18 @@ class ScheduleViewController: OCKDailyPageViewController {
             case .failure(let error): print("Error: \(error)")
             case .success(let tasks):
 
-                // Add a non-CareKit view into the list
-                let tipTitle = "Customize your app!"
-                let tipText = "Start with the CKConfiguration.plist file."
-
-                // Only show the tip view on the current date
-                if Calendar.current.isDate(date, inSameDayAs: Date()) {
-                    let tipView = TipView()
-                    tipView.headerView.titleLabel.text = tipTitle
-                    tipView.headerView.detailLabel.text = tipText
-                    tipView.imageView.image = UIImage(named: "GraphicOperatingSystem")
-                    listViewController.appendView(tipView, animated: false)
-                }
+//                // Add a non-CareKit view into the list
+//                let tipTitle = "Customize your app!"
+//                let tipText = "Start with the CKConfiguration.plist file."
+//
+//                // Only show the tip view on the current date
+//                if Calendar.current.isDate(date, inSameDayAs: Date()) {
+//                    let tipView = TipView()
+//                    tipView.headerView.titleLabel.text = tipTitle
+//                    tipView.headerView.detailLabel.text = tipText
+//                    tipView.imageView.image = UIImage(named: "GraphicOperatingSystem")
+//                    listViewController.appendView(tipView, animated: false)
+//                }
 
                 if #available(iOS 14, *), let walkTask = tasks.first(where: { $0.id == "steps" }) {
 
@@ -54,14 +55,30 @@ class ScheduleViewController: OCKDailyPageViewController {
                     listViewController.appendViewController(view.formattedHostingController(), animated: false)
                 }
 
-                // Since the coffee task is only scheduled every other day, there will be cases
-                // where it is not contained in the tasks array returned from the query.
-                if let coffeeTask = tasks.first(where: { $0.id == "coffee" }) {
-                    let coffeeCard = OCKSimpleTaskViewController(task: coffeeTask, eventQuery: .init(for: date),
-                                                                 storeManager: self.storeManager)
-                    listViewController.appendViewController(coffeeCard, animated: false)
-                }
 
+                // This was an experiment - an outstanding TODO is better understanding the link between OCKInstructionsTaskView, and
+                // OCKInstructionsTaskViewController. Hopefully this can be a point of discussion during our code review. :)
+//                if let pd1 = tasks.first(where: { $0.id == "pd1" }) {
+//                    let pd1Card = OCKInstructionsTaskViewController(viewSynchronizer: OCKInstructionsTaskViewSynchronizer(),
+//                                                        task: pd1,
+//                                                        eventQuery: .init(for: date),
+//                                                        storeManager: self.storeManager)
+//                    listViewController.appendViewController(pd1Card, animated: false)
+//                }
+
+                // Adding professional development tasks (abbr: pd)
+                if let pd1 = tasks.first(where: { $0.id == "pd1" }) {
+                    let pd1Card = OCKSimpleTaskViewController(task: pd1, eventQuery: .init(for: date),
+                                                                 storeManager: self.storeManager)
+                    listViewController.appendViewController(pd1Card, animated: false)
+                }
+                
+                if let pd2 = tasks.first(where: { $0.id == "pd2" }) {
+                    let pd2Card = OCKSimpleTaskViewController(task: pd2, eventQuery: .init(for: date),
+                                                                 storeManager: self.storeManager)
+                    listViewController.appendViewController(pd2Card, animated: false)
+                }
+                
                 if let surveyTask = tasks.first(where: { $0.id == "survey" }) {
                     let surveyCard = SurveyItemViewController(
                         viewSynchronizer: SurveyItemViewSynchronizer(),
