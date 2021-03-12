@@ -74,10 +74,14 @@ internal extension OCKStore {
         contact2.asset = "JamesLanday"
         contact2.title = "Professor of Computer Science"
         contact2.role = "Dr. Landay is a Professor of Computer Science (Human-Computer Interaction) at Stanford University."
-        contact2.phoneNumbers = [OCKLabeledValue(label: CNLabelWork, value: "(555) 555-5555")]
-        contact2.messagingNumbers = [OCKLabeledValue(label: CNLabelWork, value: "(555) 555-5555")]
 
-        addContacts([contact2, contact1])
+        var contact3 = OCKContact(id: "sarah", givenName: "Sarah",
+                                  familyName: "Billington", carePlanUUID: nil)
+        contact3.asset = "SarahBillington"
+        contact3.title = "Professor of Civil and Environmental Engineering"
+        contact3.role = "Dr. Billington is a Professor of Civil and Environmental Engineering at Stanford University."
+
+        addContacts([contact3, contact2, contact1])
     }
     
 }
