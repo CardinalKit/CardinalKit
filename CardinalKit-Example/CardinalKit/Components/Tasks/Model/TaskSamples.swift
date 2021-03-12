@@ -27,12 +27,14 @@ struct TaskSamples {
         steps += [instructionStep]
         
         // OUTCOME 1: Belonging.
+
         
         // Question 1.1 - Sliding Scale of Belonging
         let belongingAnswer = ORKScaleAnswerFormat(maximumValue: 7, minimumValue: 1, defaultValue: 4, step: 1)
         let belongingStep = ORKQuestionStep(identifier: "belongingQuestion", title: "Experience Sampling", question: "I feel like I belong in this space.", answer: belongingAnswer)
         
         steps += [belongingStep]
+
         
         // Question 1.2 - Sliding Scale of Connection to Coworkers
         let coworkerConnectionAnswer = ORKScaleAnswerFormat(maximumValue: 7, minimumValue: 1, defaultValue: 4, step: 1)

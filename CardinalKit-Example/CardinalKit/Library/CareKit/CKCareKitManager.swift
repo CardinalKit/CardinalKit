@@ -13,6 +13,10 @@ class CKCareKitManager: NSObject {
     
     let coreDataStore = OCKStore(name: "CKCareKitStore", type: .inMemory)//, remote: CKCareKitRemoteSynchronizable())
     let healthKitStore = OCKHealthKitPassthroughStore(name: "CKCareKitHealthKitStore", type: .inMemory)
+
+// Convert to the below when ready to add all CareKit services to the Firestore
+//    let coreDataStore = OCKStore(name: "CKCareKitStore", type: .onDisk, remote: CKCareKitRemoteSyncWithFirestore())
+//    let healthKitStore = OCKHealthKitPassthroughStore(name: "CKCareKitHealthKitStore", type: .onDisk)
     private(set) var synchronizedStoreManager: OCKSynchronizedStoreManager!
     
     static let shared = CKCareKitManager()

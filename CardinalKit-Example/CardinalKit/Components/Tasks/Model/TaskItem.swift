@@ -20,6 +20,7 @@ enum TaskItem: Int {
 //         sampleResearchKitActiveTask,
 //         sampleCoreMotionAppleWatch,
          // sampleFunCoffeeSurvey,
+
          sampleLearnItem
     
     /*
@@ -36,6 +37,7 @@ enum TaskItem: Int {
 //            return "Sensors Demo"
 //        case .sampleFunCoffeeSurvey:
 //            return "Coffee Survey"
+
         case .sampleLearnItem:
             return "About Digital-PD"
         }
@@ -54,6 +56,7 @@ enum TaskItem: Int {
 //            return "CoreMotion & Cloud Storage"
 //        case .sampleFunCoffeeSurvey:
 //            return "How do you like your coffee?"
+
         case .sampleLearnItem:
             return "Learn More about the Digital-PD Project"
         }
@@ -72,6 +75,7 @@ enum TaskItem: Int {
 //            return getImage(named: "CoffeeIcon")
 //        case .sampleCoreMotionAppleWatch:
 //            return getImage(named: "WatchIcon")
+
         case .sampleLearnItem:
             return getImage(named: "AppIcon")
         default:
@@ -85,10 +89,11 @@ enum TaskItem: Int {
     var section: String {
         switch self {
         case .sampleResearchKitSurvey://, .sampleResearchKitActiveTask, .sampleCoreMotionAppleWatch:
+
             return "Current Tasks"
-//        case .sampleFunCoffeeSurvey:
-//            return "Your Interests"
-        case .sampleLearnItem:
+        case .sampleFunCoffeeSurvey, .sampleFunCoffeeResult:
+            return "Your Interests"
+        case .sampleLearnItem, .sampleCoreMotionAppleWatch:
             return "Learn"
         }
     }
@@ -107,6 +112,7 @@ enum TaskItem: Int {
 //            return AnyView(SensorsDemoUIView())
 //        case .sampleFunCoffeeSurvey:
 //            return AnyView(CKTaskViewController(tasks: TaskSamples.sampleCoffeeTask))
+
         case .sampleLearnItem:
             return AnyView(LearnUIView())
         }

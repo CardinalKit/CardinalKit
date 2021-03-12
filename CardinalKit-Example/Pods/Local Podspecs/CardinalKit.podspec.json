@@ -1,6 +1,6 @@
 {
   "name": "CardinalKit",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "summary": "https://cardinalkit.org/",
   "description": "TODO: Add long description of the pod here.",
   "homepage": "https://github.com/CardinalKit/CardinalKit",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/CardinalKit/CardinalKit.git",
-    "tag": "1.1.0"
+    "tag": "1.2.0"
   },
   "platforms": {
     "ios": "13.0"
