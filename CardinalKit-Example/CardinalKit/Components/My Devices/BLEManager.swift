@@ -74,7 +74,7 @@ class BLEManager: NSObject, CBCentralManagerDelegate, ObservableObject, CBPeriph
             peripheralName = name
         }
         else {
-            peripheralName = "Unknown Device"
+            peripheralName = "Bluetooth Device"
         }
         
         var alreadyDetected = false
@@ -193,6 +193,10 @@ class BLEManager: NSObject, CBCentralManagerDelegate, ObservableObject, CBPeriph
             if characteristic.uuid == CBUUID(string: "0x2A19") {
                 peripheral.readValue(for: characteristic)
             }
+            
+            if characteristic.uuid == ServiceNameToCBUUID["Blood Pressure"] {
+                peripheral.readValue(for: characteristic)
+            }
         }
         
         // add the characteristic for the given service
@@ -224,8 +228,49 @@ class BLEManager: NSObject, CBCentralManagerDelegate, ObservableObject, CBPeriph
         if characteristic.uuid == CBUUID(string: "0x2A19") {
             let index = findPeripheralIndex(peripheral: peripheral)
             connectedPeripherals[index].batteryLevel = Int(characteristic.value?.first! ?? 0)
+        } else if characteristic.uuid == ServiceNameToCBUUID["Blood Pressure"] {
+            let index = findPeripheralIndex(peripheral: peripheral)
+            print("Reading blood pressure information from peripheral \(index)")
+            print("Value is: \(characteristic.value)")
+            getBloodPressureInfo(from: characteristic)
         }
         print(characteristic.value ?? "no value")
+    }
+    
+    func getBloodPressureInfo(from characteristic: CBCharacteristic) {
+        guard let characteristicData = characteristic.value else { return }
+        let byteArray = [UInt8](characteristicData)
+        
+        // firstly, extract core data about the metrics from the flags byte
+        if byteArray[0] & 0x01 == 0 {
+            print("Units are mmHg")
+        } else {
+            print("Units are kPa")
+        }
+        
+        if byteArray[1] & (0x01 << 1) == 0 {
+            print("Time stamp flag not present")
+        } else {
+            print("Time stamp flag present")
+        }
+        
+        if byteArray[1] & (0x01 << 2) == 0 {
+            print("Pulse rate flag not present")
+        } else {
+            print("Pulse rate flag present")
+        }
+        
+        if byteArray[1] & (0x01 << 3) == 0 {
+            print("User ID flag not present")
+        } else {
+            print("User ID flag present")
+        }
+        
+        if byteArray[1] & (0x01 << 4) == 0 {
+            print("Measurement status not present")
+        } else {
+            print("Measurement status present")
+        }
     }
     
     func discoverServices(peripheral: CBPeripheral) {

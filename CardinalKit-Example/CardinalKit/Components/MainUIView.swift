@@ -68,7 +68,7 @@ struct MainUIView: View {
             
             let schedule = OCKSchedule(composing: [dailyAtBreakfast])
             
-            var task = OCKTask(id: "bloodpressure", title: "Test Blood Pressure", carePlanUUID: nil, schedule: schedule)
+            let task = OCKTask(id: "bloodpressure", title: "Test Blood Pressure", carePlanUUID: nil, schedule: schedule)
             
             let store = OCKStore(name: "CKCareKitStore")
             store.addTasks([task], callbackQueue: DispatchQueue.main, completion: {result in
