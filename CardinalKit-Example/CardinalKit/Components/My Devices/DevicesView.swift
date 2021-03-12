@@ -33,6 +33,7 @@ struct AddDeviceView: View {
             
         }.onAppear {
             print("Add Bluetooth Device Menu Appeared")
+            self.bleManager.peripherals.removeAll()
             self.bleManager.startScanning()
         }.onDisappear {
             print("Add Bluetooth Device Menu Disappeared")
@@ -84,8 +85,12 @@ struct ConnectedDeviceView: View {
         .contentShape(Rectangle())
         .onTapGesture {
             print("Click detected")
-            print(acceptableDeviceCBUUIDList)
+            //print(acceptableDeviceCBUUIDList)
             print(peripheral.services)
+            if peripheral.bloodPressureCharacteristic != nil {
+//                peripheral.corePeripheral.readValue(for: peripheral.bloodPressureCharacteristic!)
+                peripheral.corePeripheral.setNotifyValue(true, for: peripheral.bloodPressureCharacteristic!)
+            }
 //            bleManager.discoverServices(peripheral: peripheral.corePeripheral)
         }
     }

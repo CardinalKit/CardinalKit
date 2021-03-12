@@ -40,10 +40,10 @@ struct MainUIView: View {
                 }
             }
             
-            DevicesView().tabItem {
-                Image(systemName: "rectangle.connected.to.line.below").renderingMode(.template)
-                Text("My Devices")
-            }
+//            DevicesView().tabItem {
+//                Image(systemName: "rectangle.connected.to.line.below").renderingMode(.template)
+//                Text("My Devices")
+//            }
             
             //            AboutUsView(dotColor: self.color).tabItem {
             //                Image(systemName: "book").renderingMode(.template)
