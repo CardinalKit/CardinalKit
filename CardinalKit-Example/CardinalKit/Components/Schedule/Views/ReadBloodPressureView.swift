@@ -27,9 +27,37 @@ struct ReadBloodPressureView: View {
     
     func submitMetrics() {
         if useCuff {
-            // extract data from BP cuff
+            systolicPressure = String(bleManager.systolicPressure)
+            diastolicPressure = String(bleManager.diastolicPressure)
         }
-        print("I'm gonna have to Kermit")
+        
+        if #available(iOS 14.0, *) {
+            let systolicPressureMeasurement = HKQuantity(unit: .millimeterOfMercury(), doubleValue: Double(self.systolicPressure) ?? -1.0)
+            let diastolicPressureMeasurement = HKQuantity(unit: .millimeterOfMercury(), doubleValue: Double(self.diastolicPressure) ?? -1.0)
+            
+            let systolicPressureDataObject = HKQuantitySample(type: HKQuantityType.quantityType(forIdentifier: .bloodPressureSystolic)!, quantity: systolicPressureMeasurement, start: Date(), end: Date())
+            let diastolicPressureDataObject = HKQuantitySample(type: HKQuantityType.quantityType(forIdentifier: .bloodPressureDiastolic)!, quantity: diastolicPressureMeasurement, start: Date(), end: Date())
+            
+            HKHealthStore().save(systolicPressureDataObject) { success, error in
+                if error != nil {
+                    print("Error: \(String(describing: error))")
+                }
+                if success {
+                    print("Saved systolic successfully")
+                }
+            }
+            
+            HKHealthStore().save(diastolicPressureDataObject) { success, error in
+                if error != nil {
+                    print("Error: \(String(describing: error))")
+                }
+                if success {
+                    print("Saved diastolic successfully")
+                }
+            }
+        } else {
+            // Fallback on earlier versions
+        }
     }
     
     var body: some View {
@@ -140,13 +168,31 @@ struct ReadBloodPressureView: View {
                     .buttonStyle(RoundedCornerGradientButtonStyle())
                     Spacer()
                 }
+            } else if actionItemSelected && !useCuff {
+                Group {
+                    Text("Systolic Blood Pressure")
+                    TextField("", text: $systolicPressure)
+                        .keyboardType(.numberPad)
+                    Text("Diastolic Blood Pressure")
+                    TextField("", text: $diastolicPressure)
+                        .keyboardType(.numberPad)
+                    Spacer()
+                    Button(action: {
+                        submitMetrics()
+                    }) {
+                        HStack {
+                            Spacer()
+                            Text("Submit Pressure")
+                            Spacer()
+                        }
+                    }
+                    .buttonStyle(RoundedCornerGradientButtonStyle())
+                }
             }
             
-            
-            
         }.sheet(isPresented: $presentAddDeviceMenu, onDismiss: {
-                    presentAddDeviceMenu = false
-                    deviceChosen = true
+            presentAddDeviceMenu = false
+            deviceChosen = true
             
         }, content: {
             AddDeviceView(bleManager: bleManager)
