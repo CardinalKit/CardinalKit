@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		2F94C5F22536543600DF8866 /* SceneDelegate+CardinalKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F94C5F12536543600DF8866 /* SceneDelegate+CardinalKit.swift */; };
+		4453014225FD5EDD00F7AB22 /* ProgressUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4453014125FD5EDD00F7AB22 /* ProgressUIView.swift */; };
+		4453014625FD7B7F00F7AB22 /* NotificationStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4453014525FD7B7E00F7AB22 /* NotificationStepViewController.swift */; };
+		44CD173B25F85C1600054F0E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44CD173A25F85C1600054F0E /* GoogleService-Info.plist */; };
+		44CD173D25F85D7600054F0E /* LoginExistingUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CD173C25F85D7600054F0E /* LoginExistingUserViewController.swift */; };
 		44F5403325D3BD1F00B15111 /* TeamUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F5403225D3BD1F00B15111 /* TeamUIView.swift */; };
 		44F5403525D45AEB00B15111 /* ProfileDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F5403425D45AEB00B15111 /* ProfileDetail.swift */; };
 		44F5403825D464F100B15111 /* ProfileData.json in Resources */ = {isa = PBXBuildFile; fileRef = 44F5403725D464F100B15111 /* ProfileData.json */; };
@@ -83,7 +87,6 @@
 		DA52062825F3242400D7D0A7 /* CheckInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA52062725F3242400D7D0A7 /* CheckInViewController.swift */; };
 		DA52062A25F32D1A00D7D0A7 /* SF12ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA52062925F32D1900D7D0A7 /* SF12ViewController.swift */; };
 		DA52064C25F45DAE00D7D0A7 /* DaysSinceSurgeryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA52064B25F45DAE00D7D0A7 /* DaysSinceSurgeryView.swift */; };
-		DAEFF13F25EF428500BC36B1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DAEFF13E25EF428500BC36B1 /* GoogleService-Info.plist */; };
 		E235077724F7082700CC1899 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E235077624F7082700CC1899 /* SceneDelegate.swift */; };
 		E29143FC24E74AD100EE97B2 /* LaunchUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29143FB24E74AD100EE97B2 /* LaunchUIView.swift */; };
 		E2CB7FE524F730C80039C24A /* CKConfiguration-old.plist in Resources */ = {isa = PBXBuildFile; fileRef = E2CB7FE424F730C80039C24A /* CKConfiguration-old.plist */; };
@@ -111,6 +114,10 @@
 		1D31556B648F48DA664CEE80 /* Pods_CardinalKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CardinalKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F94C5F12536543600DF8866 /* SceneDelegate+CardinalKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SceneDelegate+CardinalKit.swift"; sourceTree = "<group>"; };
 		41DC264876E45FE5A3FD8701 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		4453014125FD5EDD00F7AB22 /* ProgressUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressUIView.swift; sourceTree = "<group>"; };
+		4453014525FD7B7E00F7AB22 /* NotificationStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStepViewController.swift; sourceTree = "<group>"; };
+		44CD173A25F85C1600054F0E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		44CD173C25F85D7600054F0E /* LoginExistingUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginExistingUserViewController.swift; sourceTree = "<group>"; };
 		44F5403225D3BD1F00B15111 /* TeamUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamUIView.swift; sourceTree = "<group>"; };
 		44F5403425D45AEB00B15111 /* ProfileDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetail.swift; sourceTree = "<group>"; };
 		44F5403725D464F100B15111 /* ProfileData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ProfileData.json; sourceTree = "<group>"; };
@@ -190,7 +197,6 @@
 		DA52062725F3242400D7D0A7 /* CheckInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInViewController.swift; sourceTree = "<group>"; };
 		DA52062925F32D1900D7D0A7 /* SF12ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SF12ViewController.swift; sourceTree = "<group>"; };
 		DA52064B25F45DAE00D7D0A7 /* DaysSinceSurgeryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysSinceSurgeryView.swift; sourceTree = "<group>"; };
-		DAEFF13E25EF428500BC36B1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E235077624F7082700CC1899 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		E29143FB24E74AD100EE97B2 /* LaunchUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchUIView.swift; sourceTree = "<group>"; };
 		E2CB7FE424F730C80039C24A /* CKConfiguration-old.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "CKConfiguration-old.plist"; sourceTree = "<group>"; };
@@ -227,17 +233,12 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		44F5402F25D3BCE900B15111 /* About Team */ = {
+		4453014025FD5CA500F7AB22 /* Progress */ = {
 			isa = PBXGroup;
 			children = (
-				44F5403225D3BD1F00B15111 /* TeamUIView.swift */,
-				44F5403F25D468B400B15111 /* ProfileRow.swift */,
-				44F5403725D464F100B15111 /* ProfileData.json */,
-				44F5403425D45AEB00B15111 /* ProfileDetail.swift */,
-				44F5403B25D4663E00B15111 /* Profile.swift */,
-				44F5403D25D4669700B15111 /* ModelData.swift */,
+				4453014125FD5EDD00F7AB22 /* ProgressUIView.swift */,
 			);
-			path = "About Team";
+			path = Progress;
 			sourceTree = "<group>";
 		};
 		607FACC71AFB9204008FA782 = {
@@ -312,8 +313,8 @@
 				8E0A4384244A4A0400656518 /* Constants.swift */,
 				8E0A4378244A4A0300656518 /* CardinalKit_Example-Bridging-Header.h */,
 				8E0A43C9244A4C6500656518 /* Info.plist */,
+				44CD173A25F85C1600054F0E /* GoogleService-Info.plist */,
 				E2F1FD7724D62064006C39DF /* CKConfiguration.plist */,
-				DAEFF13E25EF428500BC36B1 /* GoogleService-Info.plist */,
 				E2CB7FE424F730C80039C24A /* CKConfiguration-old.plist */,
 			);
 			path = "Supporting Files";
@@ -334,6 +335,7 @@
 			children = (
 				8E0A439C244A4A0400656518 /* Steps */,
 				8E6E1E2125352C780024B8DF /* OnboardingUIView.swift */,
+				44CD173C25F85D7600054F0E /* LoginExistingUserViewController.swift */,
 				8E6E1E082534F4100024B8DF /* OnboardingViewController.swift */,
 				8E6E1E0A2534FF640024B8DF /* OnboardingViewController+Coordinator.swift */,
 				8E6E1E0C25351D8F0024B8DF /* PageViewController.swift */,
@@ -352,6 +354,7 @@
 				8E0A439F244A4A0400656518 /* PasswordlessLoginStep.swift */,
 				8E0A43A3244A4A0400656518 /* LoginCustomWaitStepViewController.swift */,
 				E2DF9F092500C9CE00A93B93 /* LoginViewController.swift */,
+				4453014525FD7B7E00F7AB22 /* NotificationStepViewController.swift */,
 			);
 			path = Steps;
 			sourceTree = "<group>";
@@ -431,11 +434,11 @@
 		8E9CDEAA25916F2A00C8A228 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				44F5402F25D3BCE900B15111 /* About Team */,
 				8E6E1E23253537580024B8DF /* MainUIView.swift */,
 				E29143FB24E74AD100EE97B2 /* LaunchUIView.swift */,
 				8E0A4399244A4A0400656518 /* Onboarding */,
 				8E9CDEA525915F6600C8A228 /* Schedule */,
+				4453014025FD5CA500F7AB22 /* Progress */,
 				8E9CDEB42591818200C8A228 /* Care Team */,
 				8E0A438D244A4A0400656518 /* Tasks */,
 				8E0A4379244A4A0400656518 /* Profile */,
@@ -469,6 +472,12 @@
 			isa = PBXGroup;
 			children = (
 				8E9CDEB5259181B400C8A228 /* CareTeamViewControllerRepresentable.swift */,
+				44F5403225D3BD1F00B15111 /* TeamUIView.swift */,
+				44F5403F25D468B400B15111 /* ProfileRow.swift */,
+				44F5403725D464F100B15111 /* ProfileData.json */,
+				44F5403425D45AEB00B15111 /* ProfileDetail.swift */,
+				44F5403B25D4663E00B15111 /* Profile.swift */,
+				44F5403D25D4669700B15111 /* ModelData.swift */,
 			);
 			path = "Care Team";
 			sourceTree = "<group>";
@@ -602,7 +611,7 @@
 				8E0A43C1244A4A0400656518 /* LoginCustomWaitStepView.xib in Resources */,
 				E2CB7FE524F730C80039C24A /* CKConfiguration-old.plist in Resources */,
 				44F5403825D464F100B15111 /* ProfileData.json in Resources */,
-				DAEFF13F25EF428500BC36B1 /* GoogleService-Info.plist in Resources */,
+				44CD173B25F85C1600054F0E /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -721,6 +730,7 @@
 				8E0A43B3244A4A0400656518 /* TaskSamples.swift in Sources */,
 				8E6E1E2225352C780024B8DF /* OnboardingUIView.swift in Sources */,
 				8E6E1E1A253528450024B8DF /* WithdrawView.swift in Sources */,
+				44CD173D25F85D7600054F0E /* LoginExistingUserViewController.swift in Sources */,
 				8E6E1E2E25353A1E0024B8DF /* PatientIDView.swift in Sources */,
 				8E6E1E0B2534FF640024B8DF /* OnboardingViewController+Coordinator.swift in Sources */,
 				8E40DC042471E5940027536B /* CKNetworkManager.swift in Sources */,
@@ -747,9 +757,11 @@
 				8E6E1E182535263F0024B8DF /* CKTaskViewController.swift in Sources */,
 				8E9CDF142591B73900C8A228 /* CKHealthRecordsManager.swift in Sources */,
 				8EA664B42594387900B6A45A /* Errors.swift in Sources */,
+				4453014625FD7B7F00F7AB22 /* NotificationStepViewController.swift in Sources */,
 				8E6E1E1225351F830024B8DF /* DocumentPreviewViewController.swift in Sources */,
 				8E6E1E20253529760024B8DF /* DocumentView.swift in Sources */,
 				8E7FFFBB25DE37FF002982B4 /* CoffeePieChartView.swift in Sources */,
+				4453014225FD5EDD00F7AB22 /* ProgressUIView.swift in Sources */,
 				8E7FFFB825DE350A002982B4 /* CoffeeUIView.swift in Sources */,
 				8E0A43B5244A4A0400656518 /* TaskItem.swift in Sources */,
 				8E6E1E2C253539AE0024B8DF /* ChangePasscodeView.swift in Sources */,
@@ -910,7 +922,7 @@
 				);
 				MARKETING_VERSION = 1.3.0;
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = edu.stanford.cs342.342a2ksj;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.stanford.cs342.kidney.release;
 				PRODUCT_NAME = "CardinalKit Example";
 				SWIFT_OBJC_BRIDGING_HEADER = "CardinalKit/Supporting Files/CardinalKit_Example-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -936,7 +948,7 @@
 				);
 				MARKETING_VERSION = 1.3.0;
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = edu.stanford.cs342.342a2ksj;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.stanford.cs342.kidney.release;
 				PRODUCT_NAME = "CardinalKit Example";
 				SWIFT_OBJC_BRIDGING_HEADER = "CardinalKit/Supporting Files/CardinalKit_Example-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
