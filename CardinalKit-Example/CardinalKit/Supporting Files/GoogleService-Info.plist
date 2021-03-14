@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>743900058552-50d418tmmuoftfhhlsg1fmmm99mmpqfc.apps.googleusercontent.com</string>
+	<string>743900058552-spjnerct4iegqj08mkhjdfbp4olak8pp.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.743900058552-50d418tmmuoftfhhlsg1fmmm99mmpqfc</string>
+	<string>com.googleusercontent.apps.743900058552-spjnerct4iegqj08mkhjdfbp4olak8pp</string>
 	<key>API_KEY</key>
 	<string>AIzaSyABySwkvgZziTXsGEsh8EkSdjD-mCr69bA</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,22 +13,22 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>edu.stanford.cs342.342a2ksj</string>
+	<string>edu.stanford.cs342.kidney.release</string>
 	<key>PROJECT_ID</key>
 	<string>a2-4c1e9</string>
 	<key>STORAGE_BUCKET</key>
 	<string>a2-4c1e9.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_GCM_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:743900058552:ios:ed6b81cb0b31727964754d</string>
+	<string>1:743900058552:ios:394b3fc899f9da8864754d</string>
 </dict>
 </plist>

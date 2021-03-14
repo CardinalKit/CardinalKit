@@ -20,6 +20,10 @@ struct OnboardingElement {
 
 struct OnboardingUIView: View {
     
+    static let screenWidth = UIScreen.main.bounds.size.width
+    static let screenHeight = UIScreen.main.bounds.size.height
+    static let screenSize = UIScreen.main.bounds.size
+    
     var onboardingElements: [OnboardingElement] = []
     let color: Color
     let config = CKPropertyReader(file: "CKConfiguration")
@@ -41,8 +45,7 @@ struct OnboardingUIView: View {
     }
 
     var body: some View {
-        VStack(spacing: 10) {
-            Spacer()
+        VStack(spacing: OnboardingUIView.screenHeight*(1/80)) {
             /*
             Image("SBDLogoGrey")
                 .resizable()
@@ -50,7 +53,8 @@ struct OnboardingUIView: View {
                 .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN*4)
                 .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN*4)
             */
-            Spacer(minLength: 20)
+            //Spacer(minLength: 20)
+            Spacer(minLength: OnboardingUIView.screenHeight*(1/40))
              
             
             Text(config.read(query: "Study Title"))
@@ -92,32 +96,32 @@ struct OnboardingUIView: View {
         
                 Spacer()
             }
-            
-//            HStack {
-//                Spacer()
-//                Button(action: {
-//                    self.showingLogin.toggle()
-//                }, label: {
-//                     Text("I'm a Returning User")
-//                        .padding(Metrics.PADDING_BUTTON_LABEL)
-//                        .frame(maxWidth: .infinity)
-//                        .foregroundColor(self.color)
-//                        .font(.system(size: 20, weight: .bold, design: .default))
-//                        .overlay(
-//                                    RoundedRectangle(cornerRadius: Metrics.RADIUS_CORNER_BUTTON)
-//                                        .stroke(self.color, lineWidth: 2)
-//                            )
-//                })
-//                .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN)
-//                .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN)
-//                .sheet(isPresented: $showingLogin, onDismiss: {
-//                    self.onComplete?()
-//                }, content: {
-//                    LoginExistingUserViewController()
-//                })
-//
-//                Spacer()
-//            }
+       
+            HStack {
+                Spacer()
+                Button(action: {
+                    self.showingLogin.toggle()
+                }, label: {
+                     Text("I'm a Returning User")
+                        .padding(Metrics.PADDING_BUTTON_LABEL)
+                        .frame(maxWidth: .infinity)
+                        .foregroundColor(self.color)
+                        .font(.system(size: 20, weight: .bold, design: .default))
+                        .overlay(
+                                    RoundedRectangle(cornerRadius: Metrics.RADIUS_CORNER_BUTTON)
+                                        .stroke(self.color, lineWidth: 2)
+                            )
+                })
+                .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN)
+                .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN)
+                .sheet(isPresented: $showingLogin, onDismiss: {
+                    self.onComplete?()
+                }, content: {
+                    LoginExistingUserViewController()
+                })
+
+                Spacer()
+            }
             
             Spacer()
         }
@@ -130,21 +134,21 @@ struct InfoView: View {
     let description: String
     let color: Color
     var body: some View {
-        VStack(spacing: 10) {
+        VStack(spacing: OnboardingUIView.screenHeight*(1/80)) {
             Image(logo)
                 .resizable()
                 .padding()
-                .frame(width: 250, height: 250, alignment: .center)
+                .frame(width: OnboardingUIView.screenHeight*(5/16), height: OnboardingUIView.screenHeight*(5/16), alignment: .center)
 
                 Text(title).font(.title)
                 
                 Text(description)
                     .font(.body)
                     .multilineTextAlignment(.center)
-                    .padding(.leading, 40)
-                    .padding(.trailing, 40)
+                    .padding(.leading, OnboardingUIView.screenHeight*(1/20))
+                    .padding(.trailing, OnboardingUIView.screenHeight*(1/20))
         }
-        .offset(y: -20)
+        .offset(y: -OnboardingUIView.screenHeight*(1/40))
     }
 }
 

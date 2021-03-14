@@ -68,7 +68,6 @@ extension AppDelegate {
             UserDefaults.standard.set(true, forKey: Constants.prefFirstRunWasMarked)
         }
     }
-    
 }
 
 
