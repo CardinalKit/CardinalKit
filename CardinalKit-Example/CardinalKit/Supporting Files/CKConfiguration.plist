@@ -40,6 +40,10 @@
 	<string>Permission to read Activity Data 🏃🏽‍♀️</string>
 	<key>Health Permissions Text</key>
 	<string>Use this text to provide an explanation to your app participants about what activity data you intend to read from the Health app and why. This sample will read step count, distance, heart rate, and flights climbed data.</string>
+	<key>Notifications Title</key>
+	<string>Permission to send Notifications</string>
+	<key>Notifications Text</key>
+	<string>Enabling notifications will allow us to send you reminders about when to take your meds and complete your tasks!</string>
 	<key>Health Records</key>
 	<dict>
 		<key>Enabled</key>
