@@ -36,6 +36,7 @@ class CKStudyUser {
     }
     
     fileprivate var rootAuthCollection: String? {
+        print("THIS SHOULD BE OUR EMAIL", Auth.auth().currentUser?.email ?? "EMAIL NOT FOUND????")
         return "/registered-patients/\(Auth.auth().currentUser?.email ?? "")/studies/"
 //        if let bundleId = Bundle.main.bundleIdentifier {
 //            return "/studies/\(bundleId)/users/"
@@ -103,7 +104,7 @@ class CKStudyUser {
             CKSession.shared.userId = uid
             
             let db = Firestore.firestore()
-            db.collection(dataBucket).document(uid).setData(["userID":uid, "lastActive":Date().ISOStringFromDate(),"email":email])
+            db.collection(dataBucket).document("heartbeat").setData(["userID":uid, "lastActive":Date().ISOStringFromDate(),"email":email])
         }
     }
     

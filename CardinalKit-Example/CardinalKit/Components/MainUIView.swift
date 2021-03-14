@@ -40,10 +40,10 @@ struct MainUIView: View {
                 }
             }
             
-            DevicesView().tabItem {
-                Image(systemName: "rectangle.connected.to.line.below").renderingMode(.template)
-                Text("My Devices")
-            }
+//            DevicesView().tabItem {
+//                Image(systemName: "rectangle.connected.to.line.below").renderingMode(.template)
+//                Text("My Devices")
+//            }
             
             //            AboutUsView(dotColor: self.color).tabItem {
             //                Image(systemName: "book").renderingMode(.template)
@@ -59,6 +59,7 @@ struct MainUIView: View {
         .accentColor(self.color)
         .onAppear(perform: {
             self.useCareKit = config.readBool(query: "Use CareKit")
+            CKStudyUser.shared.save()
             
             let startOfDay = Calendar.current.startOfDay(for: Date())
             let atBreakfast = Calendar.current.date(byAdding: .hour, value: 8, to: startOfDay)!
@@ -67,8 +68,8 @@ struct MainUIView: View {
 
             let schedule = OCKSchedule(composing: [dailyAtBreakfast])
 
-            var task = OCKTask(id: "bloodpressure", title: "Test Blood Pressure", carePlanUUID: nil, schedule: schedule)
-            task.instructions = "Test Blood Pressure"
+            var bpTask = OCKTask(id: "bloodpressure", title: "Test Blood Pressure", carePlanUUID: nil, schedule: schedule)
+            // task.instructions = "Test Blood Pressure"
 
             /*
              Drug + Diary Sample.
@@ -103,7 +104,7 @@ struct MainUIView: View {
             /* ---- */
 
             let store = OCKStore(name: "CKCareKitStore")
-            store.addTasks([task, diaryTask, drugTask], callbackQueue: DispatchQueue.main, completion: {result in
+            store.addTasks([bpTask, diaryTask, drugTask], callbackQueue: DispatchQueue.main, completion: {result in
                 switch result {
                 case .failure(let error) :
                     print(error.localizedDescription)

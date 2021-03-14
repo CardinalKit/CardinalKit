@@ -73,10 +73,6 @@ class BloodPressureItemViewSynchronizer: OCKInstructionsTaskViewSynchronizer {
         let element: [OCKAnyEvent]? = context.viewModel.first
         let firstEvent = element?.first
         
-        if let answer = firstEvent?.outcome?.values.first?.integerValue {
-            view.headerView.detailLabel.text = "CardinalKit Rating: \(answer)"
-        } else {
-            view.headerView.detailLabel.text = "How are you liking CardinalKit?"
-        }
+        view.headerView.detailLabel.text = "Please record your daily blood pressure"
     }
 }

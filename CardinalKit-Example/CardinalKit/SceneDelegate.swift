@@ -77,11 +77,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             dynamicLinkLogin.link = link!
             dynamicLinkLogin.email = email!
             
-            print(email!)
+            print("Recieved login information for: " + email!)
             
-            
-            
-            // return early because we will log in later on; probably delete this code later
         }
     }
 

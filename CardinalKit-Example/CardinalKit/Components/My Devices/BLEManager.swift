@@ -19,6 +19,7 @@ struct Peripheral: Identifiable {
     var weight = false
     var services: [CBService:[CBCharacteristic]] = [:]
     var batteryLevel: Int = 0
+    var bloodPressureCharacteristic: CBCharacteristic? = nil
 }
 
 //let heartRateServiceCBUUID = CBUUID(string: "0x180D")
@@ -47,7 +48,15 @@ class BLEManager: NSObject, CBCentralManagerDelegate, ObservableObject, CBPeriph
     @Published var connectedPeripherals = [Peripheral]()
     @Published var stateText: String = "Waiting for initialisation"
     
-    // Identify when the CoreBluetooth Central Manager changes state; probably representing a change in client blueooth settings
+    // Blood Pressure Specific Published Data
+    @Published var systolicPressure: Float = 0.0
+    @Published var diastolicPressure: Float = 0.0
+    @Published var heartRate: Float = 0.0
+    @Published var weight: Float = 0.0
+    @Published var pressureUnits: String = "mmHg"
+    @Published var dataGatheringComplete = false
+    
+    // Identify when the CoreBluetooth Central Manager changes state; probably representing a change in client Bluetooth settings
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         switch central.state {
         case .unknown:
@@ -72,11 +81,11 @@ class BLEManager: NSObject, CBCentralManagerDelegate, ObservableObject, CBPeriph
         
         if let name = advertisementData[CBAdvertisementDataLocalNameKey] as? String {
             peripheralName = name
-        }
-        else {
-            peripheralName = "Unknown Device"
+        } else {
+            peripheralName = "Bluetooth Device"
         }
         
+        // see if we have already detected this device; if we have, we need not list it again
         var alreadyDetected = false
         for alreadyDetectedPeriph in peripherals {
             if alreadyDetectedPeriph.corePeripheral.identifier == peripheral.identifier {
@@ -107,21 +116,12 @@ class BLEManager: NSObject, CBCentralManagerDelegate, ObservableObject, CBPeriph
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         print("Yay!  Connected!")
-        // TODO: extend the logic to non-blood pressure stuff
-//        let newPeripheral = Peripheral(id: connectedPeripherals.count, name: peripheral.name ?? "Unknown Device", rssi: -1, corePeripheral: peripheral)
-//        newPeripheral.corePeripheral.delegate = self
-//        connectedPeripherals.append(newPeripheral)
         refreshConnectedDevices()
         discoverServices(peripheral: peripheral)
     }
     
+    // Refresh the list of devices that are currently connected
     func refreshConnectedDevices() {
-        
-        // what should refreshConnectedDevices do?
-        
-        // - cull any devices that are no longer connected for whatever reason
-        // - if devices are connected but aren't in the connectedDevices list, add them and schedule discovery of services and characteristics
-        
         let detectedPeripherals = myCentral.retrieveConnectedPeripherals(withServices: acceptableDeviceCBUUIDList)
         
         var newConnectectedPeripherals: [Peripheral] = []
@@ -159,6 +159,11 @@ class BLEManager: NSObject, CBCentralManagerDelegate, ObservableObject, CBPeriph
         }
     }
     
+    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
+        print("Lost connection to peripheral")
+        //refreshConnectedDevices()
+    }
+    
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
         print("Hmm, failed to connect")
     }
@@ -172,7 +177,6 @@ class BLEManager: NSObject, CBCentralManagerDelegate, ObservableObject, CBPeriph
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
         guard let characteristics = service.characteristics else { return }
-        print(service)
         
         // find the relevant peripheral in the list
         let index = findPeripheralIndex(peripheral: peripheral)
@@ -190,23 +194,24 @@ class BLEManager: NSObject, CBCentralManagerDelegate, ObservableObject, CBPeriph
         }
         
         for characteristic in characteristics {
+            print(characteristic.uuid)
             if characteristic.uuid == CBUUID(string: "0x2A19") {
                 peripheral.readValue(for: characteristic)
             }
+            
+            if characteristic.uuid == CBUUID(string: "0x2A35") {
+                print("Attempting to read value for blood pressure")
+                peripheral.setNotifyValue(true, for: characteristic)
+                connectedPeripherals[index].bloodPressureCharacteristic = characteristic
+            }
         }
-        
-        // add the characteristic for the given service
-//        for characteristic in characteristics {
-//            print(characteristic)
-//
-//            if characteristic.properties.contains(.read) {
-//                peripheral.readValue(for: characteristic)
-//              print("\(characteristic.uuid): properties contains .read")
-//            }
-//            if characteristic.properties.contains(.notify) {
-//              print("\(characteristic.uuid): properties contains .notify")
-//            }
-//        }
+    }
+    
+    func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: Error?) {
+        if error != nil {
+            print(error)
+        }
+        print("Successfully updated the notification state for \(characteristic.uuid)")
     }
     
     func findPeripheralIndex(peripheral: CBPeripheral) -> Int {
@@ -220,12 +225,88 @@ class BLEManager: NSObject, CBCentralManagerDelegate, ObservableObject, CBPeriph
     
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic,
                     error: Error?) {
+        print("Updated value function triggered")
+        print(characteristic.uuid)
         // check the battery status
         if characteristic.uuid == CBUUID(string: "0x2A19") {
             let index = findPeripheralIndex(peripheral: peripheral)
             connectedPeripherals[index].batteryLevel = Int(characteristic.value?.first! ?? 0)
+        } else if characteristic.uuid == CBUUID(string: "0x2A35") {
+            print("Are we actually ever getting here?")
+            let index = findPeripheralIndex(peripheral: peripheral)
+            print("Reading blood pressure information from peripheral \(index)")
+            print("Value is: \(characteristic.value)")
+            getBloodPressureInfo(from: characteristic)
         }
         print(characteristic.value ?? "no value")
+    }
+    
+    func getBloodPressureInfo(from characteristic: CBCharacteristic) {
+        guard let characteristicData = characteristic.value else { return }
+        let byteArray = [UInt8](characteristicData)
+        
+        var ismmHg = true
+        var supportsPulse = true
+        
+        // firstly, extract core data about the metrics from the flags byte
+        if byteArray[0] & 0x01 == 0 {
+            print("Units are mmHg")
+            self.pressureUnits = "mmHg"
+        } else {
+            print("Units are kPa")
+            self.pressureUnits = "kPa"
+            ismmHg = false
+        }
+        
+        if byteArray[0] & (0x01 << 1) == 0 {
+            print("Time stamp flag not present")
+        } else {
+            print("Time stamp flag present")
+        }
+        
+        if byteArray[0] & (0x01 << 2) == 0 {
+            print("Pulse rate flag not present")
+            supportsPulse = false
+        } else {
+            print("Pulse rate flag present")
+        }
+        
+        if byteArray[0] & (0x01 << 3) == 0 {
+            print("User ID flag not present")
+        } else {
+            print("User ID flag present")
+        }
+        
+        if byteArray[0] & (0x01 << 4) == 0 {
+            print("Measurement status not present")
+        } else {
+            print("Measurement status present")
+        }
+        
+        if ismmHg {
+            print("We've got mmHg")
+            self.systolicPressure = Float(byteArray[1])
+            self.diastolicPressure = Float(byteArray[3])
+            
+            print("Systolic: \(systolicPressure)")
+            print("Diastolic: \(diastolicPressure)")
+        } else {
+            print("We've got kPA")
+        }
+        
+        if supportsPulse {
+            print("Reading pulse data")
+            self.heartRate = Float(byteArray[5])
+            print("Heart rate: \(self.heartRate)")
+            print(Float(byteArray[4]))
+            print(Float(byteArray[5]))
+            print(Float(byteArray[6]))
+            print(Float(byteArray[7]))
+            print(Float(byteArray[8]))
+            print(Float(byteArray[9]))
+            print(Float(byteArray[10]))
+        }
+        dataGatheringComplete = true
     }
     
     func discoverServices(peripheral: CBPeripheral) {

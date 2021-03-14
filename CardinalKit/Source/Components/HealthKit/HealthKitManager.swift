@@ -63,7 +63,7 @@ class HealthKitManager: SyncDelegate {
             return
         }
         
-        healthStore.requestAuthorization(toShare: nil, read: types) {
+        healthStore.requestAuthorization(toShare: types, read: types) {
             [weak self] success, error in
             
             guard let strongSelf = self else { return }
