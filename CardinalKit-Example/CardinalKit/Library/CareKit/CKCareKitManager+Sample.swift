@@ -27,7 +27,9 @@ internal extension OCKStore {
         coffee.impactsAdherence = true
         coffee.instructions = "Drink coffee for good spirits!"
         
-        let surveyElement = OCKScheduleElement(start: afterLunch, end: nil, interval: DateComponents(day: 1))
+        let startOfDay = Calendar.current.startOfDay(for: Date())
+        let atBreakfast = Calendar.current.date(byAdding: .hour, value: 8, to: startOfDay)!
+        let surveyElement = OCKScheduleElement(start: atBreakfast, end: nil, interval: DateComponents(day: 1))
         let surveySchedule = OCKSchedule(composing: [surveyElement])
         var survey = OCKTask(id: "survey", title: "Take a Survey 📝", carePlanUUID: nil, schedule: surveySchedule)
         survey.impactsAdherence = true
@@ -40,8 +42,6 @@ internal extension OCKStore {
         heartRateSurvey.impactsAdherence = true
         heartRateSurvey.instructions = "Reeeeeee"
         
-        let startOfDay = Calendar.current.startOfDay(for: Date())
-        let atBreakfast = Calendar.current.date(byAdding: .hour, value: 8, to: startOfDay)!
         
         let dailyAtBreakfast = OCKScheduleElement(start: atBreakfast, end: nil, interval: DateComponents(day: 1))
         

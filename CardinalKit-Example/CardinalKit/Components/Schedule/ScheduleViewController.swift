@@ -130,7 +130,7 @@ class ScheduleViewController: OCKDailyPageViewController {
     
     override func dailyPageViewController(_ dailyPageViewController: OCKDailyPageViewController, prepare listViewController: OCKListViewController, for date: Date) {
         
-        let identifiers = ["doxylamine", "nausea", "coffee", "heartRate", "survey", "steps", "heartRate", "heartrate-2", "bloodpressure"]
+        let identifiers = ["doxylamine", "nausea", "coffee", "heartRate", "survey", "steps", "heartRate", "heartrate-2", "bloodpressure", "drug", "diary"]
         var query = OCKTaskQuery(for: date)
         query.ids = identifiers
         query.excludesTasksWithNoEvents = true
@@ -140,6 +140,20 @@ class ScheduleViewController: OCKDailyPageViewController {
             switch result {
             case .failure(let error): print("Error: \(error)")
             case .success(let tasks):
+
+                // Add a non-CareKit view into the list
+//                let tipTitle = "Customize your app!"
+//                let tipText = "Start with the CKConfiguration.plist file."
+//
+//                // Only show the tip view on the current date
+//                if Calendar.current.isDate(date, inSameDayAs: Date()) {
+//                    let tipView = TipView()
+//                    tipView.headerView.titleLabel.text = tipTitle
+//                    tipView.headerView.detailLabel.text = tipText
+//                    tipView.imageView.image = UIImage(named: "GraphicOperatingSystem")
+//                    listViewController.appendView(tipView, animated: false)
+//                }
+                
                 if (diastolicDoubleArray.isEmpty || systolicDoubleArray.isEmpty) {
                     print("Error: No blood pressure data found")
                 } else if date < Date() {
@@ -177,17 +191,6 @@ class ScheduleViewController: OCKDailyPageViewController {
                     listViewController.appendViewController(surveyCard, animated: false)
                 }
                 
-                // Create a card for the water task if there are events for it on this day.
-                if let doxylamineTask = tasks.first(where: { $0.id == "doxylamine" }) {
-                    
-                    let doxylamineCard = OCKChecklistTaskViewController(
-                        task: doxylamineTask,
-                        eventQuery: .init(for: date),
-                        storeManager: self.storeManager)
-                    
-                    listViewController.appendViewController(doxylamineCard, animated: false)
-                }
-                
                 if let heartrateTask = tasks.first(where: { $0.id == "heartrate-2" }) {
                     let surveyCard = BloodPressureItemViewController(
                         viewSynchronizer: BloodPressureItemViewSynchronizer(),
@@ -209,32 +212,30 @@ class ScheduleViewController: OCKDailyPageViewController {
                 } else {
                     print("Couldn't find the task!")
                 }
-                
-                // Create a card for the nausea task if there are events for it on this day.
-                // Its OCKSchedule was defined to have daily events, so this task should be
-                // found in `tasks` every day after the task start date.
-                if let nauseaTask = tasks.first(where: { $0.id == "nausea" }) {
-                    
+
+                // Drug and Diary Tasks
+                if let diaryTask = tasks.first(where: { $0.id == "diary" }) {
+
                     // dynamic gradient colors
-                    let nauseaGradientStart = UIColor { traitCollection -> UIColor in
+                    let diaryGradientStart = UIColor { traitCollection -> UIColor in
                         return traitCollection.userInterfaceStyle == .light ? #colorLiteral(red: 0.9960784314, green: 0.3725490196, blue: 0.368627451, alpha: 1) : #colorLiteral(red: 0.8627432641, green: 0.2630574384, blue: 0.2592858295, alpha: 1)
                     }
-                    let nauseaGradientEnd = UIColor { traitCollection -> UIColor in
+                    let diaryGradientEnd = UIColor { traitCollection -> UIColor in
                         return traitCollection.userInterfaceStyle == .light ? #colorLiteral(red: 0.9960784314, green: 0.4732026144, blue: 0.368627451, alpha: 1) : #colorLiteral(red: 0.8627432641, green: 0.3598620686, blue: 0.2592858295, alpha: 1)
                     }
-                    
-                    // Create a plot comparing nausea to medication adherence.
-                    let nauseaDataSeries = OCKDataSeriesConfiguration(
-                        taskID: "nausea",
-                        legendTitle: "Nausea",
-                        gradientStartColor: nauseaGradientStart,
-                        gradientEndColor: nauseaGradientEnd,
+
+                    // Create a plot comparing diary to medication adherence.
+                    let diaryDataSeries = OCKDataSeriesConfiguration(
+                        taskID: "diary",
+                        legendTitle: "Apples Eaten",
+                        gradientStartColor: diaryGradientStart,
+                        gradientEndColor: diaryGradientEnd,
                         markerSize: 10,
                         eventAggregator: OCKEventAggregator.countOutcomeValues)
-                    
-                    let doxylamineDataSeries = OCKDataSeriesConfiguration(
-                        taskID: "doxylamine",
-                        legendTitle: "Doxylamine",
+
+                    let drugDataSeries = OCKDataSeriesConfiguration(
+                        taskID: "drug",
+                        legendTitle: "Drugs Taken",
                         gradientStartColor: .systemGray2,
                         gradientEndColor: .systemGray,
                         markerSize: 10,
@@ -243,20 +244,31 @@ class ScheduleViewController: OCKDailyPageViewController {
                     let insightsCard = OCKCartesianChartViewController(
                         plotType: .bar,
                         selectedDate: date,
-                        configurations: [nauseaDataSeries, doxylamineDataSeries],
+                        configurations: [diaryDataSeries, drugDataSeries],
                         storeManager: self.storeManager)
-                    
-                    insightsCard.chartView.headerView.titleLabel.text = "Nausea & Doxylamine Intake"
+
+                    insightsCard.chartView.headerView.titleLabel.text = "Diary & Drug Intake"
                     insightsCard.chartView.headerView.detailLabel.text = "This Week"
-                    insightsCard.chartView.headerView.accessibilityLabel = "Nausea & Doxylamine Intake, This Week"
+                    insightsCard.chartView.headerView.accessibilityLabel = "Diary & Drug Intake, This Week"
                     listViewController.appendViewController(insightsCard, animated: false)
                     
                     // Also create a card that displays a single event.
                     // The event query passed into the initializer specifies that only
                     // today's log entries should be displayed by this log task view controller.
-                    let nauseaCard = OCKButtonLogTaskViewController(task: nauseaTask, eventQuery: .init(for: date),
-                                                                    storeManager: self.storeManager)
-                    listViewController.appendViewController(nauseaCard, animated: false)
+                    let diaryCard = OCKButtonLogTaskViewController(task: diaryTask,
+                                                                   eventQuery: .init(for: date),
+                                                                   storeManager: self.storeManager)
+                    listViewController.appendViewController(diaryCard, animated: false)
+                }
+                
+                if let drugTask = tasks.first(where: { $0.id == "drug" }) {
+
+                    let drugCard = OCKChecklistTaskViewController(
+                        task: drugTask,
+                        eventQuery: .init(for: date),
+                        storeManager: self.storeManager)
+
+                    listViewController.appendViewController(drugCard, animated: false)
                 }
             }
         }
