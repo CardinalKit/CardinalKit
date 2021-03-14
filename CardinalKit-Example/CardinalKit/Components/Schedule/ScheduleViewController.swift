@@ -140,24 +140,19 @@ class ScheduleViewController: OCKDailyPageViewController {
             switch result {
             case .failure(let error): print("Error: \(error)")
             case .success(let tasks):
-                
-                print("Tasks: ")
-                for task in tasks {
-                    print("\(task.id)")
-                }
 
                 // Add a non-CareKit view into the list
-                let tipTitle = "Customize your app!"
-                let tipText = "Start with the CKConfiguration.plist file."
-
-                // Only show the tip view on the current date
-                if Calendar.current.isDate(date, inSameDayAs: Date()) {
-                    let tipView = TipView()
-                    tipView.headerView.titleLabel.text = tipTitle
-                    tipView.headerView.detailLabel.text = tipText
-                    tipView.imageView.image = UIImage(named: "GraphicOperatingSystem")
-                    listViewController.appendView(tipView, animated: false)
-                }
+//                let tipTitle = "Customize your app!"
+//                let tipText = "Start with the CKConfiguration.plist file."
+//
+//                // Only show the tip view on the current date
+//                if Calendar.current.isDate(date, inSameDayAs: Date()) {
+//                    let tipView = TipView()
+//                    tipView.headerView.titleLabel.text = tipTitle
+//                    tipView.headerView.detailLabel.text = tipText
+//                    tipView.imageView.image = UIImage(named: "GraphicOperatingSystem")
+//                    listViewController.appendView(tipView, animated: false)
+//                }
                 
                 if (diastolicDoubleArray.isEmpty || systolicDoubleArray.isEmpty) {
                     print("Error: No blood pressure data found")
