@@ -95,6 +95,7 @@
 		FD62213425EF21B7006F6488 /* ReadBloodPressureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD62213325EF21B7006F6488 /* ReadBloodPressureView.swift */; };
 		FD72DED325DF3B0D00805D54 /* BLEManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD72DED225DF3B0D00805D54 /* BLEManager.swift */; };
 		FD7A58FB25E595DC00DCDF0B /* BloodPressureSurveyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7A58FA25E595DC00DCDF0B /* BloodPressureSurveyViewController.swift */; };
+		FDA3D2D925FEC75B00886907 /* SupplementalUserInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA3D2D825FEC75B00886907 /* SupplementalUserInformation.swift */; };
 		FDDB2B7325E046460076C3CB /* RoundedCornerGradientButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDDB2B7225E046460076C3CB /* RoundedCornerGradientButtonStyle.swift */; };
 /* End PBXBuildFile section */
 
@@ -206,6 +207,7 @@
 		FD62213325EF21B7006F6488 /* ReadBloodPressureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadBloodPressureView.swift; sourceTree = "<group>"; };
 		FD72DED225DF3B0D00805D54 /* BLEManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEManager.swift; sourceTree = "<group>"; };
 		FD7A58FA25E595DC00DCDF0B /* BloodPressureSurveyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BloodPressureSurveyViewController.swift; sourceTree = "<group>"; };
+		FDA3D2D825FEC75B00886907 /* SupplementalUserInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupplementalUserInformation.swift; sourceTree = "<group>"; };
 		FDDB2B7225E046460076C3CB /* RoundedCornerGradientButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCornerGradientButtonStyle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -287,6 +289,7 @@
 				8E6E1E3125353ABE0024B8DF /* ProfileUIView.swift */,
 				8E6E1E1125351F830024B8DF /* DocumentPreviewViewController.swift */,
 				8E6E1E15253524500024B8DF /* WithdrawalViewController.swift */,
+				FDA3D2D825FEC75B00886907 /* SupplementalUserInformation.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -840,6 +843,7 @@
 				8E6E1E16253524500024B8DF /* WithdrawalViewController.swift in Sources */,
 				8E6E1E2A2535398D0024B8DF /* HelpView.swift in Sources */,
 				8E9CDED02591AC4A00C8A228 /* CKHealthKitManager.swift in Sources */,
+				FDA3D2D925FEC75B00886907 /* SupplementalUserInformation.swift in Sources */,
 				DC2DC54325CA588B002DBFA6 /* ProfileView.swift in Sources */,
 				8E0A43C2244A4A0400656518 /* ConsentDocument.swift in Sources */,
 			);

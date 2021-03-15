@@ -10,6 +10,7 @@ import SwiftUI
 
 struct PatientIDView: View {
     var userID = ""
+    @ObservedObject var supplementalInfo = SupplementalUserInformation.shared
     
     init() {
         if let currentUser = CKStudyUser.shared.currentUser {
@@ -20,11 +21,13 @@ struct PatientIDView: View {
     var body: some View {
         VStack {
             HStack {
-                Text("PATIENT ID").font(.system(.headline)).foregroundColor(Color(.greyText()))
+                Text("Patient Name").font(.system(.headline)).foregroundColor(Color(.greyText()))
                 Spacer()
             }
             HStack {
-                Text(self.userID).font(.system(.body)).foregroundColor(Color(.greyText()))
+                Text("\(String(describing: supplementalInfo.retrieveSupplementalDictionary()!["firstName"])) \(String(describing: supplementalInfo.retrieveSupplementalDictionary()!["lastName"]))")
+                    .font(.system(.body))
+                    .foregroundColor(Color(.greyText()))
                 Spacer()
             }
         }.frame(height: 100)

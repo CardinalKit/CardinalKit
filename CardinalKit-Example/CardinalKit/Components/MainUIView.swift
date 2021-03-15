@@ -23,10 +23,10 @@ struct MainUIView: View {
     
     var body: some View {
         TabView {
-            TasksUIView(color: self.color).tabItem {
-                Image("tab_tasks").renderingMode(.template)
-                Text("Tasks")
-            }
+//            TasksUIView(color: self.color).tabItem {
+//                Image("tab_tasks").renderingMode(.template)
+//                Text("Tasks")
+//            }
             
             if useCareKit {
                 ScheduleViewControllerRepresentable().tabItem {
@@ -68,7 +68,7 @@ struct MainUIView: View {
 
             let schedule = OCKSchedule(composing: [dailyAtBreakfast])
 
-            var bpTask = OCKTask(id: "bloodpressure", title: "Test Blood Pressure", carePlanUUID: nil, schedule: schedule)
+            let bpTask = OCKTask(id: "bloodpressure", title: "Test Blood Pressure", carePlanUUID: nil, schedule: schedule)
             // task.instructions = "Test Blood Pressure"
 
             /*
@@ -80,17 +80,17 @@ struct MainUIView: View {
             let beforeBreakfast = Calendar.current.date(byAdding: .hour, value: 8, to: aFewDaysAgo)!
             let afterLunch = Calendar.current.date(byAdding: .hour, value: 14, to: aFewDaysAgo)!
             
-            // the schedule time determines the task checklist value?
-            let drugSchedule = OCKSchedule(composing: [
-                OCKScheduleElement(start: beforeBreakfast, end: nil,
-                                   interval: DateComponents(day: 1)),
-                OCKScheduleElement(start: afterLunch, end: nil,
-                                   interval: DateComponents(day: 1))
-            ])
-
-            var drugTask = OCKTask(id: "drug", title: "Take Your Drug 💊",
-                                     carePlanUUID: nil, schedule: drugSchedule)
-            drugTask.instructions = "Tap the button below when you take your drug."
+//            // the schedule time determines the task checklist value?
+//            let drugSchedule = OCKSchedule(composing: [
+//                OCKScheduleElement(start: beforeBreakfast, end: nil,
+//                                   interval: DateComponents(day: 1)),
+//                OCKScheduleElement(start: afterLunch, end: nil,
+//                                   interval: DateComponents(day: 1))
+//            ])
+//
+//            var drugTask = OCKTask(id: "drug", title: "Take Your Drug 💊",
+//                                     carePlanUUID: nil, schedule: drugSchedule)
+//            drugTask.instructions = "Tap the button below when you take your drug."
 
             let diarySchedule = OCKSchedule(composing: [
                 OCKScheduleElement(start: beforeBreakfast, end: nil, interval: DateComponents(day: 1),
@@ -104,7 +104,7 @@ struct MainUIView: View {
             /* ---- */
 
             let store = OCKStore(name: "CKCareKitStore")
-            store.addTasks([bpTask, diaryTask, drugTask], callbackQueue: DispatchQueue.main, completion: {result in
+            store.addTasks([bpTask, diaryTask], callbackQueue: DispatchQueue.main, completion: {result in
                 switch result {
                 case .failure(let error) :
                     print(error.localizedDescription)

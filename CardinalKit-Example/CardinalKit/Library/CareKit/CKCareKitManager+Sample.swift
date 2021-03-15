@@ -24,7 +24,7 @@ internal extension OCKStore {
         let coffeeElement = OCKScheduleElement(start: beforeBreakfast, end: nil, interval: DateComponents(day: 1))
         let coffeeSchedule = OCKSchedule(composing: [coffeeElement])
         var coffee = OCKTask(id: "coffee", title: "Drink Coffee ☕️", carePlanUUID: nil, schedule: coffeeSchedule)
-        coffee.impactsAdherence = true
+        coffee.impactsAdherence = false
         coffee.instructions = "Drink coffee for good spirits!"
         
         let startOfDay = Calendar.current.startOfDay(for: Date())
@@ -32,7 +32,7 @@ internal extension OCKStore {
         let surveyElement = OCKScheduleElement(start: atBreakfast, end: nil, interval: DateComponents(day: 1))
         let surveySchedule = OCKSchedule(composing: [surveyElement])
         var survey = OCKTask(id: "survey", title: "Take a Survey 📝", carePlanUUID: nil, schedule: surveySchedule)
-        survey.impactsAdherence = true
+        survey.impactsAdherence = false
         survey.instructions = "You can schedule any ResearchKit survey in your app."
         
         let heartRateElement = OCKScheduleElement(start: beforeBreakfast, end: nil,
@@ -48,6 +48,7 @@ internal extension OCKStore {
         let schedule = OCKSchedule(composing: [dailyAtBreakfast])
         
         var bloodPressureTask = OCKTask(id: "bloodpressure", title: "Blood Pressure", carePlanUUID: nil, schedule: schedule)
+        bloodPressureTask.impactsAdherence = true
         
         bloodPressureTask.instructions = "Take your daily blood pressure"
         

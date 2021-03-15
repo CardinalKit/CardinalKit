@@ -130,7 +130,18 @@ class ScheduleViewController: OCKDailyPageViewController {
     
     override func dailyPageViewController(_ dailyPageViewController: OCKDailyPageViewController, prepare listViewController: OCKListViewController, for date: Date) {
         
-        let identifiers = ["doxylamine", "nausea", "coffee", "heartRate", "survey", "steps", "heartRate", "heartrate-2", "bloodpressure", "drug", "diary"]
+        var identifiers = ["doxylamine", "nausea", "coffee", "heartRate", "survey", "steps", "heartRate", "heartrate-2", "bloodpressure", "drug", "diary"]
+        
+        if let medicationDictionary = SupplementalUserInformation.shared.retrieveSupplementalDictionary()?["medications"] as? Dictionary<String, Int> {
+            
+            for medicationName in medicationDictionary.keys {
+                identifiers.append("drug\(medicationName)")
+            }
+        }
+        
+        print("here are the relevant identifiers")
+        print(identifiers)
+        
         var query = OCKTaskQuery(for: date)
         query.ids = identifiers
         query.excludesTasksWithNoEvents = true
@@ -232,19 +243,28 @@ class ScheduleViewController: OCKDailyPageViewController {
                         gradientEndColor: diaryGradientEnd,
                         markerSize: 10,
                         eventAggregator: OCKEventAggregator.countOutcomeValues)
-
-                    let drugDataSeries = OCKDataSeriesConfiguration(
-                        taskID: "drug",
-                        legendTitle: "Drugs Taken",
-                        gradientStartColor: .systemGray2,
-                        gradientEndColor: .systemGray,
-                        markerSize: 10,
-                        eventAggregator: OCKEventAggregator.countOutcomeValues)
+                    
+                    var totalDataSeries = [diaryDataSeries]
+                    
+                    if let medicationDictionary = SupplementalUserInformation.shared.retrieveSupplementalDictionary()?["medications"] as? Dictionary<String, Int> {
+                        
+                        for medicationName in medicationDictionary.keys {
+                            let drugDataSeries = OCKDataSeriesConfiguration(
+                                taskID: "drug\(medicationName)",
+                                legendTitle: "\(medicationName) Taken",
+                                gradientStartColor: .systemGray2,
+                                gradientEndColor: .systemGray,
+                                markerSize: 10,
+                                eventAggregator: OCKEventAggregator.countOutcomeValues)
+                            
+                            totalDataSeries.append(drugDataSeries)
+                        }
+                    }
                     
                     let insightsCard = OCKCartesianChartViewController(
                         plotType: .bar,
                         selectedDate: date,
-                        configurations: [diaryDataSeries, drugDataSeries],
+                        configurations: totalDataSeries,
                         storeManager: self.storeManager)
 
                     insightsCard.chartView.headerView.titleLabel.text = "Diary & Drug Intake"
@@ -261,15 +281,22 @@ class ScheduleViewController: OCKDailyPageViewController {
                     listViewController.appendViewController(diaryCard, animated: false)
                 }
                 
-                if let drugTask = tasks.first(where: { $0.id == "drug" }) {
+                if let medicationDictionary = SupplementalUserInformation.shared.retrieveSupplementalDictionary()?["medications"] as? Dictionary<String, Int> {
+                    
+                    for medicationName in medicationDictionary.keys {
+                        if let drugTask = tasks.first(where: { $0.id == "drug\(medicationName)" }) {
 
-                    let drugCard = OCKChecklistTaskViewController(
-                        task: drugTask,
-                        eventQuery: .init(for: date),
-                        storeManager: self.storeManager)
+                            let drugCard = OCKChecklistTaskViewController(
+                                task: drugTask,
+                                eventQuery: .init(for: date),
+                                storeManager: self.storeManager)
 
-                    listViewController.appendViewController(drugCard, animated: false)
+                            listViewController.appendViewController(drugCard, animated: false)
+                        }
+                    }
                 }
+                
+                
             }
         }
     }
