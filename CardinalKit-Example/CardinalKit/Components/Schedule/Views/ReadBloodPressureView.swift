@@ -102,7 +102,7 @@ struct ReadBloodPressureView: View {
             }
             
             if actionItemSelected && useCuff {
-                if !deviceChosen {
+                if bleManager.connectedPeripherals.count == 0 {
                     Spacer()
                     Button(action: {
                         presentAddDeviceMenu = true
@@ -115,7 +115,7 @@ struct ReadBloodPressureView: View {
                     }
                     .buttonStyle(RoundedCornerGradientButtonStyle())
                     Spacer()
-                } else if !bleManager.dataGatheringComplete {
+                } else if !bleManager.dataGatheringComplete && bleManager.connectedPeripherals.count > 0 {
                     Spacer()
                     Text("Device has been chosen!")
                     List(bleManager.connectedPeripherals) { peripheral in
@@ -193,7 +193,6 @@ struct ReadBloodPressureView: View {
         }.sheet(isPresented: $presentAddDeviceMenu, onDismiss: {
             presentAddDeviceMenu = false
             deviceChosen = true
-            
         }, content: {
             AddDeviceView(bleManager: bleManager)
         })
