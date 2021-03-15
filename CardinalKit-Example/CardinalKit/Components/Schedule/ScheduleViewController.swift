@@ -275,7 +275,7 @@ class ScheduleViewController: OCKDailyPageViewController {
                     // Also create a card that displays a single event.
                     // The event query passed into the initializer specifies that only
                     // today's log entries should be displayed by this log task view controller.
-                    if date == Date() {
+                    if isToday(date: date) {
                         let diaryCard = OCKButtonLogTaskViewController(task: diaryTask,
                                                                        eventQuery: .init(for: date),
                                                                        storeManager: self.storeManager)
@@ -284,7 +284,7 @@ class ScheduleViewController: OCKDailyPageViewController {
                 }
                 
                 // enforce that we can only report medications on the present day
-                if date == Date() {
+                if isToday(date: date) {
                 
                     if let medicationDictionary = SupplementalUserInformation.shared.retrieveSupplementalDictionary()?["medications"] as? Dictionary<String, Int> {
                         
@@ -306,7 +306,11 @@ class ScheduleViewController: OCKDailyPageViewController {
             }
         }
     }
-    
+}
+
+func isToday(date: Date) -> Bool {
+    let order = Calendar.current.compare(date, to: Date(), toGranularity: .day)
+    return order == ComparisonResult.orderedSame
 }
 
 private extension View {
