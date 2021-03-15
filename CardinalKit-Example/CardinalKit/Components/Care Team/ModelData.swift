@@ -9,6 +9,7 @@
 import Foundation
 
 var profiles: [Profile] = load("ProfileData.json")
+var notifications: [Notification] = load("NotificationData.json")
 
 func load<T: Decodable>(_ filename: String) -> T {
     let data: Data

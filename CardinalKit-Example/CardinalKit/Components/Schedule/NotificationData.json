@@ -1,0 +1,32 @@
+[
+    {
+        "title": "Breakfast Reminder",
+        "id": 2001,
+        "body": "Reminder to take your breakfast medications and complete your daily check-in!",
+        "hour": 7
+    },
+    {
+        "title": "Morning Reminder",
+        "id": 2002,
+        "body": "Reminder to take your morning medications!",
+        "hour": 10
+    },
+    {
+        "title": "Lunch Reminder",
+        "id": 2003,
+        "body": "Reminder to take your lunch medications!",
+        "hour": 12
+    },
+    {
+        "title": "Dinner Reminder",
+        "id": 2004,
+        "body": "Reminder to take your dinner medications!",
+        "hour": 18
+    },
+    {
+        "title": "Evening Reminder",
+        "id": 2005,
+        "body": "Reminder to take your evening medications!",
+        "hour": 22
+    }
+]
