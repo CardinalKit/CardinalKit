@@ -275,23 +275,29 @@ class ScheduleViewController: OCKDailyPageViewController {
                     // Also create a card that displays a single event.
                     // The event query passed into the initializer specifies that only
                     // today's log entries should be displayed by this log task view controller.
-                    let diaryCard = OCKButtonLogTaskViewController(task: diaryTask,
-                                                                   eventQuery: .init(for: date),
-                                                                   storeManager: self.storeManager)
-                    listViewController.appendViewController(diaryCard, animated: false)
+                    if date == Date() {
+                        let diaryCard = OCKButtonLogTaskViewController(task: diaryTask,
+                                                                       eventQuery: .init(for: date),
+                                                                       storeManager: self.storeManager)
+                        listViewController.appendViewController(diaryCard, animated: false)
+                    }
                 }
                 
-                if let medicationDictionary = SupplementalUserInformation.shared.retrieveSupplementalDictionary()?["medications"] as? Dictionary<String, Int> {
-                    
-                    for medicationName in medicationDictionary.keys {
-                        if let drugTask = tasks.first(where: { $0.id == "drug\(medicationName)" }) {
+                // enforce that we can only report medications on the present day
+                if date == Date() {
+                
+                    if let medicationDictionary = SupplementalUserInformation.shared.retrieveSupplementalDictionary()?["medications"] as? Dictionary<String, Int> {
+                        
+                        for medicationName in medicationDictionary.keys {
+                            if let drugTask = tasks.first(where: { $0.id == "drug\(medicationName)" }) {
 
-                            let drugCard = OCKChecklistTaskViewController(
-                                task: drugTask,
-                                eventQuery: .init(for: date),
-                                storeManager: self.storeManager)
+                                let drugCard = OCKChecklistTaskViewController(
+                                    task: drugTask,
+                                    eventQuery: .init(for: date),
+                                    storeManager: self.storeManager)
 
-                            listViewController.appendViewController(drugCard, animated: false)
+                                listViewController.appendViewController(drugCard, animated: false)
+                            }
                         }
                     }
                 }
