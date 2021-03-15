@@ -107,58 +107,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to undo the changes made on entering the background.
         CKLockApp()
         
-        // update current user information from Firestore
-        if let email = Auth.auth().currentUser?.email {
-            let db = Firestore.firestore()
-            let path = "/registered-patients/"
-            db.collection(path).document(email).getDocument { (document, error) in
-                if let document = document, document.exists {
-                    SupplementalUserInformation.shared.setSupplementalDictionary(newDict: document.data())
-                    
-                    // configure the new drug tasks based on the information that we recieve here
-                    
-                    print("Attempting to extract medication names")
-                    if let medicationDictionary = SupplementalUserInformation.shared.retrieveSupplementalDictionary()?["medications"] as? Dictionary<String, Int> {
-                        
-                        for medicationName in medicationDictionary.keys {
-                            print("ADDING \(medicationName) TO THE STORE")
-                            let thisMorning = Calendar.current.startOfDay(for: Date())
-                            let aFewDaysAgo = Calendar.current.date(byAdding: .day, value: -3, to: thisMorning)!
-                            let beforeBreakfast = Calendar.current.date(byAdding: .hour, value: 8, to: aFewDaysAgo)!
-                            let afterLunch = Calendar.current.date(byAdding: .hour, value: 14, to: aFewDaysAgo)!
-                            
-                            // the schedule time determines the task checklist value?
-                            
-                            let interval = medicationDictionary[medicationName]
-                            let drugSchedule = OCKSchedule(composing: [
-                                OCKScheduleElement(start: beforeBreakfast, end: nil,
-                                                   interval: DateComponents(day: interval)),
-                                OCKScheduleElement(start: afterLunch, end: nil,
-                                                   interval: DateComponents(day: interval))
-                            ])
-                            
-                            var drugTask = OCKTask(id: "drug\(medicationName)", title: "Take \(medicationName) 💊",
-                                                     carePlanUUID: nil, schedule: drugSchedule)
-                            drugTask.impactsAdherence = true
-                            drugTask.instructions = "Tap the button below when you take your drug."
-                            let store = OCKStore(name: "CKCareKitStore")
-                            store.addTasks([drugTask], callbackQueue: DispatchQueue.main, completion: {result in
-                                switch result {
-                                case .failure(let error) :
-                                    print(error.localizedDescription)
-                                case .success( _) :
-                                    print("Successfully added drug\(medicationName)!")
-                                }
-                            })
-                        }
-                        
-                        
-                    }
-                } else {
-                    print("Ooooof")
-                }
-            }
-        }
+        refreshSupplementalUserInformation()
         
     }
 

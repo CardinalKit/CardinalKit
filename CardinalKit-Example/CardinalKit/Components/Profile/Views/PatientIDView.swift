@@ -25,7 +25,7 @@ struct PatientIDView: View {
                 Spacer()
             }
             HStack {
-                Text("\(String(describing: supplementalInfo.retrieveSupplementalDictionary()!["firstName"])) \(String(describing: supplementalInfo.retrieveSupplementalDictionary()!["lastName"]))")
+                Text("\(supplementalInfo.retrieveSupplementalDictionary()!["firstName"] as! String) \( supplementalInfo.retrieveSupplementalDictionary()!["lastName"] as! String)")
                     .font(.system(.body))
                     .foregroundColor(Color(.greyText()))
                 Spacer()

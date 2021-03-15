@@ -74,6 +74,7 @@ public class SignInWithEmailStepController: ORKInstructionStepViewController {
                     NotificationCenter.default.post(name: NSNotification.Name(rawValue: Constants.notificationUserLogin), object: confirmedEmail)
                     UserDefaults.standard.set(true, forKey: Constants.prefConfirmedLogin)
                     print("confirmed!")
+                    refreshSupplementalUserInformation()
                     super.goForward()
                 }
                 
