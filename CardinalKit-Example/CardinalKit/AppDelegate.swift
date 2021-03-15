@@ -10,6 +10,8 @@ import Firebase
 import ResearchKit
 import CareKit
 
+var dynamicLinkLogin = DynamicLinkLogin()
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
