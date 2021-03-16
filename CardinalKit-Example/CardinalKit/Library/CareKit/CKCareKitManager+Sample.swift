@@ -113,26 +113,48 @@ internal extension OCKStore {
         createContacts()
     }
     
-    func addMedication(name: String){
+    func addMedication(medication: Medication){
         let thisMorning = Calendar.current.startOfDay(for: Date())
-        let aFewDaysAgo = Calendar.current.date(byAdding: .day, value: -3, to: thisMorning)!
-        let beforeBreakfast = Calendar.current.date(byAdding: .hour, value: 8, to: aFewDaysAgo)!
-        let afterLunch = Calendar.current.date(byAdding: .hour, value: 14, to: aFewDaysAgo)!
-        let afterDinner = Calendar.current.date(byAdding: .hour, value: 20, to: aFewDaysAgo)!
+        //let aFewDaysAgo = Calendar.current.date(byAdding: .day, value: -3, to: thisMorning)!
+        let sixAM = Calendar.current.date(byAdding: .hour, value: 6, to: thisMorning)!
+        let eightAM = Calendar.current.date(byAdding: .hour, value: 8, to: thisMorning)!
+        let tenAM = Calendar.current.date(byAdding: .hour, value: 10, to: thisMorning)!
+        let twelvePM = Calendar.current.date(byAdding: .hour, value: 12, to: thisMorning)!
+        let sixPM = Calendar.current.date(byAdding: .hour, value: 18, to: thisMorning)!
+        let tenPM = Calendar.current.date(byAdding: .hour, value: 22, to: thisMorning)!
         
-        let prografSchedule = OCKSchedule(composing: [
-            OCKScheduleElement(start: beforeBreakfast, end: nil,
-                               interval: DateComponents(day: 1)),
+        var schedule:[OCKScheduleElement] = []
+        medication.times.forEach { time in
+            if time == "6-8AM" {
+                schedule.append(OCKScheduleElement(start: sixAM, end: eightAM,
+                                                  interval: DateComponents(day: 1)))
+            }
+            else if time == "10AM" {
+                schedule.append(OCKScheduleElement(start: tenAM, end: nil,
+                                                  interval: DateComponents(day: 1)))
+            }
+            else if time == "12PM" {
+                schedule.append(OCKScheduleElement(start: twelvePM, end: nil,
+                                                  interval: DateComponents(day: 1)))
+            }
+            else if time == "6PM" {
+                schedule.append(OCKScheduleElement(start: sixPM, end: nil,
+                                                  interval: DateComponents(day: 1)))
+            }
+            else if time == "10PM" {
+                schedule.append(OCKScheduleElement(start: tenPM, end: nil,
+                                                  interval: DateComponents(day: 1)))
+            }
+        }
+        
+        let medSchedule = OCKSchedule(composing: schedule)
 
-            OCKScheduleElement(start: afterDinner, end: nil,
-                               interval: DateComponents(day: 1))
-        ])
-
-        var prograf = OCKTask(id: "medications-" + name, title: "Take " + name,
-                                 carePlanUUID: nil, schedule: prografSchedule)
-        prograf.instructions = "Remember to take " + name
-        prograf.impactsAdherence = true
-        addTask(prograf, callbackQueue: .main, completion: nil)
+        var med = OCKTask(id: "medications-" + medication.name, title: "Take " + medication.name,
+                                 carePlanUUID: nil, schedule: medSchedule)
+        med.instructions = "Remember to take " + name
+        med.impactsAdherence = true
+        med.tags = [medication.id, medication.name, medication.dosage, medication.unit] + medication.times
+        addTask(med, callbackQueue: .main, completion: nil)
     }
     
     func deleteMedication(medicationId: String) {

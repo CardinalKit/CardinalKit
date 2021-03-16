@@ -106,28 +106,47 @@ class CKStudyUser {
         }
     }
     
-    func saveMedication(name: String) {
+    func saveMedication(medication: Medication) {
         if let dataBucket = rootAuthCollection,
             let uid = currentUser?.uid {
             
             CKSession.shared.userId = uid
             
+//            let jsonObject: NSMutableDictionary = NSMutableDictionary()
+//
+//            jsonObject.setValue(medication.name, forKey: "name")
+//            jsonObject.setValue(medication.dosage, forKey: "dosage")
+//            jsonObject.setValue(medication.unit, forKey: "unit")
+//            jsonObject.setValue(medication.times, forKey: "times")
+            
+            let medicationString = medication.id + "," + medication.name + "," + medication.dosage + "," + medication.unit + "," + medication.times.joined(separator: ",")
+            
             let db = Firestore.firestore()
             db.collection(dataBucket).document(uid).updateData([
-                "medications": FieldValue.arrayUnion([name])
+                "medications": FieldValue.arrayUnion([medicationString])
             ])
         }
     }
     
-    func deleteMedication(name: String) {
+    func deleteMedication(medication: Medication) {
         if let dataBucket = rootAuthCollection,
             let uid = currentUser?.uid {
             
             CKSession.shared.userId = uid
             
+//            let jsonObject: NSMutableDictionary = NSMutableDictionary()
+//
+//            jsonObject.setValue(medication.id, forKey: "id")
+//            jsonObject.setValue(medication.name, forKey: "name")
+//            jsonObject.setValue(medication.dosage, forKey: "dosage")
+//            jsonObject.setValue(medication.unit, forKey: "unit")
+//            jsonObject.setValue(medication.times, forKey: "times")
+            
+            let medicationString = medication.id + "," + medication.name + "," + medication.dosage + "," + medication.unit + "," + medication.times.joined(separator: ",")
+            
             let db = Firestore.firestore()
             db.collection(dataBucket).document(uid).updateData([
-                "medications": FieldValue.arrayRemove([name])
+                "medications": FieldValue.arrayRemove([medicationString])
             ])
         }
     }
