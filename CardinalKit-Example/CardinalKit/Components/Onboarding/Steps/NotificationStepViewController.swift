@@ -31,14 +31,7 @@ class NotificationStep: ORKInstructionStep {
 class NotificationStepViewController: ORKInstructionStepViewController {
     
     override func goForward() {
-        /*
-        let manager = CKHealthKitManager.shared
-        manager.getHealthAuthorization() { _,_ in
-            OperationQueue.main.addOperation {
-                super.goForward()
-            }
-        }
-        */
+        
         let center = UNUserNotificationCenter.current()
         center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
             if let error = error {

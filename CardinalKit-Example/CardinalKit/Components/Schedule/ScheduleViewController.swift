@@ -18,12 +18,56 @@ class ScheduleViewController: OCKDailyPageViewController {
         title = "Schedule"
     }
     
+    func scheduleNotifications() {
+        let center = UNUserNotificationCenter.current()
+        center.getNotificationSettings { settings in
+            guard (settings.authorizationStatus == .authorized) ||
+                  (settings.authorizationStatus == .provisional) else { return }
+
+            for notification in notifications {
+
+                let content = UNMutableNotificationContent()
+                content.title = notification.title
+                content.body = notification.body
+                
+                
+                // Configure the recurring date.
+                var dateComponents = DateComponents()
+                dateComponents.calendar = Calendar.current
+                dateComponents.timeZone = TimeZone.autoupdatingCurrent
+                dateComponents.hour = notification.hour
+                
+                // Create the trigger as a repeating event.
+                let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+                
+                if settings.soundSetting == .enabled {
+                    content.sound = UNNotificationSound.default
+                }
+                
+                // Create the request
+                let uuidString = UUID().uuidString
+                let request = UNNotificationRequest(identifier: uuidString,
+                            content: content, trigger: trigger)
+                
+                // Schedule the request with the system.
+                center.add(request) { (error) in
+                   if error != nil {
+                      print("Error in scheduling notification")
+                   }
+                }
+                 
+            }
+        }
+    }
+    
     override func dailyPageViewController(_ dailyPageViewController: OCKDailyPageViewController, prepare listViewController: OCKListViewController, for date: Date) {
         
         let identifiers = ["doxylamine", "medication", "nausea", "coffee", "survey", "steps", "heartRate", "sf12", "check-in", "tremor", "prograf", "tremor-log"]
         var query = OCKTaskQuery(for: date)
         query.ids = identifiers
         query.excludesTasksWithNoEvents = true
+        
+        scheduleNotifications()
 
         storeManager.store.fetchAnyTasks(query: query, callbackQueue: .main) { result in
             switch result {
