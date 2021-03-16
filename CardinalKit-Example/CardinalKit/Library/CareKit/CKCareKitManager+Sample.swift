@@ -83,7 +83,7 @@ internal extension OCKStore {
 
         var prograf = OCKTask(id: "prograf", title: "Take Prograf",
                                  carePlanUUID: nil, schedule: prografSchedule)
-        prograf.instructions = "Remember to take Prograf!"
+        prograf.instructions = "Remember to take Prograf!!!"
         prograf.impactsAdherence = true
         
         let tremorLogSchedule = OCKSchedule(composing: [
@@ -111,6 +111,42 @@ internal extension OCKStore {
         addTasks([nausea, doxylamine, survey, coffee, sf12, medication, checkIn, tremor, prograf, tremorLog], callbackQueue: .main, completion: nil)
 
         createContacts()
+    }
+    
+    func addMedication(name: String){
+        let thisMorning = Calendar.current.startOfDay(for: Date())
+        let aFewDaysAgo = Calendar.current.date(byAdding: .day, value: -3, to: thisMorning)!
+        let beforeBreakfast = Calendar.current.date(byAdding: .hour, value: 8, to: aFewDaysAgo)!
+        let afterLunch = Calendar.current.date(byAdding: .hour, value: 14, to: aFewDaysAgo)!
+        let afterDinner = Calendar.current.date(byAdding: .hour, value: 20, to: aFewDaysAgo)!
+        
+        let prografSchedule = OCKSchedule(composing: [
+            OCKScheduleElement(start: beforeBreakfast, end: nil,
+                               interval: DateComponents(day: 1)),
+
+            OCKScheduleElement(start: afterDinner, end: nil,
+                               interval: DateComponents(day: 1))
+        ])
+
+        var prograf = OCKTask(id: "medications-" + name, title: "Take " + name,
+                                 carePlanUUID: nil, schedule: prografSchedule)
+        prograf.instructions = "Remember to take " + name
+        prograf.impactsAdherence = true
+        addTask(prograf, callbackQueue: .main, completion: nil)
+    }
+    
+    func deleteMedication(medicationId: String) {
+        var query = OCKTaskQuery()
+        query.ids = [medicationId]
+        query.excludesTasksWithNoEvents = true
+        fetchTasks(query: query, callbackQueue: .main) { result in
+            switch result {
+            case .failure(let error): print("Error: \(error)")
+            case .success(let tasks):
+                let task = tasks[0]
+                self.deleteTask(task, callbackQueue: .main, completion: nil)
+            }
+        }
     }
     
     func createContacts() {

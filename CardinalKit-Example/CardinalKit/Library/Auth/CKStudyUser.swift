@@ -106,6 +106,33 @@ class CKStudyUser {
         }
     }
     
+    func saveMedication(name: String) {
+        if let dataBucket = rootAuthCollection,
+            let uid = currentUser?.uid {
+            
+            CKSession.shared.userId = uid
+            
+            let db = Firestore.firestore()
+            db.collection(dataBucket).document(uid).updateData([
+                "medications": FieldValue.arrayUnion([name])
+            ])
+        }
+    }
+    
+    func deleteMedication(name: String) {
+        if let dataBucket = rootAuthCollection,
+            let uid = currentUser?.uid {
+            
+            CKSession.shared.userId = uid
+            
+            let db = Firestore.firestore()
+            db.collection(dataBucket).document(uid).updateData([
+                "medications": FieldValue.arrayRemove([name])
+            ])
+        }
+    }
+    
+
     /**
     Remove the current user's auth parameters from storage.
     */

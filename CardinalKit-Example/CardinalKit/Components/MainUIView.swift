@@ -21,12 +21,14 @@ struct MainUIView: View {
     
     var body: some View {
         TabView {
-            /*
-            TasksUIView(color: self.color).tabItem {
+//            TasksUIView(color: self.color).tabItem {
+//                Image("tab_tasks").renderingMode(.template)
+//                Text("Tasks")
+//            }
+            MedicationSelector().tabItem {
                 Image("tab_tasks").renderingMode(.template)
                 Text("Tasks")
             }
-             */
             
             if useCareKit {
                 ScheduleViewControllerRepresentable().tabItem {

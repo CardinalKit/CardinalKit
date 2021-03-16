@@ -82,6 +82,11 @@
 		8EA664B2259422E400B6A45A /* CKCareKitRemoteSyncWithFirestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA664B1259422E400B6A45A /* CKCareKitRemoteSyncWithFirestore.swift */; };
 		8EA664B42594387900B6A45A /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA664B32594387900B6A45A /* Errors.swift */; };
 		8EBE6F9C24B3C0E60093D07C /* AppDelegate+CardinalKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE6F9B24B3C0E60093D07C /* AppDelegate+CardinalKit.swift */; };
+		B684145B25FDD7380038AB65 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B684145A25FDD7370038AB65 /* GoogleService-Info.plist */; };
+		B684146125FDE6110038AB65 /* MedicationSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = B684145C25FDE60F0038AB65 /* MedicationSelector.swift */; };
+		B684146225FDE6110038AB65 /* medications.csv in Resources */ = {isa = PBXBuildFile; fileRef = B684145D25FDE6100038AB65 /* medications.csv */; };
+		B684146325FDE6110038AB65 /* ClearableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B684145E25FDE6100038AB65 /* ClearableTextField.swift */; };
+		B684146525FDE6110038AB65 /* MedicationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B684146025FDE6110038AB65 /* MedicationsViewModel.swift */; };
 		D253D132250D1BDB00A363E4 /* CKSignInWithAppleStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = D253D131250D1BDB00A363E4 /* CKSignInWithAppleStep.swift */; };
 		DA52062625F1FDBB00D7D0A7 /* TremorTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA52062525F1FDBB00D7D0A7 /* TremorTaskViewController.swift */; };
 		DA52062825F3242400D7D0A7 /* CheckInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA52062725F3242400D7D0A7 /* CheckInViewController.swift */; };
@@ -191,6 +196,11 @@
 		8EA664B1259422E400B6A45A /* CKCareKitRemoteSyncWithFirestore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKCareKitRemoteSyncWithFirestore.swift; sourceTree = "<group>"; };
 		8EA664B32594387900B6A45A /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		8EBE6F9B24B3C0E60093D07C /* AppDelegate+CardinalKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+CardinalKit.swift"; sourceTree = "<group>"; };
+		B684145A25FDD7370038AB65 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B684145C25FDE60F0038AB65 /* MedicationSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicationSelector.swift; sourceTree = "<group>"; };
+		B684145D25FDE6100038AB65 /* medications.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = medications.csv; sourceTree = "<group>"; };
+		B684145E25FDE6100038AB65 /* ClearableTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClearableTextField.swift; sourceTree = "<group>"; };
+		B684146025FDE6110038AB65 /* MedicationsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicationsViewModel.swift; sourceTree = "<group>"; };
 		CB97C14C759E56B88E4E3941 /* Pods_CardinalKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CardinalKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D253D131250D1BDB00A363E4 /* CKSignInWithAppleStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKSignInWithAppleStep.swift; sourceTree = "<group>"; };
 		DA52062525F1FDBB00D7D0A7 /* TremorTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TremorTaskViewController.swift; sourceTree = "<group>"; };
@@ -316,6 +326,7 @@
 				44CD173A25F85C1600054F0E /* GoogleService-Info.plist */,
 				E2F1FD7724D62064006C39DF /* CKConfiguration.plist */,
 				E2CB7FE424F730C80039C24A /* CKConfiguration-old.plist */,
+				B684145A25FDD7370038AB65 /* GoogleService-Info.plist */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -434,6 +445,7 @@
 		8E9CDEAA25916F2A00C8A228 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				B684146625FDF8CF0038AB65 /* Medication */,
 				8E6E1E23253537580024B8DF /* MainUIView.swift */,
 				E29143FB24E74AD100EE97B2 /* LaunchUIView.swift */,
 				8E0A4399244A4A0400656518 /* Onboarding */,
@@ -533,6 +545,17 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		B684146625FDF8CF0038AB65 /* Medication */ = {
+			isa = PBXGroup;
+			children = (
+				B684145E25FDE6100038AB65 /* ClearableTextField.swift */,
+				B684145D25FDE6100038AB65 /* medications.csv */,
+				B684145C25FDE60F0038AB65 /* MedicationSelector.swift */,
+				B684146025FDE6110038AB65 /* MedicationsViewModel.swift */,
+			);
+			path = Medication;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -606,12 +629,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E0A43AF244A4A0400656518 /* Assets.xcassets in Resources */,
+				B684146225FDE6110038AB65 /* medications.csv in Resources */,
 				8E0A43B0244A4A0400656518 /* LaunchScreen.storyboard in Resources */,
 				E2F1FD7824D62064006C39DF /* CKConfiguration.plist in Resources */,
 				8E0A43C1244A4A0400656518 /* LoginCustomWaitStepView.xib in Resources */,
+				B684145B25FDD7380038AB65 /* GoogleService-Info.plist in Resources */,
 				E2CB7FE524F730C80039C24A /* CKConfiguration-old.plist in Resources */,
 				44F5403825D464F100B15111 /* ProfileData.json in Resources */,
-				44CD173B25F85C1600054F0E /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -747,6 +771,7 @@
 				8EA664232592E57200B6A45A /* SensorsDemoUIView.swift in Sources */,
 				8E6E1E3225353ABE0024B8DF /* ProfileUIView.swift in Sources */,
 				8E6E1E1E253528F50024B8DF /* SupportView.swift in Sources */,
+				B684146325FDE6110038AB65 /* ClearableTextField.swift in Sources */,
 				8E6E1E1C253528D70024B8DF /* ReportView.swift in Sources */,
 				8E6E1E26253537E40024B8DF /* TasksUIView.swift in Sources */,
 				44F5403525D45AEB00B15111 /* ProfileDetail.swift in Sources */,
@@ -755,6 +780,7 @@
 				8E6E1E3425353AFE0024B8DF /* EmailHelper.swift in Sources */,
 				8E6E1E24253537580024B8DF /* MainUIView.swift in Sources */,
 				8E6E1E182535263F0024B8DF /* CKTaskViewController.swift in Sources */,
+				B684146525FDE6110038AB65 /* MedicationsViewModel.swift in Sources */,
 				8E9CDF142591B73900C8A228 /* CKHealthRecordsManager.swift in Sources */,
 				8EA664B42594387900B6A45A /* Errors.swift in Sources */,
 				4453014625FD7B7F00F7AB22 /* NotificationStepViewController.swift in Sources */,
@@ -781,6 +807,7 @@
 				8E6E1E1025351E890024B8DF /* Extensions+UIColor.swift in Sources */,
 				8E9CDF832592844A00C8A228 /* LearnUIView.swift in Sources */,
 				8E9CDEA725916B2800C8A228 /* ScheduleViewControllerRepresentable.swift in Sources */,
+				B684146125FDE6110038AB65 /* MedicationSelector.swift in Sources */,
 				DA52062A25F32D1A00D7D0A7 /* SF12ViewController.swift in Sources */,
 				E235077724F7082700CC1899 /* SceneDelegate.swift in Sources */,
 				8E6E1E16253524500024B8DF /* WithdrawalViewController.swift in Sources */,
