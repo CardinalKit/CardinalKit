@@ -106,8 +106,6 @@ func refreshSupplementalUserInformation() {
                         let interval = medicationDictionary[medicationName]
                         let drugSchedule = OCKSchedule(composing: [
                             OCKScheduleElement(start: beforeBreakfast, end: nil,
-                                               interval: DateComponents(day: interval)),
-                            OCKScheduleElement(start: afterLunch, end: nil,
                                                interval: DateComponents(day: interval))
                         ])
                         
