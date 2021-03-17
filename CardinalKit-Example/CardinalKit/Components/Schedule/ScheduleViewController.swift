@@ -238,7 +238,7 @@ class ScheduleViewController: OCKDailyPageViewController {
                     // Create a plot comparing diary to medication adherence.
                     let diaryDataSeries = OCKDataSeriesConfiguration(
                         taskID: "diary",
-                        legendTitle: "Apples Eaten",
+                        legendTitle: "Salty Food",
                         gradientStartColor: diaryGradientStart,
                         gradientEndColor: diaryGradientEnd,
                         markerSize: 10,
