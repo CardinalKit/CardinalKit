@@ -196,6 +196,16 @@ struct ReadBloodPressureView: View {
         }, content: {
             AddDeviceView(bleManager: bleManager)
         })
+        .onAppear {
+            systolicPressure = ""
+            diastolicPressure = ""
+            cuffConnected = true
+            actionItemSelected = false
+            useCuff = true
+            presentAddDeviceMenu = false
+            deviceChosen = false
+            uploadSelected = false
+        }
         .padding()
         
     }

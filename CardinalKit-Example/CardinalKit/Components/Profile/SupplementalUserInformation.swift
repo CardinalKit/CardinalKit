@@ -67,7 +67,7 @@ func refreshSupplementalUserInformation() {
     var diaryTask = OCKTask(id: "diary", title: "Daily Diary",
                             carePlanUUID: nil, schedule: diarySchedule)
     diaryTask.impactsAdherence = false
-    diaryTask.instructions = "Tap the button below anytime you ate salty food."
+    diaryTask.instructions = "Tap the button below anytime you ate salty food. 🍟"
     /* ---- */
     
     let store = OCKStore(name: "CKCareKitStore")
