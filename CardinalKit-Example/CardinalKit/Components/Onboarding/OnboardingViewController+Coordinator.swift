@@ -186,7 +186,10 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
         
         case is NotificationStep:
             return NotificationStepViewController(step: step)
-            
+            /*
+        case is OnboardingSurveyStep:
+            return OnboardingSurveyStepViewController(step: step)
+            */
         default:
             return nil
         }

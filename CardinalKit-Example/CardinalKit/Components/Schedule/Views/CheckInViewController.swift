@@ -26,7 +26,7 @@ class CheckInViewController: OCKInstructionsTaskViewController, ORKTaskViewContr
         
         // Daily check-in
         // TODO: add blood pressure items here
-        let numberAnswerFormat = ORKNumericAnswerFormat(style: .integer, unit: nil, minimum: 0 as NSNumber, maximum: 120 as NSNumber)
+        let numberAnswerFormat = ORKNumericAnswerFormat(style: .integer, unit: nil, minimum: 0 as NSNumber, maximum: 500 as NSNumber)
         let weightFormItem = ORKFormItem(identifier: "weight", text: "What is your weight (lbs)?", answerFormat: numberAnswerFormat, optional: false)
         weightFormItem.placeholder = NSLocalizedString("Enter your weight here", comment: "")
         
