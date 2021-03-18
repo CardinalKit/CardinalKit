@@ -12,6 +12,7 @@
 		4453014625FD7B7F00F7AB22 /* NotificationStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4453014525FD7B7E00F7AB22 /* NotificationStepViewController.swift */; };
 		4469456B25FF28D000891851 /* NotificationData.json in Resources */ = {isa = PBXBuildFile; fileRef = 4469456A25FF28D000891851 /* NotificationData.json */; };
 		4469456D25FF2AD000891851 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469456C25FF2AD000891851 /* Notification.swift */; };
+		4469456F2600485E00891851 /* OnboardingSurveyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469456E2600485D00891851 /* OnboardingSurveyViewController.swift */; };
 		44CD173D25F85D7600054F0E /* LoginExistingUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CD173C25F85D7600054F0E /* LoginExistingUserViewController.swift */; };
 		44F5403325D3BD1F00B15111 /* TeamUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F5403225D3BD1F00B15111 /* TeamUIView.swift */; };
 		44F5403525D45AEB00B15111 /* ProfileDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F5403425D45AEB00B15111 /* ProfileDetail.swift */; };
@@ -125,6 +126,7 @@
 		4453014525FD7B7E00F7AB22 /* NotificationStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStepViewController.swift; sourceTree = "<group>"; };
 		4469456A25FF28D000891851 /* NotificationData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = NotificationData.json; path = CardinalKit/Components/Schedule/NotificationData.json; sourceTree = SOURCE_ROOT; };
 		4469456C25FF2AD000891851 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		4469456E2600485D00891851 /* OnboardingSurveyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSurveyViewController.swift; sourceTree = "<group>"; };
 		44CD173C25F85D7600054F0E /* LoginExistingUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginExistingUserViewController.swift; sourceTree = "<group>"; };
 		44F5403225D3BD1F00B15111 /* TeamUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamUIView.swift; sourceTree = "<group>"; };
 		44F5403425D45AEB00B15111 /* ProfileDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetail.swift; sourceTree = "<group>"; };
@@ -370,6 +372,7 @@
 				8E0A43A3244A4A0400656518 /* LoginCustomWaitStepViewController.swift */,
 				E2DF9F092500C9CE00A93B93 /* LoginViewController.swift */,
 				4453014525FD7B7E00F7AB22 /* NotificationStepViewController.swift */,
+				4469456E2600485D00891851 /* OnboardingSurveyViewController.swift */,
 			);
 			path = Steps;
 			sourceTree = "<group>";
@@ -798,6 +801,7 @@
 				8E6E1E1C253528D70024B8DF /* ReportView.swift in Sources */,
 				8E6E1E26253537E40024B8DF /* TasksUIView.swift in Sources */,
 				44F5403525D45AEB00B15111 /* ProfileDetail.swift in Sources */,
+				4469456F2600485E00891851 /* OnboardingSurveyViewController.swift in Sources */,
 				8E9CDEAD259170AD00C8A228 /* CKCareKitManager.swift in Sources */,
 				DA9C965E25FEB84B00AE6CA4 /* BLEManager.swift in Sources */,
 				8EA664892593213000B6A45A /* CKSendHelper.swift in Sources */,

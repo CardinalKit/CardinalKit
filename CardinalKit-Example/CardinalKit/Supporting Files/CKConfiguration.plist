@@ -92,7 +92,6 @@
 	<array>
 		<string>StepCount</string>
 		<string>DistanceWalkingRunning</string>
-		<string>FlightsClimbed</string>
 		<string>HeartRate</string>
 	</array>
 	<key>Consent Form</key>
