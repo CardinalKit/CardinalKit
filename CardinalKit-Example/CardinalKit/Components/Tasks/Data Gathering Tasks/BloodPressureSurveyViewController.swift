@@ -1,8 +1,8 @@
 //
-//  CheckInViewController.swift
+//  BloodPressureSurveyViewController.swift
 //  CardinalKit_Example
 //
-//  Created by Kabir Jolly on 3/5/21.
+//  Created by Harry Mellsop on 2/23/21.
 //  Copyright © 2021 CocoaPods. All rights reserved.
 //
 
@@ -11,9 +11,10 @@ import CareKit
 import ResearchKit
 import CareKitUI
 import CareKitStore
+import SwiftUI
 
 // 1. Subclass a task view controller to customize the control flow and present a ResearchKit survey!
-class CheckInViewController: OCKInstructionsTaskViewController, ORKTaskViewControllerDelegate {
+class BloodPressureItemViewController: OCKInstructionsTaskViewController, ORKTaskViewControllerDelegate {
 
     // 2. This method is called when the use taps the button!
     override func taskView(_ taskView: UIView & OCKTaskDisplayable, didCompleteEvent isComplete: Bool, at indexPath: IndexPath, sender: Any?) {
@@ -23,25 +24,15 @@ class CheckInViewController: OCKInstructionsTaskViewController, ORKTaskViewContr
             super.taskView(taskView, didCompleteEvent: isComplete, at: indexPath, sender: sender)
             return
         }
+
+//        // 2b. If the user attempted to mark the task complete, display a ResearchKit survey.
+
         
-        // Daily check-in
-        // TODO: add blood pressure items here
-        let numberAnswerFormat = ORKNumericAnswerFormat(style: .integer, unit: nil, minimum: 0 as NSNumber, maximum: 500 as NSNumber)
-        let weightFormItem = ORKFormItem(identifier: "weight", text: "What is your weight (lbs)?", answerFormat: numberAnswerFormat, optional: false)
-        weightFormItem.placeholder = NSLocalizedString("Enter your weight here", comment: "")
-        
-        let answerFormat = ORKAnswerFormat.scale(withMaximumValue: 10, minimumValue: 1, defaultValue: 5, step: 1, vertical: false, maximumValueDescription: "Great!", minimumValueDescription: "Unwell")
-        let healthStep = ORKQuestionStep(identifier: "selfReportedHealth", title: "How are you feeling?", question: "Rate on a scale of 1-10", answer: answerFormat)
-        
-        let checkInFormStep = ORKFormStep(identifier: "CheckInForm", title: "Daily Check In", text: "")
-        checkInFormStep.formItems = [weightFormItem]
-        
-        let checkInTask = ORKOrderedTask(identifier: "check-in", steps: [checkInFormStep, healthStep])
-        let checkInViewController = ORKTaskViewController(task: checkInTask, taskRun: nil)
-        checkInViewController.delegate = self
+        let view = ReadBloodPressureView(parent: self)
+        let hostedView = UIHostingController(rootView: view)
 
         // 3a. Present the survey to the user
-        present(checkInViewController, animated: true, completion: nil)
+        present(hostedView, animated: true, completion: nil)
     }
 
     // 3b. This method will be called when the user completes the survey.
@@ -53,7 +44,7 @@ class CheckInViewController: OCKInstructionsTaskViewController, ORKTaskViewContr
         }
 
         // 4a. Retrieve the result from the ResearchKit survey
-        let survey = taskViewController.result.results!.first(where: { $0.identifier == "selfReportedHealth" }) as! ORKStepResult
+        let survey = taskViewController.result.results!.first(where: { $0.identifier == "feedback" }) as! ORKStepResult
         let feedbackResult = survey.results!.first as! ORKScaleQuestionResult
         let answer = Int(truncating: feedbackResult.scaleAnswer!)
 
@@ -62,12 +53,22 @@ class CheckInViewController: OCKInstructionsTaskViewController, ORKTaskViewContr
     }
 }
 
-class CheckInItemViewSynchronizer: OCKInstructionsTaskViewSynchronizer {
+class BloodPressureItemViewSynchronizer: OCKInstructionsTaskViewSynchronizer {
 
     // Customize the initial state of the view
     override func makeView() -> OCKInstructionsTaskView {
         let instructionsView = super.makeView()
         instructionsView.completionButton.label.text = "Start"
         return instructionsView
+    }
+    
+    override func updateView(_ view: OCKInstructionsTaskView, context: OCKSynchronizationContext<OCKTaskEvents>) {
+        super.updateView(view, context: context)
+
+        // Check if an answer exists or not and set the detail label accordingly
+        let element: [OCKAnyEvent]? = context.viewModel.first
+        let firstEvent = element?.first
+        
+        view.headerView.detailLabel.text = "Please record your daily blood pressure"
     }
 }

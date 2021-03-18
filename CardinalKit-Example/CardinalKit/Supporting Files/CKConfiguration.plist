@@ -44,6 +44,10 @@
 	<string>Permission to send Notifications</string>
 	<key>Notifications Text</key>
 	<string>Enabling notifications will allow us to send you reminders about when to take your meds and complete your tasks!</string>
+	<key>Onboarding Survey Title</key>
+	<string>Onbaording Survey</string>
+	<key>Onboarding Survey Text</key>
+	<string>Please fill out a short onboarding survey so we can learn more about you and your kidneys!</string>
 	<key>Health Records</key>
 	<dict>
 		<key>Enabled</key>
@@ -88,7 +92,6 @@
 	<array>
 		<string>StepCount</string>
 		<string>DistanceWalkingRunning</string>
-		<string>FlightsClimbed</string>
 		<string>HeartRate</string>
 	</array>
 	<key>Consent Form</key>

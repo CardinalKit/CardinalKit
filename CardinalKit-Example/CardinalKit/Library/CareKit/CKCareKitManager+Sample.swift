@@ -108,7 +108,13 @@ internal extension OCKStore {
         tremor.impactsAdherence = true
         tremor.instructions = "Conduct the tremor active task to monitor the side effects to Prograf!"
         
-        addTasks([nausea, doxylamine, survey, coffee, sf12, medication, checkIn, tremor, prograf, tremorLog], callbackQueue: .main, completion: nil)
+        let dailyAtBreakfast = OCKScheduleElement(start: beforeBreakfast, end: nil, interval: DateComponents(day: 1))
+
+        let schedule = OCKSchedule(composing: [dailyAtBreakfast])
+
+        var bpTask = OCKTask(id: "bloodpressure", title: "Test Blood Pressure", carePlanUUID: nil, schedule: schedule)
+        
+        addTasks([nausea, doxylamine, survey, coffee, sf12, medication, checkIn, tremor, prograf, tremorLog, bpTask], callbackQueue: .main, completion: nil)
 
         createContacts()
     }
