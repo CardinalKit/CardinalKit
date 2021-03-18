@@ -172,9 +172,9 @@ class ScheduleViewController: OCKDailyPageViewController {
     
     override func dailyPageViewController(_ dailyPageViewController: OCKDailyPageViewController, prepare listViewController: OCKListViewController, for date: Date) {
         
-        let identifiers = ["doxylamine", "medication", "nausea", "coffee", "survey", "steps", "heartRate", "sf12", "check-in", "tremor", "prograf", "tremor-log", "heartrate-2", "bloodpressure"]
+        //let identifiers = ["doxylamine", "medication", "nausea", "coffee", "survey", "steps", "heartRate", "sf12", "check-in", "tremor", "prograf", "tremor-log", "medications"]
         var query = OCKTaskQuery(for: date)
-        query.ids = identifiers
+        //query.ids = identifiers
         query.excludesTasksWithNoEvents = true
         queryHealthkitLastWeekBPDataStatistic(date: date)
         
@@ -226,11 +226,11 @@ class ScheduleViewController: OCKDailyPageViewController {
                     listViewController.appendViewController(sf12Card, animated: false)
                 }
                 
-                if let medicationTask = tasks.first(where:  { $0.id == "medication" }) {
-                    let medicationCard = OCKSimpleTaskViewController(task: medicationTask, eventQuery: .init(for: date),
-                                                                 storeManager: self.storeManager)
-                    listViewController.appendViewController(medicationCard, animated: false)
-                }
+//                if let medicationTask = tasks.first(where:  { $0.id == "medication" }) {
+//                    let medicationCard = OCKSimpleTaskViewController(task: medicationTask, eventQuery: .init(for: date),
+//                                                                 storeManager: self.storeManager)
+//                    listViewController.appendViewController(medicationCard, animated: false)
+//                }
                 
                 if let checkInTask = tasks.first(where: { $0.id == "check-in" }) {
                     let checkInCard = CheckInViewController(
@@ -260,6 +260,20 @@ class ScheduleViewController: OCKDailyPageViewController {
                         storeManager: self.storeManager)
 
                     listViewController.appendViewController(prografCard, animated: false)
+                }
+                
+                tasks.forEach { task in
+                    print(task.id)
+                    if task.id.contains("medications") {
+                        print("medication task: " + task.id)
+                        let medicationCard = OCKChecklistTaskViewController(
+                            task: task,
+                            eventQuery: .init(for: date),
+                            storeManager: self.storeManager)
+
+                        listViewController.appendViewController(medicationCard, animated: false)
+
+                    }
                 }
 
                 if let tremorLogTask = tasks.first(where: { $0.id == "tremor-log" }) {
