@@ -8,6 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		2F94C5F22536543600DF8866 /* SceneDelegate+CardinalKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F94C5F12536543600DF8866 /* SceneDelegate+CardinalKit.swift */; };
+		4453014225FD5EDD00F7AB22 /* ProgressUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4453014125FD5EDD00F7AB22 /* ProgressUIView.swift */; };
+		4453014625FD7B7F00F7AB22 /* NotificationStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4453014525FD7B7E00F7AB22 /* NotificationStepViewController.swift */; };
+		4469456B25FF28D000891851 /* NotificationData.json in Resources */ = {isa = PBXBuildFile; fileRef = 4469456A25FF28D000891851 /* NotificationData.json */; };
+		4469456D25FF2AD000891851 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469456C25FF2AD000891851 /* Notification.swift */; };
+		4469456F2600485E00891851 /* OnboardingSurveyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469456E2600485D00891851 /* OnboardingSurveyViewController.swift */; };
+		44CD173D25F85D7600054F0E /* LoginExistingUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CD173C25F85D7600054F0E /* LoginExistingUserViewController.swift */; };
+		44F5403325D3BD1F00B15111 /* TeamUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F5403225D3BD1F00B15111 /* TeamUIView.swift */; };
+		44F5403525D45AEB00B15111 /* ProfileDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F5403425D45AEB00B15111 /* ProfileDetail.swift */; };
+		44F5403825D464F100B15111 /* ProfileData.json in Resources */ = {isa = PBXBuildFile; fileRef = 44F5403725D464F100B15111 /* ProfileData.json */; };
+		44F5403C25D4663E00B15111 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F5403B25D4663E00B15111 /* Profile.swift */; };
+		44F5403E25D4669700B15111 /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F5403D25D4669700B15111 /* ModelData.swift */; };
+		44F5404025D468B400B15111 /* ProfileRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F5403F25D468B400B15111 /* ProfileRow.swift */; };
 		8E0A43AC244A4A0400656518 /* CKStudyUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4382244A4A0400656518 /* CKStudyUser.swift */; };
 		8E0A43AD244A4A0400656518 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4384244A4A0400656518 /* Constants.swift */; };
 		8E0A43AE244A4A0400656518 /* ORKESerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4386244A4A0400656518 /* ORKESerialization.m */; };
@@ -72,9 +84,27 @@
 		8EA664B2259422E400B6A45A /* CKCareKitRemoteSyncWithFirestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA664B1259422E400B6A45A /* CKCareKitRemoteSyncWithFirestore.swift */; };
 		8EA664B42594387900B6A45A /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA664B32594387900B6A45A /* Errors.swift */; };
 		8EBE6F9C24B3C0E60093D07C /* AppDelegate+CardinalKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE6F9B24B3C0E60093D07C /* AppDelegate+CardinalKit.swift */; };
+		B684146125FDE6110038AB65 /* MedicationSelectorOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = B684145C25FDE60F0038AB65 /* MedicationSelectorOld.swift */; };
+		B684146325FDE6110038AB65 /* ClearableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B684145E25FDE6100038AB65 /* ClearableTextField.swift */; };
+		B684146525FDE6110038AB65 /* MedicationsViewModelOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = B684146025FDE6110038AB65 /* MedicationsViewModelOld.swift */; };
+		B6E881F426007B3F00E15AC4 /* medications.csv in Resources */ = {isa = PBXBuildFile; fileRef = B6E881F326007B3F00E15AC4 /* medications.csv */; };
+		B6E881F626007B5A00E15AC4 /* MedicationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E881F526007B5A00E15AC4 /* MedicationDetailView.swift */; };
+		B6E881F826007BDC00E15AC4 /* Medication.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E881F726007BDB00E15AC4 /* Medication.swift */; };
+		B6E881FA26007CCF00E15AC4 /* MedicationSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E881F926007CCF00E15AC4 /* MedicationSelector.swift */; };
+		B6E881FC26007CDF00E15AC4 /* MedicationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E881FB26007CDE00E15AC4 /* MedicationsViewModel.swift */; };
+		B6E881FE26008D5200E15AC4 /* MultipleSelectionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E881FD26008D5100E15AC4 /* MultipleSelectionRow.swift */; };
 		D253D132250D1BDB00A363E4 /* CKSignInWithAppleStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = D253D131250D1BDB00A363E4 /* CKSignInWithAppleStep.swift */; };
+		DA52062625F1FDBB00D7D0A7 /* TremorTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA52062525F1FDBB00D7D0A7 /* TremorTaskViewController.swift */; };
+		DA52062825F3242400D7D0A7 /* CheckInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA52062725F3242400D7D0A7 /* CheckInViewController.swift */; };
+		DA52062A25F32D1A00D7D0A7 /* SF12ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA52062925F32D1900D7D0A7 /* SF12ViewController.swift */; };
+		DA52064C25F45DAE00D7D0A7 /* DaysSinceSurgeryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA52064B25F45DAE00D7D0A7 /* DaysSinceSurgeryView.swift */; };
+		DA9C965425FEAF4500AE6CA4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA9C965325FEAF4500AE6CA4 /* GoogleService-Info.plist */; };
+		DA9C965725FEB76200AE6CA4 /* BloodPressureSurveyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9C965625FEB76200AE6CA4 /* BloodPressureSurveyViewController.swift */; };
+		DA9C965925FEB7A900AE6CA4 /* ReadBloodPressureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9C965825FEB7A900AE6CA4 /* ReadBloodPressureView.swift */; };
+		DA9C965C25FEB82000AE6CA4 /* DevicesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9C965B25FEB82000AE6CA4 /* DevicesView.swift */; };
+		DA9C965E25FEB84B00AE6CA4 /* BLEManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9C965D25FEB84B00AE6CA4 /* BLEManager.swift */; };
+		DA9C966125FEBB1F00AE6CA4 /* RoundedCornerGradientButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9C966025FEBB1F00AE6CA4 /* RoundedCornerGradientButtonStyle.swift */; };
 		E235077724F7082700CC1899 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E235077624F7082700CC1899 /* SceneDelegate.swift */; };
-		E290FB1D24FF4BBA00D19BE9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E290FB1C24FF4BBA00D19BE9 /* GoogleService-Info.plist */; };
 		E29143FC24E74AD100EE97B2 /* LaunchUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29143FB24E74AD100EE97B2 /* LaunchUIView.swift */; };
 		E2CB7FE524F730C80039C24A /* CKConfiguration-old.plist in Resources */ = {isa = PBXBuildFile; fileRef = E2CB7FE424F730C80039C24A /* CKConfiguration-old.plist */; };
 		E2DF9F0A2500C9CE00A93B93 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DF9F092500C9CE00A93B93 /* LoginViewController.swift */; };
@@ -101,6 +131,18 @@
 		1D31556B648F48DA664CEE80 /* Pods_CardinalKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CardinalKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F94C5F12536543600DF8866 /* SceneDelegate+CardinalKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SceneDelegate+CardinalKit.swift"; sourceTree = "<group>"; };
 		41DC264876E45FE5A3FD8701 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		4453014125FD5EDD00F7AB22 /* ProgressUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressUIView.swift; sourceTree = "<group>"; };
+		4453014525FD7B7E00F7AB22 /* NotificationStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStepViewController.swift; sourceTree = "<group>"; };
+		4469456A25FF28D000891851 /* NotificationData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = NotificationData.json; path = CardinalKit/Components/Schedule/NotificationData.json; sourceTree = SOURCE_ROOT; };
+		4469456C25FF2AD000891851 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		4469456E2600485D00891851 /* OnboardingSurveyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSurveyViewController.swift; sourceTree = "<group>"; };
+		44CD173C25F85D7600054F0E /* LoginExistingUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginExistingUserViewController.swift; sourceTree = "<group>"; };
+		44F5403225D3BD1F00B15111 /* TeamUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamUIView.swift; sourceTree = "<group>"; };
+		44F5403425D45AEB00B15111 /* ProfileDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetail.swift; sourceTree = "<group>"; };
+		44F5403725D464F100B15111 /* ProfileData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ProfileData.json; sourceTree = "<group>"; };
+		44F5403B25D4663E00B15111 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		44F5403D25D4669700B15111 /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
+		44F5403F25D468B400B15111 /* ProfileRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRow.swift; sourceTree = "<group>"; };
 		58275A0CAB0C7223B21F375D /* Pods-CardinalKit_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardinalKit_Tests.debug.xcconfig"; path = "Target Support Files/Pods-CardinalKit_Tests/Pods-CardinalKit_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* CardinalKit Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CardinalKit Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		62AA5CD1C2188D392530510F /* CardinalKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = CardinalKit.podspec; path = ../CardinalKit.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -168,10 +210,29 @@
 		8EA664B1259422E400B6A45A /* CKCareKitRemoteSyncWithFirestore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKCareKitRemoteSyncWithFirestore.swift; sourceTree = "<group>"; };
 		8EA664B32594387900B6A45A /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		8EBE6F9B24B3C0E60093D07C /* AppDelegate+CardinalKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+CardinalKit.swift"; sourceTree = "<group>"; };
+		B684145A25FDD7370038AB65 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B684145C25FDE60F0038AB65 /* MedicationSelectorOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicationSelectorOld.swift; sourceTree = "<group>"; };
+		B684145E25FDE6100038AB65 /* ClearableTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClearableTextField.swift; sourceTree = "<group>"; };
+		B684146025FDE6110038AB65 /* MedicationsViewModelOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicationsViewModelOld.swift; sourceTree = "<group>"; };
+		B6E881F326007B3F00E15AC4 /* medications.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = medications.csv; sourceTree = "<group>"; };
+		B6E881F526007B5A00E15AC4 /* MedicationDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicationDetailView.swift; sourceTree = "<group>"; };
+		B6E881F726007BDB00E15AC4 /* Medication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Medication.swift; sourceTree = "<group>"; };
+		B6E881F926007CCF00E15AC4 /* MedicationSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicationSelector.swift; sourceTree = "<group>"; };
+		B6E881FB26007CDE00E15AC4 /* MedicationsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicationsViewModel.swift; sourceTree = "<group>"; };
+		B6E881FD26008D5100E15AC4 /* MultipleSelectionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleSelectionRow.swift; sourceTree = "<group>"; };
 		CB97C14C759E56B88E4E3941 /* Pods_CardinalKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CardinalKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D253D131250D1BDB00A363E4 /* CKSignInWithAppleStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKSignInWithAppleStep.swift; sourceTree = "<group>"; };
+		DA52062525F1FDBB00D7D0A7 /* TremorTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TremorTaskViewController.swift; sourceTree = "<group>"; };
+		DA52062725F3242400D7D0A7 /* CheckInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInViewController.swift; sourceTree = "<group>"; };
+		DA52062925F32D1900D7D0A7 /* SF12ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SF12ViewController.swift; sourceTree = "<group>"; };
+		DA52064B25F45DAE00D7D0A7 /* DaysSinceSurgeryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysSinceSurgeryView.swift; sourceTree = "<group>"; };
+		DA9C965325FEAF4500AE6CA4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		DA9C965625FEB76200AE6CA4 /* BloodPressureSurveyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BloodPressureSurveyViewController.swift; sourceTree = "<group>"; };
+		DA9C965825FEB7A900AE6CA4 /* ReadBloodPressureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadBloodPressureView.swift; sourceTree = "<group>"; };
+		DA9C965B25FEB82000AE6CA4 /* DevicesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicesView.swift; sourceTree = "<group>"; };
+		DA9C965D25FEB84B00AE6CA4 /* BLEManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEManager.swift; sourceTree = "<group>"; };
+		DA9C966025FEBB1F00AE6CA4 /* RoundedCornerGradientButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCornerGradientButtonStyle.swift; sourceTree = "<group>"; };
 		E235077624F7082700CC1899 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		E290FB1C24FF4BBA00D19BE9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E29143FB24E74AD100EE97B2 /* LaunchUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchUIView.swift; sourceTree = "<group>"; };
 		E2CB7FE424F730C80039C24A /* CKConfiguration-old.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "CKConfiguration-old.plist"; sourceTree = "<group>"; };
 		E2DF9F092500C9CE00A93B93 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -205,6 +266,14 @@
 				CB97C14C759E56B88E4E3941 /* Pods_CardinalKit_Tests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4453014025FD5CA500F7AB22 /* Progress */ = {
+			isa = PBXGroup;
+			children = (
+				4453014125FD5EDD00F7AB22 /* ProgressUIView.swift */,
+			);
+			path = Progress;
 			sourceTree = "<group>";
 		};
 		607FACC71AFB9204008FA782 = {
@@ -279,9 +348,10 @@
 				8E0A4384244A4A0400656518 /* Constants.swift */,
 				8E0A4378244A4A0300656518 /* CardinalKit_Example-Bridging-Header.h */,
 				8E0A43C9244A4C6500656518 /* Info.plist */,
-				E290FB1C24FF4BBA00D19BE9 /* GoogleService-Info.plist */,
 				E2F1FD7724D62064006C39DF /* CKConfiguration.plist */,
+				DA9C965325FEAF4500AE6CA4 /* GoogleService-Info.plist */,
 				E2CB7FE424F730C80039C24A /* CKConfiguration-old.plist */,
+				B684145A25FDD7370038AB65 /* GoogleService-Info.plist */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -289,6 +359,7 @@
 		8E0A438D244A4A0400656518 /* Tasks */ = {
 			isa = PBXGroup;
 			children = (
+				DA9C965525FEB73900AE6CA4 /* Data Gathering Tasks */,
 				8E9CDF7F2591E62000C8A228 /* Model */,
 				8E6E1E2F25353A550024B8DF /* Views */,
 				8E6E1E25253537E40024B8DF /* TasksUIView.swift */,
@@ -301,6 +372,7 @@
 			children = (
 				8E0A439C244A4A0400656518 /* Steps */,
 				8E6E1E2125352C780024B8DF /* OnboardingUIView.swift */,
+				44CD173C25F85D7600054F0E /* LoginExistingUserViewController.swift */,
 				8E6E1E082534F4100024B8DF /* OnboardingViewController.swift */,
 				8E6E1E0A2534FF640024B8DF /* OnboardingViewController+Coordinator.swift */,
 				8E6E1E0C25351D8F0024B8DF /* PageViewController.swift */,
@@ -319,6 +391,8 @@
 				8E0A439F244A4A0400656518 /* PasswordlessLoginStep.swift */,
 				8E0A43A3244A4A0400656518 /* LoginCustomWaitStepViewController.swift */,
 				E2DF9F092500C9CE00A93B93 /* LoginViewController.swift */,
+				4453014525FD7B7E00F7AB22 /* NotificationStepViewController.swift */,
+				4469456E2600485D00891851 /* OnboardingSurveyViewController.swift */,
 			);
 			path = Steps;
 			sourceTree = "<group>";
@@ -360,6 +434,7 @@
 		8E6E1E2F25353A550024B8DF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				DA9C965825FEB7A900AE6CA4 /* ReadBloodPressureView.swift */,
 				8E6E1E27253538CC0024B8DF /* TaskListItemView.swift */,
 				8E9CDF822592844A00C8A228 /* LearnUIView.swift */,
 				8EA664222592E57200B6A45A /* SensorsDemoUIView.swift */,
@@ -380,6 +455,7 @@
 				8E6E1E2B253539AE0024B8DF /* ChangePasscodeView.swift */,
 				8E6E1E2D25353A1E0024B8DF /* PatientIDView.swift */,
 				8EA664AC2593380D00B6A45A /* SendRecordsView.swift */,
+				DA52064B25F45DAE00D7D0A7 /* DaysSinceSurgeryView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -389,6 +465,8 @@
 			children = (
 				8E9CDEB02591737A00C8A228 /* Views */,
 				8E9CDEA625916B2800C8A228 /* ScheduleViewControllerRepresentable.swift */,
+				4469456A25FF28D000891851 /* NotificationData.json */,
+				4469456C25FF2AD000891851 /* Notification.swift */,
 				8E9CDEA825916E6600C8A228 /* ScheduleViewController.swift */,
 			);
 			path = Schedule;
@@ -397,10 +475,14 @@
 		8E9CDEAA25916F2A00C8A228 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				B684146625FDF8CF0038AB65 /* Medication */,
+				DA9C965F25FEBAD900AE6CA4 /* Component Styles */,
+				DA9C965A25FEB80900AE6CA4 /* My Devices */,
 				8E6E1E23253537580024B8DF /* MainUIView.swift */,
 				E29143FB24E74AD100EE97B2 /* LaunchUIView.swift */,
 				8E0A4399244A4A0400656518 /* Onboarding */,
 				8E9CDEA525915F6600C8A228 /* Schedule */,
+				4453014025FD5CA500F7AB22 /* Progress */,
 				8E9CDEB42591818200C8A228 /* Care Team */,
 				8E0A438D244A4A0400656518 /* Tasks */,
 				8E0A4379244A4A0400656518 /* Profile */,
@@ -423,6 +505,9 @@
 			children = (
 				8E9CDEB12591739A00C8A228 /* TipView.swift */,
 				8EA664AF25941A4D00B6A45A /* SurveyItemViewController.swift */,
+				DA52062525F1FDBB00D7D0A7 /* TremorTaskViewController.swift */,
+				DA52062725F3242400D7D0A7 /* CheckInViewController.swift */,
+				DA52062925F32D1900D7D0A7 /* SF12ViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -431,6 +516,12 @@
 			isa = PBXGroup;
 			children = (
 				8E9CDEB5259181B400C8A228 /* CareTeamViewControllerRepresentable.swift */,
+				44F5403225D3BD1F00B15111 /* TeamUIView.swift */,
+				44F5403F25D468B400B15111 /* ProfileRow.swift */,
+				44F5403725D464F100B15111 /* ProfileData.json */,
+				44F5403425D45AEB00B15111 /* ProfileDetail.swift */,
+				44F5403B25D4663E00B15111 /* Profile.swift */,
+				44F5403D25D4669700B15111 /* ModelData.swift */,
 			);
 			path = "Care Team";
 			sourceTree = "<group>";
@@ -486,6 +577,47 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		B684146625FDF8CF0038AB65 /* Medication */ = {
+			isa = PBXGroup;
+			children = (
+				B684145E25FDE6100038AB65 /* ClearableTextField.swift */,
+				B6E881F326007B3F00E15AC4 /* medications.csv */,
+				B6E881F726007BDB00E15AC4 /* Medication.swift */,
+				B6E881F926007CCF00E15AC4 /* MedicationSelector.swift */,
+				B6E881FB26007CDE00E15AC4 /* MedicationsViewModel.swift */,
+				B684145C25FDE60F0038AB65 /* MedicationSelectorOld.swift */,
+				B684146025FDE6110038AB65 /* MedicationsViewModelOld.swift */,
+				B6E881F526007B5A00E15AC4 /* MedicationDetailView.swift */,
+				B6E881FD26008D5100E15AC4 /* MultipleSelectionRow.swift */,
+			);
+			path = Medication;
+			sourceTree = "<group>";
+		};
+		DA9C965525FEB73900AE6CA4 /* Data Gathering Tasks */ = {
+			isa = PBXGroup;
+			children = (
+				DA9C965625FEB76200AE6CA4 /* BloodPressureSurveyViewController.swift */,
+			);
+			path = "Data Gathering Tasks";
+			sourceTree = "<group>";
+		};
+		DA9C965A25FEB80900AE6CA4 /* My Devices */ = {
+			isa = PBXGroup;
+			children = (
+				DA9C965B25FEB82000AE6CA4 /* DevicesView.swift */,
+				DA9C965D25FEB84B00AE6CA4 /* BLEManager.swift */,
+			);
+			path = "My Devices";
+			sourceTree = "<group>";
+		};
+		DA9C965F25FEBAD900AE6CA4 /* Component Styles */ = {
+			isa = PBXGroup;
+			children = (
+				DA9C966025FEBB1F00AE6CA4 /* RoundedCornerGradientButtonStyle.swift */,
+			);
+			path = "Component Styles";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -527,7 +659,6 @@
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = CQRZ4E7K9U;
 						LastSwiftMigration = 1120;
 					};
 				};
@@ -560,11 +691,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E0A43AF244A4A0400656518 /* Assets.xcassets in Resources */,
+				B6E881F426007B3F00E15AC4 /* medications.csv in Resources */,
 				8E0A43B0244A4A0400656518 /* LaunchScreen.storyboard in Resources */,
 				E2F1FD7824D62064006C39DF /* CKConfiguration.plist in Resources */,
 				8E0A43C1244A4A0400656518 /* LoginCustomWaitStepView.xib in Resources */,
+				DA9C965425FEAF4500AE6CA4 /* GoogleService-Info.plist in Resources */,
 				E2CB7FE524F730C80039C24A /* CKConfiguration-old.plist in Resources */,
-				E290FB1D24FF4BBA00D19BE9 /* GoogleService-Info.plist in Resources */,
+				44F5403825D464F100B15111 /* ProfileData.json in Resources */,
+				4469456B25FF28D000891851 /* NotificationData.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -669,6 +803,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2DF9F0A2500C9CE00A93B93 /* LoginViewController.swift in Sources */,
+				B6E881FC26007CDF00E15AC4 /* MedicationsViewModel.swift in Sources */,
+				44F5403C25D4663E00B15111 /* Profile.swift in Sources */,
 				8E6E1E14253520440024B8DF /* PasscodeViewController.swift in Sources */,
 				E29143FC24E74AD100EE97B2 /* LaunchUIView.swift in Sources */,
 				8EA6648725930B6B00B6A45A /* CKHealthRecordsStepViewController.swift in Sources */,
@@ -676,13 +812,21 @@
 				8EA664B2259422E400B6A45A /* CKCareKitRemoteSyncWithFirestore.swift in Sources */,
 				8EA664AD2593380D00B6A45A /* SendRecordsView.swift in Sources */,
 				8E6E1E28253538CC0024B8DF /* TaskListItemView.swift in Sources */,
+				44F5403E25D4669700B15111 /* ModelData.swift in Sources */,
+				DA52062825F3242400D7D0A7 /* CheckInViewController.swift in Sources */,
+				44F5404025D468B400B15111 /* ProfileRow.swift in Sources */,
 				8E0A43B3244A4A0400656518 /* TaskSamples.swift in Sources */,
 				8E6E1E2225352C780024B8DF /* OnboardingUIView.swift in Sources */,
+				DA9C965C25FEB82000AE6CA4 /* DevicesView.swift in Sources */,
 				8E6E1E1A253528450024B8DF /* WithdrawView.swift in Sources */,
+				44CD173D25F85D7600054F0E /* LoginExistingUserViewController.swift in Sources */,
+				B6E881F826007BDC00E15AC4 /* Medication.swift in Sources */,
 				8E6E1E2E25353A1E0024B8DF /* PatientIDView.swift in Sources */,
 				8E6E1E0B2534FF640024B8DF /* OnboardingViewController+Coordinator.swift in Sources */,
 				8E40DC042471E5940027536B /* CKNetworkManager.swift in Sources */,
+				DA52062625F1FDBB00D7D0A7 /* TremorTaskViewController.swift in Sources */,
 				8EA664B025941A4D00B6A45A /* SurveyItemViewController.swift in Sources */,
+				DA52064C25F45DAE00D7D0A7 /* DaysSinceSurgeryView.swift in Sources */,
 				8E9CDEBA2591843200C8A228 /* CKConfig.swift in Sources */,
 				2F94C5F22536543600DF8866 /* SceneDelegate+CardinalKit.swift in Sources */,
 				8E9CDFAE2592B79900C8A228 /* Metrics.swift in Sources */,
@@ -690,28 +834,41 @@
 				8E7FFFB425DCE9B7002982B4 /* CKUploadToGCPTaskViewControllerDelegate.swift in Sources */,
 				8EBE6F9C24B3C0E60093D07C /* AppDelegate+CardinalKit.swift in Sources */,
 				8E0A43B9244A4A0400656518 /* AppDelegate.swift in Sources */,
+				DA9C966125FEBB1F00AE6CA4 /* RoundedCornerGradientButtonStyle.swift in Sources */,
 				8EA664232592E57200B6A45A /* SensorsDemoUIView.swift in Sources */,
 				8E6E1E3225353ABE0024B8DF /* ProfileUIView.swift in Sources */,
 				8E6E1E1E253528F50024B8DF /* SupportView.swift in Sources */,
+				B684146325FDE6110038AB65 /* ClearableTextField.swift in Sources */,
 				8E6E1E1C253528D70024B8DF /* ReportView.swift in Sources */,
 				8E6E1E26253537E40024B8DF /* TasksUIView.swift in Sources */,
+				44F5403525D45AEB00B15111 /* ProfileDetail.swift in Sources */,
+				B6E881FE26008D5200E15AC4 /* MultipleSelectionRow.swift in Sources */,
+				4469456F2600485E00891851 /* OnboardingSurveyViewController.swift in Sources */,
 				8E9CDEAD259170AD00C8A228 /* CKCareKitManager.swift in Sources */,
+				DA9C965E25FEB84B00AE6CA4 /* BLEManager.swift in Sources */,
 				8EA664892593213000B6A45A /* CKSendHelper.swift in Sources */,
 				8E6E1E3425353AFE0024B8DF /* EmailHelper.swift in Sources */,
+				B6E881FA26007CCF00E15AC4 /* MedicationSelector.swift in Sources */,
 				8E6E1E24253537580024B8DF /* MainUIView.swift in Sources */,
 				8E6E1E182535263F0024B8DF /* CKTaskViewController.swift in Sources */,
+				B684146525FDE6110038AB65 /* MedicationsViewModelOld.swift in Sources */,
 				8E9CDF142591B73900C8A228 /* CKHealthRecordsManager.swift in Sources */,
+				DA9C965925FEB7A900AE6CA4 /* ReadBloodPressureView.swift in Sources */,
 				8EA664B42594387900B6A45A /* Errors.swift in Sources */,
+				4453014625FD7B7F00F7AB22 /* NotificationStepViewController.swift in Sources */,
 				8E6E1E1225351F830024B8DF /* DocumentPreviewViewController.swift in Sources */,
 				8E6E1E20253529760024B8DF /* DocumentView.swift in Sources */,
 				8E7FFFBB25DE37FF002982B4 /* CoffeePieChartView.swift in Sources */,
+				4453014225FD5EDD00F7AB22 /* ProgressUIView.swift in Sources */,
 				8E7FFFB825DE350A002982B4 /* CoffeeUIView.swift in Sources */,
 				8E0A43B5244A4A0400656518 /* TaskItem.swift in Sources */,
 				8E6E1E2C253539AE0024B8DF /* ChangePasscodeView.swift in Sources */,
 				8E0A43AD244A4A0400656518 /* Constants.swift in Sources */,
+				B6E881F626007B5A00E15AC4 /* MedicationDetailView.swift in Sources */,
 				8E0A43BE244A4A0400656518 /* CKHealthDataStepViewController.swift in Sources */,
 				8E0A43AE244A4A0400656518 /* ORKESerialization.m in Sources */,
 				8E9CDEB6259181B400C8A228 /* CareTeamViewControllerRepresentable.swift in Sources */,
+				4469456D25FF2AD000891851 /* Notification.swift in Sources */,
 				8E9CDEAF259172C200C8A228 /* CKCareKitManager+Sample.swift in Sources */,
 				8E9CDEA925916E6600C8A228 /* ScheduleViewController.swift in Sources */,
 				D253D132250D1BDB00A363E4 /* CKSignInWithAppleStep.swift in Sources */,
@@ -720,13 +877,17 @@
 				8E0A43C3244A4A0400656518 /* LoginCustomWaitStepViewController.swift in Sources */,
 				8E9CDEB22591739A00C8A228 /* TipView.swift in Sources */,
 				8E7FFFBD25DE38E4002982B4 /* CoffeeChartDataSource.swift in Sources */,
+				DA9C965725FEB76200AE6CA4 /* BloodPressureSurveyViewController.swift in Sources */,
 				E2F1FD7624D61EDA006C39DF /* CKPropertyReader.swift in Sources */,
 				8E6E1E1025351E890024B8DF /* Extensions+UIColor.swift in Sources */,
 				8E9CDF832592844A00C8A228 /* LearnUIView.swift in Sources */,
 				8E9CDEA725916B2800C8A228 /* ScheduleViewControllerRepresentable.swift in Sources */,
+				B684146125FDE6110038AB65 /* MedicationSelectorOld.swift in Sources */,
+				DA52062A25F32D1A00D7D0A7 /* SF12ViewController.swift in Sources */,
 				E235077724F7082700CC1899 /* SceneDelegate.swift in Sources */,
 				8E6E1E16253524500024B8DF /* WithdrawalViewController.swift in Sources */,
 				8E6E1E2A2535398D0024B8DF /* HelpView.swift in Sources */,
+				44F5403325D3BD1F00B15111 /* TeamUIView.swift in Sources */,
 				8E9CDED02591AC4A00C8A228 /* CKHealthKitManager.swift in Sources */,
 				8E0A43C2244A4A0400656518 /* ConsentDocument.swift in Sources */,
 			);
@@ -863,7 +1024,7 @@
 				);
 				MARKETING_VERSION = 1.3.0;
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = edu.stanford.cardinalkit;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.stanford.cs342.kidney.release;
 				PRODUCT_NAME = "CardinalKit Example";
 				SWIFT_OBJC_BRIDGING_HEADER = "CardinalKit/Supporting Files/CardinalKit_Example-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -889,7 +1050,7 @@
 				);
 				MARKETING_VERSION = 1.3.0;
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = edu.stanford.cardinalkit;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.stanford.cs342.kidney.release;
 				PRODUCT_NAME = "CardinalKit Example";
 				SWIFT_OBJC_BRIDGING_HEADER = "CardinalKit/Supporting Files/CardinalKit_Example-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;

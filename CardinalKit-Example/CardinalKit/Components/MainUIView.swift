@@ -21,7 +21,11 @@ struct MainUIView: View {
     
     var body: some View {
         TabView {
-            TasksUIView(color: self.color).tabItem {
+//            TasksUIView(color: self.color).tabItem {
+//                Image("tab_tasks").renderingMode(.template)
+//                Text("Tasks")
+//            }
+            MedicationSelector().tabItem {
                 Image("tab_tasks").renderingMode(.template)
                 Text("Tasks")
             }
@@ -31,11 +35,21 @@ struct MainUIView: View {
                     Image("tab_schedule").renderingMode(.template)
                     Text("Schedule")
                 }
-                
+                /*
                 CareTeamViewControllerRepresentable().tabItem {
                     Image("tab_care").renderingMode(.template)
-                    Text("Contact")
+                    Text("Care Team")
                 }
+ */
+            }
+            ProgressUIView().tabItem {
+                Image("tab_progress").renderingMode(.template)
+                Text("Progress")
+            }
+            
+            TeamUIView().tabItem {
+                Image("tab_care").renderingMode(.template)
+                Text("Care Team")
             }
 
             ProfileUIView(color: self.color).tabItem {

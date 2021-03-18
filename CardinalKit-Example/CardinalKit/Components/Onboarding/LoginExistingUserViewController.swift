@@ -5,7 +5,6 @@
 //  Created by Varun Shenoy on 3/2/21.
 //  Copyright © 2021 CocoaPods. All rights reserved.
 //
-
 import SwiftUI
 import UIKit
 import ResearchKit
@@ -60,4 +59,3 @@ struct LoginExistingUserViewController: UIViewControllerRepresentable {
     }
     
 }
-

@@ -92,6 +92,20 @@ struct OnboardingViewController: UIViewControllerRepresentable {
         passcodeStep.text = config.read(query: "Passcode Text")
         
         /* **************************************************************
+        * ADDED STEP: inform the user that they should enable notifications
+        **************************************************************/
+        let notificationsStep = NotificationStep(identifier: "Notifications")
+        notificationsStep.title = config.read(query: "Notifications Title")
+        notificationsStep.text = config.read(query: "Notifications Text")
+        
+        /* **************************************************************
+        * ADDED STEP: inform the user that they should take onboarding survey
+        **************************************************************/
+        let onboardingSurveyStep = OnboardingSurveyStep(identifier: "Onboarding Survey")
+        onboardingSurveyStep.title = config.read(query: "Onboarding Survey Title")
+        onboardingSurveyStep.text = config.read(query: "Onboarding Survey Text")
+        
+        /* **************************************************************
         *  STEP (6): inform the user that they are done with sign-up!
         **************************************************************/
         // use the `ORKCompletionStep` from ResearchKit
@@ -107,7 +121,7 @@ struct OnboardingViewController: UIViewControllerRepresentable {
         let introSteps: [ORKStep] = [consentStep, reviewConsentStep]
         
         // and steps regarding login / security
-        let emailVerificationSteps = loginSteps + [passcodeStep, healthDataStep, healthRecordsStep, completionStep]
+        let emailVerificationSteps = loginSteps + [passcodeStep, healthDataStep, healthRecordsStep, notificationsStep, onboardingSurveyStep, completionStep]
         
         // guide the user through ALL steps
         let fullSteps = introSteps + emailVerificationSteps
