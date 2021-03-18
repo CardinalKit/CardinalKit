@@ -10,6 +10,8 @@
 		2F94C5F22536543600DF8866 /* SceneDelegate+CardinalKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F94C5F12536543600DF8866 /* SceneDelegate+CardinalKit.swift */; };
 		4453014225FD5EDD00F7AB22 /* ProgressUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4453014125FD5EDD00F7AB22 /* ProgressUIView.swift */; };
 		4453014625FD7B7F00F7AB22 /* NotificationStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4453014525FD7B7E00F7AB22 /* NotificationStepViewController.swift */; };
+		4469456B25FF28D000891851 /* NotificationData.json in Resources */ = {isa = PBXBuildFile; fileRef = 4469456A25FF28D000891851 /* NotificationData.json */; };
+		4469456D25FF2AD000891851 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469456C25FF2AD000891851 /* Notification.swift */; };
 		44CD173D25F85D7600054F0E /* LoginExistingUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CD173C25F85D7600054F0E /* LoginExistingUserViewController.swift */; };
 		44F5403325D3BD1F00B15111 /* TeamUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F5403225D3BD1F00B15111 /* TeamUIView.swift */; };
 		44F5403525D45AEB00B15111 /* ProfileDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F5403425D45AEB00B15111 /* ProfileDetail.swift */; };
@@ -121,6 +123,8 @@
 		41DC264876E45FE5A3FD8701 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		4453014125FD5EDD00F7AB22 /* ProgressUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressUIView.swift; sourceTree = "<group>"; };
 		4453014525FD7B7E00F7AB22 /* NotificationStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStepViewController.swift; sourceTree = "<group>"; };
+		4469456A25FF28D000891851 /* NotificationData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = NotificationData.json; path = CardinalKit/Components/Schedule/NotificationData.json; sourceTree = SOURCE_ROOT; };
+		4469456C25FF2AD000891851 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		44CD173C25F85D7600054F0E /* LoginExistingUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginExistingUserViewController.swift; sourceTree = "<group>"; };
 		44F5403225D3BD1F00B15111 /* TeamUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamUIView.swift; sourceTree = "<group>"; };
 		44F5403425D45AEB00B15111 /* ProfileDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetail.swift; sourceTree = "<group>"; };
@@ -438,6 +442,8 @@
 			children = (
 				8E9CDEB02591737A00C8A228 /* Views */,
 				8E9CDEA625916B2800C8A228 /* ScheduleViewControllerRepresentable.swift */,
+				4469456A25FF28D000891851 /* NotificationData.json */,
+				4469456C25FF2AD000891851 /* Notification.swift */,
 				8E9CDEA825916E6600C8A228 /* ScheduleViewController.swift */,
 			);
 			path = Schedule;
@@ -651,6 +657,7 @@
 				DA9C965425FEAF4500AE6CA4 /* GoogleService-Info.plist in Resources */,
 				E2CB7FE524F730C80039C24A /* CKConfiguration-old.plist in Resources */,
 				44F5403825D464F100B15111 /* ProfileData.json in Resources */,
+				4469456B25FF28D000891851 /* NotificationData.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -812,6 +819,7 @@
 				8E0A43BE244A4A0400656518 /* CKHealthDataStepViewController.swift in Sources */,
 				8E0A43AE244A4A0400656518 /* ORKESerialization.m in Sources */,
 				8E9CDEB6259181B400C8A228 /* CareTeamViewControllerRepresentable.swift in Sources */,
+				4469456D25FF2AD000891851 /* Notification.swift in Sources */,
 				8E9CDEAF259172C200C8A228 /* CKCareKitManager+Sample.swift in Sources */,
 				8E9CDEA925916E6600C8A228 /* ScheduleViewController.swift in Sources */,
 				D253D132250D1BDB00A363E4 /* CKSignInWithAppleStep.swift in Sources */,
