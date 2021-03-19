@@ -11,8 +11,12 @@ import CareKitStore
 
 class CKCareKitManager: NSObject {
     
-    let coreDataStore = OCKStore(name: "CKCareKitStore", type: .onDisk, remote: CKCareKitRemoteSyncWithFirestore())
-    let healthKitStore = OCKHealthKitPassthroughStore(name: "CKCareKitHealthKitStore", type: .onDisk)
+    let coreDataStore = OCKStore(name: "CKCareKitStore", type: .inMemory)
+    let healthKitStore = OCKHealthKitPassthroughStore(name: "CKCareKitHealthKitStore", type: .inMemory)
+
+// Convert to the below when ready to add all CareKit services to the Firestore
+//    let coreDataStore = OCKStore(name: "CKCareKitStore", type: .onDisk, remote: CKCareKitRemoteSyncWithFirestore())
+//    let healthKitStore = OCKHealthKitPassthroughStore(name: "CKCareKitHealthKitStore", type: .onDisk)
     private(set) var synchronizedStoreManager: OCKSynchronizedStoreManager!
     
     static let shared = CKCareKitManager()
@@ -20,7 +24,7 @@ class CKCareKitManager: NSObject {
     override init() {
         super.init()
         
-        initStore()
+        initStore(forceUpdate: true)
 
         let coordinator = OCKStoreCoordinator()
         coordinator.attach(eventStore: healthKitStore)

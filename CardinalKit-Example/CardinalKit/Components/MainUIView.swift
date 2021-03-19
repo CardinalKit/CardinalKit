@@ -21,10 +21,10 @@ struct MainUIView: View {
     
     var body: some View {
         TabView {
-            TasksUIView(color: self.color).tabItem {
-                Image("tab_tasks").renderingMode(.template)
-                Text("Tasks")
-            }
+//            TasksUIView(color: self.color).tabItem {
+//                Image("tab_tasks").renderingMode(.template)
+//                Text("Tasks")
+//            }
             
             if useCareKit {
                 ScheduleViewControllerRepresentable().tabItem {
@@ -32,9 +32,9 @@ struct MainUIView: View {
                     Text("Schedule")
                 }
                 
-                CareTeamViewControllerRepresentable().tabItem {
+                TeamBiosView().tabItem {
                     Image("tab_care").renderingMode(.template)
-                    Text("Contact")
+                    Text("Your Team")
                 }
             }
 
@@ -42,6 +42,7 @@ struct MainUIView: View {
                 Image("tab_profile").renderingMode(.template)
                 Text("Profile")
             }
+            
         }
         .accentColor(self.color)
         .onAppear(perform: {

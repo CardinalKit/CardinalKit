@@ -1,198 +1,116 @@
 {
   "images" : [
     {
-      "size" : "20x20",
-      "idiom" : "ipad",
-      "filename" : "icon-20.png",
-      "scale" : "1x"
-    },
-    {
-      "size" : "20x20",
-      "idiom" : "ipad",
-      "filename" : "icon-40.png",
-      "scale" : "2x"
-    },
-    {
-      "size" : "29x29",
-      "idiom" : "ipad",
-      "filename" : "icon-29.png",
-      "scale" : "1x"
-    },
-    {
-      "size" : "29x29",
-      "idiom" : "ipad",
-      "filename" : "icon-58.png",
-      "scale" : "2x"
-    },
-    {
-      "size" : "40x40",
-      "idiom" : "ipad",
-      "filename" : "icon-40.png",
-      "scale" : "1x"
-    },
-    {
-      "size" : "40x40",
-      "idiom" : "ipad",
-      "filename" : "icon-80.png",
-      "scale" : "2x"
-    },
-    {
-      "size" : "76x76",
-      "idiom" : "ipad",
-      "filename" : "icon-76.png",
-      "scale" : "1x"
-    },
-    {
-      "size" : "76x76",
-      "idiom" : "ipad",
-      "filename" : "icon-152.png",
-      "scale" : "2x"
-    },
-    {
-      "size" : "83.5x83.5",
-      "idiom" : "ipad",
-      "filename" : "icon-167.png",
-      "scale" : "2x"
-    },
-    {
-      "size" : "20x20",
+      "filename" : "HPDSAppIcon-20@2x.png",
       "idiom" : "iphone",
-      "filename" : "icon-40.png",
-      "scale" : "2x"
+      "scale" : "2x",
+      "size" : "20x20"
     },
     {
-      "size" : "20x20",
+      "filename" : "HPDSAppIcon-20@3x.png",
       "idiom" : "iphone",
-      "filename" : "icon-60.png",
-      "scale" : "3x"
+      "scale" : "3x",
+      "size" : "20x20"
     },
     {
-      "size" : "29x29",
+      "filename" : "HPDSAppIcon-29@2x.png",
       "idiom" : "iphone",
-      "filename" : "icon-58.png",
-      "scale" : "2x"
+      "scale" : "2x",
+      "size" : "29x29"
     },
     {
-      "size" : "29x29",
+      "filename" : "HPDSAppIcon-29@3x.png",
       "idiom" : "iphone",
-      "filename" : "icon-87.png",
-      "scale" : "3x"
+      "scale" : "3x",
+      "size" : "29x29"
     },
     {
-      "size" : "40x40",
+      "filename" : "HPDSAppIcon-40@2x.png",
       "idiom" : "iphone",
-      "filename" : "icon-80.png",
-      "scale" : "2x"
+      "scale" : "2x",
+      "size" : "40x40"
     },
     {
-      "size" : "40x40",
+      "filename" : "HPDSAppIcon-40@3x.png",
       "idiom" : "iphone",
-      "filename" : "icon-120.png",
-      "scale" : "3x"
+      "scale" : "3x",
+      "size" : "40x40"
     },
     {
-      "size" : "60x60",
+      "filename" : "HPDSAppIcon-60@2x.png",
       "idiom" : "iphone",
-      "filename" : "icon-120.png",
-      "scale" : "2x"
+      "scale" : "2x",
+      "size" : "60x60"
     },
     {
-      "size" : "60x60",
+      "filename" : "HPDSAppIcon-60@3x.png",
       "idiom" : "iphone",
-      "filename" : "icon-180.png",
-      "scale" : "3x"
+      "scale" : "3x",
+      "size" : "60x60"
     },
     {
-      "size" : "24x24",
-      "idiom" : "watch",
-      "filename" : "icon-48.png",
-      "subtype" : "38mm",
-      "role" : "notificationCenter",
-      "scale" : "2x"
+      "filename" : "HPDSAppIcon-20.png",
+      "idiom" : "ipad",
+      "scale" : "1x",
+      "size" : "20x20"
     },
     {
-      "size" : "27.5x27.5",
-      "idiom" : "watch",
-      "filename" : "icon-55.png",
-      "subtype" : "42mm",
-      "role" : "notificationCenter",
-      "scale" : "2x"
+      "filename" : "HPDSAppIcon-20@2x.png",
+      "idiom" : "ipad",
+      "scale" : "2x",
+      "size" : "20x20"
     },
     {
-      "size" : "29x29",
-      "idiom" : "watch",
-      "filename" : "icon-58.png",
-      "role" : "companionSettings",
-      "scale" : "2x"
+      "filename" : "HPDSAppIcon-29.png",
+      "idiom" : "ipad",
+      "scale" : "1x",
+      "size" : "29x29"
     },
     {
-      "size" : "29x29",
-      "idiom" : "watch",
-      "filename" : "icon-87.png",
-      "role" : "companionSettings",
-      "scale" : "3x"
+      "filename" : "HPDSAppIcon-29@2x.png",
+      "idiom" : "ipad",
+      "scale" : "2x",
+      "size" : "29x29"
     },
     {
-      "size" : "40x40",
-      "idiom" : "watch",
-      "filename" : "icon-80.png",
-      "subtype" : "38mm",
-      "role" : "appLauncher",
-      "scale" : "2x"
+      "filename" : "HPDSAppIcon-40.png",
+      "idiom" : "ipad",
+      "scale" : "1x",
+      "size" : "40x40"
     },
     {
-      "size" : "44x44",
-      "idiom" : "watch",
-      "filename" : "icon-88.png",
-      "subtype" : "40mm",
-      "role" : "appLauncher",
-      "scale" : "2x"
+      "filename" : "HPDSAppIcon-40@2x.png",
+      "idiom" : "ipad",
+      "scale" : "2x",
+      "size" : "40x40"
     },
     {
-      "size" : "50x50",
-      "idiom" : "watch",
-      "filename" : "icon-100.png",
-      "subtype" : "44mm",
-      "role" : "appLauncher",
-      "scale" : "2x"
+      "filename" : "HPDSAppIcon-76.png",
+      "idiom" : "ipad",
+      "scale" : "1x",
+      "size" : "76x76"
     },
     {
-      "size" : "86x86",
-      "idiom" : "watch",
-      "filename" : "icon-172.png",
-      "subtype" : "38mm",
-      "role" : "quickLook",
-      "scale" : "2x"
+      "filename" : "HPDSAppIcon-76@2x.png",
+      "idiom" : "ipad",
+      "scale" : "2x",
+      "size" : "76x76"
     },
     {
-      "size" : "98x98",
-      "idiom" : "watch",
-      "filename" : "icon-196.png",
-      "subtype" : "42mm",
-      "role" : "quickLook",
-      "scale" : "2x"
+      "filename" : "HPDSAppIcon-83.5@2x.png",
+      "idiom" : "ipad",
+      "scale" : "2x",
+      "size" : "83.5x83.5"
     },
     {
-      "size" : "108x108",
-      "idiom" : "watch",
-      "filename" : "icon-216.png",
-      "subtype" : "44mm",
-      "role" : "quickLook",
-      "scale" : "2x"
-    },
-    {
-      "size" : "1024x1024",
-      "idiom" : "watch-marketing",
-      "filename" : "icon-1024.png",
-      "scale" : "1x"
-    },
-    {
-      "size" : "1024x1024",
+      "filename" : "HPDSAppIcon-1024.png",
       "idiom" : "ios-marketing",
-      "filename" : "icon-1024.png",
-      "scale" : "1x"
+      "scale" : "1x",
+      "size" : "1024x1024"
     }
   ],
-  "author" : "Iconizer",
-  "version" : "2020.11.0"
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
 }
