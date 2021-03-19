@@ -71,10 +71,10 @@
 		8EA664B2259422E400B6A45A /* CKCareKitRemoteSyncWithFirestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA664B1259422E400B6A45A /* CKCareKitRemoteSyncWithFirestore.swift */; };
 		8EA664B42594387900B6A45A /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA664B32594387900B6A45A /* Errors.swift */; };
 		8EBE6F9C24B3C0E60093D07C /* AppDelegate+CardinalKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE6F9B24B3C0E60093D07C /* AppDelegate+CardinalKit.swift */; };
-		BC23245E25D3999A00F0E1D2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BC23245D25D3999A00F0E1D2 /* GoogleService-Info.plist */; };
 		BC23246225D39F9D00F0E1D2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC23246125D39F9C00F0E1D2 /* LaunchScreen.storyboard */; };
 		BC2B3CE426032DD6008BC497 /* SetupPushNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2B3CE326032DD6008BC497 /* SetupPushNotifications.swift */; };
 		BC2B3D032603CAC0008BC497 /* BeaconRanging.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2B3D022603CAC0008BC497 /* BeaconRanging.swift */; };
+		BC2B3D0526047F1D008BC497 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BC2B3D0426047F1C008BC497 /* GoogleService-Info.plist */; };
 		BCA09CA025D51A3D00705FA1 /* TeamBiosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA09C9F25D51A3D00705FA1 /* TeamBiosView.swift */; };
 		BCEB4B1225FB035F002EA6AB /* LoginExistingUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEB4B1125FB035F002EA6AB /* LoginExistingUserViewController.swift */; };
 		D253D132250D1BDB00A363E4 /* CKSignInWithAppleStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = D253D131250D1BDB00A363E4 /* CKSignInWithAppleStep.swift */; };
@@ -171,10 +171,10 @@
 		8EA664B1259422E400B6A45A /* CKCareKitRemoteSyncWithFirestore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKCareKitRemoteSyncWithFirestore.swift; sourceTree = "<group>"; };
 		8EA664B32594387900B6A45A /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		8EBE6F9B24B3C0E60093D07C /* AppDelegate+CardinalKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+CardinalKit.swift"; sourceTree = "<group>"; };
-		BC23245D25D3999A00F0E1D2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BC23246125D39F9C00F0E1D2 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BC2B3CE326032DD6008BC497 /* SetupPushNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupPushNotifications.swift; sourceTree = "<group>"; };
 		BC2B3D022603CAC0008BC497 /* BeaconRanging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconRanging.swift; sourceTree = "<group>"; };
+		BC2B3D0426047F1C008BC497 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BCA09C9F25D51A3D00705FA1 /* TeamBiosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamBiosView.swift; sourceTree = "<group>"; };
 		BCEB4B1125FB035F002EA6AB /* LoginExistingUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginExistingUserViewController.swift; sourceTree = "<group>"; };
 		CB97C14C759E56B88E4E3941 /* Pods_CardinalKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CardinalKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -287,7 +287,7 @@
 				8E0A4384244A4A0400656518 /* Constants.swift */,
 				8E0A4378244A4A0300656518 /* CardinalKit_Example-Bridging-Header.h */,
 				8E0A43C9244A4C6500656518 /* Info.plist */,
-				BC23245D25D3999A00F0E1D2 /* GoogleService-Info.plist */,
+				BC2B3D0426047F1C008BC497 /* GoogleService-Info.plist */,
 				E2F1FD7724D62064006C39DF /* CKConfiguration.plist */,
 				E2CB7FE424F730C80039C24A /* CKConfiguration-old.plist */,
 			);
@@ -575,7 +575,7 @@
 				8E0A43C1244A4A0400656518 /* LoginCustomWaitStepView.xib in Resources */,
 				BC23246225D39F9D00F0E1D2 /* LaunchScreen.storyboard in Resources */,
 				E2CB7FE524F730C80039C24A /* CKConfiguration-old.plist in Resources */,
-				BC23245E25D3999A00F0E1D2 /* GoogleService-Info.plist in Resources */,
+				BC2B3D0526047F1D008BC497 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
