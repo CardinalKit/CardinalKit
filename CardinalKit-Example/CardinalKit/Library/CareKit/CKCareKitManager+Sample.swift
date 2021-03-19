@@ -10,6 +10,7 @@ import CareKit
 import CareKitStore
 import Contacts
 import UIKit
+import HealthKit
 
 internal extension OCKStore {
 

@@ -73,7 +73,10 @@
 		8EBE6F9C24B3C0E60093D07C /* AppDelegate+CardinalKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE6F9B24B3C0E60093D07C /* AppDelegate+CardinalKit.swift */; };
 		BC23245E25D3999A00F0E1D2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BC23245D25D3999A00F0E1D2 /* GoogleService-Info.plist */; };
 		BC23246225D39F9D00F0E1D2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC23246125D39F9C00F0E1D2 /* LaunchScreen.storyboard */; };
+		BC2B3CE426032DD6008BC497 /* SetupPushNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2B3CE326032DD6008BC497 /* SetupPushNotifications.swift */; };
+		BC2B3D032603CAC0008BC497 /* BeaconRanging.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2B3D022603CAC0008BC497 /* BeaconRanging.swift */; };
 		BCA09CA025D51A3D00705FA1 /* TeamBiosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA09C9F25D51A3D00705FA1 /* TeamBiosView.swift */; };
+		BCEB4B1225FB035F002EA6AB /* LoginExistingUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEB4B1125FB035F002EA6AB /* LoginExistingUserViewController.swift */; };
 		D253D132250D1BDB00A363E4 /* CKSignInWithAppleStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = D253D131250D1BDB00A363E4 /* CKSignInWithAppleStep.swift */; };
 		E235077724F7082700CC1899 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E235077624F7082700CC1899 /* SceneDelegate.swift */; };
 		E29143FC24E74AD100EE97B2 /* LaunchUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29143FB24E74AD100EE97B2 /* LaunchUIView.swift */; };
@@ -170,7 +173,10 @@
 		8EBE6F9B24B3C0E60093D07C /* AppDelegate+CardinalKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+CardinalKit.swift"; sourceTree = "<group>"; };
 		BC23245D25D3999A00F0E1D2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BC23246125D39F9C00F0E1D2 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		BC2B3CE326032DD6008BC497 /* SetupPushNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupPushNotifications.swift; sourceTree = "<group>"; };
+		BC2B3D022603CAC0008BC497 /* BeaconRanging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconRanging.swift; sourceTree = "<group>"; };
 		BCA09C9F25D51A3D00705FA1 /* TeamBiosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamBiosView.swift; sourceTree = "<group>"; };
+		BCEB4B1125FB035F002EA6AB /* LoginExistingUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginExistingUserViewController.swift; sourceTree = "<group>"; };
 		CB97C14C759E56B88E4E3941 /* Pods_CardinalKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CardinalKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D253D131250D1BDB00A363E4 /* CKSignInWithAppleStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKSignInWithAppleStep.swift; sourceTree = "<group>"; };
 		E235077624F7082700CC1899 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -306,6 +312,7 @@
 				8E6E1E082534F4100024B8DF /* OnboardingViewController.swift */,
 				8E6E1E0A2534FF640024B8DF /* OnboardingViewController+Coordinator.swift */,
 				8E6E1E0C25351D8F0024B8DF /* PageViewController.swift */,
+				BCEB4B1125FB035F002EA6AB /* LoginExistingUserViewController.swift */,
 				8E6E1E13253520440024B8DF /* PasscodeViewController.swift */,
 			);
 			path = Onboarding;
@@ -400,7 +407,9 @@
 			isa = PBXGroup;
 			children = (
 				8E6E1E23253537580024B8DF /* MainUIView.swift */,
+				BC2B3CE326032DD6008BC497 /* SetupPushNotifications.swift */,
 				BCA09C9F25D51A3D00705FA1 /* TeamBiosView.swift */,
+				BC2B3D022603CAC0008BC497 /* BeaconRanging.swift */,
 				E29143FB24E74AD100EE97B2 /* LaunchUIView.swift */,
 				8E0A4399244A4A0400656518 /* Onboarding */,
 				8E9CDEA525915F6600C8A228 /* Schedule */,
@@ -672,6 +681,7 @@
 			files = (
 				E2DF9F0A2500C9CE00A93B93 /* LoginViewController.swift in Sources */,
 				8E6E1E14253520440024B8DF /* PasscodeViewController.swift in Sources */,
+				BC2B3CE426032DD6008BC497 /* SetupPushNotifications.swift in Sources */,
 				E29143FC24E74AD100EE97B2 /* LaunchUIView.swift in Sources */,
 				8EA6648725930B6B00B6A45A /* CKHealthRecordsStepViewController.swift in Sources */,
 				8E0A43C0244A4A0400656518 /* PasswordlessLoginStep.swift in Sources */,
@@ -702,6 +712,7 @@
 				8EA664892593213000B6A45A /* CKSendHelper.swift in Sources */,
 				8E6E1E3425353AFE0024B8DF /* EmailHelper.swift in Sources */,
 				8E6E1E24253537580024B8DF /* MainUIView.swift in Sources */,
+				BCEB4B1225FB035F002EA6AB /* LoginExistingUserViewController.swift in Sources */,
 				8E6E1E182535263F0024B8DF /* CKTaskViewController.swift in Sources */,
 				8E9CDF142591B73900C8A228 /* CKHealthRecordsManager.swift in Sources */,
 				8EA664B42594387900B6A45A /* Errors.swift in Sources */,
@@ -732,6 +743,7 @@
 				8E6E1E2A2535398D0024B8DF /* HelpView.swift in Sources */,
 				8E9CDED02591AC4A00C8A228 /* CKHealthKitManager.swift in Sources */,
 				8E0A43C2244A4A0400656518 /* ConsentDocument.swift in Sources */,
+				BC2B3D032603CAC0008BC497 /* BeaconRanging.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

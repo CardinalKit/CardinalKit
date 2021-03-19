@@ -39,7 +39,7 @@
 	<key>Health Permissions Title</key>
 	<string>Permission to read Activity Data 🏃🏽‍♀️</string>
 	<key>Health Permissions Text</key>
-	<string>Use this text to provide an explanation to your app participants about what activity data you intend to read from the Health app and why. This sample will read step count, distance, heart rate, and flights climbed data.</string>
+	<string>This study will read step count, distance, heart rate, and flights climbed data to help track your fitness as it corresponds to your professional development.</string>
 	<key>Health Records</key>
 	<dict>
 		<key>Enabled</key>
@@ -61,7 +61,7 @@
 		<string>Sign in using your Apple ID is fast and easy, and Apple will not track any of your activities.</string>
 	</dict>
 	<key>Login-Passwordless</key>
-	<false/>
+	<true/>
 	<key>Login Step Title</key>
 	<string>Almost done!</string>
 	<key>Login Step Text</key>

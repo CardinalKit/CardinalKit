@@ -17,7 +17,10 @@ struct LaunchUIView: View {
     @State var didCompleteOnboarding = false
     
     init() {
-        
+        SetupPushNotifications()
+        scheduleNotification()
+        let ranger = BeaconRanger()
+        ranger.run()
     }
 
     var body: some View {

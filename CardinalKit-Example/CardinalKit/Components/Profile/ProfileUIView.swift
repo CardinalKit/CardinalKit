@@ -25,8 +25,8 @@ struct ProfileUIView: View {
                 }.listRowBackground(Color.white)
                 
                 Section {
-                    SendRecordsView()
-                    ChangePasscodeView()
+//                    SendRecordsView()
+//                    ChangePasscodeView()
                     HelpView(site: config.read(query: "Website"))
                 }
                 

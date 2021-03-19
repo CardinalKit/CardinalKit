@@ -51,7 +51,7 @@ class CKCareKitRemoteSyncWithFirestore: OCKRemoteSynchronizable {
     
     func chooseConflictResolutionPolicy(_ conflict: OCKMergeConflictDescription, completion: @escaping (OCKMergeConflictResolutionPolicy) -> Void) {
         // NOTE: depending on your project, you might want to change the resolution policy
-        completion(.keepRemote)
+        completion(.keepDevice)
     }
     
 }

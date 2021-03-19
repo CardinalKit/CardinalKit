@@ -82,14 +82,14 @@ struct OnboardingViewController: UIViewControllerRepresentable {
         *  that will be required to use this app!
         **************************************************************/
         // use the `ORKPasscodeStep` from ResearchKit.
-        let passcodeStep = ORKPasscodeStep(identifier: "Passcode") //NOTE: requires NSFaceIDUsageDescription in info.plist
-        let type = config.read(query: "Passcode Type")
-        if type == "6" {
-            passcodeStep.passcodeType = .type6Digit
-        } else {
-            passcodeStep.passcodeType = .type4Digit
-        }
-        passcodeStep.text = config.read(query: "Passcode Text")
+//        let passcodeStep = ORKPasscodeStep(identifier: "Passcode") //NOTE: requires NSFaceIDUsageDescription in info.plist
+//        let type = config.read(query: "Passcode Type")
+//        if type == "6" {
+//            passcodeStep.passcodeType = .type6Digit
+//        } else {
+//            passcodeStep.passcodeType = .type4Digit
+//        }
+//        passcodeStep.text = config.read(query: "Passcode Text")
         
         /* **************************************************************
         *  STEP (6): inform the user that they are done with sign-up!
@@ -104,21 +104,18 @@ struct OnboardingViewController: UIViewControllerRepresentable {
         **************************************************************/
         
         // given intro steps that the user should review and consent to
-        let introSteps: [ORKStep] = [consentStep, reviewConsentStep]
+        let introSteps: [ORKStep] = [consentStep, reviewConsentStep, healthDataStep, completionStep]
         
         // and steps regarding login / security
-        let emailVerificationSteps = loginSteps// + [passcodeStep, healthDataStep, healthRecordsStep, completionStep]
+        //let emailVerificationSteps = loginSteps// + [passcodeStep, healthDataStep, healthRecordsStep, completionStep]
 //        let emailVerificationSteps = loginSteps + [healthDataStep, completionStep]
 
-        
-        // guide the user through ALL steps
-        let fullSteps = introSteps + emailVerificationSteps
-        
+                
         // unless they have already gotten as far as to enter an email address
-        var stepsToUse = fullSteps
-        if CKStudyUser.shared.email != nil {
-            stepsToUse = emailVerificationSteps
-        }
+        let stepsToUse = introSteps
+//        if CKStudyUser.shared.email != nil {
+//            stepsToUse = emailVerificationSteps
+//        }
         
         /* **************************************************************
         * and SHOW the user these steps!

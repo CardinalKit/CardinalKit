@@ -91,10 +91,12 @@ enum TaskItem: Int {
         case .sampleResearchKitSurvey://, .sampleResearchKitActiveTask, .sampleCoreMotionAppleWatch:
 
             return "Current Tasks"
-        case .sampleFunCoffeeSurvey, .sampleFunCoffeeResult:
-            return "Your Interests"
-        case .sampleLearnItem, .sampleCoreMotionAppleWatch:
-            return "Learn"
+        default:
+            return "Other"
+//        case .sampleFunCoffeeSurvey, .sampleFunCoffeeResult:
+//            return "Your Interests"
+//        case .sampleLearnItem, .sampleCoreMotionAppleWatch:
+//            return "Learn"
         }
     }
 

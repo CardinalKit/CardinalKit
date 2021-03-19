@@ -30,14 +30,15 @@ struct TaskSamples {
 
         
         // Question 1.1 - Sliding Scale of Belonging
-        let belongingAnswer = ORKScaleAnswerFormat(maximumValue: 7, minimumValue: 1, defaultValue: 4, step: 1)
+        let belongingAnswer = ORKScaleAnswerFormat(maximumValue: 7, minimumValue: 1, defaultValue: 4, step: 1, vertical: false, maximumValueDescription: "Strongly Agree", minimumValueDescription: "Strongly Disagree")
+//        let belongingAnswer = ORKScaleAnswerFormat(maximumValue: 7, minimumValue: 1, defaultValue: 4, step: 1)
         let belongingStep = ORKQuestionStep(identifier: "belongingQuestion", title: "Experience Sampling", question: "I feel like I belong in this space.", answer: belongingAnswer)
         
         steps += [belongingStep]
 
         
         // Question 1.2 - Sliding Scale of Connection to Coworkers
-        let coworkerConnectionAnswer = ORKScaleAnswerFormat(maximumValue: 7, minimumValue: 1, defaultValue: 4, step: 1)
+        let coworkerConnectionAnswer = ORKScaleAnswerFormat(maximumValue: 7, minimumValue: 1, defaultValue: 4, step: 1, vertical: false, maximumValueDescription: "Strongly Agree", minimumValueDescription: "Strongly Disagree")
         let coworkerConnectionStep = ORKQuestionStep(identifier: "corowkerConnectionQuestion", title: "Experience Sampling", question: "I feel connected to my co-workers.", answer: coworkerConnectionAnswer)
         
         steps += [coworkerConnectionStep]
@@ -45,13 +46,13 @@ struct TaskSamples {
         // OUTCOME 2: Stress
         
         // Question 2.1 - Sliding Scale of Stress
-        let stressAnswer = ORKScaleAnswerFormat(maximumValue: 7, minimumValue: 1, defaultValue: 4, step: 1)
+        let stressAnswer = ORKScaleAnswerFormat(maximumValue: 7, minimumValue: 1, defaultValue: 4, step: 1, vertical: false, maximumValueDescription: "Strongly Agree", minimumValueDescription: "Strongly Disagree")
         let stressStep = ORKQuestionStep(identifier: "stressQuestion", title: "Experience Sampling", question: "I currently feel stressed.", answer: stressAnswer)
         
         steps += [stressStep]
         
         // Question 2.2 - Sliding Scale of Overwhelmed
-        let overwhelmedAnswer = ORKScaleAnswerFormat(maximumValue: 7, minimumValue: 1, defaultValue: 4, step: 1)
+        let overwhelmedAnswer = ORKScaleAnswerFormat(maximumValue: 7, minimumValue: 1, defaultValue: 4, step: 1, vertical: false, maximumValueDescription: "Strongly Agree", minimumValueDescription: "Strongly Disagree")
         let overwhelmedStep = ORKQuestionStep(identifier: "overwhelmedQuestion", title: "Experience Sampling", question: "I currently feel overwhelmed.", answer: overwhelmedAnswer)
         
         steps += [overwhelmedStep]
@@ -59,13 +60,13 @@ struct TaskSamples {
         // OUTCOME 3: Environmental Sttitudes
         
         // Question 3.1 - Sliding Scale of Caring about Environment
-        let environmentalAttitudesAnswer = ORKScaleAnswerFormat(maximumValue: 7, minimumValue: 1, defaultValue: 4, step: 1)
+        let environmentalAttitudesAnswer = ORKScaleAnswerFormat(maximumValue: 7, minimumValue: 1, defaultValue: 4, step: 1, vertical: false, maximumValueDescription: "Strongly Agree", minimumValueDescription: "Strongly Disagree")
         let environmentalAttitudesStep = ORKQuestionStep(identifier: "environmentalAttitudesQuestion", title: "Experience Sampling", question: "I care about the wellbeing of the environment I occupy.", answer: environmentalAttitudesAnswer)
         
         steps += [environmentalAttitudesStep]
         
         // Questoin 3.2 - Sliding Scale of Environmental Attunement
-        let environmentalAttunementAnswer = ORKScaleAnswerFormat(maximumValue: 7, minimumValue: 1, defaultValue: 4, step: 1)
+        let environmentalAttunementAnswer = ORKScaleAnswerFormat(maximumValue: 7, minimumValue: 1, defaultValue: 4, step: 1, vertical: false, maximumValueDescription: "Strongly Agree", minimumValueDescription: "Strongly Disagree")
         let environmentalAttunementStep = ORKQuestionStep(identifier: "environmentalAttunementQuestion", title: "Experience Sampling", question: "I feel attuned to my environment.", answer: environmentalAttunementAnswer)
         
         steps += [environmentalAttunementStep]
