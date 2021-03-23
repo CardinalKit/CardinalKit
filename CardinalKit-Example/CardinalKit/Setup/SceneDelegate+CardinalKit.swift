@@ -34,12 +34,15 @@ extension SceneDelegate: ORKPasscodeDelegate {
         window?.makeKeyAndVisible()
         
         //TODO: make text and passcodeType (?) configurable
-        let config = CKPropertyReader(file: "CKConfiguration")
+        let config = CKConfig.shared
         
         let passcodeViewController = ORKPasscodeViewController.passcodeAuthenticationViewController(withText: config.read(query: "Passcode On Return Text"), delegate: self)
         passcodeViewController.isModalInPresentation = true
+        passcodeViewController.modalPresentationStyle = .fullScreen
         
-        window?.rootViewController?.present(passcodeViewController, animated: false, completion: nil)
+        window?.rootViewController?.present(passcodeViewController, animated: true) {
+            passcodeViewController.becomeFirstResponder()
+        }
     }
     
     /**
