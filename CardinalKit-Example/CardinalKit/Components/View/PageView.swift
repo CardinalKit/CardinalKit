@@ -37,7 +37,7 @@ struct PageControl: UIViewRepresentable {
         let config = CKPropertyReader(file: "CKConfiguration")
         control.numberOfPages = numberOfPages
         control.pageIndicatorTintColor = UIColor.lightGray
-        control.currentPageIndicatorTintColor = config.readUIColor(query: "Primary Color")
+        control.currentPageIndicatorTintColor = config.readColor(query: "Primary Color")
         control.addTarget(
             context.coordinator,
             action: #selector(Coordinator.updateCurrentPage(sender:)),

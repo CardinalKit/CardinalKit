@@ -32,12 +32,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        print("deeplink")
         return false
     }
     
     func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
-        print(DynamicLinks.dynamicLinks().handleUniversalLink(userActivity.webpageURL!) { (dynamiclink, error) in
+        DynamicLinks.dynamicLinks().handleUniversalLink(userActivity.webpageURL!) { (dynamiclink, error) in
             
             // (1) check to see if we have a valid login link
             guard let link = dynamiclink?.url?.absoluteString,
@@ -62,7 +61,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     
                 })
             }
-        })
+        }
     }
 
 
@@ -86,12 +85,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneWillEnterForeground(_ scene: UIScene) {
         // Called as the scene transitions from the background to the foreground.
         // Use this method to undo the changes made on entering the background.
+        CKLockApp()
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
+        CKLockDidEnterBackground()
     }
 
 

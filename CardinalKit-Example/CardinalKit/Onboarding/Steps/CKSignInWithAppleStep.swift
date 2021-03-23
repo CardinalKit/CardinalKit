@@ -12,11 +12,11 @@ import CryptoKit
 import FirebaseAuth
 import AuthenticationServices
 
-/// A step that presents information about and performes
+/// A step that presents information about and performs
 /// [Sign in with Apple](https://developer.apple.com/sign-in-with-apple/).
 ///
 /// ```
-/// // Initates the Sign in with Apple step:
+/// // Initiates the Sign in with Apple step:
 /// let signInWithAppleStep = CKSignInWithAppleStep(identifier: "SignInApple")
 /// // Adds the above step (with all other steps) into a task:
 /// let orderedTask = ORKOrderedTask(identifier: "StudyOnboardingTask", steps: [

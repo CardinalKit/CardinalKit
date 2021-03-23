@@ -5,7 +5,7 @@
 	<key>Study Title</key>
 	<string>TrialX</string>
 	<key>Team Name</key>
-	<string>UWAppDev x Stanford</string>
+	<string>UWAppDev × Stanford</string>
 	<key>Email</key>
 	<string>trialx@uwdev.app</string>
 	<key>Phone</key>
@@ -13,7 +13,7 @@
 	<key>Copyright</key>
 	<string>Made at Biodesign with 💜♥️</string>
 	<key>Website</key>
-	<string>https://cardinalkit.org</string>
+	<string>https://uwdev.app/projects/trialx</string>
 	<key>Tint Color</key>
 	<string>#b6133f</string>
 	<key>Primary Color</key>
@@ -62,24 +62,6 @@
 	<array>
 		<string>StepCount</string>
 	</array>
-	<key>Consent Form</key>
-	<dict>
-		<key>Overview</key>
-		<string>Welcome to TrialX study. Enrollment for cognitive impairment clinical trials, such as Parkinson’s and Alzhiemer’s, is time consuming and requires in person meetings which is costly and especially difficult during COVID-19. TrialX&apos;s goal is to provide a digital, simpler way to screen candidates for clinical trials for neuro-degenerative diseases. You would be able to access this consent form in settings at any time.
-</string>
-		<key>Data Gathering</key>
-		<string>Your Data Gathering Section: This study collects your touch activity, completion time, raw audio recording, eye side and area of distortions.</string>
-		<key>Privacy</key>
-		<string>Your Privacy Section: Your data privacy matters the most to us. We use information to help improve the safety and reliability of our services. This includes detecting, preventing, and responding to fraud, abuse, security risks and technical issues that could harm TrialX, our users or the public.</string>
-		<key>Data Use</key>
-		<string>Your Data Use Section: Focusing on preventive care, TrialX looks beyond your symptoms to consider how environmental and lifestyle factors impact your health.</string>
-		<key>Study Survey</key>
-		<string>Your Study Survey Section: Study surveys provide more information to your health condition and help TrialX identify and track cognitive performance.</string>
-		<key>Study Tasks</key>
-		<string>Your Study Tasks Section: You will be asked to complete tasks contained in this study from Trailmaking, Part A / B, Spatial Memory, Speech Recognition and Amsler Grid.</string>
-		<key>Withdrawing</key>
-		<string>Your Withdrawing Section: At any time of using TrialX, you can opt to withdraw from the study. You will have the option to entirely erase your test data. </string>
-	</dict>
 	<key>Onboarding</key>
 	<array>
 		<dict>
@@ -108,5 +90,89 @@
 			<string>🩺</string>
 		</dict>
 	</array>
+	<key>Health Records</key>
+	<dict>
+		<key>Enabled</key>
+		<true/>
+		<key>Permissions Text</key>
+		<string>Use this text to provide an explanation to your app participants about what electronic health records (EHR) you intend to collect from the Health app and why. This sample will read all available records (for which permission is granted).</string>
+		<key>Permissions Title</key>
+		<string>Permission to read Health Records 🏥</string>
+	</dict>
+	<key>Consent Form</key>
+	<dict>
+		<key>Overview</key>
+		<dict>
+			<key>Title</key>
+			<string>Hi there! 👋🏽</string>
+			<key>Summary</key>
+			<string>Welcome to TrialX study. Enrollment for cognitive impairment clinical trials, such as Parkinson’s and Alzhiemer’s, is time consuming and requires in person meetings which is costly and especially difficult during COVID-19. TrialX&apos;s goal is to provide a digital, simpler way to screen candidates for clinical trials for neuro-degenerative diseases. You would be able to access this consent form in settings at any time.</string>
+			<key>Content</key>
+			<string>Welcome to TrialX study. Enrollment for cognitive impairment clinical trials, such as Parkinson’s and Alzhiemer’s, is time consuming and requires in person meetings which is costly and especially difficult during COVID-19. TrialX&apos;s goal is to provide a digital, simpler way to screen candidates for clinical trials for neuro-degenerative diseases. You would be able to access this consent form in settings at any time.</string>
+		</dict>
+		<key>DataGathering</key>
+		<dict>
+			<key>Title</key>
+			<string>Data Gathering</string>
+			<key>Summary</key>
+			<string>This study collects your touch activity, completion time, raw audio recording, eye side and area of distortions.</string>
+			<key>Content</key>
+			<string>This study collects your touch activity, completion time, raw audio recording, eye side and area of distortions.</string>
+		</dict>
+		<key>Privacy</key>
+		<dict>
+			<key>Title</key>
+			<string>Privacy</string>
+			<key>Summary</key>
+			<string>Your data privacy matters the most to us. We use information to help improve the safety and reliability of our services. This includes detecting, preventing, and responding to fraud, abuse, security risks and technical issues that could harm TrialX, our users or the public.</string>
+			<key>Content</key>
+			<string>Your data privacy matters the most to us. We use information to help improve the safety and reliability of our services. This includes detecting, preventing, and responding to fraud, abuse, security risks and technical issues that could harm TrialX, our users or the public.</string>
+		</dict>
+		<key>DataUse</key>
+		<dict>
+			<key>Title</key>
+			<string>Data Use</string>
+			<key>Summary</key>
+			<string>Focusing on preventive care, TrialX looks beyond your symptoms to consider how environmental and lifestyle factors impact your health.</string>
+			<key>Content</key>
+			<string>Focusing on preventive care, TrialX looks beyond your symptoms to consider how environmental and lifestyle factors impact your health.</string>
+		</dict>
+		<key>TimeCommitment</key>
+		<dict>
+			<key>Title</key>
+			<string>Time Commitment</string>
+			<key>Summary</key>
+			<string>TODO: Information about the expected time commitment per app participant.</string>
+			<key>Content</key>
+			<string>TODO: Information about the expected time commitment per app participant. Additional content.</string>
+		</dict>
+		<key>StudySurvey</key>
+		<dict>
+			<key>Title</key>
+			<string>Study Survey</string>
+			<key>Summary</key>
+			<string>Study surveys provide more information to your health condition and help TrialX identify and track cognitive performance.</string>
+			<key>Content</key>
+			<string>Study surveys provide more information to your health condition and help TrialX identify and track cognitive performance.</string>
+		</dict>
+		<key>StudyTasks</key>
+		<dict>
+			<key>Title</key>
+			<string>Study Tasks</string>
+			<key>Summary</key>
+			<string>You will be asked to complete tasks contained in this study from Trailmaking, Part A / B, Spatial Memory, Speech Recognition and Amsler Grid.</string>
+			<key>Content</key>
+			<string>You will be asked to complete tasks contained in this study from Trailmaking, Part A / B, Spatial Memory, Speech Recognition and Amsler Grid.</string>
+		</dict>
+		<key>Withdrawing</key>
+		<dict>
+			<key>Title</key>
+			<string>Withdrawing</string>
+			<key>Summary</key>
+			<string>At any time of using TrialX, you can opt to withdraw from the study. You will have the option to entirely erase your test data.</string>
+			<key>Content</key>
+			<string>At any time of using TrialX, you can opt to withdraw from the study. You will have the option to entirely erase your test data.</string>
+		</dict>
+	</dict>
 </dict>
 </plist>

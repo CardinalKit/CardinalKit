@@ -22,9 +22,9 @@ struct ReportView: View {
         .padding(.vertical)
         .onTapGesture {
             EmailHelper.shared
-                .sendEmail(to: self.email,
-                           subject: "App Support Request",
-                           body: "Enter your support request here.")
+                .sendEmail(subject: self.email,
+                           body: "App Support Request",
+                           to: "Enter your support request here.")
         }
     }
 }

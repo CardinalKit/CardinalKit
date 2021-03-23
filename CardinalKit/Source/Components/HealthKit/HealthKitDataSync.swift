@@ -129,7 +129,13 @@ extension HealthKitDataSync {
             let metadata = HealthKitDataUploads()
             metadata.dataType = type.identifier
             metadata.device = getSourceRevisionKey(source: sourceRevision)
-            metadata.lastSyncDate = Date().dayByAdding(-maxRetroactiveDays)! //a day ago
+
+            if let startDate = UserDefaults.standard.object(forKey: Constants.UserDefaults.HKStartDate) as? Date {
+                metadata.lastSyncDate = startDate
+            } else {
+                metadata.lastSyncDate = Date().dayByAdding(-maxRetroactiveDays)! //a day ago
+            }
+            
             try! realm.write {
                 realm.add(metadata)
             }
