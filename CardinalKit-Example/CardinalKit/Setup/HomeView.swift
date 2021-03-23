@@ -12,7 +12,7 @@ struct HomeView: View {
     @EnvironmentObject var config: CKPropertyReader
     @EnvironmentObject var data: NotificationsAndResults
     var color: Color {
-        return config.readColor(query: "Primary Color")
+        return Color(config.readColor(query: "Primary Color"))
     }
 
     var body: some View {

@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import CardinalKit
 
 extension String {
     public func levenshtein(from other: String) -> Int {
@@ -63,7 +64,12 @@ extension DateFormatter {
 }
 
 extension Color {
-    static let greyText = Color(UIColor(netHex: 0x989998))
+    static let greyText = Color(UIColor.greyText())
 
-    static let lightWhite = Color(UIColor(netHex: 0xf7f8f7))
+    static let lightWhite = Color(UIColor.lightWhite())
+}
+
+
+extension CKPropertyReader: ObservableObject {
+
 }

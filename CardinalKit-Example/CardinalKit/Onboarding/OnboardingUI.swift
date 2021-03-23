@@ -21,10 +21,10 @@ struct OnboardingElement {
 extension UserDefaults {
     @objc dynamic var showHomeScreen: Bool {
         get {
-            return bool(forKey: "didCompleteOnboarding")
+            return bool(forKey: Constants.onboardingDidComplete)
         }
         set {
-            set(newValue, forKey: "didCompleteOnboarding")
+            set(newValue, forKey: Constants.onboardingDidComplete)
         }
     }
 }
@@ -41,7 +41,7 @@ struct OnboardingUI: View {
         }
     }
     var color: Color {
-        return config.readColor(query: "Primary Color")
+        return Color(config.readColor(query: "Primary Color"))
     }
     @EnvironmentObject var config: CKPropertyReader
     @State var showingDetail = false
@@ -88,6 +88,7 @@ struct OnboardingUI: View {
                     })
                     .sheet(isPresented: $showingDetail) {
                         OnboardingVC()
+                            .edgesIgnoringSafeArea(.all)
                             .environmentObject(self.config)
                     }
                     
@@ -141,8 +142,7 @@ struct OnboardingVC: UIViewControllerRepresentable {
          * MARK: - STEP (2): ask user to review and sign consent document
          **************************************************************/
         // use the `ORKConsentReviewStep` from ResearchKit
-        let signature = consentDocument.signatures!.first!
-        signature.title = "Patient"
+        let signature = consentDocument.signatures?.first
         let reviewConsentStep = ORKConsentReviewStep(identifier: "ConsentReviewStep", signature: signature, in: consentDocument)
         reviewConsentStep.text = config.read(query: "Review Consent Step Text")
         reviewConsentStep.reasonForConsent = config.read(query: "Reason for Consent Text")
@@ -151,7 +151,12 @@ struct OnboardingVC: UIViewControllerRepresentable {
          * MARK: - STEP (3): get permission to collect HealthKit data, read-only
          **************************************************************/
         // see `HealthDataStep` to configure!
-        let healthDataStep = CKHealthDataStep(identifier: "Health")
+        let healthDataStep = CKHealthDataStep(identifier: "HealthKit")
+
+        /* **************************************************************
+        *  STEP (3.5): get permission to collect HealthKit health records data
+        **************************************************************/
+        let healthRecordsStep = CKHealthRecordsStep(identifier: "HealthRecords")
 
         
         /* **************************************************************
@@ -218,7 +223,7 @@ struct OnboardingVC: UIViewControllerRepresentable {
         // and steps regarding login / security
         let emailVerificationSteps = [
             chooseEnrollMethodStep, registerStep, loginStep, signInWithAppleStep,
-            passcodeStep, healthDataStep, completionStep
+            passcodeStep, healthDataStep, healthRecordsStep, completionStep
         ]
 
         // let stepsToUse = true // DEBUG ONLY
@@ -423,7 +428,7 @@ struct OnboardingVC: UIViewControllerRepresentable {
             switch step {
             case is CKHealthDataStep:
                 // this step lets us run custom logic to ask for
-                // HealthKit permissins when this step appears on screen.
+                // HealthKit permissions when this step appears on screen.
                 return CKHealthDataStepViewController(step: step)
             case is LoginCustomWaitStep:
                 // run custom code to send an email for login!

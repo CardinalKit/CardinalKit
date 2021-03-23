@@ -6,8 +6,7 @@
 //
 
 import Foundation
-import FirebaseAuth
-import FirebaseFirestore
+import Firebase
 import CardinalKit
 
 class CKStudyUser {
@@ -105,6 +104,14 @@ class CKStudyUser {
             let db = Firestore.firestore()
             db.collection(dataBucket).document(uid).setData(["userID":uid, "lastActive":Date().ISOStringFromDate(),"email":email])
         }
+    }
+    
+    /**
+    Remove the current user's auth parameters from storage.
+    */
+    func signOut() throws {
+        email = nil
+        try Auth.auth().signOut()
     }
     
 }
