@@ -11,11 +11,14 @@ import SwiftUI
 struct ConsentDocumentView: View {
     @State private var showPreview = false
     let documentsURL: URL = {
-        let data = UserDefaults.standard.data(forKey: "consentFormURL")!
         var isStale: Bool = false
-        let documentsURL = try! URL(resolvingBookmarkData: data, bookmarkDataIsStale: &isStale)
-        print(documentsURL.path)
-        return documentsURL
+        if let data = UserDefaults.standard.data(forKey: "consentFormURL"),
+           let documentsURL = try? URL(resolvingBookmarkData: data, bookmarkDataIsStale: &isStale),
+           !isStale {
+            return documentsURL
+        } else {
+            return URL(string: "https://www.youtube.com/watch?v=dQw4w9WgXcQ")!
+        }
     }()
 
     var body: some View {
