@@ -150,12 +150,12 @@ class NotificationsAndResults: ObservableObject {
                 return Double(errors) / 13
             case .trailB(_, numberOfErrors: let errors):
                 return Double(errors) / 13
-            case .memory(info: let info):
+            case .memory:
                 return -1
             case .speech(_, text: let text):
                 let target = StudyTasks.speechRecognitionText
                 return Double(text.levenshtein(from: target)) / Double(target.count)
-            case .amsler(info: let info):
+            case .amsler:
                 return -1
             }
         }

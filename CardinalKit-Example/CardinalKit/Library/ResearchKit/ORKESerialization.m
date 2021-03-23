@@ -896,15 +896,6 @@ static NSMutableDictionary<NSString *, ORKESerializableTableEntry *> *ORKESerial
                     PROPERTY(useCardStyle, NSNumber, NSObject, YES, nil, nil),
                     PROPERTY(useSecondaryColor, NSNumber, NSObject, YES, nil, nil),
                     })),
-           ENTRY(ORKLearnMoreItem,
-                 ^id(__unused NSDictionary *dict, __unused ORKESerializationPropertyGetter getter) {
-                     ORKLearnMoreItem *learnMoreItem = [[ORKLearnMoreItem alloc] initWithText:GETPROP(dict, text) learnMoreInstructionStep:GETPROP(dict, learnMoreInstructionStep)];
-                     return learnMoreItem;
-                 },
-                 (@{
-                    PROPERTY(text, NSString, NSObject, YES, nil, nil),
-                    PROPERTY(learnMoreInstructionStep, ORKLearnMoreInstructionStep, NSObject, YES, nil, nil),
-                    })),
            ENTRY(ORKReviewStep,
                  ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
                      ORKReviewStep *reviewStep = [ORKReviewStep standaloneReviewStepWithIdentifier:GETPROP(dict, identifier)
