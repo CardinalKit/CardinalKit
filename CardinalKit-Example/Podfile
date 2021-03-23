@@ -6,11 +6,22 @@ target 'TrialX' do
   pod 'CardinalKit', :path => '../'
   
   # CK Sample Pods
-  pod 'ResearchKit', :git => 'https://github.com/ResearchKit/ResearchKit.git', :branch => 'master'
-  
+  pod 'ResearchKit', :git => 'https://github.com/ResearchKit/ResearchKit.git', :branch => 'main'
+
   pod 'Firebase/Firestore'
   pod 'Firebase/Auth'
   pod 'Firebase/DynamicLinks'
   pod 'Firebase/Storage'
 
+
+  # https://stackoverflow.com/questions/63056454
+  post_install do |installer|
+    installer.pods_project.targets.each do |target|
+      target.build_configurations.each do |config|
+        if config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'].to_f < 9.0
+          config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '9.0'
+        end
+      end
+    end
+  end
 end
