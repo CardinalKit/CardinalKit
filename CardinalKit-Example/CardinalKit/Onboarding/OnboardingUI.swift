@@ -151,7 +151,7 @@ struct OnboardingVC: UIViewControllerRepresentable {
          * MARK: - STEP (3): get permission to collect HealthKit data, read-only
          **************************************************************/
         // see `HealthDataStep` to configure!
-        let healthDataStep = CKHealthDataStep(identifier: "HealthKit")
+//        let healthDataStep = CKHealthDataStep(identifier: "HealthKit")
 
         /* **************************************************************
         *  STEP (3.5): get permission to collect HealthKit health records data
@@ -223,7 +223,9 @@ struct OnboardingVC: UIViewControllerRepresentable {
         // and steps regarding login / security
         let emailVerificationSteps = [
             chooseEnrollMethodStep, registerStep, loginStep, signInWithAppleStep,
-            passcodeStep, healthDataStep, healthRecordsStep, completionStep
+            passcodeStep,
+//            healthDataStep, // only enable if there are health kit data to read
+            healthRecordsStep, completionStep
         ]
 
         // let stepsToUse = true // DEBUG ONLY
