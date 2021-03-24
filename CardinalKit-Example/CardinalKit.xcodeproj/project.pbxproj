@@ -71,6 +71,8 @@
 		D286ECC0250E0A6500815EED /* DocumentPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = D286ECBF250E0A6500815EED /* DocumentPreview.swift */; };
 		D286ECC3250E0ABF00815EED /* TaskVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D286ECC2250E0ABF00815EED /* TaskVC.swift */; };
 		D286ECC5250E0E0700815EED /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D286ECC4250E0E0700815EED /* Extensions.swift */; };
+		D2BF1B7E260AB3D200B28CDC /* EFStorageKeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = D2BF1B7D260AB3D200B28CDC /* EFStorageKeychainAccess */; };
+		D2BF1B80260AB3F200B28CDC /* EFStorageCore in Frameworks */ = {isa = PBXBuildFile; productRef = D2BF1B7F260AB3F200B28CDC /* EFStorageCore */; };
 		E235077724F7082700CC1899 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E235077624F7082700CC1899 /* SceneDelegate.swift */; };
 		E290FB1D24FF4BBA00D19BE9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E290FB1C24FF4BBA00D19BE9 /* GoogleService-Info.plist */; };
 		E29143FC24E74AD100EE97B2 /* OnboardingUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29143FB24E74AD100EE97B2 /* OnboardingUI.swift */; };
@@ -170,10 +172,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E0A43D5244A693D00656518 /* HealthKit.framework in Frameworks */,
+				D2BF1B7E260AB3D200B28CDC /* EFStorageKeychainAccess in Frameworks */,
 				D283AB0726094F4F00637663 /* CareKitFHIR in Frameworks */,
 				D283AB0D26094F4F00637663 /* CareKitUI in Frameworks */,
 				D283AB0926094F4F00637663 /* CareKit in Frameworks */,
 				69DC6BB1DB8FF78AE696891C /* Pods_TrialX.framework in Frameworks */,
+				D2BF1B80260AB3F200B28CDC /* EFStorageCore in Frameworks */,
 				D283AB0B26094F4F00637663 /* CareKitStore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -493,6 +497,8 @@
 				D283AB0826094F4F00637663 /* CareKit */,
 				D283AB0A26094F4F00637663 /* CareKitStore */,
 				D283AB0C26094F4F00637663 /* CareKitUI */,
+				D2BF1B7D260AB3D200B28CDC /* EFStorageKeychainAccess */,
+				D2BF1B7F260AB3F200B28CDC /* EFStorageCore */,
 			);
 			productName = CardinalKit;
 			productReference = 607FACD01AFB9204008FA782 /* CardinalKit Example.app */;
@@ -526,6 +532,7 @@
 			mainGroup = 607FACC71AFB9204008FA782;
 			packageReferences = (
 				D283AB0526094F4F00637663 /* XCRemoteSwiftPackageReference "CareKit" */,
+				D2BF1B7C260AB3D200B28CDC /* XCRemoteSwiftPackageReference "EFStorage" */,
 			);
 			productRefGroup = 607FACD11AFB9204008FA782 /* Products */;
 			projectDirPath = "";
@@ -912,6 +919,14 @@
 				kind = branch;
 			};
 		};
+		D2BF1B7C260AB3D200B28CDC /* XCRemoteSwiftPackageReference "EFStorage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/EFPrefix/EFStorage.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -934,6 +949,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D283AB0526094F4F00637663 /* XCRemoteSwiftPackageReference "CareKit" */;
 			productName = CareKitUI;
+		};
+		D2BF1B7D260AB3D200B28CDC /* EFStorageKeychainAccess */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D2BF1B7C260AB3D200B28CDC /* XCRemoteSwiftPackageReference "EFStorage" */;
+			productName = EFStorageKeychainAccess;
+		};
+		D2BF1B7F260AB3F200B28CDC /* EFStorageCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D2BF1B7C260AB3D200B28CDC /* XCRemoteSwiftPackageReference "EFStorage" */;
+			productName = EFStorageCore;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

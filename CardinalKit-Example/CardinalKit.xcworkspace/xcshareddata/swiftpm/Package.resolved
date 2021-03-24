@@ -11,12 +11,39 @@
         }
       },
       {
+        "package": "EFStorage",
+        "repositoryURL": "https://github.com/EFPrefix/EFStorage.git",
+        "state": {
+          "branch": "master",
+          "revision": "3efbd7749c419d846f83b133a6786deb55a50009",
+          "version": null
+        }
+      },
+      {
         "package": "FHIRModels",
         "repositoryURL": "https://github.com/apple/FHIRModels.git",
         "state": {
           "branch": null,
           "revision": "c91e5bb74397136f79656bebdfda76a523d3e88c",
           "version": "0.3.2"
+        }
+      },
+      {
+        "package": "KeychainAccess",
+        "repositoryURL": "https://github.com/kishikawakatsumi/KeychainAccess.git",
+        "state": {
+          "branch": null,
+          "revision": "8d33ffd6f74b3bcfc99af759d4204c6395a3f918",
+          "version": "3.2.1"
+        }
+      },
+      {
+        "package": "YYCache",
+        "repositoryURL": "https://github.com/EFPrefix/YYCache.git",
+        "state": {
+          "branch": null,
+          "revision": "632e4a683cec7a03c8a8fc6de677f1b00d5a00bf",
+          "version": "1.0.5"
         }
       }
     ]

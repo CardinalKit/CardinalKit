@@ -185,7 +185,7 @@ struct OnboardingVC: UIViewControllerRepresentable {
             identifier: "SignInWithApple",
             title: "Sign in with Apple",
             text: "The fast, easy way to sign in. All accounts are protected with two-factor authentication for superior security, and Apple will not track your activity in your app or website.",
-            requestedScopes: [.email]
+            requestedScopes: [.fullName, .email]
         )
 
         // let loginStep = PasswordlessLoginStep(identifier: PasswordlessLoginStep.identifier)
