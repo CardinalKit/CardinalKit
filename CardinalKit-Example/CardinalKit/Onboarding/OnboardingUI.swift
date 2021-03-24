@@ -265,7 +265,10 @@ struct OnboardingVC: UIViewControllerRepresentable {
         // wrap that task on a view controller
         let taskViewController = ORKTaskViewController(task: orderedTask, taskRun: nil)
         taskViewController.delegate = context.coordinator // enables `ORKTaskViewControllerDelegate` below
-        
+
+        // Clear existing data, if any
+        try? CKStudyUser.shared.signOut()
+
         // & present the VC!
         return taskViewController
     }
