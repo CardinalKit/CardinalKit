@@ -143,6 +143,7 @@ public class CKSignInWithAppleStepViewController: ORKInstructionStepViewControll
             print("Unable to serialize token string from data: \(appleIDToken.debugDescription)")
             return
         }
+
         // Initialize a Firebase credential.
         let credential = OAuthProvider.credential(withProviderID: "apple.com",
                                                   idToken: idTokenString,
@@ -152,6 +153,14 @@ public class CKSignInWithAppleStepViewController: ORKInstructionStepViewControll
             if let error = error {
                 self.showError(error)
             } else {
+                let currentName = CKStudyUser.shared.name
+                if currentName == nil || currentName!.isEmpty,
+                   let fullName = appleIDCredential.fullName {
+                    CKStudyUser.shared.name = PersonNameComponentsFormatter
+                        .localizedString(from: fullName,
+                                         style: .default,
+                                         options: [])
+                }
                 // User is signed in to Firebase with Apple.
                 super.goForward()
             }
