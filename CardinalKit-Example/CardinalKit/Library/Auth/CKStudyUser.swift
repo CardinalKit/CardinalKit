@@ -9,11 +9,12 @@ import Foundation
 import Firebase
 import CardinalKit
 import HealthKit
+import EFStorageUserDefaults
 import EFStorageKeychainAccess
 
 extension Int: KeychainAccessStorable {
     public func asKeychainAccessStorable() -> Swift.Result<AsIsKeychainAccessStorable, Error> {
-        return "\(self)".asKeychainStorable()
+        return "\(self)".asKeychainAccessStorable()
     }
 
     public static func fromKeychain(_ keychain: Keychain, forKey key: String) -> Int? {
@@ -21,9 +22,11 @@ extension Int: KeychainAccessStorable {
     }
 }
 
+extension Date: KeychainAccessStorable { }
+
 extension HKBiologicalSex: KeychainAccessStorable { }
 
-class CKStudyUser {
+class CKStudyUser: ObservableObject {
     
     static let shared = CKStudyUser()
     
@@ -59,14 +62,15 @@ class CKStudyUser {
 
     var email: String? {
         get {
-            return UserDefaults.standard.string(forKey: Constants.prefUserEmail)
+            return EFStorageKeychainAccessRef<String>
+                .forKey(Constants.prefUserEmail)
+                .content
         }
         set {
-            if let newValue = newValue {
-                UserDefaults.standard.set(newValue, forKey: Constants.prefUserEmail)
-            } else {
-                UserDefaults.standard.removeObject(forKey: Constants.prefUserEmail)
-            }
+            objectWillChange.send()
+            EFStorageKeychainAccessRef<String>
+                .forKey(Constants.prefUserEmail)
+                .content = newValue
         }
     }
 
@@ -78,9 +82,11 @@ class CKStudyUser {
             guard let user = currentUser else { return }
             let changeRequest = user.createProfileChangeRequest()
             changeRequest.displayName = newValue
-            changeRequest.commitChanges { (error) in
+            changeRequest.commitChanges { [weak self] (error) in
                 if let error = error {
                     print(error)
+                } else {
+                    self?.objectWillChange.send()
                 }
             }
         }
@@ -88,25 +94,21 @@ class CKStudyUser {
 
     var sex: HKBiologicalSex {
         get {
-            return EFStorageKeychainAccessRef<HKBiologicalSex>.forKey("SEX").content ?? .notSet
+            return Keychain.efStorage.sex ?? .notSet
         }
         set {
-            EFStorageKeychainAccessRef<HKBiologicalSex>.forKey("SEX").content = newValue
+            objectWillChange.send()
+            Keychain.efStorage.sex = newValue
         }
     }
 
-    var dateOfBirth: DateComponents? {
+    var dateOfBirth: Date? {
         get {
-            guard let year: Int = Keychain.efStorage.dobYear,
-                  let month: Int = Keychain.efStorage.dobMonth,
-                  let day: Int = Keychain.efStorage.dobDay
-            else { return nil }
-            return DateComponents(year: year, month: month, day: day)
+            return Keychain.efStorage.dob
         }
         set {
-            Keychain.efStorage.dobYear = newValue?.year
-            Keychain.efStorage.dobMonth = newValue?.month
-            Keychain.efStorage.dobDay = newValue?.day
+            objectWillChange.send()
+            Keychain.efStorage.dob = newValue
         }
     }
 
@@ -115,6 +117,7 @@ class CKStudyUser {
             return Keychain.efStorage.education
         }
         set {
+            objectWillChange.send()
             Keychain.efStorage.education = newValue
         }
     }
@@ -124,7 +127,28 @@ class CKStudyUser {
             return Keychain.efStorage.handedness
         }
         set {
+            objectWillChange.send()
             Keychain.efStorage.handedness = newValue
+        }
+    }
+
+    var zipCode: String? {
+        get {
+            return Keychain.efStorage.zipCode
+        }
+        set {
+            objectWillChange.send()
+            Keychain.efStorage.zipCode = newValue
+        }
+    }
+
+    var ethnicity: String? {
+        get {
+            return Keychain.efStorage.ethnicity
+        }
+        set {
+            objectWillChange.send()
+            Keychain.efStorage.ethnicity = newValue
         }
     }
     
@@ -182,11 +206,7 @@ class CKStudyUser {
      Remove the current user's auth parameters from storage.
      */
     func signOut() throws {
-        email = nil
-        sex = .notSet
-        dateOfBirth = nil
-        education = nil
-        handedness = nil
+        try Keychain.makeDefault().removeAll()
         try Auth.auth().signOut()
     }
 }

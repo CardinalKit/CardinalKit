@@ -10,23 +10,40 @@ import SwiftUI
 import ResearchKit
 import FirebaseStorage
 import FirebaseFirestore
+import EFStorageKeychainAccess
+
+extension ORKTaskResult: KeychainAccessStorable {
+    public func asKeychainAccessStorable() -> Swift.Result<AsIsKeychainAccessStorable, Error> {
+        return Swift.Result(catching: {
+            return try NSKeyedArchiver
+                .archivedData(withRootObject: self, requiringSecureCoding: true)
+        }).flatMap {
+            $0.asKeychainAccessStorable()
+        }
+    }
+}
 
 struct TaskVC: UIViewControllerRepresentable {
 
-    let vc: ORKTaskViewController
+    typealias CompletionHandler = (Swift.Result<ORKTaskResult, Error>) -> Void
 
-    init(tasks: ORKOrderedTask) {
-        self.vc = ORKTaskViewController(task: tasks, taskRun: NSUUID() as UUID)
+    let vc: ORKTaskViewController
+    let onComplete: CompletionHandler
+
+    init(tasks: ORKOrderedTask,
+         onComplete: @escaping CompletionHandler = { _ in }) {
+        self.vc = ORKTaskViewController(task: tasks, taskRun: UUID())
+        self.vc.defaultResultSource = EFStorageKeychainAccessRef<ORKTaskResult>.forKey(tasks.identifier).content
+        self.onComplete = onComplete
     }
 
     func makeCoordinator() -> Coordinator {
-        Coordinator()
+        Coordinator(self)
     }
 
     typealias UIViewControllerType = ORKTaskViewController
 
     func makeUIViewController(context: Context) -> ORKTaskViewController {
-
         if vc.outputDirectory == nil {
             vc.outputDirectory = context.coordinator.CKGetTaskOutputDirectory(vc)
         }
@@ -35,7 +52,6 @@ struct TaskVC: UIViewControllerRepresentable {
 
         // & present the VC!
         return self.vc
-
     }
 
     func updateUIViewController(_ taskViewController: ORKTaskViewController, context: Context) {
@@ -43,13 +59,23 @@ struct TaskVC: UIViewControllerRepresentable {
     }
 
     class Coordinator: NSObject, ORKTaskViewControllerDelegate {
+        let taskVC: TaskVC
+        init(_ taskVC: TaskVC) {
+            self.taskVC = taskVC
+            super.init()
+        }
+
         public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
             defer { taskViewController.dismiss(animated: true, completion: nil) }
-            guard case .completed = reason else { return }
+            guard case .completed = reason else { return taskVC.onComplete(.failure(error ?? CKError.unknownError)) }
             do {
-                // (1) convert the result of the ResearchKit task into a JSON dictionary
-                if let json = try CKTaskResultAsJson(taskViewController.result) {
+                let result = taskViewController.result
+                taskVC.onComplete(.success(result))
 
+                EFStorageKeychainAccessRef<ORKTaskResult>.forKey(result.identifier).content = result
+
+                // (1) convert the result of the ResearchKit task into a JSON dictionary
+                if let json = try CKTaskResultAsJson(result) {
                     // (2) send using Firebase
                     try CKSendJSON(json)
 
