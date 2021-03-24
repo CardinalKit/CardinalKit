@@ -147,10 +147,54 @@ struct StudyTasks {
         let reldementiaQuestionStep = ORKQuestionStep(identifier: "reldementiaQuestionStep", title: "Dementia in Relatives", question: "Have any of your relatives been diagnosed with Dementia?", answer: reldementiaAnswerFormat)
         steps += [reldementiaQuestionStep]
         
+        //Hereditary Disease
+        let hereditaryAnswerFormat = ORKAnswerFormat.valuePickerAnswerFormat(with: [ORKTextChoice(text: "Partner", value: "Partner" as NSString), ORKTextChoice(text: "Spouse", value: "Spouse" as NSString),
+            ORKTextChoice(text: "Sibling", value: "Sibling" as NSString),
+            ORKTextChoice(text: "Parent", value: "Parent" as NSString),
+            ORKTextChoice(text: "Parent in law", value: "Parent in law" as NSString),
+            ORKTextChoice(text: "Grandparent", value: "Grandparent" as NSString),
+            ORKTextChoice(text: "Aunt/Uncle", value: "Aunt/Uncle" as NSString),
+            ORKTextChoice(text: "Cousin", value: "Cousin" as NSString),
+            ORKTextChoice(text: "None", value: "None" as NSString)
+            ])
+        let hereditaryQuestionStep = ORKQuestionStep(identifier: "hereditaryQuestionStep", title: "Similar Age Group Memory Comparison", question: "Do you have any relatives with dementia?", answer: hereditaryAnswerFormat)
+        steps += [hereditaryQuestionStep]
+        
+        //Handedness
+        let handedAnswerFormat = ORKAnswerFormat.valuePickerAnswerFormat(with: [ORKTextChoice(text: "Right", value: "Right" as NSString), ORKTextChoice(text: "Left", value: "Left" as NSString)])
+        let handedQuestionStep = ORKQuestionStep(identifier: "handedQuestionStep", title: "Right or Left Handed?", question: "Which is your dominant hand?", answer: handedAnswerFormat)
+        steps += [handedQuestionStep]
+        
         //Diagnosis of Cognitive impairment
         let diagnosisAnswerFormat = ORKAnswerFormat.textAnswerFormat()
         let diagnosisQuestionStep = ORKQuestionStep(identifier: "diagnosisQuestionStep", title: "Previous Cognitive Impariment", question: "Have you ever been diagnosed with a Cognitive Impairment? If yes, please specify.", answer: diagnosisAnswerFormat)
         steps += [diagnosisQuestionStep]
+        
+        //Memory Status
+        let memoryAnswerFormat = ORKAnswerFormat.valuePickerAnswerFormat(with: [ORKTextChoice(text: "Yes", value: "Yes" as NSString), ORKTextChoice(text: "No", value: "No" as NSString), ORKTextChoice(text: "Not Sure", value:" Not Sure" as NSString)])
+        let memoryQuestionStep = ORKQuestionStep(identifier: "memoryQuestionStep", title: "Existing Memory Loss or Change", question: "Have you noticed any changes in memory or thinking skills changes in the past year?", answer: memoryAnswerFormat)
+        steps += [memoryQuestionStep]
+        
+        //Peer Memory Comparison
+        let memoryPeerAnswerFormat = ORKAnswerFormat.valuePickerAnswerFormat(with: [ORKTextChoice(text: "Yes", value: "Yes" as NSString), ORKTextChoice(text: "No", value: "No" as NSString)])
+        let memoryPeerQuestionStep = ORKQuestionStep(identifier: "memoryPeerQuestionStep", title: "Similar Age Group Memory Comparison", question: "Are your memory or other thinking skills worse than others your same age?", answer: memoryPeerAnswerFormat)
+        steps += [memoryPeerQuestionStep]
+        
+        //Trouble Using Appliances
+        let troubleAnswerFormat = ORKAnswerFormat.valuePickerAnswerFormat(with: [ORKTextChoice(text: "Yes", value: "Yes" as NSString), ORKTextChoice(text: "No", value: "No" as NSString)])
+        let troubleQuestionStep = ORKQuestionStep(identifier: "troubleQuestionStep", title: "Trouble Using Appliances", question: "(e.g. microwave, oven, stove, remote control, alarm clock)?", answer: troubleAnswerFormat)
+        steps += [troubleQuestionStep]
+        
+        //Home Repair
+        let homeAnswerFormat = ORKAnswerFormat.valuePickerAnswerFormat(with: [ORKTextChoice(text: "Yes", value: "Yes" as NSString), ORKTextChoice(text: "No", value: "No" as NSString)])
+        let homeQuestionStep = ORKQuestionStep(identifier: "homeQuestionStep", title: "Home Repair Difficulty", question: "Do you have difficulty in completing home repair or other home related tasks(housekeeping)?", answer: homeAnswerFormat)
+        steps += [homeQuestionStep]
+        
+        //Reduced activities
+        let reducedAnswerFormat = ORKAnswerFormat.valuePickerAnswerFormat(with: [ORKTextChoice(text: "Yes", value: "Yes" as NSString), ORKTextChoice(text: "No", value: "No" as NSString)])
+        let reducedQuestionStep = ORKQuestionStep(identifier: "reducedQuestionStep", title: "Reduced Physical Activities", question: "Excluding physical limitations, has the patient given up or significantly reduced activities such as golfing, dancing, exercising, or crafts?", answer: reducedAnswerFormat)
+        steps += [reducedQuestionStep]
+        
         
         return ORKOrderedTask(identifier: "Survey", steps: steps)
         
