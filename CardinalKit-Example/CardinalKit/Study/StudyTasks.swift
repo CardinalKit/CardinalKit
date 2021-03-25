@@ -142,10 +142,10 @@ struct StudyTasks {
         let relparkinsonsQuestionStep = ORKQuestionStep(identifier: "relparkinsonsQuestionStep", title: "Parkinson's in Relatives", question: "Have any of your relatives been diagnosed with Parkinson's?", answer: relparkinsonsAnswerFormat)
         steps += [relparkinsonsQuestionStep]
         
-        //Known Relatives with Dementia (none, 1st, 2nd)
-        let reldementiaAnswerFormat = ORKAnswerFormat.valuePickerAnswerFormat(with: [ORKTextChoice(text: "None", value: "None" as NSString), ORKTextChoice(text: "1st Degree Relative", value: "1st Degree Relative" as NSString), ORKTextChoice(text: "2nd Degree Relative", value: "2nd Degree Relative" as NSString)])
-        let reldementiaQuestionStep = ORKQuestionStep(identifier: "reldementiaQuestionStep", title: "Dementia in Relatives", question: "Have any of your relatives been diagnosed with Dementia?", answer: reldementiaAnswerFormat)
-        steps += [reldementiaQuestionStep]
+//        //Known Relatives with Dementia (none, 1st, 2nd)
+//        let reldementiaAnswerFormat = ORKAnswerFormat.valuePickerAnswerFormat(with: [ORKTextChoice(text: "None", value: "None" as NSString), ORKTextChoice(text: "1st Degree Relative", value: "1st Degree Relative" as NSString), ORKTextChoice(text: "2nd Degree Relative", value: "2nd Degree Relative" as NSString)])
+//        let reldementiaQuestionStep = ORKQuestionStep(identifier: "reldementiaQuestionStep", title: "Dementia in Relatives", question: "Have any of your relatives been diagnosed with Dementia?", answer: reldementiaAnswerFormat)
+//        steps += [reldementiaQuestionStep]
         
         //Hereditary Disease
         let hereditaryAnswerFormat = ORKAnswerFormat.valuePickerAnswerFormat(with: [ORKTextChoice(text: "Partner", value: "Partner" as NSString), ORKTextChoice(text: "Spouse", value: "Spouse" as NSString),
@@ -191,8 +191,8 @@ struct StudyTasks {
         steps += [homeQuestionStep]
         
         //Reduced activities
-        let reducedAnswerFormat = ORKAnswerFormat.valuePickerAnswerFormat(with: [ORKTextChoice(text: "Yes", value: "Yes" as NSString), ORKTextChoice(text: "No", value: "No" as NSString)])
-        let reducedQuestionStep = ORKQuestionStep(identifier: "reducedQuestionStep", title: "Reduced Physical Activities", question: "Excluding physical limitations, has the patient given up or significantly reduced activities such as golfing, dancing, exercising, or crafts?", answer: reducedAnswerFormat)
+        let reducedAnswerFormat = ORKAnswerFormat.textAnswerFormat()
+        let reducedQuestionStep = ORKQuestionStep(identifier: "reducedQuestionStep", title: "Reduced Physical Activities", question: "Excluding physical limitations, has the patient given up or significantly reduced activities such as golfing, dancing, exercising, or crafts? If yes, please specify.", answer: reducedAnswerFormat)
         steps += [reducedQuestionStep]
         
         

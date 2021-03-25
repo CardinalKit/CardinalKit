@@ -79,7 +79,6 @@
 		E2DF9F062500B9F000A93B93 /* LoginStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DF9F052500B9F000A93B93 /* LoginStep.swift */; };
 		E2DF9F0A2500C9CE00A93B93 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DF9F092500C9CE00A93B93 /* LoginViewController.swift */; };
 		E2F1FD7824D62064006C39DF /* CKConfiguration.plist in Resources */ = {isa = PBXBuildFile; fileRef = E2F1FD7724D62064006C39DF /* CKConfiguration.plist */; };
-		F74DFAEB260AB1CA00A3890F /* SurveyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74DFAEA260AB1CA00A3890F /* SurveyView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -165,7 +164,6 @@
 		E2DF9F092500C9CE00A93B93 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E2F1FD7724D62064006C39DF /* CKConfiguration.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = CKConfiguration.plist; sourceTree = "<group>"; };
 		F30ABA7020E91EBA421A80F9 /* Pods-CardinalKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardinalKit_Example.debug.xcconfig"; path = "Target Support Files/Pods-CardinalKit_Example/Pods-CardinalKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		F74DFAEA260AB1CA00A3890F /* SurveyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -221,7 +219,6 @@
 		607FACD21AFB9204008FA782 /* CardinalKit-Example */ = {
 			isa = PBXGroup;
 			children = (
-				F74DFAE9260AB1BA00A3890F /* Survey */,
 				D283AAD926094C8900637663 /* Library */,
 				8E0A4383244A4A0400656518 /* Supporting Files */,
 				D286EC98250DC03D00815EED /* Setup */,
@@ -477,14 +474,6 @@
 			path = Dashboard;
 			sourceTree = "<group>";
 		};
-		F74DFAE9260AB1BA00A3890F /* Survey */ = {
-			isa = PBXGroup;
-			children = (
-				F74DFAEA260AB1CA00A3890F /* SurveyView.swift */,
-			);
-			path = Survey;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -673,7 +662,6 @@
 				D283AB0426094C8900637663 /* Metrics.swift in Sources */,
 				D283AB0026094C8900637663 /* CKCareKitManager+Sample.swift in Sources */,
 				D286ECC3250E0ABF00815EED /* TaskVC.swift in Sources */,
-				F74DFAEB260AB1CA00A3890F /* SurveyView.swift in Sources */,
 				E29143FC24E74AD100EE97B2 /* OnboardingUI.swift in Sources */,
 				8E0A43C0244A4A0400656518 /* PasswordlessLoginStep.swift in Sources */,
 				D283AAF626094C8900637663 /* ORKESerialization.m in Sources */,

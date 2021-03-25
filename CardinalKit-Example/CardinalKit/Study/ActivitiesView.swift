@@ -42,7 +42,6 @@ struct ActivityView: View {
     var description: String
     let tasks: ORKOrderedTask
     @State var showingDetail = false
-
     
     var body: some View {
         Button(action: {
