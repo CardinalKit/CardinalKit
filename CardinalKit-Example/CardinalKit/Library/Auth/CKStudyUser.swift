@@ -100,7 +100,7 @@ class CKStudyUser {
             let uid = currentUser?.uid {
             
             CKSession.shared.userId = uid
-            
+            CKSendHelper.createNecessaryDocuments(path:dataBucket)
             let db = Firestore.firestore()
             db.collection(dataBucket).document(uid).setData(["userID":uid, "lastActive":Date().ISOStringFromDate(),"email":email])
         }
