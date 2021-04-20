@@ -15,17 +15,198 @@ class CKHealthKitManager : NSObject {
     static let shared = CKHealthKitManager()
     
     // TODO: save as configurable element
-    fileprivate var hkTypesToReadInBackground: Set<HKQuantityType> = []
+    fileprivate var hkTypesToReadInBackground: Set<HKSampleType> = []
     
     fileprivate let config = CKConfig.shared
     
+    private let quantyTypes = [
+        HKQuantityTypeIdentifier.bodyMassIndex,
+        .bodyFatPercentage,
+        .height,
+        .bodyMass,
+        .leanBodyMass,
+        .waistCircumference,
+        .stepCount,
+        .distanceWalkingRunning,
+        .distanceCycling,
+        .distanceWheelchair,
+        .basalEnergyBurned,
+        .activeEnergyBurned,
+        .flightsClimbed,
+        .nikeFuel,
+        .appleExerciseTime,
+        .pushCount,
+        .distanceSwimming,
+        .swimmingStrokeCount,
+        .vo2Max,
+        .distanceDownhillSnowSports,
+        .appleStandTime,
+        .heartRate,
+        .bodyTemperature,
+        .basalBodyTemperature,
+        .bloodPressureSystolic,
+        .bloodPressureDiastolic,
+        .respiratoryRate,
+        .restingHeartRate,
+        .walkingHeartRateAverage,
+        .heartRateVariabilitySDNN,
+        .oxygenSaturation,
+        .peripheralPerfusionIndex,
+        .bloodGlucose,
+        .numberOfTimesFallen,
+        .electrodermalActivity,
+        .inhalerUsage,
+        .insulinDelivery,
+        .bloodAlcoholContent,
+        .forcedVitalCapacity,
+        .forcedExpiratoryVolume1,
+        .peakExpiratoryFlowRate,
+        .environmentalAudioExposure,
+        .headphoneAudioExposure,
+        .dietaryFatTotal,
+        .dietaryFatPolyunsaturated,
+        .dietaryFatMonounsaturated,
+        .dietaryFatSaturated,
+        .dietaryCholesterol,
+        .dietarySodium,
+        .dietaryCarbohydrates,
+        .dietaryFiber,
+        .dietarySugar,
+        .dietaryEnergyConsumed,
+        .dietaryProtein,
+        .dietaryVitaminA,
+        .dietaryVitaminB6,
+        .dietaryVitaminB12,
+        .dietaryVitaminC,
+        .dietaryVitaminD,
+        .dietaryVitaminE,
+        .dietaryVitaminK,
+        .dietaryCalcium,
+        .dietaryIron,
+        .dietaryThiamin,
+        .dietaryRiboflavin,
+        .dietaryNiacin,
+        .dietaryFolate,
+        .dietaryBiotin,
+        .dietaryPantothenicAcid,
+        .dietaryPhosphorus,
+        .dietaryIodine,
+        .dietaryMagnesium,
+        .dietaryZinc,
+        .dietarySelenium,
+        .dietaryCopper,
+        .dietaryManganese,
+        .dietaryChromium,
+        .dietaryMolybdenum,
+        .dietaryChloride,
+        .dietaryPotassium,
+        .dietaryCaffeine,
+        .dietaryWater,
+        .uvExposure,
+    ]
+    
+    private let categoryTypes = [
+        HKCategoryTypeIdentifier.sleepAnalysis,
+        .appleStandHour,
+        .cervicalMucusQuality,
+        .ovulationTestResult,
+        .menstrualFlow,
+        .intermenstrualBleeding,
+        .sexualActivity,
+        .mindfulSession,
+        .highHeartRateEvent,
+        .lowHeartRateEvent,
+        .irregularHeartRhythmEvent,
+        .audioExposureEvent,
+        .toothbrushingEvent,
+        
+    ]
+           
     override init() {
-        for requestedHKType in config.readArray(query: "HealthKit Data to Read") {
-            let id = HKQuantityTypeIdentifier(rawValue: "HKQuantityTypeIdentifier" + requestedHKType)
-            let hkType = HKQuantityType.quantityType(forIdentifier: id)
-            hkTypesToReadInBackground.insert(hkType!)
+        for quantiType in quantyTypes{
+            hkTypesToReadInBackground.insert(HKObjectType.quantityType(forIdentifier: quantiType)!)
         }
-    }    
+        
+        for categoryType in categoryTypes{
+            hkTypesToReadInBackground.insert(HKObjectType.categoryType(forIdentifier: categoryType)!)
+        }
+                
+        hkTypesToReadInBackground.insert(HKObjectType.documentType(forIdentifier: .CDA)!)
+        if #available(iOS 14.3, *) {
+            let quantyType14Available = [
+                HKQuantityTypeIdentifier.walkingSpeed,
+                .walkingDoubleSupportPercentage,
+                .walkingAsymmetryPercentage,
+                .walkingStepLength,
+                .sixMinuteWalkTestDistance,
+                .stairAscentSpeed,
+                .stairDescentSpeed
+            ]
+            
+            let categoryTypes14Available=[
+                HKCategoryTypeIdentifier.pregnancy,
+                .lactation,
+                .contraceptive,
+                .environmentalAudioExposureEvent,
+                .headphoneAudioExposureEvent,
+                .handwashingEvent,
+                .lowCardioFitnessEvent,
+                .abdominalCramps,
+                .acne,
+                .appetiteChanges,
+                .bladderIncontinence,
+                .bloating,
+                .breastPain,
+                .chestTightnessOrPain,
+                .chills,
+                .constipation,
+                .coughing,
+                .diarrhea,
+                .dizziness,
+                .drySkin,
+                .fainting,
+                .fatigue,
+                .fever,
+                .generalizedBodyAche,
+                .hairLoss,
+                .headache,
+                .heartburn,
+                .hotFlashes,
+                .lossOfSmell,
+                .lossOfTaste,
+                .lowerBackPain,
+                .memoryLapse,
+                .moodChanges,
+                .nausea,
+                .nightSweats,
+                .pelvicPain,
+                .rapidPoundingOrFlutteringHeartbeat,
+                .runnyNose,
+                .shortnessOfBreath,
+                .sinusCongestion,
+                .skippedHeartbeat,
+                .sleepChanges,
+                .soreThroat,
+                .vaginalDryness,
+                .vomiting,
+                .wheezing
+            ]
+            hkTypesToReadInBackground.insert(HKElectrocardiogramType.electrocardiogramType())
+            for quantiType in quantyType14Available{
+                hkTypesToReadInBackground.insert(HKObjectType.quantityType(forIdentifier: quantiType)!)
+            }
+            for categoryType in categoryTypes14Available{
+                hkTypesToReadInBackground.insert(HKObjectType.categoryType(forIdentifier: categoryType)!)
+            }
+        }
+        
+        hkTypesToReadInBackground.insert(HKAudiogramSampleType.audiogramSampleType())
+        hkTypesToReadInBackground.insert(HKWorkoutType.workoutType())
+        hkTypesToReadInBackground.insert(HKAudiogramSampleType.audiogramSampleType())
+        hkTypesToReadInBackground.insert(HKSeriesType.workoutRoute())
+        hkTypesToReadInBackground.insert(HKSeriesType.heartbeat())
+        
+    }
     
     /// Query for HealthKit Authorization
     /// - Parameter completion: (success, error)

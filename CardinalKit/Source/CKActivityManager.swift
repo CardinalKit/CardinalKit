@@ -30,7 +30,7 @@ public class CKActivityManager : NSObject {
         }
     }
     
-    public func getHealthAuthorizaton(forTypes typesToCollect:Set<HKQuantityType>, _ completion: @escaping (_ success: Bool, _ error: Error?) -> Void) {
+    public func getHealthAuthorizaton(forTypes typesToCollect:Set<HKSampleType>, _ completion: @escaping (_ success: Bool, _ error: Error?) -> Void) {
         self.typesToCollect = typesToCollect
         HealthKitManager.shared.getHealthKitAuth(forTypes: self.typesToCollect) { [weak self] (success, error) in
             self?.hasGrantedAuth = success
@@ -89,18 +89,18 @@ public class CKActivityManager : NSObject {
          }
      }
      
-     fileprivate var _typesToCollect = Set<HKQuantityType>()
-     fileprivate var typesToCollect: Set<HKQuantityType> {
+     fileprivate var _typesToCollect = Set<HKSampleType>()
+     fileprivate var typesToCollect: Set<HKSampleType> {
          get {
              if (!_typesToCollect.isEmpty) {
                  return _typesToCollect
              }
              
              guard let typeIds = UserDefaults.standard.array(forKey: keyTypesToCollect) as? [String] else {
-                 return Set<HKQuantityType>() // no types to process
+                 return Set<HKSampleType>() // no types to process
              }
              
-             var types = Set<HKQuantityType>()
+             var types = Set<HKSampleType>()
              for type in typeIds {
                  let type = HKQuantityTypeIdentifier(rawValue: type)
                  if let parsedType = HKQuantityType.quantityType(forIdentifier: type) {

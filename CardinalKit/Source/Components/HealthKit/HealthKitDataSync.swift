@@ -21,7 +21,7 @@ class HealthKitDataSync {
     fileprivate let maxRetroactiveDays = 1 //day
     fileprivate var semaphoreDict = [String:NSLock]() //settled for lock since one max
     
-    func collectAndUploadData(forType type: HKQuantityType, onCompletion: (() -> Void)?) {
+    func collectAndUploadData(forType type: HKSampleType, onCompletion: (() -> Void)?) {
         
         let dispatchGroup = DispatchGroup()
         dispatchGroup.enter()
@@ -41,6 +41,8 @@ class HealthKitDataSync {
                         self?.setLastSyncDate(forType: type, forSource: sourceRevision, date: lastSyncDate)
                         
                         //let tag = "hkdata_\(type.identifier)_\(sourceRevision.source.key)_\(lastSyncDate.ISOStringFromDate())"
+                        print("antes de enviar resultData")
+                        print(resultData)
                         self?.send(data: resultData)
                         
                         VLog("Sent data for type and source %{public}@", type.identifier, sourceRevision.source.key)
@@ -61,7 +63,7 @@ class HealthKitDataSync {
 
 extension HealthKitDataSync {
     
-    fileprivate func collectData(forType type: HKQuantityType, _ sourceRevision: HKSourceRevision, onCompletion: @escaping (([HKSample])->Void)) {
+    fileprivate func collectData(forType type: HKSampleType, _ sourceRevision: HKSourceRevision, onCompletion: @escaping (([HKSample])->Void)) {
         
         let latestSync = getLastSyncDate(forType: type, forSource: sourceRevision)
         
@@ -81,7 +83,7 @@ extension HealthKitDataSync {
         
     }
     
-    fileprivate func getSources(forType type: HKQuantityType, onCompletion: @escaping ((Set<HKSource>)->Void)) {
+    fileprivate func getSources(forType type: HKSampleType, onCompletion: @escaping ((Set<HKSource>)->Void)) {
         
         // find all sources that contain requested data type
         //TODO testing datePredicate, only look through sources that have been active in the last five days... filters out devices that are no longer in use.
@@ -108,7 +110,7 @@ extension HealthKitDataSync {
 
 extension HealthKitDataSync {
     
-    fileprivate func getLastSyncItem(forType type: HKQuantityType, _ sourceRevision: HKSourceRevision) -> Results<HealthKitDataUploads> {
+    fileprivate func getLastSyncItem(forType type: HKSampleType, _ sourceRevision: HKSourceRevision) -> Results<HealthKitDataUploads> {
         
         let realm = try! Realm()
         let syncMetadataQuery = NSCompoundPredicate(
@@ -140,7 +142,7 @@ extension HealthKitDataSync {
     }
     
     // maybe throw a default date here?
-    fileprivate func getLastSyncDate(forType type: HKQuantityType, forSource sourceRevision: HKSourceRevision) -> Date {
+    fileprivate func getLastSyncDate(forType type: HKSampleType, forSource sourceRevision: HKSourceRevision) -> Date {
         
         let lastSyncMetadata = getLastSyncItem(forType: type, sourceRevision)
         if let lastSyncItem = lastSyncMetadata.first {
@@ -151,7 +153,7 @@ extension HealthKitDataSync {
         return Date().dayByAdding(-maxRetroactiveDays)! // Q: what date should we put?
     }
     
-    fileprivate func setLastSyncDate(forType type: HKQuantityType, forSource sourceRevision: HKSourceRevision, date: Date) {
+    fileprivate func setLastSyncDate(forType type: HKSampleType, forSource sourceRevision: HKSourceRevision, date: Date) {
         
         let realm = try! Realm()
         let lastSyncMetadata = getLastSyncItem(forType: type, sourceRevision)
@@ -162,7 +164,7 @@ extension HealthKitDataSync {
         }
     }
     
-    fileprivate func queryHealthStore(forType type: HKQuantityType, forSource sourceRevision: HKSourceRevision, fromDate startDate: Date, queryHandler: @escaping (HKSampleQuery, [HKSample]?, Error?) -> Void) {
+    fileprivate func queryHealthStore(forType type: HKSampleType, forSource sourceRevision: HKSourceRevision, fromDate startDate: Date, queryHandler: @escaping (HKSampleQuery, [HKSample]?, Error?) -> Void) {
         
         let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: true)
         
@@ -182,48 +184,31 @@ extension HealthKitDataSync {
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601
         
-        var jsonArray = [String]()
+        var samplesArray = [[String: Any]]()
         
         
         //Transform HKSampleData to mHealthFormat
         let serializer = OMHSerializer()
         
-        var jsonString: String?=nil
         do{
         
-            try jsonArray = data.map({
-                jsonString = try serializer.json(for: $0)
-                
-                var data=jsonString?.data(using: String.Encoding.utf8) as! Data
-                
-                do {
-                    let dicFromData = try PropertyListSerialization.propertyList(from: data as Data, options: PropertyListSerialization.ReadOptions.mutableContainers, format: nil)
-                    if dicFromData is [String: Any]{
-                                print(dicFromData)
-                            }
-                        } catch{
-                            print(error)
-                        }
-                
-               
-                
-                
-                return jsonString ?? ""
+            try samplesArray = data.map({
+                let sampleInJsonString = try serializer.json(for: $0)
+                let sampleInData = Data(sampleInJsonString.utf8)
+                let sampleInObject = try JSONSerialization.jsonObject(with: sampleInData, options: []) as? [String: Any]
+                return sampleInObject!
             })
+         
+            let arrayToJson = try JSONSerialization.data(withJSONObject: ["payload":samplesArray], options: [])
             
-            let arrayToJson = try JSONSerialization.data(withJSONObject: jsonArray, options: [])
-            
-            let arrayJsonToString = String(data: arrayToJson, encoding: .utf8)
-            
-            if let collectedData = try? encoder.encode(["payload": arrayJsonToString]),
-                let packageName = getPackageName(for: data) {
-                do {
-                    let package = try Package(packageName, type: .hkdata, data: collectedData)
-                    try NetworkDataRequest.send(package)
-                } catch {
-                    VError("Unable to process package %{public}@", error.localizedDescription)
-                }
-            }
+            let packageName = getPackageName(for: data)
+             do {
+                let package = try Package(packageName!, type: .hkdata, data: arrayToJson)
+                try NetworkDataRequest.send(package)
+             } catch {
+                VError("Unable to process package %{public}@", error.localizedDescription)
+             }
+          
         }
         catch{
             
@@ -247,8 +232,9 @@ extension HealthKitDataSync {
         return "\(source.productType ?? "UnknownDevice") \(source.source.key)"
     }
     
-    fileprivate func getRequestKey(source: HKSourceRevision, type: HKQuantityType) -> String {
+    fileprivate func getRequestKey(source: HKSourceRevision, type: HKSampleType) -> String {
         return "\(type.identifier) \(getSourceRevisionKey(source: source))"
     }
+    
+    
 }
-
