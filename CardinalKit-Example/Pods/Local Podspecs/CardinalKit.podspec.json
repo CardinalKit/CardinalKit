@@ -47,6 +47,10 @@
     ],
     "Zip": [
       "~> 1.1.0"
+    ],
+    "Granola": [
+
     ]
-  }
+  },
+  "public_header_files": "CardinalKit/Source/Components/Header.h"
 }

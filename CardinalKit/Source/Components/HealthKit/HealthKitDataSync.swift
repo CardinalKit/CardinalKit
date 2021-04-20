@@ -37,7 +37,7 @@ class HealthKitDataSync {
                 
                 self?.collectData(forType: type, sourceRevision) { [weak self] resultData in
                     VLog("Collected data for type and source %@", type.identifier, sourceRevision.source.key)
-                    if let lastSyncDate = resultData.last?.quantitySample?.startDate {
+                    if let lastSyncDate = resultData.last?.startDate {
                         self?.setLastSyncDate(forType: type, forSource: sourceRevision, date: lastSyncDate)
                         
                         //let tag = "hkdata_\(type.identifier)_\(sourceRevision.source.key)_\(lastSyncDate.ISOStringFromDate())"
@@ -61,7 +61,7 @@ class HealthKitDataSync {
 
 extension HealthKitDataSync {
     
-    fileprivate func collectData(forType type: HKQuantityType, _ sourceRevision: HKSourceRevision, onCompletion: @escaping (([HKSampleData])->Void)) {
+    fileprivate func collectData(forType type: HKQuantityType, _ sourceRevision: HKSourceRevision, onCompletion: @escaping (([HKSample])->Void)) {
         
         let latestSync = getLastSyncDate(forType: type, forSource: sourceRevision)
         
@@ -72,16 +72,11 @@ extension HealthKitDataSync {
             }
             
             guard let results = results as? [HKQuantitySample], !results.isEmpty else {
-                onCompletion([HKSampleData]())
+                onCompletion([HKSample]())
                 return
             }
             
-            let resultData = results.map({ (quantitySample) -> HKSampleData in
-                return HKSampleData(sample: quantitySample)
-            })
-            
-            
-            onCompletion(resultData)
+            onCompletion(results)
         }
         
     }
@@ -183,26 +178,66 @@ extension HealthKitDataSync {
         HealthKitManager.shared.healthStore.execute(query) // run something when finished
     }
     
-    fileprivate func send(data: [HKSampleData]) {
+    fileprivate func send(data: [HKSample]) {
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601
-        if let collectedData = try? encoder.encode(["payload": data]),
-            let packageName = getPackageName(for: data) {
-            do {
-                let package = try Package(packageName, type: .hkdata, data: collectedData)
-                try NetworkDataRequest.send(package)
-            } catch {
-                VError("Unable to process package %{public}@", error.localizedDescription)
+        
+        var jsonArray = [String]()
+        
+        
+        //Transform HKSampleData to mHealthFormat
+        let serializer = OMHSerializer()
+        
+        var jsonString: String?=nil
+        do{
+        
+            try jsonArray = data.map({
+                jsonString = try serializer.json(for: $0)
+                
+                var data=jsonString?.data(using: String.Encoding.utf8) as! Data
+                
+                do {
+                    let dicFromData = try PropertyListSerialization.propertyList(from: data as Data, options: PropertyListSerialization.ReadOptions.mutableContainers, format: nil)
+                    if dicFromData is [String: Any]{
+                                print(dicFromData)
+                            }
+                        } catch{
+                            print(error)
+                        }
+                
+               
+                
+                
+                return jsonString ?? ""
+            })
+            
+            let arrayToJson = try JSONSerialization.data(withJSONObject: jsonArray, options: [])
+            
+            let arrayJsonToString = String(data: arrayToJson, encoding: .utf8)
+            
+            if let collectedData = try? encoder.encode(["payload": arrayJsonToString]),
+                let packageName = getPackageName(for: data) {
+                do {
+                    let package = try Package(packageName, type: .hkdata, data: collectedData)
+                    try NetworkDataRequest.send(package)
+                } catch {
+                    VError("Unable to process package %{public}@", error.localizedDescription)
+                }
             }
+        }
+        catch{
+            
         }
     }
     
-    fileprivate func getPackageName(for data: [HKSampleData]) -> String? {
+    fileprivate func getPackageName(for data: [HKSample]) -> String? {
         let sessionEID = SessionManager.shared.userId ?? ""
-        if let start = data.first?.quantitySample?.startDate,
-            let end = data.last?.quantitySample?.startDate,
-            let type = data.first?.quantitySample?.type,
-            let device = data.first?.quantitySample?.source {
+         let sample = data as? [HKQuantitySample]
+        
+        if let start = sample?.first?.startDate,
+            let end = sample?.last?.startDate,
+            let type = sample?.first?.quantityType.identifier,
+            let device = sample?.first?.deviceKey {
             return "E\(sessionEID)_hkdata_report_\(device)_\(type)_\(start.stringWithFormat("MMdd'T'HHmm"))_\(end.stringWithFormat("MMdd'T'HHmm"))".trimmingCharacters(in: .whitespaces)
         }
         return nil
