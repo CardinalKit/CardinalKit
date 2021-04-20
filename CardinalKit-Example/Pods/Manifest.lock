@@ -316,6 +316,8 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (7.1.1):
     - GoogleUtilities/Logger
+  - Granola (0.4.1):
+    - ObjectiveSugar (~> 1.1)
   - "gRPC-C++ (1.28.2)":
     - "gRPC-C++/Implementation (= 1.28.2)"
     - "gRPC-C++/Interface (= 1.28.2)"
@@ -347,6 +349,7 @@ PODS:
     - nanopb/encode (= 2.30906.0)
   - nanopb/decode (2.30906.0)
   - nanopb/encode (2.30906.0)
+  - ObjectiveSugar (1.1.0)
   - ObjectMapper (3.3.0)
   - PromisesObjC (1.2.11)
   - ReachabilitySwift (3)
@@ -367,6 +370,7 @@ DEPENDENCIES:
   - Firebase/DynamicLinks
   - Firebase/Firestore
   - Firebase/Storage
+  - Granola
   - ResearchKit (from `https://github.com/ResearchKit/ResearchKit.git`, branch `master`)
 
 SPEC REPOS:
@@ -385,11 +389,13 @@ SPEC REPOS:
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleUtilities
+    - Granola
     - "gRPC-C++"
     - gRPC-Core
     - GTMSessionFetcher
     - leveldb-library
     - nanopb
+    - ObjectiveSugar
     - ObjectMapper
     - PromisesObjC
     - ReachabilitySwift
@@ -427,11 +433,13 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: 8d3c0aeede16ab7764144b5a4ca8e1d4323841b7
   GoogleDataTransport: 116c84c4bdeb76be2a7a46de51244368f9794eab
   GoogleUtilities: 3dc4ff0d5e4840e2fa8eef0889620e8c33d4218c
+  Granola: 07d8cc4bdf005228118161eb182cd34eaf169a03
   "gRPC-C++": 13d8ccef97d5c3c441b7e3c529ef28ebee86fad2
   gRPC-Core: 4afa11bfbedf7cdecd04de535a9e046893404ed5
   GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: 1bf24dd71191072e120b83dd02d08f3da0d65e53
+  ObjectiveSugar: a6a25f23d657c19df0a0b972466d5b5ca9f5295c
   ObjectMapper: b612bf8c8e99c4dc0bb6013a51f7c27966ed5da9
   PromisesObjC: 8c196f5a328c2cba3e74624585467a557dcb482f
   ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
@@ -442,6 +450,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
   Zip: 8877eede3dda76bcac281225c20e71c25270774c
 
-PODFILE CHECKSUM: 61ceae1bc7ff27f9e0bfd306957b6b793f5cc8a2
+PODFILE CHECKSUM: 8197c0eb055659eabcbd811381d6d23df4add258
 
-COCOAPODS: 1.10.0
+COCOAPODS: 1.10.1

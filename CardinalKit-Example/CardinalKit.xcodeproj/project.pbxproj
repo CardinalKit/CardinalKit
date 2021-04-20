@@ -49,10 +49,10 @@
 		8E7FFFB825DE350A002982B4 /* CoffeeUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7FFFB725DE350A002982B4 /* CoffeeUIView.swift */; };
 		8E7FFFBB25DE37FF002982B4 /* CoffeePieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7FFFBA25DE37FF002982B4 /* CoffeePieChartView.swift */; };
 		8E7FFFBD25DE38E4002982B4 /* CoffeeChartDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7FFFBC25DE38E4002982B4 /* CoffeeChartDataSource.swift */; };
-		8E9CDE912591534B00C8A228 /* CareKitStore in Frameworks */ = {isa = PBXBuildFile; productRef = 8E9CDE902591534B00C8A228 /* CareKitStore */; };
-		8E9CDE932591534B00C8A228 /* CareKitFHIR in Frameworks */ = {isa = PBXBuildFile; productRef = 8E9CDE922591534B00C8A228 /* CareKitFHIR */; };
-		8E9CDE952591534B00C8A228 /* CareKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8E9CDE942591534B00C8A228 /* CareKit */; };
-		8E9CDE972591534B00C8A228 /* CareKitUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8E9CDE962591534B00C8A228 /* CareKitUI */; };
+		8E9CDE912591534B00C8A228 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 8E9CDE902591534B00C8A228 /* SwiftPackageProductDependency */; };
+		8E9CDE932591534B00C8A228 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 8E9CDE922591534B00C8A228 /* SwiftPackageProductDependency */; };
+		8E9CDE952591534B00C8A228 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 8E9CDE942591534B00C8A228 /* SwiftPackageProductDependency */; };
+		8E9CDE972591534B00C8A228 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 8E9CDE962591534B00C8A228 /* SwiftPackageProductDependency */; };
 		8E9CDEA725916B2800C8A228 /* ScheduleViewControllerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9CDEA625916B2800C8A228 /* ScheduleViewControllerRepresentable.swift */; };
 		8E9CDEA925916E6600C8A228 /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9CDEA825916E6600C8A228 /* ScheduleViewController.swift */; };
 		8E9CDEAD259170AD00C8A228 /* CKCareKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9CDEAC259170AD00C8A228 /* CKCareKitManager.swift */; };
@@ -187,12 +187,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E9CDE952591534B00C8A228 /* CareKit in Frameworks */,
+				8E9CDE952591534B00C8A228 /* BuildFile in Frameworks */,
 				8E0A43CE244A60D800656518 /* Pods_CardinalKit_Example.framework in Frameworks */,
-				8E9CDE972591534B00C8A228 /* CareKitUI in Frameworks */,
+				8E9CDE972591534B00C8A228 /* BuildFile in Frameworks */,
 				8E0A43D5244A693D00656518 /* HealthKit.framework in Frameworks */,
-				8E9CDE912591534B00C8A228 /* CareKitStore in Frameworks */,
-				8E9CDE932591534B00C8A228 /* CareKitFHIR in Frameworks */,
+				8E9CDE912591534B00C8A228 /* BuildFile in Frameworks */,
+				8E9CDE932591534B00C8A228 /* BuildFile in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -509,10 +509,10 @@
 			);
 			name = CardinalKit_Example;
 			packageProductDependencies = (
-				8E9CDE902591534B00C8A228 /* CareKitStore */,
-				8E9CDE922591534B00C8A228 /* CareKitFHIR */,
-				8E9CDE942591534B00C8A228 /* CareKit */,
-				8E9CDE962591534B00C8A228 /* CareKitUI */,
+				8E9CDE902591534B00C8A228 /* SwiftPackageProductDependency */,
+				8E9CDE922591534B00C8A228 /* SwiftPackageProductDependency */,
+				8E9CDE942591534B00C8A228 /* SwiftPackageProductDependency */,
+				8E9CDE962591534B00C8A228 /* SwiftPackageProductDependency */,
 			);
 			productName = CardinalKit;
 			productReference = 607FACD01AFB9204008FA782 /* CardinalKit Example.app */;
@@ -546,7 +546,7 @@
 			);
 			mainGroup = 607FACC71AFB9204008FA782;
 			packageReferences = (
-				8E9CDE8F2591534B00C8A228 /* XCRemoteSwiftPackageReference "CareKit" */,
+				8E9CDE8F2591534B00C8A228 /* RemoteSwiftPackageReference */,
 			);
 			productRefGroup = 607FACD11AFB9204008FA782 /* Products */;
 			projectDirPath = "";
@@ -615,7 +615,9 @@
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleDataTransport/GoogleDataTransport.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/Granola/Granola.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectiveSugar/ObjectiveSugar.framework",
 				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
 				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/ReachabilitySwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
@@ -644,7 +646,9 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleDataTransport.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Granola.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectiveSugar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReachabilitySwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
@@ -925,7 +929,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		8E9CDE8F2591534B00C8A228 /* XCRemoteSwiftPackageReference "CareKit" */ = {
+		8E9CDE8F2591534B00C8A228 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/carekit-apple/CareKit";
 			requirement = {
@@ -936,24 +940,24 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		8E9CDE902591534B00C8A228 /* CareKitStore */ = {
+		8E9CDE902591534B00C8A228 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8E9CDE8F2591534B00C8A228 /* XCRemoteSwiftPackageReference "CareKit" */;
+			package = 8E9CDE8F2591534B00C8A228 /* RemoteSwiftPackageReference */;
 			productName = CareKitStore;
 		};
-		8E9CDE922591534B00C8A228 /* CareKitFHIR */ = {
+		8E9CDE922591534B00C8A228 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8E9CDE8F2591534B00C8A228 /* XCRemoteSwiftPackageReference "CareKit" */;
+			package = 8E9CDE8F2591534B00C8A228 /* RemoteSwiftPackageReference */;
 			productName = CareKitFHIR;
 		};
-		8E9CDE942591534B00C8A228 /* CareKit */ = {
+		8E9CDE942591534B00C8A228 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8E9CDE8F2591534B00C8A228 /* XCRemoteSwiftPackageReference "CareKit" */;
+			package = 8E9CDE8F2591534B00C8A228 /* RemoteSwiftPackageReference */;
 			productName = CareKit;
 		};
-		8E9CDE962591534B00C8A228 /* CareKitUI */ = {
+		8E9CDE962591534B00C8A228 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8E9CDE8F2591534B00C8A228 /* XCRemoteSwiftPackageReference "CareKit" */;
+			package = 8E9CDE8F2591534B00C8A228 /* RemoteSwiftPackageReference */;
 			productName = CareKitUI;
 		};
 /* End XCSwiftPackageProductDependency section */
