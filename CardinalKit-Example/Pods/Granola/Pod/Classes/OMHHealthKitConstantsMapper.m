@@ -137,6 +137,8 @@
             return @"HKWorkoutActivityTypeYoga";
         case HKWorkoutActivityTypeOther:
             return @"HKWorkoutActivityTypeOther";
+        case HKWorkoutActivityTypeMixedCardio:
+            return @"HKWorkoutActivityTypeMixedCardio";
         default:{
             NSException *e = [NSException
                               exceptionWithName:@"HKWorkoutActivityTypeInvalidValue"
