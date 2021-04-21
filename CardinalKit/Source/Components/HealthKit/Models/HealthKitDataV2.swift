@@ -13,7 +13,7 @@ import RealmSwift
 import ObjectMapper
 
 class HKSampleData: Object, Codable {
-    var quantitySample: QuantitySampleData?
+    @objc dynamic var quantitySample: QuantitySampleData?
     //var categorySample: CategorySampleData?
     //var cdaSample: CDADocumentSampleData?
     //var correlationSample: CorrelationSampleData? //not sure about this one
@@ -29,12 +29,12 @@ class HKSampleData: Object, Codable {
 
 class QuantitySampleData: Object, Codable {
     
-    var value: Double = 0
-    var unit: String = ""
-    var source: String = ""
-    var type: String = ""
-    var startDate: Date = Date()
-    var endDate: Date = Date()
+    @objc dynamic var value: Double = 0
+    @objc dynamic var unit: String = ""
+    @objc dynamic var source: String = ""
+    @objc dynamic var type: String = ""
+    @objc dynamic var startDate: Date = Date()
+    @objc dynamic var endDate: Date = Date()
     
     convenience init?(sample: HKQuantitySample) {
         self.init()

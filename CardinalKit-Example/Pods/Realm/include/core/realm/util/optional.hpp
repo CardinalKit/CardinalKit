@@ -20,7 +20,7 @@
 #ifndef REALM_UTIL_OPTIONAL_HPP
 #define REALM_UTIL_OPTIONAL_HPP
 
-#include <realm/util/features.h>
+#include <realm/util/assert.hpp>
 #include <realm/util/backtrace.hpp>
 
 #include <stdexcept>  // std::logic_error
@@ -77,13 +77,13 @@ namespace util {
 
 // Note: Should conform with the future std::optional.
 template <class T>
-class Optional : private _impl::OptionalStorage<T> {
+class Optional : private realm::_impl::OptionalStorage<T> {
 public:
     using value_type = T;
 
     constexpr Optional();
     constexpr Optional(None);
-    Optional(Optional<T>&& other);
+    Optional(Optional<T>&& other) noexcept;
     Optional(const Optional<T>& other);
 
     constexpr Optional(T&& value);
@@ -93,9 +93,9 @@ public:
     constexpr Optional(InPlace tag, Args&&...);
     // FIXME: std::optional specifies an std::initializer_list constructor overload as well.
 
-    Optional<T>& operator=(None);
-    Optional<T>& operator=(Optional<T>&& other);
-    Optional<T>& operator=(const Optional<T>& other);
+    Optional<T>& operator=(None) noexcept;
+    Optional<T>& operator=(Optional<T>&& other) noexcept(std::is_nothrow_move_assignable<T>::value);
+    Optional<T>& operator=(const Optional<T>& other) noexcept(std::is_nothrow_copy_assignable<T>::value);
 
     template <class U, class = typename std::enable_if<_impl::TypeIsAssignableToOptional<T, U>::value>::type>
     Optional<T>& operator=(U&& value);
@@ -119,8 +119,11 @@ public:
     template <class... Args>
     void emplace(Args&&...);
     // FIXME: std::optional specifies an std::initializer_list overload for `emplace` as well.
+
+    void reset();
+
 private:
-    using Storage = _impl::OptionalStorage<T>;
+    using Storage = realm::_impl::OptionalStorage<T>;
     using Storage::m_engaged;
     using Storage::m_value;
 
@@ -132,7 +135,6 @@ private:
     {
         m_engaged = b;
     }
-    void clear();
 };
 
 
@@ -170,23 +172,23 @@ public:
     } // FIXME: Was a delegating constructor, but not fully supported in VS2015
     Optional(const Optional<T&>& other) = default;
     template <class U>
-    Optional(const Optional<U&>& other)
+    Optional(const Optional<U&>& other) noexcept
         : m_ptr(other.m_ptr)
     {
     }
     template <class U>
-    Optional(std::reference_wrapper<U> ref)
+    Optional(std::reference_wrapper<U> ref) noexcept
         : m_ptr(&ref.get())
     {
     }
 
-    constexpr Optional(T& init_value)
+    constexpr Optional(T& init_value) noexcept
         : m_ptr(&init_value)
     {
     }
     Optional(T&& value) = delete; // Catches accidental references to rvalue temporaries.
 
-    Optional<T&>& operator=(None)
+    Optional<T&>& operator=(None) noexcept
     {
         m_ptr = nullptr;
         return *this;
@@ -198,13 +200,13 @@ public:
     }
 
     template <class U>
-    Optional<T&>& operator=(std::reference_wrapper<U> ref)
+    Optional<T&>& operator=(std::reference_wrapper<U> ref) noexcept
     {
         m_ptr = &ref.get();
         return *this;
     }
 
-    explicit constexpr operator bool() const
+    explicit constexpr operator bool() const noexcept
     {
         return m_ptr;
     }
@@ -288,7 +290,7 @@ constexpr Optional<T>::Optional(None)
 }
 
 template <class T>
-Optional<T>::Optional(Optional<T>&& other)
+Optional<T>::Optional(Optional<T>&& other) noexcept
     : Storage(none)
 {
     if (other.m_engaged) {
@@ -327,7 +329,7 @@ constexpr Optional<T>::Optional(InPlace, Args&&... args)
 }
 
 template <class T>
-void Optional<T>::clear()
+void Optional<T>::reset()
 {
     if (m_engaged) {
         m_value.~T();
@@ -336,21 +338,21 @@ void Optional<T>::clear()
 }
 
 template <class T>
-Optional<T>& Optional<T>::operator=(None)
+Optional<T>& Optional<T>::operator=(None) noexcept
 {
-    clear();
+    reset();
     return *this;
 }
 
 template <class T>
-Optional<T>& Optional<T>::operator=(Optional<T>&& other)
+Optional<T>& Optional<T>::operator=(Optional<T>&& other) noexcept(std::is_nothrow_move_assignable<T>::value)
 {
     if (m_engaged) {
         if (other.m_engaged) {
             m_value = std::move(other.m_value);
         }
         else {
-            clear();
+            reset();
         }
     }
     else {
@@ -363,14 +365,14 @@ Optional<T>& Optional<T>::operator=(Optional<T>&& other)
 }
 
 template <class T>
-Optional<T>& Optional<T>::operator=(const Optional<T>& other)
+Optional<T>& Optional<T>::operator=(const Optional<T>& other) noexcept(std::is_nothrow_copy_assignable<T>::value)
 {
     if (m_engaged) {
         if (other.m_engaged) {
             m_value = other.m_value;
         }
         else {
-            clear();
+            reset();
         }
     }
     else {
@@ -405,58 +407,50 @@ constexpr Optional<T>::operator bool() const
 template <class T>
 constexpr const T& Optional<T>::value() const
 {
-    return m_engaged ? m_value : (throw BadOptionalAccess{"bad optional access"}, m_value);
+    return m_value;
 }
 
 template <class T>
 T& Optional<T>::value()
 {
-    if (!m_engaged) {
-        throw BadOptionalAccess{"bad optional access"};
-    }
+    REALM_ASSERT(m_engaged);
     return m_value;
 }
 
 template <class T>
 constexpr const typename Optional<T&>::target_type& Optional<T&>::value() const
 {
-    return m_ptr ? *m_ptr : (throw BadOptionalAccess{"bad optional access"}, *m_ptr);
+    return *m_ptr;
 }
 
 template <class T>
 typename Optional<T&>::target_type& Optional<T&>::value()
 {
-    if (!m_ptr) {
-        throw BadOptionalAccess{"bad optional access"};
-    }
+    REALM_ASSERT(m_ptr);
     return *m_ptr;
 }
 
 template <class T>
 constexpr const T& Optional<T>::operator*() const
 {
-    // Note: This differs from std::optional, which doesn't throw.
     return value();
 }
 
 template <class T>
 T& Optional<T>::operator*()
 {
-    // Note: This differs from std::optional, which doesn't throw.
     return value();
 }
 
 template <class T>
 constexpr const T* Optional<T>::operator->() const
 {
-    // Note: This differs from std::optional, which doesn't throw.
     return &value();
 }
 
 template <class T>
 T* Optional<T>::operator->()
 {
-    // Note: This differs from std::optional, which doesn't throw.
     return &value();
 }
 
@@ -492,7 +486,7 @@ template <class T>
 template <class... Args>
 void Optional<T>::emplace(Args&&... args)
 {
-    clear();
+    reset();
     new (&m_value) T(std::forward<Args>(args)...);
     m_engaged = true;
 }

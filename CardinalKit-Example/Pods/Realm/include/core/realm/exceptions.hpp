@@ -23,6 +23,7 @@
 
 #include <realm/util/features.h>
 #include <realm/util/backtrace.hpp>
+#include <realm/util/to_string.hpp>
 
 namespace realm {
 
@@ -33,6 +34,19 @@ using util::ExceptionWithBacktrace;
 class NoSuchTable : public ExceptionWithBacktrace<std::exception> {
 public:
     const char* message() const noexcept override;
+};
+
+class InvalidTableRef : public ExceptionWithBacktrace<std::exception> {
+public:
+    InvalidTableRef(const char* cause)
+        : m_message(cause)
+    {
+    }
+    const char* message() const noexcept override
+    {
+        return m_message.c_str();
+    }
+    std::string m_message;
 };
 
 
@@ -60,15 +74,15 @@ public:
 };
 
 
-/// The FileFormatUpgradeRequired exception can be thrown by the SharedGroup
+/// The UnsupportedFileFormatVersion exception is thrown by DB::open()
 /// constructor when opening a database that uses a deprecated file format
-/// and/or a deprecated history schema, and the user has indicated he does not
-/// want automatic upgrades to be performed. This exception indicates that until
-/// an upgrade of the file format is performed, the database will be unavailable
-/// for read or write operations.
-class FileFormatUpgradeRequired : public ExceptionWithBacktrace<std::exception> {
+/// and/or a deprecated history schema which this version of Realm cannot
+/// upgrade from.
+class UnsupportedFileFormatVersion : public ExceptionWithBacktrace<> {
 public:
-    const char* message() const noexcept override;
+    UnsupportedFileFormatVersion(int source_version);
+    /// The unsupported version of the file.
+    int source_version = 0;
 };
 
 
@@ -102,6 +116,42 @@ public:
     /// runtime_error::what() returns the msg provided in the constructor.
 };
 
+/// Thrown when a key can not by found
+class KeyNotFound : public std::runtime_error {
+public:
+    KeyNotFound(const std::string& msg)
+        : std::runtime_error(msg)
+    {
+    }
+};
+
+/// Thrown when a column can not by found
+class ColumnNotFound : public std::runtime_error {
+public:
+    ColumnNotFound()
+        : std::runtime_error("Column not found")
+    {
+    }
+};
+
+/// Thrown when a column key is already used
+class ColumnAlreadyExists : public std::runtime_error {
+public:
+    ColumnAlreadyExists()
+        : std::runtime_error("Column already exists")
+    {
+    }
+};
+
+/// Thrown when a key is already existing when trying to create a new object
+class KeyAlreadyUsed : public std::runtime_error {
+public:
+    KeyAlreadyUsed(const std::string& msg)
+        : std::runtime_error(msg)
+    {
+    }
+};
+
 // SerialisationError intentionally does not inherit ExceptionWithBacktrace
 // because the query-based-sync permissions queries generated on the server
 // use a LinksToNode which is not currently serialisable (this limitation can
@@ -119,6 +169,24 @@ class InvalidPathError : public std::runtime_error {
 public:
     InvalidPathError(const std::string& msg);
     /// runtime_error::what() returns the msg provided in the constructor.
+};
+
+class DuplicatePrimaryKeyValueException : public std::logic_error {
+public:
+    DuplicatePrimaryKeyValueException(std::string object_type, std::string property);
+
+    std::string const& object_type() const
+    {
+        return m_object_type;
+    }
+    std::string const& property() const
+    {
+        return m_property;
+    }
+
+private:
+    std::string m_object_type;
+    std::string m_property;
 };
 
 
@@ -161,6 +229,8 @@ public:
         binary_too_big,
         table_name_too_long,
         column_name_too_long,
+        column_name_in_use,
+        invalid_column_name,
         table_index_out_of_range,
         row_index_out_of_range,
         column_index_out_of_range,
@@ -212,31 +282,28 @@ public:
 
         /// Group::open() is called on a group accessor that is already in the
         /// attached state. Or Group::open() or Group::commit() is called on a
-        /// group accessor that is managed by a SharedGroup object.
+        /// group accessor that is managed by a DB object.
         wrong_group_state,
 
-        /// No active transaction on a particular SharedGroup object (e.g.,
-        /// SharedGroup::commit()), or the active transaction on the SharedGroup
-        /// object is of the wrong type (read/write), or an attampt was made to
-        /// initiate a new transaction while one is already in progress on the
-        /// same SharedGroup object.
+        /// No active transaction on a particular Transaction object (e.g. after commit)
+        /// or the Transaction object is of the wrong type (write to a read-only transaction)
         wrong_transact_state,
 
-        /// Attempted use of a continuous transaction through a SharedGroup
+        /// Attempted use of a continuous transaction through a DB
         /// object with no history. See Replication::get_history().
         no_history,
 
-        /// Durability setting (as passed to the SharedGroup constructor) was
+        /// Durability setting (as passed to the DB constructor) was
         /// not consistent across the session.
         mixed_durability,
 
         /// History type (as specified by the Replication implementation passed
-        /// to the SharedGroup constructor) was not consistent across the
+        /// to the DB constructor) was not consistent across the
         /// session.
         mixed_history_type,
 
         /// History schema version (as specified by the Replication
-        /// implementation passed to the SharedGroup constructor) was not
+        /// implementation passed to the DB constructor) was not
         /// consistent across the session.
         mixed_history_schema_version,
 
@@ -247,7 +314,10 @@ public:
         column_does_not_exist,
 
         /// You can not add index on a subtable of a subtable
-        subtable_of_subtable_index
+        subtable_of_subtable_index,
+
+        /// You try to instantiate a collection object not matching column type
+        collection_type_mismatch
     };
 
     LogicError(ErrorKind message);
@@ -284,9 +354,11 @@ inline const char* DescriptorMismatch::message() const noexcept
     return "Table descriptor mismatch";
 }
 
-inline const char* FileFormatUpgradeRequired::message() const noexcept
+inline UnsupportedFileFormatVersion::UnsupportedFileFormatVersion(int version)
+    : ExceptionWithBacktrace<>(
+          util::format("Database has an unsupported version (%1) and cannot be upgraded", version))
+    , source_version(version)
 {
-    return "Database upgrade required but prohibited";
 }
 
 inline const char* MultipleSyncAgents::message() const noexcept
@@ -307,7 +379,7 @@ inline MaximumFileSizeExceeded::MaximumFileSizeExceeded(const std::string& msg)
 }
 
 inline OutOfDiskSpace::OutOfDiskSpace(const std::string& msg)
-: std::runtime_error(msg)
+    : std::runtime_error(msg)
 {
 }
 

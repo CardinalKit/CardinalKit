@@ -1,22 +1,3 @@
-/*************************************************************************
- *
- * REALM CONFIDENTIAL
- * __________________
- *
- *  [2011] - [2015] Realm Inc
- *  All Rights Reserved.
- *
- * NOTICE:  All information contained herein is, and remains
- * the property of Realm Incorporated and its suppliers,
- * if any.  The intellectual and technical concepts contained
- * herein are proprietary to Realm Incorporated
- * and its suppliers and may be covered by U.S. and Foreign Patents,
- * patents in process, and are protected by trade secret or copyright law.
- * Dissemination of this information or reproduction of this material
- * is strictly forbidden unless prior written permission is obtained
- * from Realm Incorporated.
- *
- **************************************************************************/
 
 #ifndef REALM_SYNC_TRANSFORM_HPP
 #define REALM_SYNC_TRANSFORM_HPP
@@ -26,7 +7,8 @@
 #include <realm/util/buffer.hpp>
 #include <realm/impl/cont_transact_hist.hpp>
 #include <realm/impl/transact_log.hpp>
-#include <realm/group_shared.hpp>
+#include <realm/db.hpp>
+#include <realm/impl/transact_log.hpp>
 #include <realm/chunked_binary.hpp>
 #include <realm/sync/instructions.hpp>
 #include <realm/sync/protocol.hpp>
@@ -91,7 +73,6 @@ public:
 };
 
 
-
 /// The interface between the sync history and the operational transformer
 /// (Transformer) for the purpose of transforming changesets received from a
 /// particular *remote peer*.
@@ -111,7 +92,7 @@ public:
     /// to point to it with BinaryData. entry.changeset.size() always gives the
     /// size of the changeset.
     ///
-    /// \param begin_version, end_version The range of versions to consider. If
+    /// \param begin_version  end_version The range of versions to consider. If
     /// `begin_version` is equal to `end_version`, it is the empty range. If
     /// `begin_version` is zero, it means that everything preceeding
     /// `end_version` is to be considered, which is again the empty range if
@@ -138,7 +119,6 @@ public:
 
     virtual ~TransformHistory() noexcept {}
 };
-
 
 
 class TransformError; // Exception
@@ -185,21 +165,14 @@ public:
     /// changeset is of local origin. The specified identifier must never be
     /// zero.
     ///
-    /// \return The size of the transformed version of the specified
-    /// changesets. Upon return, the transformed changesets are concatenated
-    /// and placed in \a output_buffer.
-    ///
     /// \throw TransformError Thrown if operational transformation fails due to
     /// a problem with the specified changeset.
     ///
     /// FIXME: Consider using std::error_code instead of throwing
     /// TransformError.
-    virtual void transform_remote_changesets(TransformHistory&,
-                                             file_ident_type local_file_ident,
-                                             version_type current_local_version,
-                                             Changeset* changesets,
-                                             std::size_t num_changesets,
-                                             Reporter* = nullptr,
+    virtual void transform_remote_changesets(TransformHistory&, file_ident_type local_file_ident,
+                                             version_type current_local_version, Changeset* changesets,
+                                             std::size_t num_changesets, Reporter* = nullptr,
                                              util::Logger* = nullptr) = 0;
 
     virtual ~Transformer() noexcept {}
@@ -223,22 +196,19 @@ public:
 
     TransformerImpl();
 
-    void transform_remote_changesets(TransformHistory&, file_ident_type, version_type, Changeset*,
-                                     std::size_t, Reporter*, util::Logger*) override;
+    void transform_remote_changesets(TransformHistory&, file_ident_type, version_type, Changeset*, std::size_t,
+                                     Reporter*, util::Logger*) override;
 
     struct Side;
     struct MajorSide;
     struct MinorSide;
 
 protected:
-    virtual void merge_changesets(file_ident_type local_file_ident,
-                                  Changeset* their_changesets,
+    virtual void merge_changesets(file_ident_type local_file_ident, Changeset* their_changesets,
                                   std::size_t their_size,
                                   // our_changesets is a pointer-pointer because these changesets
                                   // are held by the reciprocal transform cache.
-                                  Changeset** our_changesets,
-                                  std::size_t our_size,
-                                  Reporter* reporter,
+                                  Changeset** our_changesets, std::size_t our_size, Reporter* reporter,
                                   util::Logger* logger);
 
 private:
@@ -246,13 +216,11 @@ private:
 
     TransactLogParser m_changeset_parser;
 
-    Changeset& get_reciprocal_transform(TransformHistory&, file_ident_type local_file_ident,
-                                        version_type version, const HistoryEntry&);
+    Changeset& get_reciprocal_transform(TransformHistory&, file_ident_type local_file_ident, version_type version,
+                                        const HistoryEntry&);
     void flush_reciprocal_transform_cache(TransformHistory&);
 
-    static size_t emit_changesets(const Changeset*,
-                                  size_t num_changesets,
-                                  util::Buffer<char>& output_buffer);
+    static size_t emit_changesets(const Changeset*, size_t num_changesets, util::Buffer<char>& output_buffer);
 
     struct Discriminant;
     struct Transformer;
@@ -308,10 +276,8 @@ public:
     std::size_t original_changeset_size = 0;
 
     RemoteChangeset() {}
-    RemoteChangeset(version_type rv, version_type lv, ChunkedBinaryData d, timestamp_type ot,
-                    file_ident_type fi);
+    RemoteChangeset(version_type rv, version_type lv, ChunkedBinaryData d, timestamp_type ot, file_ident_type fi);
 };
-
 
 
 class Transformer::Reporter {
@@ -320,30 +286,31 @@ public:
 };
 
 
-
 void parse_remote_changeset(const Transformer::RemoteChangeset&, Changeset&);
-
-
 
 
 // Implementation
 
-class TransformError: public std::runtime_error {
+class TransformError : public std::runtime_error {
 public:
-    TransformError(const std::string& message):
-        std::runtime_error(message)
+    TransformError(const std::string& message)
+        : std::runtime_error(message)
     {
     }
 };
 
-inline Transformer::RemoteChangeset::RemoteChangeset(version_type rv, version_type lv,
-                                                     ChunkedBinaryData d, timestamp_type ot,
-                                                     file_ident_type fi):
-    remote_version(rv),
-    last_integrated_local_version(lv),
-    data(d),
-    origin_timestamp(ot),
-    origin_file_ident(fi)
+class SchemaMismatchError : public TransformError {
+public:
+    using TransformError::TransformError;
+};
+
+inline Transformer::RemoteChangeset::RemoteChangeset(version_type rv, version_type lv, ChunkedBinaryData d,
+                                                     timestamp_type ot, file_ident_type fi)
+    : remote_version(rv)
+    , last_integrated_local_version(lv)
+    , data(d)
+    , origin_timestamp(ot)
+    , origin_file_ident(fi)
 {
 }
 

@@ -1,22 +1,3 @@
-/*************************************************************************
- *
- * REALM CONFIDENTIAL
- * __________________
- *
- *  [2011] - [2015] Realm Inc
- *  All Rights Reserved.
- *
- * NOTICE:  All information contained herein is, and remains
- * the property of Realm Incorporated and its suppliers,
- * if any.  The intellectual and technical concepts contained
- * herein are proprietary to Realm Incorporated
- * and its suppliers and may be covered by U.S. and Foreign Patents,
- * patents in process, and are protected by trade secret or copyright law.
- * Dissemination of this information or reproduction of this material
- * is strictly forbidden unless prior written permission is obtained
- * from Realm Incorporated.
- *
- **************************************************************************/
 
 #include <cstdint>
 #include <memory>
@@ -25,6 +6,7 @@
 
 #include <realm/util/string_view.hpp>
 #include <realm/impl/cont_transact_hist.hpp>
+#include <realm/sync/config.hpp>
 #include <realm/sync/instruction_replication.hpp>
 #include <realm/sync/protocol.hpp>
 #include <realm/sync/transform.hpp>
@@ -59,24 +41,11 @@ struct VersionInfo {
     SaltedVersion sync_version = {0, 0};
 };
 
-
-struct SerialTransactSubstitutions {
-    struct Class {
-        InternString name;
-        std::size_t substitutions_end;
-    };
-    std::vector<Class> classes;
-    std::vector<std::pair<ObjectID, ObjectID>> substitutions;
-};
-
-
 timestamp_type generate_changeset_timestamp() noexcept;
 
 // FIXME: in C++17, switch to using std::timespec in place of last two
 // arguments.
-void map_changeset_timestamp(timestamp_type, std::time_t& seconds_since_epoch,
-                             long& nanoseconds) noexcept;
-
+void map_changeset_timestamp(timestamp_type, std::time_t& seconds_since_epoch, long& nanoseconds) noexcept;
 
 /// Thrown if changeset cooking is not either consistently on or consistently
 /// off during synchronization (ClientHistory::set_sync_progress() and
@@ -88,8 +57,7 @@ class InconsistentUseOfCookedHistory;
 class BadCookedServerVersion;
 
 
-class ClientHistoryBase :
-        public InstructionReplication {
+class ClientReplicationBase : public SyncReplication {
 public:
     using SyncTransactCallback = void(VersionID old_version, VersionID new_version);
 
@@ -110,8 +78,7 @@ public:
     /// The returned SyncProgress is the one that was last stored by
     /// set_sync_progress(), or `SyncProgress{}` if set_sync_progress() has
     /// never been called.
-    virtual void get_status(version_type& current_client_version,
-                            SaltedFileIdent& client_file_ident,
+    virtual void get_status(version_type& current_client_version, SaltedFileIdent& client_file_ident,
                             SyncProgress& progress) const = 0;
 
     /// Stores the server assigned client file identifier in the associated
@@ -136,8 +103,7 @@ public:
     /// synchronization proper, and it must store the identifier and use it to
     /// reestablish the connection between the client file and the server file
     /// when engaging in future synchronization sessions.
-    virtual void set_client_file_ident(SaltedFileIdent client_file_ident,
-                                       bool fix_up_object_ids) = 0;
+    virtual void set_client_file_ident(SaltedFileIdent client_file_ident, bool fix_up_object_ids) = 0;
 
     /// Stores the synchronization progress in the associated Realm file in a
     /// way that makes it available via get_status() during future
@@ -155,8 +121,8 @@ public:
     /// cooked history, and a cooked history can no longer be added because some
     /// synchronization has already happened. Or if no changeset cooker has been
     /// attached, and the Realm file does have a cooked history.
-    virtual void set_sync_progress(const SyncProgress& progress,
-                                   const std::uint_fast64_t* downloadable_bytes, VersionInfo&) = 0;
+    virtual void set_sync_progress(const SyncProgress& progress, const std::uint_fast64_t* downloadable_bytes,
+                                   VersionInfo&) = 0;
 
     struct UploadChangeset {
         timestamp_type origin_timestamp;
@@ -211,14 +177,12 @@ public:
     class SyncTransactReporter {
     public:
         virtual void report_sync_transact(VersionID old_version, VersionID new_version) = 0;
+
     protected:
         ~SyncTransactReporter() {}
     };
 
-    enum class IntegrationError {
-        bad_origin_file_ident,
-        bad_changeset
-    };
+    enum class IntegrationError { bad_origin_file_ident, bad_changeset };
 
     /// \brief Integrate a sequence of changesets received from the server using
     /// a single Realm transaction.
@@ -262,27 +226,22 @@ public:
     /// attached, and the Realm file does have a cooked history.
     virtual bool integrate_server_changesets(const SyncProgress& progress,
                                              const std::uint_fast64_t* downloadable_bytes,
-                                             const RemoteChangeset* changesets,
-                                             std::size_t num_changesets, VersionInfo& new_version,
-                                             IntegrationError& integration_error, util::Logger&,
-                                             SyncTransactReporter* transact_reporter = nullptr,
-                                             const SerialTransactSubstitutions* = nullptr) = 0;
+                                             const RemoteChangeset* changesets, std::size_t num_changesets,
+                                             VersionInfo& new_version, IntegrationError& integration_error,
+                                             util::Logger&, SyncTransactReporter* transact_reporter = nullptr) = 0;
 
 protected:
-    ClientHistoryBase(const std::string& realm_path);
+    ClientReplicationBase(const std::string& realm_path);
 };
 
 
-
-class ClientHistory : public ClientHistoryBase {
+class ClientReplication : public ClientReplicationBase {
 public:
-    class ChangesetCooker;
     class Config;
 
     /// Get the persisted upload/download progress in bytes.
     virtual void get_upload_download_bytes(std::uint_fast64_t& downloaded_bytes,
-                                           std::uint_fast64_t& downloadable_bytes,
-                                           std::uint_fast64_t& uploaded_bytes,
+                                           std::uint_fast64_t& downloadable_bytes, std::uint_fast64_t& uploaded_bytes,
                                            std::uint_fast64_t& uploadable_bytes,
                                            std::uint_fast64_t& snapshot_version) = 0;
 
@@ -325,8 +284,7 @@ public:
     ///
     /// \throw BadCookedServerVersion See \a server_version.
     virtual void get_cooked_status(version_type server_version, std::int_fast64_t& num_changesets,
-                                   CookedProgress& progress,
-                                   std::int_fast64_t& num_skipped_changesets) const = 0;
+                                   CookedProgress& progress, std::int_fast64_t& num_skipped_changesets) const = 0;
 
     /// Fetch the cooked changeset at the specified index.
     ///
@@ -347,8 +305,7 @@ public:
     /// history compartment to schema version 2, then \a server_version will be
     /// set to zero instead, because the real value is unkown. Zero is not a
     /// possible value in any other case.
-    virtual void get_cooked_changeset(std::int_fast64_t index,
-                                      util::AppendBuffer<char>&,
+    virtual void get_cooked_changeset(std::int_fast64_t index, util::AppendBuffer<char>&,
                                       version_type& server_version) const = 0;
 
     /// Persistently stores the point of progress of the consumer of cooked
@@ -413,7 +370,7 @@ public:
     /// **CAUTION:** Must be called only while a transaction (read or write) is
     /// in progress via the SharedGroup object associated with this history
     /// object.
-    virtual UploadCursor get_upload_anchor_of_current_transact() const = 0;
+    virtual UploadCursor get_upload_anchor_of_current_transact(const Transaction&) const = 0;
 
     /// Return the synchronization changeset of the current transaction as it
     /// would be if that transaction was committed at this time.
@@ -423,48 +380,14 @@ public:
     ///
     /// **CAUTION:** Must be called only while a write transaction is in
     /// progress via the SharedGroup object associated with this history object.
-    virtual util::StringView get_sync_changeset_of_current_transact() const noexcept = 0;
+    virtual util::StringView get_sync_changeset_of_current_transact(const Transaction&) const noexcept = 0;
 
 protected:
-    ClientHistory(const std::string& realm_path);
+    ClientReplication(const std::string& realm_path);
 };
 
 
-/// \brief Abstract interface for changeset cookers.
-///
-/// Note, it is completely up to the application to decide what a cooked
-/// changeset is. History objects (instances of ClientHistory) are required to
-/// treat cooked changesets as opaque entities. For an example of a concrete
-/// changeset cooker, see TrivialChangesetCooker which defines the cooked
-/// changesets to be identical copies of the raw changesets.
-class ClientHistory::ChangesetCooker {
-public:
-    virtual ~ChangesetCooker() {}
-
-    /// \brief An opportunity to produce a cooked changeset.
-    ///
-    /// When the implementation chooses to produce a cooked changeset, it must
-    /// write the cooked changeset to the specified buffer, and return
-    /// true. When the implementation chooses not to produce a cooked changeset,
-    /// it must return false. The implementation is allowed to write to the
-    /// buffer, and return false, and in that case, the written data will be
-    /// ignored.
-    ///
-    /// \param prior_state The state of the local Realm on which the specified
-    /// raw changeset is based.
-    ///
-    /// \param changeset, changeset_size The raw changeset.
-    ///
-    /// \param buffer The buffer to which the cooked changeset must be written.
-    ///
-    /// \return True if a cooked changeset was produced. Otherwise false.
-    virtual bool cook_changeset(const Group& prior_state,
-                                const char* changeset, std::size_t changeset_size,
-                                util::AppendBuffer<char>& buffer) = 0;
-};
-
-
-class ClientHistory::Config {
+class ClientReplication::Config {
 public:
     Config() {}
 
@@ -494,13 +417,17 @@ public:
 /// interface.
 ///
 /// The intended role for such an object is as a plugin for new
-/// realm::SharedGroup objects.
-std::unique_ptr<ClientHistory> make_client_history(const std::string& realm_path,
-                                                   ClientHistory::Config = {});
-
+/// realm::DB objects.
+std::unique_ptr<ClientReplication> make_client_replication(const std::string& realm_path,
+                                                           ClientReplication::Config = {});
 
 
 // Implementation
+
+inline ClientReplicationBase::ClientReplicationBase(const std::string& realm_path)
+    : SyncReplication{realm_path} // Throws
+{
+}
 
 inline timestamp_type generate_changeset_timestamp() noexcept
 {
@@ -521,8 +448,7 @@ inline timestamp_type generate_changeset_timestamp() noexcept
     // about not including leap seconds in the value returned by
     // time_since_epoch().
     auto time_since_epoch = chrono::system_clock::now().time_since_epoch();
-    std::uint_fast64_t millis_since_epoch =
-        chrono::duration_cast<chrono::milliseconds>(time_since_epoch).count();
+    std::uint_fast64_t millis_since_epoch = chrono::duration_cast<chrono::milliseconds>(time_since_epoch).count();
     // `offset_in_millis` is the number of milliseconds between
     // 1970-01-01T00:00:00Z and 2015-01-01T00:00:00Z not counting leap seconds.
     std::uint_fast64_t offset_in_millis = 1420070400000ULL;
@@ -540,47 +466,44 @@ inline void map_changeset_timestamp(timestamp_type timestamp, std::time_t& secon
 
 class InconsistentUseOfCookedHistory : public std::exception {
 public:
-    InconsistentUseOfCookedHistory(const char* message) noexcept :
-        m_message{message}
+    InconsistentUseOfCookedHistory(const char* message) noexcept
+        : m_message{message}
     {
     }
     const char* what() const noexcept override final
     {
         return m_message;
     }
+
 private:
     const char* m_message;
 };
 
 class BadCookedServerVersion : public std::exception {
 public:
-    BadCookedServerVersion(const char* message) noexcept :
-        m_message{message}
+    BadCookedServerVersion(const char* message) noexcept
+        : m_message{message}
     {
     }
     const char* what() const noexcept override final
     {
         return m_message;
     }
+
 private:
     const char* m_message;
 };
 
-inline ClientHistoryBase::ClientHistoryBase(const std::string& realm_path) :
-    InstructionReplication{realm_path} // Throws
+inline ClientReplication::ClientReplication(const std::string& realm_path)
+    : ClientReplicationBase{realm_path} // Throws
 {
 }
 
-inline ClientHistory::ClientHistory(const std::string& realm_path) :
-    ClientHistoryBase{realm_path} // Throws
-{
-}
-
-inline std::int_fast64_t ClientHistory::get_num_cooked_changesets() const noexcept
+inline std::int_fast64_t ClientReplication::get_num_cooked_changesets() const noexcept
 {
     version_type server_version = 0; // Skip nothing
     std::int_fast64_t num_changesets = 0;
-    ClientHistory::CookedProgress progress;
+    ClientReplication::CookedProgress progress;
     std::int_fast64_t num_skipped_changesets = 0;
     get_cooked_status(server_version, num_changesets, progress, num_skipped_changesets);
     REALM_ASSERT(progress.changeset_index <= num_changesets);
@@ -588,11 +511,11 @@ inline std::int_fast64_t ClientHistory::get_num_cooked_changesets() const noexce
     return num_changesets;
 }
 
-inline auto ClientHistory::get_cooked_progress() const noexcept -> CookedProgress
+inline auto ClientReplication::get_cooked_progress() const noexcept -> CookedProgress
 {
     version_type server_version = 0; // Skip nothing
     std::int_fast64_t num_changesets = 0;
-    ClientHistory::CookedProgress progress;
+    ClientReplication::CookedProgress progress;
     std::int_fast64_t num_skipped_changesets = 0;
     get_cooked_status(server_version, num_changesets, progress, num_skipped_changesets);
     REALM_ASSERT(progress.changeset_index <= num_changesets);
@@ -600,10 +523,9 @@ inline auto ClientHistory::get_cooked_progress() const noexcept -> CookedProgres
     return progress;
 }
 
-inline void ClientHistory::get_cooked_changeset(std::int_fast64_t index,
-                                                util::AppendBuffer<char>& buffer) const
+inline void ClientReplication::get_cooked_changeset(std::int_fast64_t index, util::AppendBuffer<char>& buffer) const
 {
-    version_type server_version; // Dummy
+    version_type server_version;                         // Dummy
     get_cooked_changeset(index, buffer, server_version); // Throws
 }
 
