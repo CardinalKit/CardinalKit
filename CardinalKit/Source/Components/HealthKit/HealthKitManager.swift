@@ -77,6 +77,12 @@ class HealthKitManager: SyncDelegate {
         self.setUpBackgroundDeliveryForDataTypes(types: types, frequency: frequency, completion)
     }
     
+    public func startCollectAllData(forTypes types: Set<HKSampleType>,fromDate startDate: Date? = nil, _ completion: ((_ success: Bool, _ error: Error?) -> Void)? = nil) {
+        for type in types {
+            HealthKitDataSync.shared.collectAndUploadData(forType: type, fromDate: startDate, onCompletion: nil)
+        }
+    }
+    
     public func disableHealthKit(_ completion: ((_ success: Bool, _ error: Error?) -> Void)? = nil) {
         healthStore.disableAllBackgroundDelivery { (success, error) in
             if let error = error {
@@ -91,14 +97,10 @@ class HealthKitManager: SyncDelegate {
 extension HealthKitManager {
     
     fileprivate func setUpBackgroundDeliveryForDataTypes(types: Set<HKSampleType>, frequency: HKUpdateFrequency, _ completion: ((_ success: Bool, _ error: Error?) -> Void)? = nil) {
-        print("Estos son los tipos que el observador esta recogiendo")
-        print(types)
         for type in types {
             let query = HKObserverQuery(sampleType: type, predicate: nil, updateHandler: { [weak self] (query, completionHandler, error) in
                 
                 guard let strongSelf = self else {
-                    print("entro al else")
-                    print(type)
                     completionHandler()
                     return
                 }
@@ -115,8 +117,6 @@ extension HealthKitManager {
                 })*/
                 
                 dispatchGroup.notify(queue: .main, execute: {
-                    print("entro a execute con:")
-                    print(type)
                     completionHandler()
                 })
                 
@@ -132,6 +132,8 @@ extension HealthKitManager {
             
         }
     }
+    
+    
     
     //TODO: (delete) running the old data collection solution as a baseline to compare new values
     @available(*, deprecated)

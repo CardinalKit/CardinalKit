@@ -21,7 +21,7 @@ class HealthKitDataSync {
     fileprivate let maxRetroactiveDays = 1 //day
     fileprivate var semaphoreDict = [String:NSLock]() //settled for lock since one max
     
-    func collectAndUploadData(forType type: HKSampleType, onCompletion: (() -> Void)?) {
+    func collectAndUploadData(forType type: HKSampleType,fromDate startDate: Date? = nil, onCompletion: (() -> Void)?) {
         
         let dispatchGroup = DispatchGroup()
         dispatchGroup.enter()
@@ -35,14 +35,12 @@ class HealthKitDataSync {
                 
                 let sourceRevision = HKSourceRevision(source: source, version: HKSourceRevisionAnyVersion)
                 
-                self?.collectData(forType: type, sourceRevision) { [weak self] resultData in
+                self?.collectData(forType: type, sourceRevision,fromDate: startDate) { [weak self] resultData in
                     VLog("Collected data for type and source %@", type.identifier, sourceRevision.source.key)
                     if let lastSyncDate = resultData.last?.startDate {
                         self?.setLastSyncDate(forType: type, forSource: sourceRevision, date: lastSyncDate)
                         
-                        //let tag = "hkdata_\(type.identifier)_\(sourceRevision.source.key)_\(lastSyncDate.ISOStringFromDate())"
-                        print("antes de enviar resultData")
-                        print(resultData)
+                        //let tag = "hkdata_\(type.identifier)_\(sourceRevision.source.key)_\(lastSyncDate.ISOStringFromDate())
                         self?.send(data: resultData)
                         
                         VLog("Sent data for type and source %{public}@", type.identifier, sourceRevision.source.key)
@@ -63,9 +61,12 @@ class HealthKitDataSync {
 
 extension HealthKitDataSync {
     
-    fileprivate func collectData(forType type: HKSampleType, _ sourceRevision: HKSourceRevision, onCompletion: @escaping (([HKSample])->Void)) {
-        
-        let latestSync = getLastSyncDate(forType: type, forSource: sourceRevision)
+    fileprivate func collectData(forType type: HKSampleType, _ sourceRevision: HKSourceRevision,fromDate startDate: Date? = nil, onCompletion: @escaping (([HKSample])->Void)) {
+        var latestSync = getLastSyncDate(forType: type, forSource: sourceRevision)
+        let dateFormatter = DateFormatter()
+        if startDate != nil {
+            latestSync=startDate!
+        }
         
         self.queryHealthStore(forType: type, forSource: sourceRevision, fromDate: latestSync) { (query: HKSampleQuery, results: [HKSample]?, error: Error?) in
             
@@ -73,7 +74,7 @@ extension HealthKitDataSync {
                 VError("%@", error.localizedDescription)
             }
             
-            guard let results = results as? [HKQuantitySample], !results.isEmpty else {
+            guard let results = results, !results.isEmpty else {
                 onCompletion([HKSample]())
                 return
             }
@@ -82,7 +83,7 @@ extension HealthKitDataSync {
         }
         
     }
-    
+          
     fileprivate func getSources(forType type: HKSampleType, onCompletion: @escaping ((Set<HKSource>)->Void)) {
         
         // find all sources that contain requested data type
@@ -217,12 +218,10 @@ extension HealthKitDataSync {
     
     fileprivate func getPackageName(for data: [HKSample]) -> String? {
         let sessionEID = SessionManager.shared.userId ?? ""
-         let sample = data as? [HKQuantitySample]
-        
-        if let start = sample?.first?.startDate,
-            let end = sample?.last?.startDate,
-            let type = sample?.first?.quantityType.identifier,
-            let device = sample?.first?.deviceKey {
+        if let start = data.first?.startDate,
+            let end = data.last?.startDate,
+            let type = data.first?.sampleType.identifier,
+            let device = data.first?.deviceKey {
             return "E\(sessionEID)_hkdata_report_\(device)_\(type)_\(start.stringWithFormat("MMdd'T'HHmm"))_\(end.stringWithFormat("MMdd'T'HHmm"))".trimmingCharacters(in: .whitespaces)
         }
         return nil

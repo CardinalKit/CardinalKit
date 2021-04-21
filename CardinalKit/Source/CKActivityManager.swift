@@ -59,6 +59,21 @@ public class CKActivityManager : NSObject {
         }
     }
     
+    public func collectAllDataBetweenSpecificDates(fromDate startDate: Date? = nil,_ completion: ((_ success: Bool, _ error: Error?) -> Void)? = nil){
+        
+        guard hasGrantedAuth else {
+            let error = NSError(domain: Constants.app, code: 2, userInfo: [NSLocalizedDescriptionKey: "Cannot startHealthKitCollection without getting auth permissions first."])
+            completion?(false, error)
+            return
+        }
+        
+        HealthKitManager.shared.startCollectAllData(forTypes: typesToCollect, fromDate: startDate) { [weak self] (success, error) in
+            self?.hasStartedCollection = success
+            completion?(success, error)
+        }
+        
+    }
+    
     public func stopHealthKitCollection() {
         HealthKitManager.shared.disableHealthKit() { [weak self] (success, error) in
             if (success) { //disable successfully
