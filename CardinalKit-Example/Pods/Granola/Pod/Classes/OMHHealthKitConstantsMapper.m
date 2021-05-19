@@ -295,6 +295,8 @@
     if (allQuantityTypeIdsToClasses == nil) {
         allQuantityTypeIdsToClasses = @{
                                         HKQuantityTypeIdentifierActiveEnergyBurned: @"OMHSerializerEnergyBurned",
+                                        HKQuantityTypeIdentifierAppleExerciseTime: @"OMHSerializerGenericQuantitySample",
+                                        HKQuantityTypeIdentifierAppleStandTime: @"OMHSerializerGenericQuantitySample",
                                         HKQuantityTypeIdentifierBasalBodyTemperature: @"OMHSerializerBodyTemperature",
                                         HKQuantityTypeIdentifierBasalEnergyBurned: @"OMHSerializerEnergyBurned",
                                         HKQuantityTypeIdentifierBloodAlcoholContent: @"OMHSerializerGenericQuantitySample",
@@ -345,7 +347,10 @@
                                         HKQuantityTypeIdentifierDietaryWater: @"OMHSerializerGenericQuantitySample",
                                         HKQuantityTypeIdentifierDietaryZinc: @"OMHSerializerGenericQuantitySample",
                                         HKQuantityTypeIdentifierDistanceCycling: @"OMHSerializerGenericQuantitySample",
+                                        HKQuantityTypeIdentifierDistanceDownhillSnowSports: @"OMHSerializerGenericQuantitySample",
+                                        HKQuantityTypeIdentifierDistanceSwimming: @"OMHSerializerGenericQuantitySample",
                                         HKQuantityTypeIdentifierDistanceWalkingRunning: @"OMHSerializerGenericQuantitySample",
+                                        HKQuantityTypeIdentifierDistanceWheelchair: @"OMHSerializerGenericQuantitySample",
                                         HKQuantityTypeIdentifierElectrodermalActivity: @"OMHSerializerGenericQuantitySample",
                                         HKQuantityTypeIdentifierFlightsClimbed: @"OMHSerializerGenericQuantitySample",
                                         HKQuantityTypeIdentifierForcedExpiratoryVolume1: @"OMHSerializerGenericQuantitySample",
@@ -357,9 +362,11 @@
                                         HKQuantityTypeIdentifierNikeFuel: @"OMHSerializerGenericQuantitySample",
                                         HKQuantityTypeIdentifierNumberOfTimesFallen: @"OMHSerializerGenericQuantitySample",
                                         HKQuantityTypeIdentifierOxygenSaturation: @"OMHSerializerOxygenSaturation",
+                                        HKQuantityTypeIdentifierPushCount:@"OMHSerializerGenericQuantitySample",
                                         HKQuantityTypeIdentifierPeakExpiratoryFlowRate: @"OMHSerializerGenericQuantitySample",
                                         HKQuantityTypeIdentifierPeripheralPerfusionIndex: @"OMHSerializerGenericQuantitySample",
                                         HKQuantityTypeIdentifierRespiratoryRate: @"OMHSerializerRespiratoryRate",
+                                        HKQuantityTypeIdentifierSwimmingStrokeCount: @"OMHSerializerGenericQuantitySample",
                                         HKQuantityTypeIdentifierStepCount : @"OMHSerializerStepCount",
                                         HKQuantityTypeIdentifierUVExposure: @"OMHSerializerGenericQuantitySample"
                                         };
