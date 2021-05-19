@@ -197,22 +197,25 @@ extension HealthKitDataSync {
                 let sampleInJsonString = try serializer.json(for: $0)
                 let sampleInData = Data(sampleInJsonString.utf8)
                 let sampleInObject = try JSONSerialization.jsonObject(with: sampleInData, options: []) as? [String: Any]
+                
                 return sampleInObject!
             })
-         
-            let arrayToJson = try JSONSerialization.data(withJSONObject: ["payload":samplesArray], options: [])
-            
             let packageName = getPackageName(for: data)
-             do {
-                let package = try Package(packageName!, type: .hkdata, data: arrayToJson)
-                try NetworkDataRequest.send(package)
-             } catch {
-                VError("Unable to process package %{public}@", error.localizedDescription)
-             }
-          
+            var index=0
+            for sample in samplesArray {
+                let sampleToJson = try JSONSerialization.data(withJSONObject: sample, options: [])
+                do {
+                    let internalName = packageName!+"\(index)"
+                    index = index+1
+                   let package = try Package(internalName, type: .hkdata, data: sampleToJson)
+                   try NetworkDataRequest.send(package)
+                } catch {
+                   VError("Unable to process package %{public}@", error.localizedDescription)
+                }
+            }
         }
         catch{
-            
+            print("Error info: \(error)")
         }
     }
     
