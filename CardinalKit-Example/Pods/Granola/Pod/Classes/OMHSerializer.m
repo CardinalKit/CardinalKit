@@ -202,12 +202,14 @@
              @"header": @{
                      @"id": self.sample.UUID.UUIDString,
                      @"creation_date_time": [self.sample.startDate RFC3339String],
+                     //@"apple_identifier": [self.sample.sampleType description],
                      @"schema_id": @{
                              @"namespace": [self schemaNamespace],
                              @"name": [self schemaName],
                              @"version": [self schemaVersion]
                              },
                      },
+             
              @"body":serializedBodyDictionaryWithMetadata
              };
     
@@ -249,6 +251,7 @@
     double value = [[(HKQuantitySample*)self.sample quantity] doubleValueForUnit:unit];
     
     return @{
+        @"quantity_type":((HKQuantitySample*)self.sample).quantityType.description,
              @"step_count": [NSNumber numberWithDouble:value],
              @"effective_time_frame": [self populateTimeFrameProperty:self.sample.startDate endDate:self.sample.endDate]
              };
@@ -278,6 +281,7 @@
     double value = [[(HKQuantitySample*)self.sample quantity] doubleValueForUnit:unit];
     
     return @{
+        @"quantity_type":((HKQuantitySample*)self.sample).quantityType.description,
              @"body_height": @{
                      @"value": [NSNumber numberWithDouble:value],
                      @"unit": unitString
@@ -310,6 +314,7 @@
     double value = [[(HKQuantitySample*)self.sample quantity] doubleValueForUnit:unit];
     
     return @{
+        @"quantity_type":((HKQuantitySample*)self.sample).quantityType.description,
              @"body_weight": @{
                      @"value": [NSNumber numberWithDouble:value],
                      @"unit": unitString
@@ -341,6 +346,7 @@
     double value = [[(HKQuantitySample*)self.sample quantity] doubleValueForUnit:unit];
     
     return @{
+            @"quantity_type":((HKQuantitySample*)self.sample).quantityType.description,
              @"heart_rate": @{
                      @"value": [NSNumber numberWithDouble:value],
                      @"unit": @"beats/min"
@@ -373,6 +379,7 @@
     double value = [[(HKQuantitySample*)self.sample quantity] doubleValueForUnit:unit];
     
     return @{
+        @"quantity_type":((HKQuantitySample*)self.sample).quantityType.description,
              @"blood_glucose": @{
                      @"value": [NSNumber numberWithDouble:value],
                      @"unit": unitString
@@ -405,6 +412,7 @@
     double value = [[(HKQuantitySample*)self.sample quantity] doubleValueForUnit:unit];
     
     return @{
+        @"quantity_type":((HKQuantitySample*)self.sample).quantityType.description,
              @"kcal_burned": @{
                      @"value": [NSNumber numberWithDouble:value],
                      @"unit": unitString
@@ -438,6 +446,7 @@
     double value = [[(HKQuantitySample*)self.sample quantity] doubleValueForUnit:unit];
     
     return @{
+        @"quantity_type":((HKQuantitySample*)self.sample).quantityType.description,
              @"oxygen_saturation": @{
                      @"value": [NSNumber numberWithDouble:value*100],
                      @"unit": unitString
@@ -470,6 +479,7 @@
     HKUnit* unit = [HKUnit unitFromString:unitString];
     float value = [[(HKQuantitySample*)self.sample quantity] doubleValueForUnit:unit];
     return @{
+            @"quantity_type":((HKQuantitySample*)self.sample).quantityType.description,
              @"respiratory_rate": @{
                      @"value": [NSNumber numberWithDouble:value],
                      @"unit": @"breaths/min"
@@ -503,6 +513,7 @@
     
     
     NSMutableDictionary* serializedValues = [NSMutableDictionary dictionaryWithDictionary:@{
+             @"quantity_type":((HKQuantitySample*)self.sample).quantityType.description,
              @"body_temperature": @{
                      @"value": [NSNumber numberWithDouble:value],
                      @"unit": @"C"
@@ -589,16 +600,22 @@
     }
     return NO;
 }
+
 - (id)bodyData {
+    
     id value =
     [NSNumber numberWithFloat:
      [self.sample.endDate timeIntervalSinceDate:self.sample.startDate]];
+    
+    HKCategorySample *categorySample = (HKCategorySample*) self.sample;
+    
     return @{
              @"sleep_duration": @{
                      @"value": value,
                      @"unit": @"sec"
                      },
-             @"effective_time_frame":[self populateTimeFrameProperty:self.sample.startDate endDate:self.sample.endDate]
+             @"effective_time_frame":[self populateTimeFrameProperty:self.sample.startDate endDate:self.sample.endDate],
+             @"category_type": categorySample.categoryType.description
              };
 }
 - (NSString*)schemaName {
@@ -625,6 +642,7 @@
     HKUnit* unit = [HKUnit unitFromString:unitString];
     double value = [[(HKQuantitySample*)self.sample quantity] doubleValueForUnit:unit];
     return @{
+             @"quantity_type":((HKQuantitySample*)self.sample).quantityType.description,
              @"body_fat_percentage": @{
                      @"value": [NSNumber numberWithDouble:value*100],
                      @"unit": unitString
@@ -729,6 +747,7 @@
     double value = [[quantitySample quantity] doubleValueForUnit:unit];
     
     return @{
+             @"quantity_type":((HKQuantitySample*)self.sample).quantityType.description,
              @"body_mass_index": @{
                      @"value":[NSNumber numberWithDouble:value],
                      @"unit":@"kg/m2"
@@ -822,7 +841,7 @@
     
     NSDictionary *partialSerializedDictionary =
     @{
-      @"quantity_type":[quantitySample quantityType].description,
+      @"quantity_type":quantitySample.quantityType.description,
       @"effective_time_frame":[self populateTimeFrameProperty:quantitySample.startDate endDate:quantitySample.endDate]
       } ;
     NSMutableDictionary *fullSerializedDictionary = [partialSerializedDictionary mutableCopy];
@@ -887,7 +906,7 @@
     
     return @{
              @"effective_time_frame":[self populateTimeFrameProperty:categorySample.startDate endDate:categorySample.endDate],
-             @"category_type": [categorySample categoryType].description,
+             @"category_type": categorySample.categoryType.description,
              @"category_value": schemaMappedValue
              };
 }
@@ -922,12 +941,71 @@
             measure as the value. */
         return @"Sexual activity";
     }
+    else if (
+             [categoryType.description isEqualToString:HKCategoryTypeIdentifierFever] ||
+             [categoryType.description isEqualToString:HKCategoryTypeIdentifierAbdominalCramps] ||
+             [categoryType.description isEqualToString:HKCategoryTypeIdentifierAcne]||
+             [categoryType.description isEqualToString:HKCategoryTypeIdentifierBladderIncontinence] ||
+             [categoryType.description isEqualToString:HKCategoryTypeIdentifierBloating]||
+             [categoryType.description isEqualToString:HKCategoryTypeIdentifierBreastPain]||
+             [categoryType.description isEqualToString:HKCategoryTypeIdentifierHeadache]||
+             [categoryType.description isEqualToString:HKCategoryTypeIdentifierChestTightnessOrPain] ||
+             [categoryType.description isEqualToString:HKCategoryTypeIdentifierChills] ||
+             [categoryType.description isEqualToString:HKCategoryTypeIdentifierConstipation] ||
+             [categoryType.description isEqualToString:HKCategoryTypeIdentifierCoughing] ||
+             [categoryType.description isEqualToString:HKCategoryTypeIdentifierDiarrhea] ||
+             [categoryType.description isEqualToString:HKCategoryTypeIdentifierDizziness] ||
+             [categoryType.description isEqualToString:HKCategoryTypeIdentifierDrySkin]||
+             [categoryType.description isEqualToString:HKCategoryTypeIdentifierFainting]||
+             [categoryType.description isEqualToString:HKCategoryTypeIdentifierFatigue]||
+             [categoryType.description isEqualToString:HKCategoryTypeIdentifierGeneralizedBodyAche]||
+             [categoryType.description isEqualToString:HKCategoryTypeIdentifierHairLoss]||
+             [categoryType.description isEqualToString:HKCategoryTypeIdentifierHotFlashes]||
+             [categoryType.description isEqualToString:HKCategoryTypeIdentifierLossOfSmell] ||
+             [categoryType.description isEqualToString:HKCategoryTypeIdentifierLossOfTaste] ||
+             [categoryType.description isEqualToString:HKCategoryTypeIdentifierLowerBackPain] ||
+             [categoryType.description isEqualToString:HKCategoryTypeIdentifierMemoryLapse] ||
+             [categoryType.description isEqualToString:HKCategoryTypeIdentifierNausea] ||
+             [categoryType.description isEqualToString:HKCategoryTypeIdentifierNightSweats] ||
+             [categoryType.description isEqualToString:HKCategoryTypeIdentifierPelvicPain] ||
+             [categoryType.description isEqualToString:HKCategoryTypeIdentifierRapidPoundingOrFlutteringHeartbeat] ||
+             [categoryType.description isEqualToString:HKCategoryTypeIdentifierRunnyNose] ||
+             [categoryType.description isEqualToString:HKCategoryTypeIdentifierSinusCongestion] ||
+             [categoryType.description isEqualToString:HKCategoryTypeIdentifierSkippedHeartbeat] ||
+             [categoryType.description isEqualToString:HKCategoryTypeIdentifierShortnessOfBreath] ||
+             [categoryType.description isEqualToString:HKCategoryTypeIdentifierSoreThroat] ||
+             [categoryType.description isEqualToString:HKCategoryTypeIdentifierHeartburn] ||
+             [categoryType.description isEqualToString:HKCategoryTypeIdentifierVaginalDryness] ||
+             [categoryType.description isEqualToString:HKCategoryTypeIdentifierVomiting] ||
+             [categoryType.description isEqualToString:HKCategoryTypeIdentifierWheezing]
+             ){
+        return [OMHHealthKitConstantsMapper stringForHKSeverityValue:(int)categoryValue];
+    }
+    else if([categoryType.description isEqualToString:HKCategoryTypeIdentifierCervicalMucusQuality]){
+        return [OMHHealthKitConstantsMapper stringForHKCervicalMucusQualityValue:(int)categoryValue];
+    }
+    else if([categoryType.description isEqualToString:HKCategoryTypeIdentifierAppetiteChanges]){
+        return [OMHHealthKitConstantsMapper stringForHKAppetiteChangesValue:(int)categoryValue];
+    }
+    else if([categoryType.description isEqualToString:HKCategoryTypeIdentifierContraceptive]){
+        return [OMHHealthKitConstantsMapper stringForHKContraceptiveValue:(int)categoryValue];
+    }
+    else if([categoryType.description isEqualToString:HKCategoryTypeIdentifierEnvironmentalAudioExposureEvent]){
+        return @"Audio Exposure Limit";
+    }
+    else if([categoryType.description isEqualToString:HKCategoryTypeIdentifierLowCardioFitnessEvent]){
+        return @"Low Fitness";
+    }
+    else if([categoryType.description isEqualToString:HKCategoryTypeIdentifierHeadphoneAudioExposureEvent]){
+        return @"Seven Day Limit";
+    }
+    else if([categoryType.description isEqualToString:HKCategoryTypeIdentifierMoodChanges] ||
+            [categoryType.description isEqualToString:HKCategoryTypeIdentifierSleepChanges]
+            ){
+        return [OMHHealthKitConstantsMapper stringForHKPresenceValue:(int)categoryValue];
+    }
     else{
-        NSException *e = [NSException
-                          exceptionWithName:@"InvalidHKCategoryType"
-                          reason:@"Incorrect category type parameter for method."
-                          userInfo:nil];
-        @throw e;
+        return @"Not Applicable";
     }
     
 }

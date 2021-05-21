@@ -84,6 +84,14 @@
  */
 + (NSString*) stringForHKMenstrualFlowValue:(int) enumValue;
 
++ (NSString*) stringForHKSeverityValue:(int) enumValue;
+
++ (NSString*) stringForHKAppetiteChangesValue:(int) enumValue;
+
++ (NSString*) stringForHKContraceptiveValue:(int) enumValue;
+
++ (NSString*) stringForHKPresenceValue:(int) enumValue;
+
 /**
  Translates `HKCategoryValueOvulationTestResult` constant values into more semantically meaningful string representations.
  
