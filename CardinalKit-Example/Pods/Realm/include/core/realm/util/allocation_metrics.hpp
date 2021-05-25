@@ -1,22 +1,3 @@
-/*************************************************************************
- *
- * REALM CONFIDENTIAL
- * __________________
- *
- *  [2011] - [2018] Realm Inc
- *  All Rights Reserved.
- *
- * NOTICE:  All information contained herein is, and remains
- * the property of Realm Incorporated and its suppliers,
- * if any.  The intellectual and technical concepts contained
- * herein are proprietary to Realm Incorporated
- * and its suppliers and may be covered by U.S. and Foreign Patents,
- * patents in process, and are protected by trade secret or copyright law.
- * Dissemination of this information or reproduction of this material
- * is strictly forbidden unless prior written permission is obtained
- * from Realm Incorporated.
- *
- **************************************************************************/
 #ifndef REALM_UTIL_ALLOCATION_METRICS_HPP
 #define REALM_UTIL_ALLOCATION_METRICS_HPP
 
@@ -67,6 +48,7 @@ struct AllocationMetricName {
     /// This method is thread-safe.
     static const AllocationMetricName* get_top() noexcept;
     static const AllocationMetricName* find(const char* name) noexcept;
+
 private:
     const char* m_name;
     size_t m_index; // Index into `AllocationMetricsContext::m_metrics`.
@@ -179,6 +161,7 @@ public:
     static AllocationMetricsContext& get_unknown();
 
     MeteredAllocator& get_metric(const AllocationMetricName& name) noexcept;
+
 private:
     std::unique_ptr<MeteredAllocator[]> m_metrics;
 
@@ -219,6 +202,7 @@ public:
     AllocationMetricNameScope& operator=(AllocationMetricNameScope&&) = delete;
 
     void* operator new(std::size_t) = delete;
+
 private:
     const AllocationMetricName& m_name;
     const AllocationMetricName* m_previous = nullptr;

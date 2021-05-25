@@ -1,22 +1,3 @@
-/*************************************************************************
- *
- * REALM CONFIDENTIAL
- * __________________
- *
- *  [2011] - [2015] Realm Inc
- *  All Rights Reserved.
- *
- * NOTICE:  All information contained herein is, and remains
- * the property of Realm Incorporated and its suppliers,
- * if any.  The intellectual and technical concepts contained
- * herein are proprietary to Realm Incorporated
- * and its suppliers and may be covered by U.S. and Foreign Patents,
- * patents in process, and are protected by trade secret or copyright law.
- * Dissemination of this information or reproduction of this material
- * is strictly forbidden unless prior written permission is obtained
- * from Realm Incorporated.
- *
- **************************************************************************/
 
 #ifndef REALM_SYNC_CRYPTO_SERVER_HPP
 #define REALM_SYNC_CRYPTO_SERVER_HPP
@@ -30,8 +11,11 @@
 namespace realm {
 namespace sync {
 
-struct CryptoError: std::runtime_error {
-    CryptoError(std::string message) : std::runtime_error(std::move(message)) {}
+struct CryptoError : std::runtime_error {
+    CryptoError(std::string message)
+        : std::runtime_error(std::move(message))
+    {
+    }
 };
 
 /// This class represents a public/private keypair, or more commonly a single public

@@ -21,59 +21,73 @@
 
 #include <realm/table.hpp>
 
-#include "parser_utils.hpp"
-
 #include <unordered_map>
 #include <string>
 
 namespace realm {
-namespace parser {
 
-struct KeyPathElement
-{
+namespace util {
+using KeyPath = std::vector<std::string>;
+KeyPath key_path_from_string(const std::string& s);
+} // namespace util
+
+namespace query_parser {
+
+struct KeyPathElement {
     ConstTableRef table;
-    size_t col_ndx;
-    DataType col_type;
-    bool is_backlink;
+    ColKey col_key;
+    enum class KeyPathOperation { None, BacklinkTraversal, BacklinkCount, ListOfPrimitivesElementLength } operation;
+    bool is_list_of_primitives() const
+    {
+        return bool(col_key) && col_key.get_type() != col_type_LinkList && col_key.get_attrs().test(col_attr_List);
+    }
 };
 
-class BacklinksRestrictedError : public std::runtime_error {
+class MappingError : public std::runtime_error {
 public:
-    BacklinksRestrictedError(const std::string& msg) : std::runtime_error(msg) {}
+    MappingError(const std::string& msg)
+        : std::runtime_error(msg)
+    {
+    }
     /// runtime_error::what() returns the msg provided in the constructor.
 };
 
 struct TableAndColHash {
-    std::size_t operator () (const std::pair<ConstTableRef, std::string> &p) const;
+    std::size_t operator()(const std::pair<TableKey, std::string>& p) const;
 };
-
 
 // This class holds state which allows aliasing variable names in key paths used in queries.
 // It is used to allow variable naming in subqueries such as 'SUBQUERY(list, $obj, $obj.intCol = 5).@count'
 // It can also be used to allow querying named backlinks if bindings provide the mappings themselves.
-class KeyPathMapping
-{
+class KeyPathMapping {
 public:
-    KeyPathMapping();
+    KeyPathMapping() = default;
     // returns true if added, false if duplicate key already exists
     bool add_mapping(ConstTableRef table, std::string name, std::string alias);
-    void remove_mapping(ConstTableRef table, std::string name);
-    bool has_mapping(ConstTableRef table, std::string name);
-    KeyPathElement process_next_path(ConstTableRef table, KeyPath& path, size_t& index);
-    void set_allow_backlinks(bool allow);
-    bool backlinks_allowed() const
-    {
-        return m_allow_backlinks;
-    }
+    bool remove_mapping(ConstTableRef table, std::string name);
+    bool has_mapping(ConstTableRef table, const std::string& name) const;
+    util::Optional<std::string> get_mapping(TableKey table_key, const std::string& name) const;
+    // table names are only used in backlink queries with the syntax '@links.TableName.property'
+    bool add_table_mapping(ConstTableRef table, std::string alias);
+    bool remove_table_mapping(std::string alias_to_remove);
+    bool has_table_mapping(const std::string& alias) const;
+    util::Optional<std::string> get_table_mapping(const std::string name) const;
     void set_backlink_class_prefix(std::string prefix);
-    static Table* table_getter(TableRef table, const std::vector<KeyPathElement>& links);
+    const std::string& get_backlink_class_prefix() const
+    {
+        return m_backlink_class_prefix;
+    }
+    std::string translate(LinkChain&, const std::string& identifier);
+    std::string translate(ConstTableRef table, const std::string& identifier);
+    std::string translate_table_name(const std::string& identifier);
+
 protected:
-    bool m_allow_backlinks;
     std::string m_backlink_class_prefix;
-    std::unordered_map<std::pair<ConstTableRef, std::string>, std::string, TableAndColHash> m_mapping;
+    std::unordered_map<std::pair<TableKey, std::string>, std::string, TableAndColHash> m_mapping;
+    std::unordered_map<std::string, std::string> m_table_mappings;
 };
 
-} // namespace parser
+} // namespace query_parser
 } // namespace realm
 
 #endif // REALM_KEYPATH_MAPPING_HPP
