@@ -157,6 +157,9 @@ class CKSendHelper {
         }
     }
     
+    /**
+       This function creates the necessary documents in firebase adding a data to avoid virtual documents
+     */
     static func createNecessaryDocuments(path: String){
             let _db = Firestore.firestore()
             let _pathArray = path.split{$0 == "/"}.map(String.init)
