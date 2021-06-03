@@ -289,27 +289,6 @@
     }
 }
 
-+ (NSString*) stringForHKACervicalMucusQualityValue:(int) enumValue{
-    switch (enumValue) {
-        case HKCategoryValueAppetiteChangesDecreased:
-            return @"Decreased";
-        case HKCategoryValueAppetiteChangesIncreased:
-            return @"Increased";
-        case HKCategoryValueAppetiteChangesUnspecified:
-            return @"Unspecified";
-        case HKCategoryValueAppetiteChangesNoChange:
-            return @"No change";
-            
-        default:{
-            NSException *e = [NSException
-                              exceptionWithName:@"HKCategoryValueCervicalMucusQualityInvalidValue"
-                              reason:@"HKCategoryCervicalMucusQuality can only have a value specified in the HKCategoryValueCervicalMucusQuality enum"
-                              userInfo:nil];
-            @throw e;
-        }
-    }
-}
-
 + (NSString*) stringForHKContraceptiveValue:(int) enumValue{
     switch (enumValue) {
         case HKCategoryValueContraceptiveUnspecified:
