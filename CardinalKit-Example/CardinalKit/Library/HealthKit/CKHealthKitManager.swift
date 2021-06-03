@@ -175,6 +175,7 @@ class CKHealthKitManager : NSObject {
                 .lossOfSmell,
                 .lossOfTaste,
                 .lowerBackPain,
+                .lowCardioFitnessEvent,
                 .memoryLapse,
                 .moodChanges,
                 .nausea,
