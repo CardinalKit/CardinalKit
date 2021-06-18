@@ -22,6 +22,7 @@
 #include <cstdint>
 #include <ostream>
 #include <chrono>
+#include <ctime>
 #include <realm/util/assert.hpp>
 #include <realm/null.hpp>
 
@@ -108,7 +109,7 @@ public:
     }
 
     template <typename C = std::chrono::system_clock, typename D = typename C::duration>
-    std::chrono::time_point<C, D> get_time_point()
+    std::chrono::time_point<C, D> get_time_point() const
     {
         REALM_ASSERT(!m_is_null);
 
@@ -118,11 +119,12 @@ public:
         return std::chrono::time_point<C, D>(duration);
     }
 
-    // Note that only == and != operators work if one of the Timestamps are null! Else use realm::Greater,
-    // realm::Less, etc, instead. This is in order to collect all treatment of null behaviour in a single place for all
-    // types (query_conditions.hpp) to ensure that all types sort and compare null vs. non-null in the same manner,
-    // especially for int/float where we cannot override operators. This design is open for discussion, though,
-    // because it has usability drawbacks
+    template <typename C = std::chrono::system_clock, typename D = typename C::duration>
+    explicit operator std::chrono::time_point<C, D>() const
+    {
+        return get_time_point();
+    }
+
     bool operator==(const Timestamp& rhs) const
     {
         if (is_null() && rhs.is_null())
@@ -139,29 +141,47 @@ public:
     }
     bool operator>(const Timestamp& rhs) const
     {
-        REALM_ASSERT(!is_null());
-        REALM_ASSERT(!rhs.is_null());
+        if (is_null()) {
+            return false;
+        }
+        if (rhs.is_null()) {
+            return true;
+        }
         return (m_seconds > rhs.m_seconds) || (m_seconds == rhs.m_seconds && m_nanoseconds > rhs.m_nanoseconds);
     }
     bool operator<(const Timestamp& rhs) const
     {
-        REALM_ASSERT(!is_null());
-        REALM_ASSERT(!rhs.is_null());
+        if (rhs.is_null()) {
+            return false;
+        }
+        if (is_null()) {
+            return true;
+        }
         return (m_seconds < rhs.m_seconds) || (m_seconds == rhs.m_seconds && m_nanoseconds < rhs.m_nanoseconds);
     }
     bool operator<=(const Timestamp& rhs) const
     {
-        REALM_ASSERT(!is_null());
-        REALM_ASSERT(!rhs.is_null());
+        if (is_null()) {
+            return true;
+        }
+        if (rhs.is_null()) {
+            return false;
+        }
         return *this < rhs || *this == rhs;
     }
     bool operator>=(const Timestamp& rhs) const
     {
-        REALM_ASSERT(!is_null());
-        REALM_ASSERT(!rhs.is_null());
+        if (rhs.is_null()) {
+            return true;
+        }
+        if (is_null()) {
+            return false;
+        }
         return *this > rhs || *this == rhs;
     }
     Timestamp& operator=(const Timestamp& rhs) = default;
+
+    size_t hash() const noexcept;
 
     template <class Ch, class Tr>
     friend std::basic_ostream<Ch, Tr>& operator<<(std::basic_ostream<Ch, Tr>& out, const Timestamp&);
@@ -177,11 +197,50 @@ private:
 template <class C, class T>
 inline std::basic_ostream<C, T>& operator<<(std::basic_ostream<C, T>& out, const Timestamp& d)
 {
-    out << "Timestamp(" << d.m_seconds << ", " << d.m_nanoseconds << ")";
+    auto seconds = time_t(d.get_seconds());
+    struct tm buf;
+#ifdef _MSC_VER
+    bool success = gmtime_s(&buf, &seconds) == 0;
+#else
+    bool success = gmtime_r(&seconds, &buf) != nullptr;
+#endif
+    if (success) {
+        // We need a buffer for formatting dates.
+        // Max size is 20 bytes (incl terminating zero) "YYYY-MM-DD HH:MM:SS"\0
+        char buffer[30];
+        if (strftime(buffer, sizeof(buffer), "%Y-%m-%d %H:%M:%S", &buf)) {
+            out << buffer;
+        }
+    }
+
     return out;
 }
 // LCOV_EXCL_STOP
 
+inline size_t Timestamp::hash() const noexcept
+{
+    return size_t(m_seconds) ^ size_t(m_nanoseconds);
+}
+
 } // namespace realm
+
+namespace std {
+template <>
+struct numeric_limits<realm::Timestamp> {
+    static constexpr bool is_integer = false;
+    static realm::Timestamp min()
+    {
+        return realm::Timestamp(numeric_limits<int64_t>::min(), 0);
+    }
+    static realm::Timestamp lowest()
+    {
+        return realm::Timestamp(numeric_limits<int64_t>::lowest(), 0);
+    }
+    static realm::Timestamp max()
+    {
+        return realm::Timestamp(numeric_limits<int64_t>::max(), 0);
+    }
+};
+}
 
 #endif // REALM_TIMESTAMP_HPP

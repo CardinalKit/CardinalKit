@@ -1,22 +1,3 @@
-/*************************************************************************
- *
- * REALM CONFIDENTIAL
- * __________________
- *
- *  [2011] - [2018] Realm Inc
- *  All Rights Reserved.
- *
- * NOTICE:  All information contained herein is, and remains
- * the property of Realm Incorporated and its suppliers,
- * if any.  The intellectual and technical concepts contained
- * herein are proprietary to Realm Incorporated
- * and its suppliers and may be covered by U.S. and Foreign Patents,
- * patents in process, and are protected by trade secret or copyright law.
- * Dissemination of this information or reproduction of this material
- * is strictly forbidden unless prior written permission is obtained
- * from Realm Incorporated.
- *
- **************************************************************************/
 #ifndef REALM_ENCRYPT_FINGERPRINT_HPP
 #define REALM_ENCRYPT_FINGERPRINT_HPP
 
@@ -44,8 +25,7 @@ std::string calculate_fingerprint(const util::Optional<std::array<char, 64>> enc
 // verify_fingerprint() returns true if `fingerprint` was obtained previously
 // from calculate_fingerprint() with `encryption_key` as argument.  Otherwise,
 // verify_fingerprint() returns false with extremely high probability.
-bool verify_fingerprint(const std::string& fingerprint,
-                        const util::Optional<std::array<char, 64>> encryption_key);
+bool verify_fingerprint(const std::string& fingerprint, const util::Optional<std::array<char, 64>> encryption_key);
 
 } // namespace encrypt
 } // namespace realm

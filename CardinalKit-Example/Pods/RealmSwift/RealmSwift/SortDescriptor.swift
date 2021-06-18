@@ -23,7 +23,7 @@ import Realm
  A `SortDescriptor` stores a key path and a sort order for use with `sorted(sortDescriptors:)`. It is similar to
  `NSSortDescriptor`, but supports only the subset of functionality which can be efficiently run by Realm's query engine.
  */
-public struct SortDescriptor {
+@frozen public struct SortDescriptor {
 
     // MARK: Properties
 
@@ -85,24 +85,6 @@ extension SortDescriptor: ExpressibleByStringLiteral {
 
     public typealias UnicodeScalarLiteralType = StringLiteralType
     public typealias ExtendedGraphemeClusterLiteralType = StringLiteralType
-
-    /**
-     Creates a `SortDescriptor` out of a Unicode scalar literal.
-
-     - parameter unicodeScalarLiteral: Property name literal.
-    */
-    public init(unicodeScalarLiteral value: UnicodeScalarLiteralType) {
-        self.init(keyPath: value)
-    }
-
-    /**
-     Creates a `SortDescriptor` out of a character literal.
-
-     - parameter extendedGraphemeClusterLiteral: Property name literal.
-     */
-    public init(extendedGraphemeClusterLiteral value: ExtendedGraphemeClusterLiteralType) {
-        self.init(keyPath: value)
-    }
 
     /**
      Creates a `SortDescriptor` out of a string literal.
