@@ -361,6 +361,9 @@ PODS:
     - Realm (= 4.4.1)
   - ResearchKit (2.1.0-beta)
   - SAMKeychain (1.5.3)
+  - Sentry (7.1.3):
+    - Sentry/Core (= 7.1.3)
+  - Sentry/Core (7.1.3)
   - SwiftyJSON (4.1.0)
   - Zip (1.1.0)
 
@@ -373,6 +376,7 @@ DEPENDENCIES:
   - Firebase/Storage
   - Granola
   - ResearchKit (from `https://github.com/ResearchKit/ResearchKit.git`, branch `master`)
+  - Sentry (from `https://github.com/getsentry/sentry-cocoa.git`, tag `7.1.3`)
 
 SPEC REPOS:
   trunk:
@@ -412,11 +416,17 @@ EXTERNAL SOURCES:
   ResearchKit:
     :branch: master
     :git: https://github.com/ResearchKit/ResearchKit.git
+  Sentry:
+    :git: https://github.com/getsentry/sentry-cocoa.git
+    :tag: 7.1.3
 
 CHECKOUT OPTIONS:
   ResearchKit:
     :commit: 68f9d29b669dd3ac27b548f7c9c28342218cf72e
     :git: https://github.com/ResearchKit/ResearchKit.git
+  Sentry:
+    :git: https://github.com/getsentry/sentry-cocoa.git
+    :tag: 7.1.3
 
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
@@ -448,9 +458,10 @@ SPEC CHECKSUMS:
   RealmSwift: 3eb8924ff7100df5928c7602f71d0fec51e7c9c5
   ResearchKit: 449f96824c4e71c70a9278953c3b279f0fe10805
   SAMKeychain: 483e1c9f32984d50ca961e26818a534283b4cd5c
+  Sentry: 6d963d64804dd06d96e778be729613f481394312
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
   Zip: 8877eede3dda76bcac281225c20e71c25270774c
 
-PODFILE CHECKSUM: 8197c0eb055659eabcbd811381d6d23df4add258
+PODFILE CHECKSUM: 08ce13263dd9db39f19d62ce39cf8d8d510685ea
 
 COCOAPODS: 1.10.1
