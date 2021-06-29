@@ -4,7 +4,7 @@
 //  Created for the CardinalKit Framework.
 //  Copyright © 2019 Stanford University. All rights reserved.
 //
-
+import Sentry
 import UIKit
 import Firebase
 import ResearchKit
@@ -16,6 +16,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // Initialize sentry sdk
+        SentrySDK.start { options in
+            options.dsn = "https://89efc1650eed40da87b212f23c4397da@o814801.ingest.sentry.io/5806740"
+            options.debug = true // Enabled debug when first installing is always helpful
+            options.sampleRate = 1.0
+            options.tracesSampleRate = 1.0
+        }
         
         // (1) initialize Firebase SDK
         FirebaseApp.configure()
