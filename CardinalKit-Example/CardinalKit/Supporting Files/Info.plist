@@ -40,6 +40,8 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>Used for sensor collection demo tasks.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Used In ResearchKit Active Tasks.</string>
 	<key>NSFaceIDUsageDescription</key>
@@ -53,6 +55,8 @@
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Used for sensor collection demo tasks.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Used for sensor collection demo tasks.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Used for sensor collection demo tasks.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Used In ResearchKit Active Tasks.</string>

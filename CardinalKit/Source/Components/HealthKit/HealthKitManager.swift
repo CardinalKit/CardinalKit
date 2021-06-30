@@ -55,7 +55,7 @@ class HealthKitManager: SyncDelegate {
         return true
     }*/
     
-    public func getHealthKitAuth(forTypes types: Set<HKQuantityType>, _ completion: @escaping (_ success: Bool, _ error: NSError?) -> Void) {
+    public func getHealthKitAuth(forTypes types: Set<HKSampleType>, _ completion: @escaping (_ success: Bool, _ error: NSError?) -> Void) {
         
         guard HKHealthStore.isHealthDataAvailable() && SessionManager.shared.userId != nil else {
             let error = NSError(domain: Constants.app, code: 2, userInfo: [NSLocalizedDescriptionKey: "Health data is not available on this device."])
@@ -73,8 +73,14 @@ class HealthKitManager: SyncDelegate {
         }
     }
     
-    public func startBackgroundDelivery(forTypes types: Set<HKQuantityType>, withFrequency frequency: HKUpdateFrequency, _ completion: ((_ success: Bool, _ error: Error?) -> Void)? = nil) {
+    public func startBackgroundDelivery(forTypes types: Set<HKSampleType>, withFrequency frequency: HKUpdateFrequency, _ completion: ((_ success: Bool, _ error: Error?) -> Void)? = nil) {
         self.setUpBackgroundDeliveryForDataTypes(types: types, frequency: frequency, completion)
+    }
+    
+    public func startCollectAllData(forTypes types: Set<HKSampleType>,fromDate startDate: Date? = nil, _ completion: ((_ success: Bool, _ error: Error?) -> Void)? = nil) {
+        for type in types {
+            HealthKitDataSync.shared.collectAndUploadData(forType: type, fromDate: startDate, onCompletion: nil)
+        }
     }
     
     public func disableHealthKit(_ completion: ((_ success: Bool, _ error: Error?) -> Void)? = nil) {
@@ -90,8 +96,7 @@ class HealthKitManager: SyncDelegate {
 
 extension HealthKitManager {
     
-    fileprivate func setUpBackgroundDeliveryForDataTypes(types: Set<HKQuantityType>, frequency: HKUpdateFrequency, _ completion: ((_ success: Bool, _ error: Error?) -> Void)? = nil) {
-
+    fileprivate func setUpBackgroundDeliveryForDataTypes(types: Set<HKSampleType>, frequency: HKUpdateFrequency, _ completion: ((_ success: Bool, _ error: Error?) -> Void)? = nil) {
         for type in types {
             let query = HKObserverQuery(sampleType: type, predicate: nil, updateHandler: { [weak self] (query, completionHandler, error) in
                 
@@ -128,9 +133,11 @@ extension HealthKitManager {
         }
     }
     
+    
+    
     //TODO: (delete) running the old data collection solution as a baseline to compare new values
     @available(*, deprecated)
-    fileprivate func cumulativeBackgroundQuery(forType type: HKQuantityType, completionHandler: @escaping ()->Void) {
+    fileprivate func cumulativeBackgroundQuery(forType type: HKSampleType, completionHandler: @escaping ()->Void) {
         
         let supportedTypes = [HKQuantityTypeIdentifier.stepCount.rawValue, HKQuantityTypeIdentifier.flightsClimbed.rawValue, HKQuantityTypeIdentifier.distanceWalkingRunning.rawValue]
         if (!supportedTypes.contains(type.identifier)) {
@@ -155,7 +162,7 @@ extension HealthKitManager {
         
     }
     
-    fileprivate func backgroundQuery(forType type: HKQuantityType, completionHandler: @escaping ()->Void) {
+    fileprivate func backgroundQuery(forType type: HKSampleType, completionHandler: @escaping ()->Void) {
         
         guard canQuery(forType: type) else {
             VLog("Cannot yet query for %{public}@, please try again in a minute.", type.identifier)
@@ -174,7 +181,7 @@ extension HealthKitManager {
         
     }
 
-    fileprivate func canQuery(forType type: HKQuantityType) -> Bool {
+    fileprivate func canQuery(forType type: HKSampleType) -> Bool {
         queryLogMutex.lock()
         defer { queryLogMutex.unlock() }
         
@@ -194,7 +201,7 @@ extension HealthKitManager {
         return false
     }
     
-    @objc fileprivate func syncData(forHkTypes hkTypes: Set<HKQuantityType>) {
+    @objc fileprivate func syncData(forHkTypes hkTypes: Set<HKSampleType>) {
         for type in hkTypes {
             HealthKitDataSync.shared.collectAndUploadData(forType: type, onCompletion: nil)
         }

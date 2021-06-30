@@ -55,4 +55,7 @@ TODO: Add long description of the pod here.
 
   #Compressing files
   s.dependency 'Zip',              '~> 1.1.0'
+  s.dependency 'Granola'
+  s.public_header_files = 'CardinalKit/Source/Components/Header.h'
+
 end

@@ -16,7 +16,9 @@ public class SessionManager {
     static let shared = SessionManager()
     
     // Get the default Realm
-    let realm = try! Realm()
+    lazy var realm:Realm = {
+            return try! Realm()
+        }()
     
     //This reference to the userId is based of UserDefaults instead of Realm
     //When needed, only use this reference if you need to access the userID from a background thread.

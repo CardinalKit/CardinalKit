@@ -77,4 +77,15 @@ class CKHealthRecordsManager: NSObject {
         }
     }
     
+    func collectAndUploadAll(_ onCompletion: ((Bool, Error?) -> Void)? = nil){
+        CKHealthKitManager.shared.collectAllTypes({ (success, error) in
+            if let error = error {
+                print(error)
+            }else{
+                UserDefaults.standard.set(Date(), forKey: Constants.prefHealthRecordsLastUploaded)
+                onCompletion?(true, nil)
+            }
+        })
+    }
+    
 }
