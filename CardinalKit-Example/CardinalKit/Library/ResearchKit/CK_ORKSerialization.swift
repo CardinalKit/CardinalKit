@@ -8,6 +8,7 @@
 
 import Foundation
 import ResearchKit
+import Sentry
 
 class CK_ORKSerialization{
     /**
@@ -226,7 +227,9 @@ class CK_ORKSerialization{
                 }
                 break;
             default:
-                return(["identifier":identifier,"class":String(describing: result!.self),"TODO":"classNotImplemented"]);
+                let className = String(describing: result!.self)
+                SentrySDK.capture(message: "Try to map an unimplemented class from object-> \(className)")
+                return(["identifier":identifier,"class":className,"TODO":"classNotImplemented"]);
         }
         return ["answer":answer,"class":_class,"identifier":identifier]
     }
@@ -316,8 +319,7 @@ class CK_ORKSerialization{
                         result.fileURL = URL(string: fileURL as! String)
                         return result
                     default:
-                        print("no class in cases")
-                        print(_class)
+                        SentrySDK.capture(message: "Try to map an unimplemented class from json-> \(_class)")
                         let result = ORKTaskResult(identifier: identifier)
                         result.results=TransformResults(fromJSONObject: object)
                         return result
