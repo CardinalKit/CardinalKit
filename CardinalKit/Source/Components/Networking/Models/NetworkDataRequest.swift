@@ -5,7 +5,7 @@
 //  Copyright © 2018 VascTrac. All rights reserved.
 //
 
-import RealmSwift
+//import RealmSwift
 
 enum NetworkDataRequestError: Error {
     case packageDoesNotExist
@@ -17,7 +17,10 @@ enum NetworkDataRequestStatus {
     case completed
 }
 
-class NetworkDataRequest: Object {
+class NetworkDataRequest
+//:
+//    Object
+{
     
     @objc dynamic var id = -1
     
@@ -56,9 +59,10 @@ class NetworkDataRequest: Object {
     }
     
     class func nextId() throws -> Int {
-        let realm = try Realm()
-        let currentObjectCount = realm.objects(NetworkDataRequest.self).count
-        return currentObjectCount + 1
+//        let realm = try Realm()
+//        let currentObjectCount = realm.objects(NetworkDataRequest.self).count
+//        return currentObjectCount + 1
+        return 1
     }
     
     class func send(_ package: Package) throws {
@@ -68,6 +72,7 @@ class NetworkDataRequest: Object {
         
         creationMutex.lock()
         let request = try findOrCreateNetworkRequest(package)
+        print("request perform on send")
         try request.perform()
         creationMutex.unlock()
     }
@@ -88,21 +93,21 @@ class NetworkDataRequest: Object {
         newRequest.processing = false
         newRequest.attempts = 0
         
-        let realm = try Realm()
-        try realm.write {
-            realm.add(newRequest, update: .all)
-        }
+//        let realm = try Realm()
+//        try realm.write {
+//            realm.add(newRequest, update: .all)
+//        }
         
         return newRequest
     }
     
     class func findNetworkRequest(_ request: Package) throws -> NetworkDataRequest? {
-        let realm = try Realm()
-        let matches = realm.objects(NetworkDataRequest.self).filter("fileType == %@ and fileName == %@", request.type.rawValue, request.fileName)
-        if !matches.isEmpty {
-            assert(matches.count == 1, "NetworkDataRequest.findNetworkRequest - database inconsistency")
-            return matches.first
-        }
+//        let realm = try Realm()
+//        let matches = realm.objects(NetworkDataRequest.self).filter("fileType == %@ and fileName == %@", request.type.rawValue, request.fileName)
+//        if !matches.isEmpty {
+//            assert(matches.count == 1, "NetworkDataRequest.findNetworkRequest - database inconsistency")
+//            return matches.first
+//        }
         
         return nil
     }
@@ -112,23 +117,23 @@ class NetworkDataRequest: Object {
             return nil
         }
         
-        let realm = try? Realm()
-        let matches = realm?.objects(NetworkDataRequest.self).filter("id == \(requestId)")
-        if let matches = matches, !matches.isEmpty {
-            assert(matches.count == 1, "NetworkDataRequest.findNetworkRequest - database inconsistency")
-            return matches.first
-        }
+//        let realm = try? Realm()
+//        let matches = realm?.objects(NetworkDataRequest.self).filter("id == \(requestId)")
+//        if let matches = matches, !matches.isEmpty {
+//            assert(matches.count == 1, "NetworkDataRequest.findNetworkRequest - database inconsistency")
+//            return matches.first
+//        }
         
         return nil
     }
     
-    override var description: String {
-        return "Task #\(id) : \(fileName ?? "(no fileName)") \(fileType ?? "(no fileType)") \(sentOn?.ISOStringFromDate() ?? "(never delivered)") \(processing)"
-    }
-    
-    override static func primaryKey() -> String? {
-        return "id"
-    }
+//    override var description: String {
+//        return "Task #\(id) : \(fileName ?? "(no fileName)") \(fileType ?? "(no fileType)") \(sentOn?.ISOStringFromDate() ?? "(never delivered)") \(processing)"
+//    }
+//
+//    override static func primaryKey() -> String? {
+//        return "id"
+//    }
     
 }
 
@@ -139,7 +144,7 @@ extension NetworkDataRequest {
             return
         }
         
-        VLog("Performing task %@", self.description)
+//        VLog("Performing task %@", self.description)
         
         guard let package = package else {
             throw NetworkDataRequestError.packageDoesNotExist
@@ -151,15 +156,16 @@ extension NetworkDataRequest {
             // if the user has a custom send function, use it
             customDelegate.send(file: store, package: package) { [weak self] (success) in
                 if (success) {
-                    self?.complete()
+                    //self?.complete()
                 } else {
-                    self?.fail()
+                    //self?.fail()
                 }
             }
             try markAsProcessing() //mark request as processing
         } else {
             // send file using CK network protocols
             if let endpointURL = package.routeAsURL() {
+                print("upload")
                 UploadManager.shared.upload(file: store, to: endpointURL, uuid: "\(id)")
                 try markAsProcessing() //mark request as processing
             }  else {
@@ -170,36 +176,42 @@ extension NetworkDataRequest {
     }
     
     func complete() {
-        VLog("Marking task as completed %@", self.description)
+        print("Before markin as completed")
+        
         do {
-            let realm = try Realm()
-            try realm.write {
-                self.sentOn = Date()
-                self.processing = false
-            }
+           
+//            let realm = try! Realm()
+//            try! realm.write {
+//
+//                self.sentOn = Date()
+//                self.processing = false
+//
+//            }
             
             if let store = try package?.store() {
                 CacheManager.shared.deleteCache(atURL: store)
             }
+            print("After markin as completed")
         } catch {
+            print("In Catch markin as completed")
             VError("%@", error.localizedDescription)
         }
     }
     
     func fail() {
-        VLog("Marking task as failed %@", self.description)
-        do {
-            let realm = try Realm()
-            try realm.write {
-                self.processing = false
-            }
-        } catch {
-            VError("%@", error.localizedDescription)
-        }
+//        VLog("Marking task as failed %@", self.description)
+//        do {
+////            let realm = try Realm()
+////            try realm.write {
+////                self.processing = false
+////            }
+//        } catch {
+//            VError("%@", error.localizedDescription)
+//        }
     }
     
     func mark(_ statusCode: Int) {
-        VLog("Marking task with statusCode %@", self.description, statusCode)
+//        VLog("Marking task with statusCode %@", self.description, statusCode)
         if (200 ... 299).contains(statusCode) {
             complete()
         } else {
@@ -224,12 +236,12 @@ extension NetworkDataRequest {
     }
     
     fileprivate func markAsProcessing() throws {
-        let realm = try Realm()
-        try realm.write {
-            self.lastAttempt = Date()
-            self.attempts += 1
-            self.processing = true
-        }
+//        let realm = try Realm()
+//        try realm.write {
+//            self.lastAttempt = Date()
+//            self.attempts += 1
+//            self.processing = true
+//        }
     }
     
 }

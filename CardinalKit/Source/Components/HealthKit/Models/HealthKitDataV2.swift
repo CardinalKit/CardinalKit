@@ -9,11 +9,14 @@
 import Foundation
 import HealthKit
 import UIKit
-import RealmSwift
+//import RealmSwift
 import ObjectMapper
 
-class HKSampleData: Object, Codable {
-    @objc dynamic var quantitySample: QuantitySampleData?
+class HKSampleData:
+//    Object,
+    Codable {
+//    @objc dynamic var quantitySample: QuantitySampleData?
+    dynamic var quantitySample: QuantitySampleData?
     //var categorySample: CategorySampleData?
     //var cdaSample: CDADocumentSampleData?
     //var correlationSample: CorrelationSampleData? //not sure about this one
@@ -27,7 +30,16 @@ class HKSampleData: Object, Codable {
     }
 }
 
-class QuantitySampleData: Object, Codable {
+class QuantitySampleData:
+//    Object,
+    Equatable,
+    Codable {
+    static func == (lhs: QuantitySampleData, rhs: QuantitySampleData) -> Bool {
+        
+        return lhs.value == rhs.value && lhs.unit == rhs.unit && lhs.source == rhs.source && lhs.type == rhs.type && lhs.startDate == rhs.startDate && lhs.endDate == rhs.endDate
+        
+    }
+    
     
     @objc dynamic var value: Double = 0
     @objc dynamic var unit: String = ""

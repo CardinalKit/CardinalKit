@@ -7,13 +7,13 @@
 //
 
 import HealthKit
-import RealmSwift
+//import RealmSwift
 
-class HealthKitDataUploads: Object {
-    @objc dynamic var dataType: String = ""
-    @objc dynamic var lastSyncDate: Date = Date()
-    @objc dynamic var device: String = ""
-}
+//class HealthKitDataUploads: Object {
+//    @objc dynamic var dataType: String = ""
+//    @objc dynamic var lastSyncDate: Date = Date()
+//    @objc dynamic var device: String = ""
+//}
 
 class HealthKitDataSync {
     
@@ -111,65 +111,93 @@ extension HealthKitDataSync {
 
 extension HealthKitDataSync {
     
-    fileprivate func getLastSyncItem(forType type: HKSampleType, _ sourceRevision: HKSourceRevision) -> Results<HealthKitDataUploads> {
-        
-        let realm = try! Realm()
-        let syncMetadataQuery = NSCompoundPredicate(
-            andPredicateWithSubpredicates: [
-                NSPredicate(format: "dataType = '\(type.identifier)'"),
-                NSPredicate(format: "device = '\(getSourceRevisionKey(source: sourceRevision))'")
-            ])
-        
-        let result = realm.objects(HealthKitDataUploads.self).filter(syncMetadataQuery)
-        assert(result.count <= 1, "There should only be at most one sync date per type")
-        
-        if result.count == 0 {
-            let metadata = HealthKitDataUploads()
-            metadata.dataType = type.identifier
-            metadata.device = getSourceRevisionKey(source: sourceRevision)
-
-            if let startDate = UserDefaults.standard.object(forKey: Constants.UserDefaults.HKStartDate) as? Date {
-                metadata.lastSyncDate = startDate
-            } else {
-                metadata.lastSyncDate = Date().dayByAdding(-maxRetroactiveDays)! //a day ago
-            }
-            
-            try! realm.write {
-                realm.add(metadata)
-            }
-        }
-        
-        return result
-    }
+//    fileprivate func getLastSyncItem(forType type: HKSampleType, _ sourceRevision: HKSourceRevision) ->
+    // Results<HealthKitDataUploads>
+//    String
+//    {
+//        return "Func TODO"
+//        let realm = try! Realm()
+//        let syncMetadataQuery = NSCompoundPredicate(
+//            andPredicateWithSubpredicates: [
+//                NSPredicate(format: "dataType = '\(type.identifier)'"),
+//                NSPredicate(format: "device = '\(getSourceRevisionKey(source: sourceRevision))'")
+//            ])
+//
+//        let result = realm.objects(HealthKitDataUploads.self).filter(syncMetadataQuery)
+//        assert(result.count <= 1, "There should only be at most one sync date per type")
+//
+//        if result.count == 0 {
+//            let metadata = HealthKitDataUploads()
+//            metadata.dataType = type.identifier
+//            metadata.device = getSourceRevisionKey(source: sourceRevision)
+//
+//            if let startDate = UserDefaults.standard.object(forKey: Constants.UserDefaults.HKStartDate) as? Date {
+//                metadata.lastSyncDate = startDate
+//            } else {
+//                metadata.lastSyncDate = Date().dayByAdding(-maxRetroactiveDays)! //a day ago
+//            }
+//
+//            try! realm.write {
+//                realm.add(metadata)
+//            }
+//        }
+//
+//        return result
+//    }
     
     // maybe throw a default date here?
     fileprivate func getLastSyncDate(forType type: HKSampleType, forSource sourceRevision: HKSourceRevision) -> Date {
-        
-        let lastSyncMetadata = getLastSyncItem(forType: type, sourceRevision)
-        if let lastSyncItem = lastSyncMetadata.first {
-            return lastSyncItem.lastSyncDate
+        if let lastSyncDate : Date = readValue(forKey: getKey(forType: type, forSource: sourceRevision)){
+            return lastSyncDate
+        }
+        else{
+            return Date().dayByAdding(-maxRetroactiveDays)!
         }
         
+    //    let lastSyncMetadata = getLastSyncItem(forType: type, sourceRevision)
+//        if let lastSyncItem = lastSyncMetadata.first {
+////            return lastSyncItem.lastSyncDate
+//            return Date()
+//        }
+        
         // No sync for this type found, grab all data for type starting from from one day ago
-        return Date().dayByAdding(-maxRetroactiveDays)! // Q: what date should we put?
+        // return Date().dayByAdding(-maxRetroactiveDays)! // Q: what date should we put?
     }
     
     fileprivate func setLastSyncDate(forType type: HKSampleType, forSource sourceRevision: HKSourceRevision, date: Date) {
+        let lastSyncDate : Date? = readValue(forKey: getKey(forType: type, forSource: sourceRevision))
         
-        let realm = try! Realm()
-        let lastSyncMetadata = getLastSyncItem(forType: type, sourceRevision)
-        if let metadata = lastSyncMetadata.first, metadata.lastSyncDate != date {
-            try! realm.write {
-                metadata.lastSyncDate = date
-            }
+        if lastSyncDate != date {
+            saveValue(forKey: getKey(forType: type, forSource: sourceRevision), value: date)
         }
+        
+//        let realm = try! Realm()
+//        let lastSyncMetadata = getLastSyncItem(forType: type, sourceRevision)
+//        if let metadata = lastSyncMetadata.first, metadata.lastSyncDate != date {
+//            try! realm.write {
+//                metadata.lastSyncDate = date
+//            }
+//        }
     }
+        private func getKey(forType type: HKSampleType, forSource sourceRevision: HKSourceRevision) -> String{
+            return "\(Constants.Sync.syncKey).\(type.identifier).\(getSourceRevisionKey(source: sourceRevision))"
+        }
+        private func saveValue(forKey key: String, value: Any) {
+            UserDefaults.standard.set(value, forKey: key)
+        }
+        private func readValue<T>(forKey key: String) -> T? {
+            return UserDefaults.standard.value(forKey: key) as? T
+        }
+        private func removeValue(forKey key: String){
+            UserDefaults.standard.removeObject(forKey: key)
+        }
     
     fileprivate func queryHealthStore(forType type: HKSampleType, forSource sourceRevision: HKSourceRevision, fromDate startDate: Date, queryHandler: @escaping (HKSampleQuery, [HKSample]?, Error?) -> Void) {
         
         let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: true)
         
-        let datePredicate = HKQuery.predicateForSamples(withStart: startDate.addingTimeInterval(1) , end: Date(), options: .strictStartDate)
+        let datePredicate = HKQuery.predicateForSamples(withStart: startDate.addingTimeInterval(1), end: nil , options: .strictStartDate)
+        
         let sourcePredicate = HKQuery.predicateForObjects(from: [sourceRevision])
         let predicate = NSCompoundPredicate.init(andPredicateWithSubpredicates: [datePredicate, sourcePredicate])
         
@@ -208,6 +236,7 @@ extension HealthKitDataSync {
                     let internalName = packageName!+"\(index)"
                     index = index+1
                    let package = try Package(internalName, type: .hkdata, data: sampleToJson)
+                    print("call send -----------")
                    try NetworkDataRequest.send(package)
                 } catch {
                    VError("Unable to process package %{public}@", error.localizedDescription)

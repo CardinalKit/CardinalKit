@@ -7,7 +7,7 @@
 
 import Foundation
 import UIKit
-import RealmSwift
+//import RealmSwift
 import ObjectMapper
 
 enum HealthKitDataModel : Int {
@@ -19,7 +19,10 @@ enum HealthKitDataModel : Int {
     static let all = [MSWS, steps, flightsClimbed, distance]
 }
 
-class HealthKitData: Object, Mappable, Codable {
+class HealthKitData:
+//    Object,
+    Equatable,
+    Mappable, Codable {
     
     @objc dynamic var id: Int = 0
     @objc dynamic var startDate: String = ""
@@ -93,9 +96,9 @@ class HealthKitData: Object, Mappable, Codable {
         }
     }
     
-    override static func primaryKey() -> String? {
-        return "id"
-    }
+//    override static func primaryKey() -> String? {
+//        return "id"
+//    }
     
     /*override func isEqual(_ object: HealthKitData?) -> Bool {
         guard let object = object as? HealthKitData else {

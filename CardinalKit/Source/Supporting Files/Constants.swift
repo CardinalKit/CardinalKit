@@ -80,6 +80,7 @@ class Constants {
         static let walkTestCompleted = "edu.stanford.vasctrac.sync.walktest.completed"
         static let hkDay = "edu.stanford.vasctrac.sync.hk.day.completed"
         static let hkEverything = "edu.stanford.vasctrac.sync.hk.everything.completed"
+        static let syncKey = "edu.stanford.vasctrac.sync.key"
     }
     
     struct WatchMessage {

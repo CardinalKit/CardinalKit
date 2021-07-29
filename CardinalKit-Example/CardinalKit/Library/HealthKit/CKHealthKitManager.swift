@@ -244,7 +244,7 @@ class CKHealthKitManager : NSObject {
         CKActivityManager.shared.getHealthAuthorizaton(forTypes: hkTypesToReadInBackground) {(success, error) in
             if (success) {
                 
-                CKActivityManager.shared.collectAllDataBetweenSpecificDates(fromDate: Date().dayByAdding(-10), completion)
+                CKActivityManager.shared.collectAllDataBetweenSpecificDates(fromDate: Date().dayByAdding(-3), completion)
             }
             completion(success, error)
         }

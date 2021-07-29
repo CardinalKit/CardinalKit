@@ -8,7 +8,7 @@
 
 import Foundation
 import ReachabilitySwift
-import RealmSwift
+//import RealmSwift
 
 enum NetworkTypes: String {
     case connected = "cardinalkit.network.connected"
@@ -30,17 +30,17 @@ class NetworkTracker {
         reachability.stopNotifier()
     }
     
-    lazy var completedResults: Results<NetworkDataRequest>? = {
-        return (try? getCompletedRequests()) ?? nil
-    }()
-    
-    lazy var pendingResults: Results<NetworkDataRequest>? = {
-        return (try? getPendingRequests()) ?? nil
-    }()
-    
-    lazy var processingResults: Results<NetworkDataRequest>? = {
-        return (try? getProcessingRequests()) ?? nil
-    }()
+//    lazy var completedResults: Results<NetworkDataRequest>? = {
+//        return (try? getCompletedRequests()) ?? nil
+//    }()
+//
+//    lazy var pendingResults: Results<NetworkDataRequest>? = {
+//        return (try? getPendingRequests()) ?? nil
+//    }()
+//
+//    lazy var processingResults: Results<NetworkDataRequest>? = {
+//        return (try? getProcessingRequests()) ?? nil
+//    }()
     
     func notify() {
         
@@ -54,36 +54,37 @@ class NetworkTracker {
 extension NetworkTracker {
     
     fileprivate func checkPending() {
-        guard let pending = pendingResults, !pending.isEmpty else {
-            return
-        }
+//        guard let pending = pendingResults, !pending.isEmpty else {
+//            return
+//        }
         
-        for item in pending {
-            
-            do {
-                try item.perform()
-            } catch {
-                VError("%@", error.localizedDescription)
-            }
-        }
+//        for item in pending {
+//
+//            do {
+//                print("item try perfom")
+//                try item.perform()
+//            } catch {
+//                VError("%@", error.localizedDescription)
+//            }
+//        }
         
         // sendFileSnapshot()
     }
     
     fileprivate func checkProcessing() {
-        guard let processing = processingResults, !processing.isEmpty else {
-            return
-        }
-        
-        for item in processing {
-            let waitThreshold = Date().addingTimeInterval(-60*10) //10 mins
-            if let lastAttempt = item.lastAttempt, lastAttempt > waitThreshold {
-                continue
-            }
-            
-            UploadManager.shared.cancel(item)
-            item.fail()
-        }
+//        guard let processing = processingResults, !processing.isEmpty else {
+//            return
+//        }
+//
+//        for item in processing {
+//            let waitThreshold = Date().addingTimeInterval(-60*10) //10 mins
+//            if let lastAttempt = item.lastAttempt, lastAttempt > waitThreshold {
+//                continue
+//            }
+//
+//            UploadManager.shared.cancel(item)
+//            item.fail()
+//        }
     }
     
     fileprivate func checkCache() {
@@ -197,19 +198,19 @@ extension NetworkTracker {
 
 extension NetworkTracker {
 
-    fileprivate func getCompletedRequests() throws -> Results<NetworkDataRequest> {
-        let realm = try Realm()
-        return realm.objects(NetworkDataRequest.self).filter("sentOn != nil")
-    }
-    
-    fileprivate func getPendingRequests() throws -> Results<NetworkDataRequest> {
-        let realm = try Realm()
-        return realm.objects(NetworkDataRequest.self).filter("processing == false AND sentOn == nil")
-    }
-    
-    fileprivate func getProcessingRequests() throws -> Results<NetworkDataRequest> {
-        let realm = try Realm()
-        return realm.objects(NetworkDataRequest.self).filter("processing == true")
-    }
+//    fileprivate func getCompletedRequests() throws -> Results<NetworkDataRequest> {
+//        let realm = try Realm()
+//        return realm.objects(NetworkDataRequest.self).filter("sentOn != nil")
+//    }
+//    
+//    fileprivate func getPendingRequests() throws -> Results<NetworkDataRequest> {
+//        let realm = try Realm()
+//        return realm.objects(NetworkDataRequest.self).filter("processing == false AND sentOn == nil")
+//    }
+//    
+//    fileprivate func getProcessingRequests() throws -> Results<NetworkDataRequest> {
+//        let realm = try Realm()
+//        return realm.objects(NetworkDataRequest.self).filter("processing == true")
+//    }
     
 }

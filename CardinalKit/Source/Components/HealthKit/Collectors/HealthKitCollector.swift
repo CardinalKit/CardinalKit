@@ -196,7 +196,7 @@ extension HealthKitCollector {
 }
 
 //formerly under SyncManager
-import RealmSwift
+//import RealmSwift
 import ObjectMapper
 extension HealthKitCollector {
     
@@ -243,16 +243,16 @@ extension HealthKitCollector {
     @available(*, deprecated)
     fileprivate func send(_ data: [HealthKitData], _ onCompletion: @escaping ()->Void) {
         
-        let realm = try! Realm()
-        
-        if let lastSentPayload = realm.objects(HealthKitData.self).last,
-            lastSentPayload == data.first {
-            VLog("[HealthKitCollector] cummulative data already up-to-date")
-            //don't send the same thing again
-            //we can get here if the phone tries to sync data but hasn't moved at all since the last time it synced. This patient needs to get up!
-            onCompletion()
-            return
-        }
+//        let realm = try! Realm()
+//
+//        if let lastSentPayload = realm.objects(HealthKitData.self).last,
+//            lastSentPayload == data.first {
+//            VLog("[HealthKitCollector] cummulative data already up-to-date")
+//            //don't send the same thing again
+//            //we can get here if the phone tries to sync data but hasn't moved at all since the last time it synced. This patient needs to get up!
+//            onCompletion()
+//            return
+//        }
         
         // let collectedData = Mapper().toJSONArray(data)
         // let payload: [String:Any] = ["daysData": collectedData]
@@ -268,14 +268,14 @@ extension HealthKitCollector {
             let package = try Package(packageName, type: .hkdataAggregate, data: collectedData)
             try NetworkDataRequest.send(package)
             
-            if let entry = data.first {
-                
-                let dataQueue = realm.objects(HealthKitData.self)
-                try! realm.write {
-                    realm.delete(dataQueue)
-                    realm.add(entry, update: .all)
-                }
-            }
+//            if let entry = data.first {
+//
+//                let dataQueue = realm.objects(HealthKitData.self)
+//                try! realm.write {
+//                    realm.delete(dataQueue)
+//                    realm.add(entry, update: .all)
+//                }
+//            }
             
             onCompletion()
         } catch {

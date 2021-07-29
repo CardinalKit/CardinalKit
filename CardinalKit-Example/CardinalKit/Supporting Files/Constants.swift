@@ -26,4 +26,6 @@ class Constants {
     
     static let onboardingDidComplete = "didCompleteOnboarding"
     
+    static let dataSyncKey = "dataSync"
+    
 }
