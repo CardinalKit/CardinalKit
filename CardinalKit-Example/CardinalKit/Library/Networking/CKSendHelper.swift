@@ -168,7 +168,7 @@ class CKSendHelper {
             for part in _pathArray{
                 currentPath+=part
                 if(index%2 != 0){
-                    _db.document(currentPath).setData(["exist":"true"])
+                    _db.document(currentPath).setData(["exist":"true"], merge: true)
                 }
                 currentPath+="/"
                 index+=1

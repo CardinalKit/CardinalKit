@@ -36,17 +36,19 @@ class HealthKitDataSync {
                 let sourceRevision = HKSourceRevision(source: source, version: HKSourceRevisionAnyVersion)
                 
                 self?.collectData(forType: type, sourceRevision,fromDate: startDate) { [weak self] resultData in
-                    VLog("Collected data for type and source %@", type.identifier, sourceRevision.source.key)
-                    if let lastSyncDate = resultData.last?.startDate {
-                        self?.setLastSyncDate(forType: type, forSource: sourceRevision, date: lastSyncDate)
+                    DispatchQueue.main.async {
+                        VLog("Collected data for type and source %@", type.identifier, sourceRevision.source.key)
+                        if let lastSyncDate = resultData.last?.startDate {
+                            self?.setLastSyncDate(forType: type, forSource: sourceRevision, date: lastSyncDate)
+                            
+                            //let tag = "hkdata_\(type.identifier)_\(sourceRevision.source.key)_\(lastSyncDate.ISOStringFromDate())
+                            self?.send(data: resultData)
+                            
+                            VLog("Sent data for type and source %{public}@", type.identifier, sourceRevision.source.key)
+                        }
                         
-                        //let tag = "hkdata_\(type.identifier)_\(sourceRevision.source.key)_\(lastSyncDate.ISOStringFromDate())
-                        self?.send(data: resultData)
-                        
-                        VLog("Sent data for type and source %{public}@", type.identifier, sourceRevision.source.key)
+                        dispatchGroup.leave()
                     }
-                    
-                    dispatchGroup.leave()
                 }
             }
         }

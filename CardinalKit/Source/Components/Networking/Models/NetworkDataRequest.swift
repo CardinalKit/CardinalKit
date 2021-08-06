@@ -149,14 +149,16 @@ extension NetworkDataRequest {
             
         if let customDelegate = CKApp.instance.options.networkDeliveryDelegate {
             // if the user has a custom send function, use it
-            customDelegate.send(file: store, package: package) { [weak self] (success) in
-                if (success) {
-                    self?.complete()
-                } else {
-                    self?.fail()
+            customDelegate.send(file: store, package: package) { (success) in
+                DispatchQueue.main.async {
+                    if (success) {
+                        self.complete()
+                    } else {
+                        self.fail()
+                    }
                 }
             }
-            try markAsProcessing() //mark request as processing
+            try self.markAsProcessing() //mark request as processing
         } else {
             // send file using CK network protocols
             if let endpointURL = package.routeAsURL() {
@@ -170,15 +172,17 @@ extension NetworkDataRequest {
     }
     
     func complete() {
-        VLog("Marking task as completed %@", self.description)
+        
+        
         do {
+            
             let realm = try Realm()
             try realm.write {
                 self.sentOn = Date()
                 self.processing = false
             }
             
-            if let store = try package?.store() {
+            if let store = try self.package?.store() {
                 CacheManager.shared.deleteCache(atURL: store)
             }
         } catch {

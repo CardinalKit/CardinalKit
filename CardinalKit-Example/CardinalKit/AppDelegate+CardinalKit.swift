@@ -39,6 +39,7 @@ extension AppDelegate {
                 }
             }
         }
+        CKStudyUser.shared.save()
     }
     
 }

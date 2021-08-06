@@ -242,11 +242,12 @@ class CKHealthKitManager : NSObject {
     func collectAllTypes(_ completion: @escaping (_ success: Bool, _ error: Error?) -> Void) {             
         // handle authorization from the OS
         CKActivityManager.shared.getHealthAuthorizaton(forTypes: hkTypesToReadInBackground) {(success, error) in
-            if (success) {
-                
-                CKActivityManager.shared.collectAllDataBetweenSpecificDates(fromDate: Date().dayByAdding(-10), completion)
+            DispatchQueue.main.async {
+                if (success) {
+                    CKActivityManager.shared.collectAllDataBetweenSpecificDates(fromDate: Date().dayByAdding(-10), completion)
+                }
+                completion(success, error)
             }
-            completion(success, error)
         }
     }
     

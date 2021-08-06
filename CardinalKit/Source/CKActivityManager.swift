@@ -57,6 +57,7 @@ public class CKActivityManager : NSObject {
             self?.hasStartedCollection = success
             completion?(success, error)
         }
+        
     }
     
     public func collectAllDataBetweenSpecificDates(fromDate startDate: Date? = nil,_ completion: ((_ success: Bool, _ error: Error?) -> Void)? = nil){
@@ -67,8 +68,8 @@ public class CKActivityManager : NSObject {
             return
         }
         
-        HealthKitManager.shared.startCollectAllData(forTypes: typesToCollect, fromDate: startDate) { [weak self] (success, error) in
-            self?.hasStartedCollection = success
+        HealthKitManager.shared.startCollectAllData(forTypes: typesToCollect, fromDate: startDate) { (success, error) in
+            self.hasStartedCollection = success
             completion?(success, error)
         }
         
