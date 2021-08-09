@@ -8,6 +8,7 @@
 
 import SwiftUI
 import ResearchKit
+import CardinalKit
 
 struct TasksUIView: View {
     
@@ -21,11 +22,20 @@ struct TasksUIView: View {
     var listItemsSections = [String]()
     
     init(color: Color) {
+//        if let customDelegate = CKApp.instance.configure() {
+//        
+//        }
+        CKResearchSurveysManager.shared.getTaskItems(onCompletion: {
+            (restults) in
+            
+        })
+        
         self.color = color
         
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM. d, YYYY"
         self.date = formatter.string(from: Date())
+        //here get items from firebase
         
         if listItemsPerHeader.count <= 0 { // init
             for item in listItems {

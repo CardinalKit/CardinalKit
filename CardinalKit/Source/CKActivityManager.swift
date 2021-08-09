@@ -30,6 +30,10 @@ public class CKActivityManager : NSObject {
         }
     }
     
+    public func fetchData(route: String, onCompletion: @escaping (Any) -> Void){
+        DownloadManager.shared.fetchData(route: route, onCompletion: onCompletion)
+    }
+    
     public func getHealthAuthorizaton(forTypes typesToCollect:Set<HKSampleType>, _ completion: @escaping (_ success: Bool, _ error: Error?) -> Void) {
         self.typesToCollect = typesToCollect
         HealthKitManager.shared.getHealthKitAuth(forTypes: self.typesToCollect) { [weak self] (success, error) in
