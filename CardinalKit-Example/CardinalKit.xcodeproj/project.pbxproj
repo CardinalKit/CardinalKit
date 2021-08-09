@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2BF6451826C1D0040020C206 /* CK_ORKSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6451726C1D0040020C206 /* CK_ORKSerialization.swift */; };
+		2BF6451826C1D0040020C206 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		2BF6452026C1DBE70020C206 /* CK_ORKSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6451F26C1DBE70020C206 /* CK_ORKSerialization.swift */; };
 		2F94C5F22536543600DF8866 /* SceneDelegate+CardinalKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F94C5F12536543600DF8866 /* SceneDelegate+CardinalKit.swift */; };
 		8E0A43AC244A4A0400656518 /* CKStudyUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4382244A4A0400656518 /* CKStudyUser.swift */; };
 		8E0A43AD244A4A0400656518 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4384244A4A0400656518 /* Constants.swift */; };
@@ -101,6 +102,7 @@
 		00480E2D79186BE9405F0F72 /* Pods-CardinalKit_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardinalKit_Tests.release.xcconfig"; path = "Target Support Files/Pods-CardinalKit_Tests/Pods-CardinalKit_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		07D78DA16FC9C3C7709EA243 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		1D31556B648F48DA664CEE80 /* Pods_CardinalKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CardinalKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2BF6451F26C1DBE70020C206 /* CK_ORKSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CK_ORKSerialization.swift; sourceTree = "<group>"; };
 		2F94C5F12536543600DF8866 /* SceneDelegate+CardinalKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SceneDelegate+CardinalKit.swift"; sourceTree = "<group>"; };
 		41DC264876E45FE5A3FD8701 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		58275A0CAB0C7223B21F375D /* Pods-CardinalKit_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardinalKit_Tests.debug.xcconfig"; path = "Target Support Files/Pods-CardinalKit_Tests/Pods-CardinalKit_Tests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -470,7 +472,7 @@
 		8E9CDF812591E6D000C8A228 /* ResearchKit */ = {
 			isa = PBXGroup;
 			children = (
-				2BF6451726C1D0040020C206 /* CK_ORKSerialization.swift */,
+				2BF6451F26C1DBE70020C206 /* CK_ORKSerialization.swift */,
 				8E0A4386244A4A0400656518 /* ORKESerialization.m */,
 				8E0A4387244A4A0400656518 /* ORKESerialization.h */,
 				8E0A43A2244A4A0400656518 /* ConsentDocument.swift */,
@@ -717,11 +719,12 @@
 				8E6E1E20253529760024B8DF /* DocumentView.swift in Sources */,
 				8E7FFFBB25DE37FF002982B4 /* CoffeePieChartView.swift in Sources */,
 				8E7FFFB825DE350A002982B4 /* CoffeeUIView.swift in Sources */,
-				2BF6451826C1D0040020C206 /* CK_ORKSerialization.swift in Sources */,
+				2BF6451826C1D0040020C206 /* (null) in Sources */,
 				8E0A43B5244A4A0400656518 /* TaskItem.swift in Sources */,
 				8E6E1E2C253539AE0024B8DF /* ChangePasscodeView.swift in Sources */,
 				8E0A43AD244A4A0400656518 /* Constants.swift in Sources */,
 				8E0A43BE244A4A0400656518 /* CKHealthDataStepViewController.swift in Sources */,
+				2BF6452026C1DBE70020C206 /* CK_ORKSerialization.swift in Sources */,
 				8E0A43AE244A4A0400656518 /* ORKESerialization.m in Sources */,
 				8E9CDEB6259181B400C8A228 /* CareTeamViewControllerRepresentable.swift in Sources */,
 				8E9CDEAF259172C200C8A228 /* CKCareKitManager+Sample.swift in Sources */,
