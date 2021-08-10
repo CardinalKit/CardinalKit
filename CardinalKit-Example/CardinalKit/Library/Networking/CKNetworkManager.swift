@@ -12,7 +12,9 @@ class CKAppNetworkManager: CKAPIDeliveryDelegate {
     
     // MARK: - CKAPIDeliveryDelegate
     func send(file: URL, package: Package, onCompletion: @escaping (Bool) -> Void) {
-        self._send(file: file, package: package, onCompletion: onCompletion)
+        DispatchQueue.main.async{
+            self._send(file: file, package: package, onCompletion: onCompletion)
+        }
     }
     
     fileprivate func _send(file: URL, package: Package, onCompletion: @escaping (Bool) -> Void) {
