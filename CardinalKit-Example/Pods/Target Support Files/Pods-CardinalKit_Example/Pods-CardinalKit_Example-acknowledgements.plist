@@ -554,7 +554,7 @@ version(s), and exceptions or additional permissions here}."
   You may add additional accurate notices of copyright ownership.
 </string>
 			<key>License</key>
-			<string>ELP2</string>
+			<string>MIT</string>
 			<key>Title</key>
 			<string>CardinalKit</string>
 			<key>Type</key>

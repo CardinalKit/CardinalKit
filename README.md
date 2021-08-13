@@ -62,7 +62,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 
 ## License
 
-CardinalKit is available under the EPL-2.0 License license. See the LICENSE file for more info.
+CardinalKit is available under the MIT license. See the LICENSE file for more info.
 
 
 <img src="https://github.com/CardinalKit/CardinalKit/blob/master/CardinalKit-Web-Assets/footer.png?raw=true" alt="biodesign logo">
