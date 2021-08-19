@@ -30,12 +30,14 @@ class CKResearchSurveysManager: NSObject {
                             var subtitle=""
                             var imageName = ""
                             var section = ""
-                            var questions:[String] = [""]
+                            var questions:[String] = []
+                            var order = "1"
                             if let data = data as? [String:Any] {
                                 title = data["title"] as? String ?? "NoTitle"
                                 subtitle = data["subtitle"] as? String ?? "NoSubTitle"
-                                imageName = data["imageName"] as? String ?? "NoImage"
+                                imageName = data["image"] as? String ?? "NoImage"
                                 section = data["section"] as? String ?? "NoSection"
+                                order = data["order"] as? String ?? "1"
                             }
                             
                             
@@ -53,14 +55,15 @@ class CKResearchSurveysManager: NSObject {
                                     }
                                 }
                             }
-                            
-                            let taskItem: TaskItem = TaskItem(title: title, subtitle: subtitle, imageName: imageName, section: section, questions: questions)
-                            AllItems.append(taskItem)
-                            
+                            if questions.count>0{
+                                let taskItem: TaskItem = TaskItem(order: order, title: title, subtitle: subtitle, imageName: imageName, section: section, questions: questions)
+                                AllItems.append(taskItem)
+                            }
                         }
                         
                         counter-=1
                         if(counter<=0){
+                            AllItems=AllItems.sorted(by: {a,b in return a.order<b.order})
                          onCompletion(AllItems)
                         }
                     })

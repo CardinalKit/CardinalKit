@@ -66,7 +66,6 @@ struct TasksUIView: View {
                 .padding(.top, 10)
             Text(config.read(query: "Team Name")).font(.system(size: 15, weight:.light))
             Text(date).font(.system(size: 18, weight: .regular)).padding()
-            Text(String(listItems.count))
             List {
                 ForEach(listItemsSections, id: \.self) { key in
                     Section(header: Text(key)) {
