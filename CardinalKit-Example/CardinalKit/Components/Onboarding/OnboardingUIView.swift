@@ -111,7 +111,7 @@ struct OnboardingUIView: View {
                 .sheet(isPresented: $showingLogin, onDismiss: {
                     self.onComplete?()
                 }, content: {
-                    LoginExistingUserViewController()
+                    LoginExistingUserViewController().ignoresSafeArea(edges: .all)
                 })
         
                 Spacer()
