@@ -387,7 +387,7 @@ DEPENDENCIES:
   - Firebase/DynamicLinks
   - Firebase/Firestore
   - Firebase/Storage
-  - ResearchKit (from `https://github.com/ResearchKit/ResearchKit.git`, branch `master`)
+  - ResearchKit (from `https://github.com/ResearchKit/ResearchKit.git`, branch `main`)
 
 SPEC REPOS:
   trunk:
@@ -423,18 +423,18 @@ EXTERNAL SOURCES:
   CardinalKit:
     :path: "../"
   ResearchKit:
-    :branch: master
+    :branch: main
     :git: https://github.com/ResearchKit/ResearchKit.git
 
 CHECKOUT OPTIONS:
   ResearchKit:
-    :commit: 68f9d29b669dd3ac27b548f7c9c28342218cf72e
+    :commit: 0e68cdf744a135e80e1065965ee056fe05513d58
     :git: https://github.com/ResearchKit/ResearchKit.git
 
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
   BoringSSL-GRPC: 8edf627ee524575e2f8d19d56f068b448eea3879
-  CardinalKit: 49c5efad6440522e95c55c44e001be28d3ce680c
+  CardinalKit: 75ec9411f5bb231a310f564a84f804d6d50d77c9
   Firebase: c121feb35e4126c0b355e3313fa9b487d47319fd
   FirebaseAnalytics: cd3bd84d722a24a8923918af8af8e5236f615d77
   FirebaseAuth: 5fe4585c2ed847319f0ea68bd1d82c77e49ff9a0
@@ -457,11 +457,11 @@ SPEC CHECKSUMS:
   ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
   Realm: e523da9ade306c5ae87e85dc09fdef148d3e1cc1
   RealmSwift: 4f6758c3adbdcc87f7b7777107226532a077f61c
-  ResearchKit: 449f96824c4e71c70a9278953c3b279f0fe10805
+  ResearchKit: 9d6981b42c8633aa64097f4490be65abf39c350a
   SAMKeychain: 483e1c9f32984d50ca961e26818a534283b4cd5c
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
   Zip: 8877eede3dda76bcac281225c20e71c25270774c
 
-PODFILE CHECKSUM: 61ceae1bc7ff27f9e0bfd306957b6b793f5cc8a2
+PODFILE CHECKSUM: 192678957f672b9209afbb494bfe0446f25cbaaa
 
 COCOAPODS: 1.10.1
