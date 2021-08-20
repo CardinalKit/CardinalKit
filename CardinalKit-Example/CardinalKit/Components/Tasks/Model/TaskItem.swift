@@ -13,7 +13,7 @@ import SwiftUI
 
 struct TaskItem:Hashable {
     static func == (lhs: TaskItem, rhs: TaskItem) -> Bool {
-        true
+        return lhs.title == rhs.title && lhs.section == rhs.section
     }
     var order: String;
     var title:String;
@@ -52,50 +52,68 @@ struct TaskItem:Hashable {
         
         
         for question in questionAsObj {
-            if let step = QuestionToStep(data:question){
-                steps+=[step]
+            if let type = question["type"] as? String,
+               let identifier = question["identifier"] as? String,
+               let description = question["description"] as? String,
+               let title = question["title"] as? String
+            {
+                let qs = question["question"] as? String ?? ""
+                switch type {
+                case "instruction":
+                    let instructionStep = ORKInstructionStep(identifier: identifier)
+                    instructionStep.title = title
+                    instructionStep.text = description
+                    steps+=[instructionStep]
+                    break;
+                case "signature":
+                    let signatureStep = ORKSignatureStep(identifier: identifier)
+                    signatureStep.title = title
+                    signatureStep.text = description
+                    steps+=[signatureStep]
+                    break;
+                case "summary":
+                    let summaryStep = ORKCompletionStep(identifier: identifier)
+                    summaryStep.title = title
+                    summaryStep.text = description
+                    steps+=[summaryStep]
+                    break;
+                    
+                case "form":
+                    if let step = formStep(data: question){
+                        steps+=[step]
+                    }
+                    break;
+                default:
+                    if let step = QuestionToStep(data:question){
+                        steps+=[ORKQuestionStep(identifier: identifier, title: title, question: qs, answer: step)]
+                    }
+                }
             }
+            
+            
+            
         }
         return AnyView(CKTaskViewController(tasks: ORKOrderedTask(identifier: title, steps: steps)))
     }
     
-    private func QuestionToStep(data:[String:Any])->ORKStep?{
-//        let textChoices = [
-//            ORKTextChoice(text: "Yes, Limited A lot", value: 0 as NSCoding & NSCopying & NSObjectProtocol),
-//            ORKTextChoice(text: "Yes, Limited A Little", value: 1 as NSCoding & NSCopying & NSObjectProtocol),
-//            ORKTextChoice(text: "w, Not Limited At All", value: 2 as NSCoding & NSCopying & NSObjectProtocol),
-//            ORKTextChoice(text: "w2, Not Limited At All", value: 2 as NSCoding & NSCopying & NSObjectProtocol),
-//            ORKTextChoice(text: "w3, Not Limited At All", value: 2 as NSCoding & NSCopying & NSObjectProtocol),
-//
-//        ]
-//        let booleanAnswer = ORKSESAnswerFormat(topRungText: "top", bottomRungText: "botton")
-//        let booleanQuestionStep = ORKQuestionStep(identifier: "QuestionStep", title: nil, question: "In the past four weeks, did you feel limited in the kind of work that you can accomplish?", answer: booleanAnswer)
-//        return booleanQuestionStep
-            if let type = data["type"] as? String,
-               let question = data["question"] as? String,
-               let identifier = data["identifier"] as? String,
-               let description = data["description"] as? String,
-               let title = data["title"] as? String
+    private func QuestionToStep(data:[String:Any])->ORKAnswerFormat?{
+            if let type = data["type"] as? String
                {
+                
                 switch type {
-                case "MultipleChoice":
+                case "multipleChoice":
                     if let step = multipleChoiceQuestion(data: data){
                         return step
                     }
                     break;
-                case "SingleChoice":
+                case "singleChoice":
                     if let step = singleChoiceQuestion(data: data){
                         return step
                     }
                     break;
-                case "Form":
-                    if let step = formStep(data: data){
-                        return step
-                    }
-                    break;
-                case "Area","Text":
-                    return ORKQuestionStep(identifier: identifier, title: title, question: question, answer: ORKTextAnswerFormat(maximumLength: type=="Text" ? 50:1000))
-                case "Scale":
+                case "area","text":
+                    return ORKTextAnswerFormat(maximumLength: type=="Text" ? 50:1000)
+                case "scale":
                     if let max = data["max"] as? String,
                        let min = data["min"] as? String,
                        let step = data["step"] as? String,
@@ -105,8 +123,7 @@ struct TaskItem:Hashable {
                         
                         let healthScaleAnswerFormat = ORKAnswerFormat.scale(withMaximumValue:Int(max) ?? 5, minimumValue: Int(min) ?? 0, defaultValue: 3, step: Int(step) ?? 1, vertical: Bool(vertical) ?? false, maximumValueDescription: maxValueDescription, minimumValueDescription: minValueDescription)
                         
-                        let healthScaleQuestionStep = ORKQuestionStep(identifier: identifier, title: title, question: question, answer: healthScaleAnswerFormat)
-                        return healthScaleQuestionStep
+                        return healthScaleAnswerFormat
                     }
                     break;
                 case "continiousScale":
@@ -121,90 +138,74 @@ struct TaskItem:Hashable {
                         
                         let healthScaleAnswerFormat = ORKAnswerFormat.continuousScale(withMaximumValue: Double(max) ?? 5.0, minimumValue: Double(min) ?? 1.0, defaultValue: Double(defaultV) ?? 3.0, maximumFractionDigits: Int(maxFractionDigits) ?? 1, vertical: Bool(vertical) ?? false, maximumValueDescription: maxValueDescription, minimumValueDescription: minValueDescription)
                         
-                        let healthScaleQuestionStep = ORKQuestionStep(identifier: identifier, title: title, question: question, answer: healthScaleAnswerFormat)
-                        return healthScaleQuestionStep
+                        return healthScaleAnswerFormat
                     }
                     break;
-                case "TextScale":
+                case "textScale":
                     if let options = data["options"] as? [[String:String]],
                        let defaultIndex = data["defaultIndex"] as? String
                     {
                         let ScaleAnswerFormat = ORKTextScaleAnswerFormat(textChoices: getTextChoices(data: options), defaultIndex: Int(defaultIndex) ?? 1)
-                        return ORKQuestionStep(identifier: identifier,title: title, question: question, answer: ScaleAnswerFormat)
+                        return ScaleAnswerFormat
                     }
                     break;
-                case "Picker":
+                case "picker":
                     if let options = data["options"] as? [[String:String]]
                     {
                         let PickerAnswerFormat = ORKValuePickerAnswerFormat(textChoices:getTextChoices(data: options))
-                        return ORKQuestionStep(identifier: identifier,title: title, question: question, answer: PickerAnswerFormat)
+                        return PickerAnswerFormat
                     }
                     break;
-                case "Numeric":
+                case "numeric":
                     if let max = data["max"] as? String,
                        let min = data["min"] as? String,
                        let unit = data["unit"] as? String,
                        let maxFractionDigits = data["maxFractionDigits"] as? String
                     {
                         let NumericAnswerFormat = ORKNumericAnswerFormat(style: ORKNumericAnswerStyle(rawValue: 1)!, unit: unit, minimum: min as! NSNumber?, maximum: max as! NSNumber?, maximumFractionDigits: maxFractionDigits as! NSNumber?)
-                        return ORKQuestionStep(identifier: identifier,title: title, question: question, answer: NumericAnswerFormat)
+                        return NumericAnswerFormat
                     }
                     break;
-                case "ImageChoice":
+                case "IimageChoice":
                     if let options = data["options"] as? [[String:String]]
                     {
                         let ImageAnswerFormat = ORKImageChoiceAnswerFormat(imageChoices: getImageChoices(data: options))
-                        return ORKQuestionStep(identifier: identifier,title: title, question: question, answer: ImageAnswerFormat)
+                        return ImageAnswerFormat
                     }
                     break;
-                case "TimeOfDay":
-                    return ORKQuestionStep(identifier: identifier,title: title, question: question, answer: ORKTimeOfDayAnswerFormat())
-                case "Date":
+                case "timeOfDay":
+                    return ORKTimeOfDayAnswerFormat()
+                case "date":
                     let dateFormatter = DateFormatter()
                     dateFormatter.dateFormat = "dd/MM/yy"
                     let answerFormat = ORKAnswerFormat.dateTime()
-                    return ORKQuestionStep(identifier: identifier,title: title, question: question, answer: answerFormat)
+                    return answerFormat
                 
-                case "Boolean":
+                case "boolean":
                     if let yesText = data["yesText"] as? String,
                        let noText = data["noText"] as? String{
                         let booleanAnswer = ORKBooleanAnswerFormat(yesString: yesText, noString: noText)
-                        let booleanQuestionStep = ORKQuestionStep(identifier: identifier, title: title, question: question, answer: booleanAnswer)
-                        return booleanQuestionStep
+                        return booleanAnswer
                     }
                     break;
-                case "Email":
-                    return ORKQuestionStep(identifier: identifier,title: title, question: question, answer: ORKEmailAnswerFormat())
-                case "TimeInterval":
-                    return ORKQuestionStep(identifier: identifier,title: title, question: question, answer: ORKTimeIntervalAnswerFormat())
-                case "Height":
-                    return ORKQuestionStep(identifier: identifier,title: title, question: question, answer: ORKHeightAnswerFormat())
-                case "Weight":
-                    return ORKQuestionStep(identifier: identifier,title: title, question: question, answer: ORKHeightAnswerFormat())
-                case "Location":
-                    return ORKQuestionStep(identifier: identifier,title: title, question: question, answer: ORKLocationAnswerFormat())
-                case "SES":
+                case "email":
+                    return ORKEmailAnswerFormat()
+                case "timeInterval":
+                    return ORKTimeIntervalAnswerFormat()
+                case "height":
+                    return ORKHeightAnswerFormat()
+                case "weight":
+                    return ORKHeightAnswerFormat()
+                case "location":
+                    return  ORKLocationAnswerFormat()
+                case "ses":
                     if let topText = data["topText"] as? String,
                        let bottomText = data["bottomText"] as? String{
-                    return ORKQuestionStep(identifier: identifier,title: title, question: question, answer: ORKSESAnswerFormat(topRungText: topText, bottomRungText: bottomText))
+                    return ORKSESAnswerFormat(topRungText: topText, bottomRungText: bottomText)
                 }
-                case "Instruction":
-                    let instructionStep = ORKInstructionStep(identifier: identifier)
-                    instructionStep.title = title
-                    instructionStep.text = description
-                    return instructionStep
-                case "Signature":
-                    let signatureStep = ORKSignatureStep(identifier: identifier)
-                    signatureStep.title = title
-                    signatureStep.text = description
-                    return signatureStep
-                case "Summary":
-                    let summaryStep = ORKCompletionStep(identifier: identifier)
-                    summaryStep.title = title
-                    summaryStep.text = description
-                    return summaryStep
+               
                 default:
-                    print("other \(type)")
+                    print("No Type")
                 }
             }
         return nil
@@ -224,8 +225,11 @@ struct TaskItem:Hashable {
                 }
                 return true
             }){
-                if let formItem = formItem(data:_question){
-                    steps+=[formItem]
+                if let question = _question["question"] as? String,
+                   let identifier = _question["identifier"] as? String{
+                    if let formItem = QuestionToStep(data:_question){
+                        steps+=[ORKFormItem(identifier: identifier, text: question, answerFormat: formItem)   ]
+                    }
                 }
             }
             let formStep = ORKFormStep(identifier: identifier, title: title, text: description)
@@ -236,65 +240,63 @@ struct TaskItem:Hashable {
         return nil
     }
     
-    private func formItem(data:[String:Any])->ORKFormItem?{
-        
-        if let type = data["type"] as? String{
-            switch type {
-            case "MultipleChoice","SingleChoice":
-                if let question = data["question"] as? String,
-                   let identifier = data["identifier"] as? String,
-                   let options = data["options"] as? [[String:String]]{
-                    let textChoiceAnswerFormat = ORKAnswerFormat.choiceAnswerFormat(with: type=="MultipleChoice" ? .multipleChoice: .singleChoice, textChoices: getTextChoices(data: options))
-                    let formItem = ORKFormItem(identifier: identifier, text: question, answerFormat: textChoiceAnswerFormat)
-                    return formItem
-                }
-                break;
-            case "Area","Text":
-                if let question = data["question"] as? String,
-                   let identifier = data["identifier"] as? String{
-                    let formItem = ORKFormItem(identifier: identifier, text: question, answerFormat: ORKAnswerFormat.textAnswerFormat(withMaximumLength: type=="Text" ? 50:1000))
-                    formItem.showsProgress = true
-                    return formItem
-                }
-                break;
-            case "Scale":
-                
-                break;
-            case "Boolean":
-                break;
-            case "Instruction":
-                
-                break;
-            case "Signature":
-                
-                break;
-            default:
-                print("other \(type)")
-            }
-        }
-        
-        
-        
-        return nil
-    }
+//    private func formItem(data:[String:Any])->ORKAnswerFormat?{
+//
+//        if let type = data["type"] as? String{
+//            if let question = data["question"] as? String,
+//               let identifier = data["identifier"] as? String{
+//            switch type {
+//            case "MultipleChoice","SingleChoice":
+//                if let options = data["options"] as? [[String:String]]{
+//                    let textChoiceAnswerFormat = ORKAnswerFormat.choiceAnswerFormat(with: type=="MultipleChoice" ? .multipleChoice: .singleChoice, textChoices: getTextChoices(data: options))
+//                    let formItem = ORKFormItem(identifier: identifier, text: question, answerFormat: textChoiceAnswerFormat)
+//                    return formItem
+//                }
+//                break;
+//            case "Area","Text":
+//                    let formItem = ORKFormItem(identifier: identifier, text: question, answerFormat: ORKAnswerFormat.textAnswerFormat(withMaximumLength: type=="Text" ? 50:1000))
+//                    return formItem
+//            case "Scale":
+//                if let max = data["max"] as? String,
+//                   let min = data["min"] as? String,
+//                   let step = data["step"] as? String,
+//                   let maxValueDescription = data["maxValueDescription"] as? String,
+//                   let minValueDescription = data["minValueDescription"] as? String{
+//                    let vertical = data["vertical"] as? String ?? "false"
+//                    return ORKFormItem(identifier: identifier, text: question, answerFormat: ORKAnswerFormat.scale(withMaximumValue:Int(max) ?? 5, minimumValue: Int(min) ?? 0, defaultValue: 3, step: Int(step) ?? 1, vertical: Bool(vertical) ?? false, maximumValueDescription: maxValueDescription, minimumValueDescription: minValueDescription))
+//                }
+//                break;
+//            case "Boolean":
+//                if let yesText = data["yesText"] as? String,
+//                   let noText = data["noText"] as? String{
+//                    let booleanAnswer = ORKBooleanAnswerFormat(yesString: yesText, noString: noText)
+//                    return ORKFormItem(identifier: identifier, text: question, answerFormat: booleanAnswer)
+//                }
+//                break;
+//            default:
+//                print("other \(type)")
+//            }
+//        }
+//        }
+//
+//
+//
+//        return nil
+//    }
     
-    private func multipleChoiceQuestion(data:[String:Any]) -> ORKStep? {
+    private func multipleChoiceQuestion(data:[String:Any]) -> ORKAnswerFormat? {
         return stepQuestion(data: data, multiple: true)
     }
     
-    private func singleChoiceQuestion(data:[String:Any])->ORKStep?{
+    private func singleChoiceQuestion(data:[String:Any])->ORKAnswerFormat?{
         return stepQuestion(data: data, multiple: false)
     }
     
-    private func stepQuestion(data:[String:Any],multiple:Bool)->ORKStep?{
-        if let question = data["question"] as? String,
-           let description = data["description"] as? String,
-           let identifier = data["identifier"] as? String,
-           let options = data["options"] as? [[String:String]]
+    private func stepQuestion(data:[String:Any],multiple:Bool)->ORKAnswerFormat?{
+        if let options = data["options"] as? [[String:String]]
         {
             let textChoiceAnswerFormat = ORKAnswerFormat.choiceAnswerFormat(with: multiple ? .multipleChoice: .singleChoice, textChoices: getTextChoices(data: options))
-            let step = ORKQuestionStep(identifier: identifier, title: description, question: question, answer: textChoiceAnswerFormat)
-            return step
+            return textChoiceAnswerFormat
         }
         return nil
     }

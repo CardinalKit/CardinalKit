@@ -44,16 +44,21 @@ struct TasksUIView: View {
             
             if let results = results as? [TaskItem]{
                 listItems = results
+                var headerCopy = listItemsPerHeader
+                var sectionsCopy = listItemsSections
                 if listItemsPerHeader.count <= 0 { // init
                     for item in results {
-                        if listItemsPerHeader[item.section] == nil {
-                            listItemsPerHeader[item.section] = [TaskItem]()
-                            listItemsSections.append(item.section)
+                        if headerCopy[item.section] == nil {
+                            headerCopy[item.section] = [TaskItem]()
+                            sectionsCopy.append(item.section)
                         }
-
-                        listItemsPerHeader[item.section]?.append(item)
+                        if(((headerCopy[item.section]?.contains(item)) ?? false) == false){
+                            headerCopy[item.section]?.append(item)
+                        }
                     }
                 }
+                listItemsPerHeader=headerCopy
+                listItemsSections=sectionsCopy
             }
         })
     }
