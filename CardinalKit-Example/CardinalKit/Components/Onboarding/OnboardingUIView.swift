@@ -85,7 +85,7 @@ struct OnboardingUIView: View {
                 .sheet(isPresented: $showingOnboard, onDismiss: {
                     self.onComplete?()
                 }, content: {
-                    OnboardingViewController()
+                    OnboardingViewController().ignoresSafeArea(edges: .all)
                 })
         
                 Spacer()
