@@ -199,52 +199,52 @@ class CK_ORKSerialization{
                 }
             case is ORKDateQuestionResult:
                 if let _ans = (result as? ORKDateQuestionResult)?.dateAnswer{
-                    answer=_ans
+                    answer = "\(_ans)"
                     _class = String(describing: ORKDateQuestionResult.self)
                 }
             case is ORKLocationQuestionResult:
                 if let _ans = (result as? ORKLocationQuestionResult)?.locationAnswer{
-                    answer = _ans;
+                    answer = "\(_ans)"
                     _class = String(describing: ORKLocationQuestionResult.self)
                 }
             case is ORKScaleQuestionResult:
                 if let _ans = (result as? ORKScaleQuestionResult)?.scaleAnswer{
-                    answer=_ans
+                    answer = "\(_ans)"
                     _class = String(describing: ORKScaleQuestionResult.self)
                 }
             case is ORKMultipleComponentQuestionResult:
                 if let _ans = (result as? ORKMultipleComponentQuestionResult)?.componentsAnswer{
-                    answer = _ans
+                    answer = "\(_ans)"
                     _class = String(describing: ORKMultipleComponentQuestionResult.self)
                 }
             case is ORKNumericQuestionResult:
                 if let _ans = (result as? ORKNumericQuestionResult)?.numericAnswer{
-                    answer = _ans;
+                    answer = "\(_ans)"
                     _class = String(describing: ORKNumericQuestionResult.self)
                 }
             case is ORKScaleQuestionResult:
                 if let _ans = (result as? ORKScaleQuestionResult)?.scaleAnswer{
-                    answer=_ans
+                    answer = "\(_ans)"
                     _class = String(describing: ORKScaleQuestionResult.self)
                 }
             case is ORKTextQuestionResult:
                 if let _ans = (result as? ORKTextQuestionResult)?.textAnswer{
-                    answer=_ans
+                    answer = "\(_ans)"
                     _class = String(describing: ORKTextQuestionResult.self)
                 }
             case is ORKTimeIntervalQuestionResult:
                 if let _ans = (result as? ORKTimeIntervalQuestionResult)?.intervalAnswer{
-                    answer = _ans
+                    answer = "\(_ans)"
                     _class = String(describing: ORKTimeIntervalQuestionResult.self)
                 }
             case is ORKTimeOfDayQuestionResult:
                 if let _ans = (result as? ORKTimeOfDayQuestionResult)?.dateComponentsAnswer{
-                    answer = _ans
+                    answer = "\(_ans)"
                     _class = String(describing: ORKTimeOfDayQuestionResult.self)
                 }
             case is ORKSESQuestionResult:
                 if let _ans = (result as? ORKSESQuestionResult)?.rungPicked{
-                    answer = _ans
+                    answer = "\(_ans)"
                     _class = String(describing: ORKSESQuestionResult.self)
                 }
             case is ORKFileResult:

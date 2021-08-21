@@ -162,7 +162,10 @@ struct TaskItem:Hashable {
                        let unit = data["unit"] as? String,
                        let maxFractionDigits = data["maxFractionDigits"] as? String
                     {
-                        let NumericAnswerFormat = ORKNumericAnswerFormat(style: ORKNumericAnswerStyle(rawValue: 1)!, unit: unit, minimum: min as! NSNumber?, maximum: max as! NSNumber?, maximumFractionDigits: maxFractionDigits as! NSNumber?)
+                        let max = Int(max) ?? 5
+                        let min = Int(min) ?? 1
+                        let maxFractionDigits = Int(maxFractionDigits) ?? 2
+                        let NumericAnswerFormat = ORKNumericAnswerFormat(style: ORKNumericAnswerStyle(rawValue: 1)!, unit: unit, minimum: Int(min) as NSNumber?, maximum: Int(max) as NSNumber?, maximumFractionDigits: maxFractionDigits as NSNumber?)
                         return NumericAnswerFormat
                     }
                     break;
@@ -198,7 +201,7 @@ struct TaskItem:Hashable {
                     return ORKHeightAnswerFormat()
                 case "location":
                     return  ORKLocationAnswerFormat()
-                case "ses":
+                case "socioeconomic":
                     if let topText = data["topText"] as? String,
                        let bottomText = data["bottomText"] as? String{
                     return ORKSESAnswerFormat(topRungText: topText, bottomRungText: bottomText)
