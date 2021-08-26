@@ -390,6 +390,7 @@ DEPENDENCIES:
   - Firebase/DynamicLinks
   - Firebase/Firestore
   - Firebase/Storage
+  - Granola (from `https://github.com/Alternova-Inc/Granola.git`, branch `Main`)
   - ResearchKit (from `https://github.com/ResearchKit/ResearchKit.git`, branch `master`)
   - Sentry (from `https://github.com/getsentry/sentry-cocoa.git`, tag `7.1.3`)
 
