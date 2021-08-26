@@ -10,6 +10,7 @@ import Foundation
 public struct CKAppOptions {
     public var networkRouteDelegate: CKAPIRouteDelegate?
     public var networkDeliveryDelegate : CKAPIDeliveryDelegate?
+    public var networkReceiverDelegate : CKAPIReceiverDelegate?
     public init() { }
 }
 

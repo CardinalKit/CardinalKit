@@ -8,6 +8,7 @@
 
 import SwiftUI
 import ResearchKit
+import CardinalKit
 
 struct TasksUIView: View {
     
@@ -16,27 +17,50 @@ struct TasksUIView: View {
     let color: Color
     let config = CKConfig.shared
     
-    let listItems = TaskItem.allValues
-    var listItemsPerHeader = [String:[TaskItem]]()
-    var listItemsSections = [String]()
+    @State var listItems = [TaskItem]()
+    @State var listItemsPerHeader = [String:[TaskItem]]()
+    @State var listItemsSections = [String]()
     
     init(color: Color) {
-        self.color = color
+//        if let customDelegate = CKApp.instance.configure() {
+//        
+//        }
         
+        
+        self.color = color
+//        getItems()
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM. d, YYYY"
-        self.date = formatter.string(from: Date())
+        date = formatter.string(from: Date())
+//        self.date = "Joder asignele valor"
+        //here get items from firebase
         
-        if listItemsPerHeader.count <= 0 { // init
-            for item in listItems {
-                if listItemsPerHeader[item.section] == nil {
-                    listItemsPerHeader[item.section] = [TaskItem]()
-                    listItemsSections.append(item.section)
+        
+    }
+    
+    func getItems(){
+        CKResearchSurveysManager.shared.getTaskItems(onCompletion: {
+            (results) in
+            
+            if let results = results as? [TaskItem]{
+                listItems = results
+                var headerCopy = listItemsPerHeader
+                var sectionsCopy = listItemsSections
+                if listItemsPerHeader.count <= 0 { // init
+                    for item in results {
+                        if headerCopy[item.section] == nil {
+                            headerCopy[item.section] = [TaskItem]()
+                            sectionsCopy.append(item.section)
+                        }
+                        if(((headerCopy[item.section]?.contains(item)) ?? false) == false){
+                            headerCopy[item.section]?.append(item)
+                        }
+                    }
                 }
-                
-                listItemsPerHeader[item.section]?.append(item)
+                listItemsPerHeader=headerCopy
+                listItemsSections=sectionsCopy
             }
-        }
+        })
     }
     
     var body: some View {
@@ -46,7 +70,7 @@ struct TasksUIView: View {
                 .foregroundColor(self.color)
                 .padding(.top, 10)
             Text(config.read(query: "Team Name")).font(.system(size: 15, weight:.light))
-            Text(self.date).font(.system(size: 18, weight: .regular)).padding()
+            Text(date).font(.system(size: 18, weight: .regular)).padding()
             List {
                 ForEach(listItemsSections, id: \.self) { key in
                     Section(header: Text(key)) {
@@ -57,6 +81,9 @@ struct TasksUIView: View {
                 }
             }.listStyle(GroupedListStyle())
         }
+        .onAppear(perform: {
+            getItems()
+        })
     }
 }
 

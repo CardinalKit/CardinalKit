@@ -6,12 +6,13 @@ target 'CardinalKit_Example' do
   # CK Sample Pods
   pod 'ResearchKit', :git => 'https://github.com/ResearchKit/ResearchKit.git', :branch => 'master'
   pod 'Sentry', :git => 'https://github.com/getsentry/sentry-cocoa.git', :tag => '7.1.3'
+  pod 'Granola', :git => 'https://github.com/Alternova-Inc/Granola.git', :branch => 'Main'
   
   pod 'Firebase/Firestore'
   pod 'Firebase/Auth'
   pod 'Firebase/Storage'
   pod 'Firebase/Analytics'
   pod 'Firebase/DynamicLinks'
-  pod 'Granola'
+  
 
 end

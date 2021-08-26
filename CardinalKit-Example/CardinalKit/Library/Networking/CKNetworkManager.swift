@@ -8,7 +8,7 @@
 import CardinalKit
 import Firebase
 
-class CKAppNetworkManager: CKAPIDeliveryDelegate {
+class CKAppNetworkManager: CKAPIDeliveryDelegate, CKAPIReceiverDelegate {
     
     // MARK: - CKAPIDeliveryDelegate
     func send(file: URL, package: Package, onCompletion: @escaping (Bool) -> Void) {
@@ -25,11 +25,49 @@ class CKAppNetworkManager: CKAPIDeliveryDelegate {
         case .sensorData:
             sendSensorData(file, package, onCompletion)
             break
+        case .metricsData:
+            sendMetricsData(file, package, onCompletion)
+            break;
         default:
             fatalError("Sending data of type \(package.type.description) is NOT supported.")
             break
         }
     }
+    // return dict { documentId: data }
+    // MARK: - CKAPIReceiverDelegate
+    func request(route: String, onCompletion: @escaping (Any) -> Void){
+        var objResult = [String:Any]()
+        let db = Firestore.firestore()
+        db.collection(route).getDocuments(){ (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    objResult[document.documentID]=document.data()
+                }
+                onCompletion(objResult)
+            }
+        }
+    }
+    
+//    func downloadSurveys(){
+//
+//        guard let authPath = CKStudyUser.shared.authCollection else {
+//            return
+//        }
+//
+//
+//        let db = Firestore.firestore()
+////        let docRef = db.collection("cities").document("SF")
+////        docRef.getDocument { (document, error) in
+////            if let document = document, document.exists {
+////                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+////                print("Document data: \(dataDescription)")
+////            } else {
+////                print("Document does not exist")
+////            }
+////        }
+//    }
     
 }
 
@@ -86,6 +124,36 @@ extension CKAppNetworkManager {
         
         uploadTask.observe(.failure) { snapshot in
             print("[sendSensorData] error uploading file!")
+        }
+    }
+    
+    fileprivate func sendMetricsData(_ file: URL, _ package: Package, _ onCompletion: @escaping (Bool) -> Void) {
+        do {
+            let data = try Data(contentsOf: file)
+            guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+                let authPath = CKStudyUser.shared.authCollection else {
+                onCompletion(false)
+                return
+            }
+            
+            let identifier:String = (json["date"] as? String ?? Date().shortStringFromDate())+"Activity_index"
+            
+            let db = Firestore.firestore()
+            db.collection(authPath + "\(Constants.dataBucketMetrics)").document(identifier).setData(json) { err in
+                
+                if let err = err {
+                    onCompletion(false)
+                    print("Error writing document: \(err)")
+                } else {
+                    onCompletion(true)
+                    print("[sendMetrics] \(identifier) - successfully written!")
+                }
+            }
+            
+        } catch {
+            print("Error \(error.localizedDescription)")
+            onCompletion(false)
+            return
         }
     }
     

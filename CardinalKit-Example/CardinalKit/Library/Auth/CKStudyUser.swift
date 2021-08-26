@@ -35,6 +35,14 @@ class CKStudyUser {
         return nil
     }
     
+    var surveysCollection: String? {
+        if let bundleId = Bundle.main.bundleIdentifier {
+            return "/studies/\(bundleId)/surveys/"
+        }
+        
+        return nil
+    }
+    
     fileprivate var rootAuthCollection: String? {
         if let bundleId = Bundle.main.bundleIdentifier {
             return "/studies/\(bundleId)/users/"

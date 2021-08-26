@@ -41,38 +41,42 @@ class CK_ORKSerialization{
                 StepDict["class"] = String(describing: type(of: step).self)
                 if let taskStep = task.step?(withIdentifier: step.identifier){
                     if let stepQuestion = taskStep as? ORKQuestionStep{
-                        let questionTypeValue = stepQuestion.answerFormat!.questionType.rawValue
-                        let questionTypeText = dictQuestionTypes[questionTypeValue]
-                        StepDict["questionType"] = questionTypeValue
-                        StepDict["questionTypeText"] = questionTypeText
-                        StepDict["question"] = stepQuestion.question!
-                        StepDict["Options"] = CKOptions(answerFormat:stepQuestion.answerFormat!)
+                        if let answerFormat = stepQuestion.answerFormat,
+                           let question = stepQuestion.question{
+                            let questionTypeValue = answerFormat.questionType.rawValue
+                            let questionTypeText = dictQuestionTypes[questionTypeValue]
+                            StepDict["questionType"] = questionTypeValue
+                            StepDict["questionTypeText"] = questionTypeText
+                            StepDict["Options"] = CKOptions(answerFormat:answerFormat)
+                            StepDict["question"] = question
+                        }
                     }
                    else if let stepForm = taskStep as? ORKFormStep{
                         var FormResults = [Any]()
-                        for item in stepForm.formItems!{
+                    if let formItems = stepForm.formItems{
+                        for item in formItems{
                             if let answerFormat = item.answerFormat{
                             
-                            if let questionResult = step as? ORKStepResult{
-                                let stepFormResults = (CKResults(results: questionResult, identifier: item.identifier) as! [[String:Any]])
-                                var stepFormTransformed = [[String:Any]]()
-                                for itemFormResult in stepFormResults{
-                                    let questionTypeValue = answerFormat.questionType.rawValue
-                                    let questionTypeText = dictQuestionTypes[questionTypeValue]
-                                    var itemFormTransformed = itemFormResult
-                                    itemFormTransformed["questionType"] = questionTypeValue
-                                    itemFormTransformed["questionTypeText"] = questionTypeText
-                                    itemFormTransformed["question"] = item.text!
-                                    itemFormTransformed["Options"] = CKOptions(answerFormat:answerFormat)
-                                    stepFormTransformed.append(itemFormTransformed)
+                                if let questionResult = step as? ORKStepResult,
+                                   let stepFormResults = (CKResults(results: questionResult, identifier: item.identifier) as? [[String:Any]]){
+                                    var stepFormTransformed = [[String:Any]]()
+                                    for itemFormResult in stepFormResults{
+                                        let questionTypeValue = answerFormat.questionType.rawValue
+                                        let questionTypeText = dictQuestionTypes[questionTypeValue]
+                                        var itemFormTransformed = itemFormResult
+                                        itemFormTransformed["questionType"] = questionTypeValue
+                                        itemFormTransformed["questionTypeText"] = questionTypeText
+                                        itemFormTransformed["question"] = item.text ?? "No Question"
+                                        itemFormTransformed["Options"] = CKOptions(answerFormat:answerFormat)
+                                        stepFormTransformed.append(itemFormTransformed)
+                                    }
+                                    FormResults+=stepFormTransformed
                                 }
-                                
-                                FormResults+=stepFormTransformed
-                            }
                             }
                         }
-                        StepDict["results"]=FormResults
-                        QuestionsDict.append(StepDict)
+                    }
+                    StepDict["results"]=FormResults
+                    QuestionsDict.append(StepDict)
                     }
                     else if let stepWalking = taskStep as? ORKWalkingTaskStep{
                         StepDict["numberOfStepsPerLeg"] = stepWalking.numberOfStepsPerLeg
@@ -96,50 +100,57 @@ class CK_ORKSerialization{
     private static func CKOptions(answerFormat: ORKAnswerFormat)->Any{
         switch answerFormat {
         case is ORKTextChoiceAnswerFormat:
-            let choicesFormat = answerFormat as! ORKTextChoiceAnswerFormat
-            return CKTextChoices(choices: choicesFormat.textChoices)
-        case is ORKScaleAnswerFormat:
-            let scaleFormat = answerFormat as! ORKScaleAnswerFormat
-            var Result = [String:Any]()
-            Result["Max"] = scaleFormat.maximum
-            Result["Min"] = scaleFormat.minimum
-            Result["Step"] = scaleFormat.step
-            Result["MaxDescription"] = scaleFormat.maximumValueDescription
-            Result["MinDescription"] = scaleFormat.minimumValueDescription
-            return Result
-        case is ORKContinuousScaleAnswerFormat:
-            let scaleFormat = answerFormat as! ORKContinuousScaleAnswerFormat
-            var Result = [String:Any]()
-            Result["Max"] = scaleFormat.maximum
-            Result["Min"] = scaleFormat.minimum
-            Result["MaxDescription"] = scaleFormat.maximumValueDescription
-            Result["MinDescription"] = scaleFormat.minimumValueDescription
-            return Result
-        case is ORKTextScaleAnswerFormat:
-            let textScaleFormat = answerFormat as! ORKTextScaleAnswerFormat
-            return CKTextChoices(choices: textScaleFormat.textChoices)
-        case is ORKValuePickerAnswerFormat:
-            let pickerFormat = answerFormat as! ORKValuePickerAnswerFormat
-            return CKTextChoices(choices: pickerFormat.textChoices)
-        case is ORKMultipleValuePickerAnswerFormat:
-            let multipleFormat = answerFormat as! ORKMultipleValuePickerAnswerFormat
-            var pickerChoices = [Any]()
-            for picker in multipleFormat.valuePickers{
-                pickerChoices.append(CKTextChoices(choices: picker.textChoices))
+            if let choicesFormat = answerFormat as? ORKTextChoiceAnswerFormat{
+                return CKTextChoices(choices: choicesFormat.textChoices)
             }
-            return pickerChoices
+        case is ORKScaleAnswerFormat:
+            if let scaleFormat = answerFormat as? ORKScaleAnswerFormat{
+                var Result = [String:Any]()
+                Result["Max"] = scaleFormat.maximum
+                Result["Min"] = scaleFormat.minimum
+                Result["Step"] = scaleFormat.step
+                Result["MaxDescription"] = scaleFormat.maximumValueDescription
+                Result["MinDescription"] = scaleFormat.minimumValueDescription
+                return Result
+            }
+        case is ORKContinuousScaleAnswerFormat:
+            if let scaleFormat = answerFormat as? ORKContinuousScaleAnswerFormat{
+                var Result = [String:Any]()
+                Result["Max"] = scaleFormat.maximum
+                Result["Min"] = scaleFormat.minimum
+                Result["MaxDescription"] = scaleFormat.maximumValueDescription
+                Result["MinDescription"] = scaleFormat.minimumValueDescription
+                return Result
+            }
+        case is ORKTextScaleAnswerFormat:
+            if let textScaleFormat = answerFormat as? ORKTextScaleAnswerFormat{
+                return CKTextChoices(choices: textScaleFormat.textChoices)}
+        case is ORKValuePickerAnswerFormat:
+            if let pickerFormat = answerFormat as? ORKValuePickerAnswerFormat{
+                return CKTextChoices(choices: pickerFormat.textChoices)}
+        case is ORKMultipleValuePickerAnswerFormat:
+            if let multipleFormat = answerFormat as? ORKMultipleValuePickerAnswerFormat{
+                var pickerChoices = [Any]()
+                for picker in multipleFormat.valuePickers{
+                    pickerChoices.append(CKTextChoices(choices: picker.textChoices))
+                }
+                return pickerChoices
+            }
         case is ORKImageChoiceAnswerFormat:
-            let imageFormat = answerFormat as! ORKImageChoiceAnswerFormat
-            return CKImageChoices(choices: imageFormat.imageChoices)
+            if let imageFormat = answerFormat as? ORKImageChoiceAnswerFormat{
+                return CKImageChoices(choices: imageFormat.imageChoices)
+            }
         case is ORKBooleanAnswerFormat:
-            let booleanFormat = answerFormat as! ORKBooleanAnswerFormat
-            var Result = [String:Any]()
-            Result["NoText"] = booleanFormat.no
-            Result["YesText"] = booleanFormat.yes
-            return Result
+            if let booleanFormat = answerFormat as? ORKBooleanAnswerFormat{
+                var Result = [String:Any]()
+                Result["NoText"] = booleanFormat.no
+                Result["YesText"] = booleanFormat.yes
+                return Result
+            }
         default:
             return "NoOptions"
         }
+        return "NoOptions"
     }
     
     private static func CKTextChoices(choices:[ORKTextChoice])->Any{
@@ -175,59 +186,85 @@ class CK_ORKSerialization{
         var _class = ""
         switch result {
             case is ORKBooleanQuestionResult:
-                answer=(result as! ORKBooleanQuestionResult).booleanAnswer!.boolValue
-                _class = String(describing: ORKBooleanQuestionResult.self)
-            case is ORKChoiceQuestionResult:
-                for answer in (result as! ORKChoiceQuestionResult).choiceAnswers!{
-                    response.append(["answer":answer.description,"class":String(describing: ORKChoiceQuestionResult.self),"identifier":identifier])
+                if let _ans = (result as? ORKBooleanQuestionResult)?.booleanAnswer{
+                    answer=_ans.boolValue
+                    _class = String(describing: ORKBooleanQuestionResult.self)
                 }
-                return response
-            case is ORKDateQuestionResult:
-                answer=(result as! ORKDateQuestionResult).dateAnswer!
-                _class = String(describing: ORKDateQuestionResult.self)
-            case is ORKLocationQuestionResult:
-                answer=(result as! ORKLocationQuestionResult).locationAnswer!;
-                _class = String(describing: ORKLocationQuestionResult.self)
-            case is ORKScaleQuestionResult:
-                answer=(result as! ORKScaleQuestionResult).scaleAnswer!;
-                _class = String(describing: ORKScaleQuestionResult.self)
-            case is ORKMultipleComponentQuestionResult:
-                answer=((result as! ORKMultipleComponentQuestionResult).componentsAnswer!);
-                _class = String(describing: ORKMultipleComponentQuestionResult.self)
-            case is ORKNumericQuestionResult:
-                answer=((result as! ORKNumericQuestionResult).numericAnswer!);
-                _class = String(describing: ORKNumericQuestionResult.self)
-            case is ORKScaleQuestionResult:
-                answer=((result as! ORKScaleQuestionResult).scaleAnswer!);
-                _class = String(describing: ORKScaleQuestionResult.self)
-            case is ORKTextQuestionResult:
-                answer=((result as! ORKTextQuestionResult).textAnswer!);
-                _class = String(describing: ORKTextQuestionResult.self)
-            case is ORKTimeIntervalQuestionResult:
-                answer=((result as! ORKTimeIntervalQuestionResult).intervalAnswer!);
-                _class = String(describing: ORKTimeIntervalQuestionResult.self)
-            case is ORKTimeOfDayQuestionResult:
-                answer=((result as! ORKTimeOfDayQuestionResult).dateComponentsAnswer!);
-                _class = String(describing: ORKTimeOfDayQuestionResult.self)
-            case is ORKSESQuestionResult:
-                answer=((result as! ORKSESQuestionResult).rungPicked!);
-                _class = String(describing: ORKSESQuestionResult.self)
-            case is ORKFileResult:
-                let fileUrl = (result as! ORKFileResult).fileURL?.absoluteString ?? "No Url"
-                let urlParts = fileUrl.components(separatedBy: "/")
-                _class = String(describing: ORKFileResult.self)
-                return(["identifier":identifier,"fileURL":(result as! ORKFileResult).fileURL?.absoluteString ?? "No Url","urlStorage":urlParts[urlParts.count-1],"class":_class])
-                
-            case .none:
-                if results.identifier == identifier{
-                    for result in results.results!{
-                        response.append(CKResults(results: results, identifier: result.identifier))
+            case is ORKChoiceQuestionResult:
+                if let _answers = (result as? ORKChoiceQuestionResult)?.choiceAnswers{
+                    for answer in _answers{
+                        response.append(["answer":answer.description,"class":String(describing: ORKChoiceQuestionResult.self),"identifier":identifier])
                     }
                     return response
                 }
+            case is ORKDateQuestionResult:
+                if let _ans = (result as? ORKDateQuestionResult)?.dateAnswer{
+                    answer = "\(_ans)"
+                    _class = String(describing: ORKDateQuestionResult.self)
+                }
+            case is ORKLocationQuestionResult:
+                if let _ans = (result as? ORKLocationQuestionResult)?.locationAnswer{
+                    answer = "\(_ans)"
+                    _class = String(describing: ORKLocationQuestionResult.self)
+                }
+            case is ORKScaleQuestionResult:
+                if let _ans = (result as? ORKScaleQuestionResult)?.scaleAnswer{
+                    answer = "\(_ans)"
+                    _class = String(describing: ORKScaleQuestionResult.self)
+                }
+            case is ORKMultipleComponentQuestionResult:
+                if let _ans = (result as? ORKMultipleComponentQuestionResult)?.componentsAnswer{
+                    answer = "\(_ans)"
+                    _class = String(describing: ORKMultipleComponentQuestionResult.self)
+                }
+            case is ORKNumericQuestionResult:
+                if let _ans = (result as? ORKNumericQuestionResult)?.numericAnswer{
+                    answer = "\(_ans)"
+                    _class = String(describing: ORKNumericQuestionResult.self)
+                }
+            case is ORKScaleQuestionResult:
+                if let _ans = (result as? ORKScaleQuestionResult)?.scaleAnswer{
+                    answer = "\(_ans)"
+                    _class = String(describing: ORKScaleQuestionResult.self)
+                }
+            case is ORKTextQuestionResult:
+                if let _ans = (result as? ORKTextQuestionResult)?.textAnswer{
+                    answer = "\(_ans)"
+                    _class = String(describing: ORKTextQuestionResult.self)
+                }
+            case is ORKTimeIntervalQuestionResult:
+                if let _ans = (result as? ORKTimeIntervalQuestionResult)?.intervalAnswer{
+                    answer = "\(_ans)"
+                    _class = String(describing: ORKTimeIntervalQuestionResult.self)
+                }
+            case is ORKTimeOfDayQuestionResult:
+                if let _ans = (result as? ORKTimeOfDayQuestionResult)?.dateComponentsAnswer{
+                    answer = "\(_ans)"
+                    _class = String(describing: ORKTimeOfDayQuestionResult.self)
+                }
+            case is ORKSESQuestionResult:
+                if let _ans = (result as? ORKSESQuestionResult)?.rungPicked{
+                    answer = "\(_ans)"
+                    _class = String(describing: ORKSESQuestionResult.self)
+                }
+            case is ORKFileResult:
+                let fileUrl = (result as? ORKFileResult)?.fileURL?.absoluteString ?? "No Url"
+                let urlParts = fileUrl.components(separatedBy: "/")
+                _class = String(describing: ORKFileResult.self)
+                return(["identifier":identifier,"fileURL":fileUrl,"urlStorage":urlParts[urlParts.count-1],"class":_class])
+                
+            case .none:
+                if results.identifier == identifier{
+                    if let nResults = results.results{
+                        for result in nResults{
+                            response.append(CKResults(results: results, identifier: result.identifier))
+                        }
+                        return response
+                    }
+                }
                 break;
             default:
-                let className = String(describing: result!.self)
+                let className = String(describing: result.self )
                 SentrySDK.capture(message: "Try to map an unimplemented class from object-> \(className)")
                 return(["identifier":identifier,"class":className,"TODO":"classNotImplemented"]);
         }
@@ -266,9 +303,11 @@ class CK_ORKSerialization{
                     case "ORKChoiceQuestionResult":
                         let result = ORKChoiceQuestionResult(identifier: identifier)
                         var answers = [NSCoding&NSCopying&NSObject]()
-                        answers.append(answer as! NSCoding&NSCopying&NSObject)
-                        result.choiceAnswers = answers
-                        return result
+                        if let nAnswer = answer as? NSCoding&NSCopying&NSObject{
+                            answers.append(nAnswer)
+                            result.choiceAnswers = answers
+                            return result
+                        }
                     case  "ORKDateQuestionResult":
                         let result = ORKDateQuestionResult(identifier: identifier)
                         result.answer=answer
@@ -316,7 +355,7 @@ class CK_ORKSerialization{
                     case "ORKFileResult":
                         let result = ORKFileResult(identifier: identifier)
                         let fileURL = object["fileURL"] ?? "NoUrl"
-                        result.fileURL = URL(string: fileURL as! String)
+                        result.fileURL = URL(string: ( (fileURL as? String) ?? "NoUrl"))
                         return result
                     default:
                         SentrySDK.capture(message: "Try to map an unimplemented class from json-> \(_class)")

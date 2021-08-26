@@ -65,7 +65,10 @@ extension HealthKitDataSync {
     
     fileprivate func collectData(forType type: HKSampleType, _ sourceRevision: HKSourceRevision,fromDate startDate: Date? = nil, onCompletion: @escaping (([HKSample])->Void)) {
         var latestSync = getLastSyncDate(forType: type, forSource: sourceRevision)
-        let dateFormatter = DateFormatter()
+        //get last sync of activity index
+       updateActivityIndex()
+        
+        
         if startDate != nil {
             latestSync=startDate!
         }
@@ -156,6 +159,123 @@ extension HealthKitDataSync {
         return Date().dayByAdding(-maxRetroactiveDays)! // Q: what date should we put?
     }
     
+    fileprivate func getLastSyncActivityIndex() -> Date{
+        let realm = try! Realm()
+        let syncMetadataQuery = NSCompoundPredicate(
+            andPredicateWithSubpredicates: [
+                NSPredicate(format: "dataType = 'activityIndex'"),
+                NSPredicate(format: "device = 'general'")
+            ])
+        
+        let result = realm.objects(HealthKitDataUploads.self).filter(syncMetadataQuery)
+        assert(result.count <= 1, "There should only be at most one sync date per type")
+        
+        if result.count == 0 {
+            let metadata = HealthKitDataUploads()
+            metadata.dataType = "activityIndex"
+            metadata.device = "general"
+
+            if let startDate = UserDefaults.standard.object(forKey: Constants.UserDefaults.HKStartDate) as? Date {
+                metadata.lastSyncDate = startDate
+            } else {
+                metadata.lastSyncDate = Date().dayByAdding(-7)! //a day ago
+            }
+            
+            try! realm.write {
+                realm.add(metadata)
+            }
+        }
+        if let lastSyncItem = result.first {
+            return lastSyncItem.lastSyncDate
+        }
+        return Date().dayByAdding(-7)!
+        
+    }
+    
+    // calculate the last time the activity index was loaded and send an update if necessary
+    fileprivate func updateActivityIndex(){
+        // get the last time the activity index was calculated
+        let latestSync = getLastSyncActivityIndex()
+        let diff = Calendar.current.dateComponents([.day], from: latestSync, to: Date())
+        
+        if diff.day ?? 1 > 0 {
+            var nDate = latestSync
+            while (nDate<Date().startOfDay) {
+                getActivityIndex(for: nDate.startOfDay){
+                    activityIndex,date,stepCount in
+                    //send
+                    DispatchQueue.main.async {
+                    self.sendActivityIndex(forDate: date, value: activityIndex, stepCount: stepCount)
+                    }
+                    
+                }
+                nDate = nDate.dayByAdding(1)!
+            }
+            
+            let realm = try! Realm()
+            let syncMetadataQuery = NSCompoundPredicate(
+                andPredicateWithSubpredicates: [
+                    NSPredicate(format: "dataType = 'activityIndex'"),
+                    NSPredicate(format: "device = 'general'")
+                ])
+            
+            let result = realm.objects(HealthKitDataUploads.self).filter(syncMetadataQuery)
+            assert(result.count <= 1, "There should only be at most one sync date per type")
+            
+            let date = Date().startOfDay
+            if let metadata = result.first,
+               metadata.lastSyncDate != date {
+                try! realm.write {
+                    metadata.lastSyncDate = date
+                }
+            }
+            
+        }
+        
+    }
+    
+    fileprivate func getActivityIndex(for date: Date, onCompletion: @escaping (Double,Date,Double)->Void){
+        var stepsDict:[Date:Double] = [:]
+        let startDate = date.dayByAdding(-7)!.startOfDay
+        let type = HKSampleType.quantityType(forIdentifier: .stepCount)
+        var interval = DateComponents()
+        interval.day = 1
+        let predicate = HKQuery.predicateForSamples(withStart: startDate, end: date.endOfDay, options: .strictStartDate)
+        let query = HKStatisticsCollectionQuery(quantityType: type!, quantitySamplePredicate: predicate, options: [.cumulativeSum], anchorDate: date, intervalComponents:interval)
+        query.initialResultsHandler = { query, results, error in
+            if let myResults = results{
+                myResults.enumerateStatistics(from: startDate, to: date) {
+                    statistics, stop in
+                    if let quantity = statistics.sumQuantity() {
+                        let date = statistics.startDate
+                        let steps = quantity.doubleValue(for: HKUnit.count())
+                        stepsDict[date]=steps
+                    }
+                }
+            }
+            if stepsDict.count>0{
+                var nDate = startDate
+                var stepsArray:[Double]=[]
+                //organice by dates
+                while nDate<=date {
+                    stepsArray.append(stepsDict[nDate] ?? 0.0)
+                    nDate=nDate.dayByAdding(1)!
+                }
+                let k=0.25
+                var emaArray = [stepsArray[0]]
+                for i in 1...(stepsArray.count-1) {
+                    emaArray.append(stepsArray[i]*k+emaArray[i-1]*(1-k))
+                }
+                let activityIndex = emaArray[emaArray.count-1]
+                onCompletion(activityIndex,date,stepsArray[stepsArray.count-1])
+            }
+            else{
+                onCompletion(0.0,date,0.0)
+            }
+        }
+        HealthKitManager.shared.healthStore.execute(query)
+    }
+    
     fileprivate func setLastSyncDate(forType type: HKSampleType, forSource sourceRevision: HKSourceRevision, date: Date) {
         
         let realm = try! Realm()
@@ -181,6 +301,18 @@ extension HealthKitDataSync {
         }
         
         HealthKitManager.shared.healthStore.execute(query) // run something when finished
+    }
+    
+    fileprivate func sendActivityIndex(forDate date: Date,value: Double, stepCount:Double){
+        let dictionary=["date":date.shortStringFromDate(),"activityindex":String(value),"stepCount":String(stepCount)]
+        do{
+            let data = try JSONSerialization.data(withJSONObject: dictionary, options: [])
+            let package = try Package("metrics"+date.shortStringFromDate(), type: .metricsData, data: data)
+            try NetworkDataRequest.send(package)
+        }
+        catch{
+            print("error send activity index")
+        }
     }
     
     fileprivate func send(data: [HKSample]) {
