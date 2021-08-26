@@ -25,6 +25,9 @@ class CKAppNetworkManager: CKAPIDeliveryDelegate, CKAPIReceiverDelegate {
         case .sensorData:
             sendSensorData(file, package, onCompletion)
             break
+        case .metricsData:
+            sendMetricsData(file, package, onCompletion)
+            break;
         default:
             fatalError("Sending data of type \(package.type.description) is NOT supported.")
             break
@@ -121,6 +124,36 @@ extension CKAppNetworkManager {
         
         uploadTask.observe(.failure) { snapshot in
             print("[sendSensorData] error uploading file!")
+        }
+    }
+    
+    fileprivate func sendMetricsData(_ file: URL, _ package: Package, _ onCompletion: @escaping (Bool) -> Void) {
+        do {
+            let data = try Data(contentsOf: file)
+            guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+                let authPath = CKStudyUser.shared.authCollection else {
+                onCompletion(false)
+                return
+            }
+            
+            let identifier:String = (json["date"] as? String ?? Date().shortStringFromDate())+"Activity_index"
+            
+            let db = Firestore.firestore()
+            db.collection(authPath + "\(Constants.dataBucketMetrics)").document(identifier).setData(json) { err in
+                
+                if let err = err {
+                    onCompletion(false)
+                    print("Error writing document: \(err)")
+                } else {
+                    onCompletion(true)
+                    print("[sendMetrics] \(identifier) - successfully written!")
+                }
+            }
+            
+        } catch {
+            print("Error \(error.localizedDescription)")
+            onCompletion(false)
+            return
         }
     }
     

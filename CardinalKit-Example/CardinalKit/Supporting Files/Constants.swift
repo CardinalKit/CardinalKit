@@ -23,6 +23,7 @@ class Constants {
     static let dataBucketSurveys = "surveys"
     static let dataBucketHealthKit = "healthKit"
     static let dataBucketStorage = "storage"
+    static let dataBucketMetrics = "metrics"
     
     static let onboardingDidComplete = "didCompleteOnboarding"
     
