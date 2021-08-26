@@ -12,6 +12,7 @@ public enum PackageType: String {
     case snapshot = "SNAPSHOT"
     case hkdata = "HKDATA"
     case hkdataAggregate = "HKDATA_AGGREGATE"
+    case metricsData = "HKDATA_METRICS"
     
     static let debuggable: [PackageType] = [.sensorData, .hkdata]
     
@@ -25,6 +26,8 @@ public enum PackageType: String {
             return "Dump of tracked data from healthkit"
         case .hkdataAggregate:
             return "Aggregate summary per day"
+        case .metricsData:
+            return "metrics data"
         }
     }
 }
