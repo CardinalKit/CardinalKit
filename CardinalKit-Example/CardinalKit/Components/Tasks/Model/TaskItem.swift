@@ -296,7 +296,9 @@ struct TaskItem:Hashable {
     }
     
     private func stepQuestion(data:[String:Any],multiple:Bool)->ORKAnswerFormat?{
-        if let options = data["options"] as? [[String:String]]
+        if let options = data["options"] as? [[String:String]],
+           options.count>0,
+           options[0]["text"] != nil
         {
             let textChoiceAnswerFormat = ORKAnswerFormat.choiceAnswerFormat(with: multiple ? .multipleChoice: .singleChoice, textChoices: getTextChoices(data: options))
             return textChoiceAnswerFormat
