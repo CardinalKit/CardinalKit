@@ -10,7 +10,13 @@ import Foundation
 import Firebase
 
 class CKSendHelper {
-    
+    private static func firestoreDb()->Firestore{
+        let settings = FirestoreSettings()
+        settings.isPersistenceEnabled = false
+        let db = Firestore.firestore()
+        db.settings = settings
+        return db
+    }
     /**
      Parse a JSON Data object and convert to a dictionary.
     */
@@ -28,7 +34,7 @@ class CKSendHelper {
             return
         }
         
-        let db = Firestore.firestore()
+        let db=firestoreDb()
         createNecessaryDocuments(path:authCollection)
         let ref = db.collection(authCollection + "\(collection)").document(identifier)
         ref.getDocument { (document, error) in
@@ -69,7 +75,7 @@ class CKSendHelper {
         // represents the directory that you MUST write to in order to
         // verify and access this data in the future.
         
-        let db = Firestore.firestore()
+        let db=firestoreDb()
         createNecessaryDocuments(path:authCollection)
         db.collection(authCollection + "\(collection)")
             .document(identifier ?? UUID().uuidString)
@@ -99,7 +105,7 @@ class CKSendHelper {
             
         let dataPayload: [String:Any] = ["userId":"\(userId)", "updatedAt": Date()]
         createNecessaryDocuments(path:authCollection)
-        let db = Firestore.firestore()
+        let db=firestoreDb()
         db.collection(authCollection + collection).document(identifier).setData(dataPayload, merge: true)
         
         func completion(_ err: Error?) {
@@ -128,7 +134,7 @@ class CKSendHelper {
             return
         }
         
-        let db = Firestore.firestore()
+        let db=firestoreDb()
         createNecessaryDocuments(path:authCollection)
         db.collection(authCollection + collection).document(identifier).setData(["updatedAt": Date()], merge: true)
         let ref = db.collection(authCollection + collection).document(identifier)
@@ -161,19 +167,19 @@ class CKSendHelper {
        This function creates the necessary documents in firebase adding a data to avoid virtual documents
      */
     static func createNecessaryDocuments(path: String){
-            let _db = Firestore.firestore()
-            let _pathArray = path.split{$0 == "/"}.map(String.init)
-            var currentPath = ""
-            var index=0
-            for part in _pathArray{
-                currentPath+=part
-                if(index%2 != 0){
-                    _db.document(currentPath).setData(["exist":"true"], merge: true)
-                }
-                currentPath+="/"
-                index+=1
+        let _db=firestoreDb()
+        let _pathArray = path.split{$0 == "/"}.map(String.init)
+        var currentPath = ""
+        var index=0
+        for part in _pathArray{
+            currentPath+=part
+            if(index%2 != 0){
+                _db.document(currentPath).setData(["exist":"true"], merge: true)
             }
+            currentPath+="/"
+            index+=1
         }
+    }
     
     /**
      Given a file, use the Firebase SDK to store it in Google Storage.
