@@ -17,8 +17,7 @@ class CKCareKitRemoteSyncWithFirestore: OCKRemoteSynchronizable {
     
     var automaticallySynchronizes: Bool = true
     
-    let collection: String = "carekit-store"
-    let identifier: String = "v1"
+    let collection: String = "carekit-store/v2/entities"
     
     init() {
         delegate = self
@@ -60,13 +59,49 @@ extension CKCareKitRemoteSyncWithFirestore {
     
     fileprivate func putRevisionInFirestore(deviceRevision: OCKRevisionRecord, _ overwriteRemote: Bool, _ completion: @escaping (Error?) -> Void) {
         do {
-            let data = try JSONEncoder().encode(deviceRevision)
-            let json = try CKSendHelper.jsonDataAsDict(data) ?? [String:Any]()
-            
-            CKSendHelper.appendCareKitArrayInFirestore(json: json, collection: collection, withIdentifier: identifier, overwriteRemote: overwriteRemote) { (success, error) in
-                print("[putRevisionInFirestore] success \(success), error \(error?.localizedDescription ?? "")")
-                completion(error)
+            var outComesNotDeleted:[String]=[]
+            let group = DispatchGroup()
+            var error:Error? = nil
+            for entity in deviceRevision.entities{
+                group.enter()
+                let entityData = try JSONEncoder().encode(entity)
+                let entityJson = try CKSendHelper.jsonDataAsDict(entityData) ?? [String:Any]()
+                var jsonResult:[String:Any] = entityJson["object"] as! [String : Any]
+                jsonResult["type"]=entityJson["type"]
+                if var uuid = jsonResult["uuid"] as? String
+                {
+                    var add = true
+                    if jsonResult["type"] as? String == "outcome",
+                       let taskUUID = jsonResult["taskUUID"] as? String,
+                       let ocurrencyIndex = jsonResult["taskOccurrenceIndex"]{
+                        uuid = "outcome \(taskUUID) \(ocurrencyIndex)"
+                        if jsonResult["deletedDate"] == nil{
+                            outComesNotDeleted.append(uuid)
+                        }
+                        else{
+                            if !outComesNotDeleted.contains(uuid){
+                                outComesNotDeleted.append(uuid)
+                            }
+                            else{
+                                add = false
+                            }
+                        }
+                    }
+                    if(add){
+                        CKSendHelper.appendCareKitArrayInFirestore(json: jsonResult, collection: "\(collection)", withIdentifier: uuid, overwriteRemote: overwriteRemote) { (success, _error) in
+                            print("[putRevisionInFirestore] success \(success), error \(_error?.localizedDescription ?? "")")
+                            if let _error = _error{
+                                error = _error
+                            }
+                            group.leave()
+                        }
+                    }
+                }
+                
             }
+            group.notify(queue: .main, execute: {
+                    completion(error)
+                })
         } catch {
             print("[putRevisionInFirestore] " + error.localizedDescription)
             completion(error)
@@ -74,21 +109,46 @@ extension CKCareKitRemoteSyncWithFirestore {
     }
     
     fileprivate func getRevisionsFromFirestore(completion: @escaping (_ revisions: [OCKRevisionRecord]) -> Void) {
-        CKSendHelper.getFromFirestore(collection: collection, identifier: identifier, onCompletion: { (document, error) in
-            guard let document = document,
-                  let payload = document.data()?["revisions"] else {
+        CKSendHelper.getFromFirestore(collection: collection, onCompletion: { [self] (documents, error) in
+            guard let documents = documents,
+                  documents.count>0 else {
                 completion([OCKRevisionRecord]())
                 return
             }
-            
-            do {
-                let jsonData = try JSONSerialization.data(withJSONObject: payload, options: [])
-                let revisions = try JSONDecoder().decode([OCKRevisionRecord].self, from: jsonData)
-                completion(revisions)
-            } catch {
-                print("[getRevisionsFromFirestore] ERROR " + error.localizedDescription)
-                completion([OCKRevisionRecord]())
+            let group = DispatchGroup()
+            var entities = [CareKitStore.OCKEntity]()
+            for document in documents{
+                group.enter()
+                CKSendHelper.getFromFirestore(collection: self.collection, identifier: document.documentID) { (document, error) in
+                    group.leave()
+                    do{
+                        guard let document = document,
+                              var payload = document.data() else {
+                                completion([OCKRevisionRecord]())
+                            return
+                        }
+                        payload.removeValue(forKey: "updatedAt")
+                        let type = payload["type"]!
+                        payload.removeValue(forKey: "type")
+                        
+                        var object = [String:Any]()
+                        object["object"] = payload
+                        object["type"] = type
+                        
+                        let jsonData = try JSONSerialization.data(withJSONObject: object, options: [])
+                        let entity = try JSONDecoder().decode(CareKitStore.OCKEntity.self, from: jsonData)
+                        entities.append(entity)
+                        
+                    }
+                    catch {
+                        print("[getRevisionsFromFirestore] ERROR " + error.localizedDescription)
+                        completion([OCKRevisionRecord]())
+                    }
+                }
             }
+            group.notify(queue: .main, execute: {
+                completion([OCKRevisionRecord(entities: entities, knowledgeVector: OCKRevisionRecord.KnowledgeVector())])
+            })
         })
     }
     

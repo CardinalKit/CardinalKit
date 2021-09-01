@@ -25,6 +25,24 @@ class CKSendHelper {
     }
     
     /**
+     Use the Firebase SDK to retrieve a documents on collection
+     */
+    static func getFromFirestore(collection:String, onCompletion: @escaping ([DocumentSnapshot]?, Error?)->Void) {
+        guard let authCollection = CKStudyUser.shared.authCollection else {
+            onCompletion(nil, CKError.unauthorized)
+            return
+        }
+        
+        let db=firestoreDb()
+        createNecessaryDocuments(path:authCollection)
+        let ref = db.collection(authCollection + "\(collection)")
+        ref.getDocuments{ (querySnapshot,error) in
+            onCompletion(querySnapshot?.documents,error)
+        }
+        
+    }
+    
+    /**
      Use the Firebase SDK to retrieve a document with a specific ID.
      */
     static func getFromFirestore(collection: String, identifier: String, onCompletion: @escaping (DocumentSnapshot?, Error?)->Void) {
@@ -136,7 +154,7 @@ class CKSendHelper {
         
         let db=firestoreDb()
         createNecessaryDocuments(path:authCollection)
-        db.collection(authCollection + collection).document(identifier).setData(["updatedAt": Date()], merge: true)
+        db.collection(authCollection + collection).document(identifier).setData(["updatedAt": Date()], merge: false)
         let ref = db.collection(authCollection + collection).document(identifier)
         if !json.isEmpty {
             
@@ -149,16 +167,12 @@ class CKSendHelper {
                     onCompletion?(true, nil)
                 }
             }
-            
-            if overwriteRemote {
-                ref.updateData([
-                    "revisions": [json]
-                ], completion: completion)
-            } else {
-                ref.updateData([
-                    "revisions": FieldValue.arrayUnion([json])
-                ], completion: completion)
-            }
+            ref.updateData(json, completion: completion)
+//            if overwriteRemote {
+//                ref.updateData(json, completion: completion)
+//            } else {
+//                ref.updateData(json, completion: completion)
+//            }
             print("[appendCareKitArrayInFirestore] updating revisions with overwriteRemote \(overwriteRemote)")
         }
     }
