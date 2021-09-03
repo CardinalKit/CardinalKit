@@ -27,34 +27,46 @@ class CKSendHelper {
     /**
      Use the Firebase SDK to retrieve a documents on collection
      */
-    static func getFromFirestore(collection:String, onCompletion: @escaping ([DocumentSnapshot]?, Error?)->Void) {
-        guard let authCollection = CKStudyUser.shared.authCollection else {
-            onCompletion(nil, CKError.unauthorized)
-            return
+    static func getFromFirestore(authCollection:String?=nil, collection:String, onCompletion: @escaping ([DocumentSnapshot]?, Error?)->Void) {
+        var nAuthCollection = ""
+        if authCollection == nil{
+            guard  let nAuth = CKStudyUser.shared.authCollection else {
+                onCompletion(nil, CKError.unauthorized)
+                return
+            }
+            nAuthCollection = nAuth
         }
-        
+        else{
+            nAuthCollection = authCollection!
+        }
         let db=firestoreDb()
-        createNecessaryDocuments(path:authCollection)
-        let ref = db.collection(authCollection + "\(collection)")
+        createNecessaryDocuments(path:nAuthCollection)
+        let ref = db.collection(nAuthCollection + "\(collection)")
         ref.getDocuments{ (querySnapshot,error) in
             onCompletion(querySnapshot?.documents,error)
-        }
-        
+        }        
     }
     
     /**
      Use the Firebase SDK to retrieve a document with a specific ID.
      */
-    static func getFromFirestore(collection: String, identifier: String, onCompletion: @escaping (DocumentSnapshot?, Error?)->Void) {
+    static func getFromFirestore(authCollection:String?=nil,collection: String, identifier: String, onCompletion: @escaping (DocumentSnapshot?, Error?)->Void) {
         
-        guard let authCollection = CKStudyUser.shared.authCollection else {
-            onCompletion(nil, CKError.unauthorized)
-            return
+        var nAuthCollection = ""
+        if authCollection == nil{
+            guard  let nAuth = CKStudyUser.shared.authCollection else {
+                onCompletion(nil, CKError.unauthorized)
+                return
+            }
+            nAuthCollection = nAuth
+        }
+        else{
+            nAuthCollection = authCollection!
         }
         
         let db=firestoreDb()
-        createNecessaryDocuments(path:authCollection)
-        let ref = db.collection(authCollection + "\(collection)").document(identifier)
+        createNecessaryDocuments(path:nAuthCollection)
+        let ref = db.collection(nAuthCollection + "\(collection)").document(identifier)
         ref.getDocument { (document, error) in
             if let document = document, document.exists {
                 onCompletion(document, error)

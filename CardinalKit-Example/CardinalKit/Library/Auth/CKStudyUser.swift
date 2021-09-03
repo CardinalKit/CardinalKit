@@ -43,6 +43,13 @@ class CKStudyUser {
         return nil
     }
     
+    var studyCollection: String?{
+        if let bundleId = Bundle.main.bundleIdentifier {
+            return "/studies/\(bundleId)/"
+        }
+        return nil
+    }
+    
     fileprivate var rootAuthCollection: String? {
         if let bundleId = Bundle.main.bundleIdentifier {
             return "/studies/\(bundleId)/users/"

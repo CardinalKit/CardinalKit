@@ -10,12 +10,105 @@ import CareKit
 import CareKitStore
 import Contacts
 import UIKit
+import FirebaseFirestore
 
 internal extension OCKStore {
 
+    fileprivate func insertDocuments(documents: [DocumentSnapshot]?, collection: String, authCollection: String?,lastUpdateDate: Date,onCompletion: @escaping (Error?)->Void){
+        guard let documents = documents,
+             documents.count>0 else {
+           return
+       }
+        
+        let group = DispatchGroup()
+        for document in documents{
+            group.enter()
+            CKSendHelper.getFromFirestore(authCollection:authCollection, collection: collection, identifier: document.documentID) {(document, error) in
+                do{
+                    guard let document = document,
+                          let payload = document.data(),
+                          let id = payload["id"] as? String else {
+                        onCompletion(nil)
+                        return
+                    }
+                    var itemSchedule:OCKSchedule? = nil
+                    if let schedule = payload["scheduleElements"] as? [[String:Any]],
+                       let updateTime = payload["updateTime"] as? Timestamp,
+                       updateTime.dateValue()>lastUpdateDate{
+                        var scheduleElements=[OCKScheduleElement]()
+                        for element in schedule{
+                            var startDate = Date()
+                            var endDate:Date?=nil
+                            var intervalDate = DateComponents(day:2)
+                            var durationElement:OCKScheduleElement.Duration = .allDay
+                            if let startStamp = element["startTime"] as? Timestamp{
+                                startDate = startStamp.dateValue()
+                            }
+                            if let endStamp = element["endTime"] as? Timestamp{
+                                endDate = endStamp.dateValue()
+                            }
+                            
+                            if let interval = element["interval"] as? [String:Any]{
+                                intervalDate =
+                                    DateComponents(
+                                        timeZone: interval["timeZone"] as? TimeZone,
+                                        year: interval["year"] as? Int,
+                                        month: interval["month"] as? Int,
+                                        day: interval["day"] as? Int,
+                                        hour: interval["hour"] as? Int,
+                                        minute: interval["minute"] as? Int,
+                                        second: interval["second"] as? Int,
+                                        weekday: interval["weekday"] as? Int,
+                                        weekdayOrdinal: interval["weekdayOrdinal"] as? Int,
+                                        weekOfMonth: interval["weekOfMonth"] as? Int,
+                                        weekOfYear: interval["weekOfYear"] as? Int,
+                                        yearForWeekOfYear: interval["yearForWeekOfYear"] as? Int)
+                            }
+                            if let duration = element["duration"] as? [String:Any]{
+                                if let allDay = duration["allDay"] as? Bool,
+                                   allDay{
+                                    durationElement = .allDay
+                                }
+                                if let seconds = duration["seconds"] as? Double{
+                                    durationElement = .seconds(seconds)
+                                }
+                                if let hours = duration["hours"] as? Double{
+                                    durationElement = .hours(hours)
+                                }
+                                if let minutes = duration["minutes"] as? Double{
+                                    durationElement = .minutes(minutes)
+                                }
+                            }
+                            scheduleElements.append(OCKScheduleElement(start: startDate, end: endDate, interval: intervalDate, text: element["text"] as? String, duration: durationElement))
+                        }
+                        if scheduleElements.count>0{
+                            itemSchedule = OCKSchedule(composing: scheduleElements)
+                        }
+                    }
+                    if let itemSchedule = itemSchedule{
+                        var uuid:UUID? = nil
+                        if let _uuid = payload["uuid"] as? String{
+                            uuid=UUID(uuidString: _uuid)
+                        }
+                        var task = OCKTask(id: id, title: payload["title"] as? String, carePlanUUID: uuid, schedule: itemSchedule)
+                        if let impactsAdherence = payload["impactsAdherence"] as? Bool{
+                            task.impactsAdherence = impactsAdherence
+                        }
+                        task.instructions = payload["instructions"] as? String
+                        self.addTask(task)
+                    }
+                    group.leave()
+                }
+            }
+        }
+        group.notify(queue: .main, execute: {
+            onCompletion(nil)
+        })
+    }
     // Adds tasks and contacts into the store
-    func populateSampleData() {
-
+    func populateSampleData(lastUpdateDate: Date) {
+        
+        /*
         let thisMorning = Calendar.current.startOfDay(for: Date())
         let aFewDaysAgo = Calendar.current.date(byAdding: .day, value: -3, to: thisMorning)!
         let beforeBreakfast = Calendar.current.date(byAdding: .hour, value: 8, to: aFewDaysAgo)!
@@ -62,6 +155,38 @@ internal extension OCKStore {
         addTasks([nausea, doxylamine, survey, coffee], callbackQueue: .main, completion: nil)
 
         createContacts()
+        
+         */
+        
+        let collection: String = "carekit-store/v2/tasks"
+        // Download Tasks By Study
+        
+        guard  let studyCollection = CKStudyUser.shared.studyCollection else {
+            return
+        }
+        // Get tasks on study
+        CKSendHelper.getFromFirestore(authCollection: studyCollection,collection: collection, onCompletion: { (documents,error) in
+            self.insertDocuments(documents: documents, collection: collection, authCollection: studyCollection,lastUpdateDate:lastUpdateDate){
+                (Error) in
+                if let Error = Error{
+                    print("error \(Error)")
+                }
+                else{
+                    // get task on user
+                    CKSendHelper.getFromFirestore(collection: collection, onCompletion: { (documents,error) in
+                        self.insertDocuments(documents: documents, collection: collection, authCollection: nil,lastUpdateDate:lastUpdateDate){
+                            (Error) in
+                            if let Error = Error{
+                                print("error \(Error)")
+                            }
+                            else{
+                                self.createContacts()
+                            }
+                        }
+                    })
+                }
+            }
+        })
     }
     
     func createContacts() {
