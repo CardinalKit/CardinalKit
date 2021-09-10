@@ -17,6 +17,7 @@ internal extension OCKStore {
     fileprivate func insertDocuments(documents: [DocumentSnapshot]?, collection: String, authCollection: String?,lastUpdateDate: Date?,onCompletion: @escaping (Error?)->Void){
         guard let documents = documents,
              documents.count>0 else {
+           onCompletion(nil)
            return
        }
         
@@ -145,23 +146,12 @@ internal extension OCKStore {
         CKSendHelper.getFromFirestore(authCollection: studyCollection,collection: collection, onCompletion: { (documents,error) in
             self.insertDocuments(documents: documents, collection: collection, authCollection: studyCollection,lastUpdateDate:lastUpdateDate){
                 (Error) in
-                if let Error = Error{
-                    print("error \(Error)")
-                }
-                else{
-                    // get task on user
-                    CKSendHelper.getFromFirestore(collection: collection, onCompletion: { (documents,error) in
-                        self.insertDocuments(documents: documents, collection: collection, authCollection: nil,lastUpdateDate:lastUpdateDate){
-                            (Error) in
-                            if let Error = Error{
-                                print("error \(Error)")
-                            }
-                            else{
-                                self.createContacts()
-                            }
-                        }
-                    })
-                }
+                CKSendHelper.getFromFirestore(collection: collection, onCompletion: { (documents,error) in
+                    self.insertDocuments(documents: documents, collection: collection, authCollection: nil,lastUpdateDate:lastUpdateDate){
+                        (Error) in
+                        self.createContacts()
+                    }
+                })
             }
         })
     }
