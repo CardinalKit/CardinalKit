@@ -145,15 +145,17 @@ extension CKCareKitRemoteSyncWithFirestore {
                 group.enter()
                 CKSendHelper.getFromFirestore(collection: self.collection, identifier: document.documentID) { (document, error) in
                     guard let document = document,
-                          var payload = document.data() else {
+                          var payload = document.data(),
+                          payload.count>0 else {
                         completion([OCKRevisionRecord]())
                         return
                     }
                     payload.removeValue(forKey: "updatedAt")
-                    let type = payload["type"]!
-                    payload.removeValue(forKey: "type")
-                    if type as?String == "outcome",
+                    if let type = payload["type"],
+                        type as?String == "outcome",
                        let id = payload["taskId"] as? String{
+                        
+                        payload.removeValue(forKey: "type")
                         var query = OCKTaskQuery()
                         query.ids.append(id)
                         CKCareKitManager.shared.coreDataStore.fetchAnyTasks(query: query, callbackQueue: .main, completion: {(result) in

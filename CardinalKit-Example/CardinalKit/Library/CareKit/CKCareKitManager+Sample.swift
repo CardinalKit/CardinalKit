@@ -14,7 +14,7 @@ import FirebaseFirestore
 
 internal extension OCKStore {
 
-    fileprivate func insertDocuments(documents: [DocumentSnapshot]?, collection: String, authCollection: String?,lastUpdateDate: Date,onCompletion: @escaping (Error?)->Void){
+    fileprivate func insertDocuments(documents: [DocumentSnapshot]?, collection: String, authCollection: String?,lastUpdateDate: Date?,onCompletion: @escaping (Error?)->Void){
         guard let documents = documents,
              documents.count>0 else {
            return
@@ -31,10 +31,16 @@ internal extension OCKStore {
                         onCompletion(nil)
                         return
                     }
-                    var itemSchedule:OCKSchedule? = nil
-                    if let schedule = payload["scheduleElements"] as? [[String:Any]],
-                       let updateTime = payload["updateTime"] as? Timestamp,
-                       updateTime.dateValue()>lastUpdateDate{
+                    var itemSchedule:OCKSchedule? = nil                    
+                    var update = true
+                    if lastUpdateDate != nil,
+                       let updateTimeServer = payload["updateTime"] as? Timestamp,
+                       updateTimeServer.dateValue()<lastUpdateDate!{
+                        update = false
+                    }
+                    
+                    if update,
+                        let schedule = payload["scheduleElements"] as? [[String:Any]]{
                         var scheduleElements=[OCKScheduleElement]()
                         for element in schedule{
                             var startDate = Date()
@@ -79,7 +85,17 @@ internal extension OCKStore {
                                     durationElement = .minutes(minutes)
                                 }
                             }
-                            scheduleElements.append(OCKScheduleElement(start: startDate, end: endDate, interval: intervalDate, text: element["text"] as? String, duration: durationElement))
+                            var targetValue:[OCKOutcomeValue] = [OCKOutcomeValue]()
+                            if let targetValues = element["targetValues"] as? [[String:Any]]{
+                                for target in targetValues{
+                                    if let identifier = target["groupIdentifier"] as? String{
+                                        var come = OCKOutcomeValue("", units: nil)
+                                            come.groupIdentifier=identifier
+                                        targetValue.append(come)
+                                    }
+                                }
+                            }
+                            scheduleElements.append(OCKScheduleElement(start: startDate, end: endDate, interval: intervalDate, text: element["text"] as? String, targetValues: targetValue, duration: durationElement))
                         }
                         if scheduleElements.count>0{
                             itemSchedule = OCKSchedule(composing: scheduleElements)
@@ -95,7 +111,18 @@ internal extension OCKStore {
                             task.impactsAdherence = impactsAdherence
                         }
                         task.instructions = payload["instructions"] as? String
-                        self.addTask(task)
+                        
+                        // get if task exist?
+                        self.fetchTask(withID: id) { result in
+                            switch result {
+                                case .failure(_): do {
+                                    self.addTask(task)
+                                }
+                            case .success(_):do {
+                                self.updateTask(task)
+                                }
+                            }
+                        }
                     }
                     group.leave()
                 }
@@ -106,57 +133,7 @@ internal extension OCKStore {
         })
     }
     // Adds tasks and contacts into the store
-    func populateSampleData(lastUpdateDate: Date) {
-        
-        /*
-        let thisMorning = Calendar.current.startOfDay(for: Date())
-        let aFewDaysAgo = Calendar.current.date(byAdding: .day, value: -3, to: thisMorning)!
-        let beforeBreakfast = Calendar.current.date(byAdding: .hour, value: 8, to: aFewDaysAgo)!
-        let afterLunch = Calendar.current.date(byAdding: .hour, value: 14, to: aFewDaysAgo)!
-
-        let coffeeElement = OCKScheduleElement(start: beforeBreakfast, end: nil, interval: DateComponents(day: 1))
-        let coffeeSchedule = OCKSchedule(composing: [coffeeElement])
-        var coffee = OCKTask(id: "coffee", title: "Drink Coffee ☕️", carePlanUUID: nil, schedule: coffeeSchedule)
-        coffee.impactsAdherence = true
-        coffee.instructions = "Drink coffee for good spirits!"
-        
-        let surveyElement = OCKScheduleElement(start: afterLunch, end: nil, interval: DateComponents(day: 1))
-        let surveySchedule = OCKSchedule(composing: [surveyElement])
-        var survey = OCKTask(id: "survey", title: "Take a Survey 📝", carePlanUUID: nil, schedule: surveySchedule)
-        survey.impactsAdherence = true
-        survey.instructions = "You can schedule any ResearchKit survey in your app."
-        
-        /*
-         Doxylamine and Nausea DEMO.
-         */
-        let doxylamineSchedule = OCKSchedule(composing: [
-            OCKScheduleElement(start: beforeBreakfast, end: nil,
-                               interval: DateComponents(day: 2)),
-
-            OCKScheduleElement(start: afterLunch, end: nil,
-                               interval: DateComponents(day: 4))
-        ])
-
-        var doxylamine = OCKTask(id: "doxylamine", title: "Take Doxylamine",
-                                 carePlanUUID: nil, schedule: doxylamineSchedule)
-        doxylamine.instructions = "Take 25mg of doxylamine when you experience nausea."
-
-        let nauseaSchedule = OCKSchedule(composing: [
-            OCKScheduleElement(start: beforeBreakfast, end: nil, interval: DateComponents(day: 2),
-                               text: "Anytime throughout the day", targetValues: [], duration: .allDay)
-            ])
-
-        var nausea = OCKTask(id: "nausea", title: "Track your nausea",
-                             carePlanUUID: nil, schedule: nauseaSchedule)
-        nausea.impactsAdherence = false
-        nausea.instructions = "Tap the button below anytime you experience nausea."
-        /* ---- */
-
-        addTasks([nausea, doxylamine, survey, coffee], callbackQueue: .main, completion: nil)
-
-        createContacts()
-        
-         */
+    func populateSampleData(lastUpdateDate: Date?) {
         
         let collection: String = "carekit-store/v2/tasks"
         // Download Tasks By Study
