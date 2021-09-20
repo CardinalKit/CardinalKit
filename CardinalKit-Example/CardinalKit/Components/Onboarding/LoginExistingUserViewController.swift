@@ -47,7 +47,8 @@ struct LoginExistingUserViewController: UIViewControllerRepresentable {
         passcodeStep.text = config.read(query: "Passcode Text")
         
         loginSteps += [passcodeStep]
-        
+        let healthDataStep = CKHealthDataStep(identifier: "Healthkit")
+        loginSteps += [healthDataStep]
         // create a task with each step
         let orderedTask = ORKOrderedTask(identifier: "StudyLoginTask", steps: loginSteps)
         
