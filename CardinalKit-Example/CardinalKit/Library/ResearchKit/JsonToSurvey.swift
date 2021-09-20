@@ -11,7 +11,7 @@ import ResearchKit
 
 class JsonToSurvey {
     static let shared = JsonToSurvey();
-    func GetSurvey(from jsonData:[[String : Any]], title:String) -> ORKOrderedTask{
+    func GetSurvey(from jsonData:[[String : Any]], identifier:String) -> ORKOrderedTask{
         
         var steps = [ORKStep]()
         for question in jsonData {
@@ -53,7 +53,7 @@ class JsonToSurvey {
                 }
             }
         }
-        return ORKOrderedTask(identifier: title, steps: steps)
+        return ORKOrderedTask(identifier: identifier, steps: steps)
     }
     
     private func formStep(data:[String:Any])->ORKStep? {

@@ -20,6 +20,7 @@ struct TaskItem:Hashable {
     var subtitle:String;
     var imageName: String;
     var section: String;
+    var identifier: String;
     
     var image: UIImage?{
         return UIImage(named: imageName) ?? UIImage(systemName: "questionmark.square")
@@ -50,6 +51,6 @@ struct TaskItem:Hashable {
         })
         
         
-        return AnyView(CKTaskViewController(tasks: JsonToSurvey.shared.GetSurvey(from: questionAsObj,title: title)))
+        return AnyView(CKTaskViewController(tasks: JsonToSurvey.shared.GetSurvey(from: questionAsObj,identifier: identifier)))
     }
 }

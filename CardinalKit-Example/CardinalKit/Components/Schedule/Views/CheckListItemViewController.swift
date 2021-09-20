@@ -65,7 +65,7 @@ class CheckListItemViewController: OCKChecklistTaskViewController, ORKTaskViewCo
                     super.taskView(taskView, didCompleteEvent: isComplete, at: indexPath, sender: sender)
                     return
                 }
-                let surveyTask = JsonToSurvey.shared.GetSurvey(from: objResult,title: identifier)
+                let surveyTask = JsonToSurvey.shared.GetSurvey(from: objResult,identifier: identifier)
                 let surveyViewController = ORKTaskViewController(task: surveyTask, taskRun: nil)
                 surveyViewController.delegate = self
                 self.present(surveyViewController, animated: true, completion: nil)
