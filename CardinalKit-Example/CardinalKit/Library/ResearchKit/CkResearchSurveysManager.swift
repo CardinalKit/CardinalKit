@@ -26,18 +26,23 @@ class CKResearchSurveysManager: NSObject {
                     CKActivityManager.shared.fetchData(route: surveysPath+"\(id)/questions/", onCompletion: {
                         (surveyResult) in
                         if let surveyResult = surveyResult as? [String:Any]{
+                            var deleted = false
+                            var identifier = ""
                             var title=""
                             var subtitle=""
                             var imageName = ""
                             var section = ""
                             var questions:[String] = []
                             var order = "1"
-                            if let data = data as? [String:Any] {
+                            if let data = data as? [String:Any],
+                               let _identifier=data["identifier"] as? String{
                                 title = data["title"] as? String ?? "NoTitle"
                                 subtitle = data["subtitle"] as? String ?? "NoSubTitle"
                                 imageName = data["image"] as? String ?? "NoImage"
                                 section = data["section"] as? String ?? "NoSection"
                                 order = data["order"] as? String ?? "1"
+                                deleted = data["deleted"] as? Bool ?? false
+                                identifier = _identifier
                             }
                             
                             
@@ -55,8 +60,8 @@ class CKResearchSurveysManager: NSObject {
                                     }
                                 }
                             }
-                            if questions.count>0{
-                                let taskItem: TaskItem = TaskItem(order: order, title: title, subtitle: subtitle, imageName: imageName, section: section, questions: questions)
+                            if questions.count>0 && !deleted{
+                                let taskItem: TaskItem = TaskItem(order: order, title: title, subtitle: subtitle, imageName: imageName, section: section, identifier: identifier, questions: questions)
                                 AllItems.append(taskItem)
                             }
                         }
