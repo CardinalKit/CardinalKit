@@ -134,7 +134,7 @@ internal extension OCKStore {
         })
     }
     // Adds tasks and contacts into the store
-    func populateSampleData(lastUpdateDate: Date?) {
+    func populateSampleData(lastUpdateDate: Date?,completion:@escaping () -> Void) {
         
         let collection: String = "carekit-store/v2/tasks"
         // Download Tasks By Study
@@ -150,6 +150,7 @@ internal extension OCKStore {
                     self.insertDocuments(documents: documents, collection: collection, authCollection: nil,lastUpdateDate:lastUpdateDate){
                         (Error) in
                         self.createContacts()
+                        completion()
                     }
                 })
             }
