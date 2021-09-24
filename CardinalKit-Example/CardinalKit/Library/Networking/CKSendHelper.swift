@@ -10,7 +10,13 @@ import Foundation
 import Firebase
 
 class CKSendHelper {
-    
+    private static func firestoreDb()->Firestore{
+        let settings = FirestoreSettings()
+        settings.isPersistenceEnabled = false
+        let db = Firestore.firestore()
+        db.settings = settings
+        return db
+    }
     /**
      Parse a JSON Data object and convert to a dictionary.
     */
@@ -19,18 +25,48 @@ class CKSendHelper {
     }
     
     /**
+     Use the Firebase SDK to retrieve a documents on collection
+     */
+    static func getFromFirestore(authCollection:String?=nil, collection:String, onCompletion: @escaping ([DocumentSnapshot]?, Error?)->Void) {
+        var nAuthCollection = ""
+        if authCollection == nil{
+            guard  let nAuth = CKStudyUser.shared.authCollection else {
+                onCompletion(nil, CKError.unauthorized)
+                return
+            }
+            nAuthCollection = nAuth
+        }
+        else{
+            nAuthCollection = authCollection!
+        }
+        let db=firestoreDb()
+        createNecessaryDocuments(path:nAuthCollection)
+        let ref = db.collection(nAuthCollection + "\(collection)")
+        ref.getDocuments{ (querySnapshot,error) in
+            onCompletion(querySnapshot?.documents,error)
+        }        
+    }
+    
+    /**
      Use the Firebase SDK to retrieve a document with a specific ID.
      */
-    static func getFromFirestore(collection: String, identifier: String, onCompletion: @escaping (DocumentSnapshot?, Error?)->Void) {
+    static func getFromFirestore(authCollection:String?=nil,collection: String, identifier: String, onCompletion: @escaping (DocumentSnapshot?, Error?)->Void) {
         
-        guard let authCollection = CKStudyUser.shared.authCollection else {
-            onCompletion(nil, CKError.unauthorized)
-            return
+        var nAuthCollection = ""
+        if authCollection == nil{
+            guard  let nAuth = CKStudyUser.shared.authCollection else {
+                onCompletion(nil, CKError.unauthorized)
+                return
+            }
+            nAuthCollection = nAuth
+        }
+        else{
+            nAuthCollection = authCollection!
         }
         
-        let db = Firestore.firestore()
-        createNecessaryDocuments(path:authCollection)
-        let ref = db.collection(authCollection + "\(collection)").document(identifier)
+        let db=firestoreDb()
+        createNecessaryDocuments(path:nAuthCollection)
+        let ref = db.collection(nAuthCollection + "\(collection)").document(identifier)
         ref.getDocument { (document, error) in
             if let document = document, document.exists {
                 onCompletion(document, error)
@@ -69,7 +105,7 @@ class CKSendHelper {
         // represents the directory that you MUST write to in order to
         // verify and access this data in the future.
         
-        let db = Firestore.firestore()
+        let db=firestoreDb()
         createNecessaryDocuments(path:authCollection)
         db.collection(authCollection + "\(collection)")
             .document(identifier ?? UUID().uuidString)
@@ -99,7 +135,7 @@ class CKSendHelper {
             
         let dataPayload: [String:Any] = ["userId":"\(userId)", "updatedAt": Date()]
         createNecessaryDocuments(path:authCollection)
-        let db = Firestore.firestore()
+        let db=firestoreDb()
         db.collection(authCollection + collection).document(identifier).setData(dataPayload, merge: true)
         
         func completion(_ err: Error?) {
@@ -128,9 +164,9 @@ class CKSendHelper {
             return
         }
         
-        let db = Firestore.firestore()
+        let db=firestoreDb()
         createNecessaryDocuments(path:authCollection)
-        db.collection(authCollection + collection).document(identifier).setData(["updatedAt": Date()], merge: true)
+        db.collection(authCollection + collection).document(identifier).setData(["updatedAt": Date()], merge: false)
         let ref = db.collection(authCollection + collection).document(identifier)
         if !json.isEmpty {
             
@@ -143,16 +179,12 @@ class CKSendHelper {
                     onCompletion?(true, nil)
                 }
             }
-            
-            if overwriteRemote {
-                ref.updateData([
-                    "revisions": [json]
-                ], completion: completion)
-            } else {
-                ref.updateData([
-                    "revisions": FieldValue.arrayUnion([json])
-                ], completion: completion)
-            }
+            ref.updateData(json, completion: completion)
+//            if overwriteRemote {
+//                ref.updateData(json, completion: completion)
+//            } else {
+//                ref.updateData(json, completion: completion)
+//            }
             print("[appendCareKitArrayInFirestore] updating revisions with overwriteRemote \(overwriteRemote)")
         }
     }
@@ -161,19 +193,19 @@ class CKSendHelper {
        This function creates the necessary documents in firebase adding a data to avoid virtual documents
      */
     static func createNecessaryDocuments(path: String){
-            let _db = Firestore.firestore()
-            let _pathArray = path.split{$0 == "/"}.map(String.init)
-            var currentPath = ""
-            var index=0
-            for part in _pathArray{
-                currentPath+=part
-                if(index%2 != 0){
-                    _db.document(currentPath).setData(["exist":"true"], merge: true)
-                }
-                currentPath+="/"
-                index+=1
+        let _db=firestoreDb()
+        let _pathArray = path.split{$0 == "/"}.map(String.init)
+        var currentPath = ""
+        var index=0
+        for part in _pathArray{
+            currentPath+=part
+            if(index%2 != 0){
+                _db.document(currentPath).setData(["exist":"true"], merge: true)
             }
+            currentPath+="/"
+            index+=1
         }
+    }
     
     /**
      Given a file, use the Firebase SDK to store it in Google Storage.

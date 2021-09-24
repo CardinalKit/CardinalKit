@@ -27,7 +27,9 @@ class HealthKitDataSync {
         dispatchGroup.enter()
         
         getSources(forType: type) { [weak self] (sources) in
-            defer { dispatchGroup.leave() }
+            defer {
+                dispatchGroup.leave()                
+            }
             
             VLog("Got sources for type %@", sources.count, type.identifier)
             for source in sources {
@@ -42,12 +44,15 @@ class HealthKitDataSync {
                             self?.setLastSyncDate(forType: type, forSource: sourceRevision, date: lastSyncDate)
                             
                             //let tag = "hkdata_\(type.identifier)_\(sourceRevision.source.key)_\(lastSyncDate.ISOStringFromDate())
-                            self?.send(data: resultData)
+                            // need async
+                            self?.send(data: resultData){() in
+                                dispatchGroup.leave()
+                            }
                             
                             VLog("Sent data for type and source %{public}@", type.identifier, sourceRevision.source.key)
                         }
                         
-                        dispatchGroup.leave()
+                        
                     }
                 }
             }
@@ -315,10 +320,10 @@ extension HealthKitDataSync {
         }
     }
     
-    fileprivate func send(data: [HKSample]) {
+    fileprivate func send(data: [HKSample], onCompletion: (() -> Void)? = nil) {
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601
-        
+        let dispatchGroup = DispatchGroup()
         var samplesArray = [[String: Any]]()
         
         
@@ -337,15 +342,25 @@ extension HealthKitDataSync {
             let packageName = getPackageName(for: data)
             var index=0
             for sample in samplesArray {
+                dispatchGroup.enter()
                 let sampleToJson = try JSONSerialization.data(withJSONObject: sample, options: [])
                 do {
                     let internalName = packageName!+"\(index)"
                     index = index+1
                    let package = try Package(internalName, type: .hkdata, data: sampleToJson)
-                   try NetworkDataRequest.send(package)
+                    // async
+                    try NetworkDataRequest.send(package) { (success,error) in
+                        dispatchGroup.leave()
+                    }
                 } catch {
                    VError("Unable to process package %{public}@", error.localizedDescription)
                 }
+            }
+            
+            
+            
+            dispatchGroup.notify(queue: DispatchQueue.main) {
+                onCompletion?()
             }
         }
         catch{

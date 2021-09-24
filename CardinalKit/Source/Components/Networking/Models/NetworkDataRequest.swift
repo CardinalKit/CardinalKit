@@ -61,14 +61,14 @@ class NetworkDataRequest: Object {
         return currentObjectCount + 1
     }
     
-    class func send(_ package: Package) throws {
+    class func send(_ package: Package, onCompletion: ((Bool, Error?) -> Void)? = nil) throws {
         guard package.hasData() else{
             throw NetworkDataRequestError.packageDoesNotExist
         }
         
         creationMutex.lock()
         let request = try findOrCreateNetworkRequest(package)
-        try request.perform()
+        try request.perform(onCompletion:onCompletion)
         creationMutex.unlock()
     }
     
@@ -134,7 +134,7 @@ class NetworkDataRequest: Object {
 
 extension NetworkDataRequest {
     
-    func perform() throws {
+    func perform(onCompletion: ((Bool, Error?) -> Void)? = nil) throws {
         guard shouldPerform() else {
             return
         }
@@ -153,8 +153,10 @@ extension NetworkDataRequest {
                 DispatchQueue.main.async {
                     if (success) {
                         self.complete()
+                        onCompletion?(true, nil)
                     } else {
                         self.fail()
+                        onCompletion?(false, nil)
                     }
                 }
             }

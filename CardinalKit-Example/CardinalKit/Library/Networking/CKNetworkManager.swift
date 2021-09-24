@@ -37,7 +37,7 @@ class CKAppNetworkManager: CKAPIDeliveryDelegate, CKAPIReceiverDelegate {
     // MARK: - CKAPIReceiverDelegate
     func request(route: String, onCompletion: @escaping (Any) -> Void){
         var objResult = [String:Any]()
-        let db = Firestore.firestore()
+        let db=firestoreDb()
         db.collection(route).getDocuments(){ (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
@@ -50,6 +50,13 @@ class CKAppNetworkManager: CKAPIDeliveryDelegate, CKAPIReceiverDelegate {
         }
     }
     
+    private func firestoreDb()->Firestore{
+        let settings = FirestoreSettings()
+        settings.isPersistenceEnabled = false
+        let db = Firestore.firestore()
+        db.settings = settings
+        return db
+    }
 //    func downloadSurveys(){
 //
 //        guard let authPath = CKStudyUser.shared.authCollection else {
@@ -88,7 +95,7 @@ extension CKAppNetworkManager {
             let identifier = Date().startOfDay.shortStringFromDate() + "-\(package.fileName)"
             let trimmedIdentifier = identifier.trimmingCharacters(in: .whitespaces)
             
-            let db = Firestore.firestore()
+            let db=firestoreDb()
             db.collection(authPath + "\(Constants.dataBucketHealthKit)").document(trimmedIdentifier).setData(json) { err in
                 
                 if let err = err {
@@ -138,7 +145,7 @@ extension CKAppNetworkManager {
             
             let identifier:String = (json["date"] as? String ?? Date().shortStringFromDate())+"Activity_index"
             
-            let db = Firestore.firestore()
+            let db=firestoreDb()
             db.collection(authPath + "\(Constants.dataBucketMetrics)").document(identifier).setData(json) { err in
                 
                 if let err = err {

@@ -43,6 +43,6 @@ struct TaskListItemView: View {
 
 struct TaskListItemView_Previews: PreviewProvider {
     static var previews: some View {
-        TaskListItemView(item: TaskItem(order: "1", title: "Title", subtitle: "Subtitle", imageName: "ImageName", section: "Seccion", questions: ["Question"]))
+        TaskListItemView(item: TaskItem(order: "1", title: "Title", subtitle: "Subtitle", imageName: "ImageName", section: "Seccion", identifier:"identifier" , questions: ["Question"]))
     }
 }

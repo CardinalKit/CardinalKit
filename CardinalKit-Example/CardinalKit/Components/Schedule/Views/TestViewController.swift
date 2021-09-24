@@ -1,9 +1,9 @@
 //
-//  SurveyItemViewController.swift
+//  TestViewController.swift
 //  CardinalKit_Example
 //
-//  Created by Santiago Gutierrez on 12/23/20.
-//  Copyright © 2020 CocoaPods. All rights reserved.
+//  Created by Julian Esteban Ramos Martinez on 7/09/21.
+//  Copyright © 2021 CocoaPods. All rights reserved.
 //
 
 import Foundation
@@ -12,12 +12,11 @@ import ResearchKit
 import CareKitUI
 import CareKitStore
 
-// 1. Subclass a task view controller to customize the control flow and present a ResearchKit survey!
-class SurveyItemViewController: OCKInstructionsTaskViewController, ORKTaskViewControllerDelegate {
-
+class TestViewController: OCKSimpleTaskViewController, ORKTaskViewControllerDelegate{
+    
     // 2. This method is called when the use taps the button!
     override func taskView(_ taskView: UIView & OCKTaskDisplayable, didCompleteEvent isComplete: Bool, at indexPath: IndexPath, sender: Any?) {
-
+        
         // 2a. If the task was marked incomplete, fall back on the super class's default behavior or deleting the outcome.
         if !isComplete {
             super.taskView(taskView, didCompleteEvent: isComplete, at: indexPath, sender: sender)
@@ -42,46 +41,33 @@ class SurveyItemViewController: OCKInstructionsTaskViewController, ORKTaskViewCo
             taskView.completionButton.isSelected = false
             return
         }
+
         // 4a. Retrieve the result from the ResearchKit survey
         let survey = taskViewController.result.results!.first(where: { $0.identifier == "feedback" }) as! ORKStepResult
         let feedbackResult = survey.results!.first as! ORKScaleQuestionResult
+        let answer = Int(truncating: feedbackResult.scaleAnswer!)
+
+        // 4b. Save the result into CareKit's store
+        controller.appendOutcomeValue(value: answer, at: IndexPath(item: 0, section: 0), completion: nil)
         
-        if let ScaleAnswer = feedbackResult.scaleAnswer{
-            // 4b. Save the result into CareKit's store
-            let answer = Int(truncating: ScaleAnswer)
-            controller.appendOutcomeValue(value: answer, at: IndexPath(item: 0, section: 0), completion: nil)
-            // 5. Upload results to GCP, using the CKTaskViewControllerDelegate class.
-            let gcpDelegate = CKUploadToGCPTaskViewControllerDelegate()
-            gcpDelegate.taskViewController(taskViewController, didFinishWith: reason, error: error)
-        }
-        else{
-            taskView.completionButton.isSelected = false
-            let gcpDelegate = CKUploadToGCPTaskViewControllerDelegate()
-            gcpDelegate.taskViewController(taskViewController, didFinishWith: .discarded, error: error)
-        }
+        // 5. Upload results to GCP, using the CKTaskViewControllerDelegate class.
+        let gcpDelegate = CKUploadToGCPTaskViewControllerDelegate()
+        gcpDelegate.taskViewController(taskViewController, didFinishWith: reason, error: error)
     }
 }
 
-class SurveyItemViewSynchronizer: OCKInstructionsTaskViewSynchronizer {
-
-    // Customize the initial state of the view
-    override func makeView() -> OCKInstructionsTaskView {
+class TestItemViewSynchronizer: OCKSimpleTaskViewSynchronizer {
+    
+    override func makeView() -> OCKSimpleTaskView {
         let instructionsView = super.makeView()
-        instructionsView.completionButton.label.text = "Start"
+//        instructionsView.headerView.detailLabel.text = "this is detail"
+//        instructionsView.headerView.titleLabel.text = "this is title"
         return instructionsView
     }
     
-    override func updateView(_ view: OCKInstructionsTaskView, context: OCKSynchronizationContext<OCKTaskEvents>) {
+    override func updateView(_ view: OCKSimpleTaskView, context: OCKSynchronizationContext<OCKTaskEvents>) {
         super.updateView(view, context: context)
-
-        // Check if an answer exists or not and set the detail label accordingly
-        let element: [OCKAnyEvent]? = context.viewModel.first
-        let firstEvent = element?.first
-        
-        if let answer = firstEvent?.outcome?.values.first?.integerValue {
-            view.headerView.detailLabel.text = "CardinalKit Rating: \(answer)"
-        } else {
-            view.headerView.detailLabel.text = "How are you liking CardinalKit?"
-        }
+//        view.headerView.detailLabel.text = "This is detail"
+//        view.headerView.titleLabel.text = "this is title"
     }
 }

@@ -10,58 +10,151 @@ import CareKit
 import CareKitStore
 import Contacts
 import UIKit
+import FirebaseFirestore
 
 internal extension OCKStore {
 
+    fileprivate func insertDocuments(documents: [DocumentSnapshot]?, collection: String, authCollection: String?,lastUpdateDate: Date?,onCompletion: @escaping (Error?)->Void){
+        guard let documents = documents,
+             documents.count>0 else {
+           onCompletion(nil)
+           return
+       }
+        
+        let group = DispatchGroup()
+        for document in documents{
+            group.enter()
+            CKSendHelper.getFromFirestore(authCollection:authCollection, collection: collection, identifier: document.documentID) {(document, error) in
+                do{
+                    guard let document = document,
+                          let payload = document.data(),
+                          let id = payload["id"] as? String else {
+                        onCompletion(nil)
+                        return
+                    }
+                    var itemSchedule:OCKSchedule? = nil                    
+                    var update = true
+                    if lastUpdateDate != nil,
+                       let updateTimeServer = payload["updateTime"] as? Timestamp,
+                       updateTimeServer.dateValue()<lastUpdateDate!{
+                        update = false
+                    }
+                    
+                    if update,
+                        let schedule = payload["scheduleElements"] as? [[String:Any]]{
+                        var scheduleElements=[OCKScheduleElement]()
+                        for element in schedule{
+                            var startDate = Date()
+                            var endDate:Date?=nil
+                            var intervalDate = DateComponents(day:2)
+                            var durationElement:OCKScheduleElement.Duration = .allDay
+                            if let startStamp = element["startTime"] as? Timestamp{
+                                startDate = startStamp.dateValue()
+                            }
+                            if let endStamp = element["endTime"] as? Timestamp{
+                                endDate = endStamp.dateValue()
+                            }
+                            
+                            if let interval = element["interval"] as? [String:Any]{
+                                intervalDate =
+                                    DateComponents(
+                                        timeZone: interval["timeZone"] as? TimeZone,
+                                        year: interval["year"] as? Int,
+                                        month: interval["month"] as? Int,
+                                        day: interval["day"] as? Int,
+                                        hour: interval["hour"] as? Int,
+                                        minute: interval["minute"] as? Int,
+                                        second: interval["second"] as? Int,
+                                        weekday: interval["weekday"] as? Int,
+                                        weekdayOrdinal: interval["weekdayOrdinal"] as? Int,
+                                        weekOfMonth: interval["weekOfMonth"] as? Int,
+                                        weekOfYear: interval["weekOfYear"] as? Int,
+                                        yearForWeekOfYear: interval["yearForWeekOfYear"] as? Int)
+                            }
+                            if let duration = element["duration"] as? [String:Any]{
+                                if let allDay = duration["allDay"] as? Bool,
+                                   allDay{
+                                    durationElement = .allDay
+                                }
+                                if let seconds = duration["seconds"] as? Double{
+                                    durationElement = .seconds(seconds)
+                                }
+                                if let hours = duration["hours"] as? Double{
+                                    durationElement = .hours(hours)
+                                }
+                                if let minutes = duration["minutes"] as? Double{
+                                    durationElement = .minutes(minutes)
+                                }
+                            }
+                            var targetValue:[OCKOutcomeValue] = [OCKOutcomeValue]()
+                            if let targetValues = element["targetValues"] as? [[String:Any]]{
+                                for target in targetValues{
+                                    if let identifier = target["groupIdentifier"] as? String{
+                                        var come = OCKOutcomeValue("", units: nil)
+                                            come.groupIdentifier=identifier
+                                        targetValue.append(come)
+                                    }
+                                }
+                            }
+                            scheduleElements.append(OCKScheduleElement(start: startDate, end: endDate, interval: intervalDate, text: element["text"] as? String, targetValues: targetValue, duration: durationElement))
+                        }
+                        if scheduleElements.count>0{
+                            itemSchedule = OCKSchedule(composing: scheduleElements)
+                        }
+                    }
+                    if let itemSchedule = itemSchedule{
+                        var uuid:UUID? = nil
+                        if let _uuid = payload["uuid"] as? String{
+                            uuid=UUID(uuidString: _uuid)
+                        }
+                        var task = OCKTask(id: id, title: payload["title"] as? String, carePlanUUID: uuid, schedule: itemSchedule)
+                        if let impactsAdherence = payload["impactsAdherence"] as? Bool{
+                            task.impactsAdherence = impactsAdherence
+                        }
+                        task.instructions = payload["instructions"] as? String
+                        
+                        // get if task exist?
+                        self.fetchTask(withID: id) { result in
+                            switch result {
+                                case .failure(_): do {
+                                    self.addTask(task)
+                                }
+                            case .success(_):do {
+                                self.updateTask(task)
+                                }
+                            }
+                        }
+                    }
+                    group.leave()
+                }
+            }
+        }
+        group.notify(queue: .main, execute: {
+            onCompletion(nil)
+        })
+    }
     // Adds tasks and contacts into the store
-    func populateSampleData() {
-
-        let thisMorning = Calendar.current.startOfDay(for: Date())
-        let aFewDaysAgo = Calendar.current.date(byAdding: .day, value: -3, to: thisMorning)!
-        let beforeBreakfast = Calendar.current.date(byAdding: .hour, value: 8, to: aFewDaysAgo)!
-        let afterLunch = Calendar.current.date(byAdding: .hour, value: 14, to: aFewDaysAgo)!
-
-        let coffeeElement = OCKScheduleElement(start: beforeBreakfast, end: nil, interval: DateComponents(day: 1))
-        let coffeeSchedule = OCKSchedule(composing: [coffeeElement])
-        var coffee = OCKTask(id: "coffee", title: "Drink Coffee ☕️", carePlanUUID: nil, schedule: coffeeSchedule)
-        coffee.impactsAdherence = true
-        coffee.instructions = "Drink coffee for good spirits!"
+    func populateSampleData(lastUpdateDate: Date?,completion:@escaping () -> Void) {
         
-        let surveyElement = OCKScheduleElement(start: afterLunch, end: nil, interval: DateComponents(day: 1))
-        let surveySchedule = OCKSchedule(composing: [surveyElement])
-        var survey = OCKTask(id: "survey", title: "Take a Survey 📝", carePlanUUID: nil, schedule: surveySchedule)
-        survey.impactsAdherence = true
-        survey.instructions = "You can schedule any ResearchKit survey in your app."
+        let collection: String = "carekit-store/v2/tasks"
+        // Download Tasks By Study
         
-        /*
-         Doxylamine and Nausea DEMO.
-         */
-        let doxylamineSchedule = OCKSchedule(composing: [
-            OCKScheduleElement(start: beforeBreakfast, end: nil,
-                               interval: DateComponents(day: 2)),
-
-            OCKScheduleElement(start: afterLunch, end: nil,
-                               interval: DateComponents(day: 4))
-        ])
-
-        var doxylamine = OCKTask(id: "doxylamine", title: "Take Doxylamine",
-                                 carePlanUUID: nil, schedule: doxylamineSchedule)
-        doxylamine.instructions = "Take 25mg of doxylamine when you experience nausea."
-
-        let nauseaSchedule = OCKSchedule(composing: [
-            OCKScheduleElement(start: beforeBreakfast, end: nil, interval: DateComponents(day: 2),
-                               text: "Anytime throughout the day", targetValues: [], duration: .allDay)
-            ])
-
-        var nausea = OCKTask(id: "nausea", title: "Track your nausea",
-                             carePlanUUID: nil, schedule: nauseaSchedule)
-        nausea.impactsAdherence = false
-        nausea.instructions = "Tap the button below anytime you experience nausea."
-        /* ---- */
-
-        addTasks([nausea, doxylamine, survey, coffee], callbackQueue: .main, completion: nil)
-
-        createContacts()
+        guard  let studyCollection = CKStudyUser.shared.studyCollection else {
+            return
+        }
+        // Get tasks on study
+        CKSendHelper.getFromFirestore(authCollection: studyCollection,collection: collection, onCompletion: { (documents,error) in
+            self.insertDocuments(documents: documents, collection: collection, authCollection: studyCollection,lastUpdateDate:lastUpdateDate){
+                (Error) in
+                CKSendHelper.getFromFirestore(collection: collection, onCompletion: { (documents,error) in
+                    self.insertDocuments(documents: documents, collection: collection, authCollection: nil,lastUpdateDate:lastUpdateDate){
+                        (Error) in
+                        self.createContacts()
+                        completion()
+                    }
+                })
+            }
+        })
     }
     
     func createContacts() {
