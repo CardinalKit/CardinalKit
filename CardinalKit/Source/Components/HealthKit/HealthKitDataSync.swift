@@ -300,7 +300,7 @@ extension HealthKitDataSync {
         let sourcePredicate = HKQuery.predicateForObjects(from: [sourceRevision])
         let predicate = NSCompoundPredicate.init(andPredicateWithSubpredicates: [datePredicate, sourcePredicate])
         
-        let query = HKSampleQuery(sampleType: type, predicate: predicate, limit: HKObjectQueryNoLimit, sortDescriptors: [sortDescriptor]) {
+        let query = HKSampleQuery(sampleType: type, predicate: predicate, limit: 1000, sortDescriptors: [sortDescriptor]) {
             (query: HKSampleQuery, results: [HKSample]?, error: Error?) in
             queryHandler(query, results, error)
         }
