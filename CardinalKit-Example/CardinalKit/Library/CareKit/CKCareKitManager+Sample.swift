@@ -29,10 +29,10 @@ internal extension OCKStore {
                     guard let document = document,
                           let payload = document.data(),
                           let id = payload["id"] as? String else {
-                        onCompletion(nil)
+                              group.leave()
                         return
                     }
-                    var itemSchedule:OCKSchedule? = nil                    
+                    var itemSchedule:OCKSchedule? = nil
                     var update = true
                     if lastUpdateDate != nil,
                        let updateTimeServer = payload["updateTime"] as? Timestamp,
@@ -41,7 +41,8 @@ internal extension OCKStore {
                     }
                     
                     if update,
-                        let schedule = payload["scheduleElements"] as? [[String:Any]]{
+                        let schedule = payload["scheduleElements"] as? [[String:Any]]
+                    {
                         var scheduleElements=[OCKScheduleElement]()
                         for element in schedule{
                             var startDate = Date()
@@ -56,15 +57,23 @@ internal extension OCKStore {
                             }
                             
                             if let interval = element["interval"] as? [String:Any]{
+                                var day = 1
+                                if let dayInterval = interval["day"] as? Int{
+                                    day = dayInterval
+                                }
+                                var seconds = 1
+                                if let secondsInterval = interval["seconds"] as? Int{
+                                    seconds = secondsInterval
+                                }
                                 intervalDate =
                                     DateComponents(
                                         timeZone: interval["timeZone"] as? TimeZone,
                                         year: interval["year"] as? Int,
                                         month: interval["month"] as? Int,
-                                        day: interval["day"] as? Int,
+                                        day: day,
                                         hour: interval["hour"] as? Int,
                                         minute: interval["minute"] as? Int,
-                                        second: interval["second"] as? Int,
+                                        second: seconds,
                                         weekday: interval["weekday"] as? Int,
                                         weekdayOrdinal: interval["weekdayOrdinal"] as? Int,
                                         weekOfMonth: interval["weekOfMonth"] as? Int,
@@ -90,7 +99,7 @@ internal extension OCKStore {
                             if let targetValues = element["targetValues"] as? [[String:Any]]{
                                 for target in targetValues{
                                     if let identifier = target["groupIdentifier"] as? String{
-                                        var come = OCKOutcomeValue("", units: nil)
+                                        var come = OCKOutcomeValue(false, units: nil)
                                             come.groupIdentifier=identifier
                                         targetValue.append(come)
                                     }
@@ -112,7 +121,7 @@ internal extension OCKStore {
                             task.impactsAdherence = impactsAdherence
                         }
                         task.instructions = payload["instructions"] as? String
-                        
+
                         // get if task exist?
                         self.fetchTask(withID: id) { result in
                             switch result {
@@ -123,9 +132,14 @@ internal extension OCKStore {
                                 self.updateTask(task)
                                 }
                             }
+
+                            group.leave()
                         }
                     }
-                    group.leave()
+                    else{
+                        group.leave()
+                    }
+                    
                 }
             }
         }

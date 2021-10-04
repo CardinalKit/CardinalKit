@@ -113,10 +113,10 @@ extension HealthKitManager {
         var copyTypes = types
         let element = copyTypes.removeFirst()
         let query = HKObserverQuery(sampleType: element, predicate: nil, updateHandler: { [weak self] (query, completionHandler, error) in
-            
             guard let strongSelf = self else {
                 if(copyTypes.count>0){
                     self?.setUpBackgroundDeliveryForDataTypes(types: copyTypes, frequency: frequency,completion)
+                    copyTypes.removeAll()
                 }
                 completionHandler()
                 return
@@ -127,19 +127,11 @@ extension HealthKitManager {
             strongSelf.backgroundQuery(forType: element, completionHandler: {
                 dispatchGroup.leave()
             })
-            
-            /* dispatchGroup.enter()
-            strongSelf.cumulativeBackgroundQuery(forType: type, completionHandler: {
-                dispatchGroup.leave()
-            })*/
-            
-            dispatchGroup.notify(queue: .main, execute: {
-                if(copyTypes.count>0){
-                    strongSelf.setUpBackgroundDeliveryForDataTypes(types: copyTypes, frequency: frequency,completion)
-                }
-                completionHandler()
-            })
-            
+            if(copyTypes.count>0){
+                strongSelf.setUpBackgroundDeliveryForDataTypes(types: copyTypes, frequency: frequency,completion)
+                copyTypes.removeAll()
+            }
+            completionHandler()
         })
         healthStore.execute(query)
         healthStore.enableBackgroundDelivery(for: element, frequency: frequency, withCompletion: { (success, error) in
