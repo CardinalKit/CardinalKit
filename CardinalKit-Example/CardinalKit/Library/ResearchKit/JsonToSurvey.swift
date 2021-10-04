@@ -110,7 +110,21 @@ class JsonToSurvey {
                        let minValueDescription = data["minValueDescription"] as? String{
                         let vertical = data["vertical"] as? String ?? "false"
                         
-                        let healthScaleAnswerFormat = ORKAnswerFormat.scale(withMaximumValue:Int(max) ?? 5, minimumValue: Int(min) ?? 0, defaultValue: 3, step: Int(step) ?? 1, vertical: Bool(vertical) ?? false, maximumValueDescription: maxValueDescription, minimumValueDescription: minValueDescription)
+                        let intMax = Int(max) ?? 5
+                        var intMin = Int(min) ?? 0
+                        var intStep = Int(step) ?? 1
+                                                
+                        if intMin > intMax {
+                            intMin = intMax - 1
+                        }
+                        
+                        let difference = intMax-intMin
+                        
+                        if difference < intStep {
+                            intStep=difference
+                        }
+                        
+                        let healthScaleAnswerFormat = ORKAnswerFormat.scale(withMaximumValue:intMax, minimumValue: intMin, defaultValue: 3, step: intStep, vertical: Bool(vertical) ?? false, maximumValueDescription: maxValueDescription, minimumValueDescription: minValueDescription)
                         
                         return healthScaleAnswerFormat
                     }

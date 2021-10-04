@@ -8,6 +8,7 @@
 
 import HealthKit
 import RealmSwift
+import UIKit
 
 class HealthKitDataUploads: Object {
     @objc dynamic var dataType: String = ""
@@ -294,18 +295,31 @@ extension HealthKitDataSync {
     
     fileprivate func queryHealthStore(forType type: HKSampleType, forSource sourceRevision: HKSourceRevision, fromDate startDate: Date, queryHandler: @escaping (HKSampleQuery, [HKSample]?, Error?) -> Void) {
         
-        let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: true)
         
+        let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: true)
         let datePredicate = HKQuery.predicateForSamples(withStart: startDate.addingTimeInterval(1) , end: Date(), options: .strictStartDate)
         let sourcePredicate = HKQuery.predicateForObjects(from: [sourceRevision])
         let predicate = NSCompoundPredicate.init(andPredicateWithSubpredicates: [datePredicate, sourcePredicate])
         
-        let query = HKSampleQuery(sampleType: type, predicate: predicate, limit: HKObjectQueryNoLimit, sortDescriptors: [sortDescriptor]) {
+//        if let quantityType = type as? HKQuantityType{
+//            let query = HKStatisticsQuery(quantityType: quantityType, quantitySamplePredicate: predicate){
+//                (query: HKStatisticsQuery, results: HKStatistics?, error: Error?) in
+//                let value = results?.sumQuantity()
+//
+////                queryHandler(query, results, error)
+//            }
+//            HealthKitManager.shared.healthStore.execute(query) // run something when finished
+//        }
+//        else{
+        let query = HKSampleQuery(sampleType: type, predicate: predicate, limit: 1000, sortDescriptors: [sortDescriptor]) {
             (query: HKSampleQuery, results: [HKSample]?, error: Error?) in
             queryHandler(query, results, error)
         }
         
         HealthKitManager.shared.healthStore.execute(query) // run something when finished
+//        }
+        
+        
     }
     
     fileprivate func sendActivityIndex(forDate date: Date,value: Double, stepCount:Double){
@@ -321,14 +335,26 @@ extension HealthKitDataSync {
     }
     
     fileprivate func send(data: [HKSample], onCompletion: (() -> Void)? = nil) {
+        if data.count<999{
+            do {
+                let packageName = "dataUpperThan1000"
+                let jsonObject = ["dataType": String(describing: data[0].sampleType)]
+                let sampleToJson = try JSONSerialization.data(withJSONObject: jsonObject, options: [])
+                let package = try Package(packageName, type: .hkdata, data: sampleToJson)
+                try NetworkDataRequest.send(package) { (success,error) in}
+            } catch {
+               VError("Unable to process package %{public}@", error.localizedDescription)
+            }
+        }
+        
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601
         let dispatchGroup = DispatchGroup()
         var samplesArray = [[String: Any]]()
-        
-        
         //Transform HKSampleData to mHealthFormat
         let serializer = OMHSerializer()
+        
+        
         
         do{
         
@@ -339,9 +365,10 @@ extension HealthKitDataSync {
                 
                 return sampleInObject!
             })
+            let newData = JoinData(data: samplesArray)
             let packageName = getPackageName(for: data)
             var index=0
-            for sample in samplesArray {
+            for sample in newData {
                 dispatchGroup.enter()
                 let sampleToJson = try JSONSerialization.data(withJSONObject: sample, options: [])
                 do {
@@ -356,9 +383,6 @@ extension HealthKitDataSync {
                    VError("Unable to process package %{public}@", error.localizedDescription)
                 }
             }
-            
-            
-            
             dispatchGroup.notify(queue: DispatchQueue.main) {
                 onCompletion?()
             }
@@ -366,6 +390,116 @@ extension HealthKitDataSync {
         catch{
             print("Error info: \(error)")
         }
+    }
+    
+    fileprivate func JoinData(data: [[String: Any]])->[[String: Any]]{
+        
+        let firstElement = data.first
+        if let element = firstElement,
+           let body = element["body"] as? [String: Any]
+        {
+//            if is quantity
+            if let quantityType = body["quantity_type"] as? String{
+                switch(quantityType){
+                case "HKQuantityTypeIdentifierStepCount":
+                    return joinDataStepCount(data: data)
+                case "HKQuantityTypeIdentifierActiveEnergyBurned":
+                    return joinDataEnergyBurned(data: data)
+                default:
+                    return data
+                }
+
+            }
+
+        }
+        
+        return data
+        
+    }
+    
+    private func joinDataEnergyBurned(data: [[String:Any]])->[[String:Any]]{
+        var finalData = [[String: Any]]()
+        var datesDictionary = [Date:[String:Any]]()
+        var firstElement = data.first!
+        var body = firstElement["body"] as! [String: Any]
+        if var kcalBurned = body["kcal_burned"] as? [String:Any]{
+            for element in data {
+                if let nBody = element["body"] as? [String:Any],
+                   let kcal = nBody["kcal_burned"] as? [String:Any],
+                   let kcalValue = kcal["value"] as? Int {
+                    if let time_frame = nBody["effective_time_frame"] as? [String:Any],
+                       let dateStr = time_frame["date_time"] as? String{
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"//this your string date format
+                        let date = dateFormatter.date(from: dateStr)!
+                        let onlyDate = removeTimeStamp(fromDate: date)
+                        var finalKcalValue = kcalValue
+                        if let dateKcalValue = datesDictionary[onlyDate]{
+                            finalKcalValue+=dateKcalValue["count"] as! Int
+                        }
+                        else{
+                            datesDictionary[onlyDate]=[String:Any]()
+                            datesDictionary[onlyDate]?["date"] = dateStr
+                        }
+                        datesDictionary[onlyDate]?["count"]=finalKcalValue
+                    }
+                }
+            }
+            for dateElement in datesDictionary{
+                kcalBurned["value"] = dateElement.value["count"]
+                body["kcal_burned"] = kcalBurned
+                body["effective_time_frame"] = ["date_time":dateElement.value["date"]]
+                firstElement["body"]=body
+                finalData.append(firstElement)
+            }
+            return finalData
+        }
+        else{
+            return data
+        }
+    }
+    
+    private func joinDataStepCount(data: [[String: Any]])->[[String: Any]]{
+        var finalData = [[String: Any]]()
+        var datesDictionary = [Date:[String:Any]]()
+        var firstElement = data.first!
+        var body = firstElement["body"] as! [String: Any]
+        
+        for element in data {
+            if let nBody = element["body"] as? [String:Any],
+               let count = nBody["step_count"] as? Int{
+                if let time_frame = nBody["effective_time_frame"] as? [String:Any],
+                   let dateStr = time_frame["date_time"] as? String{
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"//this your string date format
+                    let date = dateFormatter.date(from: dateStr)!
+                    let onlyDate = removeTimeStamp(fromDate: date)
+                    var finalStepCount = count
+                    if let dateStepCount = datesDictionary[onlyDate]{
+                        finalStepCount+=dateStepCount["count"] as! Int
+                    }
+                    else{
+                        datesDictionary[onlyDate]=[String:Any]()
+                        datesDictionary[onlyDate]?["date"] = dateStr
+                    }
+                    datesDictionary[onlyDate]?["count"]=finalStepCount
+                }
+            }
+        }
+        for dateElement in datesDictionary{
+            body["step_count"] = dateElement.value["count"]
+            body["effective_time_frame"] = ["date_time":dateElement.value["date"]]
+            firstElement["body"]=body
+            finalData.append(firstElement)
+        }
+        return finalData
+    }
+    
+    private func removeTimeStamp(fromDate: Date) -> Date {
+        guard let date = Calendar.current.date(from: Calendar.current.dateComponents([.year, .month, .day], from: fromDate)) else {
+            fatalError("Failed to strip time from Date object")
+        }
+        return date
     }
     
     fileprivate func getPackageName(for data: [HKSample]) -> String? {

@@ -81,7 +81,7 @@ class CheckListItemViewController: OCKChecklistTaskViewController, ORKTaskViewCo
         taskViewController.dismiss(animated: true, completion: nil)
         if reason == .completed,
            let indexPath = self.indexPath{
-            controller.appendOutcomeValue(value: "", at: indexPath, completion: nil)
+            controller.appendOutcomeValue(value: true, at: indexPath, completion: nil)
             // 5. Upload results to GCP, using the CKTaskViewControllerDelegate class.
             let gcpDelegate = CKUploadToGCPTaskViewControllerDelegate()
             gcpDelegate.taskViewController(taskViewController, didFinishWith: reason, error: error)

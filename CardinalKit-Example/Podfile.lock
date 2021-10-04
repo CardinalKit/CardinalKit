@@ -219,6 +219,7 @@ PODS:
     - BoringSSL-GRPC/Interface (= 0.0.7)
   - BoringSSL-GRPC/Interface (0.0.7)
   - CardinalKit (1.2.0):
+    - Granola
     - ObjectMapper (~> 3.3.0)
     - ReachabilitySwift (~> 3)
     - RealmSwift (~> 10.7)
@@ -336,6 +337,8 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (7.3.1):
     - GoogleUtilities/Logger
+  - Granola (0.4.1):
+    - ObjectiveSugar (~> 1.1)
   - "gRPC-C++ (1.28.2)":
     - "gRPC-C++/Implementation (= 1.28.2)"
     - "gRPC-C++/Interface (= 1.28.2)"
@@ -367,6 +370,7 @@ PODS:
     - nanopb/encode (= 2.30908.0)
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
+  - ObjectiveSugar (1.1.0)
   - ObjectMapper (3.3.0)
   - PromisesObjC (1.2.12)
   - ReachabilitySwift (3)
@@ -377,9 +381,6 @@ PODS:
     - Realm (= 10.7.2)
   - ResearchKit (2.1.0-beta)
   - SAMKeychain (1.5.3)
-  - Sentry (7.1.3):
-    - Sentry/Core (= 7.1.3)
-  - Sentry/Core (7.1.3)
   - SwiftyJSON (4.1.0)
   - Zip (1.1.0)
 
@@ -392,7 +393,6 @@ DEPENDENCIES:
   - Firebase/Storage
   - Granola (from `https://github.com/Alternova-Inc/Granola.git`, branch `Main`)
   - ResearchKit (from `https://github.com/ResearchKit/ResearchKit.git`, branch `master`)
-  - Sentry (from `https://github.com/getsentry/sentry-cocoa.git`, tag `7.1.3`)
 
 SPEC REPOS:
   trunk:
@@ -415,6 +415,7 @@ SPEC REPOS:
     - GTMSessionFetcher
     - leveldb-library
     - nanopb
+    - ObjectiveSugar
     - ObjectMapper
     - PromisesObjC
     - ReachabilitySwift
@@ -427,25 +428,25 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   CardinalKit:
     :path: "../"
+  Granola:
+    :branch: Main
+    :git: https://github.com/Alternova-Inc/Granola.git
   ResearchKit:
-    :branch: main
+    :branch: master
     :git: https://github.com/ResearchKit/ResearchKit.git
-  Sentry:
-    :git: https://github.com/getsentry/sentry-cocoa.git
-    :tag: 7.1.3
 
 CHECKOUT OPTIONS:
+  Granola:
+    :commit: 4b6a421bab81bea5fad4b124b0441b3dd2d82c6b
+    :git: https://github.com/Alternova-Inc/Granola.git
   ResearchKit:
-    :commit: 0e68cdf744a135e80e1065965ee056fe05513d58
+    :commit: 68f9d29b669dd3ac27b548f7c9c28342218cf72e
     :git: https://github.com/ResearchKit/ResearchKit.git
-  Sentry:
-    :git: https://github.com/getsentry/sentry-cocoa.git
-    :tag: 7.1.3
 
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
   BoringSSL-GRPC: 8edf627ee524575e2f8d19d56f068b448eea3879
-  CardinalKit: 75ec9411f5bb231a310f564a84f804d6d50d77c9
+  CardinalKit: a6eb647066db9588873321637424bb6f72c92531
   Firebase: c121feb35e4126c0b355e3313fa9b487d47319fd
   FirebaseAnalytics: cd3bd84d722a24a8923918af8af8e5236f615d77
   FirebaseAuth: 5fe4585c2ed847319f0ea68bd1d82c77e49ff9a0
@@ -458,22 +459,23 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: fd19169c3034975cb934e865e5667bfdce59df7f
   GoogleDataTransport: cd9db2180fcecd8da1b561aea31e3e56cf834aa7
   GoogleUtilities: e1d9ed4e544fc32a93e00e721400cbc3f377200d
+  Granola: 07d8cc4bdf005228118161eb182cd34eaf169a03
   "gRPC-C++": 13d8ccef97d5c3c441b7e3c529ef28ebee86fad2
   gRPC-Core: 4afa11bfbedf7cdecd04de535a9e046893404ed5
   GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
+  ObjectiveSugar: a6a25f23d657c19df0a0b972466d5b5ca9f5295c
   ObjectMapper: b612bf8c8e99c4dc0bb6013a51f7c27966ed5da9
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
   Realm: e523da9ade306c5ae87e85dc09fdef148d3e1cc1
   RealmSwift: 4f6758c3adbdcc87f7b7777107226532a077f61c
-  ResearchKit: 9d6981b42c8633aa64097f4490be65abf39c350a
+  ResearchKit: 449f96824c4e71c70a9278953c3b279f0fe10805
   SAMKeychain: 483e1c9f32984d50ca961e26818a534283b4cd5c
-  Sentry: 6d963d64804dd06d96e778be729613f481394312
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
   Zip: 8877eede3dda76bcac281225c20e71c25270774c
 
-PODFILE CHECKSUM: 192678957f672b9209afbb494bfe0446f25cbaaa
+PODFILE CHECKSUM: cc50d0a51750b74329c348a3a4f6965ce59c9ff6
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.10.2
