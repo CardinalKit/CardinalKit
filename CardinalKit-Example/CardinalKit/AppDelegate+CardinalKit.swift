@@ -25,6 +25,7 @@ extension AppDelegate {
         // (2) setup the CardinalKit SDK
         var options = CKAppOptions()
         options.networkDeliveryDelegate = CKAppNetworkManager()
+        options.networkReceiverDelegate = CKAppNetworkManager()
         CKApp.configure(options)
         
         // (3) if we have already logged in
@@ -39,6 +40,7 @@ extension AppDelegate {
                 }
             }
         }
+        CKStudyUser.shared.save()
     }
     
 }

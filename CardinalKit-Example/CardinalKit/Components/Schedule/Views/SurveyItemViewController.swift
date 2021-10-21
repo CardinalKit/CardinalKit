@@ -42,18 +42,23 @@ class SurveyItemViewController: OCKInstructionsTaskViewController, ORKTaskViewCo
             taskView.completionButton.isSelected = false
             return
         }
-
         // 4a. Retrieve the result from the ResearchKit survey
         let survey = taskViewController.result.results!.first(where: { $0.identifier == "feedback" }) as! ORKStepResult
         let feedbackResult = survey.results!.first as! ORKScaleQuestionResult
-        let answer = Int(truncating: feedbackResult.scaleAnswer!)
-
-        // 4b. Save the result into CareKit's store
-        controller.appendOutcomeValue(value: answer, at: IndexPath(item: 0, section: 0), completion: nil)
         
-        // 5. Upload results to GCP, using the CKTaskViewControllerDelegate class.
-        let gcpDelegate = CKUploadToGCPTaskViewControllerDelegate()
-        gcpDelegate.taskViewController(taskViewController, didFinishWith: reason, error: error)
+        if let ScaleAnswer = feedbackResult.scaleAnswer{
+            // 4b. Save the result into CareKit's store
+            let answer = Int(truncating: ScaleAnswer)
+            controller.appendOutcomeValue(value: answer, at: IndexPath(item: 0, section: 0), completion: nil)
+            // 5. Upload results to GCP, using the CKTaskViewControllerDelegate class.
+            let gcpDelegate = CKUploadToGCPTaskViewControllerDelegate()
+            gcpDelegate.taskViewController(taskViewController, didFinishWith: reason, error: error)
+        }
+        else{
+            taskView.completionButton.isSelected = false
+            let gcpDelegate = CKUploadToGCPTaskViewControllerDelegate()
+            gcpDelegate.taskViewController(taskViewController, didFinishWith: .discarded, error: error)
+        }
     }
 }
 

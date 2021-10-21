@@ -55,7 +55,7 @@ class HealthKitManager: SyncDelegate {
         return true
     }*/
     
-    public func getHealthKitAuth(forTypes types: Set<HKQuantityType>, _ completion: @escaping (_ success: Bool, _ error: NSError?) -> Void) {
+    public func getHealthKitAuth(forTypes types: Set<HKSampleType>, _ completion: @escaping (_ success: Bool, _ error: NSError?) -> Void) {
         
         guard HKHealthStore.isHealthDataAvailable() && SessionManager.shared.userId != nil else {
             let error = NSError(domain: Constants.app, code: 2, userInfo: [NSLocalizedDescriptionKey: "Health data is not available on this device."])
@@ -73,8 +73,27 @@ class HealthKitManager: SyncDelegate {
         }
     }
     
-    public func startBackgroundDelivery(forTypes types: Set<HKQuantityType>, withFrequency frequency: HKUpdateFrequency, _ completion: ((_ success: Bool, _ error: Error?) -> Void)? = nil) {
+    public func startBackgroundDelivery(forTypes types: Set<HKSampleType>, withFrequency frequency: HKUpdateFrequency, _ completion: ((_ success: Bool, _ error: Error?) -> Void)? = nil) {
         self.setUpBackgroundDeliveryForDataTypes(types: types, frequency: frequency, completion)
+    }
+    
+    public func startCollectAllData(forTypes types: Set<HKSampleType>,fromDate startDate: Date? = nil, _ completion: ((_ success: Bool, _ error: Error?) -> Void)? = nil) {
+        collectNextType(types: types, startDate: startDate)
+//        for type in types {
+//            // collect one after another
+//            HealthKitDataSync.shared.collectAndUploadData(forType: type, fromDate: startDate, onCompletion: nil)
+//        }
+    }
+    
+    private func collectNextType(types: Set<HKSampleType>,startDate: Date? = nil){
+        var elements = types
+        let first = elements.removeFirst()
+        HealthKitDataSync.shared.collectAndUploadData(forType: first, fromDate: startDate){() in
+            if(elements.count>0){
+                self.collectNextType(types: elements, startDate: startDate)
+            }
+        }
+        
     }
     
     public func disableHealthKit(_ completion: ((_ success: Bool, _ error: Error?) -> Void)? = nil) {
@@ -90,47 +109,83 @@ class HealthKitManager: SyncDelegate {
 
 extension HealthKitManager {
     
-    fileprivate func setUpBackgroundDeliveryForDataTypes(types: Set<HKQuantityType>, frequency: HKUpdateFrequency, _ completion: ((_ success: Bool, _ error: Error?) -> Void)? = nil) {
-
-        for type in types {
-            let query = HKObserverQuery(sampleType: type, predicate: nil, updateHandler: { [weak self] (query, completionHandler, error) in
-                
-                guard let strongSelf = self else {
-                    completionHandler()
-                    return
+    fileprivate func setUpBackgroundDeliveryForDataTypes(types: Set<HKSampleType>, frequency: HKUpdateFrequency, _ completion: ((_ success: Bool, _ error: Error?) -> Void)? = nil) {
+        var copyTypes = types
+        let element = copyTypes.removeFirst()
+        let query = HKObserverQuery(sampleType: element, predicate: nil, updateHandler: { [weak self] (query, completionHandler, error) in
+            guard let strongSelf = self else {
+                if(copyTypes.count>0){
+                    self?.setUpBackgroundDeliveryForDataTypes(types: copyTypes, frequency: frequency,completion)
+                    copyTypes.removeAll()
                 }
-                
-                let dispatchGroup = DispatchGroup()
-                dispatchGroup.enter()
-                strongSelf.backgroundQuery(forType: type, completionHandler: {
-                    dispatchGroup.leave()
-                })
-                
-                /* dispatchGroup.enter()
-                strongSelf.cumulativeBackgroundQuery(forType: type, completionHandler: {
-                    dispatchGroup.leave()
-                })*/
-                
-                dispatchGroup.notify(queue: .main, execute: {
-                    completionHandler()
-                })
-                
-            })
+                completionHandler()
+                return
+            }
             
-            healthStore.execute(query)
-            healthStore.enableBackgroundDelivery(for: type, frequency: frequency, withCompletion: { (success, error) in
-                if let error = error {
-                    VError("%@", error.localizedDescription)
-                }
-                completion?(success, error)
+            let dispatchGroup = DispatchGroup()
+            dispatchGroup.enter()
+            strongSelf.backgroundQuery(forType: element, completionHandler: {
+                dispatchGroup.leave()
             })
-            
-        }
+            if(copyTypes.count>0){
+                strongSelf.setUpBackgroundDeliveryForDataTypes(types: copyTypes, frequency: frequency,completion)
+                copyTypes.removeAll()
+            }
+            completionHandler()
+        })
+        healthStore.execute(query)
+        healthStore.enableBackgroundDelivery(for: element, frequency: frequency, withCompletion: { (success, error) in
+            if let error = error {
+                VError("%@", error.localizedDescription)
+            }
+            completion?(success, error)
+        })
+        
+        
+        
+        
+//        for type in types {
+//            let query = HKObserverQuery(sampleType: type, predicate: nil, updateHandler: { [weak self] (query, completionHandler, error) in
+//
+//                guard let strongSelf = self else {
+//                    completionHandler()
+//                    return
+//                }
+//
+//                let dispatchGroup = DispatchGroup()
+//                dispatchGroup.enter()
+//                strongSelf.backgroundQuery(forType: type, completionHandler: {
+//                    dispatchGroup.leave()
+//                })
+//
+//                /* dispatchGroup.enter()
+//                strongSelf.cumulativeBackgroundQuery(forType: type, completionHandler: {
+//                    dispatchGroup.leave()
+//                })*/
+//
+//                dispatchGroup.notify(queue: .main, execute: {
+//                    completionHandler()
+//                })
+//
+//            })
+//
+//            healthStore.execute(query)
+//            healthStore.enableBackgroundDelivery(for: type, frequency: frequency, withCompletion: { (success, error) in
+//                if let error = error {
+//                    VError("%@", error.localizedDescription)
+//                }
+//                completion?(success, error)
+//            })
+//
+//        }
     }
+    
+    
+    
     
     //TODO: (delete) running the old data collection solution as a baseline to compare new values
     @available(*, deprecated)
-    fileprivate func cumulativeBackgroundQuery(forType type: HKQuantityType, completionHandler: @escaping ()->Void) {
+    fileprivate func cumulativeBackgroundQuery(forType type: HKSampleType, completionHandler: @escaping ()->Void) {
         
         let supportedTypes = [HKQuantityTypeIdentifier.stepCount.rawValue, HKQuantityTypeIdentifier.flightsClimbed.rawValue, HKQuantityTypeIdentifier.distanceWalkingRunning.rawValue]
         if (!supportedTypes.contains(type.identifier)) {
@@ -155,7 +210,7 @@ extension HealthKitManager {
         
     }
     
-    fileprivate func backgroundQuery(forType type: HKQuantityType, completionHandler: @escaping ()->Void) {
+    fileprivate func backgroundQuery(forType type: HKSampleType, completionHandler: @escaping ()->Void) {
         
         guard canQuery(forType: type) else {
             VLog("Cannot yet query for %{public}@, please try again in a minute.", type.identifier)
@@ -174,7 +229,7 @@ extension HealthKitManager {
         
     }
 
-    fileprivate func canQuery(forType type: HKQuantityType) -> Bool {
+    fileprivate func canQuery(forType type: HKSampleType) -> Bool {
         queryLogMutex.lock()
         defer { queryLogMutex.unlock() }
         
@@ -194,10 +249,19 @@ extension HealthKitManager {
         return false
     }
     
-    @objc fileprivate func syncData(forHkTypes hkTypes: Set<HKQuantityType>) {
-        for type in hkTypes {
-            HealthKitDataSync.shared.collectAndUploadData(forType: type, onCompletion: nil)
+    @objc fileprivate func syncData(forHkTypes hkTypes: Set<HKSampleType>) {
+        var copyTypes = hkTypes
+        let element = copyTypes.removeFirst()
+        HealthKitDataSync.shared.collectAndUploadData(forType: element){ () in
+            if(copyTypes.count>0){
+                self.syncData(forHkTypes: copyTypes)
+            }
         }
+        
+//        for type in hkTypes {
+//            HealthKitDataSync.shared.collectAndUploadData(forType: type, onCompletion: nil)
+//        }
     }
+    
     
 }

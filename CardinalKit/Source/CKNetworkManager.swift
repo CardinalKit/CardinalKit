@@ -17,6 +17,10 @@ public protocol CKAPIDeliveryDelegate {
     func send(file: URL, package: Package, onCompletion: @escaping (Bool) -> Void)
 }
 
+public protocol CKAPIReceiverDelegate {
+    func request(route: String, onCompletion: @escaping (Any) -> Void)
+}
+
 public class CKNetworkManager : NSObject {
 
 }

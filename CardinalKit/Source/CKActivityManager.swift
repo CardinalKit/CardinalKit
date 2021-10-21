@@ -30,7 +30,11 @@ public class CKActivityManager : NSObject {
         }
     }
     
-    public func getHealthAuthorizaton(forTypes typesToCollect:Set<HKQuantityType>, _ completion: @escaping (_ success: Bool, _ error: Error?) -> Void) {
+    public func fetchData(route: String, onCompletion: @escaping (Any) -> Void){
+        DownloadManager.shared.fetchData(route: route, onCompletion: onCompletion)
+    }
+    
+    public func getHealthAuthorizaton(forTypes typesToCollect:Set<HKSampleType>, _ completion: @escaping (_ success: Bool, _ error: Error?) -> Void) {
         self.typesToCollect = typesToCollect
         HealthKitManager.shared.getHealthKitAuth(forTypes: self.typesToCollect) { [weak self] (success, error) in
             self?.hasGrantedAuth = success
@@ -57,6 +61,22 @@ public class CKActivityManager : NSObject {
             self?.hasStartedCollection = success
             completion?(success, error)
         }
+        
+    }
+    
+    public func collectAllDataBetweenSpecificDates(fromDate startDate: Date? = nil,_ completion: ((_ success: Bool, _ error: Error?) -> Void)? = nil){
+        
+        guard hasGrantedAuth else {
+            let error = NSError(domain: Constants.app, code: 2, userInfo: [NSLocalizedDescriptionKey: "Cannot startHealthKitCollection without getting auth permissions first."])
+            completion?(false, error)
+            return
+        }
+        
+        HealthKitManager.shared.startCollectAllData(forTypes: typesToCollect, fromDate: startDate) { (success, error) in
+            self.hasStartedCollection = success
+            completion?(success, error)
+        }
+        
     }
     
     public func stopHealthKitCollection() {
@@ -89,18 +109,18 @@ public class CKActivityManager : NSObject {
          }
      }
      
-     fileprivate var _typesToCollect = Set<HKQuantityType>()
-     fileprivate var typesToCollect: Set<HKQuantityType> {
+     fileprivate var _typesToCollect = Set<HKSampleType>()
+     fileprivate var typesToCollect: Set<HKSampleType> {
          get {
              if (!_typesToCollect.isEmpty) {
                  return _typesToCollect
              }
              
              guard let typeIds = UserDefaults.standard.array(forKey: keyTypesToCollect) as? [String] else {
-                 return Set<HKQuantityType>() // no types to process
+                 return Set<HKSampleType>() // no types to process
              }
              
-             var types = Set<HKQuantityType>()
+             var types = Set<HKSampleType>()
              for type in typeIds {
                  let type = HKQuantityTypeIdentifier(rawValue: type)
                  if let parsedType = HKQuantityType.quantityType(forIdentifier: type) {
