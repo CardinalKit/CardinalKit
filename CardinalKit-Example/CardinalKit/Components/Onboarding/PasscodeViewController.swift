@@ -39,7 +39,7 @@ struct PasscodeViewController: UIViewControllerRepresentable {
 
     class Coordinator: NSObject, ORKPasscodeDelegate {
         func passcodeViewControllerDidCancel(_ viewController: UIViewController) {
-            
+            viewController.dismiss(animated: true, completion: nil)
         }
         
         func passcodeViewControllerDidFinish(withSuccess viewController: UIViewController) {
