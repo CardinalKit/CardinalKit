@@ -27,14 +27,18 @@ struct MainUIView: View {
             }
             
             if useCareKit {
-                ScheduleViewControllerRepresentable().tabItem {
-                    Image("tab_schedule").renderingMode(.template)
-                    Text("Schedule")
+                ScheduleViewControllerRepresentable()
+                    .ignoresSafeArea(edges: .all)
+                    .tabItem {
+                        Image("tab_schedule").renderingMode(.template)
+                        Text("Schedule")
                 }
                 
-                CareTeamViewControllerRepresentable().tabItem {
-                    Image("tab_care").renderingMode(.template)
-                    Text("Contact")
+                CareTeamViewControllerRepresentable()
+                    .ignoresSafeArea(edges: .all)
+                    .tabItem {
+                        Image("tab_care").renderingMode(.template)
+                        Text("Contact")
                 }
             }
 
