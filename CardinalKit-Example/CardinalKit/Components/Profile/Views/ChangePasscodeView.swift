@@ -25,7 +25,7 @@ struct ChangePasscodeView: View {
         })).sheet(isPresented: $showPasscode, onDismiss: {
             
         }, content: {
-            PasscodeViewController().ignoresSafeArea(edges: .all)
+            PasscodeViewController()
         })
     }
 }
