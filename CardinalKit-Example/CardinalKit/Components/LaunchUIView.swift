@@ -22,7 +22,7 @@ struct LaunchUIView: View {
 
     var body: some View {
         VStack(spacing: 10) {
-            if didCompleteOnboarding {
+            if didCompleteOnboarding && (CKStudyUser.shared.currentUser != nil){
                 MainUIView()
             } else {
                 OnboardingUIView() {
