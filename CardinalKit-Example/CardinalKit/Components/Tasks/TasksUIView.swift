@@ -17,28 +17,35 @@ struct TasksUIView: View {
     let color: Color
     let config = CKConfig.shared
     
+    @State var useCloudSurveys = false
+    
     @State var listItems = [TaskItem]()
     @State var listItemsPerHeader = [String:[TaskItem]]()
     @State var listItemsSections = [String]()
     
+    let localListItems = LocalTaskItem.allValues
+    var localListItemsPerHeader = [String:[LocalTaskItem]]()
+    var localListItemsSections = [String]()
+    
     init(color: Color) {
-//        if let customDelegate = CKApp.instance.configure() {
-//        
-//        }
-        
-        
         self.color = color
-//        getItems()
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM. d, YYYY"
         date = formatter.string(from: Date())
-//        self.date = "Joder asignele valor"
-        //here get items from firebase
         
-        
+        if localListItemsPerHeader.count <= 0 { // init
+            for item in localListItems {
+                if localListItemsPerHeader[item.section] == nil {
+                    localListItemsPerHeader[item.section] = [LocalTaskItem]()
+                    localListItemsSections.append(item.section)
+                }
+                
+                localListItemsPerHeader[item.section]?.append(item)
+            }
+        }
     }
     
-    func getItems(){
+    func getRemoteItems(){
         CKResearchSurveysManager.shared.getTaskItems(onCompletion: {
             (results) in
             
@@ -71,18 +78,35 @@ struct TasksUIView: View {
                 .padding(.top, 10)
             Text(config.read(query: "Team Name")).font(.system(size: 15, weight:.light))
             Text(date).font(.system(size: 18, weight: .regular)).padding()
-            List {
-                ForEach(listItemsSections, id: \.self) { key in
-                    Section(header: Text(key)) {
-                        ForEach(listItemsPerHeader[key]!, id: \.self) { item in
-                            TaskListItemView(item: item)
-                        }
-                    }.listRowBackground(Color.white)
-                }
-            }.listStyle(GroupedListStyle())
+            
+            if (useCloudSurveys){
+                List {
+                    ForEach(listItemsSections, id: \.self) { key in
+                        Section(header: Text(key)) {
+                            ForEach(listItemsPerHeader[key]!, id: \.self) { item in
+                                TaskListItemView(item: item)
+                            }
+                        }.listRowBackground(Color.white)
+                    }
+                }.listStyle(GroupedListStyle())
+            } else {
+                List {
+                    ForEach(localListItemsSections, id: \.self) { key in
+                        Section(header: Text(key)) {
+                            ForEach(localListItemsPerHeader[key]!, id: \.self) { item in
+                                LocalTaskListItemView(item: item)
+                            }
+                        }.listRowBackground(Color.white)
+                    }
+                }.listStyle(GroupedListStyle())
+            }
         }
         .onAppear(perform: {
-            getItems()
+            self.useCloudSurveys = config.readBool(query: "Use Cloud Surveys")
+            
+            if(self.useCloudSurveys){
+                getRemoteItems()
+            }
         })
     }
 }
