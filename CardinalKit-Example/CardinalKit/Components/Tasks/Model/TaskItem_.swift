@@ -10,7 +10,7 @@ import UIKit
 import ResearchKit
 import SwiftUI
 
-enum TaskItem_: Int {
+enum LocalTaskItem: Int {
 
     /*
      * STEP (1) APPEND TABLE ITEMS HERE,
@@ -129,15 +129,15 @@ enum TaskItem_: Int {
         UIImage(named: named) ?? UIImage(systemName: "questionmark.square")
     }
     
-//    static var allValues: [TaskItem] {
-//        var index = 0
-//        return Array (
-//            AnyIterator {
-//                let returnedElement = self.init(rawValue: index)
-//                index = index + 1
-//                return returnedElement
-//            }
-//        )
-//    }
+    static var allValues: [LocalTaskItem] {
+        var index = 0
+        return Array (
+            AnyIterator {
+                let returnedElement = self.init(rawValue: index)
+                index = index + 1
+                return returnedElement
+            }
+        )
+    }
     
 }
