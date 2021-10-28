@@ -189,5 +189,7 @@
 			<string>3️⃣</string>
 		</dict>
 	</array>
+	<key>Use Cloud Surveys</key>
+	<false/>
 </dict>
 </plist>

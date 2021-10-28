@@ -219,6 +219,7 @@ PODS:
     - BoringSSL-GRPC/Interface (= 0.0.7)
   - BoringSSL-GRPC/Interface (0.0.7)
   - CardinalKit (1.3.0):
+    - Granola
     - ObjectMapper (~> 3.3.0)
     - ReachabilitySwift (~> 3)
     - RealmSwift (~> 10.7)
@@ -445,7 +446,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
   BoringSSL-GRPC: 8edf627ee524575e2f8d19d56f068b448eea3879
-  CardinalKit: 945c6c9b429c88b517fe3f01ada3afe0c45e5815
+  CardinalKit: 6534b41552c2a164a8430dde815d4fb6834642db
   Firebase: c121feb35e4126c0b355e3313fa9b487d47319fd
   FirebaseAnalytics: cd3bd84d722a24a8923918af8af8e5236f615d77
   FirebaseAuth: 5fe4585c2ed847319f0ea68bd1d82c77e49ff9a0
@@ -477,4 +478,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: cc50d0a51750b74329c348a3a4f6965ce59c9ff6
 
-COCOAPODS: 1.10.2
+COCOAPODS: 1.10.1
