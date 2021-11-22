@@ -99,7 +99,7 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
                 loadingIndicator.startAnimating();
 
                 alert.view.addSubview(loadingIndicator)
-                taskViewController.present(alert, animated: true, completion: nil)
+                taskViewController.present(alert, animated: false, completion: nil)
                 
                 let stepResult = taskViewController.result.stepResult(forStepIdentifier: "RegistrationStep")
                 if let emailRes = stepResult?.results?.first as? ORKTextQuestionResult, let email = emailRes.textAnswer {
@@ -107,7 +107,7 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
                         Auth.auth().createUser(withEmail: email, password: pass) { (res, error) in
                             DispatchQueue.main.async {
                                 if error != nil {
-                                    alert.dismiss(animated: true, completion: nil)
+                                    alert.dismiss(animated: false, completion: nil)
                                     if let errCode = AuthErrorCode(rawValue: error!._code) {
 
                                         switch errCode {
@@ -115,14 +115,14 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
                                                 let alert = UIAlertController(title: "Registration Error!", message: error?.localizedDescription, preferredStyle: .alert)
                                                 alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
 
-                                                taskViewController.present(alert, animated: true)
+                                                taskViewController.present(alert, animated: false)
                                         }
                                     }
                                     
                                     stepViewController.goBackward()
 
                                 } else {
-                                    alert.dismiss(animated: true, completion: nil)
+                                    alert.dismiss(animated: false, completion: nil)
                                     print("Created user!")
                                 }
                             }
