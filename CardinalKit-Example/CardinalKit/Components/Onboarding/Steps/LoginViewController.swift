@@ -20,17 +20,17 @@ class LoginViewController: ORKLoginStepViewController {
             loadingIndicator.startAnimating()
             alert.view.addSubview(loadingIndicator)
 
-            taskViewController?.present(alert, animated: true, completion: nil)
+            taskViewController?.present(alert, animated: false, completion: nil)
 
             Auth.auth().signIn(withEmail: email, password: pass) { (res, error) in
                 if let error = error {
-                    alert.dismiss(animated: true) {
+                    alert.dismiss(animated: false) {
                         let alert = UIAlertController(title: "Login Error!", message: error.localizedDescription, preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
-                        self.taskViewController?.present(alert, animated: true)
+                        self.taskViewController?.present(alert, animated: false)
                     }
                 } else {
-                    alert.dismiss(animated: true, completion: nil)
+                    alert.dismiss(animated: false, completion: nil)
                     super.goForward()
                 }
             }
