@@ -22,40 +22,48 @@ struct LoginExistingUserViewController: UIViewControllerRepresentable {
     
     func updateUIViewController(_ taskViewController: ORKTaskViewController, context: Context) {}
     func makeUIViewController(context: Context) -> ORKTaskViewController {
-
-        let config = CKPropertyReader(file: "CKConfiguration")
-        
         var loginSteps: [ORKStep]
+        let signInButtons = CKMultipleSignInStep(identifier: "SignInButtons")
+        let loginUserPassword = ORKLoginStep(identifier: "LoginExistingStep", title: "Login", text: "Log into this study.", loginViewControllerClass: LoginViewController.self)
+        loginSteps = [signInButtons, loginUserPassword]
         
-        if config["Login-Sign-In-With-Apple"]["Enabled"] as? Bool == true {
-            let signInWithAppleStep = CKSignInWithAppleStep(identifier: "SignExistingInWithApple")
-            loginSteps = [signInWithAppleStep]
-        } else {
-            let loginStep = ORKLoginStep(identifier: "LoginExistingStep", title: "Login", text: "Log into this study.", loginViewControllerClass: LoginViewController.self)
-            
-            loginSteps = [loginStep]
-        }
+//        if config["Login-Sign-In-With-Apple"]["Enabled"] as? Bool == true {
+//            let signInWithAppleStep = CKSignInWithAppleStep(identifier: "SignExistingInWithApple")
+//            loginSteps = [signInWithAppleStep]
+//        } else {
+//            let loginStep = ORKLoginStep(identifier: "LoginExistingStep", title: "Login", text: "Log into this study.", loginViewControllerClass: LoginViewController.self)
+//
+//            loginSteps = [loginStep]
+//        }
         
-        // use the `ORKPasscodeStep` from ResearchKit.
-        let passcodeStep = ORKPasscodeStep(identifier: "Passcode") //NOTE: requires NSFaceIDUsageDescription in info.plist
-        let type = config.read(query: "Passcode Type")
-        if type == "6" {
-            passcodeStep.passcodeType = .type6Digit
-        } else {
-            passcodeStep.passcodeType = .type4Digit
-        }
-        passcodeStep.text = config.read(query: "Passcode Text")
+//        // use the `ORKPasscodeStep` from ResearchKit.
+//        let passcodeStep = ORKPasscodeStep(identifier: "Passcode") //NOTE: requires NSFaceIDUsageDescription in info.plist
+//        let type = config.read(query: "Passcode Type")
+//        if type == "6" {
+//            passcodeStep.passcodeType = .type6Digit
+//        } else {
+//            passcodeStep.passcodeType = .type4Digit
+//        }
+//        passcodeStep.text = config.read(query: "Passcode Text")
         
         // set health data permissions
         let healthDataStep = CKHealthDataStep(identifier: "HealthKit")
         let healthRecordsStep = CKHealthRecordsStep(identifier: "HealthRecords")
         
         // create a task with each step
-        loginSteps += [passcodeStep, healthDataStep, healthRecordsStep]
-        let orderedTask = ORKOrderedTask(identifier: "StudyLoginTask", steps: loginSteps)
+        loginSteps += [healthDataStep, healthRecordsStep]
+        let navigableTask = ORKNavigableOrderedTask(identifier: "StudyLoginTask", steps: loginSteps)
+//        let orderedTask = ORKOrderedTask(identifier: "StudyLoginTask", steps: loginSteps)
+        let resultSelector = ORKResultSelector(resultIdentifier: "SignInButtons")
+        let booleanAnswerType = ORKResultPredicate.predicateForBooleanQuestionResult(with: resultSelector, expectedAnswer: true)
+        let predicateRule = ORKPredicateStepNavigationRule(resultPredicates: [booleanAnswerType],
+                                                           destinationStepIdentifiers: ["LoginExistingStep"],
+                                                           defaultStepIdentifier: "HealthKit",
+                                                           validateArrays: true)
+        navigableTask.setNavigationRule(predicateRule, forTriggerStepIdentifier: "SignInButtons")
         
         // wrap that task on a view controller
-        let taskViewController = ORKTaskViewController(task: orderedTask, taskRun: nil)
+        let taskViewController = ORKTaskViewController(task: navigableTask, taskRun: nil)
         taskViewController.delegate = context.coordinator // enables `ORKTaskViewControllerDelegate` below
         
         // & present the VC!

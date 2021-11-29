@@ -59,23 +59,26 @@ struct OnboardingViewController: UIViewControllerRepresentable {
         // the `LoginCustomWaitStep` waits for email verification.
 
         var loginSteps: [ORKStep]
-        if config["Login-Sign-In-With-Apple"]["Enabled"] as? Bool == true {
-            let signInWithAppleStep = CKSignInWithAppleStep(identifier: "SignInWithApple")
-            loginSteps = [signInWithAppleStep]
-        } else if config.readBool(query: "Login-Passwordless") == true {
-            let loginStep = PasswordlessLoginStep(identifier: PasswordlessLoginStep.identifier)
-            let loginVerificationStep = LoginCustomWaitStep(identifier: LoginCustomWaitStep.identifier)
-            
-            loginSteps = [loginStep, loginVerificationStep]
-        } else {
+        let signInButtons = CKMultipleSignInStep(identifier: "SignInButtons")
+        
+        
+//        if config["Login-Sign-In-With-Apple"]["Enabled"] as? Bool == true {
+//            let signInWithAppleStep = CKSignInWithAppleStep(identifier: "SignInWithApple")
+//            loginSteps = [signInWithAppleStep]
+//        } else if config.readBool(query: "Login-Passwordless") == true {
+//            let loginStep = PasswordlessLoginStep(identifier: PasswordlessLoginStep.identifier)
+//            let loginVerificationStep = LoginCustomWaitStep(identifier: LoginCustomWaitStep.identifier)
+//
+//            loginSteps = [loginStep, loginVerificationStep]
+//        } else {
             let regexp = try! NSRegularExpression(pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[d$@$!%*?&#])[A-Za-z\\dd$@$!%*?&#]{8,}")
 
             let registerStep = ORKRegistrationStep(identifier: "RegistrationStep", title: "Registration", text: "Sign up for this study.", passcodeValidationRegularExpression: regexp, passcodeInvalidMessage: "Your password does not meet the following criteria: minimum 8 characters with at least 1 Uppercase Alphabet, 1 Lowercase Alphabet, 1 Number and 1 Special Character", options: [])
 
             let loginStep = ORKLoginStep(identifier: "LoginStep", title: "Login", text: "Log into this study.", loginViewControllerClass: LoginViewController.self)
 
-            loginSteps = [registerStep, loginStep]
-        }
+            loginSteps = [signInButtons, registerStep, loginStep]
+//        }
         
         /* **************************************************************
         *  STEP (5): ask the user to create a security passcode
@@ -122,10 +125,24 @@ struct OnboardingViewController: UIViewControllerRepresentable {
         * and SHOW the user these steps!
         **************************************************************/
         // create a task with each step
-        let orderedTask = ORKOrderedTask(identifier: "StudyOnboardingTask", steps: stepsToUse)
+//        let orderedTask = ORKOrderedTask(identifier: "StudyOnboardingTask", steps: stepsToUse)
+        
+        
+        let navigableTask = ORKNavigableOrderedTask(identifier: "StudyOnboardingTask", steps: stepsToUse)
+        
+        let resultSelector = ORKResultSelector(resultIdentifier: "SignInButtons")
+        let booleanAnswerType = ORKResultPredicate.predicateForBooleanQuestionResult(with: resultSelector, expectedAnswer: true)
+        let predicateRule = ORKPredicateStepNavigationRule(resultPredicates: [booleanAnswerType],
+                                                           destinationStepIdentifiers: ["RegistrationStep"],
+                                                           defaultStepIdentifier: "Passcode",
+                                                           validateArrays: true)
+        navigableTask.setNavigationRule(predicateRule, forTriggerStepIdentifier: "SignInButtons")
+        
+        
+        
         
         // wrap that task on a view controller
-        let taskViewController = ORKTaskViewController(task: orderedTask, taskRun: nil)
+        let taskViewController = ORKTaskViewController(task: navigableTask, taskRun: nil)
         taskViewController.delegate = context.coordinator // enables `ORKTaskViewControllerDelegate` below
         
         // & present the VC!
