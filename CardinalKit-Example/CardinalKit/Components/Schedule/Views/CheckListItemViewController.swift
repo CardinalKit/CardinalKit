@@ -68,7 +68,7 @@ class CheckListItemViewController: OCKChecklistTaskViewController, ORKTaskViewCo
                 let surveyTask = JsonToSurvey.shared.GetSurvey(from: objResult,identifier: identifier)
                 let surveyViewController = ORKTaskViewController(task: surveyTask, taskRun: nil)
                 surveyViewController.delegate = self
-                self.present(surveyViewController, animated: true, completion: nil)
+                self.present(surveyViewController, animated: false, completion: nil)
             })
                 
             }
@@ -78,7 +78,7 @@ class CheckListItemViewController: OCKChecklistTaskViewController, ORKTaskViewCo
     }
     // 3b. This method will be called when the user completes the survey.
     func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
-        taskViewController.dismiss(animated: true, completion: nil)
+        taskViewController.dismiss(animated: false, completion: nil)
         if reason == .completed,
            let indexPath = self.indexPath{
             controller.appendOutcomeValue(value: true, at: indexPath, completion: nil)

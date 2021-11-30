@@ -23,11 +23,11 @@ class EmailHelper: NSObject, MFMailComposeViewControllerDelegate {
         picker.setToRecipients([to])
         picker.mailComposeDelegate = self
         
-        EmailHelper.getRootViewController()?.present(picker, animated: true, completion: nil)
+        EmailHelper.getRootViewController()?.present(picker, animated: false, completion: nil)
     }
     
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        EmailHelper.getRootViewController()?.dismiss(animated: true, completion: nil)
+        EmailHelper.getRootViewController()?.dismiss(animated: false, completion: nil)
     }
     
     static func getRootViewController() -> UIViewController? {
