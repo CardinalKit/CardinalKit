@@ -71,9 +71,10 @@ public class CKMultipleSignInStepViewController: ORKQuestionStepViewController,G
             self.view.addSubview(buttonApple)
             button = buttonApple
         }
+        self.view.backgroundColor = .white
 //        
 //        
-//        
+//
 //        
 //        let buttonUserPassWord = CustomButton(title: "Sign in with User and Password", backGroundColor: .white, textColor: .black, borderColor: .black, reference: nil, action: #selector(loginUserAndPaswwordAction))
 //        self.view.addSubview(buttonUserPassWord)
