@@ -55,7 +55,7 @@ extension SceneDelegate: ORKPasscodeDelegate {
     func passcodeViewControllerDidFinish(withSuccess viewController: UIViewController) {
         // dismiss passcode prompt screen
         toggleContainer(hidden: false)
-        viewController.dismiss(animated: true, completion: nil)
+        viewController.dismiss(animated: false, completion: nil)
     }
     
     func passcodeViewControllerDidFailAuthentication(_ viewController: UIViewController) {

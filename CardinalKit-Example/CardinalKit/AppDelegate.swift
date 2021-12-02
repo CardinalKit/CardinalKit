@@ -8,6 +8,11 @@ import UIKit
 import Firebase
 import ResearchKit
 
+// import facebook
+import FBSDKCoreKit
+
+import GoogleSignIn
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -28,6 +33,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let config = CKPropertyReader(file: "CKConfiguration")
         UIView.appearance(whenContainedInInstancesOf: [ORKTaskViewController.self]).tintColor = config.readColor(query: "Tint Color")
+        // Fix transparent navbar in iOS 15
+               if #available(iOS 15, *) {
+                   let appearance = UINavigationBarAppearance()
+                   appearance.configureWithOpaqueBackground()
+                   UINavigationBar.appearance().standardAppearance = appearance
+                   UINavigationBar.appearance().scrollEdgeAppearance = appearance
+               }
+        
+        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
+        
+        FBSDKCoreKit.ApplicationDelegate.shared.application(
+                    application,
+                    didFinishLaunchingWithOptions: launchOptions
+                )
         
         // Fix transparent navbar in iOS 15
         if #available(iOS 15, *) {
@@ -38,6 +57,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         return true
+    }
+    
+    @available(iOS 9.0, *)
+    func application(_ application: UIApplication, open url: URL,
+                     options: [UIApplication.OpenURLOptionsKey: Any])
+      -> Bool {
+          
+          ApplicationDelegate.shared.application(
+              application,
+              open: url,
+              sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
+              annotation: options[UIApplication.OpenURLOptionsKey.annotation]
+          )
+          
+      return GIDSignIn.sharedInstance().handle(url)
     }
     
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {

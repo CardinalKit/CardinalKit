@@ -316,7 +316,14 @@ class CK_ORKSerialization{
                         return result
                     case "ORKScaleQuestionResult":
                         let result = ORKScaleQuestionResult(identifier: identifier)
-                        result.answer = answer
+                        if let answer = answer as? Int{
+                            result.answer = answer
+                        }
+                        if let answer = answer as? String{
+                            result.answer = Int(answer)
+                        }
+
+                        
                         return result
                     case "ORKMultipleComponentQuestionResult":
                         let result = ORKMultipleComponentQuestionResult(identifier: identifier)

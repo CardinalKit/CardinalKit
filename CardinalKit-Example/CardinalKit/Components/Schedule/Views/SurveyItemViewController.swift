@@ -32,12 +32,12 @@ class SurveyItemViewController: OCKInstructionsTaskViewController, ORKTaskViewCo
         surveyViewController.delegate = self
 
         // 3a. Present the survey to the user
-        present(surveyViewController, animated: true, completion: nil)
+        present(surveyViewController, animated: false, completion: nil)
     }
 
     // 3b. This method will be called when the user completes the survey.
     func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
-        taskViewController.dismiss(animated: true, completion: nil)
+        taskViewController.dismiss(animated: false, completion: nil)
         guard reason == .completed else {
             taskView.completionButton.isSelected = false
             return

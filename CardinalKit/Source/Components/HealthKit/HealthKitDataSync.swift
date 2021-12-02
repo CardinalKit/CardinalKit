@@ -335,10 +335,11 @@ extension HealthKitDataSync {
     }
     
     fileprivate func send(data: [HKSample], onCompletion: (() -> Void)? = nil) {
-        if data.count<999{
+        if data.count>999{
             do {
-                let packageName = "dataUpperThan1000"
-                let jsonObject = ["dataType": String(describing: data[0].sampleType)]
+                let dataType = String(describing: data[0].sampleType)
+                let packageName = "dataUpperThan1000 \(dataType)"
+                let jsonObject = ["dataType": dataType]
                 let sampleToJson = try JSONSerialization.data(withJSONObject: jsonObject, options: [])
                 let package = try Package(packageName, type: .hkdata, data: sampleToJson)
                 try NetworkDataRequest.send(package) { (success,error) in}

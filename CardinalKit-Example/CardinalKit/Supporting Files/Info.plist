@@ -28,15 +28,48 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>edu.stanford.cardinalkit</string>
+				<string>fb415789243347763</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.806755930989-af4rk313be8gt9n4gmkcec9m14cnadrp</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>FacebookAppID</key>
+	<string>415789243347763</string>
+	<key>FacebookClientToken</key>
+	<string>f8624ce0c9aae97fb930e1ef443db214</string>
+	<key>FacebookDisplayName</key>
+	<string>SenseReliefApp</string>
 	<key>FirebaseDynamicLinksCustomDomains</key>
 	<array>
 		<string>https://cs342.page.link</string>
 		<string>https://cs342.page.link/Rdse</string>
+	</array>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fbapi20130214</string>
+		<string>fbapi20130410</string>
+		<string>fbapi20130702</string>
+		<string>fbapi20131010</string>
+		<string>fbapi20131219</string>
+		<string>fbapi20140410</string>
+		<string>fbapi20140116</string>
+		<string>fbapi20150313</string>
+		<string>fbapi20150629</string>
+		<string>fbapi20160328</string>
+		<string>fbauth</string>
+		<string>fb-messenger-share-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>

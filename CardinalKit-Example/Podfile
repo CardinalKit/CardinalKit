@@ -12,6 +12,8 @@ target 'CardinalKit_Example' do
   pod 'Firebase/Storage'
   pod 'Firebase/Analytics'
   pod 'Firebase/DynamicLinks'
+  pod 'GoogleSignIn'
+  pod 'FBSDKLoginKit'
   
 
 end

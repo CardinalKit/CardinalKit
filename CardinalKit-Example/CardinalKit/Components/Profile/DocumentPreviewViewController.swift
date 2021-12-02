@@ -28,7 +28,7 @@ struct DocumentPreviewViewController: UIViewControllerRepresentable {
     func updateUIViewController(_ uiViewController: UIViewController, context: UIViewControllerRepresentableContext<DocumentPreviewViewController>) {
         if self.isActive.wrappedValue && docController?.delegate == nil { // to not show twice
             self.docController?.delegate = context.coordinator
-            self.docController?.presentPreview(animated: true)
+            self.docController?.presentPreview(animated: false)
         }
     }
 
