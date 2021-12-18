@@ -13,6 +13,7 @@ import CardinalKit
 class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
     
     public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
+        let storage = Storage.storage()
         switch reason {
         case .completed:
             // if we completed the onboarding task view controller, go to study.
@@ -41,7 +42,32 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
                         try data?.write(to: url)
                         
                         UserDefaults.standard.set(url.path, forKey: "consentFormURL")
-                        print(url.path)
+                        
+                        let storageRef = storage.reference()
+                        
+                        if let DocumentCollection = CKStudyUser.shared.authCollection {
+                            let DocumentRef = storageRef.child("\(DocumentCollection)/Consent.pdf")
+                            
+                            // Upload the file to the path "images/rivers.jpg"
+                            DocumentRef.putFile(from: url, metadata: nil) { metadata, error in
+                              guard let metadata = metadata else {
+                                // Uh-oh, an error occurred!
+                                return
+                              }
+                              // Metadata contains file metadata such as size, content-type.
+//                              let size = metadata.size
+                              // You can also access to download URL after upload.
+                                DocumentRef.downloadURL { (url, error) in
+                                guard let downloadURL = url else {
+                                  // Uh-oh, an error occurred!
+                                  return
+                                }
+                              }
+                            }
+                        }
+                        
+                        
+                        
 
                     } catch let error {
 
@@ -186,6 +212,8 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
             return CKSignInWithAppleStepViewController(step: step)
         case is CKMultipleSignInStep:
             return CKMultipleSignInStepViewController(step: step)
+        case is CKReviewConsentDocument:
+            return CKReviewConsentDocumentViewController(step: step)
         default:
             return nil
         }

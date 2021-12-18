@@ -44,7 +44,7 @@ public class CKMultipleSignInStepViewController: ORKQuestionStepViewController,G
         ///Sign in label
         let signInLabel = UILabel(frame: CGRect(x: 0, y: 100, width: 450, height: 50 ))
         signInLabel.center.x = view.center.x
-        signInLabel.text = "Sense Relief Sign In"
+        signInLabel.text = "Sign In"
         signInLabel.textAlignment = NSTextAlignment.center
         self.view.addSubview(signInLabel)
         
