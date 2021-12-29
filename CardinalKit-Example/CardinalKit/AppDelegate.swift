@@ -33,6 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let config = CKPropertyReader(file: "CKConfiguration")
         UIView.appearance(whenContainedInInstancesOf: [ORKTaskViewController.self]).tintColor = config.readColor(query: "Tint Color")
+        
         // Fix transparent navbar in iOS 15
                if #available(iOS 15, *) {
                    let appearance = UINavigationBarAppearance()
@@ -41,8 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                    UINavigationBar.appearance().scrollEdgeAppearance = appearance
                }
         
-        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
-        
+        // Set up FB Sign In
         FBSDKCoreKit.ApplicationDelegate.shared.application(
                     application,
                     didFinishLaunchingWithOptions: launchOptions
@@ -51,6 +51,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    
+    // Set up Google Sign In
     @available(iOS 9.0, *)
     func application(_ application: UIApplication, open url: URL,
                      options: [UIApplication.OpenURLOptionsKey: Any])
@@ -63,7 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
               annotation: options[UIApplication.OpenURLOptionsKey.annotation]
           )
           
-      return GIDSignIn.sharedInstance().handle(url)
+      return GIDSignIn.sharedInstance.handle(url)
     }
     
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
