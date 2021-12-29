@@ -48,8 +48,18 @@ struct LoginExistingUserViewController: UIViewControllerRepresentable {
         
         let consentReview = CKReviewConsentDocument(identifier: "ConsentReview")
         
+        // set passcode
+        let passcodeStep = ORKPasscodeStep(identifier: "Passcode")
+        let type = config.read(query: "Passcode Type")
+        if type == "6" {
+            passcodeStep.passcodeType = .type6Digit
+        } else {
+            passcodeStep.passcodeType = .type4Digit
+        }
+        passcodeStep.text = config.read(query: "Passcode Text")
+        
         // create a task with each step
-        loginSteps += [consentReview,reviewConsentStep,healthDataStep, healthRecordsStep]
+        loginSteps += [consentReview,reviewConsentStep,healthDataStep, healthRecordsStep, passcodeStep]
         
         
         
