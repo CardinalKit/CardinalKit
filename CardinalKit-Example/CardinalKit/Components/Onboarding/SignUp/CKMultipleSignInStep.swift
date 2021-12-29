@@ -8,6 +8,7 @@
 
 import ResearchKit
 import CardinalKit
+import Firebase
 import FirebaseAuth
 import GoogleSignIn
 import AuthenticationServices
@@ -30,16 +31,12 @@ public class CKMultipleSignInStep: ORKQuestionStep{
     
 }
 
-public class CKMultipleSignInStepViewController: ORKQuestionStepViewController,GIDSignInDelegate, ASAuthorizationControllerDelegate{
+public class CKMultipleSignInStepViewController: ORKQuestionStepViewController, ASAuthorizationControllerDelegate{
     public var CKMultipleSignInStep: CKMultipleSignInStep!{
         return step as? CKMultipleSignInStep
     }
     
     public override func viewDidLoad() {
-        /// Set the actual view for load Web Site
-        GIDSignIn.sharedInstance()?.presentingViewController = self
-        /// Set the actual view for handle data result
-        GIDSignIn.sharedInstance()?.delegate = self
         
         ///Sign in label
         let signInLabel = UILabel(frame: CGRect(x: 0, y: 100, width: 450, height: 50 ))
@@ -56,34 +53,26 @@ public class CKMultipleSignInStepViewController: ORKQuestionStepViewController,G
             button = buttonUserPassWord
             
         }
+        
         if config["Login-Sign-In-With-Facebook"]["Enabled"] as? Bool == true {
-            let buttonFacebook = CustomButton(title: "Sign in with facebook", backGroundColor: UIColor(red: 59, green: 89, blue: 152), textColor: .white, borderColor: nil, reference: button, action: #selector(loginFacebookAction), WithAttachement: "facebook", imageOffset: 35)
+            let buttonFacebook = CustomButton(title: "Sign in with Facebook", backGroundColor: UIColor(red: 59, green: 89, blue: 152), textColor: .white, borderColor: nil, reference: button, action: #selector(loginFacebookAction), WithAttachement: "facebook", imageOffset: 35)
             self.view.addSubview(buttonFacebook)
             button = buttonFacebook
         }
+        
         if config["Login-Sign-In-With-Google"]["Enabled"] as? Bool == true {
-            let buttonGoogle = CustomButton(title: "Sign in with google", backGroundColor: .white, textColor: .gray, borderColor: UIColor(red: 66, green: 133, blue: 244), reference: button, action: #selector(loginGoogleAction),WithAttachement: "google")
+            let buttonGoogle = CustomButton(title: "Sign in with Google", backGroundColor: .white, textColor: .gray, borderColor: UIColor(red: 66, green: 133, blue: 244), reference: button, action: #selector(loginGoogleAction),WithAttachement: "google")
             self.view.addSubview(buttonGoogle)
             button = buttonGoogle
         }
+        
         if config["Login-Sign-In-With-Apple"]["Enabled"] as? Bool == true {
             let buttonApple = CustomButton(title: "Sign in with Apple", backGroundColor: .black, textColor: .white, borderColor: nil, reference: button, action: #selector(loginAppleAction),WithAttachement: "apple")
             self.view.addSubview(buttonApple)
             button = buttonApple
         }
+        
         self.view.backgroundColor = .white
-//        
-//        
-//
-//        
-//        let buttonUserPassWord = CustomButton(title: "Sign in with User and Password", backGroundColor: .white, textColor: .black, borderColor: .black, reference: nil, action: #selector(loginUserAndPaswwordAction))
-//        self.view.addSubview(buttonUserPassWord)
-//        let buttonFacebook = CustomButton(title: "Sign in with facebook", backGroundColor: UIColor(red: 59, green: 89, blue: 152), textColor: .white, borderColor: nil, reference: buttonUserPassWord, action: #selector(loginFacebookAction), WithAttachement: "facebook", imageOffset: 35)
-//        self.view.addSubview(buttonFacebook)
-//        let buttonGoogle = CustomButton(title: "Sign in with google", backGroundColor: .white, textColor: .gray, borderColor: UIColor(red: 66, green: 133, blue: 244), reference: buttonFacebook, action: #selector(loginGoogleAction),WithAttachement: "google")
-//        self.view.addSubview(buttonGoogle)
-//        let buttonApple = CustomButton(title: "Sign in with Apple", backGroundColor: .black, textColor: .white, borderColor: nil, reference: buttonGoogle, action: #selector(loginAppleAction),WithAttachement: "apple")
-//        self.view.addSubview(buttonApple)
     }
     
     public func CustomButton(
@@ -202,32 +191,41 @@ public class CKMultipleSignInStepViewController: ORKQuestionStepViewController,G
     @objc
     func loginGoogleAction(){
         /// Load Web view for sign in process
-        GIDSignIn.sharedInstance()?.signIn()
-    }
+        //GIDSignIn.sharedInstance()?.signIn()
     
-    public func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-        if error == nil && user.authentication != nil {
+        guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+        
+        // Create Google Sign In configuration object
+        let config = GIDConfiguration(clientID: clientID)
+        
+        // Start sign in flow
+        GIDSignIn.sharedInstance.signIn(with: config, presenting: self){ user, error in
+            if let error = error {
+                self.showError(error)
+                return
+            }
+        
+        guard
+            let authentication = user?.authentication,
+            let idToken = authentication.idToken
+            else {
+                return
+            }
             
-            print("User email: \(user.profile.email ?? "No Email")")
+            let credential = GoogleAuthProvider.credential(withIDToken: idToken,
+                                                           accessToken: authentication.accessToken)
             
-            /// Initialize a Firebase credential.
-            let credentialGoogle = GoogleAuthProvider.credential(withIDToken: user.authentication.idToken, accessToken: user.authentication.accessToken)
-           
-            /// Sign in with Firebase.
-            Auth.auth().signIn(with: credentialGoogle) { (authResult, error) in
+            Auth.auth().signIn(with: credential) { (authResult, error) in
                 if let error = error {
                     self.showError(error)
                 }
                 else {
-                    /// User is signed in to Firebase with Google.
                     self.setAnswer(false)
                     super.goForward()
                 }
             }
         }
-        else{
-            print("Unable to obtain Google credentials")
-        }
+    
     }
     
     private func showError(_ error: Error) {
