@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'CardinalKit'
-  s.version          = '1.3.0'
+  s.version          = '2.0.0'
   s.summary          = 'https://cardinalkit.org/'
 
 # This description is used to generate tags and improve search results.
@@ -55,4 +55,7 @@ TODO: Add long description of the pod here.
 
   #Compressing files
   s.dependency 'Zip',              '~> 1.1.0'
+  s.dependency 'Granola'
+  s.public_header_files = 'CardinalKit/Source/Components/Header.h'
+
 end

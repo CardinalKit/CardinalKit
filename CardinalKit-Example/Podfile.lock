@@ -212,19 +212,33 @@ PODS:
     - abseil/base/base_internal
     - abseil/base/config
     - abseil/meta/type_traits
+  - AppAuth (1.4.0):
+    - AppAuth/Core (= 1.4.0)
+    - AppAuth/ExternalUserAgent (= 1.4.0)
+  - AppAuth/Core (1.4.0)
+  - AppAuth/ExternalUserAgent (1.4.0)
   - BoringSSL-GRPC (0.0.7):
     - BoringSSL-GRPC/Implementation (= 0.0.7)
     - BoringSSL-GRPC/Interface (= 0.0.7)
   - BoringSSL-GRPC/Implementation (0.0.7):
     - BoringSSL-GRPC/Interface (= 0.0.7)
   - BoringSSL-GRPC/Interface (0.0.7)
-  - CardinalKit (1.3.0):
+  - CardinalKit (2.0.0):
+    - Granola
     - ObjectMapper (~> 3.3.0)
     - ReachabilitySwift (~> 3)
     - RealmSwift (~> 10.7)
     - SAMKeychain (~> 1.5.2)
     - SwiftyJSON (~> 4.1.0)
     - Zip (~> 1.1.0)
+  - FBAEMKit (12.1.0):
+    - FBSDKCoreKit_Basics (= 12.1.0)
+  - FBSDKCoreKit (12.1.0):
+    - FBAEMKit (= 12.1.0)
+    - FBSDKCoreKit_Basics (= 12.1.0)
+  - FBSDKCoreKit_Basics (12.1.0)
+  - FBSDKLoginKit (12.1.0):
+    - FBSDKCoreKit (= 12.1.0)
   - Firebase/Analytics (7.11.0):
     - Firebase/Core
   - Firebase/Auth (7.11.0):
@@ -317,6 +331,10 @@ PODS:
     - GoogleUtilities/Environment (~> 7.2)
     - nanopb (~> 2.30908.0)
     - PromisesObjC (~> 1.2)
+  - GoogleSignIn (6.1.0):
+    - AppAuth (~> 1.4)
+    - GTMAppAuth (~> 1.0)
+    - GTMSessionFetcher/Core (~> 1.1)
   - GoogleUtilities/AppDelegateSwizzler (7.3.1):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
@@ -336,6 +354,8 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (7.3.1):
     - GoogleUtilities/Logger
+  - Granola (0.4.1):
+    - ObjectiveSugar (~> 1.1)
   - "gRPC-C++ (1.28.2)":
     - "gRPC-C++/Implementation (= 1.28.2)"
     - "gRPC-C++/Interface (= 1.28.2)"
@@ -360,6 +380,9 @@ PODS:
     - BoringSSL-GRPC (= 0.0.7)
     - gRPC-Core/Interface (= 1.28.2)
   - gRPC-Core/Interface (1.28.2)
+  - GTMAppAuth (1.2.2):
+    - AppAuth/Core (~> 1.4)
+    - GTMSessionFetcher/Core (~> 1.5)
   - GTMSessionFetcher/Core (1.5.0)
   - leveldb-library (1.22.1)
   - nanopb (2.30908.0):
@@ -367,6 +390,7 @@ PODS:
     - nanopb/encode (= 2.30908.0)
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
+  - ObjectiveSugar (1.1.0)
   - ObjectMapper (3.3.0)
   - PromisesObjC (1.2.12)
   - ReachabilitySwift (3)
@@ -382,17 +406,25 @@ PODS:
 
 DEPENDENCIES:
   - CardinalKit (from `../`)
+  - FBSDKLoginKit
   - Firebase/Analytics
   - Firebase/Auth
   - Firebase/DynamicLinks
   - Firebase/Firestore
   - Firebase/Storage
+  - GoogleSignIn
+  - Granola (from `https://github.com/CardinalKit/Granola.git`, branch `main`)
   - ResearchKit (from `https://github.com/ResearchKit/ResearchKit.git`, branch `main`)
 
 SPEC REPOS:
   trunk:
     - abseil
+    - AppAuth
     - BoringSSL-GRPC
+    - FBAEMKit
+    - FBSDKCoreKit
+    - FBSDKCoreKit_Basics
+    - FBSDKLoginKit
     - Firebase
     - FirebaseAnalytics
     - FirebaseAuth
@@ -404,12 +436,15 @@ SPEC REPOS:
     - FirebaseStorage
     - GoogleAppMeasurement
     - GoogleDataTransport
+    - GoogleSignIn
     - GoogleUtilities
     - "gRPC-C++"
     - gRPC-Core
+    - GTMAppAuth
     - GTMSessionFetcher
     - leveldb-library
     - nanopb
+    - ObjectiveSugar
     - ObjectMapper
     - PromisesObjC
     - ReachabilitySwift
@@ -422,19 +457,30 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   CardinalKit:
     :path: "../"
+  Granola:
+    :branch: main
+    :git: https://github.com/CardinalKit/Granola.git
   ResearchKit:
     :branch: main
     :git: https://github.com/ResearchKit/ResearchKit.git
 
 CHECKOUT OPTIONS:
+  Granola:
+    :commit: 4b6a421bab81bea5fad4b124b0441b3dd2d82c6b
+    :git: https://github.com/CardinalKit/Granola.git
   ResearchKit:
-    :commit: 0e68cdf744a135e80e1065965ee056fe05513d58
+    :commit: 90c68d0d195f23fff1f618a9a4ffa518be9ac845
     :git: https://github.com/ResearchKit/ResearchKit.git
 
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
+  AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
   BoringSSL-GRPC: 8edf627ee524575e2f8d19d56f068b448eea3879
-  CardinalKit: 945c6c9b429c88b517fe3f01ada3afe0c45e5815
+  CardinalKit: c300a3d56de7d0f54503aea8a6b8436f8069f9e0
+  FBAEMKit: 56c0bb9b42e3747cd82b67934f0c2b19325382ea
+  FBSDKCoreKit: 75368765d9c2303073145a7925dfaa9d60bcd77b
+  FBSDKCoreKit_Basics: 39865aff97e5f6951a78fb3e89dc4460e35e1895
+  FBSDKLoginKit: e993f97c7cc794c5da4056d8aec3c3d66033a727
   Firebase: c121feb35e4126c0b355e3313fa9b487d47319fd
   FirebaseAnalytics: cd3bd84d722a24a8923918af8af8e5236f615d77
   FirebaseAuth: 5fe4585c2ed847319f0ea68bd1d82c77e49ff9a0
@@ -446,12 +492,16 @@ SPEC CHECKSUMS:
   FirebaseStorage: 8542711850ca181a3931c0ed483006a7b46039e7
   GoogleAppMeasurement: fd19169c3034975cb934e865e5667bfdce59df7f
   GoogleDataTransport: cd9db2180fcecd8da1b561aea31e3e56cf834aa7
+  GoogleSignIn: c90b5bec45e780f54c6a8e1e3c182a86e3dda69d
   GoogleUtilities: e1d9ed4e544fc32a93e00e721400cbc3f377200d
+  Granola: 07d8cc4bdf005228118161eb182cd34eaf169a03
   "gRPC-C++": 13d8ccef97d5c3c441b7e3c529ef28ebee86fad2
   gRPC-Core: 4afa11bfbedf7cdecd04de535a9e046893404ed5
+  GTMAppAuth: ad5c2b70b9a8689e1a04033c9369c4915bfcbe89
   GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
+  ObjectiveSugar: a6a25f23d657c19df0a0b972466d5b5ca9f5295c
   ObjectMapper: b612bf8c8e99c4dc0bb6013a51f7c27966ed5da9
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
@@ -462,6 +512,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
   Zip: 8877eede3dda76bcac281225c20e71c25270774c
 
-PODFILE CHECKSUM: 192678957f672b9209afbb494bfe0446f25cbaaa
+PODFILE CHECKSUM: 549c36170930bcd868333a0b59bd5f15026d7e2a
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.11.2

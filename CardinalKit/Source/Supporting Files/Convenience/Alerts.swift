@@ -16,7 +16,7 @@ public class Alerts {
         let cancelAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
         alert.addAction(cancelAction)
         
-        vc?.present(alert, animated: true, completion: nil)
+        vc?.present(alert, animated: false, completion: nil)
     }
     
 }

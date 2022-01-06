@@ -72,7 +72,7 @@ struct WithdrawalViewController: UIViewControllerRepresentable {
             default:
                 
                 // otherwise dismiss onboarding without proceeding.
-                taskViewController.dismiss(animated: true, completion: nil)
+                taskViewController.dismiss(animated: false, completion: nil)
                 
             }
         }

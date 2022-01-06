@@ -1,0 +1,6 @@
+framework module Granola {
+  umbrella header "Granola-umbrella.h"
+
+  export *
+  module * { export * }
+}

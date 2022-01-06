@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>AppId</key>
+	<string>415789243347763</string>
 	<key>Study Title</key>
 	<string>CardinalKit</string>
 	<key>Team Name</key>
@@ -51,6 +53,21 @@
 	</dict>
 	<key>Background Read Frequency</key>
 	<string>immediate</string>
+	<key>Login-Sign-In-With-Facebook</key>
+	<dict>
+		<key>Enabled</key>
+		<true/>
+	</dict>
+	<key>Login-Sign-In-With-Google</key>
+	<dict>
+		<key>Enabled</key>
+		<true/>
+	</dict>
+	<key>Login-Sign-In-With-UserPassword</key>
+	<dict>
+		<key>Enabled</key>
+		<true/>
+	</dict>
 	<key>Login-Sign-In-With-Apple</key>
 	<dict>
 		<key>Enabled</key>
@@ -189,5 +206,7 @@
 			<string>3️⃣</string>
 		</dict>
 	</array>
+	<key>Use Cloud Surveys</key>
+	<false/>
 </dict>
 </plist>

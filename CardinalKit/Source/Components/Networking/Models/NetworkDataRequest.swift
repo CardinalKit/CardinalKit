@@ -61,14 +61,14 @@ class NetworkDataRequest: Object {
         return currentObjectCount + 1
     }
     
-    class func send(_ package: Package) throws {
+    class func send(_ package: Package, onCompletion: ((Bool, Error?) -> Void)? = nil) throws {
         guard package.hasData() else{
             throw NetworkDataRequestError.packageDoesNotExist
         }
         
         creationMutex.lock()
         let request = try findOrCreateNetworkRequest(package)
-        try request.perform()
+        try request.perform(onCompletion:onCompletion)
         creationMutex.unlock()
     }
     
@@ -134,7 +134,7 @@ class NetworkDataRequest: Object {
 
 extension NetworkDataRequest {
     
-    func perform() throws {
+    func perform(onCompletion: ((Bool, Error?) -> Void)? = nil) throws {
         guard shouldPerform() else {
             return
         }
@@ -149,14 +149,18 @@ extension NetworkDataRequest {
             
         if let customDelegate = CKApp.instance.options.networkDeliveryDelegate {
             // if the user has a custom send function, use it
-            customDelegate.send(file: store, package: package) { [weak self] (success) in
-                if (success) {
-                    self?.complete()
-                } else {
-                    self?.fail()
+            customDelegate.send(file: store, package: package) { (success) in
+                DispatchQueue.main.async {
+                    if (success) {
+                        self.complete()
+                        onCompletion?(true, nil)
+                    } else {
+                        self.fail()
+                        onCompletion?(false, nil)
+                    }
                 }
             }
-            try markAsProcessing() //mark request as processing
+            try self.markAsProcessing() //mark request as processing
         } else {
             // send file using CK network protocols
             if let endpointURL = package.routeAsURL() {
@@ -170,15 +174,17 @@ extension NetworkDataRequest {
     }
     
     func complete() {
-        VLog("Marking task as completed %@", self.description)
+        
+        
         do {
+            
             let realm = try Realm()
             try realm.write {
                 self.sentOn = Date()
                 self.processing = false
             }
             
-            if let store = try package?.store() {
+            if let store = try self.package?.store() {
                 CacheManager.shared.deleteCache(atURL: store)
             }
         } catch {

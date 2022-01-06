@@ -49,7 +49,7 @@ class LoginViewController: ORKLoginStepViewController {
             Auth.auth().sendPasswordReset(withEmail: textField.text!) { error in
                 DispatchQueue.main.async {
                     if error != nil {
-                        alert.dismiss(animated: true, completion: nil)
+                        alert.dismiss(animated: false, completion: nil)
                         if let errCode = AuthErrorCode(rawValue: error!._code) {
 
                             switch errCode {
@@ -57,8 +57,8 @@ class LoginViewController: ORKLoginStepViewController {
                                     let alert = UIAlertController(title: "Password Reset Error!", message: error?.localizedDescription, preferredStyle: .alert)
                                     alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
                                     
-                                    alert.dismiss(animated: true, completion: nil)
-                                    self.present(alert, animated: true)
+                                    alert.dismiss(animated: false, completion: nil)
+                                    self.present(alert, animated: false)
                             }
                         }
 
@@ -85,7 +85,7 @@ class LoginViewController: ORKLoginStepViewController {
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
 
-        self.present(alert, animated: true)
+        self.present(alert, animated: false)
     }
     
 }

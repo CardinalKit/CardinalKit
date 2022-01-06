@@ -8,6 +8,7 @@
 
 import SwiftUI
 import ResearchKit
+import CardinalKit
 
 struct TasksUIView: View {
     
@@ -16,27 +17,57 @@ struct TasksUIView: View {
     let color: Color
     let config = CKConfig.shared
     
-    let listItems = TaskItem.allValues
-    var listItemsPerHeader = [String:[TaskItem]]()
-    var listItemsSections = [String]()
+    @State var useCloudSurveys = false
+    
+    @State var listItems = [TaskItem]()
+    @State var listItemsPerHeader = [String:[TaskItem]]()
+    @State var listItemsSections = [String]()
+    
+    let localListItems = LocalTaskItem.allValues
+    var localListItemsPerHeader = [String:[LocalTaskItem]]()
+    var localListItemsSections = [String]()
     
     init(color: Color) {
         self.color = color
-        
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM. d, YYYY"
-        self.date = formatter.string(from: Date())
+        date = formatter.string(from: Date())
         
-        if listItemsPerHeader.count <= 0 { // init
-            for item in listItems {
-                if listItemsPerHeader[item.section] == nil {
-                    listItemsPerHeader[item.section] = [TaskItem]()
-                    listItemsSections.append(item.section)
+        if localListItemsPerHeader.count <= 0 { // init
+            for item in localListItems {
+                if localListItemsPerHeader[item.section] == nil {
+                    localListItemsPerHeader[item.section] = [LocalTaskItem]()
+                    localListItemsSections.append(item.section)
                 }
                 
-                listItemsPerHeader[item.section]?.append(item)
+                localListItemsPerHeader[item.section]?.append(item)
             }
         }
+    }
+    
+    func getRemoteItems(){
+        CKResearchSurveysManager.shared.getTaskItems(onCompletion: {
+            (results) in
+            
+            if let results = results as? [TaskItem]{
+                listItems = results
+                var headerCopy = listItemsPerHeader
+                var sectionsCopy = listItemsSections
+                if listItemsPerHeader.count <= 0 { // init
+                    for item in results {
+                        if headerCopy[item.section] == nil {
+                            headerCopy[item.section] = [TaskItem]()
+                            sectionsCopy.append(item.section)
+                        }
+                        if(((headerCopy[item.section]?.contains(item)) ?? false) == false){
+                            headerCopy[item.section]?.append(item)
+                        }
+                    }
+                }
+                listItemsPerHeader=headerCopy
+                listItemsSections=sectionsCopy
+            }
+        })
     }
     
     var body: some View {
@@ -46,17 +77,37 @@ struct TasksUIView: View {
                 .foregroundColor(self.color)
                 .padding(.top, 10)
             Text(config.read(query: "Team Name")).font(.system(size: 15, weight:.light))
-            Text(self.date).font(.system(size: 18, weight: .regular)).padding()
-            List {
-                ForEach(listItemsSections, id: \.self) { key in
-                    Section(header: Text(key)) {
-                        ForEach(listItemsPerHeader[key]!, id: \.self) { item in
-                            TaskListItemView(item: item)
-                        }
-                    }.listRowBackground(Color.white)
-                }
-            }.listStyle(GroupedListStyle())
+            Text(date).font(.system(size: 18, weight: .regular)).padding()
+            
+            if (useCloudSurveys){
+                List {
+                    ForEach(listItemsSections, id: \.self) { key in
+                        Section(header: Text(key)) {
+                            ForEach(listItemsPerHeader[key]!, id: \.self) { item in
+                                TaskListItemView(item: item)
+                            }
+                        }.listRowBackground(Color.white)
+                    }
+                }.listStyle(GroupedListStyle())
+            } else {
+                List {
+                    ForEach(localListItemsSections, id: \.self) { key in
+                        Section(header: Text(key)) {
+                            ForEach(localListItemsPerHeader[key]!, id: \.self) { item in
+                                LocalTaskListItemView(item: item)
+                            }
+                        }.listRowBackground(Color.white)
+                    }
+                }.listStyle(GroupedListStyle())
+            }
         }
+        .onAppear(perform: {
+            self.useCloudSurveys = config.readBool(query: "Use Cloud Surveys")
+            
+            if(self.useCloudSurveys){
+                getRemoteItems()
+            }
+        })
     }
 }
 

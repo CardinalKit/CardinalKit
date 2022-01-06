@@ -4,10 +4,14 @@
 //  Created for the CardinalKit Framework.
 //  Copyright © 2019 Stanford University. All rights reserved.
 //
-
 import UIKit
 import Firebase
 import ResearchKit
+
+// import facebook
+import FBSDKCoreKit
+
+import GoogleSignIn
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
+                
         // (1) initialize Firebase SDK
         FirebaseApp.configure()
         
@@ -31,14 +35,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIView.appearance(whenContainedInInstancesOf: [ORKTaskViewController.self]).tintColor = config.readColor(query: "Tint Color")
         
         // Fix transparent navbar in iOS 15
-        if #available(iOS 15, *) {
-            let appearance = UINavigationBarAppearance()
-            appearance.configureWithOpaqueBackground()
-            UINavigationBar.appearance().standardAppearance = appearance
-            UINavigationBar.appearance().scrollEdgeAppearance = appearance
-        }
+               if #available(iOS 15, *) {
+                   let appearance = UINavigationBarAppearance()
+                   appearance.configureWithOpaqueBackground()
+                   UINavigationBar.appearance().standardAppearance = appearance
+                   UINavigationBar.appearance().scrollEdgeAppearance = appearance
+               }
+        
+        // Set up FB Sign In
+        FBSDKCoreKit.ApplicationDelegate.shared.application(
+                    application,
+                    didFinishLaunchingWithOptions: launchOptions
+                )
         
         return true
+    }
+    
+    
+    // Set up Google Sign In
+    @available(iOS 9.0, *)
+    func application(_ application: UIApplication, open url: URL,
+                     options: [UIApplication.OpenURLOptionsKey: Any])
+      -> Bool {
+          
+          ApplicationDelegate.shared.application(
+              application,
+              open: url,
+              sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
+              annotation: options[UIApplication.OpenURLOptionsKey.annotation]
+          )
+          
+      return GIDSignIn.sharedInstance.handle(url)
     }
     
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {

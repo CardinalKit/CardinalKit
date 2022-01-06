@@ -17,8 +17,8 @@ class CKUploadToGCPTaskViewControllerDelegate : NSObject, ORKTaskViewControllerD
         case .completed:
            do {
                 // (1) convert the result of the ResearchKit task into a JSON dictionary
-                if let json = try CKTaskResultAsJson(taskViewController.result) {
-                    
+                //if let json = try CKTaskResultAsJson(taskViewController.result) {
+                if let json = try   CK_ORKSerialization.CKTaskAsJson(result: taskViewController.result,task: taskViewController.task!) {
                     // (2) send using Firebase
                     try CKSendJSON(json)
                     
@@ -32,7 +32,7 @@ class CKUploadToGCPTaskViewControllerDelegate : NSObject, ORKTaskViewControllerD
             }
             fallthrough
         default:
-            taskViewController.dismiss(animated: true, completion: nil)
+            taskViewController.dismiss(animated: false, completion: nil)
             
         }
     }

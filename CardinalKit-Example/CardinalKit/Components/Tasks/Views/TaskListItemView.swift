@@ -35,13 +35,14 @@ struct TaskListItemView: View {
             self.showingDetail.toggle()
         }))
         .sheet(isPresented: $showingDetail, onDismiss: {}, content: {
-                item.action
+//                item.action
+            item.View()
         })
     }
 }
 
 struct TaskListItemView_Previews: PreviewProvider {
     static var previews: some View {
-        TaskListItemView(item: .sampleCoreMotionAppleWatch)
+        TaskListItemView(item: TaskItem(order: "1", title: "Title", subtitle: "Subtitle", imageName: "ImageName", section: "Seccion", identifier:"identifier" , questions: ["Question"]))
     }
 }

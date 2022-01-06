@@ -13,6 +13,7 @@ import CardinalKit
 class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
     
     public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
+        let storage = Storage.storage()
         switch reason {
         case .completed:
             // if we completed the onboarding task view controller, go to study.
@@ -21,6 +22,7 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
             // TODO: where to go next?
             // trigger "Studies UI"
             UserDefaults.standard.set(true, forKey: Constants.onboardingDidComplete)
+            NotificationCenter.default.post(name: NSNotification.Name(Constants.onboardingDidComplete), object: true)
             
             if let signatureResult = taskViewController.result.stepResult(forStepIdentifier: "ConsentReviewStep")?.results?.first as? ORKConsentSignatureResult {
                 
@@ -40,7 +42,32 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
                         try data?.write(to: url)
                         
                         UserDefaults.standard.set(url.path, forKey: "consentFormURL")
-                        print(url.path)
+                        
+                        let storageRef = storage.reference()
+                        
+                        if let DocumentCollection = CKStudyUser.shared.authCollection {
+                            let DocumentRef = storageRef.child("\(DocumentCollection)/Consent.pdf")
+                            
+                            // Upload the file to the path "images/rivers.jpg"
+                            DocumentRef.putFile(from: url, metadata: nil) { metadata, error in
+                              guard let metadata = metadata else {
+                                // Uh-oh, an error occurred!
+                                return
+                              }
+                              // Metadata contains file metadata such as size, content-type.
+//                              let size = metadata.size
+                              // You can also access to download URL after upload.
+                                DocumentRef.downloadURL { (url, error) in
+                                guard let downloadURL = url else {
+                                  // Uh-oh, an error occurred!
+                                  return
+                                }
+                              }
+                            }
+                        }
+                        
+                        
+                        
 
                     } catch let error {
 
@@ -55,7 +82,7 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
             fallthrough
         default:
             // otherwise dismiss onboarding without proceeding.
-            taskViewController.dismiss(animated: true, completion: nil)
+            taskViewController.dismiss(animated: false, completion: nil)
         }
     }
     
@@ -183,6 +210,10 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
         case is CKSignInWithAppleStep:
             // handle Sign in with Apple
             return CKSignInWithAppleStepViewController(step: step)
+        case is CKMultipleSignInStep:
+            return CKMultipleSignInStepViewController(step: step)
+        case is CKReviewConsentDocument:
+            return CKReviewConsentDocumentViewController(step: step)
         default:
             return nil
         }

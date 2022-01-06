@@ -5,11 +5,15 @@ target 'CardinalKit_Example' do
   
   # CK Sample Pods
   pod 'ResearchKit', :git => 'https://github.com/ResearchKit/ResearchKit.git', :branch => 'main'
+  pod 'Granola', :git => 'https://github.com/CardinalKit/Granola.git', :branch => 'main'
   
   pod 'Firebase/Firestore'
   pod 'Firebase/Auth'
   pod 'Firebase/Storage'
   pod 'Firebase/Analytics'
   pod 'Firebase/DynamicLinks'
+  pod 'GoogleSignIn'
+  pod 'FBSDKLoginKit'
+  
 
 end

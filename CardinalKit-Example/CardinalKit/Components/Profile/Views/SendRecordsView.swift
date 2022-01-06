@@ -39,7 +39,7 @@ struct SendRecordsView: View {
                 return
             }
             
-            CKHealthRecordsManager.shared.upload() { success, _ in
+            CKHealthRecordsManager.shared.collectAndUploadAll() { success, _ in
                 isSending = false
                 if success {
                     lastSentDate = recordsLastUploaded

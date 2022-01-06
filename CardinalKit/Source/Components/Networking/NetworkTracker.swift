@@ -80,9 +80,11 @@ extension NetworkTracker {
             if let lastAttempt = item.lastAttempt, lastAttempt > waitThreshold {
                 continue
             }
+            DispatchQueue.main.async {
+                UploadManager.shared.cancel(item)
+                item.fail()
+            }
             
-            UploadManager.shared.cancel(item)
-            item.fail()
         }
     }
     
