@@ -20,13 +20,13 @@ Includes:
 
 ## Build your App with CardinalKit
 
-This repository contains a fully functional example in the `CardinalKit-Example` directory that you can use as a starting point for building your own app. To get started, clone this repository and follow our simple [setup instructions](https://cardinalkit.org/docs/getting_started).
+This repository contains a fully functional example in the `CardinalKit-Example` directory that you can use as a starting point for building your own app. To get started, clone this repository and follow our simple [setup instructions](https://cardinalkit.org/cardinalkit-docs/1-cardinalkit-app/1-start.html).
 
 Feel free to join our Slack community or attend one of our workshops or buildathons for help customizing your app! Learn more at https://cardinalkit.org.
 
 ## Contribute to CardinalKit
 
-Head on over to https://cardinalkit.org/docs/contribute to get onboarded to our open source community ⚡️ 
+Head on over to https://cardinalkit.org/ to get onboarded to our open source community ⚡️ 
 
 ## Contributors ✨
 
