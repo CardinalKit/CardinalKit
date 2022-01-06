@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'CardinalKit'
-  s.version          = '1.3.0'
+  s.version          = '2.0.0'
   s.summary          = 'https://cardinalkit.org/'
 
 # This description is used to generate tags and improve search results.
