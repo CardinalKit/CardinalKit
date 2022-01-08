@@ -172,41 +172,32 @@ internal extension OCKStore {
     }
     
     func createContacts() {
-        var contact1 = OCKContact(id: "oliver", givenName: "Oliver",
-                                  familyName: "Aalami", carePlanUUID: nil)
-        contact1.asset = "OliverAalami"
-        contact1.title = "Vascular Surgeon"
-        contact1.role = "Dr. Aalami is the director of the CardinalKit project."
-        contact1.emailAddresses = [OCKLabeledValue(label: CNLabelEmailiCloud, value: "aalami@stanford.edu")]
-        contact1.phoneNumbers = [OCKLabeledValue(label: CNLabelWork, value: "(111) 111-1111")]
-        contact1.messagingNumbers = [OCKLabeledValue(label: CNLabelWork, value: "(111) 111-1111")]
-
-        contact1.address = {
+        let config = CKPropertyReader(file: "CKConfiguration")
+        let contactData = config.readAny(query: "Contacts") as! [[String:String]]
+//        Have to put it into a list so we can reverse the list later
+        var ockContactElements: [OCKContact] = []
+        for data in contactData {
             let address = OCKPostalAddress()
-            address.street = "318 Campus Drive"
-            address.city = "Stanford"
-            address.state = "CA"
-            address.postalCode = "94305"
-            return address
-        }()
-
-        var contact2 = OCKContact(id: "johnny", givenName: "Johnny",
-                                  familyName: "Appleseed", carePlanUUID: nil)
-        contact2.asset = "JohnnyAppleseed"
-        contact2.title = "OBGYN"
-        contact2.role = "Dr. Appleseed is an OBGYN with 13 years of experience."
-        contact2.phoneNumbers = [OCKLabeledValue(label: CNLabelWork, value: "(324) 555-7415")]
-        contact2.messagingNumbers = [OCKLabeledValue(label: CNLabelWork, value: "(324) 555-7415")]
-        contact2.address = {
-            let address = OCKPostalAddress()
-            address.street = "318 Campus Drive"
-            address.city = "Stanford"
-            address.state = "CA"
-            address.postalCode = "94305"
-            return address
-        }()
-
-        addContacts([contact2, contact1])
+            var thisContact = OCKContact(id: data["givenName"]! + data["familyName"]!, givenName: data["givenName"]!, familyName: data["familyName"]!, carePlanUUID: nil)
+            for (k, v) in data {
+                k == "role" ? thisContact.role = v :
+                k == "title" ? thisContact.title = v :
+                k == "email" ? thisContact.emailAddresses = [OCKLabeledValue(label: CNLabelEmailiCloud, value: v)] :
+                k == "phone" ? thisContact.phoneNumbers = [OCKLabeledValue(label: CNLabelWork, value: v)] :
+                k == "test" ? thisContact.messagingNumbers = [OCKLabeledValue(label: CNLabelWork, value: v)] :
+                k == "street" ? address.street = v :
+                k == "city" ? address.city = v :
+                k == "state" ? address.state = v :
+                k == "postalCode" ? address.postalCode = v :
+                ()
+            }
+            if address != OCKPostalAddress() {
+                thisContact.address = address
+            }
+            ockContactElements.append(thisContact)
+        }
+//        Have to do this for them to be in what is probably the correct order
+        addContacts(ockContactElements.reversed())
     }
     
 }
