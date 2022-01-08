@@ -179,6 +179,8 @@ internal extension OCKStore {
         for data in contactData {
             let address = OCKPostalAddress()
             var thisContact = OCKContact(id: data["givenName"]! + data["familyName"]!, givenName: data["givenName"]!, familyName: data["familyName"]!, carePlanUUID: nil)
+//            If you have an image named exactly givenNamefamilyName, in assets, it will be put on contact card
+            thisContact.asset = data["givenName"]! + data["familyName"]!
             for (k, v) in data {
                 k == "role" ? thisContact.role = v :
                 k == "title" ? thisContact.title = v :
