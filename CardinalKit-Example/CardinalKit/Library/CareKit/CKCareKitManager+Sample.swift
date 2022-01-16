@@ -121,6 +121,11 @@ internal extension OCKStore {
                             task.impactsAdherence = impactsAdherence
                         }
                         task.instructions = payload["instructions"] as? String
+                        
+//                        This will make it so future surveys show up properly
+//                        It also means they can be filled out
+//                        TODO: add some kind of task.fillableDate
+                        task.effectiveDate = Date()
 
                         // get if task exist?
                         self.fetchTask(withID: id) { result in
