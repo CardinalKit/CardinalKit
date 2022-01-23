@@ -19,8 +19,8 @@ struct TasksUIView: View {
     
     @State var useCloudSurveys = false
     
-    @State var listItems = [TaskItem]()
-    @State var listItemsPerHeader = [String:[TaskItem]]()
+    @State var listItems = [CloudTaskItem]()
+    @State var listItemsPerHeader = [String:[CloudTaskItem]]()
     @State var listItemsSections = [String]()
     
     let localListItems = LocalTaskItem.allValues
@@ -49,14 +49,14 @@ struct TasksUIView: View {
         CKResearchSurveysManager.shared.getTaskItems(onCompletion: {
             (results) in
             
-            if let results = results as? [TaskItem]{
+            if let results = results as? [CloudTaskItem]{
                 listItems = results
                 var headerCopy = listItemsPerHeader
                 var sectionsCopy = listItemsSections
                 if listItemsPerHeader.count <= 0 { // init
                     for item in results {
                         if headerCopy[item.section] == nil {
-                            headerCopy[item.section] = [TaskItem]()
+                            headerCopy[item.section] = [CloudTaskItem]()
                             sectionsCopy.append(item.section)
                         }
                         if(((headerCopy[item.section]?.contains(item)) ?? false) == false){
@@ -84,7 +84,7 @@ struct TasksUIView: View {
                     ForEach(listItemsSections, id: \.self) { key in
                         Section(header: Text(key)) {
                             ForEach(listItemsPerHeader[key]!, id: \.self) { item in
-                                TaskListItemView(item: item)
+                                CloudTaskListItemView(item: item)
                             }
                         }.listRowBackground(Color.white)
                     }

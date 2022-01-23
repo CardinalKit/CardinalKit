@@ -1,5 +1,5 @@
 //
-//  StudyTableItem.swift
+//  LocalTaskItem.swift
 //
 //  Created for the CardinalKit Framework.
 //  Copyright © 2019 Stanford University. All rights reserved.
@@ -11,7 +11,7 @@ import ResearchKit
 import SwiftUI
 
 enum LocalTaskItem: Int {
-
+    
     /*
      * STEP (1) APPEND TABLE ITEMS HERE,
      * Give each item a recognizable name!
@@ -99,7 +99,7 @@ enum LocalTaskItem: Int {
             return "Learn"
         }
     }
-
+    
     /*
      * STEP (6) when each element is tapped, what should happen?
      * define a SwiftUI View & return as AnyView.
