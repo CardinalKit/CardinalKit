@@ -9,13 +9,13 @@
 import SwiftUI
 import ResearchKit
 
-struct TaskListItemView: View {
+struct CloudTaskListItemView: View {
     
-    let item: TaskItem
+    let item: CloudTaskItem
 
     @State var showingDetail = false
     
-    init(item: TaskItem) {
+    init(item: CloudTaskItem) {
         self.item = item
     }
     
@@ -41,8 +41,8 @@ struct TaskListItemView: View {
     }
 }
 
-struct TaskListItemView_Previews: PreviewProvider {
+struct CloudTaskListItemView_Previews: PreviewProvider {
     static var previews: some View {
-        TaskListItemView(item: TaskItem(order: "1", title: "Title", subtitle: "Subtitle", imageName: "ImageName", section: "Seccion", identifier:"identifier" , questions: ["Question"]))
+        CloudTaskListItemView(item: CloudTaskItem(order: "1", title: "Title", subtitle: "Subtitle", imageName: "ImageName", section: "Seccion", identifier:"identifier" , questions: ["Question"]))
     }
 }

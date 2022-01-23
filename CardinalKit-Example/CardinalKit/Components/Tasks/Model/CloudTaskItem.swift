@@ -1,9 +1,9 @@
 //
-//  TaskItem.swift
+//  CloudTaskItem.swift
 //  CardinalKit_Example
 //
 //  Created by Julian Esteban Ramos Martinez on 10/08/21.
-//  Copyright © 2021 CocoaPods. All rights reserved.
+//  Copyright © 2021 CardinalKit. All rights reserved.
 //
 
 import Foundation
@@ -11,10 +11,11 @@ import UIKit
 import ResearchKit
 import SwiftUI
 
-struct TaskItem:Hashable {
-    static func == (lhs: TaskItem, rhs: TaskItem) -> Bool {
+struct CloudTaskItem: Hashable {
+    static func == (lhs: CloudTaskItem, rhs: CloudTaskItem) -> Bool {
         return lhs.title == rhs.title && lhs.section == rhs.section
     }
+    
     var order: String;
     var title:String;
     var subtitle:String;

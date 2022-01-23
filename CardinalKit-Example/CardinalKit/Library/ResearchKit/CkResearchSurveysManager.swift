@@ -17,7 +17,7 @@ class CKResearchSurveysManager: NSObject {
             onCompletion(false)
             return
         }
-        var AllItems=[TaskItem]()
+        var AllItems=[CloudTaskItem]()
         CKActivityManager.shared.fetchData(route: surveysPath,onCompletion: {(results) in
             if let results = results as? [String:Any]{
                 var counter=results.count
@@ -61,7 +61,7 @@ class CKResearchSurveysManager: NSObject {
                                 }
                             }
                             if questions.count>0 && !deleted{
-                                let taskItem: TaskItem = TaskItem(order: order, title: title, subtitle: subtitle, imageName: imageName, section: section, identifier: identifier, questions: questions)
+                                let taskItem: CloudTaskItem = CloudTaskItem(order: order, title: title, subtitle: subtitle, imageName: imageName, section: section, identifier: identifier, questions: questions)
                                 AllItems.append(taskItem)
                             }
                         }

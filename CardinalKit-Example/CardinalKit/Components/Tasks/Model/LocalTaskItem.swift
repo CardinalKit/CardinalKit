@@ -1,5 +1,5 @@
 //
-//  StudyTableItem.swift
+//  LocalTaskItem.swift
 //
 //  Created for the CardinalKit Framework.
 //  Copyright © 2019 Stanford University. All rights reserved.
