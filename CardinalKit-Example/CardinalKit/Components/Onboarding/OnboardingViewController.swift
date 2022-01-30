@@ -41,6 +41,28 @@ struct OnboardingViewController: UIViewControllerRepresentable {
         reviewConsentStep.text = config.read(query: "Review Consent Step Text")
         reviewConsentStep.reasonForConsent = config.read(query: "Reason for Consent Text")
         
+        
+        /* ***********************************************************
+        * Get the user's personal information
+         ************************************************************* */
+        
+        let nameFormStep = ORKFormStep(identifier: "nameFormStep", title: "Registration", text: "Please provide your information for creating your user account.")
+        
+        let firstNameAnswerFormat = ORKTextAnswerFormat(maximumLength: 20)
+        firstNameAnswerFormat.multipleLines = false
+        
+        let lastNameAnswerFormat = ORKTextAnswerFormat(maximumLength: 20)
+        lastNameAnswerFormat.multipleLines = false
+        
+        let nameSectionTitle = ORKFormItem(sectionTitle: nil)
+        let firstNameFormItem = ORKFormItem(identifier: "firstNameFormItem", text: "First Name", answerFormat: firstNameAnswerFormat)
+        let lastNameFormItem = ORKFormItem(identifier: "lastNameFormItem", text: "Last Name", answerFormat: lastNameAnswerFormat)
+        let dobAnswerFormat = ORKAnswerFormat.dateAnswerFormat(withDefaultDate: nil, minimumDate: nil, maximumDate: Date(), calendar: nil)
+        let dobFormItem = ORKFormItem(identifier: "dobFormItem", text: "Date of Birth", answerFormat: dobAnswerFormat)
+        
+        nameFormStep.formItems = [nameSectionTitle, firstNameFormItem, lastNameFormItem, dobFormItem]
+        
+        
         /* **************************************************************
         *  STEP (3): get permission to collect HealthKit data
         **************************************************************/
@@ -107,7 +129,7 @@ struct OnboardingViewController: UIViewControllerRepresentable {
         **************************************************************/
         
         // given intro steps that the user should review and consent to
-        let introSteps: [ORKStep] = [consentStep, reviewConsentStep]
+        let introSteps: [ORKStep] = [consentStep, reviewConsentStep, nameFormStep]
         
         // and steps regarding login / security
         let emailVerificationSteps = loginSteps + [passcodeStep, healthDataStep, healthRecordsStep, completionStep]
