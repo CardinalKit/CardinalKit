@@ -26,7 +26,7 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
             
             
             // Save personal information from registration step to user document in Firebase
-            if let nameResult = taskViewController.result.stepResult(forStepIdentifier: "nameFormStep")?.results {
+            if let nameResult = taskViewController.result.stepResult(forStepIdentifier: "personalInfoStep")?.results {
 
                 let user = CKStudyUser.shared
 

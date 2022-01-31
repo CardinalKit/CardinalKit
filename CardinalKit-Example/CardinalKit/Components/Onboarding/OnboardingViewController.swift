@@ -45,8 +45,8 @@ struct OnboardingViewController: UIViewControllerRepresentable {
         /* ***********************************************************
         * STEP (3): Get the user's personal information for registration
          ************************************************************* */
-        // see CustomRegistrationStep to configure
-        let registrationStep = CustomRegistrationStep.registrationForm
+        // see PersonalInfoStep to configure
+        let personalInfoStep = PersonalInfoStep.form
         
         /* **************************************************************
         *  STEP (4): get permission to collect HealthKit data
@@ -114,7 +114,7 @@ struct OnboardingViewController: UIViewControllerRepresentable {
         **************************************************************/
         
         // given intro steps that the user should review and consent to
-        let introSteps: [ORKStep] = [consentStep, reviewConsentStep, registrationStep]
+        let introSteps: [ORKStep] = [consentStep, reviewConsentStep, personalInfoStep]
         
         // and steps regarding login / security
         let emailVerificationSteps = loginSteps + [passcodeStep, healthDataStep, healthRecordsStep, completionStep]

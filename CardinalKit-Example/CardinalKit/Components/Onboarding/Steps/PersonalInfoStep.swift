@@ -1,5 +1,5 @@
 //
-//  CustomRegistrationStep.swift
+//  PersonalInformationStep.swift
 //  CardinalKit_Example
 //
 //  Created by Vishnu Ravi on 1/31/22.
@@ -8,11 +8,11 @@
 
 import ResearchKit
 
-struct CustomRegistrationStep {
+struct PersonalInfoStep {
     
-    static let registrationForm: ORKFormStep = {
+    static let form: ORKFormStep = {
         
-        let registrationStep = ORKFormStep(identifier: "registrationStep", title: "Registration", text: "Please provide your information for creating your user account.")
+        let personalInfoStep = ORKFormStep(identifier: "personalInfoStep", title: "Registration", text: "Please provide your information for creating your user account.")
         
         let firstNameAnswerFormat = ORKTextAnswerFormat(maximumLength: 20)
         firstNameAnswerFormat.multipleLines = false
@@ -26,9 +26,9 @@ struct CustomRegistrationStep {
         let dobAnswerFormat = ORKAnswerFormat.dateAnswerFormat(withDefaultDate: nil, minimumDate: nil, maximumDate: Date(), calendar: nil)
         let dobFormItem = ORKFormItem(identifier: "dobFormItem", text: "Date of Birth", answerFormat: dobAnswerFormat)
         
-        registrationStep.formItems = [nameSectionTitle, firstNameFormItem, lastNameFormItem, dobFormItem]
+        personalInfoStep.formItems = [nameSectionTitle, firstNameFormItem, lastNameFormItem, dobFormItem]
         
-        return registrationStep
+        return personalInfoStep
         
     }()
     

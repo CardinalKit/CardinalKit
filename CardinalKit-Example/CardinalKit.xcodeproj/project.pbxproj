@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		27653A13272A2E7700D74E83 /* LocalTaskListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27653A12272A2E7700D74E83 /* LocalTaskListItemView.swift */; };
 		276891B727A7534B003CD4AC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 276891B627A7534B003CD4AC /* GoogleService-Info.plist */; };
-		27871AB627A8180F00F56B45 /* CustomRegistrationStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27871AB527A8180F00F56B45 /* CustomRegistrationStep.swift */; };
+		27871AB627A8180F00F56B45 /* PersonalInfoStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27871AB527A8180F00F56B45 /* PersonalInfoStep.swift */; };
 		2B19DD9226FE1BEB00649CE1 /* JsonToSurvey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19DD9126FE1BEB00649CE1 /* JsonToSurvey.swift */; };
 		2B19DD9426FE1D2600649CE1 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19DD9326FE1D2600649CE1 /* TestViewController.swift */; };
 		2B19DD9626FE1D2F00649CE1 /* CheckListItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19DD9526FE1D2F00649CE1 /* CheckListItemViewController.swift */; };
@@ -113,7 +113,7 @@
 		270AF36127872C13002945A7 /* CardinalKit_ExampleRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CardinalKit_ExampleRelease.entitlements; sourceTree = "<group>"; };
 		27653A12272A2E7700D74E83 /* LocalTaskListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalTaskListItemView.swift; sourceTree = "<group>"; };
 		276891B627A7534B003CD4AC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
-		27871AB527A8180F00F56B45 /* CustomRegistrationStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRegistrationStep.swift; sourceTree = "<group>"; };
+		27871AB527A8180F00F56B45 /* PersonalInfoStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInfoStep.swift; sourceTree = "<group>"; };
 		2B19DD9126FE1BEB00649CE1 /* JsonToSurvey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonToSurvey.swift; sourceTree = "<group>"; };
 		2B19DD9326FE1D2600649CE1 /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		2B19DD9526FE1D2F00649CE1 /* CheckListItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckListItemViewController.swift; sourceTree = "<group>"; };
@@ -348,7 +348,7 @@
 				8E0A439F244A4A0400656518 /* PasswordlessLoginStep.swift */,
 				8E0A43A3244A4A0400656518 /* LoginCustomWaitStepViewController.swift */,
 				E2DF9F092500C9CE00A93B93 /* LoginViewController.swift */,
-				27871AB527A8180F00F56B45 /* CustomRegistrationStep.swift */,
+				27871AB527A8180F00F56B45 /* PersonalInfoStep.swift */,
 			);
 			path = Steps;
 			sourceTree = "<group>";
@@ -757,7 +757,7 @@
 				8E6E1E182535263F0024B8DF /* CKTaskViewController.swift in Sources */,
 				8E9CDF142591B73900C8A228 /* CKHealthRecordsManager.swift in Sources */,
 				8EA664B42594387900B6A45A /* Errors.swift in Sources */,
-				27871AB627A8180F00F56B45 /* CustomRegistrationStep.swift in Sources */,
+				27871AB627A8180F00F56B45 /* PersonalInfoStep.swift in Sources */,
 				8E6E1E1225351F830024B8DF /* DocumentPreviewViewController.swift in Sources */,
 				8E6E1E20253529760024B8DF /* DocumentView.swift in Sources */,
 				8E7FFFBB25DE37FF002982B4 /* CoffeePieChartView.swift in Sources */,
