@@ -22,6 +22,10 @@ class CKStudyUser {
         return Auth.auth().currentUser
     }
     
+    var firstName: String?
+    var lastName: String?
+    var dateOfBirth: Date?
+    
     /* **************************************************************
      * store your Firebase objects under this path in order to
      * be compatible with CardinalKit GCP rules.
@@ -120,7 +124,23 @@ class CKStudyUser {
             settings.isPersistenceEnabled = false
             let db = Firestore.firestore()
             db.settings = settings
-            db.collection(dataBucket).document(uid).setData(["userID":uid, "lastActive":Date().ISOStringFromDate(),"email":email])
+            
+            var data = [
+                "userID": uid,
+                "lastActive": Date().ISOStringFromDate(),
+                "email": email
+            ]
+            
+            if let firstName = self.firstName, let lastName = self.lastName {
+                data["firstName"] = firstName
+                data["lastName"] = lastName
+            }
+            
+            if let dateOfBirth = dateOfBirth {
+                data["dateOfBirth"] = dateOfBirth.ISOStringFromDate()
+            }
+            
+            db.collection(dataBucket).document(uid).setData(data)
         }
     }
     

@@ -24,6 +24,29 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
             UserDefaults.standard.set(true, forKey: Constants.onboardingDidComplete)
             NotificationCenter.default.post(name: NSNotification.Name(Constants.onboardingDidComplete), object: true)
             
+            
+            // Save personal information to user document in Firebase
+            if let nameResult = taskViewController.result.stepResult(forStepIdentifier: "nameFormStep")?.results {
+
+                let user = CKStudyUser.shared
+
+                if let firstName = nameResult[0] as? ORKTextQuestionResult {
+                    user.firstName = firstName.textAnswer
+                }
+                
+                if let lastName = nameResult[1] as? ORKTextQuestionResult {
+                    user.lastName = lastName.textAnswer
+                }
+                
+                if let dateOfBirth = nameResult[2] as? ORKDateQuestionResult {
+                    user.dateOfBirth = dateOfBirth.dateAnswer
+                }
+                
+                user.save()
+            }
+
+            
+            // Upload consent document to Firebase
             if let signatureResult = taskViewController.result.stepResult(forStepIdentifier: "ConsentReviewStep")?.results?.first as? ORKConsentSignatureResult {
                 
                 let consentDocument = ConsentDocument()

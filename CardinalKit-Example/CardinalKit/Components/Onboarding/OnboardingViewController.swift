@@ -43,7 +43,7 @@ struct OnboardingViewController: UIViewControllerRepresentable {
         
         
         /* ***********************************************************
-        * Get the user's personal information
+        * STEP (3): Get the user's personal information for registration
          ************************************************************* */
         
         let nameFormStep = ORKFormStep(identifier: "nameFormStep", title: "Registration", text: "Please provide your information for creating your user account.")
@@ -64,18 +64,18 @@ struct OnboardingViewController: UIViewControllerRepresentable {
         
         
         /* **************************************************************
-        *  STEP (3): get permission to collect HealthKit data
+        *  STEP (4): get permission to collect HealthKit data
         **************************************************************/
         // see `HealthDataStep` to configure!
         let healthDataStep = CKHealthDataStep(identifier: "Healthkit")
         
         /* **************************************************************
-        *  STEP (3.5): get permission to collect HealthKit health records data
+        *  STEP (4.1): get permission to collect HealthKit health records data
         **************************************************************/
         let healthRecordsStep = CKHealthRecordsStep(identifier: "HealthRecords")
         
         /* **************************************************************
-        *  STEP (4): ask user to enter their email address for login
+        *  STEP (5): ask user to enter their email address for login
         **************************************************************/
         // the `LoginStep` collects and email address, and
         // the `LoginCustomWaitStep` waits for email verification.
@@ -103,7 +103,7 @@ struct OnboardingViewController: UIViewControllerRepresentable {
 //        }
         
         /* **************************************************************
-        *  STEP (5): ask the user to create a security passcode
+        *  STEP (6): ask the user to create a security passcode
         *  that will be required to use this app!
         **************************************************************/
         // use the `ORKPasscodeStep` from ResearchKit.
@@ -117,7 +117,7 @@ struct OnboardingViewController: UIViewControllerRepresentable {
         passcodeStep.text = config.read(query: "Passcode Text")
         
         /* **************************************************************
-        *  STEP (6): inform the user that they are done with sign-up!
+        *  STEP (7): inform the user that they are done with sign-up!
         **************************************************************/
         // use the `ORKCompletionStep` from ResearchKit
         let completionStep = ORKCompletionStep(identifier: "CompletionStep")
