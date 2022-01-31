@@ -11,23 +11,38 @@ import ResearchKit
 struct PersonalInfoStep {
     
     static let form: ORKFormStep = {
-        
+        let config = CKPropertyReader(file: "CKConfiguration")
+
         let personalInfoStep = ORKFormStep(identifier: "personalInfoStep", title: "Registration", text: "Please provide your information for creating your user account.")
         
-        let firstNameAnswerFormat = ORKTextAnswerFormat(maximumLength: 20)
-        firstNameAnswerFormat.multipleLines = false
+        let sectionTitle = ORKFormItem(sectionTitle: nil)
         
-        let lastNameAnswerFormat = ORKTextAnswerFormat(maximumLength: 20)
-        lastNameAnswerFormat.multipleLines = false
+        var formItems: [ORKFormItem] = [sectionTitle]
         
-        let nameSectionTitle = ORKFormItem(sectionTitle: nil)
-        let firstNameFormItem = ORKFormItem(identifier: "firstNameFormItem", text: "First Name", answerFormat: firstNameAnswerFormat)
-        let lastNameFormItem = ORKFormItem(identifier: "lastNameFormItem", text: "Last Name", answerFormat: lastNameAnswerFormat)
-        let dobAnswerFormat = ORKAnswerFormat.dateAnswerFormat(withDefaultDate: nil, minimumDate: nil, maximumDate: Date(), calendar: nil)
-        let dobFormItem = ORKFormItem(identifier: "dobFormItem", text: "Date of Birth", answerFormat: dobAnswerFormat)
+        if config["Collect Personal Information"]["Name"] as? Bool == true {
+            
+            let firstNameAnswerFormat = ORKTextAnswerFormat(maximumLength: 20)
+            firstNameAnswerFormat.multipleLines = false
+            
+            let lastNameAnswerFormat = ORKTextAnswerFormat(maximumLength: 20)
+            lastNameAnswerFormat.multipleLines = false
+            
+            let firstNameFormItem = ORKFormItem(identifier: "firstNameFormItem", text: "First Name", answerFormat: firstNameAnswerFormat)
+            let lastNameFormItem = ORKFormItem(identifier: "lastNameFormItem", text: "Last Name", answerFormat: lastNameAnswerFormat)
+            
+            formItems += [firstNameFormItem, lastNameFormItem]
+            
+        }
         
-        personalInfoStep.formItems = [nameSectionTitle, firstNameFormItem, lastNameFormItem, dobFormItem]
+        if config["Collect Personal Information"]["DOB"] as? Bool == true {
+            let dobAnswerFormat = ORKAnswerFormat.dateAnswerFormat(withDefaultDate: nil, minimumDate: nil, maximumDate: Date(), calendar: nil)
+            let dobFormItem = ORKFormItem(identifier: "dobFormItem", text: "Date of Birth", answerFormat: dobAnswerFormat)
+            
+            formItems += [dobFormItem]
+            
+        }
         
+        personalInfoStep.formItems = formItems
         return personalInfoStep
         
     }()
