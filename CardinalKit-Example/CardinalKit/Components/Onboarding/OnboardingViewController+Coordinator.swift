@@ -25,7 +25,7 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
             NotificationCenter.default.post(name: NSNotification.Name(Constants.onboardingDidComplete), object: true)
             
             
-            // Save personal information to user document in Firebase
+            // Save personal information from registration step to user document in Firebase
             if let nameResult = taskViewController.result.stepResult(forStepIdentifier: "nameFormStep")?.results {
 
                 let user = CKStudyUser.shared
