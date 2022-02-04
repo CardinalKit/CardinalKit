@@ -25,10 +25,7 @@ class SurveyItemViewController: OCKInstructionsTaskViewController, ORKTaskViewCo
         }
 
         // 2b. If the user attempted to mark the task complete, display a ResearchKit survey.
-        let answerFormat = ORKAnswerFormat.scale(withMaximumValue: 5, minimumValue: 1, defaultValue: 5, step: 1, vertical: false, maximumValueDescription: "A LOT!", minimumValueDescription: "a little")
-        let feedbackStep = ORKQuestionStep(identifier: "feedback", title: "Feedback", question: "How are you liking CardinalKit?", answer: answerFormat)
-        let surveyTask = ORKOrderedTask(identifier: "feedback", steps: [feedbackStep])
-        let surveyViewController = ORKTaskViewController(task: surveyTask, taskRun: nil)
+        let surveyViewController = ORKTaskViewController(task: PainSurvey.painSurvey, taskRun: nil)
         surveyViewController.delegate = self
 
         // 3a. Present the survey to the user
@@ -37,16 +34,18 @@ class SurveyItemViewController: OCKInstructionsTaskViewController, ORKTaskViewCo
 
     // 3b. This method will be called when the user completes the survey.
     func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
+        
         taskViewController.dismiss(animated: false, completion: nil)
+        
         guard reason == .completed else {
             taskView.completionButton.isSelected = false
             return
         }
         // 4a. Retrieve the result from the ResearchKit survey
-        let survey = taskViewController.result.results!.first(where: { $0.identifier == "feedback" }) as! ORKStepResult
-        let feedbackResult = survey.results!.first as! ORKScaleQuestionResult
+        let survey = taskViewController.result.results?.first(where: { $0.identifier == "painSurvey" }) as? ORKStepResult
+        let feedbackResult = survey?.results!.first as? ORKScaleQuestionResult
         
-        if let ScaleAnswer = feedbackResult.scaleAnswer{
+        if let ScaleAnswer = feedbackResult?.scaleAnswer{
             // 4b. Save the result into CareKit's store
             let answer = Int(truncating: ScaleAnswer)
             controller.appendOutcomeValue(value: answer, at: IndexPath(item: 0, section: 0), completion: nil)
@@ -79,9 +78,9 @@ class SurveyItemViewSynchronizer: OCKInstructionsTaskViewSynchronizer {
         let firstEvent = element?.first
         
         if let answer = firstEvent?.outcome?.values.first?.integerValue {
-            view.headerView.detailLabel.text = "CardinalKit Rating: \(answer)"
+            view.headerView.detailLabel.text = "Pain Scale: \(answer)"
         } else {
-            view.headerView.detailLabel.text = "How are you liking CardinalKit?"
+            view.headerView.detailLabel.text = "How much pain are you having?"
         }
     }
 }

@@ -15,7 +15,7 @@ class CKCareKitManager: NSObject {
     let healthKitStore = OCKHealthKitPassthroughStore(name: "CKCareKitHealthKitStore", type: .onDisk)
     private(set) var synchronizedStoreManager: OCKSynchronizedStoreManager!
     
-    static let shared = CKCareKitManager()
+    static let shared = CKCareKitManager() 
     
     override init() {
         super.init()
@@ -34,7 +34,8 @@ class CKCareKitManager: NSObject {
         let lastUpdateDate:Date? = UserDefaults.standard.object(forKey: Constants.prefCareKitCoreDataInitDate) as? Date
 //        if forceUpdate || UserDefaults.standard.object(forKey: Constants.prefCareKitCoreDataInitDate) == nil {
 //        coreDataStore.populateSampleData(lastUpdateDate:lastUpdateDate)
-        healthKitStore.populateSampleData()            
+        healthKitStore.populateHKSampleData()
+        
         UserDefaults.standard.set(Date(), forKey: Constants.prefCareKitCoreDataInitDate)
 //        }
     }

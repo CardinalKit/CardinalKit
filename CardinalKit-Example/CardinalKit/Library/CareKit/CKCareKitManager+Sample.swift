@@ -13,13 +13,14 @@ import UIKit
 import FirebaseFirestore
 
 internal extension OCKStore {
-
+    
+    // get tasks from firestore
     fileprivate func insertDocuments(documents: [DocumentSnapshot]?, collection: String, authCollection: String?,lastUpdateDate: Date?,onCompletion: @escaping (Error?)->Void){
         guard let documents = documents,
-             documents.count>0 else {
-           onCompletion(nil)
-           return
-       }
+              documents.count>0 else {
+                  onCompletion(nil)
+                  return
+              }
         
         let group = DispatchGroup()
         for document in documents{
@@ -30,8 +31,8 @@ internal extension OCKStore {
                           let payload = document.data(),
                           let id = payload["id"] as? String else {
                               group.leave()
-                        return
-                    }
+                              return
+                          }
                     var itemSchedule:OCKSchedule? = nil
                     var update = true
                     if lastUpdateDate != nil,
@@ -41,7 +42,7 @@ internal extension OCKStore {
                     }
                     
                     if update,
-                        let schedule = payload["scheduleElements"] as? [[String:Any]]
+                       let schedule = payload["scheduleElements"] as? [[String:Any]]
                     {
                         var scheduleElements=[OCKScheduleElement]()
                         for element in schedule{
@@ -66,19 +67,19 @@ internal extension OCKStore {
                                     seconds = secondsInterval
                                 }
                                 intervalDate =
-                                    DateComponents(
-                                        timeZone: interval["timeZone"] as? TimeZone,
-                                        year: interval["year"] as? Int,
-                                        month: interval["month"] as? Int,
-                                        day: day,
-                                        hour: interval["hour"] as? Int,
-                                        minute: interval["minute"] as? Int,
-                                        second: seconds,
-                                        weekday: interval["weekday"] as? Int,
-                                        weekdayOrdinal: interval["weekdayOrdinal"] as? Int,
-                                        weekOfMonth: interval["weekOfMonth"] as? Int,
-                                        weekOfYear: interval["weekOfYear"] as? Int,
-                                        yearForWeekOfYear: interval["yearForWeekOfYear"] as? Int)
+                                DateComponents(
+                                    timeZone: interval["timeZone"] as? TimeZone,
+                                    year: interval["year"] as? Int,
+                                    month: interval["month"] as? Int,
+                                    day: day,
+                                    hour: interval["hour"] as? Int,
+                                    minute: interval["minute"] as? Int,
+                                    second: seconds,
+                                    weekday: interval["weekday"] as? Int,
+                                    weekdayOrdinal: interval["weekdayOrdinal"] as? Int,
+                                    weekOfMonth: interval["weekOfMonth"] as? Int,
+                                    weekOfYear: interval["weekOfYear"] as? Int,
+                                    yearForWeekOfYear: interval["yearForWeekOfYear"] as? Int)
                             }
                             if let duration = element["duration"] as? [String:Any]{
                                 if let allDay = duration["allDay"] as? Bool,
@@ -100,7 +101,7 @@ internal extension OCKStore {
                                 for target in targetValues{
                                     if let identifier = target["groupIdentifier"] as? String{
                                         var come = OCKOutcomeValue(false, units: nil)
-                                            come.groupIdentifier=identifier
+                                        come.groupIdentifier=identifier
                                         targetValue.append(come)
                                     }
                                 }
@@ -121,18 +122,18 @@ internal extension OCKStore {
                             task.impactsAdherence = impactsAdherence
                         }
                         task.instructions = payload["instructions"] as? String
-
+                        
                         // get if task exist?
                         self.fetchTask(withID: id) { result in
                             switch result {
-                                case .failure(_): do {
-                                    self.addTask(task)
-                                }
+                            case .failure(_): do {
+                                self.addTask(task)
+                            }
                             case .success(_):do {
                                 self.updateTask(task)
-                                }
                             }
-
+                            }
+                            
                             group.leave()
                         }
                     }
@@ -147,28 +148,41 @@ internal extension OCKStore {
             onCompletion(nil)
         })
     }
+    
     // Adds tasks and contacts into the store
     func populateSampleData(lastUpdateDate: Date?,completion:@escaping () -> Void) {
         
+        // Add tasks from Firestore
         let collection: String = "carekit-store/v2/tasks"
-        // Download Tasks By Study
         
         guard  let studyCollection = CKStudyUser.shared.studyCollection else {
             return
         }
-        // Get tasks on study
+        
         CKSendHelper.getFromFirestore(authCollection: studyCollection,collection: collection, onCompletion: { (documents,error) in
             self.insertDocuments(documents: documents, collection: collection, authCollection: studyCollection,lastUpdateDate:lastUpdateDate){
                 (Error) in
                 CKSendHelper.getFromFirestore(collection: collection, onCompletion: { (documents,error) in
                     self.insertDocuments(documents: documents, collection: collection, authCollection: nil,lastUpdateDate:lastUpdateDate){
                         (Error) in
-                        self.createContacts()
                         completion()
                     }
                 })
             }
         })
+        
+        
+        // Add ResearchKit Survey
+        let thisMorning = Calendar.current.startOfDay(for: Date())
+        let surveyElement = OCKScheduleElement(start: thisMorning, end: nil, interval: DateComponents(day: 1))
+        let surveySchedule = OCKSchedule(composing: [surveyElement])
+        var survey = OCKTask(id: "painSurvey", title: "Take the pain survey 📝", carePlanUUID: nil, schedule: surveySchedule)
+        survey.impactsAdherence = true
+        survey.instructions = "Rate your pain."
+        
+        addTasks([survey], callbackQueue: .main, completion: nil)
+        
+        createContacts()
     }
     
     func createContacts() {
@@ -180,7 +194,7 @@ internal extension OCKStore {
         contact1.emailAddresses = [OCKLabeledValue(label: CNLabelEmailiCloud, value: "aalami@stanford.edu")]
         contact1.phoneNumbers = [OCKLabeledValue(label: CNLabelWork, value: "(111) 111-1111")]
         contact1.messagingNumbers = [OCKLabeledValue(label: CNLabelWork, value: "(111) 111-1111")]
-
+        
         contact1.address = {
             let address = OCKPostalAddress()
             address.street = "318 Campus Drive"
@@ -189,12 +203,12 @@ internal extension OCKStore {
             address.postalCode = "94305"
             return address
         }()
-
-        var contact2 = OCKContact(id: "johnny", givenName: "Johnny",
-                                  familyName: "Appleseed", carePlanUUID: nil)
-        contact2.asset = "JohnnyAppleseed"
-        contact2.title = "OBGYN"
-        contact2.role = "Dr. Appleseed is an OBGYN with 13 years of experience."
+        
+        var contact2 = OCKContact(id: "vishnu", givenName: "Vishnu",
+                                  familyName: "Ravi", carePlanUUID: nil)
+        contact2.asset = "VishnuRavi"
+        contact2.title = "Internal Medicine"
+        contact2.role = "Dr. Ravi is the lead architect of the CardinalKit project."
         contact2.phoneNumbers = [OCKLabeledValue(label: CNLabelWork, value: "(324) 555-7415")]
         contact2.messagingNumbers = [OCKLabeledValue(label: CNLabelWork, value: "(324) 555-7415")]
         contact2.address = {
@@ -205,20 +219,20 @@ internal extension OCKStore {
             address.postalCode = "94305"
             return address
         }()
-
+        
         addContacts([contact2, contact1])
     }
     
 }
 
 extension OCKHealthKitPassthroughStore {
-
-    internal func populateSampleData() {
-
+    
+    internal func populateHKSampleData() {
+        
         let schedule = OCKSchedule.dailyAtTime(
             hour: 8, minutes: 0, start: Date(), end: nil, text: nil,
-            duration: .hours(12), targetValues: [OCKOutcomeValue(2000.0, units: "Steps")])
-
+            duration: .hours(12), targetValues: [OCKOutcomeValue(1000.0, units: "Steps")])
+        
         let steps = OCKHealthKitTask(
             id: "steps",
             title: "Daily Steps Goal 🏃🏽‍♂️",
@@ -228,7 +242,7 @@ extension OCKHealthKitPassthroughStore {
                 quantityIdentifier: .stepCount,
                 quantityType: .cumulative,
                 unit: .count()))
-
+        
         addTasks([steps]) { result in
             switch result {
             case .success: print("Added tasks into HealthKitPassthroughStore!")

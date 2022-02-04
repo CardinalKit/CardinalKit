@@ -57,8 +57,7 @@ struct MainUIView: View {
             CKCareKitManager.shared.coreDataStore.populateSampleData(lastUpdateDate:lastUpdateDate){() in
                 self.carekitLoaded = true
             }
-            
-            
+
         })
     }
 }
