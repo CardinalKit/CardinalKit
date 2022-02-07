@@ -80,10 +80,9 @@ class ScheduleViewController: OCKDailyPageViewController {
                     return traitCollection.userInterfaceStyle == .light ? #colorLiteral(red: 0.9960784314, green: 0.4732026144, blue: 0.368627451, alpha: 1) : #colorLiteral(red: 0.8627432641, green: 0.3598620686, blue: 0.2592858295, alpha: 1)
                 }
                 
-                let aggregator = OCKEventAggregator.custom { dailyEvents -> Double in
-                    let values = dailyEvents.map { $0.outcome?.values.first?.integerValue ?? 0 }
-                    let sumTotal = values.reduce(0, +)
-                    return Double(sumTotal)
+                let aggregator = OCKEventAggregator.custom { events -> Double in
+                    let value = events.first?.outcome?.values.first?.integerValue ?? 0
+                    return Double(value)
                 }
                 
                 let painDataSeries = OCKDataSeriesConfiguration(
