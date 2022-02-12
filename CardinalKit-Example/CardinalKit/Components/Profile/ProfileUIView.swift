@@ -25,7 +25,9 @@ struct ProfileUIView: View {
                 }.listRowBackground(Color.white)
                 
                 Section {
-                    SendRecordsView()
+                    if config["Health Records"]["Enabled"] as? Bool == true {
+                        SendRecordsView()
+                    }
                     ChangePasscodeView()
                     HelpView(site: config.read(query: "Website"))
                 }
