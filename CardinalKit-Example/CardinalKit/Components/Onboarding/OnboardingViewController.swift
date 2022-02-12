@@ -110,15 +110,21 @@ struct OnboardingViewController: UIViewControllerRepresentable {
         let introSteps: [ORKStep] = [consentStep, reviewConsentStep]
         
         // and steps regarding login / security
-        let emailVerificationSteps = loginSteps + [passcodeStep, healthDataStep, healthRecordsStep, completionStep]
+        var securitySteps = loginSteps + [passcodeStep, healthDataStep]
+        
+        if config["Health Records"]["Enabled"] as? Bool == true {
+            securitySteps += [healthRecordsStep]
+        }
+        
+        securitySteps += [completionStep]
         
         // guide the user through ALL steps
-        let fullSteps = introSteps + emailVerificationSteps
+        let fullSteps = introSteps + securitySteps
         
         // unless they have already gotten as far as to enter an email address
         var stepsToUse = fullSteps
         if CKStudyUser.shared.email != nil {
-            stepsToUse = emailVerificationSteps
+            stepsToUse = securitySteps
         }
         
         /* **************************************************************

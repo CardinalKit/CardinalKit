@@ -29,23 +29,18 @@ struct LoginExistingUserViewController: UIViewControllerRepresentable {
         let loginUserPassword = ORKLoginStep(identifier: "LoginExistingStep", title: "Login", text: "Log into this study.", loginViewControllerClass: LoginViewController.self)
         loginSteps = [signInButtons, loginUserPassword]
         
-        
         // set health data permissions
         let healthDataStep = CKHealthDataStep(identifier: "HealthKit")
+        
+        // set health records permissions
         let healthRecordsStep = CKHealthRecordsStep(identifier: "HealthRecords")
         
-        //add consent if user dont have consent in cloud
-        
+        // get consent if user doesn't have a consent document in cloud storage
         let consentDocument = ConsentDocument()
-        /* **************************************************************
-        **************************************************************/
-        // use the `ORKConsentReviewStep` from ResearchKit
         let signature = consentDocument.signatures?.first
         let reviewConsentStep = ORKConsentReviewStep(identifier: "ConsentReviewStep", signature: signature, in: consentDocument)
         reviewConsentStep.text = config.read(query: "Review Consent Step Text")
         reviewConsentStep.reasonForConsent = config.read(query: "Reason for Consent Text")
-        
-        
         let consentReview = CKReviewConsentDocument(identifier: "ConsentReview")
         
         // set passcode
@@ -59,12 +54,15 @@ struct LoginExistingUserViewController: UIViewControllerRepresentable {
         passcodeStep.text = config.read(query: "Passcode Text")
         
         // create a task with each step
-        loginSteps += [consentReview,reviewConsentStep,healthDataStep, healthRecordsStep, passcodeStep]
+        loginSteps += [consentReview, reviewConsentStep, healthDataStep]
         
+        if config["Health Records"]["Enabled"] as? Bool == true {
+            loginSteps += [healthRecordsStep]
+        }
         
+        loginSteps += [passcodeStep]
         
         let navigableTask = ORKNavigableOrderedTask(identifier: "StudyLoginTask", steps: loginSteps)
-//        let orderedTask = ORKOrderedTask(identifier: "StudyLoginTask", steps: loginSteps)
         let resultSelector = ORKResultSelector(resultIdentifier: "SignInButtons")
         let booleanAnswerType = ORKResultPredicate.predicateForBooleanQuestionResult(with: resultSelector, expectedAnswer: true)
         let predicateRule = ORKPredicateStepNavigationRule(resultPredicates: [booleanAnswerType],
@@ -84,11 +82,9 @@ struct LoginExistingUserViewController: UIViewControllerRepresentable {
         navigableTask.setNavigationRule(predicateRuleConsent, forTriggerStepIdentifier: "ConsentReview")
         
         
-        
-        
         // wrap that task on a view controller
         let taskViewController = ORKTaskViewController(task: navigableTask, taskRun: nil)
-        taskViewController.delegate = context.coordinator // enables `ORKTaskViewControllerDelegate` below
+        taskViewController.delegate = context.coordinator
         
         // & present the VC!
         return taskViewController
