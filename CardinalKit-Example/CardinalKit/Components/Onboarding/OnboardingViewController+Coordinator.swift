@@ -30,15 +30,15 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
 
                 let user = CKStudyUser.shared
 
-                if let firstName = nameResult[0] as? ORKTextQuestionResult {
+                if nameResult.count>0, let firstName = nameResult[0] as? ORKTextQuestionResult {
                     user.firstName = firstName.textAnswer
                 }
                 
-                if let lastName = nameResult[1] as? ORKTextQuestionResult {
+                if nameResult.count>1, let lastName = nameResult[1] as? ORKTextQuestionResult {
                     user.lastName = lastName.textAnswer
                 }
                 
-                if let dateOfBirth = nameResult[2] as? ORKDateQuestionResult {
+                if nameResult.count>2, let dateOfBirth = nameResult[2] as? ORKDateQuestionResult {
                     user.dateOfBirth = dateOfBirth.dateAnswer
                 }
                 
