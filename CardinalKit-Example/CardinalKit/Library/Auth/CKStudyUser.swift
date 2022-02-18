@@ -120,7 +120,7 @@ class CKStudyUser {
             settings.isPersistenceEnabled = false
             let db = Firestore.firestore()
             db.settings = settings
-            db.collection(dataBucket).document(uid).setData(["userID":uid, "lastActive":Date().ISOStringFromDate(),"email":email])
+            db.collection(dataBucket).document(uid).setData(["userID":uid, "lastActive":Date().ISOStringFromDate(),"email":email], merge: true)
         }
     }
     
