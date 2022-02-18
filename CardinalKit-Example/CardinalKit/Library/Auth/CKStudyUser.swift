@@ -140,7 +140,7 @@ class CKStudyUser {
                 data["dateOfBirth"] = dateOfBirth.ISOStringFromDate()
             }
             
-            db.collection(dataBucket).document(uid).setData(data)
+            db.collection(dataBucket).document(uid).setData(data, merge: true)
         }
     }
     
