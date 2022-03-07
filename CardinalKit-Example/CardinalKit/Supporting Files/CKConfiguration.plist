@@ -97,13 +97,6 @@
 	<string>Research Health Study Consent Form</string>
 	<key>Use CareKit</key>
 	<true/>
-	<key>HealthKit Data to Read</key>
-	<array>
-		<string>StepCount</string>
-		<string>DistanceWalkingRunning</string>
-		<string>FlightsClimbed</string>
-		<string>HeartRate</string>
-	</array>
 	<key>Consent Form</key>
 	<dict>
 		<key>Overview</key>

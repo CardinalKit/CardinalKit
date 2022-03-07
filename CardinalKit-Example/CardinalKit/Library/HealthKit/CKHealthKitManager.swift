@@ -19,193 +19,196 @@ class CKHealthKitManager : NSObject {
     
     fileprivate let config = CKConfig.shared
     
-    private let quantyTypes = [
-        HKQuantityTypeIdentifier.bodyMassIndex,
-        .bodyFatPercentage,
-        .height,
-        .bodyMass,
-        .leanBodyMass,
-        .waistCircumference,
-        .stepCount,
-        .distanceWalkingRunning,
-        .distanceCycling,
-        .distanceWheelchair,
-        .basalEnergyBurned,
+    /* **************************************************************
+     * Customize HealthKit data that will be collected
+     * in the background. Choose from any HKQuantityType:
+     * https://developer.apple.com/documentation/healthkit/hkquantitytypeidentifier
+     **************************************************************/
+    
+    private let quantityTypesToRead: [HKQuantityTypeIdentifier] = [
         .activeEnergyBurned,
-        .flightsClimbed,
-        .nikeFuel,
         .appleExerciseTime,
-        .pushCount,
-        .distanceSwimming,
-        .swimmingStrokeCount,
-        .vo2Max,
-        .distanceDownhillSnowSports,
         .appleStandTime,
-        .heartRate,
-        .bodyTemperature,
         .basalBodyTemperature,
-        .bloodPressureSystolic,
-        .bloodPressureDiastolic,
-        .respiratoryRate,
-        .restingHeartRate,
-        .walkingHeartRateAverage,
-        .heartRateVariabilitySDNN,
-        .oxygenSaturation,
-        .peripheralPerfusionIndex,
-        .bloodGlucose,
-        .numberOfTimesFallen,
-        .electrodermalActivity,
-        .inhalerUsage,
-        .insulinDelivery,
+        .basalEnergyBurned,
         .bloodAlcoholContent,
-        .forcedVitalCapacity,
-        .forcedExpiratoryVolume1,
-        .peakExpiratoryFlowRate,
-        .environmentalAudioExposure,
-        .headphoneAudioExposure,
-        .dietaryFatTotal,
-        .dietaryFatPolyunsaturated,
-        .dietaryFatMonounsaturated,
-        .dietaryFatSaturated,
-        .dietaryCholesterol,
-        .dietarySodium,
+        .bloodGlucose,
+        .bloodPressureDiastolic,
+        .bloodPressureSystolic,
+        .bodyFatPercentage,
+        .bodyMass,
+        .bodyMassIndex,
+        .bodyTemperature,
+        .dietaryBiotin,
+        .dietaryCaffeine,
+        .dietaryCalcium,
         .dietaryCarbohydrates,
-        .dietaryFiber,
-        .dietarySugar,
+        .dietaryChloride,
+        .dietaryCholesterol,
+        .dietaryChromium,
+        .dietaryCopper,
         .dietaryEnergyConsumed,
+        .dietaryFatMonounsaturated,
+        .dietaryFatPolyunsaturated,
+        .dietaryFatSaturated,
+        .dietaryFatTotal,
+        .dietaryFiber,
+        .dietaryFolate,
+        .dietaryIodine,
+        .dietaryIron,
+        .dietaryMagnesium,
+        .dietaryManganese,
+        .dietaryMolybdenum,
+        .dietaryNiacin,
+        .dietaryPantothenicAcid,
+        .dietaryPhosphorus,
+        .dietaryPotassium,
         .dietaryProtein,
+        .dietaryRiboflavin,
+        .dietarySelenium,
+        .dietarySodium,
+        .dietarySugar,
+        .dietaryThiamin,
         .dietaryVitaminA,
-        .dietaryVitaminB6,
         .dietaryVitaminB12,
+        .dietaryVitaminB6,
         .dietaryVitaminC,
         .dietaryVitaminD,
         .dietaryVitaminE,
         .dietaryVitaminK,
-        .dietaryCalcium,
-        .dietaryIron,
-        .dietaryThiamin,
-        .dietaryRiboflavin,
-        .dietaryNiacin,
-        .dietaryFolate,
-        .dietaryBiotin,
-        .dietaryPantothenicAcid,
-        .dietaryPhosphorus,
-        .dietaryIodine,
-        .dietaryMagnesium,
-        .dietaryZinc,
-        .dietarySelenium,
-        .dietaryCopper,
-        .dietaryManganese,
-        .dietaryChromium,
-        .dietaryMolybdenum,
-        .dietaryChloride,
-        .dietaryPotassium,
-        .dietaryCaffeine,
         .dietaryWater,
+        .dietaryZinc,
+        .distanceCycling,
+        .distanceDownhillSnowSports,
+        .distanceSwimming,
+        .distanceWalkingRunning,
+        .distanceWheelchair,
+        .electrodermalActivity,
+        .environmentalAudioExposure,
+        .flightsClimbed,
+        .forcedExpiratoryVolume1,
+        .forcedVitalCapacity,
+        .headphoneAudioExposure,
+        .heartRate,
+        .heartRateVariabilitySDNN,
+        .height,
+        .inhalerUsage,
+        .insulinDelivery,
+        .leanBodyMass,
+        .nikeFuel,
+        .numberOfTimesFallen,
+        .oxygenSaturation,
+        .peakExpiratoryFlowRate,
+        .peripheralPerfusionIndex,
+        .pushCount,
+        .respiratoryRate,
+        .restingHeartRate,
+        .sixMinuteWalkTestDistance,
+        .stairAscentSpeed,
+        .stairDescentSpeed,
+        .stepCount,
+        .swimmingStrokeCount,
         .uvExposure,
+        .vo2Max,
+        .waistCircumference,
+        .walkingAsymmetryPercentage,
+        .walkingDoubleSupportPercentage,
+        .walkingHeartRateAverage,
+        .walkingSpeed,
+        .walkingStepLength
     ]
     
-    private let categoryTypes = [
-        HKCategoryTypeIdentifier.sleepAnalysis,
+    /* **************************************************************
+     * Customize HealthKit data that will be collected
+     * in the background. Choose from any HKCategoryType:
+     * https://developer.apple.com/documentation/healthkit/hkcategorytypeidentifier
+     **************************************************************/
+    
+    private let categoryTypesToRead: [HKCategoryTypeIdentifier] = [
+        .abdominalCramps,
+        .acne,
+        .appetiteChanges,
         .appleStandHour,
+        .bladderIncontinence,
+        .bloating,
+        .breastPain,
         .cervicalMucusQuality,
-        .ovulationTestResult,
-        .menstrualFlow,
-        .intermenstrualBleeding,
-        .sexualActivity,
-        .mindfulSession,
+        .chestTightnessOrPain,
+        .chills,
+        .constipation,
+        .contraceptive,
+        .coughing,
+        .diarrhea,
+        .dizziness,
+        .drySkin,
+        .environmentalAudioExposureEvent,
+        .environmentalAudioExposureEvent,
+        .fainting,
+        .fatigue,
+        .fever,
+        .generalizedBodyAche,
+        .hairLoss,
+        .handwashingEvent,
+        .headache,
+        .headphoneAudioExposureEvent,
+        .heartburn,
         .highHeartRateEvent,
-        .lowHeartRateEvent,
+        .hotFlashes,
+        .intermenstrualBleeding,
         .irregularHeartRhythmEvent,
-        .audioExposureEvent,
+        .lactation,
+        .lossOfSmell,
+        .lossOfTaste,
+        .lowCardioFitnessEvent,
+        .lowCardioFitnessEvent,
+        .lowHeartRateEvent,
+        .lowerBackPain,
+        .memoryLapse,
+        .menstrualFlow,
+        .mindfulSession,
+        .moodChanges,
+        .nausea,
+        .nightSweats,
+        .ovulationTestResult,
+        .pelvicPain,
+        .pregnancy,
+        .rapidPoundingOrFlutteringHeartbeat,
+        .runnyNose,
+        .sexualActivity,
+        .shortnessOfBreath,
+        .sinusCongestion,
+        .skippedHeartbeat,
+        .sleepAnalysis,
+        .sleepChanges,
+        .soreThroat,
         .toothbrushingEvent,
-        
+        .vaginalDryness,
+        .vomiting,
+        .wheezing
     ]
-           
-    override init() {
-        for quantiType in quantyTypes{
-            hkTypesToReadInBackground.insert(HKObjectType.quantityType(forIdentifier: quantiType)!)
-        }
-        
-        for categoryType in categoryTypes{
-            hkTypesToReadInBackground.insert(HKObjectType.categoryType(forIdentifier: categoryType)!)
-        }
-                
+    
+    func readOtherTypes() -> Void {
         hkTypesToReadInBackground.insert(HKObjectType.documentType(forIdentifier: .CDA)!)
-        if #available(iOS 14.3, *) {
-            let quantyType14Available = [
-                HKQuantityTypeIdentifier.walkingSpeed,
-                .walkingDoubleSupportPercentage,
-                .walkingAsymmetryPercentage,
-                .walkingStepLength,
-                .sixMinuteWalkTestDistance,
-                .stairAscentSpeed,
-                .stairDescentSpeed
-            ]
-            
-            let categoryTypes14Available=[
-                HKCategoryTypeIdentifier.pregnancy,
-                .lactation,
-                .contraceptive,
-                .environmentalAudioExposureEvent,
-                .headphoneAudioExposureEvent,
-                .handwashingEvent,
-                .lowCardioFitnessEvent,
-                .abdominalCramps,
-                .acne,
-                .appetiteChanges,
-                .bladderIncontinence,
-                .bloating,
-                .breastPain,
-                .chestTightnessOrPain,
-                .chills,
-                .constipation,
-                .coughing,
-                .diarrhea,
-                .dizziness,
-                .drySkin,
-                .fainting,
-                .fatigue,
-                .fever,
-                .generalizedBodyAche,
-                .hairLoss,
-                .headache,
-                .heartburn,
-                .hotFlashes,
-                .lossOfSmell,
-                .lossOfTaste,
-                .lowerBackPain,
-                .lowCardioFitnessEvent,
-                .memoryLapse,
-                .moodChanges,
-                .nausea,
-                .nightSweats,
-                .pelvicPain,
-                .rapidPoundingOrFlutteringHeartbeat,
-                .runnyNose,
-                .shortnessOfBreath,
-                .sinusCongestion,
-                .skippedHeartbeat,
-                .sleepChanges,
-                .soreThroat,
-                .vaginalDryness,
-                .vomiting,
-                .wheezing
-            ]
-            hkTypesToReadInBackground.insert(HKElectrocardiogramType.electrocardiogramType())
-            for quantiType in quantyType14Available{
-                hkTypesToReadInBackground.insert(HKObjectType.quantityType(forIdentifier: quantiType)!)
-            }
-            for categoryType in categoryTypes14Available{
-                hkTypesToReadInBackground.insert(HKObjectType.categoryType(forIdentifier: categoryType)!)
-            }
-        }
-        
+        hkTypesToReadInBackground.insert(HKElectrocardiogramType.electrocardiogramType())
         hkTypesToReadInBackground.insert(HKAudiogramSampleType.audiogramSampleType())
         hkTypesToReadInBackground.insert(HKWorkoutType.workoutType())
         hkTypesToReadInBackground.insert(HKAudiogramSampleType.audiogramSampleType())
         hkTypesToReadInBackground.insert(HKSeriesType.workoutRoute())
         hkTypesToReadInBackground.insert(HKSeriesType.heartbeat())
+    }
+    
+    override init() {
+        super.init()
+        
+        for quantityType in quantityTypesToRead {
+            hkTypesToReadInBackground.insert(HKObjectType.quantityType(forIdentifier: quantityType)!)
+        }
+        
+        for categoryType in categoryTypesToRead {
+            hkTypesToReadInBackground.insert(HKObjectType.categoryType(forIdentifier: categoryType)!)
+        }
+        
+        self.readOtherTypes()
         
     }
     
@@ -213,17 +216,11 @@ class CKHealthKitManager : NSObject {
     /// - Parameter completion: (success, error)
     func getHealthAuthorization(_ completion: @escaping (_ success: Bool, _ error: Error?) -> Void) {
         
-        /* **************************************************************
-         * customize HealthKit data that will be collected
-         * in the background. Choose from any HKQuantityType:
-         * https://developer.apple.com/documentation/healthkit/hkquantitytypeidentifier
-        **************************************************************/
-        
         // handle authorization from the OS
         CKActivityManager.shared.getHealthAuthorizaton(forTypes: hkTypesToReadInBackground) { [weak self] (success, error) in
             if (success) {
                 let frequency = self?.config.read(query: "Background Read Frequency")
-
+                
                 if frequency == "daily" {
                     CKActivityManager.shared.startHealthKitCollectionInBackground(withFrequency: .daily)
                 } else if frequency == "weekly" {
@@ -239,7 +236,7 @@ class CKHealthKitManager : NSObject {
     }
     
     
-    func collectAllTypes(_ completion: @escaping (_ success: Bool, _ error: Error?) -> Void) {             
+    func collectAllTypes(_ completion: @escaping (_ success: Bool, _ error: Error?) -> Void) {
         // handle authorization from the OS
         CKActivityManager.shared.getHealthAuthorizaton(forTypes: hkTypesToReadInBackground) {(success, error) in
             DispatchQueue.main.async {
