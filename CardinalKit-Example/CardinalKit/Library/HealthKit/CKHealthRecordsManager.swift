@@ -11,6 +11,7 @@ import HealthKit
 import CareKit
 import CareKitFHIR
 import CareKitStore
+import CardinalKit
 
 class CKHealthRecordsManager: NSObject {
     
@@ -62,8 +63,13 @@ class CKHealthRecordsManager: NSObject {
                         let data = resource.data
                         let identifier = resource.resourceType.rawValue + "-" + resource.identifier
                         
-                        if let dict = try CKSendHelper.jsonDataAsDict(data) {
-                            try CKSendHelper.sendToFirestoreWithUUID(json: dict, collection: "health-records", withIdentifier: identifier)
+                        if let dict = try JSONSerialization.jsonObject(with: data, options: []) as? [String : Any] {
+                           guard let authCollection = CKStudyUser.shared.authCollection else {
+                               return
+                           }
+                           let route = "\(authCollection)health-records/\(identifier)"
+                           CKApp.sendData(route: route, data: dict, params: nil)
+//                            try CKSendHelper.sendToFirestoreWithUUID(json: dict, collection: "health-records", withIdentifier: identifier)
                         }
                     } catch {
                         print("[upload] ERROR " + error.localizedDescription)

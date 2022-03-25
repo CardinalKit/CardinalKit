@@ -7,6 +7,8 @@
 //
 
 import ResearchKit
+import FirebaseFirestore
+import CardinalKit
 
 class CoffeeChartDataSource: NSObject, ORKPieChartViewDataSource {
     
@@ -41,14 +43,17 @@ extension CoffeeChartDataSource {
     static func fetchData(onCompletion: @escaping ([NSNumber: CGFloat]) -> Void) {
         var countPerAnswer = [NSNumber: CGFloat]()
         
-        CKSendHelper.getFromFirestore(collection: Constants.dataBucketSurveys, identifier: "SurveyTask-Coffee") { (document, error) in
-            
-            guard let payload = document?.data()?["results"] as? [[AnyHashable: Any]] else {
+        guard let authCollection = CKStudyUser.shared.authCollection else {
+           return
+        }
+        CKApp.requestData(route: "\(authCollection)\(Constants.dataBucketSurveys)/SurveyTask-Coffee" , onCompletion: {
+           result in
+           guard let document = result as? DocumentSnapshot,
+                 let payload = document.data()?["results"] as? [[AnyHashable: Any]]
+            else{
                 onCompletion([NSNumber: CGFloat]())
-                return
-            }
-            
-            //do {
+                 return
+             }
             for item in payload {
                 // let result = try ORKESerializer.object(fromJSONObject: item) as? ORKTaskResult
                 //let coffeScale = result?.stepResult(forStepIdentifier: "CoffeeScaleQuestionStep")?.results?.first as? ORKScaleQuestionResult
@@ -63,7 +68,7 @@ extension CoffeeChartDataSource {
                 print("[CoffeeChartDataSource] ERROR " + error.localizedDescription)
                onCompletion([NSNumber: CGFloat]())
             }*/
-        }
+        })
     }
     
 }

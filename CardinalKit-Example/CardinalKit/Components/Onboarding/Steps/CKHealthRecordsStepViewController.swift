@@ -8,7 +8,6 @@
 
 import HealthKit
 import ResearchKit
-import CardinalKit
 
 class CKHealthRecordsStep: ORKInstructionStep {
     
