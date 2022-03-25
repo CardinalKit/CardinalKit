@@ -10,6 +10,8 @@ import Foundation
 import CareKit
 import CareKitStore
 import CareKitUI
+import CardinalKit
+import FirebaseFirestore
 
 class CKCareKitRemoteSyncWithFirestore: OCKRemoteSynchronizable {
     
@@ -66,7 +68,7 @@ extension CKCareKitRemoteSyncWithFirestore {
             for entity in deviceRevision.entities{
                 group.enter()
                 let entityData = try JSONEncoder().encode(entity)
-                let entityJson = try CKSendHelper.jsonDataAsDict(entityData) ?? [String:Any]()
+                let entityJson = try JSONSerialization.jsonObject(with: entityData, options: []) as? [String : Any] ?? [String:Any]()
                 var jsonResult:[String:Any] = entityJson["object"] as! [String : Any]
                 jsonResult["type"]=entityJson["type"]
                  if  jsonResult["type"] as? String == "outcome",
@@ -102,13 +104,19 @@ extension CKCareKitRemoteSyncWithFirestore {
                             }
                         }                        
                         if add{
-                            CKSendHelper.appendCareKitArrayInFirestore(json: jsonResult, collection: "\(self.collection)", withIdentifier: uuid, overwriteRemote: overwriteRemote) { (success, _error) in
-                                print("[putRevisionInFirestore] success \(success), error \(_error?.localizedDescription ?? "")")
-                                if let _error = _error{
-                                    error = _error
-                                }
-                                group.leave()
-                            }
+                            guard let authCollection = CKStudyUser.shared.authCollection else {
+                               return
+                           }
+                           
+                           let route = "\(authCollection)\(self.collection)/\(uuid)"
+                           
+                           CKApp.sendData(route: route, data: jsonResult, params: nil, onCompletion: { (success, _error) in
+                               print("[putRevisionInFirestore] success \(success), error \(_error?.localizedDescription ?? "")")
+                               if let _error = _error{
+                                   error = _error
+                               }
+                               group.leave()
+                           })
                         }
                         else{
                             group.leave()
@@ -133,67 +141,82 @@ extension CKCareKitRemoteSyncWithFirestore {
     }
     
     fileprivate func getRevisionsFromFirestore(completion: @escaping (_ outComes:[OCKRevisionRecord]) -> Void) {
-        CKSendHelper.getFromFirestore(collection: collection, onCompletion: { [self] (documents, error) in
-            guard let documents = documents,
-                  documents.count>0 else {
-                completion([OCKRevisionRecord]())
-                return
-            }
-            let group = DispatchGroup()
-            var outComes = [CareKitStore.OCKEntity]()
-            for document in documents{
-                group.enter()
-                CKSendHelper.getFromFirestore(collection: self.collection, identifier: document.documentID) { (document, error) in
-                    guard let document = document,
-                          var payload = document.data(),
-                          payload.count>0 else {
-                        completion([OCKRevisionRecord]())
+        guard let authCollection = CKStudyUser.shared.authCollection else {
+            return
+        }
+        let authRoute = authCollection + "\(collection)"
+        CKApp.requestData(route: authRoute, onCompletion: { result in
+            if let documents = result as? [DocumentSnapshot]{
+                guard documents.count>0 else {
+                    completion([OCKRevisionRecord]())
+                    return
+                }
+                let group = DispatchGroup()
+                var outComes = [CareKitStore.OCKEntity]()
+                for document in documents{
+                    group.enter()
+                    
+                    guard let authCollection = CKStudyUser.shared.authCollection else {
                         return
                     }
-                    payload.removeValue(forKey: "updatedAt")
-                    if let type = payload["type"],
-                        type as?String == "outcome",
-                       let id = payload["taskId"] as? String{
+                    let route = "\(authCollection)\(self.collection)/\(document.documentID)"
+                    CKApp.requestData(route: route, onCompletion: {
+                        result in
+                        guard let document = result as? DocumentSnapshot,
+                              var payload = document.data(),
+                              payload.count>0
+                        else{
+                            completion([OCKRevisionRecord]())
+                            return
+                        }
                         
-                        payload.removeValue(forKey: "type")
-                        var query = OCKTaskQuery()
-                        query.ids.append(id)
-                        CKCareKitManager.shared.coreDataStore.fetchAnyTasks(query: query, callbackQueue: .main, completion: {(result) in
-                            switch result{
-                            case .failure(let error):do {
-                                print("Error: \(error)")
-                                group.leave()
-                            }
-                            case .success(let tasks):
-                                if tasks.count == 1{
-                                    payload["taskUUID"] = tasks[0].uuid!.uuidString
-                                    var object = [String:Any]()
-                                    object["object"] = payload
-                                    object["type"] = type
-                                    do{
-                                        let jsonData = try JSONSerialization.data(withJSONObject: object, options: [])
-                                        let entity = try JSONDecoder().decode(CareKitStore.OCKEntity.self, from: jsonData)
-                                        outComes.append(entity)
-                                    }
-                                    catch{
-                                        
-                                    }
+//                        payload.removeValue(forKey: "updatedAt")
+                        payload["updatedAt"] = nil
+                        if let type = payload["type"],
+                            type as?String == "outcome",
+                           let id = payload["taskId"] as? String{
+                            
+                            payload.removeValue(forKey: "type")
+                            var query = OCKTaskQuery()
+                            query.ids.append(id)
+                            CKCareKitManager.shared.coreDataStore.fetchAnyTasks(query: query, callbackQueue: .main, completion: {(result) in
+                                switch result{
+                                case .failure(let error):do {
+                                    print("Error: \(error)")
+                                    group.leave()
                                 }
-                                group.leave()
-                            }
-                        })
-                    }
-                    else{
-                        group.leave()
-                    }
+                                case .success(let tasks):
+                                    if tasks.count == 1{
+                                        payload["taskUUID"] = tasks[0].uuid!.uuidString
+                                        var object = [String:Any]()
+                                        object["object"] = payload
+                                        object["type"] = type
+                                        do{
+                                            let jsonData = try JSONSerialization.data(withJSONObject: object, options: [])
+                                            let entity = try JSONDecoder().decode(CareKitStore.OCKEntity.self, from: jsonData)
+                                            outComes.append(entity)
+                                        }
+                                        catch{
+                                            
+                                        }
+                                    }
+                                    group.leave()
+                                }
+                            })
+                        }
+                        else{
+                            group.leave()
+                        }
+                    })                    
                 }
+                group.notify(queue: .main, execute: {
+                    let KnowledgeVector = OCKRevisionRecord.KnowledgeVector()
+                    completion(
+                        [OCKRevisionRecord(entities: outComes, knowledgeVector: KnowledgeVector)]
+                    )
+                })
+
             }
-            group.notify(queue: .main, execute: {
-                let KnowledgeVector = OCKRevisionRecord.KnowledgeVector()
-                completion(
-                    [OCKRevisionRecord(entities: outComes, knowledgeVector: KnowledgeVector)]
-                )
-            })
         })
     }
     

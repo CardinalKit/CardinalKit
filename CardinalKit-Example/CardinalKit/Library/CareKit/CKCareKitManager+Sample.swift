@@ -11,6 +11,7 @@ import CareKitStore
 import Contacts
 import UIKit
 import FirebaseFirestore
+import CardinalKit
 
 internal extension OCKStore {
 
@@ -24,14 +25,26 @@ internal extension OCKStore {
         let group = DispatchGroup()
         for document in documents{
             group.enter()
-            CKSendHelper.getFromFirestore(authCollection:authCollection, collection: collection, identifier: document.documentID) {(document, error) in
-                do{
-                    guard let document = document,
-                          let payload = document.data(),
-                          let id = payload["id"] as? String else {
-                              group.leave()
-                        return
-                    }
+            var route = ""
+               if let authCollection = authCollection {
+                   route = "\(authCollection)\(collection)/\(document.documentID)"
+               }
+               else{
+                   guard  let nAuth = CKStudyUser.shared.authCollection else {
+                       return
+                   }
+                   route = "\(nAuth)\(collection)/\(document.documentID)"
+               }
+               CKApp.requestData(route: route, onCompletion: {
+                   result in
+                   do{
+                   guard let document = result as? DocumentSnapshot,
+                           let payload = document.data(),
+                           let id = payload["id"] as? String
+                   else{
+                       return
+                   }
+
                     var itemSchedule:OCKSchedule? = nil
                     var update = true
                     if lastUpdateDate != nil,
@@ -147,7 +160,7 @@ internal extension OCKStore {
                     }
                     
                 }
-            }
+            })
         }
         group.notify(queue: .main, execute: {
             onCompletion(nil)
@@ -159,22 +172,32 @@ internal extension OCKStore {
         let collection: String = "carekit-store/v2/tasks"
         // Download Tasks By Study
         
-        guard  let studyCollection = CKStudyUser.shared.studyCollection else {
+        guard  let studyCollection = CKStudyUser.shared.studyCollection,
+               let authCollection = CKStudyUser.shared.authCollection
+        else {
             return
         }
         // Get tasks on study
-        CKSendHelper.getFromFirestore(authCollection: studyCollection,collection: collection, onCompletion: { (documents,error) in
-            self.insertDocuments(documents: documents, collection: collection, authCollection: studyCollection,lastUpdateDate:lastUpdateDate){
-                (Error) in
-                CKSendHelper.getFromFirestore(collection: collection, onCompletion: { (documents,error) in
-                    self.insertDocuments(documents: documents, collection: collection, authCollection: nil,lastUpdateDate:lastUpdateDate){
-                        (Error) in
-                        self.createContacts()
-                        completion()
-                    }
-                })
+        let studyRoute = studyCollection + "\(collection)"
+        let authRoute = authCollection + "\(collection)"
+        CKApp.requestData(route: studyRoute, onCompletion: { result in
+            if let documents = result as? [DocumentSnapshot]{
+                self.insertDocuments(documents: documents, collection: collection, authCollection: studyCollection,lastUpdateDate:lastUpdateDate){
+                    (Error) in
+                    CKApp.requestData(route: authRoute, onCompletion: { result in
+                        if let documents = result as? [DocumentSnapshot]{
+                            self.insertDocuments(documents: documents, collection: collection, authCollection: nil,lastUpdateDate:lastUpdateDate){
+                                (Error) in
+                                self.createContacts()
+                                completion()
+                            }
+                        }
+                    })
+                }
             }
+            
         })
+
     }
     
     func createContacts() {
