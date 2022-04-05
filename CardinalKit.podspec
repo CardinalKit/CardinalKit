@@ -56,6 +56,12 @@ TODO: Add long description of the pod here.
   #Compressing files
   s.dependency 'Zip',              '~> 1.1.0'
   s.dependency 'Granola'
+  s.dependency 'Firebase/Firestore'
+  s.dependency 'Firebase/Auth'
+  s.dependency 'Firebase/Storage'
+  s.dependency 'Firebase/Analytics'
+  s.dependency 'Firebase/DynamicLinks'
+  s.static_framework = true
   s.public_header_files = 'CardinalKit/Source/Components/Header.h'
 
 end

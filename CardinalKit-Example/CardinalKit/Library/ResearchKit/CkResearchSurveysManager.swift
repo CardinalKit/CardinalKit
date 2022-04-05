@@ -18,7 +18,7 @@ class CKResearchSurveysManager: NSObject {
             return
         }
         var AllItems=[CloudTaskItem]()
-        CKActivityManager.shared.fetchData(route: surveysPath,onCompletion: {(results) in
+        CKApp.requestData(route: surveysPath,onCompletion: {(results) in
             if let results = results as? [String:Any]{
                 var counter=results.count
                 for (id, data) in results {
