@@ -122,6 +122,12 @@ internal extension OCKStore {
                         }
                         task.instructions = payload["instructions"] as? String
 
+                        // This fixes an issue where if cloud surveys were all in the future,
+                        // they would not show up
+                        // It does open up all surveys (even future) for completion
+                        // TODO: make a way for the future surveys to be visible but not fillable
+                        task.effectiveDate = Date()
+
                         // get if task exist?
                         self.fetchTask(withID: id) { result in
                             switch result {
