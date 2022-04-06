@@ -5,8 +5,8 @@
 //  Copyright © 2019 Stanford University. All rights reserved.
 //
 import UIKit
-import Firebase
 import ResearchKit
+import CardinalKit
 
 // import facebook
 import FBSDKCoreKit
@@ -20,10 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-                
-        // (1) initialize Firebase SDK
-        FirebaseApp.configure()
-        
         // (2) check if this is the first time
         // that the app runs!
         cleanIfFirstRun()
@@ -99,7 +95,8 @@ extension AppDelegate {
             if ORKPasscodeViewController.isPasscodeStoredInKeychain() {
                 ORKPasscodeViewController.removePasscodeFromKeychain()
             }
-            try? Auth.auth().signOut()
+            CKApp.signOut()
+            //SignOut
             UserDefaults.standard.set(true, forKey: Constants.prefFirstRunWasMarked)
         }
     }

@@ -56,6 +56,7 @@ TODO: Add long description of the pod here.
   #Compressing files
   s.dependency 'Zip',              '~> 1.1.0'
   s.dependency 'Granola'
+  s.dependency 'Firebase/Core'
   s.dependency 'Firebase/Firestore'
   s.dependency 'Firebase/Auth'
   s.dependency 'Firebase/Storage'
