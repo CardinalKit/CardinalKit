@@ -70,6 +70,7 @@ class HealthKitDataSync {
 extension HealthKitDataSync {
     
     fileprivate func collectData(forType type: HKSampleType, _ sourceRevision: HKSourceRevision,fromDate startDate: Date? = nil, onCompletion: @escaping (([HKSample])->Void)) {
+        
         var latestSync = getLastSyncDate(forType: type, forSource: sourceRevision)
         //get last sync of activity index
        updateActivityIndex()
@@ -114,8 +115,8 @@ extension HealthKitDataSync {
             }
             
         }
-        
-        HealthKitManager.shared.healthStore.execute(query)
+
+//////        HealthKitManager.shared.healthStore.execute(query)
     }
     
 }
@@ -279,7 +280,7 @@ extension HealthKitDataSync {
                 onCompletion(0.0,date,0.0)
             }
         }
-        HealthKitManager.shared.healthStore.execute(query)
+//////        HealthKitManager.shared.healthStore.execute(query)
     }
     
     fileprivate func setLastSyncDate(forType type: HKSampleType, forSource sourceRevision: HKSourceRevision, date: Date) {
@@ -315,11 +316,11 @@ extension HealthKitDataSync {
             (query: HKSampleQuery, results: [HKSample]?, error: Error?) in
             queryHandler(query, results, error)
         }
-        
-        HealthKitManager.shared.healthStore.execute(query) // run something when finished
+////
+////        HealthKitManager.shared.healthStore.execute(query) // run something when finished
 //        }
-        
-        
+
+
     }
     
     fileprivate func sendActivityIndex(forDate date: Date,value: Double, stepCount:Double){

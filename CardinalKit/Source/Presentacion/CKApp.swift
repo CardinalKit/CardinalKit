@@ -27,6 +27,21 @@ public class CKApp{
     
     var options = CKAppOptions()
     
+    
+    // Managers
+    var healthKitManager:HealthKitManager
+    
+    // Permissions
+    
+    var healthPermissionProvider:Healthpermissions
+    
+    init(){
+        healthKitManager = HealthKitManager()
+        healthPermissionProvider = Healthpermissions()
+        healthPermissionProvider.configure(types: Set([HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.stepCount)!]))
+        
+    }
+    
     class public func configure(_ options: CKAppOptions? = nil) {
         
         // (1) initialize Firebase SDK
@@ -40,7 +55,6 @@ public class CKApp{
         instance.options.networkDeliveryDelegate?.configure()
         instance.options.networkReceiverDelegate?.configure()
         instance.options.localDBDelegate?.configure()
-        
         
 //        // Start listenig for changes in HealthKit items (waits for valid user inherently)
 //        _ = CKActivityManager.shared.load()
@@ -88,11 +102,31 @@ public class CKApp{
         }
     }
     
+    class public func startBackgroundDeliveryData(){
+        instance.healthPermissionProvider.getPermissions{ result in
+            switch result{
+                case .success(let success):
+                if success {
+                    instance.healthKitManager.startHealthKitCollectionInBackground(withFrequency: "", forTypes: Set([HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.stepCount)!]))
+                }
+                case .failure(let error):
+                 print("error \(error)")
+            }
+        }
+        
+    }
+    
     class public func signOut(){
 //        try? Auth.auth().signOut()
     }
     
     func onDataCollected(data:HKSample){
         
+    }
+    
+    func getLastSyncDate(forType type: HKSampleType, forSource sourceRevision: HKSourceRevision) -> Date {
+        
+        
+        return Date().dayByAdding(-1)!
     }
 }

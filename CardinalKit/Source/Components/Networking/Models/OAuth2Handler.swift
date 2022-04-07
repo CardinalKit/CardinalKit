@@ -17,15 +17,20 @@ class OAuth2Handler {
     }
     
     class func getHeaders() -> [String:String]? {
-        return CKApp.instance.options.networkRouteDelegate?.getHeaders()
+//        return CKApp.instance.options.networkRouteDelegate?.getHeaders()
+        // TODO: GETheaders
+        
+        return ["1":"1"]
     }
     
     class func isWhitelisted(url: String) -> Bool {
-        guard let whitelistUrls = CKApp.instance.options.networkRouteDelegate?.getWhitelistDomains() else {
-            return false
-        }
-        
-        return (whitelistUrls.filter { url.hasPrefix($0) }.count != 0)
+//        guard let whitelistUrls = CKApp.instance.options.networkRouteDelegate?.getWhitelistDomains() else {
+//            return false
+//        }
+//
+//        return (whitelistUrls.filter { url.hasPrefix($0) }.count != 0)
+        return true
+        // TODO: whiteList remove return true
     }
     
     class func adapt(_ urlRequest: URLRequest) -> URLRequest {

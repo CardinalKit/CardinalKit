@@ -40,16 +40,14 @@ extension HealthKitManager{
         let element = copyTypes.removeFirst()
         let query = HKObserverQuery(sampleType: element, predicate: nil, updateHandler: {
             (query, completionHandler, error) in
-            
-            //TODO: review if only first time all types are configured
-            
             if(copyTypes.count>0){
                 self.setUpBackgroundCollection(withFrequency: frequency, forTypes: copyTypes)
                 copyTypes.removeAll()
             }
-            
-            //Update new data to send
-            
+            self.collectData(forType: element, fromDate: nil, toDate: Date()){ samples in
+                print("Samples \(samples)")
+                // TODO: send Data
+            }
             completionHandler()
         })
         healthStore.execute(query)
@@ -61,7 +59,9 @@ extension HealthKitManager{
         })
     }
     
-    private func collectData(forType type:HKSampleType, fromDate startDate: Date? = nil, toDate endDate:Date?=nil, onCompletion:(()->Void?)){
+    
+    
+    private func collectData(forType type:HKSampleType, fromDate startDate: Date? = nil, toDate endDate:Date, onCompletion:@escaping (([HKSample])->Void?)){
         getSources(forType: type){ [weak self] (sources) in
             let dispatchGroup = DispatchGroup()
             dispatchGroup.enter()
@@ -69,8 +69,29 @@ extension HealthKitManager{
             defer {
                 dispatchGroup.leave()
             }
+            VLog("Got sources for type %@", sources.count, type.identifier)
             for source in sources {
                 dispatchGroup.enter()
+                let sourceRevision = HKSourceRevision(source: source, version: HKSourceRevisionAnyVersion)
+                var _startDate = Date().addingTimeInterval(-1)
+                if let startDate = startDate {
+                    _startDate = startDate
+                }
+                else{
+                    _startDate = CKApp.instance.getLastSyncDate(forType: type,forSource: sourceRevision)
+                }
+                
+                self?.queryHealthStore(forType: type, forSource: sourceRevision, fromDate: _startDate, toDate: endDate) { (query: HKSampleQuery, results: [HKSample]?, error: Error?) in
+                    
+                    if let error = error {
+                        VError("%@", error.localizedDescription)
+                    }
+                    guard let results = results, !results.isEmpty else {
+                        onCompletion([HKSample]())
+                        return
+                    }
+                    onCompletion(results)
+                }
             }
         }
     }
@@ -89,6 +110,22 @@ extension HealthKitManager{
             }
         }
         healthStore.execute(query)
+    }
+    
+    fileprivate func queryHealthStore(forType type: HKSampleType, forSource sourceRevision: HKSourceRevision, fromDate startDate: Date, toDate endDate: Date, queryHandler: @escaping (HKSampleQuery, [HKSample]?, Error?) -> Void) {
+        
+        let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: true)
+        let datePredicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: .strictStartDate)
+        let sourcePredicate = HKQuery.predicateForObjects(from: [sourceRevision])
+        let predicate = NSCompoundPredicate.init(andPredicateWithSubpredicates: [datePredicate, sourcePredicate])
+        
+        let query = HKSampleQuery(sampleType: type, predicate: predicate, limit: 1000, sortDescriptors: [sortDescriptor]) {
+            (query: HKSampleQuery, results: [HKSample]?, error: Error?) in
+            queryHandler(query, results, error)
+        }
+        
+        healthStore.execute(query)
+        
     }
     
     private func setUpCollectionByDayBetweenDates(fromDate startDate:Date, toDate endDate:Date?, forTypes types:Set<HKSampleType>){

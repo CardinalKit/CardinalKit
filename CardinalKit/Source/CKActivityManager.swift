@@ -14,8 +14,8 @@ public class CKActivityManager : NSObject {
     
     public override init() {
         super.init()
-        
-        _ = HealthKitManager.shared
+//        TODO: create shared?
+//        _ = HealthKitManager.shared
     }
     
     public func load() {
@@ -42,10 +42,11 @@ public class CKActivityManager : NSObject {
            
            self.typesToCollect = typesToCollect
        }
-        HealthKitManager.shared.getHealthKitAuth(forTypes: self.typesToCollect) { [weak self] (success, error) in
-            self?.hasGrantedAuth = success
-            completion(success, error)
-        }
+//        HealthKitManager.shared.getHealthKitAuth(forTypes: self.typesToCollect) { [weak self] (success, error) in
+//            self?.hasGrantedAuth = success
+//            completion(success, error)
+//        }
+        // TODO: healtkit auth
     }
     
     func initWithAllTypes() -> Set<HKSampleType>{
@@ -247,10 +248,11 @@ public class CKActivityManager : NSObject {
         }
         
         //and get health authorization
-        HealthKitManager.shared.startBackgroundDelivery(forTypes: typesToCollect, withFrequency: frequency) { [weak self] (success, error) in
-            self?.hasStartedCollection = success
-            completion?(success, error)
-        }
+//        HealthKitManager.shared.startBackgroundDelivery(forTypes: typesToCollect, withFrequency: frequency) { [weak self] (success, error) in
+//            self?.hasStartedCollection = success
+//            completion?(success, error)
+//        }
+        // TODO: background Delivery
         
     }
     
@@ -262,19 +264,21 @@ public class CKActivityManager : NSObject {
             return
         }
         
-        HealthKitManager.shared.startCollectAllData(forTypes: typesToCollect, fromDate: startDate) { (success, error) in
-            self.hasStartedCollection = success
-            completion?(success, error)
-        }
+//        HealthKitManager.shared.startCollectAllData(forTypes: typesToCollect, fromDate: startDate) { (success, error) in
+//            self.hasStartedCollection = success
+//            completion?(success, error)
+//        }
+        // TODO: StartCollection
         
     }
     
     public func stopHealthKitCollection() {
-        HealthKitManager.shared.disableHealthKit() { [weak self] (success, error) in
-            if (success) { //disable successfully
-                self?.hasStartedCollection = false //we have disabled
-            }
-        }
+//        HealthKitManager.shared.disableHealthKit() { [weak self] (success, error) in
+//            if (success) { //disable successfully
+//                self?.hasStartedCollection = false //we have disabled
+//            }
+//        }
+        // TODO: Disable HealthKit
     }
     
      fileprivate let keyHasStartedCollection = "hasStartedCollection"

@@ -26,6 +26,7 @@ extension AppDelegate {
 //        options.networkDeliveryDelegate = CKAppNetworkManager()
 //        options.networkReceiverDelegate = CKAppNetworkManager()
         CKApp.configure(options)
+        CKApp.startBackgroundDeliveryData()
         
         // (3) if we have already logged in
         if CKStudyUser.shared.isLoggedIn {

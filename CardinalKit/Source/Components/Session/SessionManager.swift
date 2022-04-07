@@ -140,7 +140,8 @@ public class SessionManager {
             if let hkResult = CKSession.getSecure(key: Constants.UserDefaults.HKDataShare),
                 let hasUsedHealthKit = Bool(hkResult), hasUsedHealthKit {
                 
-                HealthKitManager.shared.disableHealthKit()
+//                HealthKitManager.shared.disableHealthKit()
+                // TODO: Disable Healthkit
             }
             
             // if SessionManager.shared.userId == nil { //if we have no user...

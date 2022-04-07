@@ -21,7 +21,7 @@ class Healthpermissions{
         types = Set([])
     }
     
-    func configure(types: Set<HKSampleType>){
+    public func configure(types: Set<HKSampleType>){
         self.types = types
     }
 }
