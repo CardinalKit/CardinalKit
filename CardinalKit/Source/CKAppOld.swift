@@ -6,8 +6,10 @@
 //
 
 import Foundation
+import FirebaseCore
+import FirebaseAuth
 
-public struct CKAppOptions {
+public struct CKAppOptionsOld {
     public var networkRouteDelegate: CKAPIRouteDelegate?
     public var networkDeliveryDelegate : CKAPIDeliveryDelegate?
     public var networkReceiverDelegate : CKAPIReceiverDelegate?
@@ -17,13 +19,16 @@ public struct CKAppOptions {
     }
 }
 
-public class CKApp {
+public class CKAppOld {
     
     public static let instance = CKApp()
     
     var options = CKAppOptions()
     
     class public func configure(_ options: CKAppOptions? = nil) {
+        
+        // (1) initialize Firebase SDK
+        FirebaseApp.configure()
         
         // CardinalKit Options
         if let options = options {
@@ -75,5 +80,9 @@ public class CKApp {
             completion(success, error)
             
         }
+    }
+    
+    class public func signOut(){
+        try? Auth.auth().signOut()
     }
 }
