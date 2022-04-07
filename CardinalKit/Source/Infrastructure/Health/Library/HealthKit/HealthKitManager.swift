@@ -12,9 +12,6 @@ import HealthKit
 public class HealthKitManager{
     public let defaultTypes:[HKSampleType] = []
     lazy var healthStore: HKHealthStore = HKHealthStore()
-    fileprivate let queryLogMutex = NSLock()
-    fileprivate var queryLog = [String:Date]()
-    fileprivate let timeBetweenQueries: TimeInterval = 60
     
     func startHealthKitCollectionInBackground(withFrequency frequency:String, forTypes types:Set<HKSampleType>){
         var _frequency:HKUpdateFrequency = .immediate
@@ -33,7 +30,21 @@ public class HealthKitManager{
     }
 }
 
+
+
 extension HealthKitManager{
+    private func setUpCollectionByDayBetweenDates(fromDate startDate:Date, toDate endDate:Date?, forTypes types:Set<HKSampleType>){
+        var copyTypes = types
+        let element = copyTypes.removeFirst()
+        
+        collectDataDayByDay(forType: element, fromDate: startDate, toDate: endDate ?? Date()){ samples in
+            if(copyTypes.count>0){
+                self.setUpCollectionByDayBetweenDates(fromDate: startDate, toDate: endDate, forTypes: types)
+                copyTypes.removeAll()
+            }
+        }
+        
+    }
     
     private func setUpBackgroundCollection(withFrequency frequency:HKUpdateFrequency, forTypes types:Set<HKSampleType>, onCompletion:((_ success: Bool, _ error: Error?) -> Void)? = nil){
         var copyTypes = types
@@ -41,7 +52,7 @@ extension HealthKitManager{
         let query = HKObserverQuery(sampleType: element, predicate: nil, updateHandler: {
             (query, completionHandler, error) in
             if(copyTypes.count>0){
-                self.setUpBackgroundCollection(withFrequency: frequency, forTypes: copyTypes)
+                self.setUpBackgroundCollection(withFrequency: frequency, forTypes: copyTypes, onCompletion: onCompletion)
                 copyTypes.removeAll()
             }
             self.collectData(forType: element, fromDate: nil, toDate: Date()){ samples in
@@ -88,11 +99,21 @@ extension HealthKitManager{
                     }
                     guard let results = results, !results.isEmpty else {
                         onCompletion([HKSample]())
+                        
                         return
                     }
+                    CKApp.instance.onDataCollected(data: results)
                     onCompletion(results)
                 }
             }
+        }
+    }
+    
+    private func collectDataDayByDay(forType type:HKSampleType, fromDate startDate: Date, toDate endDate:Date, onCompletion:@escaping (([HKSample])->Void)){
+        collectData(forType: type, fromDate: startDate, toDate: startDate.dayByAdding(1)!, onCompletion: onCompletion)
+        let newStartDate = startDate.dayByAdding(1)!
+        if newStartDate < endDate{
+            collectDataDayByDay(forType: type, fromDate: newStartDate, toDate: endDate, onCompletion: onCompletion)
         }
     }
     
@@ -128,8 +149,5 @@ extension HealthKitManager{
         
     }
     
-    private func setUpCollectionByDayBetweenDates(fromDate startDate:Date, toDate endDate:Date?, forTypes types:Set<HKSampleType>){
-        
-        
-    }
+   
 }

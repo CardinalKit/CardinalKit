@@ -25,35 +25,37 @@ class CKHealthKitManager : NSObject {
     func getHealthAuthorization(_ completion: @escaping (_ success: Bool, _ error: Error?) -> Void) {
         
         // handle authorization from the OS
-        CKApp.getHealthAuthorizaton(forTypes: hkTypesToReadInBackground) { [weak self] (success, error) in
-            if (success) {
-                let frequency = self?.config.read(query: "Background Read Frequency")
-                
-                if frequency == "daily" {
-                    CKActivityManager.shared.startHealthKitCollectionInBackground(withFrequency: .daily)
-                } else if frequency == "weekly" {
-                    CKActivityManager.shared.startHealthKitCollectionInBackground(withFrequency: .weekly)
-                } else if frequency == "hourly" {
-                    CKActivityManager.shared.startHealthKitCollectionInBackground(withFrequency: .hourly)
-                } else {
-                    CKActivityManager.shared.startHealthKitCollectionInBackground(withFrequency: .immediate)
-                }
-            }
-            completion(success, error)
-        }
+        // TODO: Function to request permissions
+//        CKApp.getHealthAuthorizaton(forTypes: hkTypesToReadInBackground) { [weak self] (success, error) in
+//            if (success) {
+//                let frequency = self?.config.read(query: "Background Read Frequency")
+//
+//                if frequency == "daily" {
+//                    CKActivityManager.shared.startHealthKitCollectionInBackground(withFrequency: .daily)
+//                } else if frequency == "weekly" {
+//                    CKActivityManager.shared.startHealthKitCollectionInBackground(withFrequency: .weekly)
+//                } else if frequency == "hourly" {
+//                    CKActivityManager.shared.startHealthKitCollectionInBackground(withFrequency: .hourly)
+//                } else {
+//                    CKActivityManager.shared.startHealthKitCollectionInBackground(withFrequency: .immediate)
+//                }
+//            }
+//            completion(success, error)
+//        }
     }
     
     
     func collectAllTypes(_ completion: @escaping (_ success: Bool, _ error: Error?) -> Void) {
         // handle authorization from the OS
-        CKApp.getHealthAuthorizaton(forTypes: hkTypesToReadInBackground) {(success, error) in
-            DispatchQueue.main.async {
-                if (success) {
-                    CKActivityManager.shared.collectAllDataBetweenSpecificDates(fromDate: Date().dayByAdding(-10), completion)
-                }
-                completion(success, error)
-            }
-        }
+        //TODO: Add
+//        CKApp.getHealthAuthorizaton(forTypes: hkTypesToReadInBackground) {(success, error) in
+//            DispatchQueue.main.async {
+//                if (success) {
+//                    CKActivityManager.shared.collectAllDataBetweenSpecificDates(fromDate: Date().dayByAdding(-10), completion)
+//                }
+//                completion(success, error)
+//            }
+//        }
     }
     
 }

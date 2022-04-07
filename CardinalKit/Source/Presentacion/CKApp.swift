@@ -95,13 +95,13 @@ public class CKApp{
         }
     }
     
-    class public func getHealthAuthorizaton(forTypes typesToCollect:Set<HKSampleType>, _ completion: @escaping (_ success: Bool, _ error: Error?) -> Void)
-    {
-        CKActivityManager.shared.getHealthAuthorizaton(forTypes: typesToCollect) {(success, error) in
-            completion(success, error)
-        }
+    class public func signOut(){
+//        try? Auth.auth().signOut()
     }
-    
+}
+
+// HealthKit Functions
+extension CKApp{
     class public func startBackgroundDeliveryData(){
         instance.healthPermissionProvider.getPermissions{ result in
             switch result{
@@ -116,17 +116,27 @@ public class CKApp{
         
     }
     
-    class public func signOut(){
-//        try? Auth.auth().signOut()
-    }
-    
-    func onDataCollected(data:HKSample){
-        
+    class public func collectData(fromDate startDate:Date, toDate endDate: Date){
+        instance.healthPermissionProvider.getPermissions{ result in
+            switch result{
+                case .success(let success):
+                if success {
+                    // TODO: Configure all types
+                    instance.healthKitManager.startCollectionByDayBetweenDate(fromDate: startDate, toDate: endDate, forTypes: Set([HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.stepCount)!]))
+                }
+                case .failure(let error):
+                 print("error \(error)")
+            }
+        }
     }
     
     func getLastSyncDate(forType type: HKSampleType, forSource sourceRevision: HKSourceRevision) -> Date {
-        
-        
+        // TODO: configure get last sync date by types
         return Date().dayByAdding(-1)!
+    }
+    
+    func onDataCollected(data:[HKSample]){
+     // TODO: Send Data
+        print("Data Collected \(data)")
     }
 }
