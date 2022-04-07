@@ -8,9 +8,9 @@
 
 import HealthKit
 
-class HealthKitManager: SyncDelegate {
+class HealthKitManager2: SyncDelegate {
     
-    static let shared = HealthKitManager()
+    static let shared = HealthKitManager2()
     
     lazy var healthStore: HKHealthStore = HKHealthStore()
     
@@ -29,7 +29,7 @@ class HealthKitManager: SyncDelegate {
     }
     
     init() {
-        NotificationCenter.default.addObserver(self, selector: #selector(HealthKitManager.syncData), name: NSNotification.Name(rawValue: Constants.Notification.DataSyncRequest), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(HealthKitManager2.syncData), name: NSNotification.Name(rawValue: Constants.Notification.DataSyncRequest), object: nil)
     }
     
     deinit {
@@ -107,7 +107,7 @@ class HealthKitManager: SyncDelegate {
     
 }
 
-extension HealthKitManager {
+extension HealthKitManager2 {
     
     fileprivate func setUpBackgroundDeliveryForDataTypes(types: Set<HKSampleType>, frequency: HKUpdateFrequency, _ completion: ((_ success: Bool, _ error: Error?) -> Void)? = nil) {
         var copyTypes = types
@@ -127,6 +127,7 @@ extension HealthKitManager {
             strongSelf.backgroundQuery(forType: element, completionHandler: {
                 dispatchGroup.leave()
             })
+            
             if(copyTypes.count>0){
                 strongSelf.setUpBackgroundDeliveryForDataTypes(types: copyTypes, frequency: frequency,completion)
                 copyTypes.removeAll()

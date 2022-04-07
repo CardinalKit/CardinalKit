@@ -13,7 +13,6 @@ class RealmManager {
     static let shared = RealmManager()
     
     func configure() -> Bool {
-        // let config = Realm.Configuration(schemaVersion: 2, migrationBlock: realmMigrationBlock)
         let cacheLocation = CacheManager.shared.realmFile
         let config = Realm.Configuration(fileURL: cacheLocation, schemaVersion: 2, deleteRealmIfMigrationNeeded: true)
         
@@ -52,3 +51,4 @@ class RealmManager {
     
     
 }
+
