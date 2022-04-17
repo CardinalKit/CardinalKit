@@ -26,7 +26,9 @@ extension AppDelegate {
 //        options.networkDeliveryDelegate = CKAppNetworkManager()
 //        options.networkReceiverDelegate = CKAppNetworkManager()
         CKApp.configure(options)
-        CKApp.startBackgroundDeliveryData()
+//        CKApp.startBackgroundDeliveryData()
+        
+//        CKApp.collectData(fromDate: Date().dayByAdding(-10)!, toDate: Date())
         
         // (3) if we have already logged in
         if CKStudyUser.shared.isLoggedIn {

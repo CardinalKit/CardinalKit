@@ -89,7 +89,7 @@ extension HealthKitManager{
                     _startDate = startDate
                 }
                 else{
-                    _startDate = CKApp.instance.getLastSyncDate(forType: type,forSource: sourceRevision)
+                    _startDate = (self?.getLastSyncDate(forType: type,forSource: sourceRevision))!
                 }
                 
                 self?.queryHealthStore(forType: type, forSource: sourceRevision, fromDate: _startDate, toDate: endDate) { (query: HKSampleQuery, results: [HKSample]?, error: Error?) in
@@ -102,7 +102,9 @@ extension HealthKitManager{
                         
                         return
                     }
-                    CKApp.instance.onDataCollected(data: results)
+                    
+                    self?.saveLastSyncDate(forType: type, forSource: sourceRevision, date: Date())
+                    CKApp.instance.infrastructure.onHealthDataColected(data: results)
                     onCompletion(results)
                 }
             }
@@ -139,15 +141,38 @@ extension HealthKitManager{
         let datePredicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: .strictStartDate)
         let sourcePredicate = HKQuery.predicateForObjects(from: [sourceRevision])
         let predicate = NSCompoundPredicate.init(andPredicateWithSubpredicates: [datePredicate, sourcePredicate])
-        
         let query = HKSampleQuery(sampleType: type, predicate: predicate, limit: 1000, sortDescriptors: [sortDescriptor]) {
             (query: HKSampleQuery, results: [HKSample]?, error: Error?) in
             queryHandler(query, results, error)
         }
-        
         healthStore.execute(query)
-        
     }
     
-   
+    func saveLastSyncDate(forType type: HKSampleType, forSource sourceRevision: HKSourceRevision, date:Date){
+        let lastSyncObject =
+            DateLastSyncObject(
+                dataType: "\(type.identifier)",
+                lastSyncDate: date,
+                device: "\(getSourceRevisionKey(source: sourceRevision))"
+            )
+        CKApp.instance.options.localDBDelegate?.saveLastSyncItem(item: lastSyncObject)
+    }
+    
+    func getLastSyncDate(forType type: HKSampleType, forSource sourceRevision: HKSourceRevision) -> Date
+    {
+        let queryParams:[String:AnyObject] = [
+            "dataType":"\(type.identifier)" as AnyObject,
+            "device":"\(getSourceRevisionKey(source: sourceRevision))" as AnyObject
+        ]
+        if let result = CKApp.instance.options.localDBDelegate?.getLastSyncItem(params:queryParams){
+            return result.lastSyncDate
+        }
+        return Date().dayByAdding(-1)!
+    }
+    
+    fileprivate func getSourceRevisionKey(source: HKSourceRevision) -> String {
+        return "\(source.productType ?? "UnknownDevice") \(source.source.key)"
+    }
 }
+
+

@@ -8,9 +8,94 @@
 import Foundation
 import RealmSwift
 
-class RealmManager {
+
+
+
+
+class RealmManager :CKLocalDBDelegate{
     
-    static let shared = RealmManager()
+    // Params expected Datatype
+    // Device Source
+    func getLastSyncItem(params: [String : AnyObject]) -> DateLastSyncObject? {
+        let realm = try! Realm()
+        
+        let dataType =  params["dataType"]
+        let device = params["device"]
+        
+        if let dataType = dataType as? String,
+           let device = device as? String{
+            let syncMetadataQuery = NSCompoundPredicate(
+                andPredicateWithSubpredicates: [
+                    NSPredicate(format: "dataType = '\(dataType)'"),
+                    NSPredicate(format: "device = '\(device)'")
+                ])
+            let results = realm.objects(DatesLastSyncRealmObject.self).filter(syncMetadataQuery)
+            assert(results.count <= 1, "There should only be at most one sync date per type")
+            if results.count > 0{
+                if let result = results.first{
+                    return RealmTraductors.TransformInObject(fromRealmObject: result)
+                }
+            }
+        }
+        return nil
+    }
+    
+    func saveLastSyncItem(item: DateLastSyncObject) {
+        
+    }
+    
+    func deleteLastSyncitem() {
+        
+    }
+    
+    func getNetworkItem(params: [String : AnyObject]) -> NetworkRequestObject? {
+        return nil
+        
+    }
+    
+    func saveNetworkItem(item: NetworkRequestObject) {
+        
+    }
+    
+    func deleteNetworkItem() {
+        
+    }
+    
+    
+//
+//    // Params
+//    // NSPredicate ?
+//    func getItem(params: [String : AnyObject]) -> [String:AnyObject] {
+//
+//        let realm = try! Realm()
+//        let predicate = params["Predicate"]
+//
+//        if let predicate = predicate as? NSPredicate
+//        {
+//            let results = realm.objects(DataFormat.self).filter(predicate)
+//            assert(results.count <= 1, "There should only be at most one sync date per type")
+//            if results.count > 0{
+//                if let result = results.first{
+//                    return [
+//                        "dataType":result.dataType as AnyObject,
+//                        "lastSyncDate":result.lastSyncDate  as AnyObject,
+//                        "device": result.device  as AnyObject
+//                    ]
+//                }
+//            }
+//        }
+//        return [:]
+//    }
+//
+//    func saveItem(params: [String : AnyObject]) {
+//        let metadata = HealthKitDataUploads()
+//        metadata.dataType = type.identifier
+//        metadata.device = getSourceRevisionKey(source: sourceRevision)
+//    }
+//
+//    func deleteItem(params: [String : AnyObject]) {
+//
+//    }
     
     func configure() -> Bool {
         let cacheLocation = CacheManager.shared.realmFile
@@ -48,7 +133,9 @@ class RealmManager {
     fileprivate func realmMigrationBlock(_ migration: Migration, _ oldSchemaVersion: UInt64) {
         // nothing to migrate, yet.
     }
-    
+}
+
+extension RealmManager{
     
 }
 

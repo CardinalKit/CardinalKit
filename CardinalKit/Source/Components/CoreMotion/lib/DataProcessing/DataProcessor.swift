@@ -122,7 +122,7 @@ class DataProcessor {
             
         do {
             
-            let package = Package(prefix + ".zip", type: .sensorData)
+            let package = Package(prefix + ".zip", type: .sensorData, identifier: "\(Date())-SensorData")
             let storeLocation = try package.store()
             
             try Zip.zipFiles(paths: [payloadDirectory], zipFilePath: storeLocation, password: nil, compression: .DefaultCompression, progress: nil)

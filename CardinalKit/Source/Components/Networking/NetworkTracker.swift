@@ -97,7 +97,7 @@ extension NetworkTracker {
         
         for url in cacheContents {
          
-            let package = Package(url, type: .sensorData)
+            let package = Package(url, type: .sensorData, identifier: "\(Date())-\(url)")
             do {
                 let packageRequest = try NetworkDataRequest.findNetworkRequest(package)
                 if let packageRequest = packageRequest {
@@ -128,7 +128,7 @@ extension NetworkTracker {
         
         do {
             let sessionEID = SessionManager.shared.userId ?? ""
-            let package = try Package("\(sessionEID)_snapshot_report_\(Date().stringWithFormat("yyyyMMdd'T'HHmmss"))", type: .snapshot, data: snapshot)
+            let package = try Package("\(sessionEID)_snapshot_report_\(Date().stringWithFormat("yyyyMMdd'T'HHmmss"))", type: .snapshot, identifier: "\(Date())-\(sessionEID)", data: snapshot)
             
             let store = try package.store()
             

@@ -327,7 +327,7 @@ extension HealthKitDataSync {
         let dictionary=["date":date.shortStringFromDate(),"activityindex":String(value),"stepCount":String(stepCount)]
         do{
             let data = try JSONSerialization.data(withJSONObject: dictionary, options: [])
-            let package = try Package("metrics"+date.shortStringFromDate(), type: .metricsData, data: data)
+            let package = try Package("metrics"+date.shortStringFromDate(), type: .metricsData, identifier: "\(Date())-ActivityIndex", data: data)
             try NetworkDataRequest.send(package)
         }
         catch{
@@ -342,7 +342,7 @@ extension HealthKitDataSync {
                 let packageName = "dataUpperThan1000 \(dataType)"
                 let jsonObject = ["dataType": dataType]
                 let sampleToJson = try JSONSerialization.data(withJSONObject: jsonObject, options: [])
-                let package = try Package(packageName, type: .hkdata, data: sampleToJson)
+                let package = try Package(packageName, type: .hkdata,identifier: "\(Date())-\(packageName)" , data: sampleToJson)
                 try NetworkDataRequest.send(package) { (success,error) in}
             } catch {
                VError("Unable to process package %{public}@", error.localizedDescription)
@@ -376,7 +376,7 @@ extension HealthKitDataSync {
                 do {
                     let internalName = packageName!+"\(index)"
                     index = index+1
-                   let package = try Package(internalName, type: .hkdata, data: sampleToJson)
+                   let package = try Package(internalName, type: .hkdata,identifier: "\(Date())-\(internalName)", data: sampleToJson)
                     // async
                     try NetworkDataRequest.send(package) { (success,error) in
                         dispatchGroup.leave()
@@ -400,7 +400,6 @@ extension HealthKitDataSync {
         if let element = firstElement,
            let body = element["body"] as? [String: Any]
         {
-//            if is quantity
             if let quantityType = body["quantity_type"] as? String{
                 switch(quantityType){
                 case "HKQuantityTypeIdentifierStepCount":
@@ -410,9 +409,7 @@ extension HealthKitDataSync {
                 default:
                     return data
                 }
-
             }
-
         }
         
         return data

@@ -40,6 +40,7 @@ public class Package: NSObject {
     
     public let fileName: String
     public let type: PackageType
+    public let identifier: String
     
     func store() throws -> URL {
         guard let store = CacheManager.shared.getPackageStore(fileName: fileName, fileType: type) else {
@@ -48,19 +49,21 @@ public class Package: NSObject {
         return store
     }
     
-    init(_ fileName: String, type: PackageType) {
+    init(_ fileName: String, type: PackageType, identifier:String) {
         self.fileName = fileName
         self.type = type
+        self.identifier = identifier
     }
     
-    convenience init(_ fileName: String, type: PackageType, data: Data) throws {
-        self.init(fileName, type: type)
+    convenience init(_ fileName: String, type: PackageType,identifier:String,  data: Data) throws {
+        self.init(fileName, type: type, identifier: identifier)
         try self.write(data)
     }
     
-    init(_ url: URL, type: PackageType) {
+    init(_ url: URL, type: PackageType, identifier:String) {
         self.fileName = Package.id(url)
         self.type = type
+        self.identifier = identifier
     }
     
     func hasData() -> Bool {

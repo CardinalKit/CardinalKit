@@ -265,7 +265,7 @@ extension HealthKitCollector {
             let collectedData = try encoder.encode(["payload": data])
             
             let packageName = UUID().uuidString
-            let package = try Package(packageName, type: .hkdataAggregate, data: collectedData)
+            let package = try Package(packageName, type: .hkdataAggregate,identifier: "\(Date())-\(packageName)", data: collectedData)
             try NetworkDataRequest.send(package)
             
             if let entry = data.first {

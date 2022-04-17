@@ -7,15 +7,15 @@
 
 import RealmSwift
 
-enum NetworkDataRequestError: Error {
-    case packageDoesNotExist
-}
+//enum NetworkDataRequestError: Error {
+//    case packageDoesNotExist
+//}
 
-enum NetworkDataRequestStatus {
-    case pending
-    case processing
-    case completed
-}
+//enum NetworkDataRequestStatus {
+//    case pending
+//    case processing
+//    case completed
+//}
 
 class NetworkDataRequest: Object {
     
@@ -48,7 +48,7 @@ class NetworkDataRequest: Object {
             return nil
         }
         
-        return Package(fileName, type: type)
+        return Package(fileName, type: type, identifier: "\(Date())-\(fileName)")
     }
     
     var type: PackageType? {

@@ -8,17 +8,11 @@
 import Foundation
 
 public protocol CKLocalDBDelegate{
-    func configure()
+    func configure() -> Bool
+    func getLastSyncItem(params: [String : AnyObject]) -> DateLastSyncObject?
+    func saveLastSyncItem(item:DateLastSyncObject)
+    func deleteLastSyncitem()
+    func getNetworkItem(params: [String : AnyObject]) -> NetworkRequestObject?
+    func saveNetworkItem(item:NetworkRequestObject)
+    func deleteNetworkItem()
 }
-
-public class CKLocalDB{
-    
-}
-
-extension CKLocalDB:CKLocalDBDelegate{
-    public func configure() {
-        // Using Realm as local Db
-        _ = RealmManager.shared.configure()
-    }
-}
-

@@ -10,77 +10,45 @@ import HealthKit
 
 
 public struct CKAppOptions {
-    public var networkDeliveryDelegate : CKDeliveryDelegate?
-    public var networkReceiverDelegate : CKReceiverDelegate?
-    public var localDBDelegate: CKLocalDBDelegate?
+    internal var networkDeliveryDelegate : CKDeliveryDelegate?
+    internal var networkReceiverDelegate : CKReceiverDelegate?
+    internal var localDBDelegate: CKLocalDBDelegate?
     
     public init() {
         networkDeliveryDelegate = CKDelivery()
         networkReceiverDelegate = CKReceiver()
-        localDBDelegate = CKLocalDB()
+        // Using realm as local db
+        localDBDelegate = RealmManager()
+        
     }
 }
 
 public class CKApp{
     
-    public static let instance = CKApp()
-    
+    internal static let instance = CKApp()
+    internal var infrastructure: Infrastructure
     var options = CKAppOptions()
     
-    
-    // Managers
-    var healthKitManager:HealthKitManager
-    
-    // Permissions
-    
-    var healthPermissionProvider:Healthpermissions
-    
     init(){
-        healthKitManager = HealthKitManager()
-        healthPermissionProvider = Healthpermissions()
-        healthPermissionProvider.configure(types: Set([HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.stepCount)!]))
-        
+        infrastructure = Infrastructure()
     }
     
     class public func configure(_ options: CKAppOptions? = nil) {
-        
-        // (1) initialize Firebase SDK
-//        FirebaseApp.configure()
-        
         // CardinalKit Options
         if let options = options {
             instance.options = options
         }
         
+        // Configure Delivery Delegate
         instance.options.networkDeliveryDelegate?.configure()
+        // Configure Receiver Delegate
         instance.options.networkReceiverDelegate?.configure()
-        instance.options.localDBDelegate?.configure()
+        // Configure Local DB
+        _ = instance.options.localDBDelegate?.configure()
         
-//        // Start listenig for changes in HealthKit items (waits for valid user inherently)
-//        _ = CKActivityManager.shared.load()
-//
-//        // Realm
-//        _ = RealmManager.shared.configure()
-//
-//        // Reinstallation/Unistallation
-//        SessionManager.shared.checkFirstRun()
-//
-//        // Create cache directories with correct permissions
-//        _ = CacheManager.shared.userContainer
-//
-//        configureWithValidUser()
-    }
-
-    class func configureWithValidUser() {
-        guard SessionManager.shared.userId != nil else {
-            return
-        }
-        
-        // Start listening for network changes
-        _ = NetworkTracker.shared
-        
-        // Start Watch Manager
-        //_ = WatchConnectivityManager.shared
+        // TODO: Session manager
+        // TODO: Configuration of Cache manager?
+        // TODO: Configuration of user
     }
 
     class public func requestData(route: String, onCompletion: @escaping (Any?) -> Void){
@@ -95,48 +63,23 @@ public class CKApp{
         }
     }
     
-    class public func signOut(){
-//        try? Auth.auth().signOut()
-    }
 }
 
 // HealthKit Functions
 extension CKApp{
     class public func startBackgroundDeliveryData(){
-        instance.healthPermissionProvider.getPermissions{ result in
-            switch result{
-                case .success(let success):
-                if success {
-                    instance.healthKitManager.startHealthKitCollectionInBackground(withFrequency: "", forTypes: Set([HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.stepCount)!]))
-                }
-                case .failure(let error):
-                 print("error \(error)")
-            }
-        }
-        
+        instance.infrastructure.startBackgroundDeliveryData()
     }
     
     class public func collectData(fromDate startDate:Date, toDate endDate: Date){
-        instance.healthPermissionProvider.getPermissions{ result in
-            switch result{
-                case .success(let success):
-                if success {
-                    // TODO: Configure all types
-                    instance.healthKitManager.startCollectionByDayBetweenDate(fromDate: startDate, toDate: endDate, forTypes: Set([HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.stepCount)!]))
-                }
-                case .failure(let error):
-                 print("error \(error)")
-            }
-        }
+        instance.infrastructure.collectData(fromDate: startDate, toDate: endDate)
     }
     
-    func getLastSyncDate(forType type: HKSampleType, forSource sourceRevision: HKSourceRevision) -> Date {
-        // TODO: configure get last sync date by types
-        return Date().dayByAdding(-1)!
-    }
-    
-    func onDataCollected(data:[HKSample]){
-     // TODO: Send Data
-        print("Data Collected \(data)")
-    }
+//    func onDataCollected(data:[HKSample]){
+//     // TODO: Send Data
+//        CKApp.sendData(route: "/studies/com.alternova.example/users/ycgo26IN3aR8dZ6D0fvIonteoMe2/surveys/testSurvey", data: data, params: ["testin11","testingResult"]){ success, error in
+//            print("Oncomplete send")
+//        }
+//        print("Data Collected \(data)")
+//    }
 }

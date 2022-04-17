@@ -39,7 +39,8 @@ public class CKAppOld {
         _ = CKActivityManager.shared.load()
         
         // Realm
-        _ = RealmManager.shared.configure()
+        //TODO: CONFIGURE REALM
+//        _ = RealmManager.shared.configure()
         
         // Reinstallation/Unistallation
         SessionManager.shared.checkFirstRun()

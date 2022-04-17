@@ -95,7 +95,8 @@ extension AppDelegate {
             if ORKPasscodeViewController.isPasscodeStoredInKeychain() {
                 ORKPasscodeViewController.removePasscodeFromKeychain()
             }
-            CKApp.signOut()
+//            CKApp.signOut()
+            // TODO: signOut
             //SignOut
             UserDefaults.standard.set(true, forKey: Constants.prefFirstRunWasMarked)
         }
