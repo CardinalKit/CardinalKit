@@ -75,6 +75,9 @@ extension CKApp{
         instance.infrastructure.collectData(fromDate: startDate, toDate: endDate)
     }
     
+    class public func getHealthPermision(completion: @escaping (Result<Bool, Error>) -> Void) {
+        instance.infrastructure.getPermissions(completion: completion)
+    }
 //    func onDataCollected(data:[HKSample]){
 //     // TODO: Send Data
 //        CKApp.sendData(route: "/studies/com.alternova.example/users/ycgo26IN3aR8dZ6D0fvIonteoMe2/surveys/testSurvey", data: data, params: ["testin11","testingResult"]){ success, error in

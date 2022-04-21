@@ -1,11 +1,12 @@
 //
 //  Infrastructure.swift
-//  abseil
+//  CardinalKit
 //
 //  Created by Esteban Ramos on 17/04/22.
 //
 
 import Foundation
+
 
 internal class Infrastructure {
     // Managers
@@ -20,6 +21,10 @@ internal class Infrastructure {
         mhSerializer = CKOpenMHSerializer()
         healthPermissionProvider = Healthpermissions()
         healthPermissionProvider.configure(types: Set([HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.stepCount)!]))
+    }
+    
+    func getHealthPermission(completion: @escaping (Result<Bool, Error>) -> Void){
+       healthPermissionProvider.getPermissions(completion: completion)
     }
     
     func startBackgroundDeliveryData(){

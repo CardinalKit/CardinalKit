@@ -237,20 +237,6 @@ PODS:
     - SAMKeychain (~> 1.5.2)
     - SwiftyJSON (~> 4.1.0)
     - Zip (~> 1.1.0)
-  - CK2 (3.0.0):
-    - Firebase/Analytics
-    - Firebase/Auth
-    - Firebase/Core
-    - Firebase/DynamicLinks
-    - Firebase/Firestore
-    - Firebase/Storage
-    - Granola
-    - ObjectMapper (~> 3.3.0)
-    - ReachabilitySwift (~> 3)
-    - RealmSwift (~> 10.7.0)
-    - SAMKeychain (~> 1.5.2)
-    - SwiftyJSON (~> 4.1.0)
-    - Zip (~> 1.1.0)
   - FBAEMKit (12.1.0):
     - FBSDKCoreKit_Basics (= 12.1.0)
   - FBSDKCoreKit (12.1.0):
@@ -426,7 +412,6 @@ PODS:
 
 DEPENDENCIES:
   - CardinalKit (from `../`)
-  - CK2 (from `../`)
   - FBSDKLoginKit
   - Firebase/Analytics
   - Firebase/Auth
@@ -478,8 +463,6 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   CardinalKit:
     :path: "../"
-  CK2:
-    :path: "../"
   Granola:
     :branch: main
     :git: https://github.com/CardinalKit/Granola.git
@@ -500,7 +483,6 @@ SPEC CHECKSUMS:
   AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
   BoringSSL-GRPC: 8edf627ee524575e2f8d19d56f068b448eea3879
   CardinalKit: d04ae4b01342eb0d6b46fd0f5dad7969a2e2c65f
-  CK2: 3aed5499334e04a1f4f60cd84767933fbe5cddd8
   FBAEMKit: 56c0bb9b42e3747cd82b67934f0c2b19325382ea
   FBSDKCoreKit: 75368765d9c2303073145a7925dfaa9d60bcd77b
   FBSDKCoreKit_Basics: 39865aff97e5f6951a78fb3e89dc4460e35e1895
@@ -536,6 +518,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
   Zip: 8877eede3dda76bcac281225c20e71c25270774c
 
-PODFILE CHECKSUM: 34980f8612c35e1e2554acc7575d6777adb8e6ea
+PODFILE CHECKSUM: 549c36170930bcd868333a0b59bd5f15026d7e2a
 
 COCOAPODS: 1.11.2
