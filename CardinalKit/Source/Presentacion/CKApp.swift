@@ -76,7 +76,7 @@ extension CKApp{
     }
     
     class public func getHealthPermision(completion: @escaping (Result<Bool, Error>) -> Void) {
-        instance.infrastructure.getPermissions(completion: completion)
+        instance.infrastructure.getHealthPermission(completion: completion)
     }
 //    func onDataCollected(data:[HKSample]){
 //     // TODO: Send Data
