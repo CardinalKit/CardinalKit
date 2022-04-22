@@ -3,7 +3,7 @@ name: Build
 on:
   push:
     branches:
-      - develop
+      - main
   pull_request:
   workflow_dispatch:
 
