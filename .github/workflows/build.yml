@@ -23,7 +23,7 @@ jobs:
       run: |
           xcodebuild -version
           swift --version
-    - name: Build and test
-      run: |
-          pod install
-          xcodebuild build -workspace CardinalKit.xcworkspace -scheme CardinalKit-Example -destination 'platform=iOS Simulator,name=iPhone 13'
+    - name: Install Dependencies
+      run: pod install
+    - name: Build
+      run: xcodebuild build -workspace CardinalKit.xcworkspace -scheme CardinalKit-Example -destination 'platform=iOS Simulator,name=iPhone 13'
