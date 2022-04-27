@@ -10,10 +10,19 @@ import Foundation
 import HealthKit
 
 public class HealthKitManager{
-    public let defaultTypes:[HKSampleType] = []
-    lazy var healthStore: HKHealthStore = HKHealthStore()
     
-    func startHealthKitCollectionInBackground(withFrequency frequency:String, forTypes types:Set<HKSampleType>){
+    lazy var healthStore: HKHealthStore = HKHealthStore()
+    var types:Set<HKSampleType> = Set([])
+    
+    init(){
+        types = defaultTypes()
+    }
+    
+    public func configure(types: Set<HKSampleType>){
+        self.types = types
+    }
+    
+    func startHealthKitCollectionInBackground(withFrequency frequency:String){
         var _frequency:HKUpdateFrequency = .immediate
         if frequency == "daily" {
             _frequency = .daily
@@ -22,10 +31,10 @@ public class HealthKitManager{
         } else if frequency == "hourly" {
            _frequency = .hourly
         }
-        self.setUpBackgroundCollection(withFrequency: _frequency, forTypes: types)
+        self.setUpBackgroundCollection(withFrequency: _frequency, forTypes: types.isEmpty ? defaultTypes() : types)
     }
     
-    func startCollectionByDayBetweenDate(fromDate startDate:Date, toDate endDate:Date?, forTypes types:Set<HKSampleType>){
+    func startCollectionByDayBetweenDate(fromDate startDate:Date, toDate endDate:Date?){
         self.setUpCollectionByDayBetweenDates(fromDate: startDate, toDate: endDate, forTypes: types)
     }
 }
@@ -33,6 +42,7 @@ public class HealthKitManager{
 
 
 extension HealthKitManager{
+    
     private func setUpCollectionByDayBetweenDates(fromDate startDate:Date, toDate endDate:Date?, forTypes types:Set<HKSampleType>){
         var copyTypes = types
         let element = copyTypes.removeFirst()
@@ -175,4 +185,192 @@ extension HealthKitManager{
     }
 }
 
+
+extension HealthKitManager{
+    
+    func defaultTypes() -> Set<HKSampleType>{
+        var hkTypesToReadInBackground: Set<HKSampleType> = []
+        
+        /* **************************************************************
+         * Customize HealthKit data that will be collected
+         * in the background. Choose from any HKQuantityType:
+         * https://developer.apple.com/documentation/healthkit/hkquantitytypeidentifier
+         **************************************************************/
+        
+        let quantityTypesToRead: [HKQuantityTypeIdentifier] = [
+            .activeEnergyBurned,
+            .appleExerciseTime,
+            .appleStandTime,
+            .basalBodyTemperature,
+            .basalEnergyBurned,
+            .bloodAlcoholContent,
+            .bloodGlucose,
+            .bloodPressureDiastolic,
+            .bloodPressureSystolic,
+            .bodyFatPercentage,
+            .bodyMass,
+            .bodyMassIndex,
+            .bodyTemperature,
+            .dietaryBiotin,
+            .dietaryCaffeine,
+            .dietaryCalcium,
+            .dietaryCarbohydrates,
+            .dietaryChloride,
+            .dietaryCholesterol,
+            .dietaryChromium,
+            .dietaryCopper,
+            .dietaryEnergyConsumed,
+            .dietaryFatMonounsaturated,
+            .dietaryFatPolyunsaturated,
+            .dietaryFatSaturated,
+            .dietaryFatTotal,
+            .dietaryFiber,
+            .dietaryFolate,
+            .dietaryIodine,
+            .dietaryIron,
+            .dietaryMagnesium,
+            .dietaryManganese,
+            .dietaryMolybdenum,
+            .dietaryNiacin,
+            .dietaryPantothenicAcid,
+            .dietaryPhosphorus,
+            .dietaryPotassium,
+            .dietaryProtein,
+            .dietaryRiboflavin,
+            .dietarySelenium,
+            .dietarySodium,
+            .dietarySugar,
+            .dietaryThiamin,
+            .dietaryVitaminA,
+            .dietaryVitaminB12,
+            .dietaryVitaminB6,
+            .dietaryVitaminC,
+            .dietaryVitaminD,
+            .dietaryVitaminE,
+            .dietaryVitaminK,
+            .dietaryWater,
+            .dietaryZinc,
+            .distanceCycling,
+            .distanceDownhillSnowSports,
+            .distanceSwimming,
+            .distanceWalkingRunning,
+            .distanceWheelchair,
+            .electrodermalActivity,
+            .environmentalAudioExposure,
+            .flightsClimbed,
+            .forcedExpiratoryVolume1,
+            .forcedVitalCapacity,
+            .headphoneAudioExposure,
+            .heartRate,
+            .heartRateVariabilitySDNN,
+            .height,
+            .inhalerUsage,
+            .insulinDelivery,
+            .leanBodyMass,
+            .nikeFuel,
+            .numberOfTimesFallen,
+            .oxygenSaturation,
+            .peakExpiratoryFlowRate,
+            .peripheralPerfusionIndex,
+            .pushCount,
+            .respiratoryRate,
+            .restingHeartRate,
+            .sixMinuteWalkTestDistance,
+            .stairAscentSpeed,
+            .stairDescentSpeed,
+            .stepCount,
+            .swimmingStrokeCount,
+            .uvExposure,
+            .vo2Max,
+            .waistCircumference,
+            .walkingAsymmetryPercentage,
+            .walkingDoubleSupportPercentage,
+            .walkingHeartRateAverage,
+            .walkingSpeed,
+            .walkingStepLength
+        ]
+        
+        let categoryTypesToRead: [HKCategoryTypeIdentifier] = [
+            .abdominalCramps,
+            .acne,
+            .appetiteChanges,
+            .appleStandHour,
+            .bladderIncontinence,
+            .bloating,
+            .breastPain,
+            .cervicalMucusQuality,
+            .chestTightnessOrPain,
+            .chills,
+            .constipation,
+            .contraceptive,
+            .coughing,
+            .diarrhea,
+            .dizziness,
+            .drySkin,
+            .environmentalAudioExposureEvent,
+            .environmentalAudioExposureEvent,
+            .fainting,
+            .fatigue,
+            .fever,
+            .generalizedBodyAche,
+            .hairLoss,
+            .handwashingEvent,
+            .headache,
+            .headphoneAudioExposureEvent,
+            .heartburn,
+            .highHeartRateEvent,
+            .hotFlashes,
+            .intermenstrualBleeding,
+            .irregularHeartRhythmEvent,
+            .lactation,
+            .lossOfSmell,
+            .lossOfTaste,
+            .lowCardioFitnessEvent,
+            .lowCardioFitnessEvent,
+            .lowHeartRateEvent,
+            .lowerBackPain,
+            .memoryLapse,
+            .menstrualFlow,
+            .mindfulSession,
+            .moodChanges,
+            .nausea,
+            .nightSweats,
+            .ovulationTestResult,
+            .pelvicPain,
+            .pregnancy,
+            .rapidPoundingOrFlutteringHeartbeat,
+            .runnyNose,
+            .sexualActivity,
+            .shortnessOfBreath,
+            .sinusCongestion,
+            .skippedHeartbeat,
+            .sleepAnalysis,
+            .sleepChanges,
+            .soreThroat,
+            .toothbrushingEvent,
+            .vaginalDryness,
+            .vomiting,
+            .wheezing
+        ]
+        
+        for quantityType in quantityTypesToRead {
+           hkTypesToReadInBackground.insert(HKObjectType.quantityType(forIdentifier: quantityType)!)
+       }
+
+       for categoryType in categoryTypesToRead {
+           hkTypesToReadInBackground.insert(HKObjectType.categoryType(forIdentifier: categoryType)!)
+       }
+        
+        hkTypesToReadInBackground.insert(HKObjectType.documentType(forIdentifier: .CDA)!)
+        hkTypesToReadInBackground.insert(HKElectrocardiogramType.electrocardiogramType())
+        hkTypesToReadInBackground.insert(HKAudiogramSampleType.audiogramSampleType())
+        hkTypesToReadInBackground.insert(HKWorkoutType.workoutType())
+        hkTypesToReadInBackground.insert(HKAudiogramSampleType.audiogramSampleType())
+        hkTypesToReadInBackground.insert(HKSeriesType.workoutRoute())
+        hkTypesToReadInBackground.insert(HKSeriesType.heartbeat())
+        
+        return hkTypesToReadInBackground
+    }
+    
+}
 

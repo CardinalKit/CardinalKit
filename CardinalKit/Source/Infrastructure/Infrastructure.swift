@@ -15,12 +15,20 @@ internal class Infrastructure {
     var healthPermissionProvider:Healthpermissions
     // OpenMHealthSerializer
     var mhSerializer:CKOpenMHSerializer
+    //
+    
     
     init(){
         healthKitManager = HealthKitManager()
         mhSerializer = CKOpenMHSerializer()
         healthPermissionProvider = Healthpermissions()
-        healthPermissionProvider.configure(types: Set([HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.stepCount)!]))
+        healthPermissionProvider.configure(types: healthKitManager.defaultTypes())
+        
+    }
+    
+    func configure(types: Set<HKSampleType>){
+        healthPermissionProvider.configure(types: types)
+        healthKitManager.configure(types: types)
     }
     
     func getHealthPermission(completion: @escaping (Result<Bool, Error>) -> Void){
@@ -32,7 +40,7 @@ internal class Infrastructure {
             switch result{
                 case .success(let success):
                 if success {
-                    self.healthKitManager.startHealthKitCollectionInBackground(withFrequency: "", forTypes: Set([HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.stepCount)!]))
+                    self.healthKitManager.startHealthKitCollectionInBackground(withFrequency: "")
                 }
                 case .failure(let error):
                  print("error \(error)")
@@ -46,7 +54,7 @@ internal class Infrastructure {
                 case .success(let success):
                 if success {
                     // TODO: Configure all types
-                    self.healthKitManager.startCollectionByDayBetweenDate(fromDate: startDate, toDate: endDate, forTypes: Set([HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.stepCount)!]))
+                    self.healthKitManager.startCollectionByDayBetweenDate(fromDate: startDate, toDate: endDate)
                 }
                 case .failure(let error):
                  print("error \(error)")

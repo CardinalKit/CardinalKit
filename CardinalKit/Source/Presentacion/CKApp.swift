@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import HealthKit
 
 
 public struct CKAppOptions {
@@ -38,7 +37,6 @@ public class CKApp{
         if let options = options {
             instance.options = options
         }
-        
         // Configure Delivery Delegate
         instance.options.networkDeliveryDelegate?.configure()
         // Configure Receiver Delegate
@@ -67,6 +65,11 @@ public class CKApp{
 
 // HealthKit Functions
 extension CKApp{
+    
+    class public func configureHealthKitTypes(types:Set<HKSampleType>){
+        instance.infrastructure.configure(types: types)
+    }
+    
     class public func startBackgroundDeliveryData(){
         instance.infrastructure.startBackgroundDeliveryData()
     }
@@ -78,11 +81,4 @@ extension CKApp{
     class public func getHealthPermision(completion: @escaping (Result<Bool, Error>) -> Void) {
         instance.infrastructure.getHealthPermission(completion: completion)
     }
-//    func onDataCollected(data:[HKSample]){
-//     // TODO: Send Data
-//        CKApp.sendData(route: "/studies/com.alternova.example/users/ycgo26IN3aR8dZ6D0fvIonteoMe2/surveys/testSurvey", data: data, params: ["testin11","testingResult"]){ success, error in
-//            print("Oncomplete send")
-//        }
-//        print("Data Collected \(data)")
-//    }
 }
