@@ -29,9 +29,6 @@ extension CKDelivery: CKDeliveryDelegate{
         case .hkdata:
             sendHealthKit(file, package, onCompletion)
             break
-        case .sensorData:
-            sendSensorData(file, package, onCompletion)
-            break
         case .metricsData:
             sendMetricsData(file, package, onCompletion)
             break;

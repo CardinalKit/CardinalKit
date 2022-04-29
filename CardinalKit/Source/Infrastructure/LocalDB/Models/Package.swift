@@ -8,24 +8,24 @@
 import Foundation
 
 public enum PackageType: String {
-    case sensorData = "SENSOR_DATA"
-    case snapshot = "SNAPSHOT"
+//    case sensorData = "SENSOR_DATA"
+//    case snapshot = "SNAPSHOT"
     case hkdata = "HKDATA"
-    case hkdataAggregate = "HKDATA_AGGREGATE"
+//    case hkdataAggregate = "HKDATA_AGGREGATE"
     case metricsData = "HKDATA_METRICS"
     
-    static let debuggable: [PackageType] = [.sensorData, .hkdata]
+    static let debuggable: [PackageType] = [.hkdata]
     
     public var description: String {
         switch self {
-        case .sensorData:
-            return "6MWT and Open Walk"
-        case .snapshot:
-            return "Filesystem snapshot reports"
+//        case .sensorData:
+//            return "6MWT and Open Walk"
+//        case .snapshot:
+//            return "Filesystem snapshot reports"
         case .hkdata:
             return "Dump of tracked data from healthkit"
-        case .hkdataAggregate:
-            return "Aggregate summary per day"
+//        case .hkdataAggregate:
+//            return "Aggregate summary per day"
         case .metricsData:
             return "metrics data"
         }
@@ -88,26 +88,3 @@ public class Package: NSObject {
     }
     
 }
-
-extension Package {
-    
-    func route() -> String? {
-//        return CKApp.instance.options.networkRouteDelegate?.getAPIRoute(type: self.type)
-        // TODO: --
-        return ""
-    }
-    
-    func routeAsURL() -> URL? {
-        guard let route = route() else {
-            return nil
-        }
-        
-        return URL(string: route)
-    }
-
-    /*func route() -> APIRoute {
-        return APIRoute.route(for: self.type)
-    }*/
-    
-}
-

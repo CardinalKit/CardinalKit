@@ -7,6 +7,7 @@
 
 import HealthKit
 import ResearchKit
+import CardinalKit
 
 class CKHealthDataStep: ORKInstructionStep {
     
@@ -44,9 +45,9 @@ class CKHealthDataStepViewController: ORKInstructionStepViewController {
      Relies on a `CKHealthDataStep` instance as `self.step`.
     */
     override func goForward() {
-        let manager = CKHealthKitManager.shared
-        manager.getHealthAuthorization() { _,_ in
+        CKApp.getHealthPermision{ succes in
             OperationQueue.main.addOperation {
+                CKApp.startBackgroundDeliveryData()
                 super.goForward()
             }
         }

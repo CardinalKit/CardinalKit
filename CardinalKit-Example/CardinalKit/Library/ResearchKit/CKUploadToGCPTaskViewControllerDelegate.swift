@@ -100,7 +100,7 @@ class CKUploadToGCPTaskViewControllerDelegate : NSObject, ORKTaskViewControllerD
         if  let collection = result["identifier"] as? String,
             let taskUUID = result["taskRunUUID"] as? String {
             
-            try CKSendHelper.sendToCloudStorage(files, collection: collection, withIdentifier: taskUUID)
+//            try CKSendHelper.sendToCloudStorage(files, collection: collection, withIdentifier: taskUUID)
         }
     }
     

@@ -26,6 +26,7 @@ extension AppDelegate {
 //        options.networkDeliveryDelegate = CKAppNetworkManager()
 //        options.networkReceiverDelegate = CKAppNetworkManager()
         CKApp.configure(options)
+    
 //        CKApp.startBackgroundDeliveryData()
         
 //        CKApp.collectData(fromDate: Date().dayByAdding(-10)!, toDate: Date())
@@ -33,14 +34,14 @@ extension AppDelegate {
         // (3) if we have already logged in
         if CKStudyUser.shared.isLoggedIn {
             CKStudyUser.shared.save()
-            
-            // (4) then start the requested HK data collection (if any).
-            let manager = CKHealthKitManager.shared
-            manager.getHealthAuthorization { (success, error) in
-                if let error = error {
-                    print(error)
-                }
-            }
+            CKApp.startBackgroundDeliveryData()
+//            // (4) then start the requested HK data collection (if any).
+//            let manager = CKHealthKitManager.shared
+//            manager.getHealthAuthorization { (success, error) in
+//                if let error = error {
+//                    print(error)
+//                }
+//            }
         }
         CKStudyUser.shared.save()
     }

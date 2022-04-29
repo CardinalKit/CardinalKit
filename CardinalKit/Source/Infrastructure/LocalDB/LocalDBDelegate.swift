@@ -15,4 +15,5 @@ public protocol CKLocalDBDelegate{
     func getNetworkItem(params: [String : AnyObject]) -> NetworkRequestObject?
     func saveNetworkItem(item:NetworkRequestObject)
     func deleteNetworkItem()
+    func getNetworkItemsByFilter(filterQuery:String?) -> [NetworkRequestObject] 
 }

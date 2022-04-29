@@ -8,10 +8,6 @@
 import Foundation
 import RealmSwift
 
-
-
-
-
 class RealmManager :CKLocalDBDelegate{
     
     // Params expected Datatype
@@ -41,7 +37,11 @@ class RealmManager :CKLocalDBDelegate{
     }
     
     func saveLastSyncItem(item: DateLastSyncObject) {
-        
+        let realmData = RealmTraductors.TransformInRealmObject(fromDateLastSyncObject: item)
+        let realm = try! Realm()
+        try! realm.write {
+            realm.add(realmData)
+        }
     }
     
     func deleteLastSyncitem() {
@@ -49,16 +49,54 @@ class RealmManager :CKLocalDBDelegate{
     }
     
     func getNetworkItem(params: [String : AnyObject]) -> NetworkRequestObject? {
+//        let realm = try! Realm()
+        
+    
         return nil
         
     }
     
     func saveNetworkItem(item: NetworkRequestObject) {
+        let realmData = RealmTraductors.TransformInRealmObject(fromNetwortRequestObject: item)
+        let realm = try! Realm()
+        // Review if item previously exist or is new
+        
+        let realmObjects = realm.objects(NetworkRequestRealmObject.self).filter("id == \(item.id)")
+        if realmObjects.count > 0 {
+            try! realm.write {
+                realm.add(realmData, update: .modified)
+//                realm.add(realmData)
+            }
+        }
+        else{
+            try! realm.write {
+    //            realm.add(realmData, update: .modified)
+                realm.add(realmData)
+            }
+        }
+        
         
     }
     
     func deleteNetworkItem() {
         
+    }
+    
+    func getNetworkItemsByFilter(filterQuery:String?) -> [NetworkRequestObject] {
+        
+        let realm = try! Realm()
+        var realmObjects = realm.objects(NetworkRequestRealmObject.self)
+        if let filterQuery = filterQuery {
+            realmObjects = realmObjects.filter(filterQuery)
+        }
+        guard !realmObjects.isEmpty else {
+            return []
+        }
+        var result:[NetworkRequestObject] = []
+        for object in realmObjects {
+            result.append(RealmTraductors.TransformInObject(fromRealmObject: object))
+        }
+        return result
     }
     
     

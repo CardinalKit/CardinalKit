@@ -9,9 +9,14 @@ import Foundation
 import RealmSwift
 
 class DatesLastSyncRealmObject: Object {
+    @objc dynamic var id:String = ""
     @objc dynamic var dataType: String = ""
     @objc dynamic var lastSyncDate: Date = Date()
     @objc dynamic var device: String = ""
+   
+    override class func primaryKey() -> String? {
+        return "id"
+    }
 }
 
 class NetworkRequestRealmObject: Object{
@@ -40,6 +45,7 @@ class RealmTraductors{
         realmObject.dataType = object.dataType
         realmObject.lastSyncDate = object.lastSyncDate
         realmObject.device = object.device
+        realmObject.id = "\(object.dataType)-\(object.device)"
         
         return realmObject
     }
@@ -68,17 +74,16 @@ class RealmTraductors{
         return realmObject
     }
     
-    class func TransformInRealmObject(fromRealmObject realmObject:NetworkRequestRealmObject) -> NetworkRequestObject{
-        return NetworkRequestObject(
-            id: realmObject.id,
-            fileName: realmObject.fileName,
-            fileType: realmObject.fileType,
-            createdAt: realmObject.createdAt,
-            sentOn: realmObject.sentOn,
-            processing: realmObject.processing,
-            lastAttempt: realmObject.lastAttempt,
-            attempts: realmObject.attempts
-        )
+    class func TransformInObject(fromRealmObject realmObject:NetworkRequestRealmObject) -> NetworkRequestObject{
+        let networkRequest = NetworkRequestObject(id: realmObject.id)
+        networkRequest.fileName = realmObject.fileName
+        networkRequest.fileType = realmObject.fileType
+        networkRequest.createdAt = realmObject.createdAt
+        networkRequest.sentOn = realmObject.sentOn
+        networkRequest.processing = realmObject.processing
+        networkRequest.lastAttempt = realmObject.lastAttempt
+        networkRequest.attempts = realmObject.attempts
+        return networkRequest
     }
     
     
