@@ -9,9 +9,9 @@ import Foundation
 
 
 public struct CKAppOptions {
-    internal var networkDeliveryDelegate : CKDeliveryDelegate?
-    internal var networkReceiverDelegate : CKReceiverDelegate?
-    internal var localDBDelegate: CKLocalDBDelegate?
+    public var networkDeliveryDelegate : CKDeliveryDelegate?
+    public var networkReceiverDelegate : CKReceiverDelegate?
+    public var localDBDelegate: CKLocalDBDelegate?
     
     public init() {
         networkDeliveryDelegate = CKDelivery()

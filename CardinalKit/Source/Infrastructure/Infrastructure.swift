@@ -14,7 +14,7 @@ internal class Infrastructure {
     // Permissions
     var healthPermissionProvider:Healthpermissions
     // OpenMHealthSerializer
-    var mhSerializer:CKOpenMHSerializer
+    var mhSerializer:OpenMHSerializer
     //
     
     
