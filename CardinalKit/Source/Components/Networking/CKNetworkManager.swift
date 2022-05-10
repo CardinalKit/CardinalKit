@@ -101,8 +101,8 @@ class CKAppNetworkManager: CKAPIDeliveryDelegate, CKAPIReceiverDelegate {
         case .hkdata:
             sendHealthKit(file, package, onCompletion)
             break
-        case .sensorData:
-            sendSensorData(file, package, onCompletion)
+//        case .sensorData:
+//            sendSensorData(file, package, onCompletion)
             break
         case .metricsData:
             sendMetricsData(file, package, onCompletion)
