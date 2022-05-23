@@ -17,7 +17,9 @@ platform :ios do
 
   desc "Build app"
   lane :build do
-    cocoapods
+    cocoapods(
+      podfile: "./CardinalKit-Example/"
+    )
     build_app
   end
 
