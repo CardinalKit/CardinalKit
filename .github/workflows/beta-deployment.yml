@@ -1,19 +1,31 @@
-name: Build
+#
+# This source file is part of the CardinalKit open source project
+#
+# SPDX-FileCopyrightText: 2022 Paul Schmiedmayer <paul.schmiedmayer@tum.de>
+#
+# SPDX-License-Identifier: MIT
+#
+
+name: Beta Deployment
 
 on:
   push:
     branches:
       - main
-  pull_request:
   workflow_dispatch:
 
 jobs:
-  build:
-    name: Build
+  buildandtest:
+    name: Build and Test
+    uses: ./.github/workflows/build.yml
+    secrets: inherit
+  iosapptestflightdeployment:
+    name: iOS App TestFlight Deployment
     runs-on: macos-12
     defaults:
       run:
         working-directory: CardinalKit-Example
+    needs: buildandtest
     steps:
     - uses: actions/checkout@v3
     - uses: maxim-lobanov/setup-xcode@v1
@@ -52,4 +64,9 @@ jobs:
         mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
         cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
     - name: Build and test
-      run: bundler install && bundle exec fastlane test
+      run: bundler install && bundle exec fastlane beta
+      env:
+        APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+        APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+        APP_STORE_CONNECT_API_KEY_BASE64: ${{ secrets.APP_STORE_CONNECT_API_KEY_BASE64 }}
+        APPLE_ID: ${{ secrets.APPLE_ID }}
