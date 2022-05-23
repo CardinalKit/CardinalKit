@@ -9,12 +9,6 @@
 default_platform(:ios)
 
 platform :ios do
-  desc "Build and test"
-  lane :test do
-    cocoapods
-    run_tests
-  end
-
   desc "Build app"
   lane :build do
     cocoapods(
@@ -23,19 +17,14 @@ platform :ios do
     build_app
   end
 
-  desc "Sign in to the App Store Connect API"
-  lane :signin do
+  desc "Publish a beta release to internal TestFlight testers"
+  lane :beta do
     app_store_connect_api_key(
       key_id: ENV["APP_STORE_CONNECT_API_KEY_ID"],
       issuer_id: ENV["APP_STORE_CONNECT_ISSUER_ID"],
       key_content: ENV["APP_STORE_CONNECT_API_KEY_BASE64"],
       is_key_content_base64: true
     )
-  end
-
-  desc "Publish a beta release to internal TestFlight testers"
-  lane :beta do
-    signin
     increment_build_number({
       build_number: latest_testflight_build_number + 1,
       xcodeproj: "App/App.xcodeproj"

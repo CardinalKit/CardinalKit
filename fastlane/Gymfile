@@ -14,7 +14,7 @@
 
 scheme("CardinalKit-Example")
 
-project("CardinalKit-Example/CardinalKit.xcworkspace")
+workspace("CardinalKit-Example/CardinalKit.xcworkspace")
 
 export_options(
   {
