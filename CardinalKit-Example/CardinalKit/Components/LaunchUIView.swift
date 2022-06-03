@@ -9,8 +9,6 @@
 import SwiftUI
 import UIKit
 import ResearchKit
-import CardinalKit
-import Firebase
 
 struct LaunchUIView: View {
     

@@ -9,6 +9,7 @@ import Foundation
 import CareKit
 import ResearchKit
 import Firebase
+import CardinalKit
 
 class CKUploadToGCPTaskViewControllerDelegate : NSObject, ORKTaskViewControllerDelegate {
         
@@ -82,7 +83,14 @@ class CKUploadToGCPTaskViewControllerDelegate : NSObject, ORKTaskViewControllerD
     func CKSendJSON(_ json: [String:Any]) throws {
         let identifier = (json["identifier"] as? String) ?? UUID().uuidString
             
-        try CKSendHelper.appendResearchKitResultToFirestore(json: json, collection: Constants.dataBucketSurveys, withIdentifier: identifier, onCompletion: nil)
+        guard let authCollection = CKStudyUser.shared.authCollection,
+                   let userId = CKStudyUser.shared.currentUser?.uid
+             else{
+                 return
+             }
+             let route = "\(authCollection)\(Constants.dataBucketSurveys)/\(identifier)"
+             
+             CKApp.sendData(route: route, data: ["results": FieldValue.arrayUnion([json])], params: ["userId":"\(userId)","merge":true])       
     }
     
     /**
@@ -92,7 +100,7 @@ class CKUploadToGCPTaskViewControllerDelegate : NSObject, ORKTaskViewControllerD
         if  let collection = result["identifier"] as? String,
             let taskUUID = result["taskRunUUID"] as? String {
             
-            try CKSendHelper.sendToCloudStorage(files, collection: collection, withIdentifier: taskUUID)
+//            try CKSendHelper.sendToCloudStorage(files, collection: collection, withIdentifier: taskUUID)
         }
     }
     

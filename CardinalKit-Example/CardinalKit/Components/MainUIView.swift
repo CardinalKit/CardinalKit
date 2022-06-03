@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import CardinalKit
 
 struct MainUIView: View {
     
@@ -18,7 +19,7 @@ struct MainUIView: View {
     
     init() {
         self.color = Color(config.readColor(query: "Primary Color"))
-        
+        CKApp.collectData(fromDate: Date().dayByAdding(-10)!, toDate: Date())
     }
     
     var body: some View {

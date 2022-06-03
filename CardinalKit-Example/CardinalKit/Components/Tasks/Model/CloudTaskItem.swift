@@ -52,6 +52,6 @@ struct CloudTaskItem: Hashable {
         })
         
         
-        return AnyView(CKTaskViewController(tasks: JsonToSurvey.shared.GetSurvey(from: questionAsObj,identifier: identifier)))
+        return AnyView(CKTaskViewController(tasks: JsonToSurvey.shared.GetSurvey(from: questionAsObj,identifier: identifier))).ignoresSafeArea()
     }
 }

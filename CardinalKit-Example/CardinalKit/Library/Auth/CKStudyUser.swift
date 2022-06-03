@@ -115,7 +115,7 @@ class CKStudyUser {
             let uid = currentUser?.uid {
             
             CKSession.shared.userId = uid
-            CKSendHelper.createNecessaryDocuments(path:dataBucket)
+//            CKSendHelper.createNecessaryDocuments(path:dataBucket)
             let settings = FirestoreSettings()
             settings.isPersistenceEnabled = false
             let db = Firestore.firestore()

@@ -35,7 +35,6 @@ struct CloudTaskListItemView: View {
             self.showingDetail.toggle()
         }))
         .sheet(isPresented: $showingDetail, onDismiss: {}, content: {
-//                item.action
             item.View()
         })
     }

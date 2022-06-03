@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import Firebase
 import ResearchKit
+import Firebase
 
 
 public class CKReviewConsentDocument: ORKQuestionStep{
