@@ -28,15 +28,16 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
                 
                 let consentDocument = ConsentDocument()
                 signatureResult.apply(to: consentDocument)
-
+                
                 consentDocument.makePDF { (data, error) -> Void in
                     
                     let config = CKPropertyReader(file: "CKConfiguration")
-                        
-                    var docURL = (FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)).last as NSURL?
-                    docURL = docURL?.appendingPathComponent("\(config.read(query: "Consent File Name")).pdf") as NSURL?
+                    let consentFileName = config.read(query: "Consent File Name")
                     
-
+                    var docURL = (FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)).last as NSURL?
+                    docURL = docURL?.appendingPathComponent("\(consentFileName).pdf") as NSURL?
+                    
+                    
                     do {
                         let url = docURL! as URL
                         try data?.write(to: url)
@@ -46,36 +47,19 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
                         let storageRef = storage.reference()
                         
                         if let DocumentCollection = CKStudyUser.shared.authCollection {
-                            let DocumentRef = storageRef.child("\(DocumentCollection)/Consent.pdf")
+                            let DocumentRef = storageRef.child("\(DocumentCollection)/\(consentFileName).pdf")
                             
-                            // Upload the file to the path "images/rivers.jpg"
                             DocumentRef.putFile(from: url, metadata: nil) { metadata, error in
-                              guard let metadata = metadata else {
-                                // Uh-oh, an error occurred!
-                                return
-                              }
-                              // Metadata contains file metadata such as size, content-type.
-//                              let size = metadata.size
-                              // You can also access to download URL after upload.
-                                DocumentRef.downloadURL { (url, error) in
-                                guard let downloadURL = url else {
-                                  // Uh-oh, an error occurred!
-                                  return
+                                if let error = error {
+                                    print(error.localizedDescription)
                                 }
-                              }
                             }
                         }
-                        
-                        
-                        
-
                     } catch let error {
-
                         print(error.localizedDescription)
                     }
                 }
             }
-            
             
             print("Login successful! task: \(taskViewController.task?.identifier ?? "(no ID)")")
             
@@ -95,8 +79,8 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
         if stepViewController.step?.identifier == PasswordlessLoginStep.identifier {
             
             /* **************************************************************
-            * When the login step appears, asking for the patient's email
-            **************************************************************/
+             * When the login step appears, asking for the patient's email
+             **************************************************************/
             if let _ = CKStudyUser.shared.currentUser?.email {
                 // if we already have an email, go forward and continue.
                 DispatchQueue.main.async {
@@ -119,12 +103,12 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
                 // good — we have an email!
             } else {
                 let alert = UIAlertController(title: nil, message: "Creating account...", preferredStyle: .alert)
-
+                
                 let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
                 loadingIndicator.hidesWhenStopped = true
                 loadingIndicator.style = UIActivityIndicatorView.Style.medium
                 loadingIndicator.startAnimating();
-
+                
                 alert.view.addSubview(loadingIndicator)
                 taskViewController.present(alert, animated: false, completion: nil)
                 
@@ -136,18 +120,18 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
                                 if error != nil {
                                     alert.dismiss(animated: false, completion: nil)
                                     if let errCode = AuthErrorCode(rawValue: error!._code) {
-
+                                        
                                         switch errCode {
-                                            default:
-                                                let alert = UIAlertController(title: "Registration Error!", message: error?.localizedDescription, preferredStyle: .alert)
-                                                alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-
-                                                taskViewController.present(alert, animated: false)
+                                        default:
+                                            let alert = UIAlertController(title: "Registration Error!", message: error?.localizedDescription, preferredStyle: .alert)
+                                            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+                                            
+                                            taskViewController.present(alert, animated: false)
                                         }
                                     }
                                     
                                     stepViewController.goBackward()
-
+                                    
                                 } else {
                                     alert.dismiss(animated: false, completion: nil)
                                     print("Created user!")
@@ -161,8 +145,8 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
         } else if stepViewController.step?.identifier == LoginCustomWaitStep.identifier {
             
             /* **************************************************************
-            * When the email verification step appears, send email in background!
-            **************************************************************/
+             * When the email verification step appears, send email in background!
+             **************************************************************/
             
             let stepResult = taskViewController.result.stepResult(forStepIdentifier: PasswordlessLoginStep.identifier)
             if let emailRes = stepResult?.results?.first as? ORKTextQuestionResult, let email = emailRes.textAnswer {
@@ -196,7 +180,7 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
         // Overriding the view controller of an ORKStep
         // lets us run our own code on top of what
         // ResearchKit already provides!
-
+        
         switch step {
         case is CKHealthDataStep:
             // this step lets us run custom logic to ask for
