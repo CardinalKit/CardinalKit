@@ -12,6 +12,20 @@ import CardinalKit
 
 class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
     
+    public func taskViewController(_ taskViewController: ORKTaskViewController, shouldPresent step: ORKStep) -> Bool {
+        
+        // Only allow users to continue the onboarding process if they consent
+        if let consentStepResult = taskViewController.result.stepResult(forStepIdentifier: "ConsentReviewStep")?.results,
+           let signatureResult = consentStepResult[0] as? ORKConsentSignatureResult {
+            if !signatureResult.consented {
+                taskViewController.dismiss(animated: false, completion: nil)
+                return false
+            }
+        }
+        
+        return true
+    }
+    
     public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
         let storage = Storage.storage()
         switch reason {
