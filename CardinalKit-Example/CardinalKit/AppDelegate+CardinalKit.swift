@@ -19,20 +19,15 @@ extension AppDelegate {
     */
     func CKAppLaunch() {
         
-        // (1) lock the app and prompt for passcode before continuing
-        // CKLockApp()
-        
-        // (2) setup the CardinalKit SDK
+        // (1) setup the CardinalKit SDK
         var options = CKAppOptions()
-//        options.networkDeliveryDelegate = CKAppNetworkManager()
-//        options.networkReceiverDelegate = CKAppNetworkManager()
         CKApp.configure(options)
         
-        // (3) if we have already logged in
+        // (2) if we have already logged in
         if CKStudyUser.shared.isLoggedIn {
             CKStudyUser.shared.save()
             
-            // (4) then start the requested HK data collection (if any).
+            // (3) then start the requested HK data collection (if any).
             let manager = CKHealthKitManager.shared
             manager.getHealthAuthorization { (success, error) in
                 if let error = error {
