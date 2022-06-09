@@ -36,7 +36,7 @@ extension CKDelivery: CKDeliveryDelegate{
                     continue //no file exists
                 }
                 if isDir.boolValue {
-                    sendToCloud(files: file, route: route, firestoreRoute: firestoreRoute, onCompletion: onCompletion)
+                    sendToCloud(files: file, route: route,alsoSendToFirestore: alsoSendToFirestore, firestoreRoute: firestoreRoute, onCompletion: onCompletion)
                     //cannot send a directory, recursively iterate into it
                     continue
                 }
@@ -48,7 +48,8 @@ extension CKDelivery: CKDeliveryDelegate{
                     
                     if let jsonArray = try JSONSerialization.jsonObject(with: data, options : .allowFragments) as? Dictionary<String,AnyObject>
                     {
-                        send(route: firestoreRoute!, data: jsonArray, params: nil, onCompletion: nil)
+                        let dataType:String = file.lastPathComponent.contains("accel") ? "Acelerometer" : file.lastPathComponent.contains("deviceMotion") ? "DeviceMotion" : "Other"
+                        send(route: "\(firestoreRoute!)/\(dataType)/\(file.lastPathComponent)", data: jsonArray, params: nil, onCompletion: nil)
                     } else {
                         print("bad json")
                     }

@@ -21,7 +21,7 @@ class FirebaseManager{
     
     func sendToCloudStorage (file:URL,route:String){
         let storageRef = Storage.storage().reference()
-        let ref = storageRef.child(route)
+        let ref = storageRef.child("\(route)/\(file.lastPathComponent)")
         let uploadTask = ref.putFile(from: file, metadata: nil)
         
         uploadTask.observe(.success) { snapshot in
