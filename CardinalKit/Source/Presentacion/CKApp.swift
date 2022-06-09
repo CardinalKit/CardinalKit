@@ -61,9 +61,9 @@ public class CKApp{
         }
     }
     
-    class public func sendDataToCloudStorafe(route: String, files: URL, onCompletion: @escaping ((Bool, Error)) -> Void){
+    class public func sendDataToCloudStorafe(route: String, files: URL, alsoSendToFirestore: Bool, firestoreRoute:String?,onCompletion: @escaping (Bool) -> Void){
         if let delegate = CKApp.instance.options.networkDeliveryDelegate{
-            delegate.send(file: <#T##URL#>, package: <#T##Package#>, onCompletion: <#T##(Bool) -> Void#>)
+            delegate.sendToCloud(files: files, route: route, alsoSendToFirestore: alsoSendToFirestore, firestoreRoute: firestoreRoute, onCompletion: onCompletion)
         }
     }
     
