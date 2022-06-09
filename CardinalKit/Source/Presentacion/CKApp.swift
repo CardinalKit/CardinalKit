@@ -61,6 +61,12 @@ public class CKApp{
         }
     }
     
+    class public func sendDataToCloudStorafe(route: String, files: URL, onCompletion: @escaping ((Bool, Error)) -> Void){
+        if let delegate = CKApp.instance.options.networkDeliveryDelegate{
+            delegate.send(file: <#T##URL#>, package: <#T##Package#>, onCompletion: <#T##(Bool) -> Void#>)
+        }
+    }
+    
 }
 
 // HealthKit Functions

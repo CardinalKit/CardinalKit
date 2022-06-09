@@ -8,6 +8,7 @@
 import Foundation
 import FirebaseFirestore
 import FirebaseAuth
+import FirebaseStorage
 
 class FirebaseManager{
     private func firestoreDb()->Firestore{
@@ -16,6 +17,20 @@ class FirebaseManager{
         let db = Firestore.firestore()
         db.settings = settings
         return db
+    }
+    
+    func sendToCloudStorage (file:URL,route:String){
+        let storageRef = Storage.storage().reference()
+        let ref = storageRef.child(route)
+        let uploadTask = ref.putFile(from: file, metadata: nil)
+        
+        uploadTask.observe(.success) { snapshot in
+            print("[FirebaseManager] sendToCloudStorage() - file uploaded successfully!")
+        }
+        
+        uploadTask.observe(.failure) { snapshot in
+            print("[FirebaseManager] sendToCloudStorage() - error uploading file!")
+        }
     }
     
     func send(file: URL, package: Package,authPath:String,identifier:String, onCompletion: @escaping (Bool) -> Void) {

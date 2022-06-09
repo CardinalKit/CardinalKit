@@ -12,6 +12,7 @@ import FirebaseCore
 public protocol CKDeliveryDelegate {
     func send(file: URL, package: Package, onCompletion: @escaping (Bool) -> Void)
     func send(route: String, data: Any, params: Any?, onCompletion:((Bool, Error?) -> Void)?)
+    func sendToCloud(files:URL, route: String, alsoSendToFirestore:Bool, firestoreRoute:String?, onCompletion: @escaping (Bool) -> Void)
     func configure()
 }
 
@@ -24,6 +25,42 @@ public class CKDelivery{
 }
 
 extension CKDelivery: CKDeliveryDelegate{
+    public func sendToCloud(files: URL, route: String, alsoSendToFirestore:Bool = false, firestoreRoute:String?,onCompletion: @escaping (Bool) -> Void){
+        do {
+            let fileManager = FileManager.default
+            let fileURLs = try fileManager.contentsOfDirectory(at: files, includingPropertiesForKeys: nil)
+            
+            for file in fileURLs {
+                var isDir : ObjCBool = false
+                guard FileManager.default.fileExists(atPath: file.path, isDirectory:&isDir) else {
+                    continue //no file exists
+                }
+                if isDir.boolValue {
+                    sendToCloud(files: file, route: route, firestoreRoute: firestoreRoute, onCompletion: onCompletion)
+                    //cannot send a directory, recursively iterate into it
+                    continue
+                }
+                firebaseManager.sendToCloudStorage(file: file, route: route)
+                
+                if alsoSendToFirestore{
+                    let contents = try String(contentsOf: file)
+                    let data = contents.data(using: .utf8)!
+                    
+                    if let jsonArray = try JSONSerialization.jsonObject(with: data, options : .allowFragments) as? Dictionary<String,AnyObject>
+                    {
+                        send(route: firestoreRoute!, data: jsonArray, params: nil, onCompletion: nil)
+                    } else {
+                        print("bad json")
+                    }
+                }
+            }
+        }
+        catch{
+            
+        }
+        
+    }
+    
     public func send(file: URL, package: Package, onCompletion: @escaping (Bool) -> Void) {
         switch package.type {
         case .hkdata:
