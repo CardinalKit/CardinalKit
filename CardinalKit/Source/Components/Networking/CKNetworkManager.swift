@@ -103,7 +103,7 @@ class CKAppNetworkManager: CKAPIDeliveryDelegate, CKAPIReceiverDelegate {
             break
 //        case .sensorData:
 //            sendSensorData(file, package, onCompletion)
-            break
+//            break
         case .metricsData:
             sendMetricsData(file, package, onCompletion)
             break;

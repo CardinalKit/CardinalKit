@@ -72,7 +72,13 @@ internal class Infrastructure {
                 let sampleToJson = try JSONSerialization.data(withJSONObject: sample, options: [])
                 do {
                     // TODO: Add package name
-                    let package = try Package("PackageName", type: .hkdata, identifier: "identifier", data: sampleToJson)
+                    // Date + Type + UUID
+                    var type = "HKData"
+                    if let ntype = data.first?.sampleType.identifier{
+                        type = ntype
+                    }
+                    let packageName = "\(Date().stringWithFormat())-\(type)-\(UUID())"
+                    let package = try Package(packageName, type: .hkdata, identifier: packageName, data: sampleToJson)
                     let networkObject = NetworkRequestObject.findOrCreateNetworkRequest(package)
                     try networkObject.perform()
                 }
@@ -80,22 +86,6 @@ internal class Infrastructure {
                     VError("Unable to process package %{public}@", error.localizedDescription)
                 }
                 
-            }
-            
-            
-            if let delegate = CKApp.instance.options.networkDeliveryDelegate{
-                if let authPath = CKStudyUser.shared.authCollection{
-                    var index=0
-                    for sample in samplesArray {
-                        let internalName = "packageName"+"\(index)"
-                        index = index+1
-                        // TODO: Save data Locally and then send
-                        
-                        delegate.send(route: "\(authPath)\(Constants.Firebase.dataBucketHealthKit)/\(internalName)", data: sample, params: nil){ success, error in
-                            print("sended")
-                        }
-                    }
-                }
             }
         }
         catch{

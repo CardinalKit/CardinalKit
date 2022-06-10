@@ -39,9 +39,20 @@ class RealmManager :CKLocalDBDelegate{
     func saveLastSyncItem(item: DateLastSyncObject) {
         let realmData = RealmTraductors.TransformInRealmObject(fromDateLastSyncObject: item)
         let realm = try! Realm()
-        try! realm.write {
-            realm.add(realmData)
+        
+        let realmObjects = realm.objects(DatesLastSyncRealmObject.self).filter("id == '\(realmData.id)'")
+        if realmObjects.count > 0 {
+            try! realm.write {
+                realm.add(realmData, update: .modified)
+            }
         }
+        else{
+            try! realm.write {
+                realm.add(realmData)
+            }
+        }
+        
+        
     }
     
     func deleteLastSyncitem() {
@@ -65,12 +76,10 @@ class RealmManager :CKLocalDBDelegate{
         if realmObjects.count > 0 {
             try! realm.write {
                 realm.add(realmData, update: .modified)
-//                realm.add(realmData)
             }
         }
         else{
             try! realm.write {
-    //            realm.add(realmData, update: .modified)
                 realm.add(realmData)
             }
         }
