@@ -11,13 +11,15 @@ import CareKitStore
 
 class CKCareKitManager: NSObject {
     
-    let coreDataStore = OCKStore(name: "CKCareKitStore", type: .onDisk, remote: CKCareKitRemoteSyncWithFirestore())
-    let healthKitStore = OCKHealthKitPassthroughStore(name: "CKCareKitHealthKitStore", type: .onDisk)
+    let coreDataStore = OCKStore(name: "CKCareKitStore", type: .onDisk(protection: .complete), remote: CKCareKitRemoteSyncWithFirestore())
+   
+    let healthKitStore:OCKHealthKitPassthroughStore
     private(set) var synchronizedStoreManager: OCKSynchronizedStoreManager!
     
     static let shared = CKCareKitManager()
     
     override init() {
+        healthKitStore = OCKHealthKitPassthroughStore(store: coreDataStore)
         super.init()
         initStore()
         let coordinator = OCKStoreCoordinator()

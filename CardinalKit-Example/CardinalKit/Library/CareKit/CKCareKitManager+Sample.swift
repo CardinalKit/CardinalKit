@@ -110,12 +110,9 @@ internal extension OCKStore {
                             }
                             var targetValue:[OCKOutcomeValue] = [OCKOutcomeValue]()
                             if let targetValues = element["targetValues"] as? [[String:Any]]{
-                                for target in targetValues{
-                                    if let identifier = target["groupIdentifier"] as? String{
-                                        var come = OCKOutcomeValue(false, units: nil)
-                                            come.groupIdentifier=identifier
-                                        targetValue.append(come)
-                                    }
+                                for _ in targetValues{
+                                    let come = OCKOutcomeValue(false, units: nil)
+                                    targetValue.append(come)
                                 }
                             }
                             scheduleElements.append(OCKScheduleElement(start: startDate, end: endDate, interval: intervalDate, text: element["text"] as? String, targetValues: targetValue, duration: durationElement))
@@ -130,6 +127,7 @@ internal extension OCKStore {
                             uuid=UUID(uuidString: _uuid)
                         }
                         var task = OCKTask(id: id, title: payload["title"] as? String, carePlanUUID: uuid, schedule: itemSchedule)
+                        task.groupIdentifier = payload["groupIdentifier"] as? String
                         if let impactsAdherence = payload["impactsAdherence"] as? Bool{
                             task.impactsAdherence = impactsAdherence
                         }

@@ -92,9 +92,7 @@ extension AppDelegate {
     */
     fileprivate func cleanIfFirstRun() {
         if !UserDefaults.standard.bool(forKey: Constants.prefFirstRunWasMarked) {
-            if ORKPasscodeViewController.isPasscodeStoredInKeychain() {
-                ORKPasscodeViewController.removePasscodeFromKeychain()
-            }
+            ORKPasscodeViewController.removePasscodeFromKeychain()
 //            CKApp.signOut()
             // TODO: signOut
             //SignOut
