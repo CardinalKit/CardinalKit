@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'CardinalKit'
-  s.version          = '2.0.0'
+  s.version          = '2.1.0'
   s.summary          = 'https://cardinalkit.org/'
 
 # This description is used to generate tags and improve search results.
@@ -28,7 +28,7 @@ TODO: Add long description of the pod here.
   s.source           = { :git => 'https://github.com/CardinalKit/CardinalKit.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://cardinalkit.org/'
 
-  s.ios.deployment_target = '13.0'
+  s.ios.deployment_target = '14.3'
 
   s.source_files = 'CardinalKit/Source/**/*'
   
