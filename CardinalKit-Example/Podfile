@@ -4,7 +4,7 @@ target 'CardinalKit_Example' do
   pod 'CardinalKit', :path => '../'
   
   # CK Sample Pods
-  pod 'ResearchKit', :git => 'https://github.com/ResearchKit/ResearchKit.git', :branch => 'main'
+  pod 'ResearchKit', :git => 'https://github.com/ResearchKit/ResearchKit.git', :commit => '90c68d0d195f23fff1f618a9a4ffa518be9ac845'
   pod 'Granola', :git => 'https://github.com/CardinalKit/Granola.git', :branch => 'main'
   
   pod 'Firebase/Firestore'
