@@ -69,9 +69,9 @@ public class CKApp {
         }
     }
     
-    class public func getHealthAuthorizaton(forTypes typesToCollect:Set<HKSampleType>, _ completion: @escaping (_ success: Bool, _ error: Error?) -> Void)
+    class public func getHealthAuthorization(forTypes typesToCollect:Set<HKSampleType>, _ completion: @escaping (_ success: Bool, _ error: Error?) -> Void)
     {
-        CKActivityManager.shared.getHealthAuthorizaton(forTypes: typesToCollect) {(success, error) in
+        CKActivityManager.shared.getHealthAuthorization(forTypes: typesToCollect) {(success, error) in
             completion(success, error)
             
         }

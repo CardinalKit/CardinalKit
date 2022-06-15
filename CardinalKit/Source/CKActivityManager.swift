@@ -23,7 +23,7 @@ public class CKActivityManager : NSObject {
             return
         }
         
-        getHealthAuthorizaton(forTypes: self.typesToCollect) { [weak self] (success, error) in
+        getHealthAuthorization(forTypes: self.typesToCollect) { [weak self] (success, error) in
             if (success) {
                 self?.startHealthKitCollectionInBackground(withFrequency: .hourly) // TODO: get last freq
             }
@@ -34,7 +34,7 @@ public class CKActivityManager : NSObject {
         DownloadManager.shared.fetchData(route: route, onCompletion: onCompletion)
     }
     
-    public func getHealthAuthorizaton(forTypes typesToCollect:Set<HKSampleType>, _ completion: @escaping (_ success: Bool, _ error: Error?) -> Void) {
+    public func getHealthAuthorization(forTypes typesToCollect:Set<HKSampleType>, _ completion: @escaping (_ success: Bool, _ error: Error?) -> Void) {
         if (typesToCollect.isEmpty){
            self.typesToCollect = initWithAllTypes()
        }

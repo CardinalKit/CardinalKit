@@ -63,11 +63,7 @@ class CKAppNetworkManager: CKAPIDeliveryDelegate, CKAPIReceiverDelegate {
                     onCompletion?(true, nil)
                 }
             })
-    //            if overwriteRemote {
-    //                ref.updateData(json, completion: completion)
-    //            } else {
-    //                ref.updateData(json, completion: completion)
-    //            }
+
             print("[appendCareKitArrayInFirestore] updating revisions with overwriteRemote")
         }
         
@@ -166,24 +162,6 @@ class CKAppNetworkManager: CKAPIDeliveryDelegate, CKAPIReceiverDelegate {
         db.settings = settings
         return db
     }
-//    func downloadSurveys(){
-//
-//        guard let authPath = CKStudyUser.shared.authCollection else {
-//            return
-//        }
-//
-//
-//        let db = Firestore.firestore()
-////        let docRef = db.collection("cities").document("SF")
-////        docRef.getDocument { (document, error) in
-////            if let document = document, document.exists {
-////                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-////                print("Document data: \(dataDescription)")
-////            } else {
-////                print("Document does not exist")
-////            }
-////        }
-//    }
     
 }
 

@@ -25,7 +25,7 @@ class CKHealthKitManager : NSObject {
     func getHealthAuthorization(_ completion: @escaping (_ success: Bool, _ error: Error?) -> Void) {
         
         // handle authorization from the OS
-        CKApp.getHealthAuthorizaton(forTypes: hkTypesToReadInBackground) { [weak self] (success, error) in
+        CKApp.getHealthAuthorization(forTypes: hkTypesToReadInBackground) { [weak self] (success, error) in
             if (success) {
                 let frequency = self?.config.read(query: "Background Read Frequency")
                 
@@ -46,7 +46,7 @@ class CKHealthKitManager : NSObject {
     
     func collectAllTypes(_ completion: @escaping (_ success: Bool, _ error: Error?) -> Void) {
         // handle authorization from the OS
-        CKApp.getHealthAuthorizaton(forTypes: hkTypesToReadInBackground) {(success, error) in
+        CKApp.getHealthAuthorization(forTypes: hkTypesToReadInBackground) {(success, error) in
             DispatchQueue.main.async {
                 if (success) {
                     CKActivityManager.shared.collectAllDataBetweenSpecificDates(fromDate: Date().dayByAdding(-10), completion)
