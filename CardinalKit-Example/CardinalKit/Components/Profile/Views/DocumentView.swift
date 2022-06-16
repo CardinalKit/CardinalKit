@@ -18,21 +18,24 @@ struct DocumentView: View {
         let storage = Storage.storage()
         let storageRef = storage.reference()
         if let DocumentCollection = CKStudyUser.shared.authCollection {
+            
+            // download consent document from Firebase Cloud Storage and display it to the user
+            
             let config = CKPropertyReader(file: "CKConfiguration")
-            let DocumentRef = storageRef.child("\(DocumentCollection)/Consent.pdf")
-            // Create local filesystem URL
+            let consentFileName = config.read(query: "Consent File Name")
+            let documentRef = storageRef.child("\(DocumentCollection)/\(consentFileName).pdf")
+            
             var docURL = (FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)).last as NSURL?
-            docURL = docURL?.appendingPathComponent("\(config.read(query: "Consent File Name")).pdf") as NSURL?
+            docURL = docURL?.appendingPathComponent("\(consentFileName).pdf") as NSURL?
             let url = docURL! as URL
             self.documentsURL = URL(fileURLWithPath: url.path, isDirectory: false)
             UserDefaults.standard.set(url.path, forKey: "consentFormURL")
-            // Download to the local filesystem
-            let downloadTask = DocumentRef.write(toFile: url) { url, error in
+            
+            let downloadTask = documentRef.write(toFile: url) { url, error in
               if let error = error {
-                // Uh-oh, an error occurred!
-                  print("error \(error)")
+                  print("Error downloading consent document: \(error)")
               } else {
-                  print("download correctly")
+                  print("Consent document downloaded successfully.")
               }
             }
         }
