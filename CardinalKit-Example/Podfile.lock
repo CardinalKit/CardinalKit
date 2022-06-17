@@ -469,7 +469,7 @@ CHECKOUT OPTIONS:
     :commit: 4b6a421bab81bea5fad4b124b0441b3dd2d82c6b
     :git: https://github.com/CardinalKit/Granola.git
   ResearchKit:
-    :commit: 90c68d0d195f23fff1f618a9a4ffa518be9ac845
+    :commit: 2cc8f9e7d504b7953ef1ab77a3f2e7d2516d1895
     :git: https://github.com/ResearchKit/ResearchKit.git
 
 SPEC CHECKSUMS:
@@ -507,11 +507,11 @@ SPEC CHECKSUMS:
   ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
   Realm: e523da9ade306c5ae87e85dc09fdef148d3e1cc1
   RealmSwift: 4f6758c3adbdcc87f7b7777107226532a077f61c
-  ResearchKit: 9d6981b42c8633aa64097f4490be65abf39c350a
+  ResearchKit: 145c6c2a272d313a53ab1dc49d84b0d20dde003a
   SAMKeychain: 483e1c9f32984d50ca961e26818a534283b4cd5c
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
   Zip: 8877eede3dda76bcac281225c20e71c25270774c
 
 PODFILE CHECKSUM: 549c36170930bcd868333a0b59bd5f15026d7e2a
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.11.3
