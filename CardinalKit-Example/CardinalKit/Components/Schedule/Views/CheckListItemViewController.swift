@@ -11,6 +11,8 @@ import CareKit
 import ResearchKit
 import CareKitUI
 import CareKitStore
+import CardinalKit
+import FirebaseFirestore
 
 class CheckListItemViewController: OCKChecklistTaskViewController, ORKTaskViewControllerDelegate{
     
@@ -39,11 +41,11 @@ class CheckListItemViewController: OCKChecklistTaskViewController, ORKTaskViewCo
             let identifier = event.scheduleEvent.element.targetValues[0].groupIdentifier,
             let studyCollection = CKStudyUser.shared.studyCollection
             {
-            let collectionI = "\(collection)/\(identifier)/questions"
-            CKSendHelper.getFromFirestore(authCollection:studyCollection,collection: collectionI, onCompletion: { (documents,error) in
-                guard let documents = documents,
-                     documents.count>0 else {
-                    super.taskView(taskView, didCompleteEvent: isComplete, at: indexPath, sender: sender)
+            let collectionI = "\(studyCollection)\(collection)/\(identifier)/questions"
+            CKApp.requestData(route: collectionI, onCompletion: { result in
+               
+               guard let documents = result as? [DocumentSnapshot],  documents.count>0 else {
+                   super.taskView(taskView, didCompleteEvent: isComplete, at: indexPath, sender: sender)
                    return
                }
                 var objResult = [[String:Any]]()

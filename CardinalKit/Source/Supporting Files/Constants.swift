@@ -39,6 +39,9 @@ class Constants {
         // Watch
         static let WatchReceivedFiles = "\(app).watch.receivedFiles"
         static let WatchTransferFailedFiles = "\(app).watch.failedFiles"
+        
+        static let prefUserEmail = "PREF_USER_EMAIL"
+        static let prefConfirmedLogin = "PREF_CONFIRMED_LOGIN"
     }
     
     struct Network {
@@ -107,5 +110,12 @@ class Constants {
         static let watchWorkoutSession = "edu.stanford.vasctrac.watchtrac.workout.session"
         
         static let watchSnapshot = "edu.stanford.vasctrac.watchtrac.snapshot"
+    }
+    
+    struct Firebase {
+        static let dataBucketHealthKit = "healthKit"
+        static let dataBucketStorage = "storage"
+        static let dataBucketMetrics = "metrics"
+        
     }
 }

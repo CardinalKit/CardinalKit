@@ -11,7 +11,10 @@ public struct CKAppOptions {
     public var networkRouteDelegate: CKAPIRouteDelegate?
     public var networkDeliveryDelegate : CKAPIDeliveryDelegate?
     public var networkReceiverDelegate : CKAPIReceiverDelegate?
-    public init() { }
+    public init() {
+        networkReceiverDelegate = CKAppNetworkManager()
+        networkDeliveryDelegate = CKAppNetworkManager()
+    }
 }
 
 public class CKApp {
@@ -54,5 +57,23 @@ public class CKApp {
         //_ = WatchConnectivityManager.shared
     }
 
+    class public func requestData(route: String, onCompletion: @escaping (Any?) -> Void){
+        if let delegate = CKApp.instance.options.networkReceiverDelegate {
+            delegate.request(route: route, onCompletion: onCompletion)
+        }
+    }
     
+    class public func sendData(route: String, data: Any, params: Any?, onCompletion:((Bool, Error?) -> Void )? = nil){
+        if let delegate = CKApp.instance.options.networkDeliveryDelegate{
+            delegate.send(route: route, data: data, params: params, onCompletion: onCompletion)
+        }
+    }
+    
+    class public func getHealthAuthorization(forTypes typesToCollect:Set<HKSampleType>, _ completion: @escaping (_ success: Bool, _ error: Error?) -> Void)
+    {
+        CKActivityManager.shared.getHealthAuthorization(forTypes: typesToCollect) {(success, error) in
+            completion(success, error)
+            
+        }
+    }
 }
