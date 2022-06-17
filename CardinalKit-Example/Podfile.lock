@@ -856,7 +856,7 @@ DEPENDENCIES:
   - Firebase/Storage
   - GoogleSignIn
   - Granola (from `https://github.com/CardinalKit/Granola.git`, branch `main`)
-  - ResearchKit (from `https://github.com/ResearchKit/ResearchKit.git`, commit `90c68d0d195f23fff1f618a9a4ffa518be9ac845`)
+  - ResearchKit (from `https://github.com/ResearchKit/ResearchKit.git`, branch `main`)
 
 SPEC REPOS:
   trunk:
@@ -909,7 +909,7 @@ EXTERNAL SOURCES:
     :branch: main
     :git: https://github.com/CardinalKit/Granola.git
   ResearchKit:
-    :commit: 90c68d0d195f23fff1f618a9a4ffa518be9ac845
+    :branch: main
     :git: https://github.com/ResearchKit/ResearchKit.git
 
 CHECKOUT OPTIONS:
@@ -966,6 +966,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
   Zip: 8877eede3dda76bcac281225c20e71c25270774c
 
-PODFILE CHECKSUM: b53d465db3946092e162ad1a64a6b04b75f8a680
+PODFILE CHECKSUM: 549c36170930bcd868333a0b59bd5f15026d7e2a
 
 COCOAPODS: 1.11.3
