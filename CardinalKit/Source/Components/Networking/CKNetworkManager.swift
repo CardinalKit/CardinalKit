@@ -41,10 +41,10 @@ class CKAppNetworkManager: CKAPIDeliveryDelegate, CKAPIReceiverDelegate {
         
         var merge=false
         if var params = params as? [String:Any] {
-           if let merged = params["merge"] as? Bool{
-                   params.removeValue(forKey: "merge")
-                   merge=merged
-               }
+            if let merged = params["merge"] as? Bool{
+                params.removeValue(forKey: "merge")
+                merge=merged
+            }
             documentData.append(params)
         }
         
@@ -108,53 +108,49 @@ class CKAppNetworkManager: CKAPIDeliveryDelegate, CKAPIReceiverDelegate {
             break
         }
     }
+    
     // return dict { documentId: data }
     // MARK: - CKAPIReceiverDelegate
     func request(route: String, onCompletion: @escaping (Any?) -> Void){
-            
-            //Review if request is to a document or collections
-            let routeComponents = route.components(separatedBy: "/")
-            let db=firestoreDb()
-            
-            createNecessaryDocuments(path:route)
-            
-            // if is pair get collection
-            if routeComponents.count%2==0{
-                var objResult = [DocumentSnapshot]()
-                
-                db.collection(route).getDocuments(){ (querySnapshot, err) in
-                    if let err = err {
-                        print("Error getting documents: \(err)")
-                    } else {
-                        for document in querySnapshot!.documents {
-                            objResult.append(document)
-                        }
-                        onCompletion(objResult)
-                    }
-                }
-            }
-            // else get document
-            else{
-                db.document(route).getDocument{ (document, error) in
-                    if let error = error {
-                        print("Error getting documents: \(error)")
-                    } else {
-                        if let document = document, document.exists{
-                            onCompletion(document)
-                        }
-                        else{
-                            onCompletion(nil)
-                        }
-                    }
 
+        /*  If the route has an even number of components, it is
+            a firestore document. If odd, it is a firestore collection. */
+        var charactersToTrim = CharacterSet()
+        charactersToTrim.insert(charactersIn: "/")
+        let trimmedRoute = route.trimmingCharacters(in: charactersToTrim)
+        let routeComponents = trimmedRoute.components(separatedBy: "/")
+        let db = firestoreDb()
+
+        createNecessaryDocuments(path:route)
+
+        if (routeComponents.count % 2) == 0 {
+            db.document(route).getDocument{ (document, error) in
+                if let error = error {
+                    print("Error getting document: \(error)")
+                } else {
+                    if let document = document, document.exists{
+                        onCompletion(document)
+                    }
+                    else{
+                        onCompletion(nil)
+                    }
                 }
-                
             }
-            
-           
+        } else {
+            var objResult = [DocumentSnapshot]()
+            db.collection(route).getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting collection: \(err)")
+                } else {
+                    for document in querySnapshot!.documents {
+                        objResult.append(document)
+                    }
+                    onCompletion(objResult)
+                }
+            }
         }
+    }
 
-    
     private func firestoreDb()->Firestore{
         let settings = FirestoreSettings()
         settings.isPersistenceEnabled = false
@@ -169,12 +165,12 @@ extension CKAppNetworkManager {
     
     /**
      Send HealthKit data using Firebase
-    */
+     */
     fileprivate func sendHealthKit(_ file: URL, _ package: Package, _ onCompletion: @escaping (Bool) -> Void) {
         do {
             let data = try Data(contentsOf: file)
             guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
-                let authPath = CKStudyUser.shared.authCollection else {
+                  let authPath = CKStudyUser.shared.authCollection else {
                 onCompletion(false)
                 return
             }
@@ -203,7 +199,7 @@ extension CKAppNetworkManager {
     
     /**
      Send Sensor data using Cloud Storage
-    */
+     */
     fileprivate func sendSensorData(_ file: URL, _ package: Package, _ onCompletion: @escaping (Bool) -> Void) {
         
         guard let stanfordRITBucket = CKStudyUser.shared.authCollection else { return }
@@ -225,7 +221,7 @@ extension CKAppNetworkManager {
         do {
             let data = try Data(contentsOf: file)
             guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
-                let authPath = CKStudyUser.shared.authCollection else {
+                  let authPath = CKStudyUser.shared.authCollection else {
                 onCompletion(false)
                 return
             }

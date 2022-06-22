@@ -13,7 +13,7 @@
 		2B19DD9626FE1D2F00649CE1 /* CheckListItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19DD9526FE1D2F00649CE1 /* CheckListItemViewController.swift */; };
 		2B8FB80427552B02000B2D7B /* CKMultipleSignInStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8FB80327552B02000B2D7B /* CKMultipleSignInStep.swift */; };
 		2B932F84276BF8D300AB3A02 /* CKReviewConsentDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B932F83276BF8D300AB3A02 /* CKReviewConsentDocument.swift */; };
-		2BD5328326C2CC4E00C4636E /* CkResearchSurveysManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5328226C2CC4E00C4636E /* CkResearchSurveysManager.swift */; };
+		2BD5328326C2CC4E00C4636E /* CKResearchSurveysManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5328226C2CC4E00C4636E /* CKResearchSurveysManager.swift */; };
 		2BD5328526C30F2E00C4636E /* CloudTaskItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5328426C30F2E00C4636E /* CloudTaskItem.swift */; };
 		2BF6451826C1D0040020C206 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		2BF6452026C1DBE70020C206 /* CK_ORKSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6451F26C1DBE70020C206 /* CK_ORKSerialization.swift */; };
@@ -115,7 +115,7 @@
 		2B19DD9526FE1D2F00649CE1 /* CheckListItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckListItemViewController.swift; sourceTree = "<group>"; };
 		2B8FB80327552B02000B2D7B /* CKMultipleSignInStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKMultipleSignInStep.swift; sourceTree = "<group>"; };
 		2B932F83276BF8D300AB3A02 /* CKReviewConsentDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKReviewConsentDocument.swift; sourceTree = "<group>"; };
-		2BD5328226C2CC4E00C4636E /* CkResearchSurveysManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CkResearchSurveysManager.swift; sourceTree = "<group>"; };
+		2BD5328226C2CC4E00C4636E /* CKResearchSurveysManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKResearchSurveysManager.swift; sourceTree = "<group>"; };
 		2BD5328426C30F2E00C4636E /* CloudTaskItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudTaskItem.swift; sourceTree = "<group>"; };
 		2BF6451F26C1DBE70020C206 /* CK_ORKSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CK_ORKSerialization.swift; sourceTree = "<group>"; };
 		2D9CCFBC6701FC7A8C18DE19 /* Pods_CardinalKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CardinalKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -503,7 +503,7 @@
 			isa = PBXGroup;
 			children = (
 				2B19DD9126FE1BEB00649CE1 /* JsonToSurvey.swift */,
-				2BD5328226C2CC4E00C4636E /* CkResearchSurveysManager.swift */,
+				2BD5328226C2CC4E00C4636E /* CKResearchSurveysManager.swift */,
 				2BF6451F26C1DBE70020C206 /* CK_ORKSerialization.swift */,
 				8E0A4386244A4A0400656518 /* ORKESerialization.m */,
 				8E0A4387244A4A0400656518 /* ORKESerialization.h */,
@@ -794,7 +794,7 @@
 				2BF6451826C1D0040020C206 /* (null) in Sources */,
 				2B19DD9226FE1BEB00649CE1 /* JsonToSurvey.swift in Sources */,
 				8E0A43B5244A4A0400656518 /* LocalTaskItem.swift in Sources */,
-				2BD5328326C2CC4E00C4636E /* CkResearchSurveysManager.swift in Sources */,
+				2BD5328326C2CC4E00C4636E /* CKResearchSurveysManager.swift in Sources */,
 				8E6E1E2C253539AE0024B8DF /* ChangePasscodeView.swift in Sources */,
 				8E0A43AD244A4A0400656518 /* Constants.swift in Sources */,
 				8E0A43BE244A4A0400656518 /* CKHealthDataStepViewController.swift in Sources */,
