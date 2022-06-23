@@ -104,8 +104,16 @@ class FirebaseManager{
         }
     }
     
-    func Get(){
-        
+    func get(route:String, onCompletion: @escaping ([String:Any]?) -> Void){
+        let db = firestoreDb()
+        let ref = db.document(route)
+        ref.getDocument{ (document, error) in
+            if let document = document, document.exists,
+            let payload = document.data(){
+                onCompletion(payload)
+            } else {
+                onCompletion([:])
+            }
+        }
     }
 }
-
