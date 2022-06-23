@@ -106,14 +106,34 @@ class FirebaseManager{
     
     func get(route:String, onCompletion: @escaping ([String:Any]?) -> Void){
         let db = firestoreDb()
-        let ref = db.document(route)
-        ref.getDocument{ (document, error) in
-            if let document = document, document.exists,
-            let payload = document.data(){
-                onCompletion(payload)
-            } else {
-                onCompletion([:])
+        
+        let parts = route.split(separator: "/")
+        if parts.count % 2 == 0{
+            let ref = db.document(route)
+            ref.getDocument{ (document, error) in
+                if let document = document, document.exists,
+                let payload = document.data(){
+                    onCompletion(payload)
+                } else {
+                    onCompletion([:])
+                }
             }
         }
+        else{
+            let ref = db.collection(route)
+            ref.getDocuments(){ (querySnapshot, err) in
+                var result:[String:Any] = [:]
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    for document in querySnapshot!.documents {
+                        result[document.documentID] = document.data()
+                    }
+                    onCompletion(result)
+                }
+            }
+        }
+        
+        
     }
 }
