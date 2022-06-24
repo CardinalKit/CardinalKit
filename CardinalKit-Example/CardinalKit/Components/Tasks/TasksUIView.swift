@@ -45,26 +45,26 @@ struct TasksUIView: View {
     }
     
     func getRemoteItems(){
-        CKResearchSurveysManager.shared.getTaskItems { (results) in
-            if let results = results as? [CloudTaskItem]{
-                listItems = results
-                var headerCopy = listItemsPerHeader
-                var sectionsCopy = listItemsSections
-                if listItemsPerHeader.isEmpty {
-                    for item in results {
-                        if headerCopy[item.section] == nil {
-                            headerCopy[item.section] = [CloudTaskItem]()
-                            sectionsCopy.append(item.section)
-                        }
-                        if(((headerCopy[item.section]?.contains(item)) ?? false) == false){
-                            headerCopy[item.section]?.append(item)
-                        }
-                    }
-                }
-                listItemsPerHeader = headerCopy
-                listItemsSections = sectionsCopy
-            }
-        }
+//        CKResearchSurveysManager.shared.getTaskItems { (results) in
+//            if let results = results as? [CloudTaskItem]{
+//                listItems = results
+//                var headerCopy = listItemsPerHeader
+//                var sectionsCopy = listItemsSections
+//                if listItemsPerHeader.isEmpty {
+//                    for item in results {
+//                        if headerCopy[item.section] == nil {
+//                            headerCopy[item.section] = [CloudTaskItem]()
+//                            sectionsCopy.append(item.section)
+//                        }
+//                        if(((headerCopy[item.section]?.contains(item)) ?? false) == false){
+//                            headerCopy[item.section]?.append(item)
+//                        }
+//                    }
+//                }
+//                listItemsPerHeader = headerCopy
+//                listItemsSections = sectionsCopy
+//            }
+//        }
     }
     
     var body: some View {

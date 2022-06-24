@@ -468,9 +468,6 @@ PODS:
     - abseil/base/core_headers
     - abseil/base/endian
     - abseil/base/raw_logging_internal
-    - abseil/container/fixed_array
-    - abseil/container/inlined_vector
-    - abseil/functional/function_ref
     - abseil/meta/type_traits
   - abseil/strings/str_format (1.20211102.0):
     - abseil/strings/str_format_internal
@@ -611,7 +608,7 @@ PODS:
   - BoringSSL-GRPC/Implementation (0.0.24):
     - BoringSSL-GRPC/Interface (= 0.0.24)
   - BoringSSL-GRPC/Interface (0.0.24)
-  - CardinalKit (2.0.0):
+  - CardinalKit (2.1.0):
     - Firebase/Analytics
     - Firebase/Auth
     - Firebase/Core
@@ -860,18 +857,13 @@ SPEC REPOS:
     - FBSDKLoginKit
     - Firebase
     - FirebaseAnalytics
-    - FirebaseAppCheckInterop
     - FirebaseAuth
-    - FirebaseAuthInterop
     - FirebaseCore
     - FirebaseCoreDiagnostics
-    - FirebaseCoreExtension
-    - FirebaseCoreInternal
     - FirebaseDynamicLinks
     - FirebaseFirestore
     - FirebaseInstallations
     - FirebaseStorage
-    - FirebaseStorageInternal
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleSignIn
@@ -915,7 +907,7 @@ SPEC CHECKSUMS:
   abseil: ebe5b5529fb05d93a8bdb7951607be08b7fa71bc
   AppAuth: 80317d99ac7ff2801a2f18ff86b48cd315ed465d
   BoringSSL-GRPC: 3175b25143e648463a56daeaaa499c6cb86dad33
-  CardinalKit: 65abcd5d29e4c05f63d7fe5a791007286628faf7
+  CardinalKit: 6e2369244a1bed8421cd6b7d8d0893232d2077ed
   FBAEMKit: c2b2895363b7e57192013d1dc49fdf498b28624c
   FBSDKCoreKit: 58139803d861e72c7661dc875611a759352a55ac
   FBSDKCoreKit_Basics: 1ffc68326a5ece051d85574f02a0adcf27c2a5f2

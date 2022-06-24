@@ -50,7 +50,7 @@ class LoginViewController: ORKLoginStepViewController {
                 DispatchQueue.main.async {
                     if error != nil {
                         alert.dismiss(animated: false, completion: nil)
-                        if let errCode = AuthErrorCode.Code(rawValue: error!._code) {
+                        if let errCode = AuthErrorCode(rawValue: error!._code) {
 
                             switch errCode {
                                 default:
