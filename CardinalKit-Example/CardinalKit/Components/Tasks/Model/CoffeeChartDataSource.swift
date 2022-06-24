@@ -55,8 +55,6 @@ extension CoffeeChartDataSource {
                  return
              }
             for item in payload {
-                // let result = try ORKESerializer.object(fromJSONObject: item) as? ORKTaskResult
-                //let coffeScale = result?.stepResult(forStepIdentifier: "CoffeeScaleQuestionStep")?.results?.first as? ORKScaleQuestionResult
                 let result = CK_ORKSerialization.TaskResult(fromJSONObject: item)
                 let coffeScale = result.stepResult(forStepIdentifier: "CoffeeScaleQuestionStep")?.results?.first as? ORKScaleQuestionResult
                 if let answer = coffeScale?.scaleAnswer {
@@ -64,10 +62,6 @@ extension CoffeeChartDataSource {
                 }
             }
             onCompletion(countPerAnswer)
-            /*} catch {
-                print("[CoffeeChartDataSource] ERROR " + error.localizedDescription)
-               onCompletion([NSNumber: CGFloat]())
-            }*/
         })
     }
     

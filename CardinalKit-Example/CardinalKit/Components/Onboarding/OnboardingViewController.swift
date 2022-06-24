@@ -59,24 +59,14 @@ struct OnboardingViewController: UIViewControllerRepresentable {
         var loginSteps: [ORKStep]
         let signInButtons = CKMultipleSignInStep(identifier: "SignInButtons")
         
+        let regexp = try! NSRegularExpression(pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[d$@$!%*?&#])[A-Za-z\\dd$@$!%*?&#]{8,}")
         
-//        if config["Login-Sign-In-With-Apple"]["Enabled"] as? Bool == true {
-//            let signInWithAppleStep = CKSignInWithAppleStep(identifier: "SignInWithApple")
-//            loginSteps = [signInWithAppleStep]
-//        } else if config.readBool(query: "Login-Passwordless") == true {
-//            let loginStep = PasswordlessLoginStep(identifier: PasswordlessLoginStep.identifier)
-//            let loginVerificationStep = LoginCustomWaitStep(identifier: LoginCustomWaitStep.identifier)
-//
-//            loginSteps = [loginStep, loginVerificationStep]
-//        } else {
-            let regexp = try! NSRegularExpression(pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[d$@$!%*?&#])[A-Za-z\\dd$@$!%*?&#]{8,}")
+        let registerStep = ORKRegistrationStep(identifier: "RegistrationStep", title: "Registration", text: "Sign up for this study using your email address.\n\nYour password should contain a minimum of 8 characters with at least 1 uppercase, 1 lowercase, 1 number, and 1 special character.\n\n", passcodeValidationRegularExpression: regexp, passcodeInvalidMessage: "Your password does not meet the following criteria: minimum 8 characters with at least 1 uppercase alphabet, 1 lowercase alphabet, 1 number and 1 special character", options: [])
+        
+        let loginStep = ORKLoginStep(identifier: "LoginStep", title: "Login", text: "Log into this study.", loginViewControllerClass: LoginViewController.self)
+        
+        loginSteps = [signInButtons, registerStep, loginStep]
 
-            let registerStep = ORKRegistrationStep(identifier: "RegistrationStep", title: "Registration", text: "Sign up for this study.", passcodeValidationRegularExpression: regexp, passcodeInvalidMessage: "Your password does not meet the following criteria: minimum 8 characters with at least 1 Uppercase Alphabet, 1 Lowercase Alphabet, 1 Number and 1 Special Character", options: [])
-
-            let loginStep = ORKLoginStep(identifier: "LoginStep", title: "Login", text: "Log into this study.", loginViewControllerClass: LoginViewController.self)
-
-            loginSteps = [signInButtons, registerStep, loginStep]
-//        }
         
         /* **************************************************************
         *  STEP (5): ask the user to create a security passcode
@@ -129,9 +119,7 @@ struct OnboardingViewController: UIViewControllerRepresentable {
         * and SHOW the user these steps!
         **************************************************************/
         // create a task with each step
-//        let orderedTask = ORKOrderedTask(identifier: "StudyOnboardingTask", steps: stepsToUse)
-        
-        
+
         let navigableTask = ORKNavigableOrderedTask(identifier: "StudyOnboardingTask", steps: stepsToUse)
         
         let resultSelector = ORKResultSelector(resultIdentifier: "SignInButtons")

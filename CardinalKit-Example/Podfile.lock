@@ -468,6 +468,9 @@ PODS:
     - abseil/base/core_headers
     - abseil/base/endian
     - abseil/base/raw_logging_internal
+    - abseil/container/fixed_array
+    - abseil/container/inlined_vector
+    - abseil/functional/function_ref
     - abseil/meta/type_traits
   - abseil/strings/str_format (1.20211102.0):
     - abseil/strings/str_format_internal
@@ -857,13 +860,18 @@ SPEC REPOS:
     - FBSDKLoginKit
     - Firebase
     - FirebaseAnalytics
+    - FirebaseAppCheckInterop
     - FirebaseAuth
+    - FirebaseAuthInterop
     - FirebaseCore
     - FirebaseCoreDiagnostics
+    - FirebaseCoreExtension
+    - FirebaseCoreInternal
     - FirebaseDynamicLinks
     - FirebaseFirestore
     - FirebaseInstallations
     - FirebaseStorage
+    - FirebaseStorageInternal
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleSignIn
@@ -946,4 +954,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 5ed202145139db7bcd1c4de5c77db7355bae1d08
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.11.3

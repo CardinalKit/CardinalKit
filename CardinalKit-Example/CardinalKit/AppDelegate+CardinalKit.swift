@@ -18,20 +18,15 @@ extension AppDelegate {
     */
     func CKAppLaunch() {
         
-        // (1) lock the app and prompt for passcode before continuing
-        // CKLockApp()
-        
-        // (2) setup the CardinalKit SDK
+        // (1) setup the CardinalKit SDK
         var options = CKAppOptions()
-//        options.networkDeliveryDelegate = CKAppNetworkManager()
-//        options.networkReceiverDelegate = CKAppNetworkManager()
         CKApp.configure(options)
     
 //        CKApp.startBackgroundDeliveryData()
         
 //        CKApp.collectData(fromDate: Date().dayByAdding(-10)!, toDate: Date())
         
-        // (3) if we have already logged in
+        // (2) if we have already logged in
         if CKStudyUser.shared.isLoggedIn {
             CKStudyUser.shared.save()
             CKApp.startBackgroundDeliveryData()

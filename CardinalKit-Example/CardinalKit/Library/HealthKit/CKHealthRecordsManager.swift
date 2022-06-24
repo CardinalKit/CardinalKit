@@ -69,7 +69,6 @@ class CKHealthRecordsManager: NSObject {
                            }
                            let route = "\(authCollection)health-records/\(identifier)"
                            CKApp.sendData(route: route, data: dict, params: nil)
-//                            try CKSendHelper.sendToFirestoreWithUUID(json: dict, collection: "health-records", withIdentifier: identifier)
                         }
                     } catch {
                         print("[upload] ERROR " + error.localizedDescription)
