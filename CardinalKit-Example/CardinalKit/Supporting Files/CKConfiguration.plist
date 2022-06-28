@@ -53,6 +53,13 @@
 	</dict>
 	<key>Background Read Frequency</key>
 	<string>immediate</string>
+	<key>Sign In Screen</key>
+	<dict>
+		<key>Label Text</key>
+		<string>Sign In to CardinalKit</string>
+		<key>Label Font Size</key>
+		<integer>35</integer>
+	</dict>
 	<key>Login-Sign-In-With-Facebook</key>
 	<dict>
 		<key>Enabled</key>
@@ -199,7 +206,7 @@
 			<string>3️⃣</string>
 		</dict>
 	</array>
-		<key>Contacts</key>
+	<key>Contacts</key>
 	<array>
 		<dict>
 			<key>givenName</key>
