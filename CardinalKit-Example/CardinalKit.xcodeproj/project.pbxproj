@@ -161,7 +161,7 @@
 		8E6E1E2D25353A1E0024B8DF /* PatientIDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientIDView.swift; sourceTree = "<group>"; };
 		8E6E1E3125353ABE0024B8DF /* ProfileUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUIView.swift; sourceTree = "<group>"; };
 		8E6E1E3325353AFE0024B8DF /* EmailHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailHelper.swift; sourceTree = "<group>"; };
-		8E7FFFB325DCE9B7002982B4 /* CKUploadToGCPTaskViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKUploadToGCPTaskViewControllerDelegate.swift; sourceTree = "<group>"; };
+		8E7FFFB325DCE9B7002982B4 /* CKUploadToGCPTaskViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CKUploadToGCPTaskViewControllerDelegate.swift; path = "/Users/vishnu/code/CardinalKit/CardinalKit-Example/CardinalKit/Library/ResearchKit/CKUploadToGCPTaskViewControllerDelegate.swift"; sourceTree = "<absolute>"; };
 		8E7FFFB725DE350A002982B4 /* CoffeeUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeUIView.swift; sourceTree = "<group>"; };
 		8E7FFFBA25DE37FF002982B4 /* CoffeePieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeePieChartView.swift; sourceTree = "<group>"; };
 		8E7FFFBC25DE38E4002982B4 /* CoffeeChartDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeChartDataSource.swift; sourceTree = "<group>"; };
