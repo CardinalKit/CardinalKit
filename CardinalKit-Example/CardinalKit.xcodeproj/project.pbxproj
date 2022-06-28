@@ -19,7 +19,6 @@
 		2BF6452026C1DBE70020C206 /* CK_ORKSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6451F26C1DBE70020C206 /* CK_ORKSerialization.swift */; };
 		2E02B7ECEB2186F8E5868D90 /* Pods_CardinalKit_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D9CCFBC6701FC7A8C18DE19 /* Pods_CardinalKit_Example.framework */; };
 		2F94C5F22536543600DF8866 /* SceneDelegate+CardinalKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F94C5F12536543600DF8866 /* SceneDelegate+CardinalKit.swift */; };
-		63D577FC27EE3141002A8CBA /* CkJsonHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D577FB27EE3141002A8CBA /* CkJsonHelper.swift */; };
 		8E0A43AC244A4A0400656518 /* CKStudyUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4382244A4A0400656518 /* CKStudyUser.swift */; };
 		8E0A43AD244A4A0400656518 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4384244A4A0400656518 /* Constants.swift */; };
 		8E0A43AE244A4A0400656518 /* ORKESerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4386244A4A0400656518 /* ORKESerialization.m */; };
@@ -123,7 +122,6 @@
 		41DC264876E45FE5A3FD8701 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* CardinalKit Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CardinalKit Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		62AA5CD1C2188D392530510F /* CardinalKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = CardinalKit.podspec; path = ../CardinalKit.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		63D577FB27EE3141002A8CBA /* CkJsonHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CkJsonHelper.swift; sourceTree = "<group>"; };
 		8E0A4378244A4A0300656518 /* CardinalKit_Example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CardinalKit_Example-Bridging-Header.h"; sourceTree = "<group>"; };
 		8E0A4382244A4A0400656518 /* CKStudyUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKStudyUser.swift; sourceTree = "<group>"; };
 		8E0A4384244A4A0400656518 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -276,14 +274,6 @@
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
 		};
-		63D577FA27EE3133002A8CBA /* json */ = {
-			isa = PBXGroup;
-			children = (
-				63D577FB27EE3141002A8CBA /* CkJsonHelper.swift */,
-			);
-			path = json;
-			sourceTree = "<group>";
-		};
 		8E0A4379244A4A0400656518 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -367,7 +357,6 @@
 		8E0A43C5244A4A5700656518 /* Library */ = {
 			isa = PBXGroup;
 			children = (
-				63D577FA27EE3133002A8CBA /* json */,
 				8E9CDF802591E6B800C8A228 /* Configuration */,
 				8E9CDECE2591ABDF00C8A228 /* HealthKit */,
 				8E40DC022471E5590027536B /* Networking */,
@@ -786,7 +775,6 @@
 				8E6E1E182535263F0024B8DF /* CKTaskViewController.swift in Sources */,
 				8E9CDF142591B73900C8A228 /* CKHealthRecordsManager.swift in Sources */,
 				8EA664B42594387900B6A45A /* Errors.swift in Sources */,
-				63D577FC27EE3141002A8CBA /* CkJsonHelper.swift in Sources */,
 				8E6E1E1225351F830024B8DF /* DocumentPreviewViewController.swift in Sources */,
 				8E6E1E20253529760024B8DF /* DocumentView.swift in Sources */,
 				8E7FFFBB25DE37FF002982B4 /* CoffeePieChartView.swift in Sources */,
