@@ -43,11 +43,11 @@
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>FacebookAppID</key>
-	<string>415789243347763</string>
+	<string></string>
 	<key>FacebookClientToken</key>
-	<string>f8624ce0c9aae97fb930e1ef443db214</string>
+	<string></string>
 	<key>FacebookDisplayName</key>
-	<string>SenseReliefApp</string>
+	<string></string>
 	<key>FirebaseDynamicLinksCustomDomains</key>
 	<array>
 		<string>https://cs342.page.link</string>
