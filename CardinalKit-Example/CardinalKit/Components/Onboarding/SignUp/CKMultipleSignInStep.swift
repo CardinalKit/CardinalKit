@@ -34,69 +34,74 @@ public class CKMultipleSignInStepViewController: ORKQuestionStepViewController, 
     }
     
     public override func viewDidLoad() {
+        addSignInLabel()
+        addSocialButtons()
+        self.view.backgroundColor = .white
+    }
 
+    func addSignInLabel() {
         let config = CKPropertyReader(file: "CKConfiguration")
 
         let signInLabel = getSignInLabel(text: config["Sign In Screen"]["Label Text"] as? String ?? "Sign In",
                                          fontSize: config["Sign In Screen"]["Label Font Size"] as? CGFloat ?? 35)
         self.view.addSubview(signInLabel)
+    }
 
+    func addSocialButtons() {
+        let config = CKPropertyReader(file: "CKConfiguration")
         var button: UIButton? = nil
+
         if config["Login-Sign-In-With-UserPassword"]["Enabled"] as? Bool == true {
             let buttonEmailPassword = getSignInButton(title: "Sign in with Email and Password",
-                                                   backgroundColor: .white,
-                                                   textColor: .black,
-                                                   borderColor: .black,
-                                                   reference: button,
-                                                   action: #selector(loginEmailAndPasswordAction))
+                                                      backgroundColor: .white,
+                                                      textColor: .black,
+                                                      borderColor: .black,
+                                                      reference: button,
+                                                      action: #selector(loginEmailAndPasswordAction))
             self.view.addSubview(buttonEmailPassword)
             button = buttonEmailPassword
-            
+
         }
-        
+
         if config["Login-Sign-In-With-Facebook"]["Enabled"] as? Bool == true {
             let buttonFacebook = getSignInButton(title: "Sign in with Facebook",
-                                              backgroundColor: UIColor(red: 59, green: 89, blue: 152),
-                                              textColor: .white,
-                                              borderColor: nil,
-                                              reference: button,
-                                              action: #selector(loginFacebookAction),
-                                              icon: "facebook",
-                                              imageOffset: 35)
+                                                 backgroundColor: UIColor(red: 59, green: 89, blue: 152),
+                                                 textColor: .white,
+                                                 borderColor: nil,
+                                                 reference: button,
+                                                 action: #selector(loginFacebookAction),
+                                                 icon: "facebook",
+                                                 imageOffset: 35)
             self.view.addSubview(buttonFacebook)
             button = buttonFacebook
         }
-        
+
         if config["Login-Sign-In-With-Google"]["Enabled"] as? Bool == true {
             let buttonGoogle = getSignInButton(title: "Sign in with Google",
-                                            backgroundColor: .white,
-                                            textColor: .gray,
-                                            borderColor: UIColor(red: 66, green: 133, blue: 244),
-                                            reference: button,
-                                            action: #selector(loginGoogleAction),
-                                            icon: "google")
+                                               backgroundColor: .white,
+                                               textColor: .gray,
+                                               borderColor: UIColor(red: 66, green: 133, blue: 244),
+                                               reference: button,
+                                               action: #selector(loginGoogleAction),
+                                               icon: "google")
             self.view.addSubview(buttonGoogle)
             button = buttonGoogle
         }
-        
+
         if config["Login-Sign-In-With-Apple"]["Enabled"] as? Bool == true {
             let buttonApple = getSignInButton(title: "Sign in with Apple",
-                                           backgroundColor: .black,
-                                           textColor: .white,
-                                           borderColor: nil,
-                                           reference: button,
-                                           action: #selector(loginAppleAction),
-                                           icon: "apple")
+                                              backgroundColor: .black,
+                                              textColor: .white,
+                                              borderColor: nil,
+                                              reference: button,
+                                              action: #selector(loginAppleAction),
+                                              icon: "apple")
             self.view.addSubview(buttonApple)
             button = buttonApple
         }
-        
-        self.view.backgroundColor = .white
     }
 
-
-
-    func getSignInLabel(text: String, fontSize: CGFloat = 35) -> UILabel {
+    func getSignInLabel(text: String, fontSize: CGFloat) -> UILabel {
         let signInLabel = UILabel(frame: CGRect(x: 0, y: 100, width: 450, height: 50))
         signInLabel.center.x = view.center.x
         signInLabel.text = text

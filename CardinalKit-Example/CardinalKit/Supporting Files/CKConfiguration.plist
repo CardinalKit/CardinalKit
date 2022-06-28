@@ -56,7 +56,7 @@
 	<key>Sign In Screen</key>
 	<dict>
 		<key>Label Text</key>
-		<string>Sign In</string>
+		<string>Sign In to CardinalKit</string>
 		<key>Label Font Size</key>
 		<integer>35</integer>
 	</dict>
