@@ -28,7 +28,7 @@ extension AppDelegate {
         
         // (2) if we have already logged in
         if CKStudyUser.shared.isLoggedIn {
-            CKStudyUser.shared.save()
+//            CKStudyUser.shared.save()
             CKApp.startBackgroundDeliveryData()
 //            // (4) then start the requested HK data collection (if any).
 //            let manager = CKHealthKitManager.shared
@@ -38,7 +38,7 @@ extension AppDelegate {
 //                }
 //            }
         }
-        CKStudyUser.shared.save()
+//        CKStudyUser.shared.save()
     }
     
 }

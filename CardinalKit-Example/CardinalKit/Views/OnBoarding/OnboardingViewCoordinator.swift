@@ -7,7 +7,6 @@
 //
 
 import ResearchKit
-import Firebase
 import CardinalKit
 
 class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
@@ -27,7 +26,6 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
     }
     
     public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
-        let storage = Storage.storage()
         switch reason {
         case .completed:
             // if we completed the onboarding task view controller, go to study.
@@ -36,7 +34,7 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
             // TODO: where to go next?
             // trigger "Studies UI"
             UserDefaults.standard.set(true, forKey: Constants.onboardingDidComplete)
-            NotificationCenter.default.post(name: NSNotification.Name(Constants.onboardingDidComplete), object: true)
+            NotificationCenter.default.post(name: .onBoardingStateChange, object: true)
             
             if let signatureResult = taskViewController.result.stepResult(forStepIdentifier: "ConsentReviewStep")?.results?.first as? ORKConsentSignatureResult {
                 
@@ -58,16 +56,9 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
                         
                         UserDefaults.standard.set(url.path, forKey: "consentFormURL")
                         
-                        let storageRef = storage.reference()
-                        
                         if let DocumentCollection = CKStudyUser.shared.authCollection {
-                            let DocumentRef = storageRef.child("\(DocumentCollection)/\(consentFileName).pdf")
                             
-                            DocumentRef.putFile(from: url, metadata: nil) { metadata, error in
-                                if let error = error {
-                                    print(error.localizedDescription)
-                                }
-                            }
+                            Libraries.shared.networkingLibrary.sendFile(url: url, path: "\(DocumentCollection)/\(consentFileName).pdf")
                         }
                     } catch let error {
                         print(error.localizedDescription)
@@ -85,7 +76,7 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
     }
     
     func taskViewController(_ taskViewController: ORKTaskViewController, stepViewControllerWillAppear stepViewController: ORKStepViewController) {
-        
+        let authLibrary = Libraries.shared.authlibrary
         // MARK: - Advanced Concepts
         // Sometimes we might want some custom logic
         // to run when a step appears 🎩
@@ -95,7 +86,7 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
             /* **************************************************************
              * When the login step appears, asking for the patient's email
              **************************************************************/
-            if let _ = CKStudyUser.shared.currentUser?.email {
+            if let _ =  authLibrary.user?.email {
                 // if we already have an email, go forward and continue.
                 DispatchQueue.main.async {
                     stepViewController.goForward()
@@ -104,7 +95,7 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
             
         } else if (stepViewController.step?.identifier == "RegistrationStep") {
             
-            if let _ = CKStudyUser.shared.currentUser?.email {
+            if let _ = authLibrary.user?.email {
                 // if we already have an email, go forward and continue.
                 DispatchQueue.main.async {
                     stepViewController.goForward()
@@ -113,7 +104,7 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
             
         } else if (stepViewController.step?.identifier == "LoginStep") {
             
-            if let _ = CKStudyUser.shared.currentUser?.email {
+            if let _ = authLibrary.user?.email {
                 // good — we have an email!
             } else {
                 let alert = UIAlertController(title: nil, message: "Creating account...", preferredStyle: .alert)
@@ -129,61 +120,22 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
                 let stepResult = taskViewController.result.stepResult(forStepIdentifier: "RegistrationStep")
                 if let emailRes = stepResult?.results?.first as? ORKTextQuestionResult, let email = emailRes.textAnswer {
                     if let passwordRes = stepResult?.results?[1] as? ORKTextQuestionResult, let pass = passwordRes.textAnswer {
-                        Auth.auth().createUser(withEmail: email, password: pass) { (res, error) in
-                            DispatchQueue.main.async {
-                                if error != nil {
-                                    alert.dismiss(animated: false, completion: nil)
-                                    if let errCode = AuthErrorCode(rawValue: error!._code) {
-                                        switch errCode {
-                                        default:
-                                            let alert = UIAlertController(title: "Registration Error!", message: error?.localizedDescription, preferredStyle: .alert)
-                                            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-                                            
-                                            taskViewController.present(alert, animated: false)
-                                        }
-                                    }
-                                    
-                                    stepViewController.goBackward()
-                                    
-                                } else {
-                                    alert.dismiss(animated: false, completion: nil)
-                                    print("Created user!")
-                                }
-                            }
-                        }
-                        
-                    }
-                }
-            }
-        } else if stepViewController.step?.identifier == LoginCustomWaitStep.identifier {
-            
-            /* **************************************************************
-             * When the email verification step appears, send email in background!
-             **************************************************************/
-            
-            let stepResult = taskViewController.result.stepResult(forStepIdentifier: PasswordlessLoginStep.identifier)
-            if let emailRes = stepResult?.results?.first as? ORKTextQuestionResult, let email = emailRes.textAnswer {
-                
-                // if we received a valid email
-                CKStudyUser.shared.sendLoginLink(email: email) { (success) in
-                    // send a login link
-                    guard success else {
-                        // and react accordingly if we ran into an error.
-                        DispatchQueue.main.async {
-                            let config = CKPropertyReader(file: "CKConfiguration")
+                        Libraries.shared.authlibrary.RegisterUser(email: email, pass: pass, onSuccess: {
+                            alert.dismiss(animated: false, completion: nil)
+                            print("Created user!")
+                        }, onError: { error in
+                            alert.dismiss(animated: false, completion: nil)
                             
-                            Alerts.showInfo(title: config.read(query: "Failed Login Title"), message: config.read(query: "Failed Login Text"))
+                            let alert = UIAlertController(title: "Registration Error!", message: error.localizedDescription, preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+
+                            taskViewController.present(alert, animated: false)
                             stepViewController.goBackward()
-                        }
-                        return
+                        })
                     }
-                    
-                    CKStudyUser.shared.email = email
                 }
-                
             }
-            
-        }
+        } 
         
     }
     
@@ -201,12 +153,6 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
             return CKHealthDataStepViewController(step: step)
         case is CKHealthRecordsStep:
             return CKHealthRecordsStepViewController(step: step)
-        case is LoginCustomWaitStep:
-            // run custom code to send an email for login!
-            return LoginCustomWaitStepViewController(step: step)
-        case is CKSignInWithAppleStep:
-            // handle Sign in with Apple
-            return CKSignInWithAppleStepViewController(step: step)
         case is CKMultipleSignInStep:
             return CKMultipleSignInStepViewController(step: step)
         case is CKReviewConsentDocument:

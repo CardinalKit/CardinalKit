@@ -84,7 +84,7 @@ class CKUploadToGCPTaskViewControllerDelegate : NSObject, ORKTaskViewControllerD
         let identifier = (json["identifier"] as? String) ?? UUID().uuidString
             
         guard let authCollection = CKStudyUser.shared.authCollection,
-                   let userId = CKStudyUser.shared.currentUser?.uid
+                   let userId = Libraries.shared.authlibrary.user?.uid
              else{
                  return
              }

@@ -52,13 +52,16 @@ struct WithdrawalViewController: UIViewControllerRepresentable {
                 
                 do {
                     try CKCareKitManager.shared.wipe()
-                    try CKStudyUser.shared.signOut()
+                    try Libraries.shared.authlibrary.logout(onSuccess: {
+                        NotificationCenter.default.post(name: .onBoardingStateChange, object: false)
+                        NotificationCenter.default.post(name: .onUserStateChange , object: false)
+                    }, onError: { error in })
                     
                     if (ORKPasscodeViewController.isPasscodeStoredInKeychain()) {
                         ORKPasscodeViewController.removePasscodeFromKeychain()
                     }
                     
-                    NotificationCenter.default.post(name: NSNotification.Name(Constants.onboardingDidComplete), object: false)
+                    
 
                     UserDefaults.standard.set(nil, forKey: Constants.prefCareKitCoreDataInitDate)
                     UserDefaults.standard.set(nil, forKey: Constants.prefHealthRecordsLastUploaded)

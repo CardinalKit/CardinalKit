@@ -8,41 +8,23 @@
 
 import SwiftUI
 import UIKit
-import ResearchKit
-
-struct OnboardingElement {
-    let logo: String
-    let title: String
-    let description: String
-}
 
 struct OnboardingUIView: View {
     
-    var onboardingElements: [OnboardingElement] = []
+    @ObservedObject var presenter = OnBoardingPresenter()
+    
     let color: Color
-    let config = CKPropertyReader(file: "CKConfiguration")
-    @State var showingOnboard = false
-    @State var showingLogin = false
     
-    var onComplete: (() -> Void)? = nil
-    
-    init(onComplete: (() -> Void)? = nil) {
-        let onboardingData = config.readAny(query: "Onboarding") as! [[String:String]]
-        
-        
+    init() {
+        let config = CKPropertyReader(file: "CKConfiguration")
         self.color = Color(config.readColor(query: "Primary Color"))
-        self.onComplete = onComplete
-        
-        for data in onboardingData {
-            self.onboardingElements.append(OnboardingElement(logo: data["Logo"]!, title: data["Title"]!, description: data["Description"]!))
-        }
     }
 
     var body: some View {
         VStack(spacing: 10) {
             Spacer()
             
-            Image("SBDLogoGrey")
+            Image(presenter.viewModel.studyLogo)
                 .resizable()
                 .scaledToFit()
                 .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN*4)
@@ -50,25 +32,25 @@ struct OnboardingUIView: View {
             
             Spacer(minLength: 2)
             
-            Text(config.read(query: "Study Title"))
+            Text(presenter.viewModel.studyTitle)
                 .foregroundColor(self.color)
                 .multilineTextAlignment(.center)
                 .font(.system(size: 35, weight: .bold, design: .default))
                 .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN)
                 .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN)
             
-            Text(config.read(query: "Team Name"))
+            Text(presenter.viewModel.teamName)
                 .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN)
                 .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN)
 
-            PageView(self.onboardingElements.map { InfoView(logo: $0.logo, title: $0.title, description: $0.description, color: self.color) })
+            PageView(presenter.viewModel.onBoardingElements.map { InfoView(logo: $0.logo, title: $0.title, description: $0.description, color: self.color) })
 
             Spacer()
             
             HStack {
                 Spacer()
                 Button(action: {
-                    self.showingOnboard.toggle()
+                    presenter.showNewUserSteps.toggle()
                 }, label: {
                      Text("Join Study")
                         .padding(Metrics.PADDING_BUTTON_LABEL)
@@ -80,10 +62,9 @@ struct OnboardingUIView: View {
                 })
                 .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN)
                 .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN)
-                .sheet(isPresented: $showingOnboard, onDismiss: {
-                    self.onComplete?()
+                .sheet(isPresented: $presenter.showNewUserSteps, onDismiss: {
                 }, content: {
-                    OnboardingViewController().ignoresSafeArea(edges: .all)
+                    RegisterNewUserViewController().ignoresSafeArea(edges: .all)
                 })
         
                 Spacer()
@@ -92,7 +73,7 @@ struct OnboardingUIView: View {
             HStack {
                 Spacer()
                 Button(action: {
-                    self.showingLogin.toggle()
+                    presenter.showExistinUserSteps.toggle()
                 }, label: {
                      Text("I'm a Returning User")
                         .padding(Metrics.PADDING_BUTTON_LABEL)
@@ -106,8 +87,7 @@ struct OnboardingUIView: View {
                 })
                 .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN)
                 .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN)
-                .sheet(isPresented: $showingLogin, onDismiss: {
-                    self.onComplete?()
+                .sheet(isPresented: $presenter.showExistinUserSteps, onDismiss: {
                 }, content: {
                     LoginExistingUserViewController().ignoresSafeArea(edges: .all)
                 })

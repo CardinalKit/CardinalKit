@@ -10,7 +10,7 @@ import SwiftUI
 import UIKit
 import ResearchKit
 
-struct OnboardingViewController: UIViewControllerRepresentable {
+struct RegisterNewUserViewController: UIViewControllerRepresentable {
     
     func makeCoordinator() -> OnboardingViewCoordinator {
         OnboardingViewCoordinator()
