@@ -38,6 +38,27 @@ class FirebaseAuth: NSObject, AuthLibrary,ASAuthorizationControllerDelegate {
         onSuccess()
     }
     
+    func ResetPassword(email:String,onSuccess: @escaping () -> Void, onError: @escaping (Error) -> Void){
+        Auth.auth().sendPasswordReset(withEmail: email) { error in
+            if error != nil {
+                onError(error!)
+            }
+            else{
+                onSuccess()
+            }
+        }
+    }
+    
+    func LoginIWithUserPass(email:String, pass:String, onSuccess: @escaping () -> Void, onError: @escaping (Error) -> Void){
+        Auth.auth().signIn(withEmail: email, password: pass) { (res, error) in
+            if let error = error {
+                onError(error)
+            } else {
+                onSuccess()
+            }
+        }
+    }
+    
     func LoginWithFacebook(onSuccess: @escaping () -> Void, onError: @escaping (Error) -> Void, viewController: UIViewController) {
         let fbLoginManager : LoginManager = LoginManager()
         fbLoginManager.logIn(permissions: ["email"], from: viewController){ (result, error) -> Void in
@@ -149,24 +170,8 @@ class FirebaseAuth: NSObject, AuthLibrary,ASAuthorizationControllerDelegate {
                 if error != nil {
                     onError(error!)
                     
-//                    alert.dismiss(animated: false, completion: nil)
-//                    if let errCode = AuthErrorCode(rawValue: error!._code) {
-//                        switch errCode {
-//                        default:
-//                            let alert = UIAlertController(title: "Registration Error!", message: error?.localizedDescription, preferredStyle: .alert)
-//                            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-//
-//                            taskViewController.present(alert, animated: false)
-//                        }
-//                    }
-//
-//                    stepViewController.goBackward()
-                    
                 } else {
-                    onSuccess()
-//                    alert.dismiss(animated: false, completion: nil)
-//                    print("Created user!")
-                }
+                    onSuccess()                }
             }
         }
     }

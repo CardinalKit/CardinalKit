@@ -6,7 +6,6 @@
 //
 
 import ResearchKit
-import Firebase
 
 class LoginViewController: ORKLoginStepViewController {
     override func goForward() {
@@ -22,18 +21,16 @@ class LoginViewController: ORKLoginStepViewController {
 
             taskViewController?.present(alert, animated: false, completion: nil)
 
-            Auth.auth().signIn(withEmail: email, password: pass) { (res, error) in
-                if let error = error {
-                    alert.dismiss(animated: false) {
-                        let alert = UIAlertController(title: "Login Error!", message: error.localizedDescription, preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
-                        self.taskViewController?.present(alert, animated: false)
-                    }
-                } else {
-                    alert.dismiss(animated: false, completion: nil)
-                    super.goForward()
+            Libraries.shared.authlibrary.LoginIWithUserPass(email: email, pass: pass, onSuccess: {
+                alert.dismiss(animated: false, completion: nil)
+                super.goForward()
+            }, onError: { error in
+                alert.dismiss(animated: false) {
+                    let alert = UIAlertController(title: "Login Error!", message: error.localizedDescription, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
+                    self.taskViewController?.present(alert, animated: false)
                 }
-            }
+            })
         }
     }
     
@@ -46,28 +43,19 @@ class LoginViewController: ORKLoginStepViewController {
 
         alert.addAction(UIAlertAction(title: "Submit", style: .default, handler: { (action) in
             let textField = alert.textFields![0]
-            Auth.auth().sendPasswordReset(withEmail: textField.text!) { error in
+            Libraries.shared.authlibrary.ResetPassword(email: textField.text!, onSuccess: {
+                print("Email sent!")
+            }, onError: { error in
                 DispatchQueue.main.async {
-                    if error != nil {
-                        alert.dismiss(animated: false, completion: nil)
-                        if let errCode = AuthErrorCode(rawValue: error!._code) {
-
-                            switch errCode {
-                                default:
-                                    let alert = UIAlertController(title: "Password Reset Error!", message: error?.localizedDescription, preferredStyle: .alert)
-                                    alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-                                    
-                                    alert.dismiss(animated: false, completion: nil)
-                                    self.present(alert, animated: false)
-                            }
-                        }
-
-                    } else {
-                        print("Email sent!")
-                    }
-
+                    alert.dismiss(animated: false, completion: nil)
+                    
+                    let alert = UIAlertController(title: "Password Reset Error!", message: error.localizedDescription, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+                    
+                    alert.dismiss(animated: false, completion: nil)
+                    self.present(alert, animated: false)
                 }
-            }
+            })
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
 

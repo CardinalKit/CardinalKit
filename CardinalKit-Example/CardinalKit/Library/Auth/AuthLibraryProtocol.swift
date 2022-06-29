@@ -15,4 +15,6 @@ protocol AuthLibrary {
     func LoginWithApple(onSuccess: @escaping () -> Void, onError: @escaping (Error) -> Void)
     func logout(onSuccess: @escaping () -> Void, onError: @escaping (Error) -> Void)
     func RegisterUser(email:String, pass:String, onSuccess: @escaping () -> Void, onError: @escaping (Error) -> Void)
+    func LoginIWithUserPass(email:String, pass:String, onSuccess: @escaping () -> Void, onError: @escaping (Error) -> Void)
+    func ResetPassword(email:String,onSuccess: @escaping () -> Void, onError: @escaping (Error) -> Void)
 }
