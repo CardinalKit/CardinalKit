@@ -55,7 +55,6 @@
 		8E6E1E1C253528D70024B8DF /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E1E1B253528D70024B8DF /* ReportView.swift */; };
 		8E6E1E1E253528F50024B8DF /* SupportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E1E1D253528F50024B8DF /* SupportView.swift */; };
 		8E6E1E20253529760024B8DF /* DocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E1E1F253529760024B8DF /* DocumentView.swift */; };
-		8E6E1E24253537580024B8DF /* MainUIViewOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E1E23253537580024B8DF /* MainUIViewOld.swift */; };
 		8E6E1E26253537E40024B8DF /* TasksUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E1E25253537E40024B8DF /* TasksUIView.swift */; };
 		8E6E1E28253538CC0024B8DF /* CloudTaskListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E1E27253538CC0024B8DF /* CloudTaskListItemView.swift */; };
 		8E6E1E2A2535398D0024B8DF /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E1E292535398D0024B8DF /* HelpView.swift */; };
@@ -92,7 +91,6 @@
 		E235077724F7082700CC1899 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E235077624F7082700CC1899 /* SceneDelegate.swift */; };
 		E2680B1B260A72DD00B755EA /* LoginExistingUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2680B1A260A72DD00B755EA /* LoginExistingUserViewController.swift */; };
 		E290FB1D24FF4BBA00D19BE9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E290FB1C24FF4BBA00D19BE9 /* GoogleService-Info.plist */; };
-		E29143FC24E74AD100EE97B2 /* LaunchUIViewOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29143FB24E74AD100EE97B2 /* LaunchUIViewOld.swift */; };
 		E2DF9F0A2500C9CE00A93B93 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DF9F092500C9CE00A93B93 /* LoginViewController.swift */; };
 		E2F1FD7624D61EDA006C39DF /* CKPropertyReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F1FD7524D61EDA006C39DF /* CKPropertyReader.swift */; };
 		E2F1FD7824D62064006C39DF /* CKConfiguration.plist in Resources */ = {isa = PBXBuildFile; fileRef = E2F1FD7724D62064006C39DF /* CKConfiguration.plist */; };
@@ -170,7 +168,6 @@
 		8E6E1E1B253528D70024B8DF /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
 		8E6E1E1D253528F50024B8DF /* SupportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportView.swift; sourceTree = "<group>"; };
 		8E6E1E1F253529760024B8DF /* DocumentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentView.swift; sourceTree = "<group>"; };
-		8E6E1E23253537580024B8DF /* MainUIViewOld.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainUIViewOld.swift; sourceTree = "<group>"; };
 		8E6E1E25253537E40024B8DF /* TasksUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksUIView.swift; sourceTree = "<group>"; };
 		8E6E1E27253538CC0024B8DF /* CloudTaskListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudTaskListItemView.swift; sourceTree = "<group>"; };
 		8E6E1E292535398D0024B8DF /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
@@ -202,7 +199,6 @@
 		E235077624F7082700CC1899 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		E2680B1A260A72DD00B755EA /* LoginExistingUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginExistingUserViewController.swift; sourceTree = "<group>"; };
 		E290FB1C24FF4BBA00D19BE9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		E29143FB24E74AD100EE97B2 /* LaunchUIViewOld.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchUIViewOld.swift; sourceTree = "<group>"; };
 		E2DF9F092500C9CE00A93B93 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E2F1FD7524D61EDA006C39DF /* CKPropertyReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKPropertyReader.swift; sourceTree = "<group>"; };
 		E2F1FD7724D62064006C39DF /* CKConfiguration.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = CKConfiguration.plist; sourceTree = "<group>"; };
@@ -531,8 +527,6 @@
 		8E9CDEAA25916F2A00C8A228 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				8E6E1E23253537580024B8DF /* MainUIViewOld.swift */,
-				E29143FB24E74AD100EE97B2 /* LaunchUIViewOld.swift */,
 				8E9CDEA525915F6600C8A228 /* Schedule */,
 				8E9CDEB42591818200C8A228 /* Care Team */,
 				8E0A438D244A4A0400656518 /* Tasks */,
@@ -843,7 +837,6 @@
 				2B19DD9626FE1D2F00649CE1 /* CheckListItemViewController.swift in Sources */,
 				2B19DD9426FE1D2600649CE1 /* TestViewController.swift in Sources */,
 				63F8E3F028664E6300F260AE /* MainUIView.swift in Sources */,
-				E29143FC24E74AD100EE97B2 /* LaunchUIViewOld.swift in Sources */,
 				2B8FB80427552B02000B2D7B /* CKMultipleSignInStep.swift in Sources */,
 				8EA6648725930B6B00B6A45A /* CKHealthRecordsStepViewController.swift in Sources */,
 				8E0A43C0244A4A0400656518 /* PasswordlessLoginStep.swift in Sources */,
@@ -875,7 +868,6 @@
 				632ED49D286BB7FE009C3543 /* FirebaseAuth.swift in Sources */,
 				8E6E1E3425353AFE0024B8DF /* EmailHelper.swift in Sources */,
 				63F8E3EA28664E2200F260AE /* LaunchUIView.swift in Sources */,
-				8E6E1E24253537580024B8DF /* MainUIViewOld.swift in Sources */,
 				8E6E1E182535263F0024B8DF /* CKTaskViewController.swift in Sources */,
 				8E9CDF142591B73900C8A228 /* CKHealthRecordsManager.swift in Sources */,
 				8EA664B42594387900B6A45A /* Errors.swift in Sources */,
