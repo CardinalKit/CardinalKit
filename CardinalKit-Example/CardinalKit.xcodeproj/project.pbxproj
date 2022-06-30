@@ -258,17 +258,12 @@
 		607FACD21AFB9204008FA782 /* CardinalKit-Example */ = {
 			isa = PBXGroup;
 			children = (
-				632ED495286BB63D009C3543 /* Models */,
-				63F8E3F3286650BE00F260AE /* Extensions */,
+				632ED4B7286E5C5B009C3543 /* Core */,
+				632ED4B6286E5C3B009C3543 /* Domain */,
+				632ED4B5286E5C17009C3543 /* Infrastructure */,
+				632ED4B4286E5C0D009C3543 /* Presentation */,
 				8E0A4383244A4A0400656518 /* Supporting Files */,
-				63F8E3E628664DD300F260AE /* Views */,
-				63F8E3E828664DE700F260AE /* Presenters */,
 				8E9CDEAA25916F2A00C8A228 /* Components */,
-				8E0A43C5244A4A5700656518 /* Library */,
-				8E0A4396244A4A0400656518 /* AppDelegate.swift */,
-				8EBE6F9B24B3C0E60093D07C /* AppDelegate+CardinalKit.swift */,
-				E235077624F7082700CC1899 /* SceneDelegate.swift */,
-				2F94C5F12536543600DF8866 /* SceneDelegate+CardinalKit.swift */,
 			);
 			name = "CardinalKit-Example";
 			path = CardinalKit;
@@ -337,6 +332,43 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		632ED4B4286E5C0D009C3543 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				63F8E3E828664DE700F260AE /* Presenters */,
+				63F8E3E628664DD300F260AE /* Views */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		632ED4B5286E5C17009C3543 /* Infrastructure */ = {
+			isa = PBXGroup;
+			children = (
+				8E0A43C5244A4A5700656518 /* Library */,
+				63F8E3F3286650BE00F260AE /* Extensions */,
+			);
+			path = Infrastructure;
+			sourceTree = "<group>";
+		};
+		632ED4B6286E5C3B009C3543 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				632ED495286BB63D009C3543 /* Models */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		632ED4B7286E5C5B009C3543 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				8E0A4396244A4A0400656518 /* AppDelegate.swift */,
+				E235077624F7082700CC1899 /* SceneDelegate.swift */,
+				8EBE6F9B24B3C0E60093D07C /* AppDelegate+CardinalKit.swift */,
+				2F94C5F12536543600DF8866 /* SceneDelegate+CardinalKit.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
 		63D577FA27EE3133002A8CBA /* json */ = {
 			isa = PBXGroup;
 			children = (
@@ -348,9 +380,6 @@
 		63F8E3E628664DD300F260AE /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				63F8E3EE28664E3F00F260AE /* Profile */,
-				63F8E3ED28664E3600F260AE /* Tasks */,
-				63F8E3EC28664E2E00F260AE /* Schedule */,
 				63F8E3EB28664E2700F260AE /* OnBoarding */,
 				63F8E3E928664E2200F260AE /* LaunchUIView.swift */,
 				63F8E3EF28664E6300F260AE /* MainUIView.swift */,
@@ -379,27 +408,6 @@
 				632ED485286B9FD0009C3543 /* RegisterUser */,
 			);
 			path = OnBoarding;
-			sourceTree = "<group>";
-		};
-		63F8E3EC28664E2E00F260AE /* Schedule */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Schedule;
-			sourceTree = "<group>";
-		};
-		63F8E3ED28664E3600F260AE /* Tasks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Tasks;
-			sourceTree = "<group>";
-		};
-		63F8E3EE28664E3F00F260AE /* Profile */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Profile;
 			sourceTree = "<group>";
 		};
 		63F8E3F3286650BE00F260AE /* Extensions */ = {
