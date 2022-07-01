@@ -17,4 +17,5 @@ protocol AuthLibrary {
     func RegisterUser(email:String, pass:String, onSuccess: @escaping () -> Void, onError: @escaping (Error) -> Void)
     func LoginIWithUserPass(email:String, pass:String, onSuccess: @escaping () -> Void, onError: @escaping (Error) -> Void)
     func ResetPassword(email:String,onSuccess: @escaping () -> Void, onError: @escaping (Error) -> Void)
+    func AuthDinamycLink(url: URL)
 }

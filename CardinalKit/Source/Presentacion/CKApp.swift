@@ -57,6 +57,12 @@ public class CKApp{
         }
     }
     
+    class public func getDataFromStorage(path:String, url:URL, onCompletion: @escaping (Bool, Error?) -> Void) {
+        if let delegate = CKApp.instance.options.networkReceiverDelegate {
+            delegate.requestFromStorage(path: path, url: url, OnCompletion: onCompletion)
+        }
+    }
+    
     class public func sendData(route: String, data: Any, params: Any?, onCompletion:((Bool, Error?) -> Void )? = nil){
         if let delegate = CKApp.instance.options.networkDeliveryDelegate{
             delegate.send(route: route, data: data, params: params, onCompletion: onCompletion)

@@ -9,7 +9,6 @@
 import UIKit
 import SwiftUI
 import ResearchKit
-import Firebase
 import CardinalKit
 
 struct WithdrawalViewController: UIViewControllerRepresentable {

@@ -176,6 +176,35 @@ class FirebaseAuth: NSObject, AuthLibrary,ASAuthorizationControllerDelegate {
         }
     }
     
+    func AuthDinamycLink(url: URL){
+        DynamicLinks.dynamicLinks().handleUniversalLink(url) { (dynamiclink, error) in
+        
+            // (1) check to see if we have a valid login link
+            guard let link = dynamiclink?.url?.absoluteString,
+                let email = CKStudyUser.shared.email else { // (1.5) and the learner has entered an email
+                return
+            }
+
+            // (2) & if this link is authorized to sign the user in
+            if Auth.auth().isSignIn(withEmailLink: link) {
+                // (3) process sign-in
+                Auth.auth().signIn(withEmail: email, link: link, completion: { (result, error) in
+                    if let error = error {
+                        print(error.localizedDescription)
+                    }
+
+                    if let confirmedEmail = result?.user.email {
+                        // (4) confirm email and inform app of authorization as needed.
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: Constants.notificationUserLogin), object: confirmedEmail)
+                        UserDefaults.standard.set(true, forKey: Constants.prefConfirmedLogin)
+                        print("confirmed!")
+                    }
+
+                })
+            }
+        }
+    }
+    
     
 }
 

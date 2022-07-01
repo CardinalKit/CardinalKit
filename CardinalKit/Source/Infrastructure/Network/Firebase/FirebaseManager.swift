@@ -9,14 +9,34 @@ import Foundation
 import FirebaseFirestore
 import FirebaseAuth
 import FirebaseStorage
+import FirebaseCore
 
 class FirebaseManager{
+    
+    public func configure() {
+        FirebaseApp.configure()
+    }
+    
     private func firestoreDb()->Firestore{
         let settings = FirestoreSettings()
         settings.isPersistenceEnabled = false
         let db = Firestore.firestore()
         db.settings = settings
         return db
+    }
+    
+    func getDataFromCloudStorage(path:String,url:URL, OnCompletion: @escaping () -> Void, onError: @escaping (Error) -> Void){
+        let storage = Storage.storage()
+        let storageRef = storage.reference()
+        let documentRef = storageRef.child("\(path)")
+        let _ = documentRef.write(toFile: url) { _, error in
+            if let error = error {
+                onError(error)
+            } else {
+                OnCompletion()
+            }
+
+        }
     }
     
     func sendToCloudStorage (file:URL,route:String){
@@ -69,11 +89,14 @@ class FirebaseManager{
         else{
             print(" Logged")
         }
-        guard let json = data as? [String:Any]
+        guard var json = data as? [String:Any]
         else {
             return
         }
-        
+        if let results = json["results"] as? [[String:Any]]{
+            let results = FieldValue.arrayUnion(results)
+            json["results"] = results
+        }
         var documentData:[String:Any] = ["updatedAt":Date()]
         var merge=false
         if var params = params as? [String:Any] {

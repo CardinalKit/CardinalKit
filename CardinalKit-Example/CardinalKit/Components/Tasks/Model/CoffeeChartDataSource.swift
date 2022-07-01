@@ -7,7 +7,6 @@
 //
 
 import ResearchKit
-import FirebaseFirestore
 import CardinalKit
 
 class CoffeeChartDataSource: NSObject, ORKPieChartViewDataSource {
@@ -48,8 +47,8 @@ extension CoffeeChartDataSource {
         }
         CKApp.requestData(route: "\(authCollection)\(Constants.dataBucketSurveys)/SurveyTask-Coffee" , onCompletion: {
            result in
-           guard let document = result as? DocumentSnapshot,
-                 let payload = document.data()?["results"] as? [[AnyHashable: Any]]
+            guard let document = result as? [String:Any],
+                 let payload = document["results"] as? [[AnyHashable: Any]]
             else{
                 onCompletion([NSNumber: CGFloat]())
                  return

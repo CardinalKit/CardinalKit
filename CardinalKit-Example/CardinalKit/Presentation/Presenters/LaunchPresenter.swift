@@ -27,10 +27,16 @@ class LaunchPresenter:ObservableObject{
     }
     
     @objc func onUserStateChange(_ notification: Notification){
-        if let newValue = notification.object as? Bool,
-            !newValue {
-            didCompleteOnBoarding = false
-            UserDefaults.standard.set(false, forKey: Constants.onboardingDidComplete)
+        if let newValue = notification.object as? Bool{
+            if newValue {
+                if UserDefaults.standard.bool(forKey: Constants.onboardingDidComplete) {
+                    didCompleteOnBoarding = true
+                }
+            }
+            else{
+                didCompleteOnBoarding = false
+                UserDefaults.standard.set(false, forKey: Constants.onboardingDidComplete)
+            }
         }
     }
 }

@@ -7,8 +7,6 @@
 
 import Foundation
 
-import FirebaseCore
-
 public protocol CKDeliveryDelegate {
     func send(file: URL, package: Package, onCompletion: @escaping (Bool) -> Void)
     func send(route: String, data: Any, params: Any?, onCompletion:((Bool, Error?) -> Void)?)
@@ -81,7 +79,7 @@ extension CKDelivery: CKDeliveryDelegate{
     }
     
     public func configure() {
-        FirebaseApp.configure()
+        firebaseManager.configure()
     }
 }
 

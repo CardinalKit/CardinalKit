@@ -10,51 +10,48 @@ import CareKit
 import CareKitStore
 import Contacts
 import UIKit
-import FirebaseFirestore
 import CardinalKit
 
 internal extension OCKStore {
 
-    fileprivate func insertDocuments(documents: [DocumentSnapshot]?, collection: String, authCollection: String?,lastUpdateDate: Date?,onCompletion: @escaping (Error?)->Void){
+    fileprivate func insertDocuments(documents: [String:Any]?, collection: String, authCollection: String?,lastUpdateDate: Date?,onCompletion: @escaping (Error?)->Void){
         guard let documents = documents,
              documents.count>0 else {
            onCompletion(nil)
            return
        }
-        
         let group = DispatchGroup()
-        for document in documents{
+        for (documentID,document) in documents{
             group.enter()
             var route = ""
                if let authCollection = authCollection {
-                   route = "\(authCollection)\(collection)/\(document.documentID)"
+                   route = "\(authCollection)\(collection)/\(documentID)"
                }
                else{
                    guard  let nAuth = CKStudyUser.shared.authCollection else {
                        return
                    }
-                   route = "\(nAuth)\(collection)/\(document.documentID)"
+                   route = "\(nAuth)\(collection)/\(documentID)"
                }
                CKApp.requestData(route: route, onCompletion: {
                    result in
                    do{
-                   guard let document = result as? DocumentSnapshot,
-                           let payload = document.data(),
-                           let id = payload["id"] as? String
+                   guard let document = result as? [String:Any],
+                           let id = document["id"] as? String
                    else{
                        return
                    }
 
                     var itemSchedule:OCKSchedule? = nil
                     var update = true
-                    if lastUpdateDate != nil,
-                       let updateTimeServer = payload["updateTime"] as? Timestamp,
-                       updateTimeServer.dateValue()<lastUpdateDate!{
-                        update = false
-                    }
-                    
+//                    if lastUpdateDate != nil,
+//                       let updateTimeServer = document["updateTime"] as? Timestamp,
+//                       updateTimeServer.dateValue()<lastUpdateDate!{
+//                        update = false
+//                    }
+
                     if update,
-                        let schedule = payload["scheduleElements"] as? [[String:Any]]
+                        let schedule = document["scheduleElements"] as? [[String:Any]]
                     {
                         var scheduleElements=[OCKScheduleElement]()
                         for element in schedule{
@@ -62,13 +59,14 @@ internal extension OCKStore {
                             var endDate:Date?=nil
                             var intervalDate = DateComponents(day:2)
                             var durationElement:OCKScheduleElement.Duration = .allDay
-                            if let startStamp = element["startTime"] as? Timestamp{
-                                startDate = startStamp.dateValue()
-                            }
-                            if let endStamp = element["endTime"] as? Timestamp{
-                                endDate = endStamp.dateValue()
-                            }
-                            
+                            //TODO: carekit store and carekit admin should be in the library
+//                            if let startStamp = element["startTime"] as? Timestamp{
+//                                startDate = startStamp.dateValue()
+//                            }
+//                            if let endStamp = element["endTime"] as? Timestamp{
+//                                endDate = endStamp.dateValue()
+//                            }
+
                             if let interval = element["interval"] as? [String:Any]{
                                 var day = 1
                                 if let dayInterval = interval["day"] as? Int{
@@ -123,15 +121,15 @@ internal extension OCKStore {
                     }
                     if let itemSchedule = itemSchedule{
                         var uuid:UUID? = nil
-                        if let _uuid = payload["uuid"] as? String{
+                        if let _uuid = document["uuid"] as? String{
                             uuid=UUID(uuidString: _uuid)
                         }
-                        var task = OCKTask(id: id, title: payload["title"] as? String, carePlanUUID: uuid, schedule: itemSchedule)
-                        task.groupIdentifier = payload["groupIdentifier"] as? String
-                        if let impactsAdherence = payload["impactsAdherence"] as? Bool{
+                        var task = OCKTask(id: id, title: document["title"] as? String, carePlanUUID: uuid, schedule: itemSchedule)
+                        task.groupIdentifier = document["groupIdentifier"] as? String
+                        if let impactsAdherence = document["impactsAdherence"] as? Bool{
                             task.impactsAdherence = impactsAdherence
                         }
-                        task.instructions = payload["instructions"] as? String
+                        task.instructions = document["instructions"] as? String
 
                         // This fixes an issue where if cloud surveys were all in the future,
                         // they would not show up
@@ -156,7 +154,7 @@ internal extension OCKStore {
                     else{
                         group.leave()
                     }
-                    
+
                 }
             })
         }
@@ -179,13 +177,13 @@ internal extension OCKStore {
         let studyRoute = studyCollection + "\(collection)"
         let authRoute = authCollection + "\(collection)"
         CKApp.requestData(route: studyRoute, onCompletion: { result in
-            if let documents = result as? [DocumentSnapshot]{
-                self.insertDocuments(documents: documents, collection: collection, authCollection: studyCollection,lastUpdateDate:lastUpdateDate){
-                    (Error) in
+            if let document = result as? [String:Any] {
+                self.insertDocuments(documents: document, collection: collection, authCollection: studyCollection, lastUpdateDate: lastUpdateDate){
+                    error in
                     CKApp.requestData(route: authRoute, onCompletion: { result in
-                        if let documents = result as? [DocumentSnapshot]{
+                        if let documents = result as? [String:Any] {
                             self.insertDocuments(documents: documents, collection: collection, authCollection: nil,lastUpdateDate:lastUpdateDate){
-                                (Error) in
+                                error in
                                 self.createContacts()
                                 completion()
                             }
@@ -193,7 +191,6 @@ internal extension OCKStore {
                     })
                 }
             }
-            
         })
 
     }

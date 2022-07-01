@@ -11,7 +11,6 @@ import CareKit
 import CareKitStore
 import CareKitUI
 import CardinalKit
-import FirebaseFirestore
 
 class CKCareKitRemoteSyncWithFirestore: OCKRemoteSynchronizable {
     func pullRevisions(since knowledgeVector: OCKRevisionRecord.KnowledgeVector, mergeRevision: @escaping (OCKRevisionRecord) -> Void, completion: @escaping (Error?) -> Void) {
@@ -142,36 +141,35 @@ extension CKCareKitRemoteSyncWithFirestore {
         }
         let authRoute = authCollection + "\(collection)"
         CKApp.requestData(route: authRoute, onCompletion: { result in
-            if let documents = result as? [DocumentSnapshot]{
+            if let documents = result as? [String:Any]{
                 guard documents.count>0 else {
                     completion([OCKRevisionRecord]())
                     return
                 }
                 let group = DispatchGroup()
                 var outComes = [CareKitStore.OCKEntity]()
-                for document in documents{
+                for (key,_) in documents{
                     group.enter()
-                    
+
                     guard let authCollection = CKStudyUser.shared.authCollection else {
                         return
                     }
-                    let route = "\(authCollection)\(self.collection)/\(document.documentID)"
+                    let route = "\(authCollection)\(self.collection)/\(key)"
                     CKApp.requestData(route: route, onCompletion: {
                         result in
-                        guard let document = result as? DocumentSnapshot,
-                              var payload = document.data(),
+                        guard var payload = result as? [String:Any],
                               payload.count>0
                         else{
                             completion([OCKRevisionRecord]())
                             return
                         }
-                        
+
 //                        payload.removeValue(forKey: "updatedAt")
                         payload["updatedAt"] = nil
                         if let type = payload["type"],
                             type as?String == "outcome",
                            let id = payload["taskId"] as? String{
-                            
+
                             payload.removeValue(forKey: "type")
                             var query = OCKTaskQuery()
                             query.ids.append(id)
@@ -193,7 +191,7 @@ extension CKCareKitRemoteSyncWithFirestore {
                                             outComes.append(entity)
                                         }
                                         catch{
-                                            
+
                                         }
                                     }
                                     group.leave()
@@ -203,7 +201,7 @@ extension CKCareKitRemoteSyncWithFirestore {
                         else{
                             group.leave()
                         }
-                    })                    
+                    })
                 }
                 group.notify(queue: .main, execute: {
                     let KnowledgeVector = OCKRevisionRecord.KnowledgeVector()

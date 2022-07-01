@@ -12,7 +12,6 @@ import ResearchKit
 import CareKitUI
 import CareKitStore
 import CardinalKit
-import FirebaseFirestore
 
 class CheckListItemViewController: OCKChecklistTaskViewController, ORKTaskViewControllerDelegate{
     
@@ -44,17 +43,16 @@ class CheckListItemViewController: OCKChecklistTaskViewController, ORKTaskViewCo
             {
             let collectionI = "\(studyCollection)\(collection)/\(identifier)/questions"
             CKApp.requestData(route: collectionI, onCompletion: { result in
-               
-               guard let documents = result as? [DocumentSnapshot],  documents.count>0 else {
-                   super.taskView(taskView, didCompleteEvent: isComplete, at: indexPath, sender: sender)
-                   return
-               }
+                
+                guard let documents = result as? [String:Any], documents.count>0 else{
+                    super.taskView(taskView, didCompleteEvent: isComplete, at: indexPath, sender: sender)
+                    return
+                }
                 var objResult = [[String:Any]]()
-                for document in documents{
-                    if let data = document.data(){
-                        objResult.append(data)
+                for (_,document) in documents{
+                    if let document = document as? [String:Any]{
+                        objResult.append(document)
                     }
-                    
                 }
                 objResult = objResult.sorted(by: {a,b in
                     if let order1 = a["order"] as? String,

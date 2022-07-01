@@ -8,7 +8,6 @@
 import Foundation
 import CareKit
 import ResearchKit
-import Firebase
 import CardinalKit
 
 class CKUploadToGCPTaskViewControllerDelegate : NSObject, ORKTaskViewControllerDelegate {
@@ -90,7 +89,7 @@ class CKUploadToGCPTaskViewControllerDelegate : NSObject, ORKTaskViewControllerD
              }
              let route = "\(authCollection)\(Constants.dataBucketSurveys)/\(identifier)"
              
-             CKApp.sendData(route: route, data: ["results": FieldValue.arrayUnion([json])], params: ["userId":"\(userId)","merge":true])       
+             CKApp.sendData(route: route, data: ["results": [json]], params: ["userId":"\(userId)","merge":true])       
     }
     
     /**
