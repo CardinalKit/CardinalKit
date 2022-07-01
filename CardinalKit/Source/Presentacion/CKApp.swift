@@ -12,10 +12,12 @@ public struct CKAppOptions {
     public var networkDeliveryDelegate : CKDeliveryDelegate?
     public var networkReceiverDelegate : CKReceiverDelegate?
     public var localDBDelegate: CKLocalDBDelegate?
+    public var userDataProviderDelegate: UserDataProviderDelegate?
     
     public init() {
         networkDeliveryDelegate = CKDelivery()
         networkReceiverDelegate = CKReceiver()
+        userDataProviderDelegate = CKUserDataProvider()
         // Using realm as local db
         localDBDelegate = RealmManager()
         

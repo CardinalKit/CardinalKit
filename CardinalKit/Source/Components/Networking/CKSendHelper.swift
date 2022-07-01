@@ -40,8 +40,6 @@ public class CKSendHelper {
      Given a file, use the Firebase SDK to store it in Google Storage.
     */
     public static func sendToCloudStorage(_ files: URL, collection: String, withIdentifier identifier: String? = nil) throws {
-        guard let authCollection = CKStudyUser.shared.authCollection else { return }
-            
         let fileManager = FileManager.default
         let fileURLs = try fileManager.contentsOfDirectory(at: files, includingPropertiesForKeys: nil)
         
@@ -58,7 +56,7 @@ public class CKSendHelper {
             }
             
             let storageRef = Storage.storage().reference()
-            let ref = storageRef.child("\(authCollection)\(Constants.Firebase.dataBucketStorage)\(collection)/\(identifier ?? UUID().uuidString)/\(file.lastPathComponent)")
+            let ref = storageRef.child("\(collection)/\(identifier ?? UUID().uuidString)/\(file.lastPathComponent)")
                         
             
             let uploadTask = ref.putFile(from: file, metadata: nil)
