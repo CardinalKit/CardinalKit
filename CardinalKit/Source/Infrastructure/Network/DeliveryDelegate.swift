@@ -86,14 +86,13 @@ extension CKDelivery: CKDeliveryDelegate{
 }
 
 extension CKDelivery{
-    private func sendHealthKit(_ file: URL,_ package: Package,_ onCompletion: @escaping (Bool) -> Void) {
-        if let authPath = CKStudyUser.shared.authCollection{
-            
-            let identifier = Date().startOfDay.shortStringFromDate() + "-\(package.fileName)"
-            let trimmedIdentifier = identifier.trimmingCharacters(in: .whitespaces)
-            
-            firebaseManager.send(file: file, package: package, authPath: authPath + "\(Constants.Firebase.dataBucketHealthKit)",identifier: trimmedIdentifier, onCompletion: onCompletion)
-        }
+    private func sendHealthKit(_ file: URL,_ package: Package, _ onCompletion: @escaping (Bool) -> Void) {
+        if let userDataDelegate = CKApp.instance.options.userDataProviderDelegate,
+           let authPath =   userDataDelegate.authCollection{
+                let identifier = Date().startOfDay.shortStringFromDate() + "-\(package.fileName)"
+                let trimmedIdentifier = identifier.trimmingCharacters(in: .whitespaces)
+                firebaseManager.send(file: file, package: package, authPath: authPath + "\(Constants.Firebase.dataBucketHealthKit)",identifier: trimmedIdentifier, onCompletion: onCompletion)
+            }
         else{
             onCompletion(false)
         }
@@ -101,7 +100,8 @@ extension CKDelivery{
     }
     private func sendSensorData(_ file: URL,_ package: Package,_ onCompletion: @escaping (Bool) -> Void) {}
     private func sendMetricsData(_ file: URL,_ package: Package,_ onCompletion: @escaping (Bool) -> Void) {
-        if let authPath = CKStudyUser.shared.authCollection {
+        if let userDataDelegate = CKApp.instance.options.userDataProviderDelegate,
+           let authPath = userDataDelegate.authCollection {
             let identifier:String = package.identifier
             firebaseManager.send(file: file, package: package, authPath: authPath + "\(Constants.Firebase.dataBucketHealthKit)", identifier: identifier,onCompletion: onCompletion)
             
