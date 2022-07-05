@@ -30,7 +30,7 @@ public class CKMultipleSignInStepViewController: ORKQuestionStepViewController{
         return step as? CKMultipleSignInStep
     }
     
-    let authLibrary = Libraries.shared.authlibrary
+    let authLibrary = Dependencies.container.resolve(AuthLibrary.self)!
     
     public override func viewDidLoad() {
         

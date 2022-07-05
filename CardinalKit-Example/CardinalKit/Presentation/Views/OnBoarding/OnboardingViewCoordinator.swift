@@ -57,8 +57,8 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
                         UserDefaults.standard.set(url.path, forKey: "consentFormURL")
                         
                         if let DocumentCollection = CKStudyUser.shared.authCollection {
-                            
-                            Libraries.shared.networkingLibrary.sendFile(url: url, path: "\(DocumentCollection)/\(consentFileName).pdf")
+                            let networkingLibrary = Dependencies.container.resolve(NetworkingLibrary.self)!
+                            networkingLibrary.sendFile(url: url, path: "\(DocumentCollection)/\(consentFileName).pdf")
                         }
                     } catch let error {
                         print(error.localizedDescription)
@@ -76,7 +76,7 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
     }
     
     func taskViewController(_ taskViewController: ORKTaskViewController, stepViewControllerWillAppear stepViewController: ORKStepViewController) {
-        let authLibrary = Libraries.shared.authlibrary
+        let authLibrary = Dependencies.container.resolve(AuthLibrary.self)!
         // MARK: - Advanced Concepts
         // Sometimes we might want some custom logic
         // to run when a step appears 🎩
@@ -120,7 +120,8 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
                 let stepResult = taskViewController.result.stepResult(forStepIdentifier: "RegistrationStep")
                 if let emailRes = stepResult?.results?.first as? ORKTextQuestionResult, let email = emailRes.textAnswer {
                     if let passwordRes = stepResult?.results?[1] as? ORKTextQuestionResult, let pass = passwordRes.textAnswer {
-                        Libraries.shared.authlibrary.RegisterUser(email: email, pass: pass, onSuccess: {
+                        let authLibrary = Dependencies.container.resolve(AuthLibrary.self)!
+                        authLibrary.RegisterUser(email: email, pass: pass, onSuccess: {
                             alert.dismiss(animated: false, completion: nil)
                             print("Created user!")
                         }, onError: { error in

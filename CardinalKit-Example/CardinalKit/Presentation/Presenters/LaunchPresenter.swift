@@ -13,7 +13,8 @@ class LaunchPresenter:ObservableObject{
     @Published var didCompleteOnBoarding:Bool
     
     init(){
-        didCompleteOnBoarding = UserDefaults.standard.bool(forKey: Constants.onboardingDidComplete) && Libraries.shared.authlibrary.user != nil
+        let authLibrary = Dependencies.container.resolve(AuthLibrary.self)!
+        didCompleteOnBoarding = UserDefaults.standard.bool(forKey: Constants.onboardingDidComplete) && authLibrary.user != nil
         
         NotificationCenter.default.addObserver(self, selector: #selector(onBoardingStateChange), name: .onBoardingStateChange, object: nil)
         

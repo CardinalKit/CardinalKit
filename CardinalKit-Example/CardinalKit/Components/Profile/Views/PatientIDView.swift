@@ -12,7 +12,8 @@ struct PatientIDView: View {
     var userID = ""
     
     init() {
-        if let currentUser = Libraries.shared.authlibrary.user {
+        let authLibrary = Dependencies.container.resolve(AuthLibrary.self)!
+        if let currentUser = authLibrary.user {
            self.userID = currentUser.uid
        }
     }

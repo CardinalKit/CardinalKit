@@ -25,9 +25,9 @@
 		632ED497286BB649009C3543 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632ED496286BB649009C3543 /* User.swift */; };
 		632ED49B286BB7DE009C3543 /* AuthLibraryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632ED49A286BB7DE009C3543 /* AuthLibraryProtocol.swift */; };
 		632ED49D286BB7FE009C3543 /* FirebaseAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632ED49C286BB7FE009C3543 /* FirebaseAuth.swift */; };
-		632ED49F286CF0DD009C3543 /* Libraries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632ED49E286CF0DD009C3543 /* Libraries.swift */; };
 		632ED4A2286CF13A009C3543 /* NetworkingProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632ED4A1286CF13A009C3543 /* NetworkingProtocol.swift */; };
 		632ED4A4286CF149009C3543 /* FirebaseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632ED4A3286CF149009C3543 /* FirebaseStorage.swift */; };
+		637BDB97287497D500DF9A5A /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637BDB96287497D500DF9A5A /* DIContainer.swift */; };
 		63F8E3EA28664E2200F260AE /* LaunchUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F8E3E928664E2200F260AE /* LaunchUIView.swift */; };
 		63F8E3F028664E6300F260AE /* MainUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F8E3EF28664E6300F260AE /* MainUIView.swift */; };
 		63F8E3F5286650CF00F260AE /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F8E3F4286650CF00F260AE /* Notification.swift */; };
@@ -131,9 +131,9 @@
 		632ED496286BB649009C3543 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		632ED49A286BB7DE009C3543 /* AuthLibraryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthLibraryProtocol.swift; sourceTree = "<group>"; };
 		632ED49C286BB7FE009C3543 /* FirebaseAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuth.swift; sourceTree = "<group>"; };
-		632ED49E286CF0DD009C3543 /* Libraries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Libraries.swift; sourceTree = "<group>"; };
 		632ED4A1286CF13A009C3543 /* NetworkingProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingProtocol.swift; sourceTree = "<group>"; };
 		632ED4A3286CF149009C3543 /* FirebaseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorage.swift; sourceTree = "<group>"; };
+		637BDB96287497D500DF9A5A /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
 		63F8E3E928664E2200F260AE /* LaunchUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchUIView.swift; sourceTree = "<group>"; };
 		63F8E3EF28664E6300F260AE /* MainUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainUIView.swift; sourceTree = "<group>"; };
 		63F8E3F128664F0C00F260AE /* LaunchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchPresenter.swift; sourceTree = "<group>"; };
@@ -359,6 +359,7 @@
 				E235077624F7082700CC1899 /* SceneDelegate.swift */,
 				8EBE6F9B24B3C0E60093D07C /* AppDelegate+CardinalKit.swift */,
 				2F94C5F12536543600DF8866 /* SceneDelegate+CardinalKit.swift */,
+				637BDB96287497D500DF9A5A /* DIContainer.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -462,7 +463,6 @@
 				8E6E1E3325353AFE0024B8DF /* EmailHelper.swift */,
 				8E9CDFAD2592B79900C8A228 /* Metrics.swift */,
 				8EA664B32594387900B6A45A /* Errors.swift */,
-				632ED49E286CF0DD009C3543 /* Libraries.swift */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -760,6 +760,7 @@
 				"${BUILT_PRODUCTS_DIR}/ResearchKit/ResearchKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SAMKeychain/SAMKeychain.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/Swinject/Swinject.framework",
 				"${BUILT_PRODUCTS_DIR}/Zip/Zip.framework",
 				"${BUILT_PRODUCTS_DIR}/abseil/absl.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
@@ -798,6 +799,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ResearchKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SAMKeychain.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Swinject.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Zip.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/absl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
@@ -838,7 +840,6 @@
 				8E6E1E0B2534FF640024B8DF /* OnboardingViewCoordinator.swift in Sources */,
 				8EA664B025941A4D00B6A45A /* SurveyItemViewController.swift in Sources */,
 				8E9CDEBA2591843200C8A228 /* CKConfig.swift in Sources */,
-				632ED49F286CF0DD009C3543 /* Libraries.swift in Sources */,
 				2F94C5F22536543600DF8866 /* SceneDelegate+CardinalKit.swift in Sources */,
 				8E9CDFAE2592B79900C8A228 /* Metrics.swift in Sources */,
 				27653A13272A2E7700D74E83 /* LocalTaskListItemView.swift in Sources */,
@@ -858,6 +859,7 @@
 				8E6E1E3425353AFE0024B8DF /* EmailHelper.swift in Sources */,
 				63F8E3EA28664E2200F260AE /* LaunchUIView.swift in Sources */,
 				8E6E1E182535263F0024B8DF /* CKTaskViewController.swift in Sources */,
+				637BDB97287497D500DF9A5A /* DIContainer.swift in Sources */,
 				8E9CDF142591B73900C8A228 /* CKHealthRecordsManager.swift in Sources */,
 				8EA664B42594387900B6A45A /* Errors.swift in Sources */,
 				8E6E1E1225351F830024B8DF /* DocumentPreviewViewController.swift in Sources */,

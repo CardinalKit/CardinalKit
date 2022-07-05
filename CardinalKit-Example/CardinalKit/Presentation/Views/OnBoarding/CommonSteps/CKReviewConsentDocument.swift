@@ -37,12 +37,17 @@ public class CKReviewConsentDocumentViewController:ORKQuestionStepViewController
             var docURL = (FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)).last as NSURL?
             docURL = docURL?.appendingPathComponent("\(consentFileName).pdf") as NSURL?
             let url = docURL! as URL
+            let networkLibrary = Dependencies.container.resolve(NetworkingLibrary.self)!
             
-            Libraries.shared.networkingLibrary.checkIfFileExist(url: url, path: "\(DocumentCollection)/\(consentFileName).pdf", onComplete: {
+            networkLibrary.checkIfFileExist(url: url, path: "\(DocumentCollection)/\(consentFileName).pdf", onComplete: {
                 exist in
                 self.setAnswer(exist)
                 super.goForward()
             })
+        }
+        else{
+            self.setAnswer(false)
+            super.goForward()
         }
     }
 }

@@ -22,7 +22,8 @@ class CKStudyUser {
      * be compatible with CardinalKit GCP rules.
     **************************************************************/
     var authCollection: String? {
-        if let userId = Libraries.shared.authlibrary.user?.uid,
+        let authLibrary = Dependencies.container.resolve(AuthLibrary.self)!
+        if let userId = authLibrary.user?.uid,
             let root = rootAuthCollection {
             return "\(root)\(userId)/"
         }
@@ -67,6 +68,7 @@ class CKStudyUser {
     }
     
     var isLoggedIn: Bool {
-        return Libraries.shared.authlibrary.user != nil
+        let authLibrary = Dependencies.container.resolve(AuthLibrary.self)!
+        return authLibrary.user != nil
     }    
 }

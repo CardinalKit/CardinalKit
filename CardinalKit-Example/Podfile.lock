@@ -832,6 +832,7 @@ PODS:
   - ResearchKit (2.1.0-beta)
   - SAMKeychain (1.5.3)
   - SwiftyJSON (4.1.0)
+  - Swinject (2.8.1)
   - Zip (1.1.0)
 
 DEPENDENCIES:
@@ -845,6 +846,7 @@ DEPENDENCIES:
   - GoogleSignIn
   - Granola (from `https://github.com/CardinalKit/Granola.git`, branch `main`)
   - ResearchKit (from `https://github.com/ResearchKit/ResearchKit.git`, branch `master`)
+  - Swinject
 
 SPEC REPOS:
   trunk:
@@ -883,6 +885,7 @@ SPEC REPOS:
     - RealmSwift
     - SAMKeychain
     - SwiftyJSON
+    - Swinject
     - Zip
 
 EXTERNAL SOURCES:
@@ -942,8 +945,9 @@ SPEC CHECKSUMS:
   ResearchKit: 449f96824c4e71c70a9278953c3b279f0fe10805
   SAMKeychain: 483e1c9f32984d50ca961e26818a534283b4cd5c
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
+  Swinject: 97112918bd7e0785dc2df7036213f3c8cbba6586
   Zip: 8877eede3dda76bcac281225c20e71c25270774c
 
-PODFILE CHECKSUM: 5ed202145139db7bcd1c4de5c77db7355bae1d08
+PODFILE CHECKSUM: 104f0c1f0c81a526d167ef2beca9ba74d4124bf3
 
 COCOAPODS: 1.11.3

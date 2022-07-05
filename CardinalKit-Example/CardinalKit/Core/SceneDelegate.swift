@@ -34,7 +34,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
-        Libraries.shared.authlibrary.AuthDinamycLink(url: userActivity.webpageURL!)
+        let authLibrary = Dependencies.container.resolve(AuthLibrary.self)!
+        authLibrary.AuthDinamycLink(url: userActivity.webpageURL!)
     }
 
 

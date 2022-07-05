@@ -51,7 +51,8 @@ struct WithdrawalViewController: UIViewControllerRepresentable {
                 
                 do {
                     try CKCareKitManager.shared.wipe()
-                    try Libraries.shared.authlibrary.logout(onSuccess: {
+                    let authLibrary = Dependencies.container.resolve(AuthLibrary.self)!
+                    try authLibrary.logout(onSuccess: {
                         NotificationCenter.default.post(name: .onBoardingStateChange, object: false)
                         NotificationCenter.default.post(name: .onUserStateChange , object: false)
                     }, onError: { error in })

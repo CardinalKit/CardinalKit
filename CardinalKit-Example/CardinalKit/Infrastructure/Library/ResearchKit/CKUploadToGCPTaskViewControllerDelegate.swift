@@ -81,9 +81,9 @@ class CKUploadToGCPTaskViewControllerDelegate : NSObject, ORKTaskViewControllerD
     */
     func CKSendJSON(_ json: [String:Any]) throws {
         let identifier = (json["identifier"] as? String) ?? UUID().uuidString
-            
+        let authLibrary = Dependencies.container.resolve(AuthLibrary.self)!
         guard let authCollection = CKStudyUser.shared.authCollection,
-                   let userId = Libraries.shared.authlibrary.user?.uid
+                   let userId = authLibrary.user?.uid
              else{
                  return
              }

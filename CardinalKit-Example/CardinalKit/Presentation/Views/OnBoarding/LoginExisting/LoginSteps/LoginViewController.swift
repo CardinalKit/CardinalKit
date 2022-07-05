@@ -20,8 +20,8 @@ class LoginViewController: ORKLoginStepViewController {
             alert.view.addSubview(loadingIndicator)
 
             taskViewController?.present(alert, animated: false, completion: nil)
-
-            Libraries.shared.authlibrary.LoginIWithUserPass(email: email, pass: pass, onSuccess: {
+            let authLibrary = Dependencies.container.resolve(AuthLibrary.self)!
+            authLibrary.LoginIWithUserPass(email: email, pass: pass, onSuccess: {
                 alert.dismiss(animated: false, completion: nil)
                 super.goForward()
             }, onError: { error in
@@ -43,7 +43,8 @@ class LoginViewController: ORKLoginStepViewController {
 
         alert.addAction(UIAlertAction(title: "Submit", style: .default, handler: { (action) in
             let textField = alert.textFields![0]
-            Libraries.shared.authlibrary.ResetPassword(email: textField.text!, onSuccess: {
+            let authLibrary = Dependencies.container.resolve(AuthLibrary.self)!
+            authLibrary.ResetPassword(email: textField.text!, onSuccess: {
                 print("Email sent!")
             }, onError: { error in
                 DispatchQueue.main.async {
