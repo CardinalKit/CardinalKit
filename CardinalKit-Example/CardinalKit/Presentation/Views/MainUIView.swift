@@ -7,19 +7,15 @@
 //
 
 import SwiftUI
-import CardinalKit
 
 struct MainUIView: View {
+    @ObservedObject var presenter = MainPresenter()
     
     let color: Color
     let config = CKConfig.shared
     
-    @State var useCareKit = false
-    @State var carekitLoaded = false
-    
     init() {
         self.color = Color(config.readColor(query: "Primary Color"))
-        CKApp.collectData(fromDate: Date().dayByAdding(-10)!, toDate: Date())
     }
     
     var body: some View {
@@ -29,7 +25,7 @@ struct MainUIView: View {
                 Text("Tasks")
             }
             
-            if useCareKit && carekitLoaded {
+            if presenter.useCarekit && presenter.carekitLoaded {
                 ScheduleViewControllerRepresentable()
                     .ignoresSafeArea(edges: .all)
                     .tabItem {
@@ -51,16 +47,6 @@ struct MainUIView: View {
             }
         }
         .accentColor(self.color)
-        .onAppear(perform: {
-            self.useCareKit = config.readBool(query: "Use CareKit")
-            
-            let lastUpdateDate:Date? = UserDefaults.standard.object(forKey: Constants.prefCareKitCoreDataInitDate) as? Date
-            CKCareKitManager.shared.coreDataStore.populateSampleData(lastUpdateDate:lastUpdateDate){() in
-                self.carekitLoaded = true
-            }
-            
-            
-        })
     }
 }
 
