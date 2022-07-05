@@ -12,23 +12,21 @@ import CardinalKit
 class CKStudyUser {
     
     static let shared = CKStudyUser()
+
+    weak var authStateHandle: AuthStateDidChangeListenerHandle?
     
     /* **************************************************************
      * the current user only resolves if we are logged in
-    **************************************************************/
-    var currentUser: User? {
-        // this is a reference to the
-        // Firebase + Google Identity User
-        return Auth.auth().currentUser
-    }
+     **************************************************************/
+    var currentUser: User?
     
     /* **************************************************************
      * store your Firebase objects under this path in order to
      * be compatible with CardinalKit GCP rules.
-    **************************************************************/
+     **************************************************************/
     var authCollection: String? {
         if let userId = currentUser?.uid,
-            let root = rootAuthCollection {
+           let root = rootAuthCollection {
             return "\(root)\(userId)/"
         }
         
@@ -74,16 +72,34 @@ class CKStudyUser {
     var isLoggedIn: Bool {
         return (currentUser?.isEmailVerified ?? false) && UserDefaults.standard.bool(forKey: Constants.prefConfirmedLogin)
     }
+
+    init() {
+        // listen for changes in authentication state from Firebase and update currentUser
+        authStateHandle = Auth.auth().addStateDidChangeListener { [weak self] (auth, user) in
+            if user != nil {
+                self?.currentUser = user
+            } else {
+                self?.currentUser = nil
+            }
+        }
+    }
+
+    deinit {
+        // remove the authentication state handle when the instance is deallocated
+        if let handle = authStateHandle {
+            Auth.auth().removeStateDidChangeListener(handle)
+        }
+    }
     
     /**
-    Send a login email to the user.
+     Send a login email to the user.
 
-    At this stage, we do not have a `currentUser` via Google Identity.
+     At this stage, we do not have a `currentUser` via Google Identity.
 
-    - Parameters:
-        - email: validated address that should receive the sign-in link.
-        - completion: callback
-    */
+     - Parameters:
+     - email: validated address that should receive the sign-in link.
+     - completion: callback
+     */
     func sendLoginLink(email: String, completion: @escaping (Bool)->Void) {
         guard !email.isEmpty else {
             completion(false)
@@ -107,12 +123,12 @@ class CKStudyUser {
     }
 
     /**
-    Save a snapshot of our current user into Firestore.
-    */
+     Save a snapshot of our current user into Firestore.
+     */
     func save() {
         if let dataBucket = rootAuthCollection,
-            let email = currentUser?.email,
-            let uid = currentUser?.uid {
+           let email = currentUser?.email,
+           let uid = currentUser?.uid {
             
             CKSession.shared.userId = uid
             CKSendHelper.createNecessaryDocuments(path:dataBucket)
@@ -125,8 +141,8 @@ class CKStudyUser {
     }
     
     /**
-    Remove the current user's auth parameters from storage.
-    */
+     Remove the current user's auth parameters from storage.
+     */
     func signOut() throws {
         email = nil
         try Auth.auth().signOut()
