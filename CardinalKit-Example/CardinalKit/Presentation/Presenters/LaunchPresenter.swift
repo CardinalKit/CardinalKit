@@ -35,7 +35,9 @@ class LaunchPresenter:ObservableObject{
                 }
             }
             else{
-                didCompleteOnBoarding = false
+                if didCompleteOnBoarding {
+                    didCompleteOnBoarding = false
+                }
                 UserDefaults.standard.set(false, forKey: Constants.onboardingDidComplete)
             }
         }

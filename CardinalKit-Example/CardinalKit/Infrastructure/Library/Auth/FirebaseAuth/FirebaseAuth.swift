@@ -20,6 +20,9 @@ class FirebaseAuth: NSObject, AuthLibrary,ASAuthorizationControllerDelegate {
     
     override init() {
         super.init()
+        if let user = Auth.auth().currentUser {
+            self.user = User(uid: user.uid, email: user.email)
+        }
         Auth.auth().addStateDidChangeListener() { auth, user in
             if (user != nil){
                 self.user = User(uid: user!.uid, email: user!.email)
@@ -246,3 +249,6 @@ fileprivate extension String {
         return result
     }
 }
+
+
+
