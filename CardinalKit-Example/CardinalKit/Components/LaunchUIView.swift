@@ -14,14 +14,11 @@ import Firebase
 struct LaunchUIView: View {
     
     @State var didCompleteOnboarding = false
-    
-    init() {
-        
-    }
+    @ObservedObject var auth: CKStudyUser = CKStudyUser.shared
 
     var body: some View {
         VStack(spacing: 10) {
-            if didCompleteOnboarding && (CKStudyUser.shared.currentUser != nil){
+            if didCompleteOnboarding && (auth.currentUser != nil){
                 MainUIView()
             } else {
                 OnboardingUIView() {
