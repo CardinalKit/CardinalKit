@@ -384,6 +384,7 @@
 		637BDB9B2874E01B00DF9A5A /* Tasks */ = {
 			isa = PBXGroup;
 			children = (
+				637BDBB52875EF6A00DF9A5A /* Examples */,
 				8E6E1E25253537E40024B8DF /* TasksUIView.swift */,
 				637BDBB02875DF3200DF9A5A /* TaskItemView.swift */,
 			);
@@ -401,6 +402,7 @@
 		637BDB9F2874E30100DF9A5A /* Tasks */ = {
 			isa = PBXGroup;
 			children = (
+				8E7FFFBC25DE38E4002982B4 /* CoffeeChartDataSource.swift */,
 				637BDBA42874E48700DF9A5A /* TaskItems.swift */,
 				637BDBA62874EE3D00DF9A5A /* TaskSamples.swift */,
 			);
@@ -430,6 +432,16 @@
 				637BDBB32875DF5700DF9A5A /* TaskItemPresenter.swift */,
 			);
 			path = Tasks;
+			sourceTree = "<group>";
+		};
+		637BDBB52875EF6A00DF9A5A /* Examples */ = {
+			isa = PBXGroup;
+			children = (
+				8E9CDF822592844A00C8A228 /* LearnUIView.swift */,
+				8E7FFFB725DE350A002982B4 /* CoffeeUIView.swift */,
+				8E7FFFBA25DE37FF002982B4 /* CoffeePieChartView.swift */,
+			);
+			path = Examples;
 			sourceTree = "<group>";
 		};
 		63F8E3E628664DD300F260AE /* Views */ = {
@@ -512,15 +524,6 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		8E0A438D244A4A0400656518 /* Tasks */ = {
-			isa = PBXGroup;
-			children = (
-				8E9CDF7F2591E62000C8A228 /* Model */,
-				8E6E1E2F25353A550024B8DF /* Views */,
-			);
-			path = Tasks;
-			sourceTree = "<group>";
-		};
 		8E0A43C5244A4A5700656518 /* Library */ = {
 			isa = PBXGroup;
 			children = (
@@ -546,16 +549,6 @@
 				632ED4A3286CF149009C3543 /* FirebaseStorage.swift */,
 			);
 			path = Networking;
-			sourceTree = "<group>";
-		};
-		8E6E1E2F25353A550024B8DF /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				8E9CDF822592844A00C8A228 /* LearnUIView.swift */,
-				8E7FFFB725DE350A002982B4 /* CoffeeUIView.swift */,
-				8E7FFFBA25DE37FF002982B4 /* CoffeePieChartView.swift */,
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		8E6E1E3025353AA70024B8DF /* Views */ = {
@@ -588,7 +581,6 @@
 			children = (
 				8E9CDEA525915F6600C8A228 /* Schedule */,
 				8E9CDEB42591818200C8A228 /* Care Team */,
-				8E0A438D244A4A0400656518 /* Tasks */,
 				8E0A4379244A4A0400656518 /* Profile */,
 			);
 			path = Components;
@@ -630,14 +622,6 @@
 				8E9CDF132591B73900C8A228 /* CKHealthRecordsManager.swift */,
 			);
 			path = HealthKit;
-			sourceTree = "<group>";
-		};
-		8E9CDF7F2591E62000C8A228 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				8E7FFFBC25DE38E4002982B4 /* CoffeeChartDataSource.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		8E9CDF802591E6B800C8A228 /* Configuration */ = {
