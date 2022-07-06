@@ -7,13 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		27653A13272A2E7700D74E83 /* LocalTaskListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27653A12272A2E7700D74E83 /* LocalTaskListItemView.swift */; };
 		2B19DD9226FE1BEB00649CE1 /* JsonToSurvey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19DD9126FE1BEB00649CE1 /* JsonToSurvey.swift */; };
 		2B19DD9426FE1D2600649CE1 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19DD9326FE1D2600649CE1 /* TestViewController.swift */; };
 		2B19DD9626FE1D2F00649CE1 /* CheckListItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19DD9526FE1D2F00649CE1 /* CheckListItemViewController.swift */; };
 		2B8FB80427552B02000B2D7B /* CKMultipleSignInStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8FB80327552B02000B2D7B /* CKMultipleSignInStep.swift */; };
 		2B932F84276BF8D300AB3A02 /* CKReviewConsentDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B932F83276BF8D300AB3A02 /* CKReviewConsentDocument.swift */; };
-		2BD5328526C30F2E00C4636E /* CloudTaskItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5328426C30F2E00C4636E /* CloudTaskItem.swift */; };
 		2BF6451826C1D0040020C206 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		2BF6452026C1DBE70020C206 /* CK_ORKSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6451F26C1DBE70020C206 /* CK_ORKSerialization.swift */; };
 		2E02B7ECEB2186F8E5868D90 /* Pods_CardinalKit_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D9CCFBC6701FC7A8C18DE19 /* Pods_CardinalKit_Example.framework */; };
@@ -29,6 +27,14 @@
 		632ED4A4286CF149009C3543 /* FirebaseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632ED4A3286CF149009C3543 /* FirebaseStorage.swift */; };
 		637BDB97287497D500DF9A5A /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637BDB96287497D500DF9A5A /* DIContainer.swift */; };
 		637BDB992874D8F300DF9A5A /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637BDB982874D8F200DF9A5A /* MainPresenter.swift */; };
+		637BDB9D2874E04000DF9A5A /* TaskPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637BDB9C2874E04000DF9A5A /* TaskPresenter.swift */; };
+		637BDBA32874E41000DF9A5A /* TaskItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637BDBA22874E41000DF9A5A /* TaskItem.swift */; };
+		637BDBA52874E48700DF9A5A /* TaskItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637BDBA42874E48700DF9A5A /* TaskItems.swift */; };
+		637BDBA72874EE3D00DF9A5A /* TaskSamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637BDBA62874EE3D00DF9A5A /* TaskSamples.swift */; };
+		637BDBAA2874F42700DF9A5A /* ResearchKitSurveyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637BDBA92874F42700DF9A5A /* ResearchKitSurveyManager.swift */; };
+		637BDBAF2874F49000DF9A5A /* SurveyManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637BDBAE2874F49000DF9A5A /* SurveyManagerProtocol.swift */; };
+		637BDBB12875DF3200DF9A5A /* TaskItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637BDBB02875DF3200DF9A5A /* TaskItemView.swift */; };
+		637BDBB42875DF5700DF9A5A /* TaskItemPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637BDBB32875DF5700DF9A5A /* TaskItemPresenter.swift */; };
 		63F8E3EA28664E2200F260AE /* LaunchUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F8E3E928664E2200F260AE /* LaunchUIView.swift */; };
 		63F8E3F028664E6300F260AE /* MainUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F8E3EF28664E6300F260AE /* MainUIView.swift */; };
 		63F8E3F5286650CF00F260AE /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F8E3F4286650CF00F260AE /* Notification.swift */; };
@@ -38,8 +44,6 @@
 		8E0A43AE244A4A0400656518 /* ORKESerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4386244A4A0400656518 /* ORKESerialization.m */; };
 		8E0A43AF244A4A0400656518 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E0A4388244A4A0400656518 /* Assets.xcassets */; };
 		8E0A43B0244A4A0400656518 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E0A4389244A4A0400656518 /* LaunchScreen.storyboard */; };
-		8E0A43B3244A4A0400656518 /* TaskSamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A438F244A4A0400656518 /* TaskSamples.swift */; };
-		8E0A43B5244A4A0400656518 /* LocalTaskItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4391244A4A0400656518 /* LocalTaskItem.swift */; };
 		8E0A43B9244A4A0400656518 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4396244A4A0400656518 /* AppDelegate.swift */; };
 		8E0A43BE244A4A0400656518 /* CKHealthDataStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A439D244A4A0400656518 /* CKHealthDataStepViewController.swift */; };
 		8E0A43C0244A4A0400656518 /* PasswordlessLoginStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A439F244A4A0400656518 /* PasswordlessLoginStep.swift */; };
@@ -56,7 +60,6 @@
 		8E6E1E1E253528F50024B8DF /* SupportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E1E1D253528F50024B8DF /* SupportView.swift */; };
 		8E6E1E20253529760024B8DF /* DocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E1E1F253529760024B8DF /* DocumentView.swift */; };
 		8E6E1E26253537E40024B8DF /* TasksUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E1E25253537E40024B8DF /* TasksUIView.swift */; };
-		8E6E1E28253538CC0024B8DF /* CloudTaskListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E1E27253538CC0024B8DF /* CloudTaskListItemView.swift */; };
 		8E6E1E2A2535398D0024B8DF /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E1E292535398D0024B8DF /* HelpView.swift */; };
 		8E6E1E2C253539AE0024B8DF /* ChangePasscodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E1E2B253539AE0024B8DF /* ChangePasscodeView.swift */; };
 		8E6E1E2E25353A1E0024B8DF /* PatientIDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E1E2D25353A1E0024B8DF /* PatientIDView.swift */; };
@@ -114,13 +117,11 @@
 		07D78DA16FC9C3C7709EA243 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		1FA79795EFBE53D3F8311C90 /* Pods-CardinalKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardinalKit_Example.release.xcconfig"; path = "Target Support Files/Pods-CardinalKit_Example/Pods-CardinalKit_Example.release.xcconfig"; sourceTree = "<group>"; };
 		270AF36127872C13002945A7 /* CardinalKit_ExampleRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CardinalKit_ExampleRelease.entitlements; sourceTree = "<group>"; };
-		27653A12272A2E7700D74E83 /* LocalTaskListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalTaskListItemView.swift; sourceTree = "<group>"; };
 		2B19DD9126FE1BEB00649CE1 /* JsonToSurvey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonToSurvey.swift; sourceTree = "<group>"; };
 		2B19DD9326FE1D2600649CE1 /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		2B19DD9526FE1D2F00649CE1 /* CheckListItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckListItemViewController.swift; sourceTree = "<group>"; };
 		2B8FB80327552B02000B2D7B /* CKMultipleSignInStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKMultipleSignInStep.swift; sourceTree = "<group>"; };
 		2B932F83276BF8D300AB3A02 /* CKReviewConsentDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKReviewConsentDocument.swift; sourceTree = "<group>"; };
-		2BD5328426C30F2E00C4636E /* CloudTaskItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudTaskItem.swift; sourceTree = "<group>"; };
 		2BF6451F26C1DBE70020C206 /* CK_ORKSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CK_ORKSerialization.swift; sourceTree = "<group>"; };
 		2D9CCFBC6701FC7A8C18DE19 /* Pods_CardinalKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CardinalKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F94C5F12536543600DF8866 /* SceneDelegate+CardinalKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SceneDelegate+CardinalKit.swift"; sourceTree = "<group>"; };
@@ -136,6 +137,14 @@
 		632ED4A3286CF149009C3543 /* FirebaseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorage.swift; sourceTree = "<group>"; };
 		637BDB96287497D500DF9A5A /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
 		637BDB982874D8F200DF9A5A /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
+		637BDB9C2874E04000DF9A5A /* TaskPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskPresenter.swift; sourceTree = "<group>"; };
+		637BDBA22874E41000DF9A5A /* TaskItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskItem.swift; sourceTree = "<group>"; };
+		637BDBA42874E48700DF9A5A /* TaskItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskItems.swift; sourceTree = "<group>"; };
+		637BDBA62874EE3D00DF9A5A /* TaskSamples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskSamples.swift; sourceTree = "<group>"; };
+		637BDBA92874F42700DF9A5A /* ResearchKitSurveyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResearchKitSurveyManager.swift; sourceTree = "<group>"; };
+		637BDBAE2874F49000DF9A5A /* SurveyManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyManagerProtocol.swift; sourceTree = "<group>"; };
+		637BDBB02875DF3200DF9A5A /* TaskItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskItemView.swift; sourceTree = "<group>"; };
+		637BDBB32875DF5700DF9A5A /* TaskItemPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskItemPresenter.swift; sourceTree = "<group>"; };
 		63F8E3E928664E2200F260AE /* LaunchUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchUIView.swift; sourceTree = "<group>"; };
 		63F8E3EF28664E6300F260AE /* MainUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainUIView.swift; sourceTree = "<group>"; };
 		63F8E3F128664F0C00F260AE /* LaunchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchPresenter.swift; sourceTree = "<group>"; };
@@ -150,8 +159,6 @@
 		8E0A4388244A4A0400656518 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8E0A438A244A4A0400656518 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8E0A438B244A4A0400656518 /* CardinalKit-Example.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "CardinalKit-Example.entitlements"; sourceTree = "<group>"; };
-		8E0A438F244A4A0400656518 /* TaskSamples.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskSamples.swift; sourceTree = "<group>"; };
-		8E0A4391244A4A0400656518 /* LocalTaskItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalTaskItem.swift; sourceTree = "<group>"; };
 		8E0A4396244A4A0400656518 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8E0A439D244A4A0400656518 /* CKHealthDataStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKHealthDataStepViewController.swift; sourceTree = "<group>"; };
 		8E0A439F244A4A0400656518 /* PasswordlessLoginStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordlessLoginStep.swift; sourceTree = "<group>"; };
@@ -169,7 +176,6 @@
 		8E6E1E1D253528F50024B8DF /* SupportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportView.swift; sourceTree = "<group>"; };
 		8E6E1E1F253529760024B8DF /* DocumentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentView.swift; sourceTree = "<group>"; };
 		8E6E1E25253537E40024B8DF /* TasksUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksUIView.swift; sourceTree = "<group>"; };
-		8E6E1E27253538CC0024B8DF /* CloudTaskListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudTaskListItemView.swift; sourceTree = "<group>"; };
 		8E6E1E292535398D0024B8DF /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
 		8E6E1E2B253539AE0024B8DF /* ChangePasscodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasscodeView.swift; sourceTree = "<group>"; };
 		8E6E1E2D25353A1E0024B8DF /* PatientIDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientIDView.swift; sourceTree = "<group>"; };
@@ -324,6 +330,7 @@
 			isa = PBXGroup;
 			children = (
 				632ED496286BB649009C3543 /* User.swift */,
+				637BDBA22874E41000DF9A5A /* TaskItem.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -331,6 +338,7 @@
 		632ED4B4286E5C0D009C3543 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				637BDB9E2874E2F800DF9A5A /* Mock */,
 				63F8E3E828664DE700F260AE /* Presenters */,
 				63F8E3E628664DD300F260AE /* Views */,
 			);
@@ -366,9 +374,69 @@
 			path = Core;
 			sourceTree = "<group>";
 		};
+		637BDB9A2874DFCA00DF9A5A /* Schedule */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Schedule;
+			sourceTree = "<group>";
+		};
+		637BDB9B2874E01B00DF9A5A /* Tasks */ = {
+			isa = PBXGroup;
+			children = (
+				8E6E1E25253537E40024B8DF /* TasksUIView.swift */,
+				637BDBB02875DF3200DF9A5A /* TaskItemView.swift */,
+			);
+			path = Tasks;
+			sourceTree = "<group>";
+		};
+		637BDB9E2874E2F800DF9A5A /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				637BDB9F2874E30100DF9A5A /* Tasks */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
+		637BDB9F2874E30100DF9A5A /* Tasks */ = {
+			isa = PBXGroup;
+			children = (
+				637BDBA42874E48700DF9A5A /* TaskItems.swift */,
+				637BDBA62874EE3D00DF9A5A /* TaskSamples.swift */,
+			);
+			path = Tasks;
+			sourceTree = "<group>";
+		};
+		637BDBA82874F41800DF9A5A /* Surveys */ = {
+			isa = PBXGroup;
+			children = (
+				637BDBA92874F42700DF9A5A /* ResearchKitSurveyManager.swift */,
+			);
+			path = Surveys;
+			sourceTree = "<group>";
+		};
+		637BDBAB2874F46000DF9A5A /* Survey */ = {
+			isa = PBXGroup;
+			children = (
+				637BDBAE2874F49000DF9A5A /* SurveyManagerProtocol.swift */,
+			);
+			path = Survey;
+			sourceTree = "<group>";
+		};
+		637BDBB22875DF4900DF9A5A /* Tasks */ = {
+			isa = PBXGroup;
+			children = (
+				637BDB9C2874E04000DF9A5A /* TaskPresenter.swift */,
+				637BDBB32875DF5700DF9A5A /* TaskItemPresenter.swift */,
+			);
+			path = Tasks;
+			sourceTree = "<group>";
+		};
 		63F8E3E628664DD300F260AE /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				637BDB9B2874E01B00DF9A5A /* Tasks */,
+				637BDB9A2874DFCA00DF9A5A /* Schedule */,
 				63F8E3EB28664E2700F260AE /* OnBoarding */,
 				63F8E3E928664E2200F260AE /* LaunchUIView.swift */,
 				63F8E3EF28664E6300F260AE /* MainUIView.swift */,
@@ -379,6 +447,7 @@
 		63F8E3E828664DE700F260AE /* Presenters */ = {
 			isa = PBXGroup;
 			children = (
+				637BDBB22875DF4900DF9A5A /* Tasks */,
 				63F8E3F128664F0C00F260AE /* LaunchPresenter.swift */,
 				63F8E3F62866527E00F260AE /* OnBoardingPresenter.swift */,
 				637BDB982874D8F200DF9A5A /* MainPresenter.swift */,
@@ -448,7 +517,6 @@
 			children = (
 				8E9CDF7F2591E62000C8A228 /* Model */,
 				8E6E1E2F25353A550024B8DF /* Views */,
-				8E6E1E25253537E40024B8DF /* TasksUIView.swift */,
 			);
 			path = Tasks;
 			sourceTree = "<group>";
@@ -456,6 +524,7 @@
 		8E0A43C5244A4A5700656518 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				637BDBAB2874F46000DF9A5A /* Survey */,
 				8E9CDF802591E6B800C8A228 /* Configuration */,
 				8E9CDECE2591ABDF00C8A228 /* HealthKit */,
 				8E40DC022471E5590027536B /* Networking */,
@@ -485,8 +554,6 @@
 				8E9CDF822592844A00C8A228 /* LearnUIView.swift */,
 				8E7FFFB725DE350A002982B4 /* CoffeeUIView.swift */,
 				8E7FFFBA25DE37FF002982B4 /* CoffeePieChartView.swift */,
-				27653A12272A2E7700D74E83 /* LocalTaskListItemView.swift */,
-				8E6E1E27253538CC0024B8DF /* CloudTaskListItemView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -568,10 +635,7 @@
 		8E9CDF7F2591E62000C8A228 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				8E0A438F244A4A0400656518 /* TaskSamples.swift */,
 				8E7FFFBC25DE38E4002982B4 /* CoffeeChartDataSource.swift */,
-				8E0A4391244A4A0400656518 /* LocalTaskItem.swift */,
-				2BD5328426C30F2E00C4636E /* CloudTaskItem.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -588,6 +652,7 @@
 		8E9CDF812591E6D000C8A228 /* ResearchKit */ = {
 			isa = PBXGroup;
 			children = (
+				637BDBA82874F41800DF9A5A /* Surveys */,
 				2B19DD9126FE1BEB00649CE1 /* JsonToSurvey.swift */,
 				2BF6451F26C1DBE70020C206 /* CK_ORKSerialization.swift */,
 				8E0A4386244A4A0400656518 /* ORKESerialization.m */,
@@ -836,22 +901,22 @@
 				8E0A43C0244A4A0400656518 /* PasswordlessLoginStep.swift in Sources */,
 				8EA664B2259422E400B6A45A /* CKCareKitRemoteSyncWithFirestore.swift in Sources */,
 				8EA664AD2593380D00B6A45A /* SendRecordsView.swift in Sources */,
-				8E6E1E28253538CC0024B8DF /* CloudTaskListItemView.swift in Sources */,
-				8E0A43B3244A4A0400656518 /* TaskSamples.swift in Sources */,
+				637BDBA32874E41000DF9A5A /* TaskItem.swift in Sources */,
 				8E6E1E1A253528450024B8DF /* WithdrawView.swift in Sources */,
 				8E6E1E2E25353A1E0024B8DF /* PatientIDView.swift in Sources */,
 				8E6E1E0B2534FF640024B8DF /* OnboardingViewCoordinator.swift in Sources */,
 				8EA664B025941A4D00B6A45A /* SurveyItemViewController.swift in Sources */,
 				8E9CDEBA2591843200C8A228 /* CKConfig.swift in Sources */,
 				2F94C5F22536543600DF8866 /* SceneDelegate+CardinalKit.swift in Sources */,
+				637BDBA72874EE3D00DF9A5A /* TaskSamples.swift in Sources */,
 				8E9CDFAE2592B79900C8A228 /* Metrics.swift in Sources */,
 				637BDB992874D8F300DF9A5A /* MainPresenter.swift in Sources */,
-				27653A13272A2E7700D74E83 /* LocalTaskListItemView.swift in Sources */,
 				63F8E3F5286650CF00F260AE /* Notification.swift in Sources */,
 				8E7FFFB425DCE9B7002982B4 /* CKUploadToGCPTaskViewControllerDelegate.swift in Sources */,
 				8EBE6F9C24B3C0E60093D07C /* AppDelegate+CardinalKit.swift in Sources */,
 				632ED491286BAE11009C3543 /* PageViewController.swift in Sources */,
 				8E0A43B9244A4A0400656518 /* AppDelegate.swift in Sources */,
+				637BDBA52874E48700DF9A5A /* TaskItems.swift in Sources */,
 				8E6E1E3225353ABE0024B8DF /* ProfileUIView.swift in Sources */,
 				8E6E1E1E253528F50024B8DF /* SupportView.swift in Sources */,
 				8E6E1E1C253528D70024B8DF /* ReportView.swift in Sources */,
@@ -859,21 +924,24 @@
 				8E6E1E26253537E40024B8DF /* TasksUIView.swift in Sources */,
 				8E9CDEAD259170AD00C8A228 /* CKCareKitManager.swift in Sources */,
 				632ED4A2286CF13A009C3543 /* NetworkingProtocol.swift in Sources */,
+				637BDBAA2874F42700DF9A5A /* ResearchKitSurveyManager.swift in Sources */,
+				637BDB9D2874E04000DF9A5A /* TaskPresenter.swift in Sources */,
 				632ED49D286BB7FE009C3543 /* FirebaseAuth.swift in Sources */,
 				8E6E1E3425353AFE0024B8DF /* EmailHelper.swift in Sources */,
 				63F8E3EA28664E2200F260AE /* LaunchUIView.swift in Sources */,
 				8E6E1E182535263F0024B8DF /* CKTaskViewController.swift in Sources */,
 				637BDB97287497D500DF9A5A /* DIContainer.swift in Sources */,
 				8E9CDF142591B73900C8A228 /* CKHealthRecordsManager.swift in Sources */,
+				637BDBB12875DF3200DF9A5A /* TaskItemView.swift in Sources */,
 				8EA664B42594387900B6A45A /* Errors.swift in Sources */,
 				8E6E1E1225351F830024B8DF /* DocumentPreviewViewController.swift in Sources */,
+				637BDBAF2874F49000DF9A5A /* SurveyManagerProtocol.swift in Sources */,
 				8E6E1E20253529760024B8DF /* DocumentView.swift in Sources */,
 				63F8E3F72866527E00F260AE /* OnBoardingPresenter.swift in Sources */,
 				8E7FFFBB25DE37FF002982B4 /* CoffeePieChartView.swift in Sources */,
 				8E7FFFB825DE350A002982B4 /* CoffeeUIView.swift in Sources */,
 				2BF6451826C1D0040020C206 /* (null) in Sources */,
 				2B19DD9226FE1BEB00649CE1 /* JsonToSurvey.swift in Sources */,
-				8E0A43B5244A4A0400656518 /* LocalTaskItem.swift in Sources */,
 				8E6E1E2C253539AE0024B8DF /* ChangePasscodeView.swift in Sources */,
 				8E0A43AD244A4A0400656518 /* Constants.swift in Sources */,
 				8E0A43BE244A4A0400656518 /* CKHealthDataStepViewController.swift in Sources */,
@@ -883,7 +951,6 @@
 				8E9CDEB6259181B400C8A228 /* CareTeamViewControllerRepresentable.swift in Sources */,
 				8E9CDEAF259172C200C8A228 /* CKCareKitManager+Sample.swift in Sources */,
 				8E9CDEA925916E6600C8A228 /* ScheduleViewController.swift in Sources */,
-				2BD5328526C30F2E00C4636E /* CloudTaskItem.swift in Sources */,
 				D253D132250D1BDB00A363E4 /* (null) in Sources */,
 				8E0A43AC244A4A0400656518 /* CKStudyUser.swift in Sources */,
 				8E9CDEB22591739A00C8A228 /* TipView.swift in Sources */,
@@ -896,6 +963,7 @@
 				632ED4A4286CF149009C3543 /* FirebaseStorage.swift in Sources */,
 				632ED492286BAE41009C3543 /* RegisterNewUserViewController.swift in Sources */,
 				8E9CDEA725916B2800C8A228 /* ScheduleViewControllerRepresentable.swift in Sources */,
+				637BDBB42875DF5700DF9A5A /* TaskItemPresenter.swift in Sources */,
 				2B932F84276BF8D300AB3A02 /* CKReviewConsentDocument.swift in Sources */,
 				E235077724F7082700CC1899 /* SceneDelegate.swift in Sources */,
 				8E6E1E16253524500024B8DF /* WithdrawalViewController.swift in Sources */,
