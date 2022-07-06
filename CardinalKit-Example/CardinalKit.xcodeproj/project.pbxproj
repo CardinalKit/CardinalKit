@@ -35,6 +35,7 @@
 		637BDBAF2874F49000DF9A5A /* SurveyManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637BDBAE2874F49000DF9A5A /* SurveyManagerProtocol.swift */; };
 		637BDBB12875DF3200DF9A5A /* TaskItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637BDBB02875DF3200DF9A5A /* TaskItemView.swift */; };
 		637BDBB42875DF5700DF9A5A /* TaskItemPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637BDBB32875DF5700DF9A5A /* TaskItemPresenter.swift */; };
+		637BDBB828764A5800DF9A5A /* ProfileUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637BDBB728764A5800DF9A5A /* ProfileUIView.swift */; };
 		63F8E3EA28664E2200F260AE /* LaunchUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F8E3E928664E2200F260AE /* LaunchUIView.swift */; };
 		63F8E3F028664E6300F260AE /* MainUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F8E3EF28664E6300F260AE /* MainUIView.swift */; };
 		63F8E3F5286650CF00F260AE /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F8E3F4286650CF00F260AE /* Notification.swift */; };
@@ -63,7 +64,6 @@
 		8E6E1E2A2535398D0024B8DF /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E1E292535398D0024B8DF /* HelpView.swift */; };
 		8E6E1E2C253539AE0024B8DF /* ChangePasscodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E1E2B253539AE0024B8DF /* ChangePasscodeView.swift */; };
 		8E6E1E2E25353A1E0024B8DF /* PatientIDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E1E2D25353A1E0024B8DF /* PatientIDView.swift */; };
-		8E6E1E3225353ABE0024B8DF /* ProfileUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E1E3125353ABE0024B8DF /* ProfileUIView.swift */; };
 		8E6E1E3425353AFE0024B8DF /* EmailHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E1E3325353AFE0024B8DF /* EmailHelper.swift */; };
 		8E7FFFB425DCE9B7002982B4 /* CKUploadToGCPTaskViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7FFFB325DCE9B7002982B4 /* CKUploadToGCPTaskViewControllerDelegate.swift */; };
 		8E7FFFB825DE350A002982B4 /* CoffeeUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7FFFB725DE350A002982B4 /* CoffeeUIView.swift */; };
@@ -143,6 +143,7 @@
 		637BDBAE2874F49000DF9A5A /* SurveyManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyManagerProtocol.swift; sourceTree = "<group>"; };
 		637BDBB02875DF3200DF9A5A /* TaskItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskItemView.swift; sourceTree = "<group>"; };
 		637BDBB32875DF5700DF9A5A /* TaskItemPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskItemPresenter.swift; sourceTree = "<group>"; };
+		637BDBB728764A5800DF9A5A /* ProfileUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileUIView.swift; path = CardinalKit/Components/Profile/ProfileUIView.swift; sourceTree = SOURCE_ROOT; };
 		63F8E3E928664E2200F260AE /* LaunchUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchUIView.swift; sourceTree = "<group>"; };
 		63F8E3EF28664E6300F260AE /* MainUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainUIView.swift; sourceTree = "<group>"; };
 		63F8E3F128664F0C00F260AE /* LaunchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchPresenter.swift; sourceTree = "<group>"; };
@@ -177,7 +178,6 @@
 		8E6E1E292535398D0024B8DF /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
 		8E6E1E2B253539AE0024B8DF /* ChangePasscodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasscodeView.swift; sourceTree = "<group>"; };
 		8E6E1E2D25353A1E0024B8DF /* PatientIDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientIDView.swift; sourceTree = "<group>"; };
-		8E6E1E3125353ABE0024B8DF /* ProfileUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUIView.swift; sourceTree = "<group>"; };
 		8E6E1E3325353AFE0024B8DF /* EmailHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailHelper.swift; sourceTree = "<group>"; };
 		8E7FFFB325DCE9B7002982B4 /* CKUploadToGCPTaskViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKUploadToGCPTaskViewControllerDelegate.swift; sourceTree = "<group>"; };
 		8E7FFFB725DE350A002982B4 /* CoffeeUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeUIView.swift; sourceTree = "<group>"; };
@@ -440,9 +440,27 @@
 			path = Examples;
 			sourceTree = "<group>";
 		};
+		637BDBB62876490800DF9A5A /* Items */ = {
+			isa = PBXGroup;
+			children = (
+				8E6E1E1F253529760024B8DF /* DocumentView.swift */,
+				8E6E1E19253528450024B8DF /* WithdrawView.swift */,
+				8E6E1E1B253528D70024B8DF /* ReportView.swift */,
+				8E6E1E1D253528F50024B8DF /* SupportView.swift */,
+				8E6E1E292535398D0024B8DF /* HelpView.swift */,
+				8E6E1E2B253539AE0024B8DF /* ChangePasscodeView.swift */,
+				8E6E1E2D25353A1E0024B8DF /* PatientIDView.swift */,
+				8EA664AC2593380D00B6A45A /* SendRecordsView.swift */,
+				8E6E1E1125351F830024B8DF /* DocumentPreviewViewController.swift */,
+				8E6E1E15253524500024B8DF /* WithdrawalViewController.swift */,
+			);
+			path = Items;
+			sourceTree = "<group>";
+		};
 		63F8E3E628664DD300F260AE /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8E0A4379244A4A0400656518 /* Profile */,
 				637BDB9B2874E01B00DF9A5A /* Tasks */,
 				637BDB9A2874DFCA00DF9A5A /* Schedule */,
 				63F8E3EB28664E2700F260AE /* OnBoarding */,
@@ -489,10 +507,8 @@
 		8E0A4379244A4A0400656518 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				8E6E1E3025353AA70024B8DF /* Views */,
-				8E6E1E3125353ABE0024B8DF /* ProfileUIView.swift */,
-				8E6E1E1125351F830024B8DF /* DocumentPreviewViewController.swift */,
-				8E6E1E15253524500024B8DF /* WithdrawalViewController.swift */,
+				637BDBB728764A5800DF9A5A /* ProfileUIView.swift */,
+				637BDBB62876490800DF9A5A /* Items */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -546,21 +562,6 @@
 			path = Networking;
 			sourceTree = "<group>";
 		};
-		8E6E1E3025353AA70024B8DF /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				8E6E1E1F253529760024B8DF /* DocumentView.swift */,
-				8E6E1E19253528450024B8DF /* WithdrawView.swift */,
-				8E6E1E1B253528D70024B8DF /* ReportView.swift */,
-				8E6E1E1D253528F50024B8DF /* SupportView.swift */,
-				8E6E1E292535398D0024B8DF /* HelpView.swift */,
-				8E6E1E2B253539AE0024B8DF /* ChangePasscodeView.swift */,
-				8E6E1E2D25353A1E0024B8DF /* PatientIDView.swift */,
-				8EA664AC2593380D00B6A45A /* SendRecordsView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		8E9CDEA525915F6600C8A228 /* Schedule */ = {
 			isa = PBXGroup;
 			children = (
@@ -576,7 +577,6 @@
 			children = (
 				8E9CDEA525915F6600C8A228 /* Schedule */,
 				8E9CDEB42591818200C8A228 /* Care Team */,
-				8E0A4379244A4A0400656518 /* Profile */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -887,7 +887,6 @@
 				632ED491286BAE11009C3543 /* PageViewController.swift in Sources */,
 				8E0A43B9244A4A0400656518 /* AppDelegate.swift in Sources */,
 				637BDBA52874E48700DF9A5A /* TaskItems.swift in Sources */,
-				8E6E1E3225353ABE0024B8DF /* ProfileUIView.swift in Sources */,
 				8E6E1E1E253528F50024B8DF /* SupportView.swift in Sources */,
 				8E6E1E1C253528D70024B8DF /* ReportView.swift in Sources */,
 				632ED48F286BADBD009C3543 /* OnBoardingUiView.swift in Sources */,
@@ -932,6 +931,7 @@
 				632ED4A4286CF149009C3543 /* FirebaseStorage.swift in Sources */,
 				632ED492286BAE41009C3543 /* RegisterNewUserViewController.swift in Sources */,
 				8E9CDEA725916B2800C8A228 /* ScheduleViewControllerRepresentable.swift in Sources */,
+				637BDBB828764A5800DF9A5A /* ProfileUIView.swift in Sources */,
 				637BDBB42875DF5700DF9A5A /* TaskItemPresenter.swift in Sources */,
 				2B932F84276BF8D300AB3A02 /* CKReviewConsentDocument.swift in Sources */,
 				E235077724F7082700CC1899 /* SceneDelegate.swift in Sources */,
