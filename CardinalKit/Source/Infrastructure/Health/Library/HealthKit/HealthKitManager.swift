@@ -13,13 +13,16 @@ public class HealthKitManager{
     
     lazy var healthStore: HKHealthStore = HKHealthStore()
     var types:Set<HKSampleType> = Set([])
+    var clinicalTypes:Set<HKSampleType> = Set([])
     
     init(){
         types = defaultTypes()
+        clinicalTypes = healthRecordsDefaultTypes()
     }
     
-    public func configure(types: Set<HKSampleType>){
+    public func configure(types: Set<HKSampleType>, clinicalTypes: Set<HKSampleType>){
         self.types = types
+        self.clinicalTypes = clinicalTypes
     }
     
     func startHealthKitCollectionInBackground(withFrequency frequency:String){
@@ -37,11 +40,43 @@ public class HealthKitManager{
     func startCollectionByDayBetweenDate(fromDate startDate:Date, toDate endDate:Date?){
         self.setUpCollectionByDayBetweenDates(fromDate: startDate, toDate: endDate, forTypes: types)
     }
+    
+    func collectAndUploadClinicalTypes(){
+        self.collectClinicalTypes(for: clinicalTypes)
+    }
 }
 
 
 
 extension HealthKitManager{
+    
+    private func collectClinicalTypes(for types: Set<HKSampleType>){
+        for type in types {
+            let query = HKSampleQuery(sampleType: type, predicate: nil, limit: HKObjectQueryNoLimit, sortDescriptors: nil) { (query, samples, error) in
+                guard let samples = samples as? [HKClinicalRecord] else {
+                    print("*** An error occurred: \(error?.localizedDescription ?? "nil") ***")
+                    return
+                }
+                CKApp.instance.infrastructure.onClinicalDataCollected(data: samples)
+//
+//                for sample in samples {
+//                    guard let resource = sample.fhirResource else { continue }
+//                    do {
+//                        let data = resource.data
+//                        let identifier = resource.resourceType.rawValue + "-" + resource.identifier
+//                        let sampleToJson = try JSONSerialization.data(withJSONObject: data, options: [])
+//                        let packageName = "\(Date().stringWithFormat())-\(identifier)-\(UUID())"
+//                        let package = try Package(packageName, type: .hkdata, identifier: packageName, data: sampleToJson)
+//                        let networkObject = NetworkRequestObject.findOrCreateNetworkRequest(package)
+//                        try networkObject.perform()
+//                    } catch {
+//                        print("[upload] ERROR " + error.localizedDescription)
+//                    }
+//                }
+            }
+            healthStore.execute(query)
+        }
+    }
     
     private func setUpCollectionByDayBetweenDates(fromDate startDate:Date, toDate endDate:Date?, forTypes types:Set<HKSampleType>){
         var copyTypes = types

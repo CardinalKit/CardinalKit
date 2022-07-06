@@ -113,6 +113,7 @@ class Constants {
     }
     
     struct Firebase {
+        static let dataBucketClinicalRecords = "clinicalRecords"
         static let dataBucketHealthKit = "healthKit"
         static let dataBucketStorage = "storage"
         static let dataBucketMetrics = "metrics"

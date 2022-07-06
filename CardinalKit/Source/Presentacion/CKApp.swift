@@ -80,8 +80,8 @@ public class CKApp{
 // HealthKit Functions
 extension CKApp{
     
-    class public func configureHealthKitTypes(types:Set<HKSampleType>){
-        instance.infrastructure.configure(types: types)
+    class public func configureHealthKitTypes(types:Set<HKSampleType>, clinicalTypes: Set<HKSampleType>){
+        instance.infrastructure.configure(types: types, clinicalTypes: clinicalTypes)
     }
     
     class public func startBackgroundDeliveryData(){
@@ -92,7 +92,15 @@ extension CKApp{
         instance.infrastructure.collectData(fromDate: startDate, toDate: endDate)
     }
     
+    class public func collectClinicalData(){
+        instance.infrastructure.collectClinicalData()
+    }
+    
     class public func getHealthPermision(completion: @escaping (Result<Bool, Error>) -> Void) {
         instance.infrastructure.getHealthPermission(completion: completion)
+    }
+    
+    class public func getClinicalPermission(completion: @escaping (Result<Bool, Error>) -> Void) {
+        instance.infrastructure.getClinicalPermission(completion: completion)
     }
 }

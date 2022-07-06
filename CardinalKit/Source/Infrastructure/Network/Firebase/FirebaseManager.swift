@@ -108,7 +108,7 @@ class FirebaseManager{
         }
         
         let db = firestoreDb()
-//        createNecessaryDocuments(path: route)
+        createNecessaryDocuments(path: route)
         let ref = db.document(route)
         ref.setData(documentData, merge: merge)
         
@@ -124,6 +124,21 @@ class FirebaseManager{
                 }
             })
             print("[appendCareKitArrayInFirestore] updating revisions with overwriteRemote")
+        }
+    }
+    
+    func createNecessaryDocuments(path: String){
+        let _db=firestoreDb()
+        let _pathArray = path.split{$0 == "/"}.map(String.init)
+        var currentPath = ""
+        var index=0
+        for part in _pathArray{
+            currentPath+=part
+            if(index%2 != 0){
+                _db.document(currentPath).setData(["exist":"true"], merge: true)
+            }
+            currentPath+="/"
+            index+=1
         }
     }
     

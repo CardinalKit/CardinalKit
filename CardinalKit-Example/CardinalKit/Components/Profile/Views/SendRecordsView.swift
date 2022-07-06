@@ -7,10 +7,9 @@
 //
 
 import SwiftUI
+import CardinalKit
 
 struct SendRecordsView: View {
-    
-    @State var isSending: Bool = false
     
     @State var lastSentString: String? = nil
     @State var lastSentDate: Date? = nil {
@@ -30,29 +29,20 @@ struct SendRecordsView: View {
     }
     
     fileprivate func onPress() {
-        guard !isSending else { return }
-        
-        isSending = true
-        CKHealthRecordsManager.shared.getAuth { (success, _) in
-            guard success else {
-                isSending = false
-                return
-            }
-            
-            CKHealthRecordsManager.shared.collectAndUploadAll() { success, _ in
-                isSending = false
-                if success {
-                    lastSentDate = recordsLastUploaded
-                }
-            }
+        var lastDate = Date().yesterday
+        if let recordsLastUploaded = lastSentDate {
+            lastDate = recordsLastUploaded
         }
+        CKApp.collectData(fromDate: lastDate, toDate: Date())
+        lastSentDate = Date()
+        UserDefaults.standard.set(Date(), forKey: Constants.prefHealthRecordsLastUploaded)
     }
     
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
                 Text("Upload Health Records")
-                    .foregroundColor(isSending ? .gray : .blue)
+                    .foregroundColor(.blue)
                 if let lastSentString = lastSentString {
                     Text("Last sent on \(lastSentString)")
                         .foregroundColor(.gray)
@@ -60,7 +50,6 @@ struct SendRecordsView: View {
                 }
             }
             Spacer()
-            Text(isSending ? "⏳" : "›")
         }.frame(height: 70)
         .contentShape(Rectangle())
         .gesture(TapGesture().onEnded(onPress))

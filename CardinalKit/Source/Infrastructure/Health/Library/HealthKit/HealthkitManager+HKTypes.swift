@@ -192,4 +192,21 @@ extension HealthKitManager{
         return hkTypesToReadInBackground
     }
     
+    func healthRecordsDefaultTypes() -> Set<HKSampleType>{
+        var hkClinicalTypes: Set<HKSampleType> = []
+        let clinicalTypes :[HKClinicalTypeIdentifier] = [
+            .allergyRecord,
+            .conditionRecord,
+            .immunizationRecord,
+            .labResultRecord,
+            .medicationRecord,
+            .procedureRecord,
+            .vitalSignRecord,
+            .coverageRecord
+        ]
+        for clinicalType in clinicalTypes {
+            hkClinicalTypes.insert(HKObjectType.clinicalType(forIdentifier: clinicalType)!)
+        }
+        return hkClinicalTypes
+    }
 }

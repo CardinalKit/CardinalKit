@@ -62,15 +62,14 @@ extension CKDelivery: CKDeliveryDelegate{
     
     public func send(file: URL, package: Package, onCompletion: @escaping (Bool) -> Void) {
         switch package.type {
-        case .hkdata:
-            sendHealthKit(file, package, onCompletion)
-            break
-        case .metricsData:
-            sendMetricsData(file, package, onCompletion)
-            break;
-        default:
-            fatalError("Sending data of type \(package.type.description) is NOT supported.")
-            break
+            case .hkdata:
+                sendHealthKit(file, package, onCompletion)
+                break
+            case .metricsData:
+                sendMetricsData(file, package, onCompletion)
+                break;
+            case .clinicalData:
+                sendClinicalData(file, package, onCompletion)
         }
     }
     
@@ -95,6 +94,17 @@ extension CKDelivery{
             onCompletion(false)
         }
         
+    }
+    private func sendClinicalData(_ file: URL,_ package: Package, _ onCompletion: @escaping (Bool) -> Void) {
+        if let userDataDelegate = CKApp.instance.options.userDataProviderDelegate,
+           let authPath =   userDataDelegate.authCollection{
+                let identifier = Date().startOfDay.shortStringFromDate() + "-\(package.fileName)"
+                let trimmedIdentifier = identifier.trimmingCharacters(in: .whitespaces)
+                firebaseManager.send(file: file, package: package, authPath: authPath + "\(Constants.Firebase.dataBucketClinicalRecords)",identifier: trimmedIdentifier, onCompletion: onCompletion)
+            }
+        else{
+            onCompletion(false)
+        }
     }
     private func sendSensorData(_ file: URL,_ package: Package,_ onCompletion: @escaping (Bool) -> Void) {}
     private func sendMetricsData(_ file: URL,_ package: Package,_ onCompletion: @escaping (Bool) -> Void) {

@@ -14,6 +14,8 @@ public enum PackageType: String {
 //    case hkdataAggregate = "HKDATA_AGGREGATE"
     case metricsData = "HKDATA_METRICS"
     
+    case clinicalData = "HKCLINICAL"
+    
     static let debuggable: [PackageType] = [.hkdata]
     
     public var description: String {
@@ -28,6 +30,8 @@ public enum PackageType: String {
 //            return "Aggregate summary per day"
         case .metricsData:
             return "metrics data"
+        case .clinicalData:
+            return "Clinical Records"
         }
     }
 }

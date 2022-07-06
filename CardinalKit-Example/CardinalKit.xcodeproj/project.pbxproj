@@ -80,8 +80,6 @@
 		8E9CDEB22591739A00C8A228 /* TipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9CDEB12591739A00C8A228 /* TipView.swift */; };
 		8E9CDEB6259181B400C8A228 /* CareTeamViewControllerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9CDEB5259181B400C8A228 /* CareTeamViewControllerRepresentable.swift */; };
 		8E9CDEBA2591843200C8A228 /* CKConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9CDEB92591843200C8A228 /* CKConfig.swift */; };
-		8E9CDED02591AC4A00C8A228 /* CKHealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9CDECF2591AC4A00C8A228 /* CKHealthKitManager.swift */; };
-		8E9CDF142591B73900C8A228 /* CKHealthRecordsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9CDF132591B73900C8A228 /* CKHealthRecordsManager.swift */; };
 		8E9CDF832592844A00C8A228 /* LearnUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9CDF822592844A00C8A228 /* LearnUIView.swift */; };
 		8E9CDFAE2592B79900C8A228 /* Metrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9CDFAD2592B79900C8A228 /* Metrics.swift */; };
 		8EA6648725930B6B00B6A45A /* CKHealthRecordsStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA6648625930B6B00B6A45A /* CKHealthRecordsStepViewController.swift */; };
@@ -192,8 +190,6 @@
 		8E9CDEB12591739A00C8A228 /* TipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipView.swift; sourceTree = "<group>"; };
 		8E9CDEB5259181B400C8A228 /* CareTeamViewControllerRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareTeamViewControllerRepresentable.swift; sourceTree = "<group>"; };
 		8E9CDEB92591843200C8A228 /* CKConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKConfig.swift; sourceTree = "<group>"; };
-		8E9CDECF2591AC4A00C8A228 /* CKHealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKHealthKitManager.swift; sourceTree = "<group>"; };
-		8E9CDF132591B73900C8A228 /* CKHealthRecordsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKHealthRecordsManager.swift; sourceTree = "<group>"; };
 		8E9CDF822592844A00C8A228 /* LearnUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnUIView.swift; sourceTree = "<group>"; };
 		8E9CDFAD2592B79900C8A228 /* Metrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metrics.swift; sourceTree = "<group>"; };
 		8EA6648625930B6B00B6A45A /* CKHealthRecordsStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKHealthRecordsStepViewController.swift; sourceTree = "<group>"; };
@@ -484,6 +480,7 @@
 		63F8E3F3286650BE00F260AE /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				8E6E1E0F25351E890024B8DF /* Extensions+UIColor.swift */,
 				63F8E3F4286650CF00F260AE /* Notification.swift */,
 			);
 			path = Extensions;
@@ -529,12 +526,10 @@
 			children = (
 				637BDBAB2874F46000DF9A5A /* Survey */,
 				8E9CDF802591E6B800C8A228 /* Configuration */,
-				8E9CDECE2591ABDF00C8A228 /* HealthKit */,
 				8E40DC022471E5590027536B /* Networking */,
 				8E0A4380244A4A0400656518 /* Auth */,
 				8E9CDF812591E6D000C8A228 /* ResearchKit */,
 				8E9CDEAB25916F6E00C8A228 /* CareKit */,
-				8E6E1E0F25351E890024B8DF /* Extensions+UIColor.swift */,
 				8E6E1E3325353AFE0024B8DF /* EmailHelper.swift */,
 				8E9CDFAD2592B79900C8A228 /* Metrics.swift */,
 				8EA664B32594387900B6A45A /* Errors.swift */,
@@ -613,15 +608,6 @@
 				8E9CDEB5259181B400C8A228 /* CareTeamViewControllerRepresentable.swift */,
 			);
 			path = "Care Team";
-			sourceTree = "<group>";
-		};
-		8E9CDECE2591ABDF00C8A228 /* HealthKit */ = {
-			isa = PBXGroup;
-			children = (
-				8E9CDECF2591AC4A00C8A228 /* CKHealthKitManager.swift */,
-				8E9CDF132591B73900C8A228 /* CKHealthRecordsManager.swift */,
-			);
-			path = HealthKit;
 			sourceTree = "<group>";
 		};
 		8E9CDF802591E6B800C8A228 /* Configuration */ = {
@@ -915,7 +901,6 @@
 				63F8E3EA28664E2200F260AE /* LaunchUIView.swift in Sources */,
 				8E6E1E182535263F0024B8DF /* CKTaskViewController.swift in Sources */,
 				637BDB97287497D500DF9A5A /* DIContainer.swift in Sources */,
-				8E9CDF142591B73900C8A228 /* CKHealthRecordsManager.swift in Sources */,
 				637BDBB12875DF3200DF9A5A /* TaskItemView.swift in Sources */,
 				8EA664B42594387900B6A45A /* Errors.swift in Sources */,
 				8E6E1E1225351F830024B8DF /* DocumentPreviewViewController.swift in Sources */,
@@ -953,7 +938,6 @@
 				8E6E1E16253524500024B8DF /* WithdrawalViewController.swift in Sources */,
 				E2680B1B260A72DD00B755EA /* LoginExistingUserViewController.swift in Sources */,
 				8E6E1E2A2535398D0024B8DF /* HelpView.swift in Sources */,
-				8E9CDED02591AC4A00C8A228 /* CKHealthKitManager.swift in Sources */,
 				8E0A43C2244A4A0400656518 /* ConsentDocument.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

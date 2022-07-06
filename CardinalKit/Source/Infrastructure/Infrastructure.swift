@@ -22,22 +22,26 @@ internal class Infrastructure {
         healthKitManager = HealthKitManager()
         mhSerializer = CKOpenMHSerializer()
         healthPermissionProvider = Healthpermissions()
-        healthPermissionProvider.configure(types: healthKitManager.defaultTypes())
+        healthPermissionProvider.configure(types: healthKitManager.defaultTypes(), clinicalTypes: healthKitManager.healthRecordsDefaultTypes())
         _ = NetworkTracker.shared
         
     }
     
-    func configure(types: Set<HKSampleType>){
-        healthPermissionProvider.configure(types: types)
-        healthKitManager.configure(types: types)
+    func configure(types: Set<HKSampleType>, clinicalTypes: Set<HKSampleType>){
+        healthPermissionProvider.configure(types: types, clinicalTypes: clinicalTypes)
+        healthKitManager.configure(types: types, clinicalTypes: clinicalTypes)
     }
     
     func getHealthPermission(completion: @escaping (Result<Bool, Error>) -> Void){
-       healthPermissionProvider.getPermissions(completion: completion)
+       healthPermissionProvider.getHealthPermissions(completion: completion)
+    }
+    
+    func getClinicalPermission(completion: @escaping (Result<Bool, Error>) -> Void){
+       healthPermissionProvider.getRecordsPermissions(completion: completion)
     }
     
     func startBackgroundDeliveryData(){
-        healthPermissionProvider.getPermissions{ result in
+        healthPermissionProvider.getHealthPermissions{ result in
             switch result{
                 case .success(let success):
                 if success {
@@ -50,12 +54,13 @@ internal class Infrastructure {
     }
     
     func collectData(fromDate startDate:Date, toDate endDate: Date){
-        healthPermissionProvider.getPermissions{ result in
+        healthPermissionProvider.getAllPermissions(){ result in
             switch result{
                 case .success(let success):
                 if success {
                     // TODO: Configure all types
                     self.healthKitManager.startCollectionByDayBetweenDate(fromDate: startDate, toDate: endDate)
+                    self.healthKitManager.collectAndUploadClinicalTypes()
                 }
                 case .failure(let error):
                  print("error \(error)")
@@ -63,41 +68,58 @@ internal class Infrastructure {
         }
     }
     
+    func collectClinicalData(){
+        healthPermissionProvider.getAllPermissions(){ result in
+            switch result{
+                case .success(let success):
+                if success {
+                    self.healthKitManager.collectAndUploadClinicalTypes()
+                }
+                case .failure(let error):
+                 print("error \(error)")
+            }
+        }
+    }
+    
+    
     func onHealthDataColected(data:[HKSample]){
         do{
             // Transfom Data in OPENMHealth Format
             let samplesArray:[[String: Any]] = try mhSerializer.json(for: data)
-            
             for sample in samplesArray{
-                let sampleToJson = try JSONSerialization.data(withJSONObject: sample, options: [])
-                do {
-                    // TODO: Add package name
-                    // Date + Type + UUID
-                    var type = "HKData"
-                    if let ntype = data.first?.sampleType.identifier{
-                        type = ntype
-                    }
-                    let packageName = "\(Date().stringWithFormat())-\(type)-\(UUID())"
-                    let package = try Package(packageName, type: .hkdata, identifier: packageName, data: sampleToJson)
-                    let networkObject = NetworkRequestObject.findOrCreateNetworkRequest(package)
-                    try networkObject.perform()
+                var identifier = "HKData"
+                if let nIdentifier = data.first?.sampleType.identifier{
+                    identifier = nIdentifier
                 }
-                catch{
-                    VError("Unable to process package %{public}@", error.localizedDescription)
-                }
-                
+                let sampleToData = try JSONSerialization.data(withJSONObject: sample, options: [])
+                CreateAndPerformPackage(type: .hkdata, data: sampleToData, identifier: identifier)
             }
         }
         catch{
             print("Error Transform Data: \(error)")
         }
-        
-       
-        
-        // Transform Data with Granola
-        // Save data on locally
-        // Try send data to Cloud
-        
     }
     
+    func onClinicalDataCollected(data: [HKClinicalRecord]){
+        for sample in data {
+            guard let resource = sample.fhirResource else { continue }
+            let data = resource.data
+            let identifier = resource.resourceType.rawValue + "-" + resource.identifier
+            CreateAndPerformPackage(type: .clinicalData, data: data, identifier: identifier)
+            
+        }
+    }
+    
+    private func CreateAndPerformPackage(type: PackageType, data:Data, identifier: String){
+        do{
+            let packageName = "\(Date().stringWithFormat())-\(identifier)-\(UUID())"
+            let package = try Package(packageName, type: type, identifier: packageName, data: data)
+            let networkObject = NetworkRequestObject.findOrCreateNetworkRequest(package)
+            try networkObject.perform()
+        }
+        catch{
+            print("[upload] ERROR " + error.localizedDescription)
+        }
+        
+    }
 }
