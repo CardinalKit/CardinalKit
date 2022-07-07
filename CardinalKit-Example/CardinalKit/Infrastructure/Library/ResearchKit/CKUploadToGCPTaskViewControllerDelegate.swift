@@ -104,7 +104,7 @@ class CKUploadToGCPTaskViewControllerDelegate : NSObject, ORKTaskViewControllerD
         if  let collection = result["identifier"] as? String,
             let taskUUID = result["taskRunUUID"] as? String{
             
-            CKApp.sendDataToCloudStorafe(route: "\(authCollection)/\(collection)/\(taskUUID)", files: files, alsoSendToFirestore: false, firestoreRoute: nil){
+            CKApp.sendDataToCloudStorage(route: "\(authCollection)/\(collection)/\(taskUUID)", files: files, alsoSendToFirestore: false, firestoreRoute: nil){
                 succes in
                 
             }
