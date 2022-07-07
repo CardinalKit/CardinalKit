@@ -96,10 +96,18 @@ class CKUploadToGCPTaskViewControllerDelegate : NSObject, ORKTaskViewControllerD
      Given a file, use the Firebase SDK to store it in Google Storage.
     */
     func CKSendFiles(_ files: URL, result: [String:Any]) throws {
+        guard let authCollection = CKStudyUser.shared.authCollection
+         else{
+             return
+         }
+        
         if  let collection = result["identifier"] as? String,
-            let taskUUID = result["taskRunUUID"] as? String {
+            let taskUUID = result["taskRunUUID"] as? String{
             
-//            try CKSendHelper.sendToCloudStorage(files, collection: collection, withIdentifier: taskUUID)
+            CKApp.sendDataToCloudStorafe(route: "\(authCollection)/\(collection)/\(taskUUID)", files: files, alsoSendToFirestore: false, firestoreRoute: nil){
+                succes in
+                
+            }
         }
     }
     
