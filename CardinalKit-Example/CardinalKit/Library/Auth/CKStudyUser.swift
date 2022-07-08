@@ -13,12 +13,14 @@ class CKStudyUser: ObservableObject {
     
     static let shared = CKStudyUser()
 
-    weak var authStateHandle: AuthStateDidChangeListenerHandle?
+    private weak var authStateHandle: AuthStateDidChangeListenerHandle?
     
     /* **************************************************************
      * the current user only resolves if we are logged in
      **************************************************************/
-    @Published var currentUser: User?
+    var currentUser: User? {
+        return Auth.auth().currentUser
+    }
     
     /* **************************************************************
      * store your Firebase objects under this path in order to
@@ -75,12 +77,8 @@ class CKStudyUser: ObservableObject {
 
     init() {
         // listen for changes in authentication state from Firebase and update currentUser
-        authStateHandle = Auth.auth().addStateDidChangeListener { [weak self] (auth, user) in
-            if user != nil {
-                self?.currentUser = user
-            } else {
-                self?.currentUser = nil
-            }
+        authStateHandle = Auth.auth().addStateDidChangeListener { [weak self] (_, _) in
+            self?.objectWillChange.send()
         }
     }
 
