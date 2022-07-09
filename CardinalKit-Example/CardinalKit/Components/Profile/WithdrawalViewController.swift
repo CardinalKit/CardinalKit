@@ -58,8 +58,6 @@ struct WithdrawalViewController: UIViewControllerRepresentable {
                         ORKPasscodeViewController.removePasscodeFromKeychain()
                     }
                     
-                    NotificationCenter.default.post(name: NSNotification.Name(Constants.onboardingDidComplete), object: false)
-
                     UserDefaults.standard.set(nil, forKey: Constants.prefCareKitCoreDataInitDate)
                     UserDefaults.standard.set(nil, forKey: Constants.prefHealthRecordsLastUploaded)
                     UserDefaults.standard.set(false, forKey: Constants.onboardingDidComplete)

@@ -8,7 +8,6 @@
 
 import SwiftUI
 import ResearchKit
-import CardinalKit
 
 struct TasksUIView: View {
     
@@ -46,14 +45,12 @@ struct TasksUIView: View {
     }
     
     func getRemoteItems(){
-        CKResearchSurveysManager.shared.getTaskItems(onCompletion: {
-            (results) in
-            
+        CKResearchSurveysManager.shared.getTaskItems { (results) in
             if let results = results as? [CloudTaskItem]{
                 listItems = results
                 var headerCopy = listItemsPerHeader
                 var sectionsCopy = listItemsSections
-                if listItemsPerHeader.count <= 0 { // init
+                if listItemsPerHeader.isEmpty {
                     for item in results {
                         if headerCopy[item.section] == nil {
                             headerCopy[item.section] = [CloudTaskItem]()
@@ -64,10 +61,10 @@ struct TasksUIView: View {
                         }
                     }
                 }
-                listItemsPerHeader=headerCopy
-                listItemsSections=sectionsCopy
+                listItemsPerHeader = headerCopy
+                listItemsSections = sectionsCopy
             }
-        })
+        }
     }
     
     var body: some View {

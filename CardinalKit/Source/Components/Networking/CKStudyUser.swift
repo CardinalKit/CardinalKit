@@ -1,34 +1,34 @@
 //
 //  CKStudyUser.swift
+//  CardinalKit
 //
-//  Created for the CardinalKit Framework.
-//  Copyright © 2019 Stanford University. All rights reserved.
+//  Created by Julian Esteban Ramos Martinez on 7/01/22.
 //
 
 import Foundation
-import Firebase
-import CardinalKit
+import FirebaseAuth
+import FirebaseFirestore
 
-class CKStudyUser: ObservableObject {
+class CKStudyUser {
     
     static let shared = CKStudyUser()
-
-    private weak var authStateHandle: AuthStateDidChangeListenerHandle?
     
     /* **************************************************************
      * the current user only resolves if we are logged in
-     **************************************************************/
+    **************************************************************/
     var currentUser: User? {
+        // this is a reference to the
+        // Firebase + Google Identity User
         return Auth.auth().currentUser
     }
     
     /* **************************************************************
      * store your Firebase objects under this path in order to
      * be compatible with CardinalKit GCP rules.
-     **************************************************************/
+    **************************************************************/
     var authCollection: String? {
         if let userId = currentUser?.uid,
-           let root = rootAuthCollection {
+            let root = rootAuthCollection {
             return "\(root)\(userId)/"
         }
         
@@ -60,44 +60,30 @@ class CKStudyUser: ObservableObject {
 
     var email: String? {
         get {
-            return UserDefaults.standard.string(forKey: Constants.prefUserEmail)
+            return UserDefaults.standard.string(forKey: Constants.UserDefaults.prefUserEmail)
         }
         set {
             if let newValue = newValue {
-                UserDefaults.standard.set(newValue, forKey: Constants.prefUserEmail)
+                UserDefaults.standard.set(newValue, forKey: Constants.UserDefaults.prefUserEmail)
             } else {
-                UserDefaults.standard.removeObject(forKey: Constants.prefUserEmail)
+                UserDefaults.standard.removeObject(forKey: Constants.UserDefaults.prefUserEmail)
             }
         }
     }
     
     var isLoggedIn: Bool {
-        return (currentUser?.isEmailVerified ?? false) && UserDefaults.standard.bool(forKey: Constants.prefConfirmedLogin)
-    }
-
-    init() {
-        // listen for changes in authentication state from Firebase and update currentUser
-        authStateHandle = Auth.auth().addStateDidChangeListener { [weak self] (_, _) in
-            self?.objectWillChange.send()
-        }
-    }
-
-    deinit {
-        // remove the authentication state handle when the instance is deallocated
-        if let handle = authStateHandle {
-            Auth.auth().removeStateDidChangeListener(handle)
-        }
+        return (currentUser?.isEmailVerified ?? false) && UserDefaults.standard.bool(forKey: Constants.UserDefaults.prefConfirmedLogin)
     }
     
     /**
-     Send a login email to the user.
+    Send a login email to the user.
 
-     At this stage, we do not have a `currentUser` via Google Identity.
+    At this stage, we do not have a `currentUser` via Google Identity.
 
-     - Parameters:
-     - email: validated address that should receive the sign-in link.
-     - completion: callback
-     */
+    - Parameters:
+        - email: validated address that should receive the sign-in link.
+        - completion: callback
+    */
     func sendLoginLink(email: String, completion: @escaping (Bool)->Void) {
         guard !email.isEmpty else {
             completion(false)
@@ -121,29 +107,52 @@ class CKStudyUser: ObservableObject {
     }
 
     /**
-     Save a snapshot of our current user into Firestore.
-     */
+    Save a snapshot of our current user into Firestore.
+    */
     func save() {
         if let dataBucket = rootAuthCollection,
-           let email = currentUser?.email,
-           let uid = currentUser?.uid {
+            let email = currentUser?.email,
+            let uid = currentUser?.uid {
             
             CKSession.shared.userId = uid
-            CKSendHelper.createNecessaryDocuments(path:dataBucket)
+            createNecessaryDocuments(path:dataBucket)
             let settings = FirestoreSettings()
             settings.isPersistenceEnabled = false
             let db = Firestore.firestore()
             db.settings = settings
-            db.collection(dataBucket).document(uid).setData(["userID":uid, "lastActive":Date().ISOStringFromDate(),"email":email], merge: true)
+            db.collection(dataBucket).document(uid).setData(["userID":uid, "lastActive":Date().ISOStringFromDate(),"email":email])
         }
     }
     
     /**
-     Remove the current user's auth parameters from storage.
-     */
+    Remove the current user's auth parameters from storage.
+    */
     func signOut() throws {
         email = nil
         try Auth.auth().signOut()
+    }
+    
+    func createNecessaryDocuments(path: String){
+        let _db=firestoreDb()
+        let _pathArray = path.split{$0 == "/"}.map(String.init)
+        var currentPath = ""
+        var index=0
+        for part in _pathArray{
+            currentPath+=part
+            if(index%2 != 0){
+                _db.document(currentPath).setData(["exist":"true"], merge: true)
+            }
+            currentPath+="/"
+            index+=1
+        }
+    }
+    
+    func firestoreDb()->Firestore{
+        let settings = FirestoreSettings()
+        settings.isPersistenceEnabled = false
+        let db = Firestore.firestore()
+        db.settings = settings
+        return db
     }
     
 }

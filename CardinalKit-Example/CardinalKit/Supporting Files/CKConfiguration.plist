@@ -53,6 +53,13 @@
 	</dict>
 	<key>Background Read Frequency</key>
 	<string>immediate</string>
+	<key>Sign In Screen</key>
+	<dict>
+		<key>Label Text</key>
+		<string>Sign In to CardinalKit</string>
+		<key>Label Font Size</key>
+		<integer>35</integer>
+	</dict>
 	<key>Login-Sign-In-With-Facebook</key>
 	<dict>
 		<key>Enabled</key>
@@ -197,6 +204,55 @@
 			<string>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</string>
 			<key>Logo</key>
 			<string>3️⃣</string>
+		</dict>
+	</array>
+	<key>Contacts</key>
+	<array>
+		<dict>
+			<key>givenName</key>
+			<string>Oliver</string>
+			<key>familyName</key>
+			<string>Aalami</string>
+			<key>title</key>
+			<string>Vascular Surgeon</string>
+			<key>role</key>
+			<string>Dr. Aalami is the director of the CardinalKit project.</string>
+			<key>email</key>
+			<string>aalami@stanford.edu</string>
+			<key>phone</key>
+			<string>111-111-1111</string>
+			<key>text</key>
+			<string>111-111-1111</string>
+			<key>street</key>
+			<string>318 Campus Drive</string>
+			<key>city</key>
+			<string>Stanford</string>
+			<key>state</key>
+			<string>CA</string>
+			<key>postalCode</key>
+			<string>94305</string>
+		</dict>
+		<dict>
+			<key>givenName</key>
+			<string>Johnny</string>
+			<key>familyName</key>
+			<string>Appleseed</string>
+			<key>title</key>
+			<string>OBGYN</string>
+			<key>role</key>
+			<string>Dr. Appleseed is an OBGYN with 13 years of experience.</string>
+			<key>phone</key>
+			<string>(324) 555-7415</string>
+			<key>text</key>
+			<string>(324) 555-7415</string>
+			<key>street</key>
+			<string>318 Campus Drive</string>
+			<key>city</key>
+			<string>Stanford</string>
+			<key>state</key>
+			<string>CA</string>
+			<key>postalCode</key>
+			<string>94305</string>
 		</dict>
 	</array>
 	<key>Use Cloud Surveys</key>

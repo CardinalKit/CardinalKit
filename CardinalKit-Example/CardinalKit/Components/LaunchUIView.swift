@@ -9,38 +9,19 @@
 import SwiftUI
 import UIKit
 import ResearchKit
-import CardinalKit
 import Firebase
 
 struct LaunchUIView: View {
     
-    @State var didCompleteOnboarding = false
-    
-    init() {
-        
-    }
+    @AppStorage(Constants.onboardingDidComplete) var didCompleteOnboarding = false
+    @ObservedObject var auth: CKStudyUser = CKStudyUser.shared
 
     var body: some View {
         VStack(spacing: 10) {
-            if didCompleteOnboarding && (CKStudyUser.shared.currentUser != nil){
+            if didCompleteOnboarding && (auth.currentUser != nil){
                 MainUIView()
             } else {
-                OnboardingUIView() {
-                    //on complete
-                    if let completed = UserDefaults.standard.object(forKey: Constants.onboardingDidComplete) as? Bool {
-                       self.didCompleteOnboarding = completed
-                    }
-                }
-            }
-        }.onAppear(perform: {
-            if let completed = UserDefaults.standard.object(forKey: Constants.onboardingDidComplete) as? Bool {
-               self.didCompleteOnboarding = completed
-            }
-        }).onReceive(NotificationCenter.default.publisher(for: NSNotification.Name(Constants.onboardingDidComplete))) { notification in
-            if let newValue = notification.object as? Bool {
-                self.didCompleteOnboarding = newValue
-            } else if let completed = UserDefaults.standard.object(forKey: Constants.onboardingDidComplete) as? Bool {
-               self.didCompleteOnboarding = completed
+                OnboardingUIView()
             }
         }
         

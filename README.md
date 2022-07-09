@@ -1,4 +1,5 @@
-<img src="https://github.com/CardinalKit/CardinalKit/blob/master/CardinalKit-Web-Assets/header.png?raw=true" alt="cardinalkit logo">
+![CardinalKit Logo](https://raw.githubusercontent.com/CardinalKit/.github/main/assets/ck-header-light.png#gh-light-mode-only)
+![CardinalKit Logo](https://raw.githubusercontent.com/CardinalKit/.github/main/assets/ck-header-dark.png#gh-dark-mode-only)
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors-)
@@ -6,7 +7,7 @@
 
 ---
 
-<img src="https://github.com/CardinalKit/CardinalKit/blob/main/CardinalKit-Web-Assets/CK_Map.jpg?raw=true" alt="cardinalkit map">
+<img src="https://raw.githubusercontent.com/CardinalKit/.github/main/assets/CK_Map.jpg" alt="cardinalkit map">
 
 Includes:
 * Informed consent process using ResearchKit.
@@ -58,4 +59,5 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 CardinalKit is available under the MIT license. See the LICENSE file for more info.
 
 
-<img src="https://github.com/CardinalKit/CardinalKit/blob/master/CardinalKit-Web-Assets/footer.png?raw=true" alt="biodesign logo">
+![Stanford Byers Center for Biodesign Logo](https://raw.githubusercontent.com/CardinalKit/.github/main/assets/ck-footer-light.png#gh-light-mode-only)
+![Stanford Byers Center for Biodesign Logo](https://raw.githubusercontent.com/CardinalKit/.github/main/assets/ck-footer-dark.png#gh-dark-mode-only)

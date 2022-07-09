@@ -11,6 +11,7 @@ import CareKitStore
 import Contacts
 import UIKit
 import FirebaseFirestore
+import CardinalKit
 
 internal extension OCKStore {
 
@@ -24,14 +25,26 @@ internal extension OCKStore {
         let group = DispatchGroup()
         for document in documents{
             group.enter()
-            CKSendHelper.getFromFirestore(authCollection:authCollection, collection: collection, identifier: document.documentID) {(document, error) in
-                do{
-                    guard let document = document,
-                          let payload = document.data(),
-                          let id = payload["id"] as? String else {
-                              group.leave()
-                        return
-                    }
+            var route = ""
+               if let authCollection = authCollection {
+                   route = "\(authCollection)\(collection)/\(document.documentID)"
+               }
+               else{
+                   guard  let nAuth = CKStudyUser.shared.authCollection else {
+                       return
+                   }
+                   route = "\(nAuth)\(collection)/\(document.documentID)"
+               }
+               CKApp.requestData(route: route, onCompletion: {
+                   result in
+                   do{
+                   guard let document = result as? DocumentSnapshot,
+                           let payload = document.data(),
+                           let id = payload["id"] as? String
+                   else{
+                       return
+                   }
+
                     var itemSchedule:OCKSchedule? = nil
                     var update = true
                     if lastUpdateDate != nil,
@@ -147,7 +160,7 @@ internal extension OCKStore {
                     }
                     
                 }
-            }
+            })
         }
         group.notify(queue: .main, execute: {
             onCompletion(nil)
@@ -159,60 +172,63 @@ internal extension OCKStore {
         let collection: String = "carekit-store/v2/tasks"
         // Download Tasks By Study
         
-        guard  let studyCollection = CKStudyUser.shared.studyCollection else {
+        guard  let studyCollection = CKStudyUser.shared.studyCollection,
+               let authCollection = CKStudyUser.shared.authCollection
+        else {
             return
         }
         // Get tasks on study
-        CKSendHelper.getFromFirestore(authCollection: studyCollection,collection: collection, onCompletion: { (documents,error) in
-            self.insertDocuments(documents: documents, collection: collection, authCollection: studyCollection,lastUpdateDate:lastUpdateDate){
-                (Error) in
-                CKSendHelper.getFromFirestore(collection: collection, onCompletion: { (documents,error) in
-                    self.insertDocuments(documents: documents, collection: collection, authCollection: nil,lastUpdateDate:lastUpdateDate){
-                        (Error) in
-                        self.createContacts()
-                        completion()
-                    }
-                })
+        let studyRoute = studyCollection + "\(collection)"
+        let authRoute = authCollection + "\(collection)"
+        CKApp.requestData(route: studyRoute, onCompletion: { result in
+            if let documents = result as? [DocumentSnapshot]{
+                self.insertDocuments(documents: documents, collection: collection, authCollection: studyCollection,lastUpdateDate:lastUpdateDate){
+                    (Error) in
+                    CKApp.requestData(route: authRoute, onCompletion: { result in
+                        if let documents = result as? [DocumentSnapshot]{
+                            self.insertDocuments(documents: documents, collection: collection, authCollection: nil,lastUpdateDate:lastUpdateDate){
+                                (Error) in
+                                self.createContacts()
+                                completion()
+                            }
+                        }
+                    })
+                }
             }
+            
         })
+
     }
     
     func createContacts() {
-        var contact1 = OCKContact(id: "oliver", givenName: "Oliver",
-                                  familyName: "Aalami", carePlanUUID: nil)
-        contact1.asset = "OliverAalami"
-        contact1.title = "Vascular Surgeon"
-        contact1.role = "Dr. Aalami is the director of the CardinalKit project."
-        contact1.emailAddresses = [OCKLabeledValue(label: CNLabelEmailiCloud, value: "aalami@stanford.edu")]
-        contact1.phoneNumbers = [OCKLabeledValue(label: CNLabelWork, value: "(111) 111-1111")]
-        contact1.messagingNumbers = [OCKLabeledValue(label: CNLabelWork, value: "(111) 111-1111")]
-
-        contact1.address = {
+        let config = CKPropertyReader(file: "CKConfiguration")
+        let contactData = config.readAny(query: "Contacts") as! [[String:String]]
+//        Have to put it into a list so we can reverse the list later
+        var ockContactElements: [OCKContact] = []
+        for data in contactData {
             let address = OCKPostalAddress()
-            address.street = "318 Campus Drive"
-            address.city = "Stanford"
-            address.state = "CA"
-            address.postalCode = "94305"
-            return address
-        }()
-
-        var contact2 = OCKContact(id: "johnny", givenName: "Johnny",
-                                  familyName: "Appleseed", carePlanUUID: nil)
-        contact2.asset = "JohnnyAppleseed"
-        contact2.title = "OBGYN"
-        contact2.role = "Dr. Appleseed is an OBGYN with 13 years of experience."
-        contact2.phoneNumbers = [OCKLabeledValue(label: CNLabelWork, value: "(324) 555-7415")]
-        contact2.messagingNumbers = [OCKLabeledValue(label: CNLabelWork, value: "(324) 555-7415")]
-        contact2.address = {
-            let address = OCKPostalAddress()
-            address.street = "318 Campus Drive"
-            address.city = "Stanford"
-            address.state = "CA"
-            address.postalCode = "94305"
-            return address
-        }()
-
-        addContacts([contact2, contact1])
+            var thisContact = OCKContact(id: data["givenName"]! + data["familyName"]!, givenName: data["givenName"]!, familyName: data["familyName"]!, carePlanUUID: nil)
+//            If you have an image named exactly givenNamefamilyName, in assets, it will be put on contact card
+            thisContact.asset = data["givenName"]! + data["familyName"]!
+            for (k, v) in data {
+                k == "role" ? thisContact.role = v :
+                k == "title" ? thisContact.title = v :
+                k == "email" ? thisContact.emailAddresses = [OCKLabeledValue(label: CNLabelEmailiCloud, value: v)] :
+                k == "phone" ? thisContact.phoneNumbers = [OCKLabeledValue(label: CNLabelWork, value: v)] :
+                k == "test" ? thisContact.messagingNumbers = [OCKLabeledValue(label: CNLabelWork, value: v)] :
+                k == "street" ? address.street = v :
+                k == "city" ? address.city = v :
+                k == "state" ? address.state = v :
+                k == "postalCode" ? address.postalCode = v :
+                ()
+            }
+            if address != OCKPostalAddress() {
+                thisContact.address = address
+            }
+            ockContactElements.append(thisContact)
+        }
+//        Have to do this for them to be in what is probably the correct order
+        addContacts(ockContactElements.reversed())
     }
     
 }
