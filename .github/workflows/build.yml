@@ -52,10 +52,10 @@ jobs:
     - uses: actions/cache@v3
       with:
         path: CardinalKit-Example/Pods
-        key: ${{ runner.os }}-pods-${{ hashFiles('/CardinalKit-Example/Podfile.lock') }}
+        key: ${{ runner.os }}-pods-${{ hashFiles('CardinalKit-Example/Podfile.lock') }}
     - uses: actions/cache@v3
       with:
         path: ~/Library/Caches/org.swift.swiftpm/
-        key: ${{ runner.os }}-spm-${{ hashFiles('/CardinalKit-Example/CardinalKit.xcworkspace/xcshareddata/swiftpm/Package.resolved') }}
+        key: ${{ runner.os }}-spm-${{ hashFiles('CardinalKit-Example/CardinalKit.xcworkspace/xcshareddata/swiftpm/Package.resolved') }}
     - name: Build and test
       run: bundler install && bundle exec fastlane build
