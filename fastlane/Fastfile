@@ -14,7 +14,10 @@ platform :ios do
     cocoapods(
       podfile: "./CardinalKit-Example/"
     )
-    build_app
+    build_app(
+      skip_archive: true,
+      skip_codesigning: true
+    )
   end
 
   desc "Publish a beta release to internal TestFlight testers"
@@ -29,7 +32,10 @@ platform :ios do
       build_number: latest_testflight_build_number + 1,
       xcodeproj: "CardinalKit-Example/CardinalKit.xcodeproj"
     })
-    build
+    cocoapods(
+      podfile: "./CardinalKit-Example/"
+    )
+    build_app
     upload_to_testflight
   end
 end
