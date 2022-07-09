@@ -28,15 +28,10 @@ jobs:
     - uses: maxim-lobanov/setup-xcode@v1
       with:
         xcode-version: latest-stable
-    - uses: ruby/setup-ruby@v1
-      with:
-        bundler-cache: true
-        ruby-version: '2.6'
     - name: Check Environment
       run: |
           xcodebuild -version
           swift --version
-          ruby -v
     - name: Install the Apple certificate and provisioning profile
       env:
         BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
