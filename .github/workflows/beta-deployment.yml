@@ -28,10 +28,15 @@ jobs:
     - uses: maxim-lobanov/setup-xcode@v1
       with:
         xcode-version: latest-stable
+    - uses: ruby/setup-ruby@v1
+      with:
+        bundler-cache: true
+        ruby-version: '3.1'
     - name: Check Environment
       run: |
           xcodebuild -version
           swift --version
+          ruby -v
     - name: Install the Apple certificate and provisioning profile
       env:
         BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
@@ -60,6 +65,14 @@ jobs:
         # apply provisioning profile
         mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
         cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
+    - uses: actions/cache@v3
+      with:
+        path: CardinalKit-Example/Pods
+        key: ${{ runner.os }}-pods-${{ hashFiles('/CardinalKit-Example/Podfile.lock') }}
+    - uses: actions/cache@v3
+      with:
+        path: ~/Library/Caches/org.swift.swiftpm/
+        key: ${{ runner.os }}-spm-${{ hashFiles('/CardinalKit-Example/CardinalKit.xcworkspace/xcshareddata/swiftpm/Package.resolved') }}
     - name: Build and test
       run: bundler install && bundle exec fastlane beta
       env:
