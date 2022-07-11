@@ -2,7 +2,7 @@
 ![CardinalKit Logo](https://raw.githubusercontent.com/CardinalKit/.github/main/assets/ck-header-dark.png#gh-dark-mode-only)
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-8-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END --> 
 
 ---
@@ -44,6 +44,10 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/aamirrasheed"><img src="https://avatars3.githubusercontent.com/u/7892721?v=4?s=100" width="100px;" alt=""/><br /><sub><b>aamirrasheed</b></sub></a><br /><a href="#content-aamirrasheed" title="Content">🖋</a> <a href="#video-aamirrasheed" title="Videos">📹</a></td>
     <td align="center"><a href="http://apollozhu.github.io/en"><img src="https://avatars1.githubusercontent.com/u/10842684?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Zhiyu Zhu/朱智语</b></sub></a><br /><a href="https://github.com/CardinalKit/CardinalKit/commits?author=ApolloZhu" title="Code">💻</a></td>
     <td align="center"><a href="http://vishnu.io"><img src="https://avatars.githubusercontent.com/u/1212163?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Vishnu Ravi</b></sub></a><br /><a href="https://github.com/CardinalKit/CardinalKit/commits?author=vishnuravi" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/griffinac"><img src="https://avatars0.githubusercontent.com/u/14243141?s=460&u=203a5408c41deaae65c2416b3043e777bdf9de0e&v=4?s=100" width="100px;" alt=""/><br /><sub><b>Ashley Griffin</b></sub></a><br /><a href="#ideas-griffinac" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/CardinalKit/CardinalKit/commits?author=griffinac" title="Code">💻</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="http://ase.in.tum.de/schmiedmayer"><img src="https://avatars.githubusercontent.com/u/28656495?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Paul Schmiedmayer</b></sub></a><br /><a href="https://github.com/CardinalKit/CardinalKit/commits?author=PSchmiedmayer" title="Code">💻</a></td>
   </tr>
 </table>
 
