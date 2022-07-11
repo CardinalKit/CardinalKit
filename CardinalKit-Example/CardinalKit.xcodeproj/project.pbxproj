@@ -943,7 +943,7 @@
 				);
 				MARKETING_VERSION = 2.1.0;
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = edu.stanford.cardinalkit;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.stanford.cardinalkitexample;
 				PRODUCT_NAME = "CardinalKit Example";
 				SWIFT_OBJC_BRIDGING_HEADER = "CardinalKit/Supporting Files/CardinalKit_Example-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -963,6 +963,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2PA7Y2WTWF;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 637867499T;
 				INFOPLIST_FILE = "CardinalKit/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -971,9 +972,10 @@
 				);
 				MARKETING_VERSION = 2.1.0;
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = com.schmiedmayer.cardinalkitexample;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.stanford.cardinalkitexample;
 				PRODUCT_NAME = "CardinalKit Example";
 				PROVISIONING_PROFILE_SPECIFIER = "CardinalKit Example";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "CardinalKit Example GitHub";
 				SWIFT_OBJC_BRIDGING_HEADER = "CardinalKit/Supporting Files/CardinalKit_Example-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.2;
