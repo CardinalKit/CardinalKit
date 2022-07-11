@@ -71,6 +71,15 @@
         "ideas",
         "code"
       ]
+    },
+    {
+      "login": "PSchmiedmayer",
+      "name": "Paul Schmiedmayer",
+      "avatar_url": "https://avatars.githubusercontent.com/u/28656495?v=4",
+      "profile": "http://ase.in.tum.de/schmiedmayer",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
