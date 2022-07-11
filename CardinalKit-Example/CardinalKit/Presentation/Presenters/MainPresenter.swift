@@ -19,8 +19,10 @@ class MainPresenter: ObservableObject {
         let config = CKConfig.shared
         self.useCarekit = config.readBool(query: "Use CareKit")
         let lastUpdateDate:Date? = UserDefaults.standard.object(forKey: Constants.prefCareKitCoreDataInitDate) as? Date
-        CKCareKitManager.shared.coreDataStore.populateSampleData(lastUpdateDate:lastUpdateDate){() in
-            self.carekitLoaded = true
-        }
+        self.carekitLoaded = true
+        CKCareKitManager.shared.coreDataStore.createContacts()
+//        CKCareKitManager.shared.coreDataStore.populateSampleData(lastUpdateDate:lastUpdateDate){() in
+//            self.carekitLoaded = true
+//        }
     }
 }

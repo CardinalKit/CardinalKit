@@ -25,7 +25,8 @@ extension AppDelegate {
         // (2) if we have already logged in
         if CKStudyUser.shared.isLoggedIn {
             CKApp.startBackgroundDeliveryData()
+            CKCareKitManager.shared.reviewIfFirstTime()
         }
+        
     }
-    
 }

@@ -12,6 +12,13 @@ import FirebaseStorage
 import FirebaseCore
 
 class FirebaseManager{
+    class func transformDateToTimeStamp(date:Date?) -> Any {
+        if let date = date {
+            return Timestamp(date: date) as Any
+        }
+        return "" as Any
+        
+    }
     
     public func configure() {
         FirebaseApp.configure()
@@ -24,6 +31,17 @@ class FirebaseManager{
         db.settings = settings
         return db
     }
+    
+    func transformTimeStampToDate(timeStamp:Any) -> Date? {
+        if  let timeStamp = timeStamp as? Timestamp{
+            return timeStamp.dateValue()
+        }
+        else{
+            return nil
+        }
+    }
+    
+    
     
     func getDataFromCloudStorage(path:String,url:URL, OnCompletion: @escaping () -> Void, onError: @escaping (Error) -> Void){
         let storage = Storage.storage()
@@ -170,8 +188,56 @@ class FirebaseManager{
                     onCompletion(result)
                 }
             }
+        } 
+    }
+    
+    func getFilterdata(route: String, filter: [FilterModel], onCompletion: @escaping ([String : Any]?) -> Void) {
+        let db = firestoreDb()
+        let parts = route.split(separator: "/")
+        guard parts.count % 2 != 0
+        else{
+            print("filter only valid for collection")
+            onCompletion([:])
+            return
+        }
+        let ref = db.collection(route)
+        
+        let completionHandler: (QuerySnapshot?, Error?)->Void = {
+            (querySnapshot, err) in
+            var result:[String:Any] = [:]
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    result[document.documentID] = document.data()
+                }
+                onCompletion(result)
+            }
+        }
+        
+        if filter.count > 0 {
+            var query = ref.order(by: filter[0].field)
+            for item in filter {
+                switch item.filterType {
+                case .GreaterOrEqualTo:
+                    query = query.whereField(item.field, isGreaterThanOrEqualTo: item.value)
+                case .GreaterThan:
+                    query = query.whereField(item.field, isGreaterThan: item.value)
+                case .LessOrEqualTo:
+                    query = query.whereField(item.field, isLessThanOrEqualTo: item.value)
+                case .LessThan:
+                    query = query.whereField(item.field, isLessThan: item.value)
+                case .equalTo:
+                    query = query.whereField(item.field, isEqualTo: item.value)
+                }
+            }
+            query.getDocuments(completion: completionHandler)
+        }
+        else{
+            ref.getDocuments(completion: completionHandler)
         }
         
         
     }
+    
 }

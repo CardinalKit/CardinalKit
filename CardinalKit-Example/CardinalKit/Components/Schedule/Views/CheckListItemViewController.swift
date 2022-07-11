@@ -10,18 +10,16 @@ import Foundation
 import CareKit
 import ResearchKit
 import CareKitUI
-import CareKitStore
 import CardinalKit
+import CareKitStore
 
 class CheckListItemViewController: OCKChecklistTaskViewController, ORKTaskViewControllerDelegate{
     
-    var task:OCKAnyTask? = nil;
     var indexPath:IndexPath? = nil;
     let collection: String = "surveys"
     
     override init(viewSynchronizer: OCKChecklistTaskViewSynchronizer, task: OCKAnyTask, eventQuery: OCKEventQuery, storeManager: OCKSynchronizedStoreManager) {
         super.init(viewSynchronizer: viewSynchronizer, task: task, eventQuery: eventQuery, storeManager: storeManager)
-        self.task = task
     }
     
     override func taskView(_ taskView: UIView & OCKTaskDisplayable, didSelectOutcomeValueAt index: Int, eventIndexPath: IndexPath, sender: Any?) {

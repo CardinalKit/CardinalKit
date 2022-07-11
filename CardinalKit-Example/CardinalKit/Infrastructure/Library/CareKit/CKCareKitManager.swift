@@ -8,22 +8,19 @@
 
 import CareKit
 import CareKitStore
+import CardinalKit
 
 class CKCareKitManager: NSObject {
     
-    let coreDataStore = OCKStore(name: "CKCareKitStore", type: .onDisk(protection: .complete), remote: CKCareKitRemoteSyncWithFirestore())
-   
-    let healthKitStore:OCKHealthKitPassthroughStore
+    let coreDataStore = OCKStore(name: "CKCareKitStore")
     private(set) var synchronizedStoreManager: OCKSynchronizedStoreManager!
     
     static let shared = CKCareKitManager()
     
     override init() {
-        healthKitStore = OCKHealthKitPassthroughStore(store: coreDataStore)
         super.init()
         initStore()
         let coordinator = OCKStoreCoordinator()
-        coordinator.attach(eventStore: healthKitStore)
         coordinator.attach(store: coreDataStore)
         synchronizedStoreManager = OCKSynchronizedStoreManager(wrapping: coordinator)
     }
@@ -33,8 +30,38 @@ class CKCareKitManager: NSObject {
     }
     
     fileprivate func initStore(forceUpdate: Bool = false) {
-        healthKitStore.populateSampleData()            
         UserDefaults.standard.set(Date(), forKey: Constants.prefCareKitCoreDataInitDate)
+    }
+    
+    func reviewIfFirstTime(){
+        guard let authCollection = CKStudyUser.shared.authCollection else {
+            return
+        }
+        let schedulePath = "\(authCollection)schedule/data"
+        CKApp.requestData(route: schedulePath){ response in
+            if let response = response as? [String:Any]{
+                // If not data on response
+                if response.count == 0 {
+                    self.addFirstTimeTasks()
+                }
+            }
+            print("response")
+        }
+    }
+    
+    func addFirstTimeTasks(){
+        // Create task items Example
+        // Example daily step goal
+        let stepInterval = Interval(day: 1)
+        let taskItemDailyStep = ScheduleModel(id: "steps", title: "Daily Steps Goal 🏃🏽‍♂️", instructions: "Complete daily steps goal", type: .steps, surveyId: nil, startDate: Date(), endDate: nil, interval: stepInterval)
+        guard let authCollection = CKStudyUser.shared.authCollection else {
+            return
+        }
+        let schedulePath = "\(authCollection)schedule"
+        CKApp.createScheduleItems(route: schedulePath, items: [taskItemDailyStep]){ success in
+            print(success)
+        }
+        
     }
     
 }

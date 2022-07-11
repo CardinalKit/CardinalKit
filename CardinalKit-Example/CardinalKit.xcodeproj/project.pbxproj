@@ -36,6 +36,7 @@
 		637BDBB12875DF3200DF9A5A /* TaskItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637BDBB02875DF3200DF9A5A /* TaskItemView.swift */; };
 		637BDBB42875DF5700DF9A5A /* TaskItemPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637BDBB32875DF5700DF9A5A /* TaskItemPresenter.swift */; };
 		637BDBB828764A5800DF9A5A /* ProfileUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637BDBB728764A5800DF9A5A /* ProfileUIView.swift */; };
+		63977FA3287897BB00DA981C /* SurveyItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63977FA2287897BB00DA981C /* SurveyItemViewController.swift */; };
 		63F8E3EA28664E2200F260AE /* LaunchUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F8E3E928664E2200F260AE /* LaunchUIView.swift */; };
 		63F8E3F028664E6300F260AE /* MainUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F8E3EF28664E6300F260AE /* MainUIView.swift */; };
 		63F8E3F5286650CF00F260AE /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F8E3F4286650CF00F260AE /* Notification.swift */; };
@@ -84,8 +85,7 @@
 		8E9CDFAE2592B79900C8A228 /* Metrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9CDFAD2592B79900C8A228 /* Metrics.swift */; };
 		8EA6648725930B6B00B6A45A /* CKHealthRecordsStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA6648625930B6B00B6A45A /* CKHealthRecordsStepViewController.swift */; };
 		8EA664AD2593380D00B6A45A /* SendRecordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA664AC2593380D00B6A45A /* SendRecordsView.swift */; };
-		8EA664B025941A4D00B6A45A /* SurveyItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA664AF25941A4D00B6A45A /* SurveyItemViewController.swift */; };
-		8EA664B2259422E400B6A45A /* CKCareKitRemoteSyncWithFirestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA664B1259422E400B6A45A /* CKCareKitRemoteSyncWithFirestore.swift */; };
+		8EA664B025941A4D00B6A45A /* SurveyItemViewControllerOdl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA664AF25941A4D00B6A45A /* SurveyItemViewControllerOdl.swift */; };
 		8EA664B42594387900B6A45A /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA664B32594387900B6A45A /* Errors.swift */; };
 		8EBE6F9C24B3C0E60093D07C /* AppDelegate+CardinalKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE6F9B24B3C0E60093D07C /* AppDelegate+CardinalKit.swift */; };
 		D253D132250D1BDB00A363E4 /* (null) in Sources */ = {isa = PBXBuildFile; };
@@ -144,6 +144,7 @@
 		637BDBB02875DF3200DF9A5A /* TaskItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskItemView.swift; sourceTree = "<group>"; };
 		637BDBB32875DF5700DF9A5A /* TaskItemPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskItemPresenter.swift; sourceTree = "<group>"; };
 		637BDBB728764A5800DF9A5A /* ProfileUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileUIView.swift; path = CardinalKit/Components/Profile/ProfileUIView.swift; sourceTree = SOURCE_ROOT; };
+		63977FA2287897BB00DA981C /* SurveyItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyItemViewController.swift; sourceTree = "<group>"; };
 		63F8E3E928664E2200F260AE /* LaunchUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchUIView.swift; sourceTree = "<group>"; };
 		63F8E3EF28664E6300F260AE /* MainUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainUIView.swift; sourceTree = "<group>"; };
 		63F8E3F128664F0C00F260AE /* LaunchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchPresenter.swift; sourceTree = "<group>"; };
@@ -194,8 +195,7 @@
 		8E9CDFAD2592B79900C8A228 /* Metrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metrics.swift; sourceTree = "<group>"; };
 		8EA6648625930B6B00B6A45A /* CKHealthRecordsStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKHealthRecordsStepViewController.swift; sourceTree = "<group>"; };
 		8EA664AC2593380D00B6A45A /* SendRecordsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendRecordsView.swift; sourceTree = "<group>"; };
-		8EA664AF25941A4D00B6A45A /* SurveyItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyItemViewController.swift; sourceTree = "<group>"; };
-		8EA664B1259422E400B6A45A /* CKCareKitRemoteSyncWithFirestore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKCareKitRemoteSyncWithFirestore.swift; sourceTree = "<group>"; };
+		8EA664AF25941A4D00B6A45A /* SurveyItemViewControllerOdl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyItemViewControllerOdl.swift; sourceTree = "<group>"; };
 		8EA664B32594387900B6A45A /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		8EBE6F9B24B3C0E60093D07C /* AppDelegate+CardinalKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+CardinalKit.swift"; sourceTree = "<group>"; };
 		E235077624F7082700CC1899 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -373,6 +373,7 @@
 		637BDB9A2874DFCA00DF9A5A /* Schedule */ = {
 			isa = PBXGroup;
 			children = (
+				63977FA2287897BB00DA981C /* SurveyItemViewController.swift */,
 			);
 			path = Schedule;
 			sourceTree = "<group>";
@@ -390,6 +391,7 @@
 		637BDB9E2874E2F800DF9A5A /* Mock */ = {
 			isa = PBXGroup;
 			children = (
+				63E87EF1287CC33000967C96 /* Survey */,
 				637BDB9F2874E30100DF9A5A /* Tasks */,
 			);
 			path = Mock;
@@ -455,6 +457,13 @@
 				8E6E1E15253524500024B8DF /* WithdrawalViewController.swift */,
 			);
 			path = Items;
+			sourceTree = "<group>";
+		};
+		63E87EF1287CC33000967C96 /* Survey */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Survey;
 			sourceTree = "<group>";
 		};
 		63F8E3E628664DD300F260AE /* Views */ = {
@@ -586,7 +595,6 @@
 			children = (
 				8E9CDEAC259170AD00C8A228 /* CKCareKitManager.swift */,
 				8E9CDEAE259172C200C8A228 /* CKCareKitManager+Sample.swift */,
-				8EA664B1259422E400B6A45A /* CKCareKitRemoteSyncWithFirestore.swift */,
 			);
 			path = CareKit;
 			sourceTree = "<group>";
@@ -597,7 +605,7 @@
 				2B19DD9526FE1D2F00649CE1 /* CheckListItemViewController.swift */,
 				2B19DD9326FE1D2600649CE1 /* TestViewController.swift */,
 				8E9CDEB12591739A00C8A228 /* TipView.swift */,
-				8EA664AF25941A4D00B6A45A /* SurveyItemViewController.swift */,
+				8EA664AF25941A4D00B6A45A /* SurveyItemViewControllerOdl.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -869,13 +877,12 @@
 				2B8FB80427552B02000B2D7B /* CKMultipleSignInStep.swift in Sources */,
 				8EA6648725930B6B00B6A45A /* CKHealthRecordsStepViewController.swift in Sources */,
 				8E0A43C0244A4A0400656518 /* PasswordlessLoginStep.swift in Sources */,
-				8EA664B2259422E400B6A45A /* CKCareKitRemoteSyncWithFirestore.swift in Sources */,
 				8EA664AD2593380D00B6A45A /* SendRecordsView.swift in Sources */,
 				637BDBA32874E41000DF9A5A /* TaskItem.swift in Sources */,
 				8E6E1E1A253528450024B8DF /* WithdrawView.swift in Sources */,
 				8E6E1E2E25353A1E0024B8DF /* PatientIDView.swift in Sources */,
 				8E6E1E0B2534FF640024B8DF /* OnboardingViewCoordinator.swift in Sources */,
-				8EA664B025941A4D00B6A45A /* SurveyItemViewController.swift in Sources */,
+				8EA664B025941A4D00B6A45A /* SurveyItemViewControllerOdl.swift in Sources */,
 				8E9CDEBA2591843200C8A228 /* CKConfig.swift in Sources */,
 				2F94C5F22536543600DF8866 /* SceneDelegate+CardinalKit.swift in Sources */,
 				637BDBA72874EE3D00DF9A5A /* TaskSamples.swift in Sources */,
@@ -927,6 +934,7 @@
 				E2F1FD7624D61EDA006C39DF /* CKPropertyReader.swift in Sources */,
 				8E6E1E1025351E890024B8DF /* Extensions+UIColor.swift in Sources */,
 				632ED49B286BB7DE009C3543 /* AuthLibraryProtocol.swift in Sources */,
+				63977FA3287897BB00DA981C /* SurveyItemViewController.swift in Sources */,
 				8E9CDF832592844A00C8A228 /* LearnUIView.swift in Sources */,
 				632ED4A4286CF149009C3543 /* FirebaseStorage.swift in Sources */,
 				632ED492286BAE41009C3543 /* RegisterNewUserViewController.swift in Sources */,

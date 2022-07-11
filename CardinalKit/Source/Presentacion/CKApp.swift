@@ -57,6 +57,25 @@ public class CKApp{
         }
     }
     
+    class public func requestDataWithFilters(route: String, filters:[FilterModel], onCompletion: @escaping (Any?) -> Void){
+        if let delegate = CKApp.instance.options.networkReceiverDelegate {
+            delegate.requestFilter(route: route, filter: filters, onCompletion: onCompletion)
+        }
+    }
+    
+    class public func requestScheduleItems(date: Date, onCompletion: @escaping ([ScheduleModel]) -> Void){
+        if let delegate = CKApp.instance.options.networkReceiverDelegate {
+            delegate.requestScheduleItems(date: date, onCompletion: onCompletion)
+        }
+    }
+    
+    class public func createScheduleItems(route:String, items:[ScheduleModel], onCompletion: @escaping (Bool) -> Void){
+        if let delegate = CKApp.instance.options.networkDeliveryDelegate{
+            delegate.createScheduleItems(route: route, items: items, onCompletion: onCompletion)
+        }
+    }
+    
+    
     class public func getDataFromStorage(path:String, url:URL, onCompletion: @escaping (Bool, Error?) -> Void) {
         if let delegate = CKApp.instance.options.networkReceiverDelegate {
             delegate.requestFromStorage(path: path, url: url, OnCompletion: onCompletion)

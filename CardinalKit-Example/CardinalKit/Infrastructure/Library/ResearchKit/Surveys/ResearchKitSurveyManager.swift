@@ -12,6 +12,75 @@ import SwiftUI
 import ResearchKit
 
 class ResearchKitSurveyManager:SurveyManager {
+    var localSurveys: [String : TaskItem] = [
+        "SurveyTask-Assessment" : TaskItem(order:"1",title: "Survey (ResearchKit)", subtitle: "Sample questions and forms.", image: "SurveyIcon", section: "Current Tasks", taskType: .custom, tasks: TaskSamples.sampleSurveyTask)
+    ]
+    
+    func foundSurvey(surveyId: String, onCompletion: @escaping (TaskItem) -> Void) {
+        if let survey = localSurveys[surveyId]{
+            onCompletion(survey)
+        }
+        else{
+            // Found survey on firebase and save local
+            if let surveyCollection = CKStudyUser.shared.surveysCollection {
+                CKApp.requestData(route: "\(surveyCollection)\(surveyId)"){ data in
+                    CKApp.requestData(route: "\(surveyCollection)\(surveyId)/questions"){ response in
+                        
+                        var deleted = false
+                        var identifier = ""
+                        var title=""
+                        var subtitle=""
+                        var imageName = ""
+                        var section = ""
+                        var questions:[String] = []
+                        var order = "1"
+                        
+                        if let data = data as? [String:Any],
+                           let _identifier=data["identifier"] as? String{
+                            title = data["title"] as? String ?? "NoTitle"
+                            subtitle = data["subtitle"] as? String ?? "NoSubTitle"
+                            imageName = data["image"] as? String ?? "NoImage"
+                            section = data["section"] as? String ?? "NoSection"
+                            order = data["order"] as? String ?? "1"
+                            deleted = data["deleted"] as? Bool ?? false
+                            identifier = _identifier
+                        }
+                        if let surveyResult = response as? [String:Any]{
+                            for (_, question) in surveyResult{
+                               if let question = question as? [String:Any]{
+                                   do{
+                                       let jsonData = try JSONSerialization.data(withJSONObject: question, options: .prettyPrinted)
+                                       let convertedString = String(data: jsonData, encoding: String.Encoding.utf8)
+                                       if let stringData:String = convertedString{
+                                           questions.append(stringData)
+                                       }
+                                   }
+                                   catch{
+                                       print(error)
+                                   }
+                               }
+                           }
+                            let questionAsOrderedTask = self.transformQuestionsToOrderedTask(questions: questions, identifier: identifier)
+                            let taskitem: TaskItem = TaskItem(order:order, title: title, subtitle:subtitle, image: imageName, section: section, taskType: .custom, tasks: questionAsOrderedTask)
+                            self.localSurveys[identifier] = taskitem
+                            onCompletion(taskitem)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func getLocalSurveyItems(onCompletion: @escaping ([TaskItem]) -> Void) {
+        onCompletion([
+            TaskItem(order:"1",title: "Survey (ResearchKit)", subtitle: "Sample questions and forms.", image: "SurveyIcon", section: "Current Tasks", taskType: .custom, tasks: TaskSamples.sampleSurveyTask),
+            TaskItem(order:"2",title: "Active Task (ResearchKit)", subtitle: "Sample sensor/data collection activities.", image: "ActivityIcon", section: "Current Tasks", taskType: .custom, tasks: TaskSamples.sampleWalkingTask),
+            TaskItem(order:"3",title: "Coffee Survey", subtitle: "How do you like your coffee?", image: "DataIcon", section: "Your Interests", taskType: .custom, tasks: TaskSamples.sampleCoffeeTask),
+            TaskItem(order:"4",title: "Coffee Results", subtitle: "ResearchKit Charts", image: "DataIcon", section: "Your Interests", taskType: .coffeView, tasks: nil),
+            TaskItem(order:"5",title: "About CardinalKit", subtitle: "Visit cardinalkit.org", image: "CKLogoIcon", section: "Learn", taskType: .learUiView, tasks: nil)
+            ])
+    }
+    
     public func getSurveyCloudItems(onCompletion: @escaping ([TaskItem]) -> Void) {
         guard let surveyCollection = CKStudyUser.shared.surveysCollection else {
             onCompletion([])
@@ -25,6 +94,7 @@ class ResearchKitSurveyManager:SurveyManager {
                     CKApp.requestData(route: surveyCollection+"\(id)/questions/", onCompletion: {
                         (surveyResult) in
                         if let surveyResult = surveyResult as? [String:Any]{
+                            
                             var deleted = false
                             var identifier = ""
                             var title=""
@@ -59,7 +129,9 @@ class ResearchKitSurveyManager:SurveyManager {
                                }
                            }
                            if questions.count>0 && !deleted{
-                               let taskitem: TaskItem = TaskItem(order:order, title: title, subtitle:subtitle, image: imageName, section: section, taskType: .custom, tasks: self.transformQuestionsToOrderedTask(questions: questions, identifier: identifier))
+                               let questionAsOrderedTask = self.transformQuestionsToOrderedTask(questions: questions, identifier: identifier)
+                               let taskitem: TaskItem = TaskItem(order:order, title: title, subtitle:subtitle, image: imageName, section: section, taskType: .custom, tasks: questionAsOrderedTask)
+                               self.localSurveys[identifier] = taskitem
                                AllItems.append(taskitem)
                            }
                        }
@@ -78,7 +150,7 @@ class ResearchKitSurveyManager:SurveyManager {
         
     }
     
-    func transformQuestionsToOrderedTask(questions:[String], identifier:String) -> ORKOrderedTask{
+    func transformQuestionsToDictionary(questions:[String], identifier:String) -> [[String:Any]]{
         var questionAsObj:[[String:Any]] = []
         for question in questions{
             let data = question.data(using: .utf8)!
@@ -99,7 +171,12 @@ class ResearchKitSurveyManager:SurveyManager {
             }
             return true
         })
-        return JsonToSurvey.shared.GetSurvey(from: questionAsObj,identifier: identifier)
+        return questionAsObj
+    }
+    
+    func transformQuestionsToOrderedTask(questions:[String], identifier:String) -> ORKOrderedTask{
+        let dictionary = transformQuestionsToDictionary(questions: questions, identifier: identifier)
+        return JsonToSurvey.shared.GetSurvey(from: dictionary,identifier: identifier)
     }
     
 }

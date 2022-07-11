@@ -10,7 +10,6 @@ import Foundation
 import CareKit
 import ResearchKit
 import CareKitUI
-import CareKitStore
 
 class TestViewController: OCKSimpleTaskViewController, ORKTaskViewControllerDelegate{
     

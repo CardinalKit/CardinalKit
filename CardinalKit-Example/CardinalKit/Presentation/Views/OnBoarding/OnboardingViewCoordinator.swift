@@ -36,6 +36,10 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
             UserDefaults.standard.set(true, forKey: Constants.onboardingDidComplete)
             NotificationCenter.default.post(name: .onBoardingStateChange, object: true)
             
+            // Review if first time and create Schedule elements
+            CKCareKitManager.shared.reviewIfFirstTime()
+            
+            
             if let signatureResult = taskViewController.result.stepResult(forStepIdentifier: "ConsentReviewStep")?.results?.first as? ORKConsentSignatureResult {
                 
                 let consentDocument = ConsentDocument()

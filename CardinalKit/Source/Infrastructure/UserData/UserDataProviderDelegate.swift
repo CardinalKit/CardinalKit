@@ -12,6 +12,7 @@ public protocol UserDataProviderDelegate{
     var currentUserId: String? {get}
     var authCollection: String? {get}
     var currentUserEmail: String? {get}
+    var scheduleCollection: String? {get}
 }
 
 public class CKUserDataProvider: UserDataProviderDelegate {
@@ -25,6 +26,13 @@ public class CKUserDataProvider: UserDataProviderDelegate {
             return "\(root)\(userId)/"
         }
         
+        return nil
+    }
+    
+    public var scheduleCollection: String? {
+        if let bundleId = Bundle.main.bundleIdentifier {
+            return "/studies/\(bundleId)/schedule"
+        }
         return nil
     }
     

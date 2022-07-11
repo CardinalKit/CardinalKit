@@ -16,7 +16,7 @@ struct ScheduleViewControllerRepresentable: UIViewControllerRepresentable {
     func updateUIViewController(_ taskViewController: UIViewController, context: Context) {}
     func makeUIViewController(context: Context) -> UIViewController {
         let manager = CKCareKitManager.shared
-        let vc = ScheduleViewController(storeManager: manager.synchronizedStoreManager)
+        let vc = ScheduleViewController()
         return UINavigationController(rootViewController: vc)
     }
     

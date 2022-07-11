@@ -9,5 +9,9 @@
 import Foundation
 
 protocol SurveyManager {
-    func getSurveyCloudItems(onCompletion: @escaping ([TaskItem]) -> Void) 
+    func getSurveyCloudItems(onCompletion: @escaping ([TaskItem]) -> Void)
+    func getLocalSurveyItems(onCompletion: @escaping ([TaskItem]) -> Void)
+    var localSurveys: [String : TaskItem] { get }
+    func foundSurvey(surveyId:String,onCompletion: @escaping (TaskItem) -> Void)
+    
 }

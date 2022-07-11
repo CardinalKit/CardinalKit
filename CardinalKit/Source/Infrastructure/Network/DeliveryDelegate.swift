@@ -11,6 +11,7 @@ public protocol CKDeliveryDelegate {
     func send(file: URL, package: Package, onCompletion: @escaping (Bool) -> Void)
     func send(route: String, data: Any, params: Any?, onCompletion:((Bool, Error?) -> Void)?)
     func sendToCloud(files:URL, route: String, alsoSendToFirestore:Bool, firestoreRoute:String?, onCompletion: @escaping (Bool) -> Void)
+    func createScheduleItems(route:String, items:[ScheduleModel], onCompletion: @escaping (Bool) -> Void)
     func configure()
 }
 
@@ -116,5 +117,16 @@ extension CKDelivery{
         }
     }
     
+}
+
+extension CKDelivery {
+    public func createScheduleItems(route:String, items:[ScheduleModel], onCompletion: @escaping (Bool) -> Void){
+        for item in items{
+            let nitem = item.transformOnDict()
+            firebaseManager.send(route: "\(route)/\(item.id)", data: nitem, params: nil){ success, error in
+                print(success)
+            }
+        }
+    }
 }
 
