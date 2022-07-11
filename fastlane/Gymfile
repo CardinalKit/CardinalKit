@@ -19,7 +19,7 @@ workspace("CardinalKit-Example/CardinalKit.xcworkspace")
 export_options(
   {
     provisioningProfiles: { 
-      "edu.stanford.cardinalkitexample" => "CardinalKit Example GitHub"
+      "edu.stanford.cardinalkitexample" => "CardinalKit Example"
     }
   }
 )
