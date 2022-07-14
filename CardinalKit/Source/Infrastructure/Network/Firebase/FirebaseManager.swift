@@ -96,6 +96,7 @@ class FirebaseManager{
             }
             
             let db=firestoreDb()
+            createNecessaryDocuments(path: authPath)
             db.collection(authPath).document(identifier).setData(json) { err in
                 
                 if let err = err {
