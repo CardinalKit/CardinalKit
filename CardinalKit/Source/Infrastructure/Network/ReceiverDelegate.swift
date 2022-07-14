@@ -25,7 +25,7 @@ public class CKReceiver{
 
 extension CKReceiver:CKReceiverDelegate{
     public func requestUrlFromStorage(path:String, onCompletion: @escaping (URL) -> Void, onError: @escaping (Error) -> Void){
-        firebaseManager.getUrlFileFromStorage(pathFile: path, OnCompletion: onCompletion, onError: onError)
+        firebaseManager.getUrlFileFromStorage(pathFile: path, onCompletion: onCompletion, onError: onError)
     }
     
     public func requestScheduleItems(date: Date, onCompletion: @escaping ([ScheduleModel]) -> Void) {
