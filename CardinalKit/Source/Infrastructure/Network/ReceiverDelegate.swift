@@ -12,6 +12,7 @@ public protocol CKReceiverDelegate {
     func requestFromStorage(path:String,url:URL, OnCompletion: @escaping (Bool, Error?) -> Void)
     func requestFilter(route: String, filter:[FilterModel], onCompletion: @escaping ([String:Any]?) -> Void)
     func requestScheduleItems(date: Date, onCompletion: @escaping ([ScheduleModel]) -> Void)
+    func requestUrlFromStorage(path:String, onCompletion: @escaping (URL) -> Void, onError: @escaping (Error) -> Void)
     func configure()
 }
 
@@ -23,6 +24,9 @@ public class CKReceiver{
 }
 
 extension CKReceiver:CKReceiverDelegate{
+    public func requestUrlFromStorage(path:String, onCompletion: @escaping (URL) -> Void, onError: @escaping (Error) -> Void){
+        firebaseManager.getUrlFileFromStorage(pathFile: path, OnCompletion: onCompletion, onError: onError)
+    }
     
     public func requestScheduleItems(date: Date, onCompletion: @escaping ([ScheduleModel]) -> Void) {
         let group = DispatchGroup()

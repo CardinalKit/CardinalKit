@@ -94,6 +94,12 @@ public class CKApp{
         }
     }
     
+    class public func requestUrlFromStorage(path: String, onCompletion: @escaping (URL) -> Void, onError: @escaping (Error) -> Void){
+        if let delegate = CKApp.instance.options.networkReceiverDelegate{
+            delegate.requestUrlFromStorage(path:path, onCompletion: onCompletion, onError:onError)
+        }
+    }
+    
 }
 
 // HealthKit Functions

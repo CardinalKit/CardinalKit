@@ -57,6 +57,22 @@ class FirebaseManager{
         }
     }
     
+    func getUrlFileFromStorage(pathFile: String, onCompletion: @escaping (URL) -> Void, onError: @escaping (Error) -> Void){
+        let storage = Storage.storage()
+        let starsRef = storage.reference()
+        let childRef = starsRef.child(pathFile)
+        
+        childRef.downloadURL{ url, error in
+            if let error = error{
+                onError(error)
+            }
+            else{
+                onCompletion(url!)
+            }
+            
+        }
+    }
+    
     func sendToCloudStorage (file:URL,route:String){
         let storageRef = Storage.storage().reference()
         let ref = storageRef.child("\(route)/\(file.lastPathComponent)")
