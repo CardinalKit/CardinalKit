@@ -115,7 +115,7 @@ internal class Infrastructure {
     
     private func CreateAndPerformPackage(type: PackageType, data:Data, identifier: String){
         do{
-            let packageName = "\(Date().stringWithFormat())-\(identifier)-\(UUID())"
+            let packageName = identifier
             let package = try Package(packageName, type: type, identifier: packageName, data: data)
             let networkObject = NetworkRequestObject.findOrCreateNetworkRequest(package)
             try networkObject.perform()
