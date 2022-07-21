@@ -87,10 +87,13 @@ internal class Infrastructure {
             // Transfom Data in OPENMHealth Format
             let samplesArray:[[String: Any]] = try mhSerializer.json(for: data)
             for sample in samplesArray{
+               
                 var identifier = "HKData"
-                if let nIdentifier = data.first?.sampleType.identifier{
-                    identifier = nIdentifier
+                if let header = sample["header"] as? [String:Any],
+                   let id = header["id"] as? String{
+                    identifier = id
                 }
+                
                 let sampleToData = try JSONSerialization.data(withJSONObject: sample, options: [])
                 CreateAndPerformPackage(type: .hkdata, data: sampleToData, identifier: identifier)
             }
