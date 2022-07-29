@@ -116,7 +116,10 @@ class FirebaseManager{
     }
     
     func send(route: String, data: Any, params: Any?, onCompletion: ((Bool, Error?) -> Void)?) {
-        
+        var userId = "NN"
+        if let user = CKApp.instance.options.userDataProviderDelegate?.currentUserId{
+            userId = user
+        }
         guard var json = data as? [String:Any]
         else {
             return
@@ -125,7 +128,7 @@ class FirebaseManager{
             let results = FieldValue.arrayUnion(results)
             json["results"] = results
         }
-        var documentData:[String:Any] = ["updatedAt":Date()]
+        var documentData:[String:Any] = ["updatedAt":Date(),"UpdatedBy":userId]
         var merge=false
         if var params = params as? [String:Any] {
            if let merged = params["merge"] as? Bool{
