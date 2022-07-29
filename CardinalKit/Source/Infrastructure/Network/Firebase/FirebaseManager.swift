@@ -89,12 +89,16 @@ class FirebaseManager{
     
     func send(file: URL, package: Package,authPath:String,identifier:String, onCompletion: @escaping (Bool) -> Void) {
         do {
+            var userId = "NN"
+            if let user = CKApp.instance.options.userDataProviderDelegate?.currentUserId{
+                userId = user
+            }
             let data = try Data(contentsOf: file)
-            guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
+            guard var json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
                 onCompletion(false)
                 return
             }
-            
+            json["UpdatedBy"] = userId
             let db=firestoreDb()
             createNecessaryDocuments(path: authPath)
             db.collection(authPath).document(identifier).setData(json) { err in
