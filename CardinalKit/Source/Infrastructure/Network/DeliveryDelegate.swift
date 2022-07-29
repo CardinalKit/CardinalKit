@@ -87,9 +87,10 @@ extension CKDelivery{
     private func sendHealthKit(_ file: URL,_ package: Package, _ onCompletion: @escaping (Bool) -> Void) {
         if let userDataDelegate = CKApp.instance.options.userDataProviderDelegate,
            let authPath =   userDataDelegate.authCollection{
-                let identifier = "\(package.fileName)"
-                let trimmedIdentifier = identifier.trimmingCharacters(in: .whitespaces)
-                firebaseManager.send(file: file, package: package, authPath: authPath + "\(Constants.Firebase.dataBucketHealthKit)",identifier: trimmedIdentifier, onCompletion: onCompletion)
+            let identifier = "\(package.fileName)"
+            let trimmedIdentifier = identifier.trimmingCharacters(in: .whitespaces)
+            firebaseManager.send(file: file, package: package, authPath: authPath +
+                                 "\(userDataDelegate.dataBucketHealthKit)",identifier: trimmedIdentifier, onCompletion: onCompletion)
             }
         else{
             onCompletion(false)
@@ -101,7 +102,7 @@ extension CKDelivery{
            let authPath =   userDataDelegate.authCollection{
                 let identifier = Date().startOfDay.shortStringFromDate() + "-\(package.fileName)"
                 let trimmedIdentifier = identifier.trimmingCharacters(in: .whitespaces)
-                firebaseManager.send(file: file, package: package, authPath: authPath + "\(Constants.Firebase.dataBucketClinicalRecords)",identifier: trimmedIdentifier, onCompletion: onCompletion)
+            firebaseManager.send(file: file, package: package, authPath: authPath + "\(userDataDelegate.dataBucketClinicalRecords)",identifier: trimmedIdentifier, onCompletion: onCompletion)
             }
         else{
             onCompletion(false)
@@ -112,7 +113,7 @@ extension CKDelivery{
         if let userDataDelegate = CKApp.instance.options.userDataProviderDelegate,
            let authPath = userDataDelegate.authCollection {
             let identifier:String = package.identifier
-            firebaseManager.send(file: file, package: package, authPath: authPath + "\(Constants.Firebase.dataBucketHealthKit)", identifier: identifier,onCompletion: onCompletion)
+            firebaseManager.send(file: file, package: package, authPath: authPath + "\(userDataDelegate.dataBucketHealthKit)", identifier: identifier,onCompletion: onCompletion)
             
         }
     }

@@ -13,15 +13,25 @@ public protocol UserDataProviderDelegate{
     var authCollection: String? {get}
     var currentUserEmail: String? {get}
     var scheduleCollection: String? {get}
+    var dataBucketClinicalRecords: String { get }
+    var dataBucketHealthKit: String { get }
+    var dataBucketStorage: String { get }
+    var dataBucketMetrics: String { get }
 }
 
 public class CKUserDataProvider: UserDataProviderDelegate {
+    
+    public var dataBucketClinicalRecords = "clinicalRecords"
+    public var dataBucketHealthKit = "healthKit"
+    public var dataBucketStorage = "storage"
+    public var dataBucketMetrics = "metrics"
+    
     public var currentUserId: String? {
         return Auth.auth().currentUser?.uid
     }
     
     public var authCollection: String? {
-        if let userId = Auth.auth().currentUser?.uid,
+        if let userId = currentUserId,
             let root = rootAuthCollection {
             return "\(root)\(userId)/"
         }
