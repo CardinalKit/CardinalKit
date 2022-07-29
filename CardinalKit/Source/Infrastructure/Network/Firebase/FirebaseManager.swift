@@ -117,13 +117,6 @@ class FirebaseManager{
     
     func send(route: String, data: Any, params: Any?, onCompletion: ((Bool, Error?) -> Void)?) {
         
-        let user = Auth.auth().currentUser;
-        if (user == nil){
-            print( "no Logged ")
-        }
-        else{
-            print(" Logged")
-        }
         guard var json = data as? [String:Any]
         else {
             return
@@ -163,6 +156,10 @@ class FirebaseManager{
     }
     
     func createNecessaryDocuments(path: String){
+        var userId = "NN"
+        if let user = CKApp.instance.options.userDataProviderDelegate?.currentUserId{
+            userId = user
+        }
         let _db=firestoreDb()
         let _pathArray = path.split{$0 == "/"}.map(String.init)
         var currentPath = ""
@@ -170,7 +167,12 @@ class FirebaseManager{
         for part in _pathArray{
             currentPath+=part
             if(index%2 != 0){
-                _db.document(currentPath).setData(["exist":"true"], merge: true)
+                _db.document(currentPath).setData(
+                    [
+                        "exist":"true",
+                        "UpdatedBy":userId
+                    ],
+                    merge: true)
             }
             currentPath+="/"
             index+=1
