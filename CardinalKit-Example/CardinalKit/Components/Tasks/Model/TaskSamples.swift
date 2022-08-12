@@ -102,4 +102,119 @@ struct TaskSamples {
         
         return ORKOrderedTask(identifier: "SurveyTask-Assessment", steps: steps)
     }()
+
+    static let sampleFHIRTask: ORKOrderedTask = {
+        let fhir = """
+                  {
+                    "resourceType": "Questionnaire",
+                    "language": "nb-NO",
+                    "status": "draft",
+                    "publisher": "NHN",
+                    "meta": {
+                      "profile": [
+                        "http://ehelse.no/fhir/StructureDefinition/sdf-Questionnaire"
+                      ],
+                      "tag": [
+                        {
+                          "system": "urn:ietf:bcp:47",
+                          "code": "nb-NO",
+                          "display": "Norsk Bokmål"
+                        }
+                      ]
+                    },
+                    "useContext": [
+                      {
+                        "code": {
+                          "system": "http://hl7.org/fhir/ValueSet/usage-context-type",
+                          "code": "focus",
+                          "display": "Clinical Focus"
+                        },
+                        "valueCodeableConcept": {
+                          "coding": [
+                            {
+                              "system": "urn:oid:2.16.578.1.12.4.1.1.8655"
+                            }
+                          ]
+                        }
+                      }
+                    ],
+                    "contact": [
+                      {
+                        "name": "http://www.nhn.no"
+                      }
+                    ],
+                    "subjectType": [
+                      "Patient"
+                    ],
+                    "extension": [
+                      {
+                        "url": "http://helsenorge.no/fhir/StructureDefinition/sdf-sidebar",
+                        "valueCoding": {
+                          "system": "http://helsenorge.no/fhir/ValueSet/sdf-sidebar",
+                          "code": "1"
+                        }
+                      },
+                      {
+                        "url": "http://helsenorge.no/fhir/StructureDefinition/sdf-information-message",
+                        "valueCoding": {
+                          "system": "http://helsenorge.no/fhir/ValueSet/sdf-information-message",
+                          "code": "1"
+                        }
+                      }
+                    ],
+                    "item": [
+                      {
+                        "linkId": "061281f3-7fe8-400b-8eee-3b7efdc94abc",
+                        "type": "choice",
+                        "text": "What is your favourite ice cream?",
+                        "required": false,
+                        "answerOption": [
+                          {
+                            "valueCoding": {
+                              "id": "3f293818-18a8-41b4-83f8-118e5f92dff1",
+                              "code": "chocolate",
+                              "system": "urn:uuid:c8dc9534-345f-4f22-ba02-630188c292b2",
+                              "display": "Chocolate"
+                            }
+                          },
+                          {
+                            "valueCoding": {
+                              "id": "88f73723-24e3-4bd4-f85c-df66d99f03d6",
+                              "code": "vanilla",
+                              "system": "urn:uuid:c8dc9534-345f-4f22-ba02-630188c292b2",
+                              "display": "Vanilla"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "linkId": "9ae117a1-2f0c-477f-8dfc-d69d8e7ee691",
+                        "type": "choice",
+                        "text": "What is your favorite candy?",
+                        "required": false,
+                        "answerOption": [
+                          {
+                            "valueCoding": {
+                              "id": "2e965935-8185-4f05-9bef-2295b39eeb12",
+                              "code": "snickers",
+                              "system": "urn:uuid:1a041cef-ce74-4501-9439-b06d9f948841",
+                              "display": "Snickers"
+                            }
+                          },
+                          {
+                            "valueCoding": {
+                              "id": "f6265d3c-64b0-4cbc-83f1-f5102c488b6d",
+                              "code": "cadbury",
+                              "system": "urn:uuid:1a041cef-ce74-4501-9439-b06d9f948841",
+                              "display": "Cadbury"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+            """
+        let fhirConverter = FhirToResearchKit()
+        return fhirConverter.convertFhirQuestionnaireToORKOrderedTask(identifier: "FhirSurvey", json: fhir, title: "FHIR Survey")
+    }()
 }
