@@ -19,7 +19,7 @@ class FhirToResearchKit {
     ///   - json: A string containing a valid FHIR Questionnaire in JSON
     ///   - title: The title of the questionnaire to be displayed in the ResearchKit Task
     /// - Returns: ORKOrderedTask
-    public func convertFhirQuestionnaireToORKOrderedTask(identifier: String, json: String, title: String) -> ORKNavigableOrderedTask {
+    public func convertFhirQuestionnaireToORKOrderedTask(identifier: String, json: String, title: String, summaryStep: ORKCompletionStep?) -> ORKNavigableOrderedTask {
         var steps = [ORKStep]()
         var task = ORKNavigableOrderedTask(identifier: identifier, steps: steps)
 
@@ -30,11 +30,9 @@ class FhirToResearchKit {
             if let item = questionnaire.item {
                 steps = self.fhirQuestionnaireItemsToORKSteps(questions: item, title: title)
 
-                // add a summary step
-                let summaryStep = ORKCompletionStep(identifier: "SummaryStep")
-                summaryStep.title = "Thank you."
-                summaryStep.text = "We appreciate your time."
-                steps += [summaryStep]
+                if let summaryStep = summaryStep {
+                    steps += [summaryStep]
+                }
 
                 task = ORKNavigableOrderedTask(identifier: identifier, steps: steps)
                 constructNavigationRules(questions: item, task: task)
