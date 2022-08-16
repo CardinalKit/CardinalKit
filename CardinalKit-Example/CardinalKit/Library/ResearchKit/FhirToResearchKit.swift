@@ -19,7 +19,7 @@ class FhirToResearchKit {
     ///   - json: A string containing a valid FHIR Questionnaire in JSON
     ///   - title: The title of the questionnaire to be displayed in the ResearchKit Task
     /// - Returns: ORKOrderedTask
-    public func convertFhirQuestionnaireToORKOrderedTask(identifier: String, json: String, title: String, summaryStep: ORKCompletionStep?) -> ORKNavigableOrderedTask {
+    public func convertFhirQuestionnaireToORKOrderedTask(identifier: String, json: String, title: String, summaryStep: ORKCompletionStep? = nil) -> ORKNavigableOrderedTask {
         var steps = [ORKStep]()
         var task = ORKNavigableOrderedTask(identifier: identifier, steps: steps)
 
@@ -54,60 +54,79 @@ class FhirToResearchKit {
         return surveySteps
     }
 
-    private func constructNavigationRules(questions: [QuestionnaireItem], task: ORKNavigableOrderedTask) -> Void {
+    private func constructNavigationRules(questions: [QuestionnaireItem], task: ORKNavigableOrderedTask) {
 
-        let INVALID_OPERATOR = "This predicate has an invalid operator."
+        let INVALID_OPERATOR = "Operator is not supported."
 
         for question in questions {
+
+            guard let questionId = question.linkId.value?.string else { return }
+
             if let enableWhen = question.enableWhen {
+
+                let fhirOperator = enableWhen[0].`operator`.value
+                guard let enableQuestionId = question.enableWhen?[0].question.value?.string else { return }
+                let resultSelector = ORKResultSelector(resultIdentifier: enableQuestionId)
+                var rule: ORKPredicateSkipStepNavigationRule?
+
                 switch enableWhen[0].answer {
                 case .coding(let coding):
-                    switch enableWhen[0].`operator`.value {
+                    switch fhirOperator {
                     case .exists, .equal:
-                        if let matchQuestion = question.enableWhen?[0].question.value?.string,
-                           let matchValue = coding.code?.value?.string,
-                           let thisQuestion = question.linkId.value?.string {
+                        if let matchValue = coding.code?.value?.string {
                             let matchingPattern = "^(?!\(matchValue)).*$"
-                            let predicate = ORKResultPredicate.predicateForChoiceQuestionResult(with: ORKResultSelector(resultIdentifier: matchQuestion), matchingPattern: matchingPattern)
-                            let rule = ORKPredicateSkipStepNavigationRule(resultPredicate: predicate)
-                            task.setSkip(rule, forStepIdentifier: thisQuestion)
+                            let predicate = ORKResultPredicate.predicateForChoiceQuestionResult(with: resultSelector, matchingPattern: matchingPattern)
+                            rule = ORKPredicateSkipStepNavigationRule(resultPredicate: predicate)
                         }
                     default:
                         print(INVALID_OPERATOR)
                     }
                 case .boolean(let boolean):
-                    if let booleanValue = boolean.value?.bool,
-                       let thisQuestionId = question.linkId.value?.string,
-                       let enableQuestionId = question.enableWhen?[0].question.value?.string {
-                        switch enableWhen[0].`operator`.value {
+                    if let booleanValue = boolean.value?.bool {
+                        switch fhirOperator {
                         case .equal:
-                            let predicate = ORKResultPredicate.predicateForBooleanQuestionResult(with: ORKResultSelector(resultIdentifier: enableQuestionId), expectedAnswer: !booleanValue)
-                            let rule = ORKPredicateSkipStepNavigationRule(resultPredicate: predicate)
-                            task.setSkip(rule, forStepIdentifier: thisQuestionId)
+                            let predicate = ORKResultPredicate.predicateForBooleanQuestionResult(with: resultSelector, expectedAnswer: !booleanValue)
+                            rule = ORKPredicateSkipStepNavigationRule(resultPredicate: predicate)
                         case .notEqual:
-                            let predicate = ORKResultPredicate.predicateForBooleanQuestionResult(with: ORKResultSelector(resultIdentifier: enableQuestionId), expectedAnswer: booleanValue)
-                            let rule = ORKPredicateSkipStepNavigationRule(resultPredicate: predicate)
-                            task.setSkip(rule, forStepIdentifier: thisQuestionId)
+                            let predicate = ORKResultPredicate.predicateForBooleanQuestionResult(with: resultSelector, expectedAnswer: booleanValue)
+                            rule = ORKPredicateSkipStepNavigationRule(resultPredicate: predicate)
                         default:
                             print(INVALID_OPERATOR)
                         }
                     }
-                case .date(_):
-                    print("TODO")
-                case .dateTime(_):
-                    print("TODO")
-                case .decimal(_):
+                case .date(let fhirDate):
+                    do {
+                        let date = try fhirDate.value?.asNSDate() as? Date
+                        switch enableWhen[0].`operator`.value {
+                        case .equal:
+                            let predicate = ORKResultPredicate.predicateForDateQuestionResult(with: resultSelector, minimumExpectedAnswer: date, maximumExpectedAnswer: date)
+                            rule = ORKPredicateSkipStepNavigationRule(resultPredicate: predicate)
+                        case .greaterThan:
+                            let predicate = ORKResultPredicate.predicateForDateQuestionResult(with: resultSelector, minimumExpectedAnswer: date, maximumExpectedAnswer: nil)
+                            rule = ORKPredicateSkipStepNavigationRule(resultPredicate: predicate)
+                        case .lessThan:
+                            let predicate = ORKResultPredicate.predicateForDateQuestionResult(with: resultSelector, minimumExpectedAnswer: nil, maximumExpectedAnswer: date)
+                            rule = ORKPredicateSkipStepNavigationRule(resultPredicate: predicate)
+                        default:
+                            print(INVALID_OPERATOR)
+                        }
+                    } catch {
+                        print("Error converting FHIRDate to NSDate.")
+                    }
+                case .decimal(let decimal):
                     print("TODO")
                 case .integer(_):
                     print("TODO")
-                case .quantity(_):
+                case .string(let string):
                     print("TODO")
-                case .reference(_):
+                case .time(let time):
                     print("TODO")
-                case .string(_):
-                    print("TODO")
-                case .time(_):
-                    print("TODO")
+                default:
+                    print("The answer type in this predicate isn't yet supported.")
+                }
+
+                if let rule = rule {
+                    task.setSkip(rule, forStepIdentifier: questionId)
                 }
             }
         }
