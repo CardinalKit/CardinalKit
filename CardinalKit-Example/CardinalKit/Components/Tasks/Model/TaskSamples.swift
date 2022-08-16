@@ -107,18 +107,18 @@ struct TaskSamples {
         let fhir = """
                   {
                     "resourceType": "Questionnaire",
-                    "language": "nb-NO",
+                    "language": "en-US",
                     "status": "draft",
-                    "publisher": "NHN",
+                    "publisher": "CardinalKit",
                     "meta": {
                       "profile": [
-                        "http://ehelse.no/fhir/StructureDefinition/sdf-Questionnaire"
+                        "http://cardinalkit.org/fhir/StructureDefinition/sdf-Questionnaire"
                       ],
                       "tag": [
                         {
                           "system": "urn:ietf:bcp:47",
-                          "code": "nb-NO",
-                          "display": "Norsk Bokmål"
+                          "code": "en-US",
+                          "display": "English"
                         }
                       ]
                     },
@@ -140,73 +140,67 @@ struct TaskSamples {
                     ],
                     "contact": [
                       {
-                        "name": "http://www.nhn.no"
+                        "name": "http://cardinalkit.org"
                       }
                     ],
                     "subjectType": [
                       "Patient"
                     ],
-                    "extension": [
-                      {
-                        "url": "http://helsenorge.no/fhir/StructureDefinition/sdf-sidebar",
-                        "valueCoding": {
-                          "system": "http://helsenorge.no/fhir/ValueSet/sdf-sidebar",
-                          "code": "1"
-                        }
-                      },
-                      {
-                        "url": "http://helsenorge.no/fhir/StructureDefinition/sdf-information-message",
-                        "valueCoding": {
-                          "system": "http://helsenorge.no/fhir/ValueSet/sdf-information-message",
-                          "code": "1"
-                        }
-                      }
-                    ],
                     "item": [
                       {
-                        "linkId": "061281f3-7fe8-400b-8eee-3b7efdc94abc",
+                        "linkId": "65963d48-48a7-4fdc-b52c-1a59dffbd513",
                         "type": "choice",
-                        "text": "What is your favourite ice cream?",
+                        "text": "Do you like ice cream?",
                         "required": false,
                         "answerOption": [
                           {
                             "valueCoding": {
-                              "id": "3f293818-18a8-41b4-83f8-118e5f92dff1",
-                              "code": "chocolate",
-                              "system": "urn:uuid:c8dc9534-345f-4f22-ba02-630188c292b2",
-                              "display": "Chocolate"
+                              "id": "c899e509-cfc6-473e-898d-5b38a60e442e",
+                              "code": "yes",
+                              "system": "urn:uuid:6fcb8b09-b45e-4acf-fb95-caf0bbf573ed",
+                              "display": "Yes"
                             }
                           },
                           {
                             "valueCoding": {
-                              "id": "88f73723-24e3-4bd4-f85c-df66d99f03d6",
-                              "code": "vanilla",
-                              "system": "urn:uuid:c8dc9534-345f-4f22-ba02-630188c292b2",
-                              "display": "Vanilla"
+                              "id": "3413a448-dacc-4aff-99ef-a5f0d40888da",
+                              "code": "no",
+                              "system": "urn:uuid:6fcb8b09-b45e-4acf-fb95-caf0bbf573ed",
+                              "display": "No"
                             }
                           }
                         ]
                       },
                       {
-                        "linkId": "9ae117a1-2f0c-477f-8dfc-d69d8e7ee691",
+                        "linkId": "2664d995-d565-4008-8f28-dea3850a0716",
                         "type": "choice",
-                        "text": "What is your favorite candy?",
+                        "text": "What kind of ice cream is your favorite?",
                         "required": false,
                         "answerOption": [
                           {
                             "valueCoding": {
-                              "id": "2e965935-8185-4f05-9bef-2295b39eeb12",
-                              "code": "snickers",
-                              "system": "urn:uuid:1a041cef-ce74-4501-9439-b06d9f948841",
-                              "display": "Snickers"
+                              "id": "91b9d310-82de-45da-8bfa-4d78b6e4e29d",
+                              "code": "chocolate",
+                              "system": "urn:uuid:2209cbf6-e620-4c84-890d-bf45dbe4a809",
+                              "display": "Chocolate"
                             }
                           },
                           {
                             "valueCoding": {
-                              "id": "f6265d3c-64b0-4cbc-83f1-f5102c488b6d",
-                              "code": "cadbury",
-                              "system": "urn:uuid:1a041cef-ce74-4501-9439-b06d9f948841",
-                              "display": "Cadbury"
+                              "id": "2a7a8fc5-b252-4830-8907-f90e93fe37a3",
+                              "code": "vanilla",
+                              "system": "urn:uuid:2209cbf6-e620-4c84-890d-bf45dbe4a809",
+                              "display": "Vanilla"
+                            }
+                          }
+                        ],
+                        "enableWhen": [
+                          {
+                            "question": "65963d48-48a7-4fdc-b52c-1a59dffbd513",
+                            "operator": "=",
+                            "answerCoding": {
+                              "system": "urn:uuid:6fcb8b09-b45e-4acf-fb95-caf0bbf573ed",
+                              "code": "yes"
                             }
                           }
                         ]
