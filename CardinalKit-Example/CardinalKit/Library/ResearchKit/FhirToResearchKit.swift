@@ -57,6 +57,9 @@ class FhirToResearchKit {
         return surveySteps
     }
 
+    /**
+     This method converts predicates contained in the  "enableWhen" property on FHIR QuestionnaireItem to a ResearchKit ORKPredicateSkipStepNavigationRule.
+     */
     private func constructNavigationRules(questions: [QuestionnaireItem], task: ORKNavigableOrderedTask) {
         let INVALID_OPERATOR = "Operator is not supported."
 
@@ -110,14 +113,25 @@ class FhirToResearchKit {
                     case .integer(let integerValue):
                         guard let integerValue = integerValue.value?.integer else { return }
                         switch fhirOperator {
-                        case .equal:
+                        case .notEqual:
                             predicate = ORKResultPredicate.predicateForNumericQuestionResult(with: resultSelector, expectedAnswer: Int(integerValue))
                         case .lessThanOrEqual:
-                            predicate = ORKResultPredicate.predicateForNumericQuestionResult(with: resultSelector, maximumExpectedAnswerValue: Double(integerValue))
-                        case .greaterThanOrEqual:
                             predicate = ORKResultPredicate.predicateForNumericQuestionResult(with: resultSelector, minimumExpectedAnswerValue: Double(integerValue))
+                        case .greaterThanOrEqual:
+                            predicate = ORKResultPredicate.predicateForNumericQuestionResult(with: resultSelector, maximumExpectedAnswerValue: Double(integerValue))
                         default:
                             print(INVALID_OPERATOR)
+                        }
+                    case .decimal(let decimalValue):
+                        guard let decimalValue = decimalValue.value?.decimal else { return }
+                        switch fhirOperator {
+                        case .lessThanOrEqual:
+                            predicate = ORKResultPredicate.predicateForNumericQuestionResult(with: resultSelector, minimumExpectedAnswerValue: decimalValue.doubleValue)
+                        case .greaterThanOrEqual:
+                            predicate = ORKResultPredicate.predicateForNumericQuestionResult(with: resultSelector, maximumExpectedAnswerValue: decimalValue.doubleValue)
+                        default:
+                            print(INVALID_OPERATOR)
+
                         }
                     default:
                         print("The answer type in this predicate isn't yet supported.")
@@ -190,4 +204,10 @@ class FhirToResearchKit {
         return choices
     }
 
+}
+
+extension Decimal {
+    var doubleValue: Double {
+        return NSDecimalNumber(decimal: self).doubleValue
+    }
 }

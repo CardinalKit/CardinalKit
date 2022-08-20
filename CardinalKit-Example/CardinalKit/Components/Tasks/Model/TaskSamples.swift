@@ -148,21 +148,34 @@ struct TaskSamples {
               ],
               "item": [
                 {
-                  "linkId": "e864f939-670f-4ad9-832a-59bb1c8e546c",
-                  "type": "date",
-                  "text": "What is the date?",
+                  "linkId": "ab3c24f7-d11d-4647-97e0-fdde67269dd0",
+                  "type": "integer",
+                  "text": "What number am I thinking of?",
                   "required": false
                 },
                 {
-                  "linkId": "43da02da-6b85-4361-82d0-e03c8d611d01",
-                  "type": "display",
-                  "text": "Is August 20, 2022",
+                  "linkId": "04c1cb90-6710-4eb1-8d2b-697578232bea",
+                  "type": "integer",
+                  "text": "No it is a greater number.",
                   "required": false,
                   "enableWhen": [
                     {
-                      "question": "e864f939-670f-4ad9-832a-59bb1c8e546c",
-                      "operator": "=",
-                      "answerDate": "2022-08-20"
+                      "question": "ab3c24f7-d11d-4647-97e0-fdde67269dd0",
+                      "operator": "<",
+                      "answerInteger": 2
+                    }
+                  ]
+                },
+                {
+                  "linkId": "4e213ca2-0112-44d1-f68b-b036fc4ac0c4",
+                  "type": "integer",
+                  "text": "No, it is a lesser number.",
+                  "required": false,
+                  "enableWhen": [
+                    {
+                      "question": "ab3c24f7-d11d-4647-97e0-fdde67269dd0",
+                      "operator": ">",
+                      "answerInteger": 2
                     }
                   ]
                 }
