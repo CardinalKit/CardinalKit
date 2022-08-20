@@ -48,6 +48,9 @@ class FhirToResearchKit {
         var surveySteps = [ORKStep]()
         for question in questions {
             if let step = fhirQuestionnaireItemToORKQuestionStep(question: question, title: title) {
+                if let required = question.required?.value?.bool {
+                    step.isOptional = !required
+                }
                 surveySteps += [step]
             }
         }
@@ -163,10 +166,8 @@ class FhirToResearchKit {
                 answer = ORKNumericAnswerFormat.decimalAnswerFormat(withUnit: "")
             case .integer:
                 answer = ORKNumericAnswerFormat.integerAnswerFormat(withUnit: "")
-            case .text:
-                answer = ORKTextAnswerFormat()
-            case .string:
-                answer = ORKTextAnswerFormat()
+            case .text, .string:
+                answer = ORKTextAnswerFormat(maximumLength: Int(question.maxLength?.value?.integer ?? 0))
             case .time:
                 answer = ORKDateAnswerFormat(style: ORKDateAnswerStyle.dateAndTime)
             default:
