@@ -16,38 +16,13 @@ class ResearchKitToFhir {
 
     func extractResultsToFhir(results: ORKTaskViewController) -> String {
         var questionnaireResponses = [QuestionnaireResponseItem]()
-
         if let taskResults = results.result.results as? [ORKStepResult] {
-
             for step in taskResults {
-
                 if let stepResults = step.results {
-
                     for result in stepResults {
-
-                        var response: QuestionnaireResponseItem
-
-                        if let taskStep = results.task?.step?(withIdentifier: step.identifier) {
-                            if let taskQuestion = taskStep as? ORKQuestionStep {
-                                if let answerFormat = taskQuestion.answerFormat {
-                                    switch(answerFormat){
-                                    case is ORKTextAnswerFormat:
-                                        response = createTextResponse(result)
-                                    case is ORKBooleanAnswerFormat:
-                                        response = createBooleanResponse(result)
-                                    case is ORKTextChoiceAnswerFormat:
-                                        response = createChoiceResponse(result)
-                                    case is ORKNumericAnswerFormat:
-                                        response = createNumericResponse(result)
-                                    default:
-                                        response = createTextResponse(result)
-                                    }
-
-                                    if response.answer != nil {
-                                        questionnaireResponses += [response]
-                                    }
-                                }
-                            }
+                        let response = createResponse(result: result)
+                        if response.answer != nil {
+                            questionnaireResponses += [response]
                         }
                     }
                 }
@@ -67,6 +42,24 @@ class ResearchKitToFhir {
 
 
     // Functions for creating FHIR responses from ResearchKit results
+
+    private func createResponse(result: ORKResult) -> QuestionnaireResponseItem {
+        var response: QuestionnaireResponseItem
+        switch(result) {
+        case is ORKBooleanQuestionResult:
+            response = createBooleanResponse(result)
+        case is ORKChoiceQuestionResult:
+            response = createChoiceResponse(result)
+        case is ORKNumericQuestionResult:
+            response = createNumericResponse(result)
+        case is ORKDateQuestionResult:
+            response = createDateResponse(result)
+        default:
+            response = createTextResponse(result)
+        }
+
+        return response
+    }
 
     private func createNumericResponse(_ result: ORKResult) -> QuestionnaireResponseItem {
         let response = QuestionnaireResponseItem(linkId: FHIRPrimitive(FHIRString(result.identifier)))
@@ -126,6 +119,24 @@ class ResearchKitToFhir {
             if let booleanAnswer = result.booleanAnswer {
                 let answer = FHIRPrimitive(FHIRBool(booleanAnswer.boolValue))
                 responseAnswer.value = .boolean(answer)
+            }
+        }
+
+        response.answer = [responseAnswer]
+        return response
+    }
+
+    private func createDateResponse(_ result: ORKResult) -> QuestionnaireResponseItem {
+        let response = QuestionnaireResponseItem(linkId: FHIRPrimitive(FHIRString(result.identifier)))
+        let responseAnswer = QuestionnaireResponseItemAnswer()
+
+        if let result = result as? ORKDateQuestionResult {
+            if let dateAnswer = result.dateAnswer {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "YY/MM/dd"
+                let dateString = dateFormatter.string(from: dateAnswer)
+                let answer = FHIRPrimitive(try? FHIRDate(dateString))
+                responseAnswer.value = .date(answer)
             }
         }
 
