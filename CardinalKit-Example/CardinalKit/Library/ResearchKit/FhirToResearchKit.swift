@@ -66,11 +66,20 @@ class FhirToResearchKit {
     private func fhirQuestionnaireItemsToORKSteps(questions: [QuestionnaireItem], title: String) -> [ORKStep] {
         var surveySteps = [ORKStep]()
         for question in questions {
-            if let step = fhirQuestionnaireItemToORKQuestionStep(question: question, title: title) {
-                if let required = question.required?.value?.bool {
-                    step.isOptional = !required
+
+            // Convert a group of questions
+            if question.type == QuestionnaireItemType.group {
+                if let groupStep = fhirGroupToORKFormStep(question: question, title: title) {
+                    surveySteps += [groupStep]
                 }
-                surveySteps += [step]
+            } else {
+                // Convert individual questions
+                if let step = fhirQuestionnaireItemToORKQuestionStep(question: question, title: title) {
+                    if let required = question.required?.value?.bool {
+                        step.isOptional = !required
+                    }
+                    surveySteps += [step]
+                }
             }
         }
         return surveySteps
@@ -173,6 +182,27 @@ class FhirToResearchKit {
         let answer = try? fhirQuestionnaireItemToORKAnswerFormat(question: question)
         let questionStep = ORKQuestionStep(identifier: identifier, title: title, question: questionText, answer: answer)
         return questionStep
+    }
+
+    private func fhirGroupToORKFormStep(question: QuestionnaireItem, title: String) -> ORKFormStep? {
+        guard let id = question.linkId.value?.string else { return nil }
+        guard let nestedQuestions = question.item else { return nil }
+
+        let formStep = ORKFormStep(identifier: id)
+        formStep.title = title
+        var formItems = [ORKFormItem]()
+
+        for question in nestedQuestions {
+            if let questionId = question.linkId.value?.string,
+               let questionText = question.text?.value?.string,
+                let answerFormat = try? fhirQuestionnaireItemToORKAnswerFormat(question: question) {
+                let formItem = ORKFormItem(identifier: questionId, text: questionText, answerFormat: answerFormat)
+                formItems.append(formItem)
+            }
+        }
+        
+        formStep.formItems = formItems
+        return formStep
     }
 
     private func fhirQuestionnaireItemToORKAnswerFormat(question: QuestionnaireItem) throws -> ORKAnswerFormat {

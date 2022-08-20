@@ -7,10 +7,8 @@
 //
 
 import Foundation
-import CareKit
 import ResearchKit
 import Firebase
-import CardinalKit
 import ModelsR4
 
 class CKUploadFHIRTaskViewControllerDelegate : NSObject, ORKTaskViewControllerDelegate {
