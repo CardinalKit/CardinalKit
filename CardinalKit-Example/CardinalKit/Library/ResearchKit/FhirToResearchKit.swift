@@ -12,6 +12,12 @@ import ResearchKit
 
 class FhirToResearchKit {
 
+    enum ConversionErrors: Error {
+        case unsupportedOperator
+        case unsupportedAnswer
+        case noOptions
+    }
+
     /// This method converts a FHIR Questionnaire defined in JSON into a ResearchKit ORKOrderedTask
     ///
     /// - Parameters:
@@ -26,16 +32,28 @@ class FhirToResearchKit {
         let data = json.data(using: .utf8)!
         let decoder = JSONDecoder()
         do {
+            // Deserialize JSON into a FHIR Questionnaire object
             let questionnaire = try decoder.decode(Questionnaire.self, from: data)
             if let item = questionnaire.item {
+
+                // Convert each FHIR Questionnaire Item to an ORKStep
                 steps = self.fhirQuestionnaireItemsToORKSteps(questions: item, title: title)
 
+                // Add a summary step at the end of the task if defined
                 if let summaryStep = summaryStep {
                     steps += [summaryStep]
                 }
 
                 task = ORKNavigableOrderedTask(identifier: identifier, steps: steps)
-                constructNavigationRules(questions: item, task: task)
+
+                // If any questions have defined skip logic, convert to ResearchKit navigation rules
+                do {
+                    try constructNavigationRules(questions: item, task: task)
+                } catch ConversionErrors.unsupportedOperator {
+                    print("An unsupported operator was used.")
+                } catch ConversionErrors.unsupportedAnswer {
+                    print("An unsupported answer type was used.")
+                }
             }
         } catch {
             print("Failed to instantiate FHIR Questionnaire: \(error)")
@@ -60,9 +78,7 @@ class FhirToResearchKit {
     /**
      This method converts predicates contained in the  "enableWhen" property on FHIR QuestionnaireItem to a ResearchKit ORKPredicateSkipStepNavigationRule.
      */
-    private func constructNavigationRules(questions: [QuestionnaireItem], task: ORKNavigableOrderedTask) {
-        let INVALID_OPERATOR = "Operator is not supported."
-
+    private func constructNavigationRules(questions: [QuestionnaireItem], task: ORKNavigableOrderedTask) throws {
         for question in questions {
             guard let questionId = question.linkId.value?.string else { return }
 
@@ -83,7 +99,7 @@ class FhirToResearchKit {
                                 predicate = ORKResultPredicate.predicateForChoiceQuestionResult(with: resultSelector, matchingPattern: matchingPattern)
                             }
                         default:
-                            print(INVALID_OPERATOR)
+                            throw ConversionErrors.unsupportedOperator
                         }
                     case .boolean(let boolean):
                         if let booleanValue = boolean.value?.bool {
@@ -93,7 +109,7 @@ class FhirToResearchKit {
                             case .notEqual:
                                 predicate = ORKResultPredicate.predicateForBooleanQuestionResult(with: resultSelector, expectedAnswer: booleanValue)
                             default:
-                                print(INVALID_OPERATOR)
+                                throw ConversionErrors.unsupportedOperator
                             }
                         }
                     case .date(let fhirDate):
@@ -105,7 +121,7 @@ class FhirToResearchKit {
                             case .lessThan:
                                 predicate = ORKResultPredicate.predicateForDateQuestionResult(with: resultSelector, minimumExpectedAnswer: date, maximumExpectedAnswer: nil)
                             default:
-                                print(INVALID_OPERATOR)
+                                throw ConversionErrors.unsupportedOperator
                             }
                         } catch {
                             print("Error converting FHIRDate to NSDate.")
@@ -120,7 +136,7 @@ class FhirToResearchKit {
                         case .greaterThanOrEqual:
                             predicate = ORKResultPredicate.predicateForNumericQuestionResult(with: resultSelector, maximumExpectedAnswerValue: Double(integerValue))
                         default:
-                            print(INVALID_OPERATOR)
+                            throw ConversionErrors.unsupportedOperator
                         }
                     case .decimal(let decimalValue):
                         guard let decimalValue = decimalValue.value?.decimal else { return }
@@ -130,11 +146,11 @@ class FhirToResearchKit {
                         case .greaterThanOrEqual:
                             predicate = ORKResultPredicate.predicateForNumericQuestionResult(with: resultSelector, maximumExpectedAnswerValue: decimalValue.doubleValue)
                         default:
-                            print(INVALID_OPERATOR)
+                            throw ConversionErrors.unsupportedOperator
 
                         }
                     default:
-                        print("The answer type in this predicate isn't yet supported.")
+                        throw ConversionErrors.unsupportedAnswer
                     }
 
                     if let predicate = predicate {
