@@ -97,12 +97,10 @@ class FhirToResearchKit {
                         do {
                             let date = try fhirDate.value?.asNSDate() as? Date
                             switch fhirOperator {
-                            case .equal:
-                                predicate = ORKResultPredicate.predicateForDateQuestionResult(with: resultSelector, minimumExpectedAnswer: date, maximumExpectedAnswer: date)
                             case .greaterThan:
-                                predicate = ORKResultPredicate.predicateForDateQuestionResult(with: resultSelector, minimumExpectedAnswer: date, maximumExpectedAnswer: nil)
-                            case .lessThan:
                                 predicate = ORKResultPredicate.predicateForDateQuestionResult(with: resultSelector, minimumExpectedAnswer: nil, maximumExpectedAnswer: date)
+                            case .lessThan:
+                                predicate = ORKResultPredicate.predicateForDateQuestionResult(with: resultSelector, minimumExpectedAnswer: date, maximumExpectedAnswer: nil)
                             default:
                                 print(INVALID_OPERATOR)
                             }

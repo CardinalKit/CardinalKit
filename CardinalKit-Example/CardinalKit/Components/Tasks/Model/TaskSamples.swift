@@ -105,108 +105,69 @@ struct TaskSamples {
 
     static let sampleFHIRTask: ORKOrderedTask = {
         let fhir = """
+            {
+              "resourceType": "Questionnaire",
+              "language": "en-US",
+              "status": "draft",
+              "publisher": "CardinalKit",
+              "meta": {
+                "profile": [
+                  "http://cardinalkit.org/fhir/StructureDefinition/sdf-Questionnaire"
+                ],
+                "tag": [
                   {
-                    "resourceType": "Questionnaire",
-                    "language": "en-US",
-                    "status": "draft",
-                    "publisher": "CardinalKit",
-                    "meta": {
-                      "profile": [
-                        "http://cardinalkit.org/fhir/StructureDefinition/sdf-Questionnaire"
-                      ],
-                      "tag": [
-                        {
-                          "system": "urn:ietf:bcp:47",
-                          "code": "en-US",
-                          "display": "English"
-                        }
-                      ]
-                    },
-                    "useContext": [
+                    "system": "urn:ietf:bcp:47",
+                    "code": "en-US",
+                    "display": "English"
+                  }
+                ]
+              },
+              "useContext": [
+                {
+                  "code": {
+                    "system": "http://hl7.org/fhir/ValueSet/usage-context-type",
+                    "code": "focus",
+                    "display": "Clinical Focus"
+                  },
+                  "valueCodeableConcept": {
+                    "coding": [
                       {
-                        "code": {
-                          "system": "http://hl7.org/fhir/ValueSet/usage-context-type",
-                          "code": "focus",
-                          "display": "Clinical Focus"
-                        },
-                        "valueCodeableConcept": {
-                          "coding": [
-                            {
-                              "system": "urn:oid:2.16.578.1.12.4.1.1.8655"
-                            }
-                          ]
-                        }
-                      }
-                    ],
-                    "contact": [
-                      {
-                        "name": "http://cardinalkit.org"
-                      }
-                    ],
-                    "subjectType": [
-                      "Patient"
-                    ],
-                    "item": [
-                      {
-                        "linkId": "65963d48-48a7-4fdc-b52c-1a59dffbd513",
-                        "type": "choice",
-                        "text": "Do you like ice cream?",
-                        "required": false,
-                        "answerOption": [
-                          {
-                            "valueCoding": {
-                              "id": "c899e509-cfc6-473e-898d-5b38a60e442e",
-                              "code": "yes",
-                              "system": "urn:uuid:6fcb8b09-b45e-4acf-fb95-caf0bbf573ed",
-                              "display": "Yes"
-                            }
-                          },
-                          {
-                            "valueCoding": {
-                              "id": "3413a448-dacc-4aff-99ef-a5f0d40888da",
-                              "code": "no",
-                              "system": "urn:uuid:6fcb8b09-b45e-4acf-fb95-caf0bbf573ed",
-                              "display": "No"
-                            }
-                          }
-                        ]
-                      },
-                      {
-                        "linkId": "2664d995-d565-4008-8f28-dea3850a0716",
-                        "type": "choice",
-                        "text": "What kind of ice cream is your favorite?",
-                        "required": false,
-                        "answerOption": [
-                          {
-                            "valueCoding": {
-                              "id": "91b9d310-82de-45da-8bfa-4d78b6e4e29d",
-                              "code": "chocolate",
-                              "system": "urn:uuid:2209cbf6-e620-4c84-890d-bf45dbe4a809",
-                              "display": "Chocolate"
-                            }
-                          },
-                          {
-                            "valueCoding": {
-                              "id": "2a7a8fc5-b252-4830-8907-f90e93fe37a3",
-                              "code": "vanilla",
-                              "system": "urn:uuid:2209cbf6-e620-4c84-890d-bf45dbe4a809",
-                              "display": "Vanilla"
-                            }
-                          }
-                        ],
-                        "enableWhen": [
-                          {
-                            "question": "65963d48-48a7-4fdc-b52c-1a59dffbd513",
-                            "operator": "=",
-                            "answerCoding": {
-                              "system": "urn:uuid:6fcb8b09-b45e-4acf-fb95-caf0bbf573ed",
-                              "code": "yes"
-                            }
-                          }
-                        ]
+                        "system": "urn:oid:2.16.578.1.12.4.1.1.8655"
                       }
                     ]
                   }
+                }
+              ],
+              "contact": [
+                {
+                  "name": "http://cardinalkit.org"
+                }
+              ],
+              "subjectType": [
+                "Patient"
+              ],
+              "item": [
+                {
+                  "linkId": "e864f939-670f-4ad9-832a-59bb1c8e546c",
+                  "type": "date",
+                  "text": "What is the date?",
+                  "required": false
+                },
+                {
+                  "linkId": "43da02da-6b85-4361-82d0-e03c8d611d01",
+                  "type": "display",
+                  "text": "Is August 20, 2022",
+                  "required": false,
+                  "enableWhen": [
+                    {
+                      "question": "e864f939-670f-4ad9-832a-59bb1c8e546c",
+                      "operator": "=",
+                      "answerDate": "2022-08-20"
+                    }
+                  ]
+                }
+              ]
+            }
             """
         let fhirConverter = FhirToResearchKit()
         return fhirConverter.convertFhirQuestionnaireToORKOrderedTask(identifier: "FhirSurvey", json: fhir, title: "FHIR Survey")
