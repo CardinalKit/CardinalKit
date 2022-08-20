@@ -17,7 +17,7 @@ class CKUploadFHIRTaskViewControllerDelegate : NSObject, ORKTaskViewControllerDe
         switch reason {
         case .completed:
             let converter = ResearchKitToFhir()
-            let results = converter.extractResultsToFhir(results: taskViewController)
+            let results = converter.extractResultsToFhir(result: taskViewController.result)
             print(results)
             
             fallthrough
