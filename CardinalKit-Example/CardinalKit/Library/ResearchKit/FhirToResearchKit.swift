@@ -16,6 +16,7 @@ class FhirToResearchKit {
         case unsupportedOperator
         case unsupportedAnswer
         case noOptions
+        case invalidDate
     }
 
     /// This method converts a FHIR Questionnaire defined in JSON into a ResearchKit ORKOrderedTask
@@ -47,14 +48,14 @@ class FhirToResearchKit {
                 task = ORKNavigableOrderedTask(identifier: identifier, steps: steps)
 
                 // If any questions have defined skip logic, convert to ResearchKit navigation rules
-                do {
-                    try constructNavigationRules(questions: item, task: task)
-                } catch ConversionErrors.unsupportedOperator {
-                    print("An unsupported operator was used.")
-                } catch ConversionErrors.unsupportedAnswer {
-                    print("An unsupported answer type was used.")
-                }
+                try constructNavigationRules(questions: item, task: task)
             }
+        } catch ConversionErrors.unsupportedOperator {
+            print("An unsupported operator was used.")
+        } catch ConversionErrors.unsupportedAnswer {
+            print("An unsupported answer type was used.")
+        } catch ConversionErrors.invalidDate {
+            print("An invalid date was found.")
         } catch {
             print("Failed to instantiate FHIR Questionnaire: \(error)")
         }
@@ -124,7 +125,7 @@ class FhirToResearchKit {
                                 throw ConversionErrors.unsupportedOperator
                             }
                         } catch {
-                            print("Error converting FHIRDate to NSDate.")
+                            throw ConversionErrors.invalidDate
                         }
                     case .integer(let integerValue):
                         guard let integerValue = integerValue.value?.integer else { return }
@@ -169,12 +170,12 @@ class FhirToResearchKit {
         guard let questionText = question.text?.value?.string,
               let identifier = question.linkId.value?.string else { return nil }
 
-        let answer = fhirQuestionnaireItemToORKAnswerFormat(question: question)
+        let answer = try? fhirQuestionnaireItemToORKAnswerFormat(question: question)
         let questionStep = ORKQuestionStep(identifier: identifier, title: title, question: questionText, answer: answer)
         return questionStep
     }
 
-    private func fhirQuestionnaireItemToORKAnswerFormat(question: QuestionnaireItem) -> ORKAnswerFormat {
+    private func fhirQuestionnaireItemToORKAnswerFormat(question: QuestionnaireItem) throws -> ORKAnswerFormat {
         var answer = ORKAnswerFormat()
 
         if let type = question.type.value {
@@ -186,7 +187,7 @@ class FhirToResearchKit {
                 if answerOptions.count > 0 {
                     answer = ORKTextChoiceAnswerFormat(style: ORKChoiceAnswerStyle.singleChoice, textChoices: answerOptions)
                 } else {
-                    print("There are no options.")
+                    throw ConversionErrors.noOptions
                 }
             case .date:
                 answer = ORKDateAnswerFormat(style: ORKDateAnswerStyle.date)

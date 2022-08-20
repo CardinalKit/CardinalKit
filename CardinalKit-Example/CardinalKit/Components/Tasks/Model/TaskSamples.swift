@@ -148,36 +148,79 @@ struct TaskSamples {
               ],
               "item": [
                 {
-                  "linkId": "ab3c24f7-d11d-4647-97e0-fdde67269dd0",
-                  "type": "integer",
-                  "text": "What number am I thinking of?",
-                  "required": false
+                  "linkId": "f0f95365-96d2-4892-9ccf-2e2c0c74a87c",
+                  "type": "boolean",
+                  "text": "Do you like ice cream?",
+                  "required": true
                 },
                 {
-                  "linkId": "04c1cb90-6710-4eb1-8d2b-697578232bea",
-                  "type": "integer",
-                  "text": "No it is a greater number.",
+                  "linkId": "59e7a3f7-4108-47a7-8fae-0fb892574a63",
+                  "type": "choice",
+                  "text": "What is your favorite flavor?",
                   "required": false,
+                  "answerOption": [
+                    {
+                      "valueCoding": {
+                        "id": "460afea8-2634-4bb4-89d2-001d92624d6c",
+                        "code": "chocolate",
+                        "system": "urn:uuid:ea53f9f1-4c06-4953-83b6-c944bccdeae3",
+                        "display": "Chocolate"
+                      }
+                    },
+                    {
+                      "valueCoding": {
+                        "id": "6fef1216-0b74-40bd-e773-2bd4a7f66e45",
+                        "code": "vanilla",
+                        "system": "urn:uuid:ea53f9f1-4c06-4953-83b6-c944bccdeae3",
+                        "display": "Vanilla"
+                      }
+                    },
+                    {
+                      "valueCoding": {
+                        "id": "abc0a0bf-0e35-48db-8f0f-b2d30038816b",
+                        "code": "strawberry",
+                        "system": "urn:uuid:ea53f9f1-4c06-4953-83b6-c944bccdeae3",
+                        "display": "Strawberry"
+                      }
+                    },
+                    {
+                      "valueCoding": {
+                        "id": "d1c27eeb-022a-4ef9-8f70-068d96a26154",
+                        "code": "other",
+                        "system": "urn:uuid:ea53f9f1-4c06-4953-83b6-c944bccdeae3",
+                        "display": "Other"
+                      }
+                    }
+                  ],
                   "enableWhen": [
                     {
-                      "question": "ab3c24f7-d11d-4647-97e0-fdde67269dd0",
-                      "operator": "<",
-                      "answerInteger": 2
+                      "question": "f0f95365-96d2-4892-9ccf-2e2c0c74a87c",
+                      "operator": "=",
+                      "answerBoolean": true
                     }
                   ]
                 },
                 {
-                  "linkId": "4e213ca2-0112-44d1-f68b-b036fc4ac0c4",
-                  "type": "integer",
-                  "text": "No, it is a lesser number.",
+                  "linkId": "ccbb4e59-ef0e-4442-8f67-17beba779b26",
+                  "type": "string",
+                  "text": "Please enter in the flavor you like.",
                   "required": false,
                   "enableWhen": [
                     {
-                      "question": "ab3c24f7-d11d-4647-97e0-fdde67269dd0",
-                      "operator": ">",
-                      "answerInteger": 2
+                      "question": "59e7a3f7-4108-47a7-8fae-0fb892574a63",
+                      "operator": "=",
+                      "answerCoding": {
+                        "system": "urn:uuid:ea53f9f1-4c06-4953-83b6-c944bccdeae3",
+                        "code": "other"
+                      }
+                    },
+                    {
+                      "question": "f0f95365-96d2-4892-9ccf-2e2c0c74a87c",
+                      "operator": "=",
+                      "answerBoolean": true
                     }
-                  ]
+                  ],
+                  "enableBehavior": "all"
                 }
               ]
             }
