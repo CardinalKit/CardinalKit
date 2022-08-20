@@ -10,6 +10,7 @@ import Foundation
 import ModelsR4
 import ResearchKit
 
+/// A class that converts FHIR Questionnaires to ResearchKit ORKOrderedTasks
 class FhirToResearchKit {
 
     enum ConversionErrors: Error {
@@ -63,6 +64,11 @@ class FhirToResearchKit {
         return task
     }
 
+    /// Converts FHIR QuestionnaireItems (questions) to ResearchKit ORKSteps
+    /// - Parameters:
+    ///   - questions: an array of FHIR QuestionnaireItems
+    ///   - title: a String that will be rendered above the questions by ResearchKit
+    /// - Returns: an array of ResearchKit ORKSteps
     private func fhirQuestionnaireItemsToORKSteps(questions: [QuestionnaireItem], title: String) -> [ORKStep] {
         var surveySteps = [ORKStep]()
         for question in questions {
@@ -86,7 +92,10 @@ class FhirToResearchKit {
     }
 
     /**
-     This method converts predicates contained in the  "enableWhen" property on FHIR QuestionnaireItem to a ResearchKit ORKPredicateSkipStepNavigationRule.
+     This method converts predicates contained in the  "enableWhen" property on FHIR QuestionnaireItem to ResearchKit ORKPredicateSkipStepNavigationRule which are applied to an ORKNavigableOrderedTask.
+     - Parameters:
+     - questions: an array of FHIR QuestionnaireItem objects
+     - task: a ResearchKit navigable ordered task to apply navigation rules to
      */
     private func constructNavigationRules(questions: [QuestionnaireItem], task: ORKNavigableOrderedTask) throws {
         for question in questions {
@@ -175,6 +184,11 @@ class FhirToResearchKit {
         }
     }
 
+    /// Converts a FHIR QuestionnaireItem to a ResearchKit ORKQuestionStep
+    /// - Parameters:
+    ///   - question: a FHIR QuestionnaireItem object (a single question or a set of questions in a group)
+    ///   - title: a String that will be displayed above the question when rendered by ResearchKit
+    /// - Returns: an ORKQuestionStep object (a ResearchKit question step containing the above question)
     private func fhirQuestionnaireItemToORKQuestionStep(question: QuestionnaireItem, title: String) -> ORKQuestionStep? {
         guard let questionText = question.text?.value?.string,
               let identifier = question.linkId.value?.string else { return nil }
@@ -184,6 +198,11 @@ class FhirToResearchKit {
         return questionStep
     }
 
+    /// Converts a FHIR QuestionnaireItem that contains a group of question items into a ResearchKit form (ORKFormStep)
+    /// - Parameters:
+    ///   - question: a FHIR QuestionnaireItem object which contains a group of nested questions
+    ///   - title: a String that will be displayed at the top of the form when rendered by ResearchKit
+    /// - Returns: an ORKFormStep object (a ResearchKit form step containing all of the nested questions)
     private func fhirGroupToORKFormStep(question: QuestionnaireItem, title: String) -> ORKFormStep? {
         guard let id = question.linkId.value?.string else { return nil }
         guard let nestedQuestions = question.item else { return nil }
@@ -200,11 +219,14 @@ class FhirToResearchKit {
                 formItems.append(formItem)
             }
         }
-        
+
         formStep.formItems = formItems
         return formStep
     }
 
+    /// Converts FHIR QuestionnaireItem answer types to the corresponding ResearchKit answer types (ORKAnswerFormat)
+    /// - Parameter question: a FHIR QuestionnaireItem object
+    /// - Returns: an object of type ORKAnswerFormat representing the type of answer this question accepts
     private func fhirQuestionnaireItemToORKAnswerFormat(question: QuestionnaireItem) throws -> ORKAnswerFormat {
         var answer = ORKAnswerFormat()
 
@@ -236,6 +258,9 @@ class FhirToResearchKit {
         return answer
     }
 
+    /// Converts FHIR text answer choices to ResearchKit ORKTextChoice
+    /// - Parameter question: a FHIR QuestionnaireItem
+    /// - Returns: an array of ORKTextChoice objects, each representing a textual answer option
     private func fhirChoicesToORKTextChoice(_ question: QuestionnaireItem) -> [ORKTextChoice] {
         var choices = [ORKTextChoice]()
         if let answerOptions = question.answerOption {

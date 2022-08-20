@@ -196,34 +196,24 @@ struct TaskSamples {
                             "display": "Other"
                           }
                         }
-                      ],
-                      "enableWhen": [
-                        {
-                          "question": "f0f95365-96d2-4892-9ccf-2e2c0c74a87c",
-                          "operator": "=",
-                          "answerBoolean": true
-                        }
                       ]
                     },
                     {
                       "linkId": "ccbb4e59-ef0e-4442-8f67-17beba779b26",
                       "type": "string",
-                      "text": "Please enter in the flavor you like.",
+                      "text": "If other:",
                       "required": false,
-                      "enableWhen": [
-                        {
-                          "question": "59e7a3f7-4108-47a7-8fae-0fb892574a63",
-                          "operator": "=",
-                          "answerCoding": {
-                            "system": "urn:uuid:ea53f9f1-4c06-4953-83b6-c944bccdeae3",
-                            "code": "other"
-                          }
-                        }
-                      ],
                       "enableBehavior": "all"
                     }
                   ],
-                  "required": false
+                  "required": false,
+                  "enableWhen": [
+                    {
+                      "question": "f0f95365-96d2-4892-9ccf-2e2c0c74a87c",
+                      "operator": "=",
+                      "answerBoolean": true
+                    }
+                  ]
                 }
               ]
             }
