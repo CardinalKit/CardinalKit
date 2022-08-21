@@ -72,19 +72,26 @@ class FhirToResearchKit {
     private func fhirQuestionnaireItemsToORKSteps(questions: [QuestionnaireItem], title: String) -> [ORKStep] {
         var surveySteps = [ORKStep]()
         for question in questions {
-
-            // Convert a group of questions
-            if question.type == QuestionnaireItemType.group {
-                if let groupStep = fhirGroupToORKFormStep(question: question, title: title) {
-                    surveySteps += [groupStep]
-                }
-            } else {
-                // Convert individual questions
-                if let step = fhirQuestionnaireItemToORKQuestionStep(question: question, title: title) {
-                    if let required = question.required?.value?.bool {
-                        step.isOptional = !required
+            if let questionType = question.type.value {
+                switch(questionType){
+                case QuestionnaireItemType.group:
+                    // multiple questions in a group
+                    if let groupStep = fhirGroupToORKFormStep(question: question, title: title) {
+                        surveySteps += [groupStep]
                     }
-                    surveySteps += [step]
+                case QuestionnaireItemType.display:
+                    // a string to display that does not take an answer
+                    if let instructionStep = fhirDisplayToORKInstructionStep(question: question, title: title) {
+                        surveySteps += [instructionStep]
+                    }
+                default:
+                    // individual questions
+                    if let step = fhirQuestionnaireItemToORKQuestionStep(question: question, title: title) {
+                        if let required = question.required?.value?.bool {
+                            step.isOptional = !required
+                        }
+                        surveySteps += [step]
+                    }
                 }
             }
         }
@@ -228,6 +235,16 @@ class FhirToResearchKit {
 
         formStep.formItems = formItems
         return formStep
+    }
+
+    private func fhirDisplayToORKInstructionStep(question: QuestionnaireItem, title: String) -> ORKInstructionStep? {
+        guard let id = question.linkId.value?.string else { return nil }
+        guard let text = question.text?.value?.string else { return nil }
+
+        let instructionStep = ORKInstructionStep(identifier: id)
+        instructionStep.title = title
+        instructionStep.detailText = text
+        return instructionStep
     }
 
     /// Converts FHIR QuestionnaireItem answer types to the corresponding ResearchKit answer types (ORKAnswerFormat)
