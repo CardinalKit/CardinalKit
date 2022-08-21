@@ -229,6 +229,9 @@ class FhirToResearchKit {
                let questionText = question.text?.value?.string,
                 let answerFormat = try? fhirQuestionnaireItemToORKAnswerFormat(question: question) {
                 let formItem = ORKFormItem(identifier: questionId, text: questionText, answerFormat: answerFormat)
+                if let required = question.required?.value?.bool {
+                    formItem.isOptional = required
+                }
                 formItems.append(formItem)
             }
         }
