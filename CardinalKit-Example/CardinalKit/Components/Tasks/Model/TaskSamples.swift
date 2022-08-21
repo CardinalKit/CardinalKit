@@ -108,7 +108,6 @@ struct TaskSamples {
     static let sampleFHIRTask: ORKOrderedTask = {
         let fhirJSON = """
             {
-              "title": "Ice Cream Survey",
               "resourceType": "Questionnaire",
               "language": "en-US",
               "status": "draft",
@@ -289,7 +288,7 @@ struct TaskSamples {
                       "valueString": ""
                     },
                     {
-                      "url": "http://ehelse.no/fhir/StructureDefinition/validationtext",
+                      "url": "http://cardinalkit.org/fhir/StructureDefinition/validationtext",
                       "valueString": "Error message"
                     }
                   ],

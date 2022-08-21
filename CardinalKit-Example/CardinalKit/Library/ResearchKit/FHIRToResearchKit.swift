@@ -42,6 +42,7 @@ extension ORKNavigableOrderedTask {
     private enum SupportedExtensions {
         static let questionaireUnit = "http://hl7.org/fhir/StructureDefinition/questionnaire-unit"
         static let regex = "http://hl7.org/fhir/StructureDefinition/regex"
+        static let validationMessage = "http://cardinalkit.org/fhir/StructureDefinition/validationtext"
     }
     
     
@@ -198,10 +199,12 @@ extension ORKNavigableOrderedTask {
             return ORKNumericAnswerFormat.decimalAnswerFormat(withUnit: getUnit(question))
         case .text, .string:
             let validationRegularExpression = getValidationRegularExpression(question)
+            let validationMessage = getValidationMessage(question)
             let maximumLength = Int(question.maxLength?.value?.integer ?? 0)
 
             let answerFormat = ORKTextAnswerFormat(maximumLength: maximumLength)
             answerFormat.validationRegularExpression = validationRegularExpression
+            answerFormat.invalidMessage = validationMessage
             return answerFormat
         case .time:
             return ORKDateAnswerFormat(style: ORKDateAnswerStyle.dateAndTime)
@@ -265,6 +268,15 @@ extension ORKNavigableOrderedTask {
             return nil
         }
         return try? NSRegularExpression(pattern: stringRegularExpression)
+    }
+
+    private static func getValidationMessage(_ question: QuestionnaireItem) -> String? {
+        guard let validationMessageExtension = getExtensionInQuestionnaireItem(question: question, url: SupportedExtensions.validationMessage),
+              case let .string(message) = validationMessageExtension.value,
+              let stringMessage = message.value?.string else {
+            return nil
+        }
+        return stringMessage
     }
 
     // MARK: Navigation Rules
