@@ -22,7 +22,7 @@ public enum FHIRToResearchKitConversionError: Error, CustomStringConvertible {
     public var description: String {
         switch self {
         case .noItems:
-            return "The parsed FHIR Questionaire didn't contain any items"
+            return "The paresed FHIR Questionaire didn't contain any items"
         case let .unsupportedOperator(fhirOperator):
             return "An unsupported operator was used: \(fhirOperator)"
         case let .unsupportedAnswer(answer):
