@@ -10,25 +10,28 @@ import UIKit
 import SwiftUI
 import ResearchKit
 
+
 struct CKFHIRTaskViewController: UIViewControllerRepresentable {
-
-    let vc: ORKTaskViewController
-    let delegate: CKUploadFHIRTaskViewControllerDelegate
-
-    init(tasks: ORKOrderedTask) {
-        self.vc = ORKTaskViewController(task: tasks, taskRun: NSUUID() as UUID)
-        self.delegate = CKUploadFHIRTaskViewControllerDelegate()
+    private let tasks: ORKOrderedTask
+    private let delegate: ORKTaskViewControllerDelegate
+    
+    
+    /// - Parameters:
+    ///   - tasks: The `ORKOrderedTask` that should be displayed by the `ORKTaskViewController`
+    ///   - delegate: An `ORKTaskViewControllerDelegate` that handles delegate calls from the `ORKTaskViewController`. If no  view controller delegate is provided the view uses an instance of `CKUploadFHIRTaskViewControllerDelegate`.
+    init(tasks: ORKOrderedTask, delegate: ORKTaskViewControllerDelegate = CKUploadFHIRTaskViewControllerDelegate()) {
+        self.tasks = tasks
+        self.delegate = delegate
     }
-
-    typealias UIViewControllerType = ORKTaskViewController
-
-    func updateUIViewController(_ taskViewController: ORKTaskViewController, context: Context) { }
+    
+    
+    func updateUIViewController(_ uiViewController: ORKTaskViewController, context: Context) {}
+    
     func makeUIViewController(context: Context) -> ORKTaskViewController {
-
-        self.vc.delegate = self.delegate // enables `ORKTaskViewControllerDelegate` below
-
-        // & present the VC!
-        return self.vc
+        // Create a new instance of the view controller and pass in the assigned delegate.
+        let viewController = ORKTaskViewController(task: tasks, taskRun: nil)
+        viewController.delegate = delegate
+        return viewController
     }
 
 }

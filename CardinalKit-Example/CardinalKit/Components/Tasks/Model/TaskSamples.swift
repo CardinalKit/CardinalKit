@@ -6,6 +6,8 @@
 //
 
 import ResearchKit
+import ModelsR4
+
 
 /**
  This file contains some sample `ResearchKit` tasks
@@ -104,7 +106,7 @@ struct TaskSamples {
     }()
 
     static let sampleFHIRTask: ORKOrderedTask = {
-        let fhir = """
+        let fhirJSON = """
             {
               "resourceType": "Questionnaire",
               "language": "en-US",
@@ -230,7 +232,7 @@ struct TaskSamples {
                     {
                       "question": "450ff39d-0292-4070-d573-381be854880a",
                       "operator": "<=",
-                      "answerInteger": 10
+                      "answerInteger": 9
                     }
                   ]
                 },
@@ -243,7 +245,7 @@ struct TaskSamples {
                     {
                       "question": "450ff39d-0292-4070-d573-381be854880a",
                       "operator": ">=",
-                      "answerInteger": 10
+                      "answerInteger": 11
                     }
                   ]
                 },
@@ -279,7 +281,14 @@ struct TaskSamples {
               ]
             }
             """
-        let fhirConverter = FhirToResearchKit()
-        return fhirConverter.convertFhirQuestionnaireToORKOrderedTask(identifier: "FhirSurvey", json: fhir, title: "FHIR Survey")
+        
+        do {
+            let questionaire = try JSONDecoder().decode(Questionnaire.self, from: Data(fhirJSON.utf8))
+            return try ORKNavigableOrderedTask(identifier: "FhirSurvey", title: "FHIR Survey", questionnaire: questionaire)
+        } catch let error as FHIRToResearchKitConversionError {
+            fatalError("Failed to parse the example FHIR task due to a conversion error: \(error)")
+        } catch {
+            fatalError("Failed to parse the example FHIR task: \(error)")
+        }
     }()
 }

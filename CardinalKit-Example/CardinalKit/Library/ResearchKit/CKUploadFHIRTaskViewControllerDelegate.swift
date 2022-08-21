@@ -11,20 +11,24 @@ import ResearchKit
 import Firebase
 import ModelsR4
 
-class CKUploadFHIRTaskViewControllerDelegate : NSObject, ORKTaskViewControllerDelegate {
 
-    public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
+class CKUploadFHIRTaskViewControllerDelegate: NSObject, ORKTaskViewControllerDelegate {
+    func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
         switch reason {
         case .completed:
-            let converter = ResearchKitToFhir()
-            let results = converter.extractResultsToFhir(result: taskViewController.result)
-            print(results)
-            
-            fallthrough
+            let fhirResponses = taskViewController.result.fhirResponses
+
+            let encoder = JSONEncoder()
+            encoder.outputFormatting = .prettyPrinted
+
+            let data = try! encoder.encode(fhirResponses)
+            let json = String(decoding: data, as: UTF8.self)
+
+            print(json)
         default:
-            taskViewController.dismiss(animated: false, completion: nil)
-
+            break
         }
-    }
 
+        taskViewController.dismiss(animated: false, completion: nil)
+    }
 }
