@@ -108,6 +108,7 @@ struct TaskSamples {
     static let sampleFHIRTask: ORKOrderedTask = {
         let fhirJSON = """
             {
+              "title": "Ice Cream Survey",
               "resourceType": "Questionnaire",
               "language": "en-US",
               "status": "draft",
@@ -300,7 +301,7 @@ struct TaskSamples {
         
         do {
             let questionaire = try JSONDecoder().decode(Questionnaire.self, from: Data(fhirJSON.utf8))
-            return try ORKNavigableOrderedTask(identifier: "FhirSurvey", title: "FHIR Survey", questionnaire: questionaire)
+            return try ORKNavigableOrderedTask(identifier: "FhirSurvey", questionnaire: questionaire)
         } catch let error as FHIRToResearchKitConversionError {
             fatalError("Failed to parse the example FHIR task due to a conversion error: \(error)")
         } catch {

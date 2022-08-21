@@ -47,16 +47,16 @@ extension ORKNavigableOrderedTask {
     
     public convenience init(
         identifier: String,
-        title: String,
+        title: String? = nil,
         questionnaire: Questionnaire,
         summaryStep: ORKCompletionStep? = nil
     ) throws {
         guard let item = questionnaire.item else {
             throw FHIRToResearchKitConversionError.noItems
         }
-        
+
         // Convert each FHIR Questionnaire Item to an ORKStep
-        var steps = ORKNavigableOrderedTask.fhirQuestionnaireItemsToORKSteps(items: item, title: title)
+        var steps = ORKNavigableOrderedTask.fhirQuestionnaireItemsToORKSteps(items: item, title: (title ?? questionnaire.title?.value?.string) ?? "")
         
         // Add a summary step at the end of the task if defined
         if let summaryStep = summaryStep {
