@@ -148,6 +148,8 @@ class FhirToResearchKit {
                     case .integer(let integerValue):
                         guard let integerValue = integerValue.value?.integer else { return }
                         switch fhirOperator {
+                        case .equal:
+                            predicate = NSCompoundPredicate(notPredicateWithSubpredicate: ORKResultPredicate.predicateForNumericQuestionResult(with: resultSelector, expectedAnswer: Int(integerValue)))
                         case .notEqual:
                             predicate = ORKResultPredicate.predicateForNumericQuestionResult(with: resultSelector, expectedAnswer: Int(integerValue))
                         case .lessThanOrEqual:
@@ -160,6 +162,10 @@ class FhirToResearchKit {
                     case .decimal(let decimalValue):
                         guard let decimalValue = decimalValue.value?.decimal else { return }
                         switch fhirOperator {
+                        case .equal:
+                            predicate = NSCompoundPredicate(notPredicateWithSubpredicate: ORKResultPredicate.predicateForNumericQuestionResult(with: resultSelector, minimumExpectedAnswerValue: decimalValue.doubleValue, maximumExpectedAnswerValue: decimalValue.doubleValue))
+                        case .notEqual:
+                            predicate = ORKResultPredicate.predicateForNumericQuestionResult(with: resultSelector, minimumExpectedAnswerValue: decimalValue.doubleValue, maximumExpectedAnswerValue: decimalValue.doubleValue)
                         case .lessThanOrEqual:
                             predicate = ORKResultPredicate.predicateForNumericQuestionResult(with: resultSelector, minimumExpectedAnswerValue: decimalValue.doubleValue)
                         case .greaterThanOrEqual:

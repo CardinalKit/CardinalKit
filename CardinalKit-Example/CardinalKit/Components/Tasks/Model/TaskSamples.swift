@@ -201,7 +201,7 @@ struct TaskSamples {
                     {
                       "linkId": "ccbb4e59-ef0e-4442-8f67-17beba779b26",
                       "type": "string",
-                      "text": "If other:",
+                      "text": "Other:",
                       "required": false,
                       "enableBehavior": "all"
                     }
@@ -212,6 +212,51 @@ struct TaskSamples {
                       "question": "f0f95365-96d2-4892-9ccf-2e2c0c74a87c",
                       "operator": "=",
                       "answerBoolean": true
+                    }
+                  ]
+                },
+                {
+                  "linkId": "450ff39d-0292-4070-d573-381be854880a",
+                  "type": "integer",
+                  "text": "Guess the number I'm thinking of?",
+                  "required": false
+                },
+                {
+                  "linkId": "c11e2750-1e25-4a34-8e1b-73a84fa84f4e",
+                  "type": "display",
+                  "text": "No, the number I'm thinking of is greater.",
+                  "required": false,
+                  "enableWhen": [
+                    {
+                      "question": "450ff39d-0292-4070-d573-381be854880a",
+                      "operator": "<=",
+                      "answerInteger": 10
+                    }
+                  ]
+                },
+                {
+                  "linkId": "180cb43d-a88d-4548-8895-427b8b1742a1",
+                  "type": "display",
+                  "text": "No, the number I'm thinking of is less.",
+                  "required": false,
+                  "enableWhen": [
+                    {
+                      "question": "450ff39d-0292-4070-d573-381be854880a",
+                      "operator": ">=",
+                      "answerInteger": 10
+                    }
+                  ]
+                },
+                {
+                  "linkId": "c55cec4d-0c98-4c94-8296-118940867c3b",
+                  "type": "display",
+                  "text": "Yes, I was thinking of 10!",
+                  "required": false,
+                  "enableWhen": [
+                    {
+                      "question": "450ff39d-0292-4070-d573-381be854880a",
+                      "operator": "=",
+                      "answerInteger": 10
                     }
                   ]
                 }
