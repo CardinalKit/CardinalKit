@@ -22,6 +22,7 @@ class FhirToResearchKit {
 
     /// Supported extensions
     let QUESTIONNAIRE_UNIT_EXTENSION_URI = "http://hl7.org/fhir/StructureDefinition/questionnaire-unit"
+    let REGEX_EXTENSION_URI = "http://hl7.org/fhir/StructureDefinition/regex"
 
     /// This method converts a FHIR Questionnaire defined in JSON into a ResearchKit ORKOrderedTask
     ///
@@ -286,7 +287,13 @@ class FhirToResearchKit {
                 let unit = getUnit(question)
                 answer = ORKNumericAnswerFormat.decimalAnswerFormat(withUnit: unit)
             case .text, .string:
-                answer = ORKTextAnswerFormat(maximumLength: Int(question.maxLength?.value?.integer ?? 0))
+                let validationRegularExpression = getValidationRegularExpression(question)
+                let maximumLength = Int(question.maxLength?.value?.integer ?? 0)
+
+                let answerFormat = ORKTextAnswerFormat(maximumLength: maximumLength)
+                answerFormat.validationRegularExpression = validationRegularExpression
+
+                answer = answerFormat
             case .time:
                 answer = ORKDateAnswerFormat(style: ORKDateAnswerStyle.dateAndTime)
             default:
@@ -314,6 +321,31 @@ class FhirToResearchKit {
         return choices
     }
 
+    // Handles FHIR extensions
+
+    /// Checks a QuestionnaireItem for an extension matching the given URL and then return it if it exists
+    /// - Parameters:
+    ///   - question: a FHIR QuestionnaireItem
+    ///   - url: a String identifying the extension
+    /// - Returns: an optional Extension if it was found
+    private func getExtensionInQuestionnaireItem(question: QuestionnaireItem, url: String) -> Extension? {
+        return question.`extension`?.filter({ $0.url.value?.url.absoluteString == url }).first
+    }
+
+    /// Gets the regular expression specified for validating a text input in a question
+    /// - Parameter question: a FHIRQuestionnaireItem with a text or string input that contains a regular expression for validation
+    /// - Returns: an optional String containing the regular expression, if it exists
+    private func getValidationRegularExpression(_ question: QuestionnaireItem) -> NSRegularExpression? {
+        if let regexExtension = getExtensionInQuestionnaireItem(question: question, url: REGEX_EXTENSION_URI){
+            if case let .string(regex) = regexExtension.value {
+                if let stringRegularExpression = regex.value?.string {
+                    return try? NSRegularExpression(pattern: stringRegularExpression)
+                }
+            }
+        }
+        return nil
+    }
+
     /// Gets the unit of a quantity answer type
     /// - Parameter question: a FHIR QuestionnaireItem with a quantity answer type
     /// - Returns: an optional String containing the unit (i.e. cm) if it was provided
@@ -326,14 +358,6 @@ class FhirToResearchKit {
         return nil
     }
 
-    /// Checks a QuestionnaireItem for an extension matching the given URL and then return it if it exists
-    /// - Parameters:
-    ///   - question: a FHIR QuestionnaireItem
-    ///   - url: a String identifying the extension
-    /// - Returns: an optional Extension if it was found
-    private func getExtensionInQuestionnaireItem(question: QuestionnaireItem, url: String) -> Extension? {
-        return question.`extension`?.filter({ $0.url.value?.url.absoluteString == url }).first
-    }
 }
 
 extension Decimal {

@@ -275,6 +275,22 @@ struct TaskSamples {
                     }
                   ],
                   "required": false
+                },
+                {
+                  "linkId": "4410191e-042d-42a0-9e3c-36f902f62801",
+                  "type": "string",
+                  "text": "Enter your email:",
+                  "extension": [
+                    {
+                      "url": "http://hl7.org/fhir/StructureDefinition/regex",
+                      "valueString": ""
+                    },
+                    {
+                      "url": "http://ehelse.no/fhir/StructureDefinition/validationtext",
+                      "valueString": "Error message"
+                    }
+                  ],
+                  "required": false
                 }
               ]
             }
