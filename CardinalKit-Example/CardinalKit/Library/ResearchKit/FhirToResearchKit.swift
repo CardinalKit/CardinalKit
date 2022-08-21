@@ -20,6 +20,9 @@ class FhirToResearchKit {
         case invalidDate
     }
 
+    /// Supported extensions
+    let QUESTIONNAIRE_UNIT_EXTENSION_URI = "http://hl7.org/fhir/StructureDefinition/questionnaire-unit"
+
     /// This method converts a FHIR Questionnaire defined in JSON into a ResearchKit ORKOrderedTask
     ///
     /// - Parameters:
@@ -240,6 +243,11 @@ class FhirToResearchKit {
         return formStep
     }
 
+    /// Converts FHIR QuestionnaireItem display type to ORKInstructionStep
+    /// - Parameters:
+    ///   - question: a FHIR QuestionnaireItem object
+    ///   - title: a String to display at the top of the view rendered by ResearchKit
+    /// - Returns: a ResearchKit ORKInstructionStep
     private func fhirDisplayToORKInstructionStep(question: QuestionnaireItem, title: String) -> ORKInstructionStep? {
         guard let id = question.linkId.value?.string else { return nil }
         guard let text = question.text?.value?.string else { return nil }
@@ -273,6 +281,10 @@ class FhirToResearchKit {
                 answer = ORKNumericAnswerFormat.decimalAnswerFormat(withUnit: "")
             case .integer:
                 answer = ORKNumericAnswerFormat.integerAnswerFormat(withUnit: "")
+            case .quantity:
+                // a numeric answer with an included unit to be displayed
+                let unit = getUnit(question)
+                answer = ORKNumericAnswerFormat.decimalAnswerFormat(withUnit: unit)
             case .text, .string:
                 answer = ORKTextAnswerFormat(maximumLength: Int(question.maxLength?.value?.integer ?? 0))
             case .time:
@@ -302,6 +314,26 @@ class FhirToResearchKit {
         return choices
     }
 
+    /// Gets the unit of a quantity answer type
+    /// - Parameter question: a FHIR QuestionnaireItem with a quantity answer type
+    /// - Returns: an optional String containing the unit (i.e. cm) if it was provided
+    private func getUnit(_ question: QuestionnaireItem) -> String? {
+        if let unitExtension = getExtensionInQuestionnaireItem(question: question, url: QUESTIONNAIRE_UNIT_EXTENSION_URI){
+            if case let .coding(coding) = unitExtension.value {
+                return coding.code?.value?.string
+            }
+        }
+        return nil
+    }
+
+    /// Checks a QuestionnaireItem for an extension matching the given URL and then return it if it exists
+    /// - Parameters:
+    ///   - question: a FHIR QuestionnaireItem
+    ///   - url: a String identifying the extension
+    /// - Returns: an optional Extension if it was found
+    private func getExtensionInQuestionnaireItem(question: QuestionnaireItem, url: String) -> Extension? {
+        return question.`extension`?.filter({ $0.url.value?.url.absoluteString == url }).first
+    }
 }
 
 extension Decimal {

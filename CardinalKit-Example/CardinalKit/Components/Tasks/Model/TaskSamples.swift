@@ -259,6 +259,22 @@ struct TaskSamples {
                       "answerInteger": 10
                     }
                   ]
+                },
+                {
+                  "linkId": "3c071e87-1f90-4091-9672-9f1f1ed97757",
+                  "type": "quantity",
+                  "text": "How much do you weigh?",
+                  "extension": [
+                    {
+                      "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-unit",
+                      "valueCoding": {
+                        "system": "http://unitsofmeasure.org",
+                        "code": "kg",
+                        "display": "kilo"
+                      }
+                    }
+                  ],
+                  "required": false
                 }
               ]
             }
