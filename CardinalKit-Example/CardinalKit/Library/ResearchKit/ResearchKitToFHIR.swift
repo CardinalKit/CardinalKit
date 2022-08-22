@@ -30,6 +30,8 @@ extension ORKTaskResult {
         let questionnaireResponse = QuestionnaireResponse(status: FHIRPrimitive(QuestionnaireResponseStatus.completed))
         questionnaireResponse.item = questionnaireResponses
         questionnaireResponse.id = FHIRPrimitive(FHIRString(id))
+        questionnaireResponse.authored = FHIRPrimitive(try? DateTime(date: Date()))
+
         return questionnaireResponse
     }
 
