@@ -46,6 +46,9 @@ extension ORKNavigableOrderedTask {
         static let questionaireUnit = "http://hl7.org/fhir/StructureDefinition/questionnaire-unit"
         static let regex = "http://hl7.org/fhir/StructureDefinition/regex"
         static let validationMessage = "http://cardinalkit.org/fhir/StructureDefinition/validationtext"
+        static let maxDecimalPlaces = "http://hl7.org/fhir/StructureDefinition/maxDecimalPlaces"
+        static let minValue = "http://hl7.org/fhir/StructureDefinition/minValue"
+        static let maxValue = "http://hl7.org/fhir/StructureDefinition/maxValue"
     }
     
     
@@ -198,11 +201,22 @@ extension ORKNavigableOrderedTask {
         case .date:
             return ORKDateAnswerFormat(style: ORKDateAnswerStyle.date)
         case .decimal:
-            return ORKNumericAnswerFormat.decimalAnswerFormat(withUnit: "")
+            let answerFormat = ORKNumericAnswerFormat.decimalAnswerFormat(withUnit: "")
+            answerFormat.maximumFractionDigits = getMaximumDecimalPlaces(question)
+            answerFormat.minimum = getMinValue(question)
+            answerFormat.maximum = getMaxValue(question)
+            return answerFormat
         case .integer:
-            return ORKNumericAnswerFormat.integerAnswerFormat(withUnit: "")
+            let answerFormat = ORKNumericAnswerFormat.integerAnswerFormat(withUnit: "")
+            answerFormat.minimum = getMinValue(question)
+            answerFormat.maximum = getMaxValue(question)
+            return answerFormat
         case .quantity: // a numeric answer with an included unit to be displayed
-            return ORKNumericAnswerFormat.decimalAnswerFormat(withUnit: getUnit(question))
+            let answerFormat = ORKNumericAnswerFormat.decimalAnswerFormat(withUnit: getUnit(question))
+            answerFormat.maximumFractionDigits = getMaximumDecimalPlaces(question)
+            answerFormat.minimum = getMinValue(question)
+            answerFormat.maximum = getMaxValue(question)
+            return answerFormat
         case .text, .string:
             let validationRegularExpression = getValidationRegularExpression(question)
             let validationMessage = getValidationMessage(question)
@@ -243,6 +257,42 @@ extension ORKNavigableOrderedTask {
     
     
     // MARK: FHIR Extensions
+
+    /// Gets the minimum value for a numerical answer
+    /// - Parameter question: a FHIR QuestionnaireItem with a numerical answer type (integer, decimal)
+    /// - Returns: an optional NSNumber containing the minimum value allowed
+    private static func getMinValue(_ question: QuestionnaireItem) -> NSNumber? {
+        guard let minValueExtension = getExtensionInQuestionnaireItem(question: question, url: SupportedExtensions.minValue),
+              case let .integer(integerValue) = minValueExtension.value,
+              let minValue = integerValue.value?.integer as? Int32 else {
+            return nil
+        }
+        return NSNumber(value: minValue)
+    }
+
+    /// Gets the maximum value for a numerical answer
+    /// - Parameter question: a FHIR QuestionnaireItem with a numerical answer type (integer, decimal)
+    /// - Returns: an optional NSNumber containing the maximum value allowed
+    private static func getMaxValue(_ question: QuestionnaireItem) -> NSNumber? {
+        guard let maxValueExtension = getExtensionInQuestionnaireItem(question: question, url: SupportedExtensions.maxValue),
+              case let .integer(integerValue) = maxValueExtension.value,
+              let maxValue = integerValue.value?.integer as? Int32 else {
+            return nil
+        }
+        return NSNumber(value: maxValue)
+    }
+
+    /// Gets the maximum number of decimal palces for a decimal answer
+    /// - Parameter question: a FHIR QuestionnaireItem with a decimal answer type
+    /// - Returns: an optional NSNumber representing the maximum number of digits to the right of the decimal place
+    private static func getMaximumDecimalPlaces(_ question: QuestionnaireItem) -> NSNumber? {
+        guard let maxDecimalPlacesExtension = getExtensionInQuestionnaireItem(question: question, url: SupportedExtensions.maxDecimalPlaces),
+              case let .integer(integerValue) = maxDecimalPlacesExtension.value,
+              let maxDecimalPlaces = integerValue.value?.integer as? Int32 else {
+                return nil
+        }
+        return NSNumber(value: maxDecimalPlaces)
+    }
     
     /// Gets the unit of a quantity answer type
     /// - Parameter question: a FHIR QuestionnaireItem with a quantity answer type
