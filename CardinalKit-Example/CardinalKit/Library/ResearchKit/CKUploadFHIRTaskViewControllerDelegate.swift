@@ -18,6 +18,11 @@ class CKUploadFHIRTaskViewControllerDelegate: NSObject, ORKTaskViewControllerDel
         case .completed:
             let fhirResponses = taskViewController.result.fhirResponses
 
+            // Adds patient identifier to QuestionnaireResponse
+            if let uid = CKStudyUser.shared.currentUser?.uid {
+                fhirResponses.subject = Reference(reference: FHIRPrimitive(FHIRString("Patient/\(uid)")))
+            }
+
             let encoder = JSONEncoder()
             encoder.outputFormatting = .prettyPrinted
 
