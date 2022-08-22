@@ -25,6 +25,8 @@ class CKUploadFHIRTaskViewControllerDelegate: NSObject, ORKTaskViewControllerDel
             let json = String(decoding: data, as: UTF8.self)
 
             print(json)
+
+            // TODO: Upload to Firestore
         default:
             break
         }

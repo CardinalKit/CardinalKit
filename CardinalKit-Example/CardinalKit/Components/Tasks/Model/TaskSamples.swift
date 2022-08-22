@@ -109,6 +109,7 @@ struct TaskSamples {
         let fhirJSON = """
             {
               "resourceType": "Questionnaire",
+              "id": "sample-fhir-questionnaire-cardinalkit",
               "language": "en-US",
               "status": "draft",
               "publisher": "CardinalKit",
@@ -282,16 +283,6 @@ struct TaskSamples {
                   "linkId": "4410191e-042d-42a0-9e3c-36f902f62801",
                   "type": "string",
                   "text": "Enter your email:",
-                  "extension": [
-                    {
-                      "url": "http://hl7.org/fhir/StructureDefinition/regex",
-                      "valueString": ""
-                    },
-                    {
-                      "url": "http://cardinalkit.org/fhir/StructureDefinition/validationtext",
-                      "valueString": "Error message"
-                    }
-                  ],
                   "required": false
                 }
               ]
@@ -300,7 +291,7 @@ struct TaskSamples {
         
         do {
             let questionaire = try JSONDecoder().decode(Questionnaire.self, from: Data(fhirJSON.utf8))
-            return try ORKNavigableOrderedTask(identifier: "FhirSurvey", questionnaire: questionaire)
+            return try ORKNavigableOrderedTask(questionnaire: questionaire)
         } catch let error as FHIRToResearchKitConversionError {
             fatalError("Failed to parse the example FHIR task due to a conversion error: \(error)")
         } catch {

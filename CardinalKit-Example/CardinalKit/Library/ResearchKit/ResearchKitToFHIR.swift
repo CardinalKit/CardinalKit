@@ -18,6 +18,7 @@ extension ORKTaskResult {
     public var fhirResponses: QuestionnaireResponse {
         var questionnaireResponses: [QuestionnaireResponseItem] = []
         let taskResults = self.results as? [ORKStepResult] ?? []
+        let id = self.identifier
         
         for result in taskResults.compactMap(\.results).flatMap({ $0 }) {
             let response = createResponse(result)
@@ -28,6 +29,7 @@ extension ORKTaskResult {
 
         let questionnaireResponse = QuestionnaireResponse(status: FHIRPrimitive(QuestionnaireResponseStatus.completed))
         questionnaireResponse.item = questionnaireResponses
+        questionnaireResponse.id = FHIRPrimitive(FHIRString(id))
         return questionnaireResponse
     }
 

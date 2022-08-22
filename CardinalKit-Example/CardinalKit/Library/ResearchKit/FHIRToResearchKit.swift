@@ -13,6 +13,7 @@ import ResearchKit
 
 public enum FHIRToResearchKitConversionError: Error, CustomStringConvertible {
     case noItems
+    case noId
     case unsupportedOperator(QuestionnaireItemOperator)
     case unsupportedAnswer(QuestionnaireItemEnableWhen.AnswerX)
     case noOptions
@@ -23,6 +24,8 @@ public enum FHIRToResearchKitConversionError: Error, CustomStringConvertible {
         switch self {
         case .noItems:
             return "The parsed FHIR Questionaire didn't contain any items"
+        case .noId:
+            return "This FHIR Questionnaire does not have an id"
         case let .unsupportedOperator(fhirOperator):
             return "An unsupported operator was used: \(fhirOperator)"
         case let .unsupportedAnswer(answer):
@@ -47,13 +50,16 @@ extension ORKNavigableOrderedTask {
     
     
     public convenience init(
-        identifier: String,
         title: String? = nil,
         questionnaire: Questionnaire,
         summaryStep: ORKCompletionStep? = nil
     ) throws {
         guard let item = questionnaire.item else {
             throw FHIRToResearchKitConversionError.noItems
+        }
+
+        guard let id = questionnaire.id?.value?.string else {
+            throw FHIRToResearchKitConversionError.noId
         }
 
         // Convert each FHIR Questionnaire Item to an ORKStep
@@ -64,7 +70,7 @@ extension ORKNavigableOrderedTask {
             steps.append(summaryStep)
         }
 
-        self.init(identifier: identifier, steps: steps)
+        self.init(identifier: id, steps: steps)
         // If any questions have defined skip logic, convert to ResearchKit navigation rules
         try constructNavigationRules(questions: item)
     }
