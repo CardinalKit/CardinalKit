@@ -104,204 +104,205 @@ struct TaskSamples {
         
         return ORKOrderedTask(identifier: "SurveyTask-Assessment", steps: steps)
     }()
-
+    
+    /// An example of FHIR-based ResearchKit tasks using the FHIR to ResearchKit translation functionality.
     static let sampleFHIRTask: ORKOrderedTask = {
         let fhirJSON = """
+            {
+              "resourceType": "Questionnaire",
+              "id": "sample-fhir-questionnaire-cardinalkit",
+              "language": "en-US",
+              "status": "draft",
+              "publisher": "CardinalKit",
+              "meta": {
+                "profile": [
+                  "http://cardinalkit.org/fhir/StructureDefinition/sdf-Questionnaire"
+                ],
+                "tag": [
+                  {
+                    "system": "urn:ietf:bcp:47",
+                    "code": "en-US",
+                    "display": "English"
+                  }
+                ]
+              },
+              "useContext": [
+                {
+                  "code": {
+                    "system": "http://hl7.org/fhir/ValueSet/usage-context-type",
+                    "code": "focus",
+                    "display": "Clinical Focus"
+                  },
+                  "valueCodeableConcept": {
+                    "coding": [
+                      {
+                        "system": "urn:oid:2.16.578.1.12.4.1.1.8655"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "contact": [
+                {
+                  "name": "http://cardinalkit.org"
+                }
+              ],
+              "subjectType": [
+                "Patient"
+              ],
+              "item": [
+                {
+                  "linkId": "f0f95365-96d2-4892-9ccf-2e2c0c74a87c",
+                  "type": "boolean",
+                  "text": "Do you like ice cream?",
+                  "required": true
+                },
+                {
+                  "linkId": "169e7113-1e8f-4858-fc97-5703ba865703",
+                  "type": "group",
+                  "text": "What is your favorite type?",
+                  "item": [
+                    {
+                      "linkId": "59e7a3f7-4108-47a7-8fae-0fb892574a63",
+                      "type": "choice",
+                      "text": "What is your favorite flavor?",
+                      "required": false,
+                      "answerOption": [
                         {
-                          "resourceType": "Questionnaire",
-                          "id": "sample-fhir-questionnaire-cardinalkit",
-                          "language": "en-US",
-                          "status": "draft",
-                          "publisher": "CardinalKit",
-                          "meta": {
-                            "profile": [
-                              "http://cardinalkit.org/fhir/StructureDefinition/sdf-Questionnaire"
-                            ],
-                            "tag": [
-                              {
-                                "system": "urn:ietf:bcp:47",
-                                "code": "en-US",
-                                "display": "English"
-                              }
-                            ]
-                          },
-                          "useContext": [
-                            {
-                              "code": {
-                                "system": "http://hl7.org/fhir/ValueSet/usage-context-type",
-                                "code": "focus",
-                                "display": "Clinical Focus"
-                              },
-                              "valueCodeableConcept": {
-                                "coding": [
-                                  {
-                                    "system": "urn:oid:2.16.578.1.12.4.1.1.8655"
-                                  }
-                                ]
-                              }
-                            }
-                          ],
-                          "contact": [
-                            {
-                              "name": "http://cardinalkit.org"
-                            }
-                          ],
-                          "subjectType": [
-                            "Patient"
-                          ],
-                          "item": [
-                            {
-                              "linkId": "f0f95365-96d2-4892-9ccf-2e2c0c74a87c",
-                              "type": "boolean",
-                              "text": "Do you like ice cream?",
-                              "required": true
-                            },
-                            {
-                              "linkId": "169e7113-1e8f-4858-fc97-5703ba865703",
-                              "type": "group",
-                              "text": "What is your favorite type?",
-                              "item": [
-                                {
-                                  "linkId": "59e7a3f7-4108-47a7-8fae-0fb892574a63",
-                                  "type": "choice",
-                                  "text": "What is your favorite flavor?",
-                                  "required": false,
-                                  "answerOption": [
-                                    {
-                                      "valueCoding": {
-                                        "id": "460afea8-2634-4bb4-89d2-001d92624d6c",
-                                        "code": "chocolate",
-                                        "system": "urn:uuid:ea53f9f1-4c06-4953-83b6-c944bccdeae3",
-                                        "display": "Chocolate"
-                                      }
-                                    },
-                                    {
-                                      "valueCoding": {
-                                        "id": "6fef1216-0b74-40bd-e773-2bd4a7f66e45",
-                                        "code": "vanilla",
-                                        "system": "urn:uuid:ea53f9f1-4c06-4953-83b6-c944bccdeae3",
-                                        "display": "Vanilla"
-                                      }
-                                    },
-                                    {
-                                      "valueCoding": {
-                                        "id": "abc0a0bf-0e35-48db-8f0f-b2d30038816b",
-                                        "code": "strawberry",
-                                        "system": "urn:uuid:ea53f9f1-4c06-4953-83b6-c944bccdeae3",
-                                        "display": "Strawberry"
-                                      }
-                                    },
-                                    {
-                                      "valueCoding": {
-                                        "id": "d1c27eeb-022a-4ef9-8f70-068d96a26154",
-                                        "code": "other",
-                                        "system": "urn:uuid:ea53f9f1-4c06-4953-83b6-c944bccdeae3",
-                                        "display": "Other"
-                                      }
-                                    }
-                                  ]
-                                }
-                              ],
-                              "required": false,
-                              "enableWhen": [
-                                {
-                                  "question": "f0f95365-96d2-4892-9ccf-2e2c0c74a87c",
-                                  "operator": "=",
-                                  "answerBoolean": true
-                                }
-                              ]
-                            },
-                            {
-                              "linkId": "450ff39d-0292-4070-d573-381be854880a",
-                              "type": "integer",
-                              "text": "Guess the number I'm thinking of between 0 and 20?",
-                              "required": false,
-                              "extension": [
-                                {
-                                  "url": "http://hl7.org/fhir/StructureDefinition/minValue",
-                                  "valueInteger": 1
-                                },
-                                {
-                                  "url": "http://hl7.org/fhir/StructureDefinition/maxValue",
-                                  "valueInteger": 20
-                                }
-                            ]
-                            },
-                            {
-                              "linkId": "c11e2750-1e25-4a34-8e1b-73a84fa84f4e",
-                              "type": "display",
-                              "text": "No, the number I'm thinking of is greater.",
-                              "required": false,
-                              "enableWhen": [
-                                {
-                                  "question": "450ff39d-0292-4070-d573-381be854880a",
-                                  "operator": "<=",
-                                  "answerInteger": 9
-                                }
-                              ]
-                            },
-                            {
-                              "linkId": "180cb43d-a88d-4548-8895-427b8b1742a1",
-                              "type": "display",
-                              "text": "No, the number I'm thinking of is less.",
-                              "required": false,
-                              "enableWhen": [
-                                {
-                                  "question": "450ff39d-0292-4070-d573-381be854880a",
-                                  "operator": ">=",
-                                  "answerInteger": 11
-                                }
-                              ]
-                            },
-                            {
-                              "linkId": "c55cec4d-0c98-4c94-8296-118940867c3b",
-                              "type": "display",
-                              "text": "Yes, I was thinking of 10!",
-                              "required": false,
-                              "enableWhen": [
-                                {
-                                  "question": "450ff39d-0292-4070-d573-381be854880a",
-                                  "operator": "=",
-                                  "answerInteger": 10
-                                }
-                              ]
-                            },
-                            {
-                              "linkId": "68fa4d26-77a4-4d35-86a9-6f7d7080f17e",
-                              "type": "quantity",
-                              "text": "How much do you weigh?",
-                              "extension": [
-                                {
-                                  "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-unit",
-                                  "valueCoding": {
-                                    "system": "http://unitsofmeasure.org",
-                                    "code": "kg",
-                                    "display": "kilo"
-                                  }
-                                },
-                                {
-                                  "url": "http://hl7.org/fhir/StructureDefinition/maxDecimalPlaces",
-                                  "valueInteger": 2
-                                },
-                                {
-                                  "url": "http://hl7.org/fhir/StructureDefinition/minValue",
-                                  "valueInteger": 10
-                                },
-                                {
-                                  "url": "http://hl7.org/fhir/StructureDefinition/maxValue",
-                                  "valueInteger": 1000
-                                }
-                              ],
-                              "required": false
-                            },
-                            {
-                              "linkId": "4410191e-042d-42a0-9e3c-36f902f62801",
-                              "type": "string",
-                              "text": "Enter your email:",
-                              "required": false
-                            }
-                          ]
+                          "valueCoding": {
+                            "id": "460afea8-2634-4bb4-89d2-001d92624d6c",
+                            "code": "chocolate",
+                            "system": "urn:uuid:ea53f9f1-4c06-4953-83b6-c944bccdeae3",
+                            "display": "Chocolate"
+                          }
+                        },
+                        {
+                          "valueCoding": {
+                            "id": "6fef1216-0b74-40bd-e773-2bd4a7f66e45",
+                            "code": "vanilla",
+                            "system": "urn:uuid:ea53f9f1-4c06-4953-83b6-c944bccdeae3",
+                            "display": "Vanilla"
+                          }
+                        },
+                        {
+                          "valueCoding": {
+                            "id": "abc0a0bf-0e35-48db-8f0f-b2d30038816b",
+                            "code": "strawberry",
+                            "system": "urn:uuid:ea53f9f1-4c06-4953-83b6-c944bccdeae3",
+                            "display": "Strawberry"
+                          }
+                        },
+                        {
+                          "valueCoding": {
+                            "id": "d1c27eeb-022a-4ef9-8f70-068d96a26154",
+                            "code": "other",
+                            "system": "urn:uuid:ea53f9f1-4c06-4953-83b6-c944bccdeae3",
+                            "display": "Other"
+                          }
                         }
+                      ]
+                    }
+                  ],
+                  "required": false,
+                  "enableWhen": [
+                    {
+                      "question": "f0f95365-96d2-4892-9ccf-2e2c0c74a87c",
+                      "operator": "=",
+                      "answerBoolean": true
+                    }
+                  ]
+                },
+                {
+                  "linkId": "450ff39d-0292-4070-d573-381be854880a",
+                  "type": "integer",
+                  "text": "Guess the number I'm thinking of between 0 and 20?",
+                  "required": false,
+                  "extension": [
+                    {
+                      "url": "http://hl7.org/fhir/StructureDefinition/minValue",
+                      "valueInteger": 1
+                    },
+                    {
+                      "url": "http://hl7.org/fhir/StructureDefinition/maxValue",
+                      "valueInteger": 20
+                    }
+                ]
+                },
+                {
+                  "linkId": "c11e2750-1e25-4a34-8e1b-73a84fa84f4e",
+                  "type": "display",
+                  "text": "No, the number I'm thinking of is greater.",
+                  "required": false,
+                  "enableWhen": [
+                    {
+                      "question": "450ff39d-0292-4070-d573-381be854880a",
+                      "operator": "<=",
+                      "answerInteger": 9
+                    }
+                  ]
+                },
+                {
+                  "linkId": "180cb43d-a88d-4548-8895-427b8b1742a1",
+                  "type": "display",
+                  "text": "No, the number I'm thinking of is less.",
+                  "required": false,
+                  "enableWhen": [
+                    {
+                      "question": "450ff39d-0292-4070-d573-381be854880a",
+                      "operator": ">=",
+                      "answerInteger": 11
+                    }
+                  ]
+                },
+                {
+                  "linkId": "c55cec4d-0c98-4c94-8296-118940867c3b",
+                  "type": "display",
+                  "text": "Yes, I was thinking of 10!",
+                  "required": false,
+                  "enableWhen": [
+                    {
+                      "question": "450ff39d-0292-4070-d573-381be854880a",
+                      "operator": "=",
+                      "answerInteger": 10
+                    }
+                  ]
+                },
+                {
+                  "linkId": "68fa4d26-77a4-4d35-86a9-6f7d7080f17e",
+                  "type": "quantity",
+                  "text": "How much do you weigh?",
+                  "extension": [
+                    {
+                      "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-unit",
+                      "valueCoding": {
+                        "system": "http://unitsofmeasure.org",
+                        "code": "kg",
+                        "display": "kilo"
+                      }
+                    },
+                    {
+                      "url": "http://hl7.org/fhir/StructureDefinition/maxDecimalPlaces",
+                      "valueInteger": 2
+                    },
+                    {
+                      "url": "http://hl7.org/fhir/StructureDefinition/minValue",
+                      "valueInteger": 10
+                    },
+                    {
+                      "url": "http://hl7.org/fhir/StructureDefinition/maxValue",
+                      "valueInteger": 1000
+                    }
+                  ],
+                  "required": false
+                },
+                {
+                  "linkId": "4410191e-042d-42a0-9e3c-36f902f62801",
+                  "type": "string",
+                  "text": "Enter your email:",
+                  "required": false
+                }
+              ]
+            }
             """
         
         do {

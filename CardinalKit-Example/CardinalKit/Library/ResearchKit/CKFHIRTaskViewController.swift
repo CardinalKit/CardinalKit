@@ -33,5 +33,4 @@ struct CKFHIRTaskViewController: UIViewControllerRepresentable {
         viewController.delegate = delegate
         return viewController
     }
-
 }

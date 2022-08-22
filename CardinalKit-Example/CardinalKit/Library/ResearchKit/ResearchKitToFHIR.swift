@@ -12,9 +12,7 @@ import ModelsR4
 
 
 extension ORKTaskResult {
-    /// Extracts results from a ResearchKit survey task and converts to a FHIR QuestionnaireResponse in JSON
-    /// - Parameter results: the result of a ResearchKit survey task (ORKTaskResult)
-    /// - Returns: a String containing the FHIR QuestionnaireResponse in JSON
+    /// Extracts results from a ResearchKit survey task and converts to a FHIR `QuestionnaireResponse`.
     public var fhirResponses: QuestionnaireResponse {
         var questionnaireResponses: [QuestionnaireResponseItem] = []
         let taskResults = self.results as? [ORKStepResult] ?? []
@@ -36,8 +34,8 @@ extension ORKTaskResult {
     }
 
 
-    // Functions for creating FHIR responses from ResearchKit results
-
+    // MARK: Functions for creating FHIR responses from ResearchKit results
+    
     private func createResponse(_ result: ORKResult) -> QuestionnaireResponseItem {
         let response = QuestionnaireResponseItem(linkId: FHIRPrimitive(FHIRString(result.identifier)))
         let responseAnswer = QuestionnaireResponseItemAnswer()

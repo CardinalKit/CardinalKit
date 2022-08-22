@@ -11,6 +11,7 @@ import ModelsR4
 import ResearchKit
 
 
+/// An error that is thrown when translating a FHIR `Questionnaire` to an `ORKNavigableOrderedTask`
 public enum FHIRToResearchKitConversionError: Error, CustomStringConvertible {
     case noItems
     case noId
@@ -52,6 +53,11 @@ extension ORKNavigableOrderedTask {
     }
     
     
+    /// Create a `ORKNavigableOrderedTask` by parsing a FHIR `Questionnaire`. Throws a `FHIRToResearchKitConversionError` if an error happens during the parsing.
+    /// - Parameters:
+    ///  - title: The title of the questionnaire. If you pass in a `String` the translation overrides the title that might be provided in the FHIR `Questionnaire`.
+    ///  - questionnaire: The FHIR `Questionnaire` used to create the `ORKNavigableOrderedTask`.
+    ///  - summaryStep: An optional `ORKCompletionStep` that can be displayed at the end of the ResearchKit survey.
     public convenience init(
         title: String? = nil,
         questionnaire: Questionnaire,
@@ -79,11 +85,11 @@ extension ORKNavigableOrderedTask {
     }
     
 
-    /// Converts FHIR QuestionnaireItems (questions) to ResearchKit ORKSteps
+    /// Converts FHIR `QuestionnaireItems` (questions) to ResearchKit `ORKSteps`.
     /// - Parameters:
-    ///   - questions: an array of FHIR QuestionnaireItems
-    ///   - title: a String that will be rendered above the questions by ResearchKit
-    /// - Returns: an array of ResearchKit ORKSteps
+    ///   - questions: An array of FHIR `QuestionnaireItems`.
+    ///   - title: A `String` that will be rendered above the questions by ResearchKit.
+    /// - Returns:An `Array` of ResearchKit `ORKSteps`.
     private static func fhirQuestionnaireItemsToORKSteps(items: [QuestionnaireItem], title: String) -> [ORKStep] {
         var surveySteps: [ORKStep] = []
         surveySteps.reserveCapacity(items.count)
@@ -118,11 +124,11 @@ extension ORKNavigableOrderedTask {
         return surveySteps
     }
 
-    /// Converts a FHIR QuestionnaireItem to a ResearchKit ORKQuestionStep
+    /// Converts a FHIR `QuestionnaireItem` to a ResearchKit `ORKQuestionStep`.
     /// - Parameters:
-    ///   - question: a FHIR QuestionnaireItem object (a single question or a set of questions in a group)
-    ///   - title: a String that will be displayed above the question when rendered by ResearchKit
-    /// - Returns: an ORKQuestionStep object (a ResearchKit question step containing the above question)
+    ///   - question: A FHIR `QuestionnaireItem` object (a single question or a set of questions in a group).
+    ///   - title: A `String` that will be displayed above the question when rendered by ResearchKit.
+    /// - Returns: An `ORKQuestionStep` object (a ResearchKit question step containing the above question).
     private static func fhirQuestionnaireItemToORKQuestionStep(question: QuestionnaireItem, title: String) -> ORKQuestionStep? {
         guard let questionText = question.text?.value?.string,
               let identifier = question.linkId.value?.string else {
@@ -133,11 +139,11 @@ extension ORKNavigableOrderedTask {
         return ORKQuestionStep(identifier: identifier, title: title, question: questionText, answer: answer)
     }
 
-    /// Converts a FHIR QuestionnaireItem that contains a group of question items into a ResearchKit form (ORKFormStep)
+    /// Converts a FHIR QuestionnaireItem that contains a group of question items into a ResearchKit form (ORKFormStep).
     /// - Parameters:
-    ///   - question: a FHIR QuestionnaireItem object which contains a group of nested questions
-    ///   - title: a String that will be displayed at the top of the form when rendered by ResearchKit
-    /// - Returns: an ORKFormStep object (a ResearchKit form step containing all of the nested questions)
+    ///   - question: A FHIR QuestionnaireItem object which contains a group of nested questions.
+    ///   - title: A String that will be displayed at the top of the form when rendered by ResearchKit.
+    /// - Returns: An ORKFormStep object (a ResearchKit form step containing all of the nested questions).
     private static func fhirGroupToORKFormStep(question: QuestionnaireItem, title: String) -> ORKFormStep? {
         guard let id = question.linkId.value?.string,
               let nestedQuestions = question.item else {
@@ -167,11 +173,11 @@ extension ORKNavigableOrderedTask {
         return formStep
     }
 
-    /// Converts FHIR QuestionnaireItem display type to ORKInstructionStep
+    /// Converts FHIR `QuestionnaireItem` display type to `ORKInstructionStep`
     /// - Parameters:
-    ///   - question: a FHIR QuestionnaireItem object
-    ///   - title: a String to display at the top of the view rendered by ResearchKit
-    /// - Returns: a ResearchKit ORKInstructionStep
+    ///   - question: A FHIR `QuestionnaireItem` object.
+    ///   - title: A `String` to display at the top of the view rendered by ResearchKit.
+    /// - Returns: A ResearchKit `ORKInstructionStep`.
     private static func fhirDisplayToORKInstructionStep(question: QuestionnaireItem, title: String) -> ORKInstructionStep? {
         guard let id = question.linkId.value?.string,
               let text = question.text?.value?.string else {
@@ -184,9 +190,9 @@ extension ORKNavigableOrderedTask {
         return instructionStep
     }
 
-    /// Converts FHIR QuestionnaireItem answer types to the corresponding ResearchKit answer types (ORKAnswerFormat)
-    /// - Parameter question: a FHIR QuestionnaireItem object
-    /// - Returns: an object of type ORKAnswerFormat representing the type of answer this question accepts
+    /// Converts FHIR QuestionnaireItem answer types to the corresponding ResearchKit answer types (ORKAnswerFormat).
+    /// - Parameter question: A FHIR `QuestionnaireItem` object.
+    /// - Returns: An object of type `ORKAnswerFormat` representing the type of answer this question accepts.
     private static func fhirQuestionnaireItemToORKAnswerFormat(question: QuestionnaireItem) throws -> ORKAnswerFormat {
         switch(question.type.value) {
         case .boolean:
@@ -233,9 +239,9 @@ extension ORKNavigableOrderedTask {
         }
     }
 
-    /// Converts FHIR text answer choices to ResearchKit ORKTextChoice
-    /// - Parameter question: a FHIR QuestionnaireItem
-    /// - Returns: an array of ORKTextChoice objects, each representing a textual answer option
+    /// Converts FHIR text answer choices to ResearchKit `ORKTextChoice`.
+    /// - Parameter question: A FHIR `QuestionnaireItem`.
+    /// - Returns: An array of `ORKTextChoice` objects, each representing a textual answer option.
     private static func fhirChoicesToORKTextChoice(_ question: QuestionnaireItem) -> [ORKTextChoice] {
         var choices: [ORKTextChoice] = []
         guard let answerOptions = question.answerOption else {
@@ -258,9 +264,9 @@ extension ORKNavigableOrderedTask {
     
     // MARK: FHIR Extensions
 
-    /// Gets the minimum value for a numerical answer
-    /// - Parameter question: a FHIR QuestionnaireItem with a numerical answer type (integer, decimal)
-    /// - Returns: an optional NSNumber containing the minimum value allowed
+    /// Gets the minimum value for a numerical answer.
+    /// - Parameter question: A FHIR `QuestionnaireItem` with a numerical answer type (integer, decimal).
+    /// - Returns: An optional `NSNumber` containing the minimum value allowed.
     private static func getMinValue(_ question: QuestionnaireItem) -> NSNumber? {
         guard let minValueExtension = getExtensionInQuestionnaireItem(question: question, url: SupportedExtensions.minValue),
               case let .integer(integerValue) = minValueExtension.value,
@@ -270,9 +276,9 @@ extension ORKNavigableOrderedTask {
         return NSNumber(value: minValue)
     }
 
-    /// Gets the maximum value for a numerical answer
-    /// - Parameter question: a FHIR QuestionnaireItem with a numerical answer type (integer, decimal)
-    /// - Returns: an optional NSNumber containing the maximum value allowed
+    /// Gets the maximum value for a numerical answer.
+    /// - Parameter question: A FHIR `QuestionnaireItem` with a numerical answer type (integer, decimal).
+    /// - Returns: An optional `NSNumber` containing the maximum value allowed.
     private static func getMaxValue(_ question: QuestionnaireItem) -> NSNumber? {
         guard let maxValueExtension = getExtensionInQuestionnaireItem(question: question, url: SupportedExtensions.maxValue),
               case let .integer(integerValue) = maxValueExtension.value,
@@ -282,9 +288,9 @@ extension ORKNavigableOrderedTask {
         return NSNumber(value: maxValue)
     }
 
-    /// Gets the maximum number of decimal palces for a decimal answer
-    /// - Parameter question: a FHIR QuestionnaireItem with a decimal answer type
-    /// - Returns: an optional NSNumber representing the maximum number of digits to the right of the decimal place
+    /// Gets the maximum number of decimal palces for a decimal answer.
+    /// - Parameter question: A FHIR `QuestionnaireItem` with a decimal answer type.
+    /// - Returns: An optional `NSNumber` representing the maximum number of digits to the right of the decimal place.
     private static func getMaximumDecimalPlaces(_ question: QuestionnaireItem) -> NSNumber? {
         guard let maxDecimalPlacesExtension = getExtensionInQuestionnaireItem(question: question, url: SupportedExtensions.maxDecimalPlaces),
               case let .integer(integerValue) = maxDecimalPlacesExtension.value,
@@ -294,9 +300,9 @@ extension ORKNavigableOrderedTask {
         return NSNumber(value: maxDecimalPlaces)
     }
     
-    /// Gets the unit of a quantity answer type
-    /// - Parameter question: a FHIR QuestionnaireItem with a quantity answer type
-    /// - Returns: an optional String containing the unit (i.e. cm) if it was provided
+    /// Gets the unit of a quantity answer type.
+    /// - Parameter question: A FHIR `QuestionnaireItem` with a quantity answer type.
+    /// - Returns: An optional `String` containing the unit (i.e. cm) if it was provided.
     private static func getUnit(_ question: QuestionnaireItem) -> String? {
         guard let unitExtension = getExtensionInQuestionnaireItem(question: question, url: SupportedExtensions.questionaireUnit),
               case let .coding(coding) = unitExtension.value else {
@@ -305,18 +311,18 @@ extension ORKNavigableOrderedTask {
         return coding.code?.value?.string
     }
 
-    /// Checks a QuestionnaireItem for an extension matching the given URL and then return it if it exists
+    /// Checks a QuestionnaireItem for an extension matching the given URL and then return it if it exists.
     /// - Parameters:
-    ///   - question: a FHIR QuestionnaireItem
-    ///   - url: a String identifying the extension
-    /// - Returns: an optional Extension if it was found
+    ///   - question: A FHIR `QuestionnaireItem`.
+    ///   - url: A `String` identifying the extension.
+    /// - Returns: an optional Extension if it was found.
     private static func getExtensionInQuestionnaireItem(question: QuestionnaireItem, url: String) -> Extension? {
         return question.`extension`?.filter({ $0.url.value?.url.absoluteString == url }).first
     }
 
-    /// Gets the regular expression specified for validating a text input in a question
-    /// - Parameter question: a FHIRQuestionnaireItem with a text or string input that contains a regular expression for validation
-    /// - Returns: an optional String containing the regular expression, if it exists
+    /// Gets the regular expression specified for validating a text input in a question.
+    /// - Parameter question: A FHIR `QuestionnaireItem` with a text or string input that contains a regular expression for validation.
+    /// - Returns: An optional `String` containing the regular expression, if it exists.
     private static func getValidationRegularExpression(_ question: QuestionnaireItem) -> NSRegularExpression? {
         guard let regexExtension = getExtensionInQuestionnaireItem(question: question, url: SupportedExtensions.regex),
               case let .string(regex) = regexExtension.value,
@@ -325,7 +331,10 @@ extension ORKNavigableOrderedTask {
         }
         return try? NSRegularExpression(pattern: stringRegularExpression)
     }
-
+    
+    /// Gets the validation message for a question.
+    /// - Parameter question: A FHIR `QuestionnaireItem` with a text or string input that contains a validation message
+    /// - Returns: An optional `String` containing the validation message, if it exists.
     private static func getValidationMessage(_ question: QuestionnaireItem) -> String? {
         guard let validationMessageExtension = getExtensionInQuestionnaireItem(question: question, url: SupportedExtensions.validationMessage),
               case let .string(message) = validationMessageExtension.value,
@@ -337,11 +346,9 @@ extension ORKNavigableOrderedTask {
 
     // MARK: Navigation Rules
     
-    /**
-     This method converts predicates contained in the  "enableWhen" property on FHIR QuestionnaireItem to ResearchKit ORKPredicateSkipStepNavigationRule which are applied to an ORKNavigableOrderedTask.
-     - Parameters:
-        - questions: an array of FHIR QuestionnaireItem objects
-     */
+    /// This method converts predicates contained in the  "enableWhen" property on FHIR `QuestionnaireItem` to ResearchKit `ORKPredicateSkipStepNavigationRule` which are applied to an `ORKNavigableOrderedTask`.
+    /// - Parameters:
+    ///    - questions: An array of FHIR QuestionnaireItem objects.
     fileprivate func constructNavigationRules(questions: [QuestionnaireItem]) throws {
         for question in questions {
             guard let questionId = question.linkId.value?.string,
@@ -487,7 +494,7 @@ extension ORKNavigableOrderedTask {
 
 
 extension Decimal {
-    var doubleValue: Double {
+    fileprivate var doubleValue: Double {
         NSDecimalNumber(decimal: self).doubleValue
     }
 }
