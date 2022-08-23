@@ -173,7 +173,8 @@ class FirebaseManager{
         var index=0
         for part in _pathArray{
             currentPath+=part
-            if(index%2 != 0){
+            // if is document and is not root
+            if(index%2 != 0 && index>2){
                 _db.document(currentPath).setData(
                     [
                         "exist":"true",
