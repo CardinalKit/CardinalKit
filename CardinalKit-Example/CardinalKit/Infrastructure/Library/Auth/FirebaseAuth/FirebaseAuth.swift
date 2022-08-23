@@ -14,7 +14,9 @@ import CryptoKit
 import FBSDKLoginKit
 import Firebase
 import FirebaseAuth
-
+/***
+ authentication protocol implementation using firebase
+ */
 class FirebaseAuth: NSObject, AuthLibrary,ASAuthorizationControllerDelegate {
     var user:User?
     

@@ -7,7 +7,9 @@
 //
 
 import Foundation
-
+/***
+ This protocol defines the correct methods for authentication with any external service.
+ */
 protocol AuthLibrary {
     var user:User? {get}
     func LoginWithFacebook(onSuccess: @escaping () -> Void, onError: @escaping (Error) -> Void, viewController: UIViewController)

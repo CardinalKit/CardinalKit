@@ -9,6 +9,7 @@
 import Foundation
 import Swinject
 
+// Class for dependency injection implementation
 final class Dependencies {
     static var container:Container = {
         let container = Container()

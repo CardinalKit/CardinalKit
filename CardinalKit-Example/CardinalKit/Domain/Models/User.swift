@@ -16,4 +16,6 @@ struct User {
         self.uid = uid
         self.email = email
     }
+    
+    // TODO: Add Validators for a valid Email
 }
