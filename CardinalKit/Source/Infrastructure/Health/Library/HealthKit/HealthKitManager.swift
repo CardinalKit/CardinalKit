@@ -209,6 +209,7 @@ extension HealthKitManager{
             "dataType":"\(type.identifier)" as AnyObject,
             "device":"\(getSourceRevisionKey(source: sourceRevision))" as AnyObject
         ]
+        // TODO: receive datatype and device as parameter
         if let result = CKApp.instance.options.localDBDelegate?.getLastSyncItem(params:queryParams){
             return result.lastSyncDate
         }

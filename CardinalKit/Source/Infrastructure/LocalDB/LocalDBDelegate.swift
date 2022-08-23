@@ -12,6 +12,7 @@ public protocol CKLocalDBDelegate{
     func getLastSyncItem(params: [String : AnyObject]) -> DateLastSyncObject?
     func saveLastSyncItem(item:DateLastSyncObject)
     func deleteLastSyncitem()
+    // TODO: add network
     func getNetworkItem(params: [String : AnyObject]) -> NetworkRequestObject?
     func saveNetworkItem(item:NetworkRequestObject)
     func deleteNetworkItem()
