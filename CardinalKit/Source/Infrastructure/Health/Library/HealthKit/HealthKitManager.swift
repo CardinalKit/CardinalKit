@@ -201,7 +201,7 @@ extension HealthKitManager{
         healthStore.execute(query)
     }
     
-    func saveLastSyncDate(forType type: HKSampleType, forSource sourceRevision: HKSourceRevision, date:Date){
+    private func saveLastSyncDate(forType type: HKSampleType, forSource sourceRevision: HKSourceRevision, date:Date){
         let lastSyncObject =
             DateLastSyncObject(
                 dataType: "\(type.identifier)",
@@ -211,13 +211,9 @@ extension HealthKitManager{
         CKApp.instance.options.localDBDelegate?.saveLastSyncItem(item: lastSyncObject)
     }
     
-    func getLastSyncDate(forType type: HKSampleType, forSource sourceRevision: HKSourceRevision) -> Date
+    private func getLastSyncDate(forType type: HKSampleType, forSource sourceRevision: HKSourceRevision) -> Date
     {
-        let queryParams:[String:AnyObject] = [
-            "dataType":"\(type.identifier)" as AnyObject,
-            "device":"\(getSourceRevisionKey(source: sourceRevision))" as AnyObject
-        ]
-        if let result = CKApp.instance.options.localDBDelegate?.getLastSyncItem(params:queryParams){
+        if let result = CKApp.instance.options.localDBDelegate?.getLastSyncItem(dataType: "\(type.identifier)", device: "\(getSourceRevisionKey(source: sourceRevision))"){
             return result.lastSyncDate
         }
         return Date().dayByAdding(-1)!

@@ -7,6 +7,7 @@
 
 import Foundation
 
+// protocol to implement to manage the sending of data to an external database
 public protocol CKDeliveryDelegate {
     func send(file: URL, package: Package, onCompletion: @escaping (Bool) -> Void)
     func send(route: String, data: Any, params: Any?, onCompletion:((Bool, Error?) -> Void)?)
@@ -15,6 +16,8 @@ public protocol CKDeliveryDelegate {
     func configure()
 }
 
+
+// cardinal kit implements firebase for sending data
 public class CKDelivery{
     var firebaseManager: FirebaseManager
     
@@ -24,6 +27,7 @@ public class CKDelivery{
 }
 
 extension CKDelivery: CKDeliveryDelegate{
+    
     public func sendToCloud(files: URL, route: String, alsoSendToFirestore:Bool = false, firestoreRoute:String?,onCompletion: @escaping (Bool) -> Void){
         do {
             let fileManager = FileManager.default

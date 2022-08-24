@@ -10,32 +10,25 @@ import RealmSwift
 
 class RealmManager :CKLocalDBDelegate{
     
-    // Params expected Datatype
-    // Device Source
-    func getLastSyncItem(params: [String : AnyObject]) -> DateLastSyncObject? {
+    // get object type DateLastSyncObject based on data type and device
+    func getLastSyncItem(dataType:String,device:String ) -> DateLastSyncObject? {
         let realm = try! Realm()
-        
-        let dataType =  params["dataType"]
-        let device = params["device"]
-        
-        if let dataType = dataType as? String,
-           let device = device as? String{
-            let syncMetadataQuery = NSCompoundPredicate(
-                andPredicateWithSubpredicates: [
-                    NSPredicate(format: "dataType = '\(dataType)'"),
-                    NSPredicate(format: "device = '\(device)'")
-                ])
-            let results = realm.objects(DatesLastSyncRealmObject.self).filter(syncMetadataQuery)
-            assert(results.count <= 1, "There should only be at most one sync date per type")
-            if results.count > 0{
-                if let result = results.first{
-                    return RealmTraductors.TransformInObject(fromRealmObject: result)
-                }
+        let syncMetadataQuery = NSCompoundPredicate(
+            andPredicateWithSubpredicates: [
+                NSPredicate(format: "dataType = '\(dataType)'"),
+                NSPredicate(format: "device = '\(device)'")
+            ])
+        let results = realm.objects(DatesLastSyncRealmObject.self).filter(syncMetadataQuery)
+        assert(results.count <= 1, "There should only be at most one sync date per type")
+        if results.count > 0{
+            if let result = results.first{
+                return RealmTraductors.TransformInObject(fromRealmObject: result)
             }
         }
         return nil
     }
     
+    // Save object type DateLastSyncObject
     func saveLastSyncItem(item: DateLastSyncObject) {
         let realmData = RealmTraductors.TransformInRealmObject(fromDateLastSyncObject: item)
         let realm = try! Realm()
@@ -51,18 +44,14 @@ class RealmManager :CKLocalDBDelegate{
                 realm.add(realmData)
             }
         }
-        
-        
     }
     
     func deleteLastSyncitem() {
-        
+        // TODO: delete sync items
     }
     
     func getNetworkItem(params: [String : AnyObject]) -> NetworkRequestObject? {
-//        let realm = try! Realm()
-        
-    
+        // TODO: get specific networkItems
         return nil
         
     }
@@ -70,8 +59,6 @@ class RealmManager :CKLocalDBDelegate{
     func saveNetworkItem(item: NetworkRequestObject) {
         let realmData = RealmTraductors.TransformInRealmObject(fromNetwortRequestObject: item)
         let realm = try! Realm()
-        // Review if item previously exist or is new
-        
         let realmObjects = realm.objects(NetworkRequestRealmObject.self).filter("id == \(item.id)")
         if realmObjects.count > 0 {
             try! realm.write {
@@ -83,12 +70,10 @@ class RealmManager :CKLocalDBDelegate{
                 realm.add(realmData)
             }
         }
-        
-        
     }
     
     func deleteNetworkItem() {
-        
+        // TODO: delete networkItems
     }
     
     func getNetworkItemsByFilter(filterQuery:String?) -> [NetworkRequestObject] {
@@ -107,42 +92,6 @@ class RealmManager :CKLocalDBDelegate{
         }
         return result
     }
-    
-    
-//
-//    // Params
-//    // NSPredicate ?
-//    func getItem(params: [String : AnyObject]) -> [String:AnyObject] {
-//
-//        let realm = try! Realm()
-//        let predicate = params["Predicate"]
-//
-//        if let predicate = predicate as? NSPredicate
-//        {
-//            let results = realm.objects(DataFormat.self).filter(predicate)
-//            assert(results.count <= 1, "There should only be at most one sync date per type")
-//            if results.count > 0{
-//                if let result = results.first{
-//                    return [
-//                        "dataType":result.dataType as AnyObject,
-//                        "lastSyncDate":result.lastSyncDate  as AnyObject,
-//                        "device": result.device  as AnyObject
-//                    ]
-//                }
-//            }
-//        }
-//        return [:]
-//    }
-//
-//    func saveItem(params: [String : AnyObject]) {
-//        let metadata = HealthKitDataUploads()
-//        metadata.dataType = type.identifier
-//        metadata.device = getSourceRevisionKey(source: sourceRevision)
-//    }
-//
-//    func deleteItem(params: [String : AnyObject]) {
-//
-//    }
     
     func configure() -> Bool {
         let cacheLocation = CacheManager.shared.realmFile

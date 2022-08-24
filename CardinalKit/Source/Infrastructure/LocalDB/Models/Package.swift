@@ -8,26 +8,27 @@
 import Foundation
 
 public enum PackageType: String {
+    // TODO: implement sensorsData and other types
 //    case sensorData = "SENSOR_DATA"
 //    case snapshot = "SNAPSHOT"
-    case hkdata = "HKDATA"
-//    case hkdataAggregate = "HKDATA_AGGREGATE"
-    case metricsData = "HKDATA_METRICS"
+    //    case hkdataAggregate = "HKDATA_AGGREGATE"
     
+//        case .sensorData:
+//            return "6MWT and Open Walk"
+//        case .snapshot:
+//            return "Filesystem snapshot reports"
+//        case .hkdataAggregate:
+//            return "Aggregate summary per day"
+    case hkdata = "HKDATA"
+    case metricsData = "HKDATA_METRICS"
     case clinicalData = "HKCLINICAL"
     
     static let debuggable: [PackageType] = [.hkdata]
     
     public var description: String {
         switch self {
-//        case .sensorData:
-//            return "6MWT and Open Walk"
-//        case .snapshot:
-//            return "Filesystem snapshot reports"
         case .hkdata:
             return "Dump of tracked data from healthkit"
-//        case .hkdataAggregate:
-//            return "Aggregate summary per day"
         case .metricsData:
             return "metrics data"
         case .clinicalData:

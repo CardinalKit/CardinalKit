@@ -38,6 +38,7 @@ class NetworkRequestRealmObject: Object{
     }
 }
 
+// Transform CardinalKit Models into a Realm Objects to use in Realm Bd
 class RealmTraductors{
     class func TransformInRealmObject(fromDateLastSyncObject object:DateLastSyncObject)->DatesLastSyncRealmObject{
         

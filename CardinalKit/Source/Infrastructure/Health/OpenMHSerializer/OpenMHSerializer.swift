@@ -12,10 +12,15 @@ protocol OpenMHSerializer {
     func json(for sample: [HKSample]) throws -> [[String: Any]]
 }
 
+// Transform the healthkit data into a json with the openMHealth format
+// cardinalkit uses granola for this
 class CKOpenMHSerializer: OpenMHSerializer{
     // use granola as serializer
     let serializer = OMHSerializer()
     
+    /**
+     receives an array of samples from healthkit HkSample and returns a json in openMhealth format
+     */
     func json(for data: [HKSample]) throws -> [[String: Any]]{
         
         let encoder = JSONEncoder()

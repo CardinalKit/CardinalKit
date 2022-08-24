@@ -7,6 +7,7 @@
 
 import Foundation
 
+// This script specifies all the valid types of data that healthkit can collect.
 extension HealthKitManager{
     func defaultTypes() -> Set<HKSampleType>{
         var hkTypesToReadInBackground: Set<HKSampleType> = []
