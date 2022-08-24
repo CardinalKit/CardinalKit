@@ -34,6 +34,8 @@ public struct CKAppOptions {
     }
 }
 
+/// Presentation layer of DDD architecture
+/// This layer is the part where interaction with external systems happens. 
 public class CKApp{
     
     internal static let instance = CKApp()

@@ -9,6 +9,7 @@ import Foundation
 
 import HealthKit
 
+// Responsible for handling all data and requests regarding healthkit data
 public class HealthKitManager{
     
     lazy var healthStore: HKHealthStore = HKHealthStore()
@@ -20,11 +21,24 @@ public class HealthKitManager{
         clinicalTypes = healthRecordsDefaultTypes()
     }
     
+    /**
+     configure the types of healthkit data that will be collected
+     - Parameter types: healhkit data types
+     - Parameter clinicalTypes: clinical Data Types
+     */
     public func configure(types: Set<HKSampleType>, clinicalTypes: Set<HKSampleType>){
         self.types = types
         self.clinicalTypes = clinicalTypes
     }
     
+    /**
+     start healthkit data collection in the background
+        - Parameter frequency: frequency with which the data will be collected
+     Options:
+         daily
+         weekly
+         hourly
+     */
     func startHealthKitCollectionInBackground(withFrequency frequency:String){
         var _frequency:HKUpdateFrequency = .immediate
         if frequency == "daily" {
@@ -34,13 +48,22 @@ public class HealthKitManager{
         } else if frequency == "hourly" {
            _frequency = .hourly
         }
+        // by default cardinal kit collects all types of data
         self.setUpBackgroundCollection(withFrequency: _frequency, forTypes: types.isEmpty ? defaultTypes() : types)
     }
     
+    /**
+     start healthkit data collection between specific pair of dates
+        - Parameter startDate: initial date
+        - Parameter endDate: final date
+     */
     func startCollectionByDayBetweenDate(fromDate startDate:Date, toDate endDate:Date?){
         self.setUpCollectionByDayBetweenDates(fromDate: startDate, toDate: endDate, forTypes: types)
     }
     
+    /**
+     start clinical data collection
+     */
     func collectAndUploadClinicalTypes(){
         self.collectClinicalTypes(for: clinicalTypes)
     }
@@ -58,21 +81,6 @@ extension HealthKitManager{
                     return
                 }
                 CKApp.instance.infrastructure.onClinicalDataCollected(data: samples)
-//
-//                for sample in samples {
-//                    guard let resource = sample.fhirResource else { continue }
-//                    do {
-//                        let data = resource.data
-//                        let identifier = resource.resourceType.rawValue + "-" + resource.identifier
-//                        let sampleToJson = try JSONSerialization.data(withJSONObject: data, options: [])
-//                        let packageName = "\(Date().stringWithFormat())-\(identifier)-\(UUID())"
-//                        let package = try Package(packageName, type: .hkdata, identifier: packageName, data: sampleToJson)
-//                        let networkObject = NetworkRequestObject.findOrCreateNetworkRequest(package)
-//                        try networkObject.perform()
-//                    } catch {
-//                        print("[upload] ERROR " + error.localizedDescription)
-//                    }
-//                }
             }
             healthStore.execute(query)
         }

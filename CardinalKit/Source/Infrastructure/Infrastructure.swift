@@ -8,14 +8,19 @@
 import Foundation
 
 
+// Infrastructure layer of DDD architecture
+/// This layer will be the layer that accesses external services such as database, messaging systems and email services.
+
 internal class Infrastructure {
     // Managers
+    // Responsible for handling all data and requests regarding healthkit data
     var healthKitManager:HealthKitManager
     // Permissions
+    // In charge of managing the necessary permissions to manipulate healthkit data (implemented in the application layer)
     var healthPermissionProvider:Healthpermissions
     // OpenMHealthSerializer
+    // in charge of transforming healthkit data into an openMhealth format
     var mhSerializer:OpenMHSerializer
-    //
     
     
     init(){
@@ -32,14 +37,17 @@ internal class Infrastructure {
         healthKitManager.configure(types: types, clinicalTypes: clinicalTypes)
     }
     
+    // Prompt user for healthkit permissions
     func getHealthPermission(completion: @escaping (Result<Bool, Error>) -> Void){
        healthPermissionProvider.getHealthPermissions(completion: completion)
     }
     
+    // Ask the user for clinical permissions
     func getClinicalPermission(completion: @escaping (Result<Bool, Error>) -> Void){
        healthPermissionProvider.getRecordsPermissions(completion: completion)
     }
     
+    // start healthkit data collection in the background
     func startBackgroundDeliveryData(){
         healthPermissionProvider.getHealthPermissions{ result in
             switch result{
@@ -53,6 +61,7 @@ internal class Infrastructure {
         }
     }
     
+    // get data from healthkit on a specific date
     func collectData(fromDate startDate:Date, toDate endDate: Date){
         healthPermissionProvider.getAllPermissions(){ result in
             switch result{
@@ -68,6 +77,7 @@ internal class Infrastructure {
         }
     }
     
+    //collect all clinical data
     func collectClinicalData(){
         healthPermissionProvider.getAllPermissions(){ result in
             switch result{
@@ -81,7 +91,7 @@ internal class Infrastructure {
         }
     }
     
-    
+    // function called when new data is received from healthkit
     func onHealthDataColected(data:[HKSample]){
         do{
             // Transfom Data in OPENMHealth Format
@@ -103,6 +113,7 @@ internal class Infrastructure {
         }
     }
     
+    // function called when a new clinical data is received
     func onClinicalDataCollected(data: [HKClinicalRecord]){
         for sample in data {
             guard let resource = sample.fhirResource else { continue }
@@ -113,6 +124,19 @@ internal class Infrastructure {
         }
     }
     
+    /**
+     to send data from healthkit to the external database we use the package model that is first saved in a local database,
+     This function creates the package and saves it to then try to send it to the external database.
+     
+     - Parameter Type: type of package that is required to be sent
+     PackageType:
+         case hkdata = "HKDATA"
+         case metricsData = "HKDATA_METRICS"
+         case clinicalData = "HKCLINICAL"
+     
+     - Parameter data: the data to send
+     - Parameter identifier: unique package identifier
+     */
     private func CreateAndPerformPackage(type: PackageType, data:Data, identifier: String){
         do{
             let packageName = identifier
