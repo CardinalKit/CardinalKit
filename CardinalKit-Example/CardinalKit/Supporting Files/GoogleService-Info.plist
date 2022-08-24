@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>267563013930-esrpvvdn6429pbd50qfpo2rgh1rgsl9e.apps.googleusercontent.com</string>
+	<string>806755930989-af4rk313be8gt9n4gmkcec9m14cnadrp.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.267563013930-esrpvvdn6429pbd50qfpo2rgh1rgsl9e</string>
+	<string>com.googleusercontent.apps.806755930989-af4rk313be8gt9n4gmkcec9m14cnadrp</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDZFphOPsibFOO40SdVJfRF-lVgH21riJk</string>
+	<string>AIzaSyDJtBALfdJMYmWj42BLNUFPr-TAMFBZ3do</string>
 	<key>GCM_SENDER_ID</key>
-	<string>267563013930</string>
+	<string>806755930989</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>edu.stanford.cardinalkit</string>
+	<string>com.alternova.example</string>
 	<key>PROJECT_ID</key>
-	<string>cs342-master-sample</string>
+	<string>cardinalkit-testing</string>
 	<key>STORAGE_BUCKET</key>
-	<string>cs342-master-sample.appspot.com</string>
+	<string>cardinalkit-testing.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:267563013930:ios:d1af91089e477416ccb053</string>
+	<string>1:806755930989:ios:3f05716ddeb70e14cd0064</string>
 	<key>DATABASE_URL</key>
-	<string>https://cs342-master-sample.firebaseio.com</string>
+	<string>https://cardinalkit-testing-default-rtdb.firebaseio.com</string>
 </dict>
 </plist>

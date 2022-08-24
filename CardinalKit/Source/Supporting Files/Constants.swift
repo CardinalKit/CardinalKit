@@ -111,11 +111,4 @@ class Constants {
         
         static let watchSnapshot = "edu.stanford.vasctrac.watchtrac.snapshot"
     }
-    
-    struct Firebase {
-        static let dataBucketHealthKit = "healthKit"
-        static let dataBucketStorage = "storage"
-        static let dataBucketMetrics = "metrics"
-        
-    }
 }
