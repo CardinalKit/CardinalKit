@@ -9,6 +9,9 @@
 import Foundation
 import FirebaseStorage
 
+/***
+ implementation of the network protocol using firebase storage
+ */
 class FirebaseStorage:NetworkingLibrary
 {
     func sendFile(url: URL, path: String) {

@@ -13,7 +13,6 @@ import UIKit
 import SwiftUI
 import ResearchKit
 
-
 enum TaskType{
     case custom
     case coffeView
@@ -21,8 +20,6 @@ enum TaskType{
 }
 
 struct TaskItem: Hashable {
-    
-    
     static func == (lhs: TaskItem, rhs: TaskItem) -> Bool {
         return lhs.title == rhs.title && lhs.section == rhs.section
     }
@@ -34,7 +31,8 @@ struct TaskItem: Hashable {
     var section:String
     var tasks:ORKOrderedTask?
     var taskType:TaskType
-    
+    // TODO: remove dependency of ResearchKit
+    // Create task model Independent of researchkit
     init(order:String, title:String, subtitle:String, image:String, section:String, taskType: TaskType, tasks:ORKOrderedTask?) {
         self.order = order
         self.title = title
@@ -44,7 +42,7 @@ struct TaskItem: Hashable {
         self.taskType = taskType
         self.tasks = tasks
     }
-    
+    // TODO: remove dependency of swift ui or uikit
     func View() -> some View {
         switch taskType {
         case .custom:
