@@ -18,6 +18,7 @@ enum LocalTaskItem: Int {
      */
     case sampleResearchKitSurvey,
          sampleResearchKitActiveTask,
+         sampleFHIRSurvey,
          sampleFunCoffeeSurvey,
          sampleFunCoffeeResult,
          sampleCoreMotionAppleWatch,
@@ -31,6 +32,8 @@ enum LocalTaskItem: Int {
         switch self {
         case .sampleResearchKitSurvey:
             return "Survey (ResearchKit)"
+        case .sampleFHIRSurvey:
+            return "Survey (FHIR)"
         case .sampleResearchKitActiveTask:
             return "Active Task (ResearchKit)"
         case .sampleCoreMotionAppleWatch:
@@ -51,6 +54,8 @@ enum LocalTaskItem: Int {
         switch self {
         case .sampleResearchKitSurvey:
             return "Sample questions and forms."
+        case .sampleFHIRSurvey:
+            return "Sample FHIR survey"
         case .sampleResearchKitActiveTask:
             return "Sample sensor/data collection activities."
         case .sampleCoreMotionAppleWatch:
@@ -73,6 +78,8 @@ enum LocalTaskItem: Int {
         switch self {
         case .sampleResearchKitActiveTask:
             return getImage(named: "ActivityIcon")
+        case .sampleFHIRSurvey:
+            return getImage(named: "SurveyIcon")
         case .sampleFunCoffeeSurvey:
             return getImage(named: "CoffeeIcon")
         case .sampleFunCoffeeResult:
@@ -91,7 +98,7 @@ enum LocalTaskItem: Int {
      */
     var section: String {
         switch self {
-        case .sampleResearchKitSurvey, .sampleResearchKitActiveTask:
+        case .sampleResearchKitSurvey, .sampleResearchKitActiveTask, .sampleFHIRSurvey:
             return "Current Tasks"
         case .sampleFunCoffeeSurvey, .sampleFunCoffeeResult:
             return "Your Interests"
@@ -108,6 +115,8 @@ enum LocalTaskItem: Int {
         switch self {
         case .sampleResearchKitSurvey:
             return AnyView(CKTaskViewController(tasks: TaskSamples.sampleSurveyTask))
+        case .sampleFHIRSurvey:
+            return AnyView(CKFHIRTaskViewController(tasks: TaskSamples.sampleFHIRTask))
         case .sampleResearchKitActiveTask:
             return AnyView(CKTaskViewController(tasks: TaskSamples.sampleWalkingTask))
         case .sampleCoreMotionAppleWatch:
