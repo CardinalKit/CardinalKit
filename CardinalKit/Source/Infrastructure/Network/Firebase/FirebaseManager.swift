@@ -99,6 +99,20 @@ class FirebaseManager{
                 return
             }
             json["UpdatedBy"] = userId
+            
+            if let header = json["header"] as? [String:Any]{
+                if let creationDate = header["creation_date_time"] as? String{
+                    var newHeader = header
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
+                    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX";
+                    let date = dateFormatter.date(from:creationDate)!
+                    let dateAsTimeStamp = Timestamp(date: date)
+                    newHeader["creation_date_time"] = dateAsTimeStamp
+                    json["header"] = newHeader
+                }
+            }
+            
             let db=firestoreDb()
             createNecessaryDocuments(path: authPath)
             db.collection(authPath).document(identifier).setData(json) { err in
