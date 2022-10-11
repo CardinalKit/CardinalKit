@@ -133,6 +133,11 @@ extension HealthKitManager{
             defer {
                 dispatchGroup.leave()
             }
+            guard sources.count>0
+                else{
+                onCompletion([HKSample]())
+                return
+            }
             VLog("Got sources for type %@", sources.count, type.identifier)
             for source in sources {
                 dispatchGroup.enter()
