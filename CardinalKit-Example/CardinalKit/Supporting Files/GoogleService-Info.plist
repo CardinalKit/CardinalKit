@@ -3,21 +3,23 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>267563013930-esrpvvdn6429pbd50qfpo2rgh1rgsl9e.apps.googleusercontent.com</string>
+	<string>108938987400-240756p197dbqn9e2jcv13l12voabev3.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.267563013930-esrpvvdn6429pbd50qfpo2rgh1rgsl9e</string>
+	<string>com.googleusercontent.apps.108938987400-240756p197dbqn9e2jcv13l12voabev3</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>108938987400-4ischmr3vd5kctdhud0pg0mh0vrnjbk1.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDZFphOPsibFOO40SdVJfRF-lVgH21riJk</string>
+	<string>AIzaSyByREiZQPb_fLAEI3nXEK5Fgp8KNex3_gQ</string>
 	<key>GCM_SENDER_ID</key>
-	<string>267563013930</string>
+	<string>108938987400</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>edu.stanford.cardinalkit</string>
 	<key>PROJECT_ID</key>
-	<string>cs342-master-sample</string>
+	<string>cardinalkit-dev</string>
 	<key>STORAGE_BUCKET</key>
-	<string>cs342-master-sample.appspot.com</string>
+	<string>cardinalkit-dev.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:267563013930:ios:d1af91089e477416ccb053</string>
-	<key>DATABASE_URL</key>
-	<string>https://cs342-master-sample.firebaseio.com</string>
+	<string>1:108938987400:ios:7339e2700d704546b4dc3d</string>
 </dict>
 </plist>

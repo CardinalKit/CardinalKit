@@ -16,7 +16,7 @@ class CKUploadFHIRTaskViewControllerDelegate: NSObject, ORKTaskViewControllerDel
     func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
         switch reason {
         case .completed:
-            let fhirResponses = taskViewController.result.fhirResponses
+            let fhirResponses = taskViewController.result.fhirResponse
 
             // Adds patient identifier to QuestionnaireResponse
             if let uid = CKStudyUser.shared.currentUser?.uid {
