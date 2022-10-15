@@ -7,12 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		270AA16328FB0FD400800226 /* FHIRExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270AA16228FB0FD400800226 /* FHIRExtensions.swift */; };
+		270AA16628FB0FFE00800226 /* FHIRToResearchKitConversionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270AA16528FB0FFE00800226 /* FHIRToResearchKitConversionError.swift */; };
+		270AA16828FB101800800226 /* NavigationRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270AA16728FB101800800226 /* NavigationRules.swift */; };
+		270AA16A28FB105800800226 /* ORKNavigableOrderedTask+FHIR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270AA16928FB105800800226 /* ORKNavigableOrderedTask+FHIR.swift */; };
+		270AA16C28FB107100800226 /* Questionnaire+ValueSets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270AA16B28FB107100800226 /* Questionnaire+ValueSets.swift */; };
+		270AA16E28FB109100800226 /* QuestionnaireItem+ResearchKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270AA16D28FB109100800226 /* QuestionnaireItem+ResearchKit.swift */; };
+		270AA17128FB10B900800226 /* ORKTaskResult+FHIR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270AA17028FB10B900800226 /* ORKTaskResult+FHIR.swift */; };
 		270CDC0A28A65A0100F2F053 /* CKFHIRTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270CDC0928A65A0100F2F053 /* CKFHIRTaskViewController.swift */; };
 		270CDC0C28A65AD300F2F053 /* CKUploadFHIRTaskViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270CDC0B28A65AD300F2F053 /* CKUploadFHIRTaskViewControllerDelegate.swift */; };
-		2745633628A4959000B455AF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2745633528A4959000B455AF /* GoogleService-Info.plist */; };
-		274F12C128A435720000A902 /* FHIRToResearchKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274F12C028A435720000A902 /* FHIRToResearchKit.swift */; };
+		2720BD3628EFBA4B005578F7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2720BD3528EFBA4A005578F7 /* GoogleService-Info.plist */; };
 		27653A13272A2E7700D74E83 /* LocalTaskListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27653A12272A2E7700D74E83 /* LocalTaskListItemView.swift */; };
-		27CCEDCD28A59422003C52FF /* ResearchKitToFHIR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CCEDCC28A59422003C52FF /* ResearchKitToFHIR.swift */; };
 		2B19DD9226FE1BEB00649CE1 /* JsonToSurvey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19DD9126FE1BEB00649CE1 /* JsonToSurvey.swift */; };
 		2B19DD9426FE1D2600649CE1 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19DD9326FE1D2600649CE1 /* TestViewController.swift */; };
 		2B19DD9626FE1D2F00649CE1 /* CheckListItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19DD9526FE1D2F00649CE1 /* CheckListItemViewController.swift */; };
@@ -109,13 +114,18 @@
 
 /* Begin PBXFileReference section */
 		07D78DA16FC9C3C7709EA243 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		270AA16228FB0FD400800226 /* FHIRExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FHIRExtensions.swift; sourceTree = "<group>"; };
+		270AA16528FB0FFE00800226 /* FHIRToResearchKitConversionError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FHIRToResearchKitConversionError.swift; sourceTree = "<group>"; };
+		270AA16728FB101800800226 /* NavigationRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRules.swift; sourceTree = "<group>"; };
+		270AA16928FB105800800226 /* ORKNavigableOrderedTask+FHIR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ORKNavigableOrderedTask+FHIR.swift"; sourceTree = "<group>"; };
+		270AA16B28FB107100800226 /* Questionnaire+ValueSets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Questionnaire+ValueSets.swift"; sourceTree = "<group>"; };
+		270AA16D28FB109100800226 /* QuestionnaireItem+ResearchKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuestionnaireItem+ResearchKit.swift"; sourceTree = "<group>"; };
+		270AA17028FB10B900800226 /* ORKTaskResult+FHIR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ORKTaskResult+FHIR.swift"; sourceTree = "<group>"; };
 		270AF36127872C13002945A7 /* CardinalKit_ExampleRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CardinalKit_ExampleRelease.entitlements; sourceTree = "<group>"; };
 		270CDC0928A65A0100F2F053 /* CKFHIRTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKFHIRTaskViewController.swift; sourceTree = "<group>"; };
 		270CDC0B28A65AD300F2F053 /* CKUploadFHIRTaskViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKUploadFHIRTaskViewControllerDelegate.swift; sourceTree = "<group>"; };
-		2745633528A4959000B455AF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		274F12C028A435720000A902 /* FHIRToResearchKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FHIRToResearchKit.swift; sourceTree = "<group>"; };
+		2720BD3528EFBA4A005578F7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		27653A12272A2E7700D74E83 /* LocalTaskListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalTaskListItemView.swift; sourceTree = "<group>"; };
-		27CCEDCC28A59422003C52FF /* ResearchKitToFHIR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResearchKitToFHIR.swift; sourceTree = "<group>"; };
 		2B19DD9126FE1BEB00649CE1 /* JsonToSurvey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonToSurvey.swift; sourceTree = "<group>"; };
 		2B19DD9326FE1D2600649CE1 /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		2B19DD9526FE1D2F00649CE1 /* CheckListItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckListItemViewController.swift; sourceTree = "<group>"; };
@@ -218,6 +228,44 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		270AA16028FB0FA600800226 /* ResearchKitOnFHIR */ = {
+			isa = PBXGroup;
+			children = (
+				270AA16F28FB10AC00800226 /* ResearchKitToFHIR */,
+				270AA16428FB0FEE00800226 /* FHIRToResearchKit */,
+				270AA16128FB0FC300800226 /* FHIRExtensions */,
+			);
+			path = ResearchKitOnFHIR;
+			sourceTree = "<group>";
+		};
+		270AA16128FB0FC300800226 /* FHIRExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				270AA16228FB0FD400800226 /* FHIRExtensions.swift */,
+			);
+			path = FHIRExtensions;
+			sourceTree = "<group>";
+		};
+		270AA16428FB0FEE00800226 /* FHIRToResearchKit */ = {
+			isa = PBXGroup;
+			children = (
+				270AA16528FB0FFE00800226 /* FHIRToResearchKitConversionError.swift */,
+				270AA16728FB101800800226 /* NavigationRules.swift */,
+				270AA16928FB105800800226 /* ORKNavigableOrderedTask+FHIR.swift */,
+				270AA16B28FB107100800226 /* Questionnaire+ValueSets.swift */,
+				270AA16D28FB109100800226 /* QuestionnaireItem+ResearchKit.swift */,
+			);
+			path = FHIRToResearchKit;
+			sourceTree = "<group>";
+		};
+		270AA16F28FB10AC00800226 /* ResearchKitToFHIR */ = {
+			isa = PBXGroup;
+			children = (
+				270AA17028FB10B900800226 /* ORKTaskResult+FHIR.swift */,
+			);
+			path = ResearchKitToFHIR;
+			sourceTree = "<group>";
+		};
 		2B8FB80227552ADD000B2D7B /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
@@ -308,8 +356,8 @@
 				8E0A4389244A4A0400656518 /* LaunchScreen.storyboard */,
 				8E0A4384244A4A0400656518 /* Constants.swift */,
 				8E0A4378244A4A0300656518 /* CardinalKit_Example-Bridging-Header.h */,
+				2720BD3528EFBA4A005578F7 /* GoogleService-Info.plist */,
 				8E0A43C9244A4C6500656518 /* Info.plist */,
-				2745633528A4959000B455AF /* GoogleService-Info.plist */,
 				E2F1FD7724D62064006C39DF /* CKConfiguration.plist */,
 			);
 			path = "Supporting Files";
@@ -369,6 +417,7 @@
 				8E9CDECE2591ABDF00C8A228 /* HealthKit */,
 				8E40DC022471E5590027536B /* Networking */,
 				8E0A4380244A4A0400656518 /* Auth */,
+				270AA16028FB0FA600800226 /* ResearchKitOnFHIR */,
 				8E9CDF812591E6D000C8A228 /* ResearchKit */,
 				8E9CDEAB25916F6E00C8A228 /* CareKit */,
 				8E6E1E0F25351E890024B8DF /* Extensions+UIColor.swift */,
@@ -507,8 +556,6 @@
 				8E0A43A2244A4A0400656518 /* ConsentDocument.swift */,
 				8E6E1E172535263F0024B8DF /* CKTaskViewController.swift */,
 				8E7FFFB325DCE9B7002982B4 /* CKUploadToGCPTaskViewControllerDelegate.swift */,
-				274F12C028A435720000A902 /* FHIRToResearchKit.swift */,
-				27CCEDCC28A59422003C52FF /* ResearchKitToFHIR.swift */,
 				270CDC0928A65A0100F2F053 /* CKFHIRTaskViewController.swift */,
 				270CDC0B28A65AD300F2F053 /* CKUploadFHIRTaskViewControllerDelegate.swift */,
 			);
@@ -597,9 +644,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2745633628A4959000B455AF /* GoogleService-Info.plist in Resources */,
 				8E0A43AF244A4A0400656518 /* Assets.xcassets in Resources */,
 				8E0A43B0244A4A0400656518 /* LaunchScreen.storyboard in Resources */,
+				2720BD3628EFBA4B005578F7 /* GoogleService-Info.plist in Resources */,
 				E2F1FD7824D62064006C39DF /* CKConfiguration.plist in Resources */,
 				8E0A43C1244A4A0400656518 /* LoginCustomWaitStepView.xib in Resources */,
 			);
@@ -751,6 +798,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				270AA16A28FB105800800226 /* ORKNavigableOrderedTask+FHIR.swift in Sources */,
 				E2DF9F0A2500C9CE00A93B93 /* LoginViewController.swift in Sources */,
 				8E6E1E14253520440024B8DF /* PasscodeViewController.swift in Sources */,
 				2B19DD9626FE1D2F00649CE1 /* CheckListItemViewController.swift in Sources */,
@@ -760,6 +808,7 @@
 				270CDC0C28A65AD300F2F053 /* CKUploadFHIRTaskViewControllerDelegate.swift in Sources */,
 				8EA6648725930B6B00B6A45A /* CKHealthRecordsStepViewController.swift in Sources */,
 				8E0A43C0244A4A0400656518 /* PasswordlessLoginStep.swift in Sources */,
+				270AA16828FB101800800226 /* NavigationRules.swift in Sources */,
 				8EA664B2259422E400B6A45A /* CKCareKitRemoteSyncWithFirestore.swift in Sources */,
 				8EA664AD2593380D00B6A45A /* SendRecordsView.swift in Sources */,
 				8E6E1E28253538CC0024B8DF /* CloudTaskListItemView.swift in Sources */,
@@ -772,6 +821,7 @@
 				8E9CDEBA2591843200C8A228 /* CKConfig.swift in Sources */,
 				2F94C5F22536543600DF8866 /* SceneDelegate+CardinalKit.swift in Sources */,
 				8E9CDFAE2592B79900C8A228 /* Metrics.swift in Sources */,
+				270AA16328FB0FD400800226 /* FHIRExtensions.swift in Sources */,
 				27653A13272A2E7700D74E83 /* LocalTaskListItemView.swift in Sources */,
 				8E6E1E092534F4100024B8DF /* OnboardingViewController.swift in Sources */,
 				8E7FFFB425DCE9B7002982B4 /* CKUploadToGCPTaskViewControllerDelegate.swift in Sources */,
@@ -796,6 +846,7 @@
 				2B19DD9226FE1BEB00649CE1 /* JsonToSurvey.swift in Sources */,
 				8E0A43B5244A4A0400656518 /* LocalTaskItem.swift in Sources */,
 				2BD5328326C2CC4E00C4636E /* CKResearchSurveysManager.swift in Sources */,
+				270AA16628FB0FFE00800226 /* FHIRToResearchKitConversionError.swift in Sources */,
 				8E6E1E2C253539AE0024B8DF /* ChangePasscodeView.swift in Sources */,
 				8E0A43AD244A4A0400656518 /* Constants.swift in Sources */,
 				270CDC0A28A65A0100F2F053 /* CKFHIRTaskViewController.swift in Sources */,
@@ -807,14 +858,14 @@
 				8E9CDEA925916E6600C8A228 /* ScheduleViewController.swift in Sources */,
 				2BD5328526C30F2E00C4636E /* CloudTaskItem.swift in Sources */,
 				D253D132250D1BDB00A363E4 /* CKSignInWithAppleStep.swift in Sources */,
+				270AA16C28FB107100800226 /* Questionnaire+ValueSets.swift in Sources */,
 				8E6E1E0D25351D8F0024B8DF /* PageViewController.swift in Sources */,
-				274F12C128A435720000A902 /* FHIRToResearchKit.swift in Sources */,
 				8E0A43AC244A4A0400656518 /* CKStudyUser.swift in Sources */,
 				8E0A43C3244A4A0400656518 /* LoginCustomWaitStepViewController.swift in Sources */,
 				8E9CDEB22591739A00C8A228 /* TipView.swift in Sources */,
 				8E7FFFBD25DE38E4002982B4 /* CoffeeChartDataSource.swift in Sources */,
 				E2F1FD7624D61EDA006C39DF /* CKPropertyReader.swift in Sources */,
-				27CCEDCD28A59422003C52FF /* ResearchKitToFHIR.swift in Sources */,
+				270AA16E28FB109100800226 /* QuestionnaireItem+ResearchKit.swift in Sources */,
 				8E6E1E1025351E890024B8DF /* Extensions+UIColor.swift in Sources */,
 				8E9CDF832592844A00C8A228 /* LearnUIView.swift in Sources */,
 				8E9CDEA725916B2800C8A228 /* ScheduleViewControllerRepresentable.swift in Sources */,
@@ -825,6 +876,7 @@
 				8E6E1E2A2535398D0024B8DF /* HelpView.swift in Sources */,
 				8E9CDED02591AC4A00C8A228 /* CKHealthKitManager.swift in Sources */,
 				8E0A43C2244A4A0400656518 /* ConsentDocument.swift in Sources */,
+				270AA17128FB10B900800226 /* ORKTaskResult+FHIR.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

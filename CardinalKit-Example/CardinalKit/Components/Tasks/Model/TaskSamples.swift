@@ -111,6 +111,7 @@ struct TaskSamples {
             {
               "resourceType": "Questionnaire",
               "id": "sample-fhir-questionnaire-cardinalkit",
+              "url": "http://cardinalkit.org/fhir/sample-fhir-questionnaire-cardinalkit",
               "language": "en-US",
               "status": "draft",
               "publisher": "CardinalKit",
