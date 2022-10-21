@@ -16,7 +16,7 @@
 		270AA17128FB10B900800226 /* ORKTaskResult+FHIR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270AA17028FB10B900800226 /* ORKTaskResult+FHIR.swift */; };
 		270CDC0A28A65A0100F2F053 /* CKFHIRTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270CDC0928A65A0100F2F053 /* CKFHIRTaskViewController.swift */; };
 		270CDC0C28A65AD300F2F053 /* CKUploadFHIRTaskViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270CDC0B28A65AD300F2F053 /* CKUploadFHIRTaskViewControllerDelegate.swift */; };
-		2720BD3628EFBA4B005578F7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2720BD3528EFBA4A005578F7 /* GoogleService-Info.plist */; };
+		276399A129021BB5004DE158 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 276399A029021BB4004DE158 /* GoogleService-Info.plist */; };
 		27653A13272A2E7700D74E83 /* LocalTaskListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27653A12272A2E7700D74E83 /* LocalTaskListItemView.swift */; };
 		2B19DD9226FE1BEB00649CE1 /* JsonToSurvey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19DD9126FE1BEB00649CE1 /* JsonToSurvey.swift */; };
 		2B19DD9426FE1D2600649CE1 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19DD9326FE1D2600649CE1 /* TestViewController.swift */; };
@@ -124,7 +124,7 @@
 		270AF36127872C13002945A7 /* CardinalKit_ExampleRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CardinalKit_ExampleRelease.entitlements; sourceTree = "<group>"; };
 		270CDC0928A65A0100F2F053 /* CKFHIRTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKFHIRTaskViewController.swift; sourceTree = "<group>"; };
 		270CDC0B28A65AD300F2F053 /* CKUploadFHIRTaskViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKUploadFHIRTaskViewControllerDelegate.swift; sourceTree = "<group>"; };
-		2720BD3528EFBA4A005578F7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		276399A029021BB4004DE158 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		27653A12272A2E7700D74E83 /* LocalTaskListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalTaskListItemView.swift; sourceTree = "<group>"; };
 		2B19DD9126FE1BEB00649CE1 /* JsonToSurvey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonToSurvey.swift; sourceTree = "<group>"; };
 		2B19DD9326FE1D2600649CE1 /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
@@ -356,7 +356,7 @@
 				8E0A4389244A4A0400656518 /* LaunchScreen.storyboard */,
 				8E0A4384244A4A0400656518 /* Constants.swift */,
 				8E0A4378244A4A0300656518 /* CardinalKit_Example-Bridging-Header.h */,
-				2720BD3528EFBA4A005578F7 /* GoogleService-Info.plist */,
+				276399A029021BB4004DE158 /* GoogleService-Info.plist */,
 				8E0A43C9244A4C6500656518 /* Info.plist */,
 				E2F1FD7724D62064006C39DF /* CKConfiguration.plist */,
 			);
@@ -646,7 +646,7 @@
 			files = (
 				8E0A43AF244A4A0400656518 /* Assets.xcassets in Resources */,
 				8E0A43B0244A4A0400656518 /* LaunchScreen.storyboard in Resources */,
-				2720BD3628EFBA4B005578F7 /* GoogleService-Info.plist in Resources */,
+				276399A129021BB5004DE158 /* GoogleService-Info.plist in Resources */,
 				E2F1FD7824D62064006C39DF /* CKConfiguration.plist in Resources */,
 				8E0A43C1244A4A0400656518 /* LoginCustomWaitStepView.xib in Resources */,
 			);
