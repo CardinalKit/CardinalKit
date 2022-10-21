@@ -1,19 +1,12 @@
 use_frameworks!
+platform :ios, '14.3'
 
 target 'CardinalKit_Example' do
   pod 'CardinalKit', :path => '../'
   
-  # CK Sample Pods
-  pod 'ResearchKit', :git => 'https://github.com/ResearchKit/ResearchKit.git', :branch => 'main'
-  pod 'Granola', :git => 'https://github.com/CardinalKit/Granola.git', :branch => 'main'
+  pod 'ResearchKit', :git => 'https://github.com/ResearchKit/ResearchKit.git', :commit => '2cc8f9e'
+  pod 'Granola', :git => 'https://github.com/CardinalKit/Granola.git', :commit => '9e0b287'
   
-  pod 'Firebase/Firestore'
-  pod 'Firebase/Auth'
-  pod 'Firebase/Storage'
-  pod 'Firebase/Analytics'
-  pod 'Firebase/DynamicLinks'
-  pod 'GoogleSignIn'
-  pod 'FBSDKLoginKit'
-  
-
+  pod 'GoogleSignIn', '~> 6'
+  pod 'FBSDKLoginKit', '~> 15'
 end

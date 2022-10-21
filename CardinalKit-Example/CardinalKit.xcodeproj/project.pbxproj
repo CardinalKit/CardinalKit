@@ -7,13 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		270AA16328FB0FD400800226 /* FHIRExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270AA16228FB0FD400800226 /* FHIRExtensions.swift */; };
-		270AA16628FB0FFE00800226 /* FHIRToResearchKitConversionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270AA16528FB0FFE00800226 /* FHIRToResearchKitConversionError.swift */; };
-		270AA16828FB101800800226 /* NavigationRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270AA16728FB101800800226 /* NavigationRules.swift */; };
-		270AA16A28FB105800800226 /* ORKNavigableOrderedTask+FHIR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270AA16928FB105800800226 /* ORKNavigableOrderedTask+FHIR.swift */; };
-		270AA16C28FB107100800226 /* Questionnaire+ValueSets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270AA16B28FB107100800226 /* Questionnaire+ValueSets.swift */; };
-		270AA16E28FB109100800226 /* QuestionnaireItem+ResearchKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270AA16D28FB109100800226 /* QuestionnaireItem+ResearchKit.swift */; };
-		270AA17128FB10B900800226 /* ORKTaskResult+FHIR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270AA17028FB10B900800226 /* ORKTaskResult+FHIR.swift */; };
 		270CDC0A28A65A0100F2F053 /* CKFHIRTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270CDC0928A65A0100F2F053 /* CKFHIRTaskViewController.swift */; };
 		270CDC0C28A65AD300F2F053 /* CKUploadFHIRTaskViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270CDC0B28A65AD300F2F053 /* CKUploadFHIRTaskViewControllerDelegate.swift */; };
 		276399A129021BB5004DE158 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 276399A029021BB4004DE158 /* GoogleService-Info.plist */; };
@@ -25,13 +18,19 @@
 		2B932F84276BF8D300AB3A02 /* CKReviewConsentDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B932F83276BF8D300AB3A02 /* CKReviewConsentDocument.swift */; };
 		2BD5328326C2CC4E00C4636E /* CKResearchSurveysManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5328226C2CC4E00C4636E /* CKResearchSurveysManager.swift */; };
 		2BD5328526C30F2E00C4636E /* CloudTaskItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5328426C30F2E00C4636E /* CloudTaskItem.swift */; };
-		2BF6451826C1D0040020C206 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		2BF6452026C1DBE70020C206 /* CK_ORKSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6451F26C1DBE70020C206 /* CK_ORKSerialization.swift */; };
 		2F94C5F22536543600DF8866 /* SceneDelegate+CardinalKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F94C5F12536543600DF8866 /* SceneDelegate+CardinalKit.swift */; };
-		4D18A6DB85C183249DDB0D11 /* Pods_CardinalKit_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA45F0AD7EB77020BD6A3281 /* Pods_CardinalKit_Example.framework */; };
+		2FFFA2C829024EFD009D289D /* ORKTaskResult+FHIR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFFA2BF29024EFD009D289D /* ORKTaskResult+FHIR.swift */; };
+		2FFFA2C929024EFD009D289D /* FHIRToResearchKitConversionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFFA2C129024EFD009D289D /* FHIRToResearchKitConversionError.swift */; };
+		2FFFA2CA29024EFD009D289D /* QuestionnaireItem+ResearchKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFFA2C229024EFD009D289D /* QuestionnaireItem+ResearchKit.swift */; };
+		2FFFA2CB29024EFD009D289D /* NavigationRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFFA2C329024EFD009D289D /* NavigationRules.swift */; };
+		2FFFA2CC29024EFD009D289D /* ORKNavigableOrderedTask+FHIR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFFA2C429024EFD009D289D /* ORKNavigableOrderedTask+FHIR.swift */; };
+		2FFFA2CD29024EFD009D289D /* Questionnaire+ValueSets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFFA2C529024EFD009D289D /* Questionnaire+ValueSets.swift */; };
+		2FFFA2CE29024EFD009D289D /* FHIRExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFFA2C729024EFD009D289D /* FHIRExtensions.swift */; };
+		2FFFA2D229025241009D289D /* ORKESerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4386244A4A0400656518 /* ORKESerialization.m */; };
+		7AA2D20BFBE19F5D3CCE1066 /* Pods_CardinalKit_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 676E5166E56D7742690197A9 /* Pods_CardinalKit_Example.framework */; };
 		8E0A43AC244A4A0400656518 /* CKStudyUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4382244A4A0400656518 /* CKStudyUser.swift */; };
 		8E0A43AD244A4A0400656518 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4384244A4A0400656518 /* Constants.swift */; };
-		8E0A43AE244A4A0400656518 /* ORKESerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4386244A4A0400656518 /* ORKESerialization.m */; };
 		8E0A43AF244A4A0400656518 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E0A4388244A4A0400656518 /* Assets.xcassets */; };
 		8E0A43B0244A4A0400656518 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E0A4389244A4A0400656518 /* LaunchScreen.storyboard */; };
 		8E0A43B3244A4A0400656518 /* TaskSamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A438F244A4A0400656518 /* TaskSamples.swift */; };
@@ -114,13 +113,6 @@
 
 /* Begin PBXFileReference section */
 		07D78DA16FC9C3C7709EA243 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		270AA16228FB0FD400800226 /* FHIRExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FHIRExtensions.swift; sourceTree = "<group>"; };
-		270AA16528FB0FFE00800226 /* FHIRToResearchKitConversionError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FHIRToResearchKitConversionError.swift; sourceTree = "<group>"; };
-		270AA16728FB101800800226 /* NavigationRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRules.swift; sourceTree = "<group>"; };
-		270AA16928FB105800800226 /* ORKNavigableOrderedTask+FHIR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ORKNavigableOrderedTask+FHIR.swift"; sourceTree = "<group>"; };
-		270AA16B28FB107100800226 /* Questionnaire+ValueSets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Questionnaire+ValueSets.swift"; sourceTree = "<group>"; };
-		270AA16D28FB109100800226 /* QuestionnaireItem+ResearchKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuestionnaireItem+ResearchKit.swift"; sourceTree = "<group>"; };
-		270AA17028FB10B900800226 /* ORKTaskResult+FHIR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ORKTaskResult+FHIR.swift"; sourceTree = "<group>"; };
 		270AF36127872C13002945A7 /* CardinalKit_ExampleRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CardinalKit_ExampleRelease.entitlements; sourceTree = "<group>"; };
 		270CDC0928A65A0100F2F053 /* CKFHIRTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKFHIRTaskViewController.swift; sourceTree = "<group>"; };
 		270CDC0B28A65AD300F2F053 /* CKUploadFHIRTaskViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKUploadFHIRTaskViewControllerDelegate.swift; sourceTree = "<group>"; };
@@ -135,10 +127,17 @@
 		2BD5328426C30F2E00C4636E /* CloudTaskItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudTaskItem.swift; sourceTree = "<group>"; };
 		2BF6451F26C1DBE70020C206 /* CK_ORKSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CK_ORKSerialization.swift; sourceTree = "<group>"; };
 		2F94C5F12536543600DF8866 /* SceneDelegate+CardinalKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SceneDelegate+CardinalKit.swift"; sourceTree = "<group>"; };
+		2FFFA2BF29024EFD009D289D /* ORKTaskResult+FHIR.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ORKTaskResult+FHIR.swift"; sourceTree = "<group>"; };
+		2FFFA2C129024EFD009D289D /* FHIRToResearchKitConversionError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FHIRToResearchKitConversionError.swift; sourceTree = "<group>"; };
+		2FFFA2C229024EFD009D289D /* QuestionnaireItem+ResearchKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "QuestionnaireItem+ResearchKit.swift"; sourceTree = "<group>"; };
+		2FFFA2C329024EFD009D289D /* NavigationRules.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationRules.swift; sourceTree = "<group>"; };
+		2FFFA2C429024EFD009D289D /* ORKNavigableOrderedTask+FHIR.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ORKNavigableOrderedTask+FHIR.swift"; sourceTree = "<group>"; };
+		2FFFA2C529024EFD009D289D /* Questionnaire+ValueSets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Questionnaire+ValueSets.swift"; sourceTree = "<group>"; };
+		2FFFA2C729024EFD009D289D /* FHIRExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FHIRExtensions.swift; sourceTree = "<group>"; };
 		41DC264876E45FE5A3FD8701 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* CardinalKit Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CardinalKit Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		62AA5CD1C2188D392530510F /* CardinalKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = CardinalKit.podspec; path = ../CardinalKit.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		6C723006371DD7B0BB7B834A /* Pods-CardinalKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardinalKit_Example.release.xcconfig"; path = "Target Support Files/Pods-CardinalKit_Example/Pods-CardinalKit_Example.release.xcconfig"; sourceTree = "<group>"; };
+		676E5166E56D7742690197A9 /* Pods_CardinalKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CardinalKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E0A4378244A4A0300656518 /* CardinalKit_Example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CardinalKit_Example-Bridging-Header.h"; sourceTree = "<group>"; };
 		8E0A4382244A4A0400656518 /* CKStudyUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKStudyUser.swift; sourceTree = "<group>"; };
 		8E0A4384244A4A0400656518 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -200,8 +199,6 @@
 		8EA664B1259422E400B6A45A /* CKCareKitRemoteSyncWithFirestore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKCareKitRemoteSyncWithFirestore.swift; sourceTree = "<group>"; };
 		8EA664B32594387900B6A45A /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		8EBE6F9B24B3C0E60093D07C /* AppDelegate+CardinalKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+CardinalKit.swift"; sourceTree = "<group>"; };
-		A23665653AEB9D62D03B4685 /* Pods-CardinalKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardinalKit_Example.debug.xcconfig"; path = "Target Support Files/Pods-CardinalKit_Example/Pods-CardinalKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		AA45F0AD7EB77020BD6A3281 /* Pods_CardinalKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CardinalKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D253D131250D1BDB00A363E4 /* CKSignInWithAppleStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKSignInWithAppleStep.swift; sourceTree = "<group>"; };
 		E235077624F7082700CC1899 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		E2680B1A260A72DD00B755EA /* LoginExistingUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginExistingUserViewController.swift; sourceTree = "<group>"; };
@@ -209,6 +206,8 @@
 		E2DF9F092500C9CE00A93B93 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E2F1FD7524D61EDA006C39DF /* CKPropertyReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKPropertyReader.swift; sourceTree = "<group>"; };
 		E2F1FD7724D62064006C39DF /* CKConfiguration.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = CKConfiguration.plist; sourceTree = "<group>"; };
+		E7F814A1693179E8C90CA6C0 /* Pods-CardinalKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardinalKit_Example.debug.xcconfig"; path = "Target Support Files/Pods-CardinalKit_Example/Pods-CardinalKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		EC787E6A92A9554A63AB1833 /* Pods-CardinalKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardinalKit_Example.release.xcconfig"; path = "Target Support Files/Pods-CardinalKit_Example/Pods-CardinalKit_Example.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -221,51 +220,13 @@
 				8E0A43D5244A693D00656518 /* HealthKit.framework in Frameworks */,
 				8E9CDE912591534B00C8A228 /* CareKitStore in Frameworks */,
 				8E9CDE932591534B00C8A228 /* CareKitFHIR in Frameworks */,
-				4D18A6DB85C183249DDB0D11 /* Pods_CardinalKit_Example.framework in Frameworks */,
+				7AA2D20BFBE19F5D3CCE1066 /* Pods_CardinalKit_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		270AA16028FB0FA600800226 /* ResearchKitOnFHIR */ = {
-			isa = PBXGroup;
-			children = (
-				270AA16F28FB10AC00800226 /* ResearchKitToFHIR */,
-				270AA16428FB0FEE00800226 /* FHIRToResearchKit */,
-				270AA16128FB0FC300800226 /* FHIRExtensions */,
-			);
-			path = ResearchKitOnFHIR;
-			sourceTree = "<group>";
-		};
-		270AA16128FB0FC300800226 /* FHIRExtensions */ = {
-			isa = PBXGroup;
-			children = (
-				270AA16228FB0FD400800226 /* FHIRExtensions.swift */,
-			);
-			path = FHIRExtensions;
-			sourceTree = "<group>";
-		};
-		270AA16428FB0FEE00800226 /* FHIRToResearchKit */ = {
-			isa = PBXGroup;
-			children = (
-				270AA16528FB0FFE00800226 /* FHIRToResearchKitConversionError.swift */,
-				270AA16728FB101800800226 /* NavigationRules.swift */,
-				270AA16928FB105800800226 /* ORKNavigableOrderedTask+FHIR.swift */,
-				270AA16B28FB107100800226 /* Questionnaire+ValueSets.swift */,
-				270AA16D28FB109100800226 /* QuestionnaireItem+ResearchKit.swift */,
-			);
-			path = FHIRToResearchKit;
-			sourceTree = "<group>";
-		};
-		270AA16F28FB10AC00800226 /* ResearchKitToFHIR */ = {
-			isa = PBXGroup;
-			children = (
-				270AA17028FB10B900800226 /* ORKTaskResult+FHIR.swift */,
-			);
-			path = ResearchKitToFHIR;
-			sourceTree = "<group>";
-		};
 		2B8FB80227552ADD000B2D7B /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
@@ -279,9 +240,47 @@
 			isa = PBXGroup;
 			children = (
 				8E0A43D4244A693D00656518 /* HealthKit.framework */,
-				AA45F0AD7EB77020BD6A3281 /* Pods_CardinalKit_Example.framework */,
+				676E5166E56D7742690197A9 /* Pods_CardinalKit_Example.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2FFFA2BD29024EFD009D289D /* ResearchKitOnFHIR */ = {
+			isa = PBXGroup;
+			children = (
+				2FFFA2BE29024EFD009D289D /* ResearchKitToFHIR */,
+				2FFFA2C029024EFD009D289D /* FHIRToResearchKit */,
+				2FFFA2C629024EFD009D289D /* FHIRExtensions */,
+			);
+			path = ResearchKitOnFHIR;
+			sourceTree = "<group>";
+		};
+		2FFFA2BE29024EFD009D289D /* ResearchKitToFHIR */ = {
+			isa = PBXGroup;
+			children = (
+				2FFFA2BF29024EFD009D289D /* ORKTaskResult+FHIR.swift */,
+			);
+			path = ResearchKitToFHIR;
+			sourceTree = "<group>";
+		};
+		2FFFA2C029024EFD009D289D /* FHIRToResearchKit */ = {
+			isa = PBXGroup;
+			children = (
+				2FFFA2C129024EFD009D289D /* FHIRToResearchKitConversionError.swift */,
+				2FFFA2C229024EFD009D289D /* QuestionnaireItem+ResearchKit.swift */,
+				2FFFA2C329024EFD009D289D /* NavigationRules.swift */,
+				2FFFA2C429024EFD009D289D /* ORKNavigableOrderedTask+FHIR.swift */,
+				2FFFA2C529024EFD009D289D /* Questionnaire+ValueSets.swift */,
+			);
+			path = FHIRToResearchKit;
+			sourceTree = "<group>";
+		};
+		2FFFA2C629024EFD009D289D /* FHIRExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				2FFFA2C729024EFD009D289D /* FHIRExtensions.swift */,
+			);
+			path = FHIRExtensions;
 			sourceTree = "<group>";
 		};
 		607FACC71AFB9204008FA782 = {
@@ -417,8 +416,8 @@
 				8E9CDECE2591ABDF00C8A228 /* HealthKit */,
 				8E40DC022471E5590027536B /* Networking */,
 				8E0A4380244A4A0400656518 /* Auth */,
-				270AA16028FB0FA600800226 /* ResearchKitOnFHIR */,
 				8E9CDF812591E6D000C8A228 /* ResearchKit */,
+				2FFFA2BD29024EFD009D289D /* ResearchKitOnFHIR */,
 				8E9CDEAB25916F6E00C8A228 /* CareKit */,
 				8E6E1E0F25351E890024B8DF /* Extensions+UIColor.swift */,
 				8E6E1E3325353AFE0024B8DF /* EmailHelper.swift */,
@@ -565,8 +564,8 @@
 		A562A578C883F67F0DAE1385 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				A23665653AEB9D62D03B4685 /* Pods-CardinalKit_Example.debug.xcconfig */,
-				6C723006371DD7B0BB7B834A /* Pods-CardinalKit_Example.release.xcconfig */,
+				E7F814A1693179E8C90CA6C0 /* Pods-CardinalKit_Example.debug.xcconfig */,
+				EC787E6A92A9554A63AB1833 /* Pods-CardinalKit_Example.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -578,13 +577,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "CardinalKit_Example" */;
 			buildPhases = (
-				D668F9E46BB53CD7BED6BDFC /* [CP] Check Pods Manifest.lock */,
+				4C064768F010545B88BD0B09 /* [CP] Check Pods Manifest.lock */,
 				607FACCC1AFB9204008FA782 /* Sources */,
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
 				8E0A43D0244A60D800656518 /* Embed Frameworks */,
-				D055C49E721320DB29772620 /* [CP] Embed Pods Frameworks */,
-				3D4E5631692A118DD95868F5 /* [CP] Copy Pods Resources */,
+				4A822B1601B9645AA515F2B3 /* [CP] Embed Pods Frameworks */,
+				C57A1F8F1E0CA2FA98754718 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -655,25 +654,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3D4E5631692A118DD95868F5 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CardinalKit_Example/Pods-CardinalKit_Example-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/CardinalKit/CardinalKit.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/CardinalKit.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CardinalKit_Example/Pods-CardinalKit_Example-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D055C49E721320DB29772620 /* [CP] Embed Pods Frameworks */ = {
+		4A822B1601B9645AA515F2B3 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -686,17 +667,14 @@
 				"${BUILT_PRODUCTS_DIR}/FirebaseAuth/FirebaseAuth.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseAuthInterop/FirebaseAuthInterop.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseCore/FirebaseCore.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseCoreDiagnostics/FirebaseCoreDiagnostics.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseCoreExtension/FirebaseCoreExtension.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseCoreInternal/FirebaseCoreInternal.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseDynamicLinks/FirebaseDynamicLinks.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseFirestore/FirebaseFirestore.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseInstallations/FirebaseInstallations.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseStorage/FirebaseStorage.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseStorageInternal/FirebaseStorageInternal.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMAppAuth/GTMAppAuth.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleDataTransport/GoogleDataTransport.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleSignIn/GoogleSignIn.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Granola/Granola.framework",
@@ -729,17 +707,14 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseAuth.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseAuthInterop.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCore.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCoreDiagnostics.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCoreExtension.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCoreInternal.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseDynamicLinks.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseFirestore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseInstallations.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseStorage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseStorageInternal.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMAppAuth.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleDataTransport.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleSignIn.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Granola.framework",
@@ -769,7 +744,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CardinalKit_Example/Pods-CardinalKit_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D668F9E46BB53CD7BED6BDFC /* [CP] Check Pods Manifest.lock */ = {
+		4C064768F010545B88BD0B09 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -791,6 +766,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		C57A1F8F1E0CA2FA98754718 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CardinalKit_Example/Pods-CardinalKit_Example-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/CardinalKit/CardinalKit.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/CardinalKit.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CardinalKit_Example/Pods-CardinalKit_Example-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -798,8 +791,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				270AA16A28FB105800800226 /* ORKNavigableOrderedTask+FHIR.swift in Sources */,
 				E2DF9F0A2500C9CE00A93B93 /* LoginViewController.swift in Sources */,
+				2FFFA2D229025241009D289D /* ORKESerialization.m in Sources */,
 				8E6E1E14253520440024B8DF /* PasscodeViewController.swift in Sources */,
 				2B19DD9626FE1D2F00649CE1 /* CheckListItemViewController.swift in Sources */,
 				2B19DD9426FE1D2600649CE1 /* TestViewController.swift in Sources */,
@@ -808,7 +801,6 @@
 				270CDC0C28A65AD300F2F053 /* CKUploadFHIRTaskViewControllerDelegate.swift in Sources */,
 				8EA6648725930B6B00B6A45A /* CKHealthRecordsStepViewController.swift in Sources */,
 				8E0A43C0244A4A0400656518 /* PasswordlessLoginStep.swift in Sources */,
-				270AA16828FB101800800226 /* NavigationRules.swift in Sources */,
 				8EA664B2259422E400B6A45A /* CKCareKitRemoteSyncWithFirestore.swift in Sources */,
 				8EA664AD2593380D00B6A45A /* SendRecordsView.swift in Sources */,
 				8E6E1E28253538CC0024B8DF /* CloudTaskListItemView.swift in Sources */,
@@ -821,16 +813,19 @@
 				8E9CDEBA2591843200C8A228 /* CKConfig.swift in Sources */,
 				2F94C5F22536543600DF8866 /* SceneDelegate+CardinalKit.swift in Sources */,
 				8E9CDFAE2592B79900C8A228 /* Metrics.swift in Sources */,
-				270AA16328FB0FD400800226 /* FHIRExtensions.swift in Sources */,
 				27653A13272A2E7700D74E83 /* LocalTaskListItemView.swift in Sources */,
 				8E6E1E092534F4100024B8DF /* OnboardingViewController.swift in Sources */,
 				8E7FFFB425DCE9B7002982B4 /* CKUploadToGCPTaskViewControllerDelegate.swift in Sources */,
+				2FFFA2CC29024EFD009D289D /* ORKNavigableOrderedTask+FHIR.swift in Sources */,
+				2FFFA2C829024EFD009D289D /* ORKTaskResult+FHIR.swift in Sources */,
 				8EBE6F9C24B3C0E60093D07C /* AppDelegate+CardinalKit.swift in Sources */,
 				8E0A43B9244A4A0400656518 /* AppDelegate.swift in Sources */,
 				8EA664232592E57200B6A45A /* SensorsDemoUIView.swift in Sources */,
+				2FFFA2CB29024EFD009D289D /* NavigationRules.swift in Sources */,
 				8E6E1E3225353ABE0024B8DF /* ProfileUIView.swift in Sources */,
 				8E6E1E1E253528F50024B8DF /* SupportView.swift in Sources */,
 				8E6E1E1C253528D70024B8DF /* ReportView.swift in Sources */,
+				2FFFA2C929024EFD009D289D /* FHIRToResearchKitConversionError.swift in Sources */,
 				8E6E1E26253537E40024B8DF /* TasksUIView.swift in Sources */,
 				8E9CDEAD259170AD00C8A228 /* CKCareKitManager.swift in Sources */,
 				8E6E1E3425353AFE0024B8DF /* EmailHelper.swift in Sources */,
@@ -842,33 +837,31 @@
 				8E6E1E20253529760024B8DF /* DocumentView.swift in Sources */,
 				8E7FFFBB25DE37FF002982B4 /* CoffeePieChartView.swift in Sources */,
 				8E7FFFB825DE350A002982B4 /* CoffeeUIView.swift in Sources */,
-				2BF6451826C1D0040020C206 /* (null) in Sources */,
 				2B19DD9226FE1BEB00649CE1 /* JsonToSurvey.swift in Sources */,
 				8E0A43B5244A4A0400656518 /* LocalTaskItem.swift in Sources */,
 				2BD5328326C2CC4E00C4636E /* CKResearchSurveysManager.swift in Sources */,
-				270AA16628FB0FFE00800226 /* FHIRToResearchKitConversionError.swift in Sources */,
+				2FFFA2CA29024EFD009D289D /* QuestionnaireItem+ResearchKit.swift in Sources */,
 				8E6E1E2C253539AE0024B8DF /* ChangePasscodeView.swift in Sources */,
 				8E0A43AD244A4A0400656518 /* Constants.swift in Sources */,
 				270CDC0A28A65A0100F2F053 /* CKFHIRTaskViewController.swift in Sources */,
 				8E0A43BE244A4A0400656518 /* CKHealthDataStepViewController.swift in Sources */,
 				2BF6452026C1DBE70020C206 /* CK_ORKSerialization.swift in Sources */,
-				8E0A43AE244A4A0400656518 /* ORKESerialization.m in Sources */,
+				2FFFA2CD29024EFD009D289D /* Questionnaire+ValueSets.swift in Sources */,
 				8E9CDEB6259181B400C8A228 /* CareTeamViewControllerRepresentable.swift in Sources */,
 				8E9CDEAF259172C200C8A228 /* CKCareKitManager+Sample.swift in Sources */,
 				8E9CDEA925916E6600C8A228 /* ScheduleViewController.swift in Sources */,
 				2BD5328526C30F2E00C4636E /* CloudTaskItem.swift in Sources */,
 				D253D132250D1BDB00A363E4 /* CKSignInWithAppleStep.swift in Sources */,
-				270AA16C28FB107100800226 /* Questionnaire+ValueSets.swift in Sources */,
 				8E6E1E0D25351D8F0024B8DF /* PageViewController.swift in Sources */,
 				8E0A43AC244A4A0400656518 /* CKStudyUser.swift in Sources */,
 				8E0A43C3244A4A0400656518 /* LoginCustomWaitStepViewController.swift in Sources */,
 				8E9CDEB22591739A00C8A228 /* TipView.swift in Sources */,
 				8E7FFFBD25DE38E4002982B4 /* CoffeeChartDataSource.swift in Sources */,
 				E2F1FD7624D61EDA006C39DF /* CKPropertyReader.swift in Sources */,
-				270AA16E28FB109100800226 /* QuestionnaireItem+ResearchKit.swift in Sources */,
 				8E6E1E1025351E890024B8DF /* Extensions+UIColor.swift in Sources */,
 				8E9CDF832592844A00C8A228 /* LearnUIView.swift in Sources */,
 				8E9CDEA725916B2800C8A228 /* ScheduleViewControllerRepresentable.swift in Sources */,
+				2FFFA2CE29024EFD009D289D /* FHIRExtensions.swift in Sources */,
 				2B932F84276BF8D300AB3A02 /* CKReviewConsentDocument.swift in Sources */,
 				E235077724F7082700CC1899 /* SceneDelegate.swift in Sources */,
 				8E6E1E16253524500024B8DF /* WithdrawalViewController.swift in Sources */,
@@ -876,7 +869,6 @@
 				8E6E1E2A2535398D0024B8DF /* HelpView.swift in Sources */,
 				8E9CDED02591AC4A00C8A228 /* CKHealthKitManager.swift in Sources */,
 				8E0A43C2244A4A0400656518 /* ConsentDocument.swift in Sources */,
-				270AA17128FB10B900800226 /* ORKTaskResult+FHIR.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -996,7 +988,7 @@
 		};
 		607FACF01AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A23665653AEB9D62D03B4685 /* Pods-CardinalKit_Example.debug.xcconfig */;
+			baseConfigurationReference = E7F814A1693179E8C90CA6C0 /* Pods-CardinalKit_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -1022,7 +1014,7 @@
 		};
 		607FACF11AFB9204008FA782 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6C723006371DD7B0BB7B834A /* Pods-CardinalKit_Example.release.xcconfig */;
+			baseConfigurationReference = EC787E6A92A9554A63AB1833 /* Pods-CardinalKit_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -1079,8 +1071,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/carekit-apple/CareKit";
 			requirement = {
-				branch = main;
-				kind = branch;
+				kind = revision;
+				revision = 4936c622d55d876ccf43d7a4f4fa6acdf4db6747;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
