@@ -823,12 +823,12 @@ PODS:
   - ObjectMapper (3.5.3)
   - PromisesObjC (2.1.1)
   - ReachabilitySwift (3)
-  - Realm (10.32.0):
-    - Realm/Headers (= 10.32.0)
-  - Realm/Headers (10.32.0)
-  - RealmSwift (10.32.0):
-    - Realm (= 10.32.0)
-  - ResearchKit (2.1.0-beta)
+  - Realm (10.32.1):
+    - Realm/Headers (= 10.32.1)
+  - Realm/Headers (10.32.1)
+  - RealmSwift (10.32.1):
+    - Realm (= 10.32.1)
+  - ResearchKit (2.1.2)
   - SAMKeychain (1.5.3)
   - SwiftyJSON (4.3.0)
   - Zip (2.1.2)
@@ -836,14 +836,9 @@ PODS:
 DEPENDENCIES:
   - CardinalKit (from `../`)
   - FBSDKLoginKit (~> 15)
-  - Firebase/Analytics (~> 10)
-  - Firebase/Auth (~> 10)
-  - Firebase/DynamicLinks (~> 10)
-  - Firebase/Firestore (~> 10)
-  - Firebase/Storage (~> 10)
   - GoogleSignIn (~> 6)
   - Granola (from `https://github.com/CardinalKit/Granola.git`, commit `9e0b287`)
-  - ResearchKit (from `https://github.com/ResearchKit/ResearchKit.git`, commit `2cc8f9e`)
+  - ResearchKit (from `https://github.com/CardinalKit/ResearchKit.git`, branch `modulemapfix`)
 
 SPEC REPOS:
   trunk:
@@ -893,16 +888,16 @@ EXTERNAL SOURCES:
     :commit: 9e0b287
     :git: https://github.com/CardinalKit/Granola.git
   ResearchKit:
-    :commit: 2cc8f9e
-    :git: https://github.com/ResearchKit/ResearchKit.git
+    :branch: modulemapfix
+    :git: https://github.com/CardinalKit/ResearchKit.git
 
 CHECKOUT OPTIONS:
   Granola:
     :commit: 9e0b287
     :git: https://github.com/CardinalKit/Granola.git
   ResearchKit:
-    :commit: 2cc8f9e
-    :git: https://github.com/ResearchKit/ResearchKit.git
+    :commit: 37189be4862a85ea236005bcde63531287a7d6c4
+    :git: https://github.com/CardinalKit/ResearchKit.git
 
 SPEC CHECKSUMS:
   abseil: ebe5b5529fb05d93a8bdb7951607be08b7fa71bc
@@ -940,13 +935,13 @@ SPEC CHECKSUMS:
   ObjectMapper: 97111c97e054a6ee25917662106689f0b4127b37
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
   ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
-  Realm: a00e93347b8d26d372c7a82f6c0b08d6536a21c8
-  RealmSwift: fe09c29ca409f8f905fe4086f2a52936193f2e3d
-  ResearchKit: 454bd5d013f5d6817b1c893ebe471a082061ceee
+  Realm: fd821b81e5479be497cc5bca2e020f707d8323eb
+  RealmSwift: 8635e4cc524790916d72b0ffa51c1a91f4ec9668
+  ResearchKit: 798aac6b8d48a9574a0c6defd337a382194a32e6
   SAMKeychain: 483e1c9f32984d50ca961e26818a534283b4cd5c
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
   Zip: b3fef584b147b6e582b2256a9815c897d60ddc67
 
-PODFILE CHECKSUM: 8830f3cb1376c241dcf83fdabd4cba84b6ae7506
+PODFILE CHECKSUM: 8d79f0f649b8da0d8d8f7374080557fa019f2353
 
 COCOAPODS: 1.11.3
