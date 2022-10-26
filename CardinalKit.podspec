@@ -17,16 +17,12 @@ Pod::Spec.new do |s|
 #   * Write the description between the DESC delimiters below.
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
-  s.description      = <<-DESC
-TODO: Add long description of the pod here.
-                       DESC
+  s.description      = 'CardinalKit empowers the digital health community to rapidly prototype and build modern, interoperable, scalable digital health solutions on a variety of platforms.'
 
   s.homepage         = 'https://github.com/CardinalKit/CardinalKit'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'CardinalKit' => 'https://cardinalkit.org/' }
   s.source           = { :git => 'https://github.com/CardinalKit/CardinalKit.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://cardinalkit.org/'
 
   s.ios.deployment_target = '14.3'
 
@@ -36,32 +32,29 @@ TODO: Add long description of the pod here.
       'CardinalKit' => ['CardinalKit/Assets/*.png', 'CardinalKit/Assets/*.pdf']
   }
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
   s.frameworks = 'UIKit', 'Foundation'
   
-  #ResearchKit
-  # s.dependency 'ResearchKit', :git => 'https://github.com/ResearchKit/ResearchKit.git', :branch => 'master'
-  
+  s.dependency 'Granola'
+
   #Securely storing key-value pairs on keychain
-  s.dependency 'SAMKeychain',      '~> 1.5.2'
+  s.dependency 'SAMKeychain', '~> 1'
 
   #Local Storage
-  s.dependency 'RealmSwift',       '~> 10.7'
+  s.dependency 'RealmSwift', '~> 10'
   
   #Networking and responses
-  s.dependency 'ObjectMapper',     '~> 3.3.0'
-  s.dependency 'SwiftyJSON',       '~> 4.1.0'
-  s.dependency 'ReachabilitySwift','~> 3'
+  s.dependency 'ObjectMapper', '~> 3'
+  s.dependency 'SwiftyJSON', '~> 4'
+  s.dependency 'ReachabilitySwift', '~> 3'
 
   #Compressing files
-  s.dependency 'Zip',              '~> 1.1.0'
-  s.dependency 'Granola'
-  s.dependency 'Firebase/Firestore'
-  s.dependency 'Firebase/Auth'
-  s.dependency 'Firebase/Storage'
-  s.dependency 'Firebase/Analytics'
-  s.dependency 'Firebase/DynamicLinks'
+  s.dependency 'Zip', '~> 2.1.2'        
+  s.dependency 'Firebase/Firestore', '~> 10'
+  s.dependency 'Firebase/Auth', '~> 10'
+  s.dependency 'Firebase/Storage', '~> 10'
+  s.dependency 'Firebase/Analytics', '~> 10'
+  s.dependency 'Firebase/DynamicLinks', '~> 10'
+
   s.static_framework = true
   s.public_header_files = 'CardinalKit/Source/Components/Header.h'
-
 end
