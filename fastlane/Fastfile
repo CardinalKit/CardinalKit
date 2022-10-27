@@ -38,7 +38,7 @@ platform :ios do
     disable_automatic_code_signing(
       path: "CardinalKit-Example/Pods/Pods.xcodeproj",
       teamid: ENV["TEAM_ID"],
-      code_sign_identity: "iOS Distribution"
+      code_sign_identity: "Apple Distribution"
     )
     # build_app
     # upload_to_testflight
