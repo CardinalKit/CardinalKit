@@ -55,7 +55,7 @@ TODO: Add long description of the pod here.
 
   #Compressing files
   s.dependency 'Zip',              '~> 1.1.0'
-  s.dependency 'Granola'
+  s.dependency 'Granola', :git => 'https://github.com/CardinalKit/Granola.git', :branch => 'main'
   s.dependency 'Firebase/Core'
   s.dependency 'Firebase/Firestore'
   s.dependency 'Firebase/Auth'
