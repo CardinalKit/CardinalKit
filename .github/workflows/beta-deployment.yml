@@ -19,7 +19,7 @@ jobs:
   # buildandtest:
   #   name: Build and Test
   #   uses: ./.github/workflows/build.yml
-    secrets: inherit
+  #   secrets: inherit
   iosapptestflightdeployment:
     name: iOS App TestFlight Deployment
     runs-on: macos-12
