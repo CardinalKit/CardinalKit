@@ -16,8 +16,6 @@ scheme("CardinalKit-Example")
 
 workspace("CardinalKit-Example/CardinalKit.xcworkspace")
 
-export_team_id(ENV["TEAM_ID"])
-
 export_options(
   {
     provisioningProfiles: { 
