@@ -35,9 +35,10 @@ platform :ios do
     cocoapods(
       podfile: "./CardinalKit-Example/"
     )
-    update_project_team(
+    disable_automatic_code_signing(
       path: "CardinalKit-Example/Pods/Pods.xcodeproj",
-      teamid: ENV["TEAM_ID"]
+      teamid: ENV["TEAM_ID"],
+      code_sign_identity: "iOS Distribution"
     )
     # build_app
     # upload_to_testflight
