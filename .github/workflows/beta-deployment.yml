@@ -12,17 +12,18 @@ on:
   push:
     branches:
       - main
+  pull_request:
   workflow_dispatch:
 
 jobs:
-  buildandtest:
-    name: Build and Test
-    uses: ./.github/workflows/build.yml
+  # buildandtest:
+  #   name: Build and Test
+  #   uses: ./.github/workflows/build.yml
     secrets: inherit
   iosapptestflightdeployment:
     name: iOS App TestFlight Deployment
     runs-on: macos-12
-    needs: buildandtest
+  #  needs: buildandtest
     steps:
     - uses: actions/checkout@v3
     - uses: maxim-lobanov/setup-xcode@v1
@@ -69,7 +70,9 @@ jobs:
         path: ~/Library/Caches/org.swift.swiftpm/
         key: ${{ runner.os }}-spm-${{ hashFiles('CardinalKit-Example/CardinalKit.xcworkspace/xcshareddata/swiftpm/Package.resolved') }}
     - name: Build and test
-      run: bundler install && bundle exec fastlane beta
+      run: |
+        bundler install && bundle exec fastlane beta
+        xcodebuild -workspace CardinalKit-Example/CardinalKit.xcworkspace -scheme CardinalKit-Example -destination 'generic/platform=iOS' archive
       env:
         APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
         APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
