@@ -35,6 +35,10 @@ platform :ios do
     cocoapods(
       podfile: "./CardinalKit-Example/"
     )
+    update_project_team(
+      path: "CardinalKit-Example/Pods/Pods.xcodeproj",
+      teamid: ENV["TEAM_ID"]
+    )
     build_app
     upload_to_testflight
   end
