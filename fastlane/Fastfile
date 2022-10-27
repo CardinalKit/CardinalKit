@@ -39,7 +39,7 @@ platform :ios do
       path: "CardinalKit-Example/Pods/Pods.xcodeproj",
       teamid: ENV["TEAM_ID"]
     )
-    build_app
-    upload_to_testflight
+    # build_app
+    # upload_to_testflight
   end
 end
