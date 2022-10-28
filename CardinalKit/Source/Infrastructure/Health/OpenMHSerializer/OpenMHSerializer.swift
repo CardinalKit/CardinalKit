@@ -108,21 +108,32 @@ class CKOpenMHSerializer: OpenMHSerializer{
         for element in data {
             if let nBody = element["body"] as? [String:Any],
                let count = nBody["step_count"] as? Int{
-                if let time_frame = nBody["effective_time_frame"] as? [String:Any],
-                   let dateStr = time_frame["date_time"] as? String{
-                    let dateFormatter = DateFormatter()
-                    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"//this your string date format
-                    let date = dateFormatter.date(from: dateStr)!
-                    let onlyDate = removeTimeStamp(fromDate: date)
-                    var finalStepCount = count
-                    if let dateStepCount = datesDictionary[onlyDate]{
-                        finalStepCount+=dateStepCount["count"] as! Int
+                if let time_frame = nBody["effective_time_frame"] as? [String:Any]{
+                    var dateString:String? = nil
+                    if let dateInterval = time_frame["time_interval"] as? [String:Any],
+                    let dateStr = dateInterval["start_date_time"] as? String{
+                        dateString = dateStr
                     }
-                    else{
-                        datesDictionary[onlyDate]=[String:Any]()
-                        datesDictionary[onlyDate]?["date"] = dateStr
+                
+                  if let dateStr = time_frame["date_time"] as? String{
+                      dateString = dateStr
+                  }
+                    
+                    if let dateStr = dateString{
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"//this your string date format
+                        let date = dateFormatter.date(from: dateStr)!
+                        let onlyDate = removeTimeStamp(fromDate: date)
+                        var finalStepCount = count
+                        if let dateStepCount = datesDictionary[onlyDate]{
+                            finalStepCount+=dateStepCount["count"] as! Int
+                        }
+                        else{
+                            datesDictionary[onlyDate]=[String:Any]()
+                            datesDictionary[onlyDate]?["date"] = dateStr
+                        }
+                        datesDictionary[onlyDate]?["count"]=finalStepCount
                     }
-                    datesDictionary[onlyDate]?["count"]=finalStepCount
                 }
             }
         }

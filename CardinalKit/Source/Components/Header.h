@@ -8,6 +8,6 @@
 #ifndef Header_h
 #define Header_h
 
-#import "Granola/OMHSerializer.h"
+#import "GranolaAlternova/OMHSerializer.h"
 
 #endif /* Header_h */
