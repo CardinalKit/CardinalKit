@@ -217,6 +217,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B4BD24A28CA70D800DF1A48 /* DataTransformation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DataTransformation;
+			sourceTree = "<group>";
+		};
 		2C45A885E8BD0CAC5349997A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -546,6 +553,7 @@
 		8E0A43C5244A4A5700656518 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				2B4BD24A28CA70D800DF1A48 /* DataTransformation */,
 				637BDBAB2874F46000DF9A5A /* Survey */,
 				8E9CDF802591E6B800C8A228 /* Configuration */,
 				8E40DC022471E5590027536B /* Networking */,
@@ -754,7 +762,7 @@
 				"${BUILT_PRODUCTS_DIR}/GoogleDataTransport/GoogleDataTransport.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleSignIn/GoogleSignIn.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/Granola/Granola.framework",
+				"${BUILT_PRODUCTS_DIR}/GranolaAlternova/GranolaAlternova.framework",
 				"${BUILT_PRODUCTS_DIR}/Libuv-gRPC/uv.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectiveSugar/ObjectiveSugar.framework",
@@ -793,7 +801,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleDataTransport.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleSignIn.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Granola.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GranolaAlternova.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/uv.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectiveSugar.framework",

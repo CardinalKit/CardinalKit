@@ -615,7 +615,7 @@ PODS:
     - Firebase/DynamicLinks
     - Firebase/Firestore
     - Firebase/Storage
-    - Granola
+    - GranolaAlternova
     - ObjectMapper (~> 3.3.0)
     - ReachabilitySwift (~> 3)
     - RealmSwift (~> 10.25.0)
@@ -751,7 +751,7 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (7.7.0):
     - GoogleUtilities/Logger
-  - Granola (0.4.1):
+  - GranolaAlternova (1.1):
     - ObjectiveSugar (~> 1.1)
   - "gRPC-C++ (1.44.0)":
     - "gRPC-C++/Implementation (= 1.44.0)"
@@ -844,7 +844,7 @@ DEPENDENCIES:
   - Firebase/Firestore
   - Firebase/Storage
   - GoogleSignIn
-  - Granola (from `https://github.com/CardinalKit/Granola.git`, branch `main`)
+  - GranolaAlternova
   - ResearchKit (from `https://github.com/ResearchKit/ResearchKit.git`, branch `master`)
   - Swinject
 
@@ -870,6 +870,7 @@ SPEC REPOS:
     - GoogleDataTransport
     - GoogleSignIn
     - GoogleUtilities
+    - GranolaAlternova
     - "gRPC-C++"
     - gRPC-Core
     - GTMAppAuth
@@ -891,17 +892,11 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   CardinalKit:
     :path: "../"
-  Granola:
-    :branch: main
-    :git: https://github.com/CardinalKit/Granola.git
   ResearchKit:
     :branch: master
     :git: https://github.com/ResearchKit/ResearchKit.git
 
 CHECKOUT OPTIONS:
-  Granola:
-    :commit: 4b6a421bab81bea5fad4b124b0441b3dd2d82c6b
-    :git: https://github.com/CardinalKit/Granola.git
   ResearchKit:
     :commit: 68f9d29b669dd3ac27b548f7c9c28342218cf72e
     :git: https://github.com/ResearchKit/ResearchKit.git
@@ -910,7 +905,7 @@ SPEC CHECKSUMS:
   abseil: ebe5b5529fb05d93a8bdb7951607be08b7fa71bc
   AppAuth: 80317d99ac7ff2801a2f18ff86b48cd315ed465d
   BoringSSL-GRPC: 3175b25143e648463a56daeaaa499c6cb86dad33
-  CardinalKit: 6e2369244a1bed8421cd6b7d8d0893232d2077ed
+  CardinalKit: 32ed819b7fb9643ba72bf4145e761c02196b221c
   FBAEMKit: c2b2895363b7e57192013d1dc49fdf498b28624c
   FBSDKCoreKit: 58139803d861e72c7661dc875611a759352a55ac
   FBSDKCoreKit_Basics: 1ffc68326a5ece051d85574f02a0adcf27c2a5f2
@@ -928,7 +923,7 @@ SPEC CHECKSUMS:
   GoogleDataTransport: 629c20a4d363167143f30ea78320d5a7eb8bd940
   GoogleSignIn: c90b5bec45e780f54c6a8e1e3c182a86e3dda69d
   GoogleUtilities: e0913149f6b0625b553d70dae12b49fc62914fd1
-  Granola: 07d8cc4bdf005228118161eb182cd34eaf169a03
+  GranolaAlternova: 85dcdb1a9a044438b906e41a6fffdf0c38eccb80
   "gRPC-C++": 9675f953ace2b3de7c506039d77be1f2e77a8db2
   gRPC-Core: 943e491cb0d45598b0b0eb9e910c88080369290b
   GTMAppAuth: 987526d41b07efb1bedda5e936fe0cb718a03113
@@ -948,6 +943,6 @@ SPEC CHECKSUMS:
   Swinject: 97112918bd7e0785dc2df7036213f3c8cbba6586
   Zip: 8877eede3dda76bcac281225c20e71c25270774c
 
-PODFILE CHECKSUM: 104f0c1f0c81a526d167ef2beca9ba74d4124bf3
+PODFILE CHECKSUM: a6cc18a0e8431607052960d18935765ee86ca15e
 
 COCOAPODS: 1.11.3
