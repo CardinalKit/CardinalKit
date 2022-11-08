@@ -126,7 +126,12 @@ extension HealthKitManager{
     
     
     private func collectData(forType type:HKSampleType, fromDate startDate: Date? = nil, toDate endDate:Date, onCompletion:@escaping (([HKSample])->Void?)){
-        getSources(forType: type){ [weak self] (sources) in
+        var _startDate = Date().addingTimeInterval(-10)
+        if let startDate = startDate {
+            _startDate = startDate
+        }
+        
+        getSources(forType: type, startDate: _startDate){ [weak self] (sources) in
             let dispatchGroup = DispatchGroup()
             dispatchGroup.enter()
             
@@ -142,7 +147,7 @@ extension HealthKitManager{
             for source in sources {
                 dispatchGroup.enter()
                 let sourceRevision = HKSourceRevision(source: source, version: HKSourceRevisionAnyVersion)
-                var _startDate = Date().addingTimeInterval(-1)
+                
                 if let startDate = startDate {
                     _startDate = startDate
                 }
@@ -177,8 +182,8 @@ extension HealthKitManager{
         }
     }
     
-    fileprivate func getSources(forType type: HKSampleType, onCompletion: @escaping ((Set<HKSource>)->Void)) {
-        let datePredicate = HKQuery.predicateForSamples(withStart: Date().dayByAdding(-10)! , end: Date(), options: .strictStartDate)
+    fileprivate func getSources(forType type: HKSampleType, startDate: Date , onCompletion: @escaping ((Set<HKSource>)->Void)) {
+        let datePredicate = HKQuery.predicateForSamples(withStart: startDate , end: Date(), options: .strictStartDate)
         let query = HKSourceQuery(sampleType: type, samplePredicate: datePredicate) {
             query, sources, error in
             if let error = error {
