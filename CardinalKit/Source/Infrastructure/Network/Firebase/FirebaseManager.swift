@@ -73,17 +73,19 @@ class FirebaseManager{
         }
     }
     
-    func sendToCloudStorage (file:URL,route:String){
+    func sendToCloudStorage (file:URL,route:String, onCompletion: @escaping (Bool) -> Void){
         let storageRef = Storage.storage().reference()
         let ref = storageRef.child("\(route)/\(file.lastPathComponent)")
         let uploadTask = ref.putFile(from: file, metadata: nil)
         
         uploadTask.observe(.success) { snapshot in
             print("[FirebaseManager] sendToCloudStorage() - file uploaded successfully!")
+            onCompletion(true)
         }
         
         uploadTask.observe(.failure) { snapshot in
             print("[FirebaseManager] sendToCloudStorage() - error uploading file!")
+            onCompletion(false)
         }
     }
     
