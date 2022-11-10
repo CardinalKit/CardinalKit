@@ -43,7 +43,7 @@ extension CKDelivery: CKDeliveryDelegate{
                     //cannot send a directory, recursively iterate into it
                     continue
                 }
-                firebaseManager.sendToCloudStorage(file: file, route: route)
+                firebaseManager.sendToCloudStorage(file: file, route: route, onCompletion: onCompletion)
                 
                 if alsoSendToFirestore{
                     let contents = try String(contentsOf: file)
