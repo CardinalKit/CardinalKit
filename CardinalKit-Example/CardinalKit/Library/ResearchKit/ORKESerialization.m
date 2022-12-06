@@ -917,14 +917,6 @@ static NSMutableDictionary<NSString *, ORKESerializableTableEntry *> *ORKESerial
                     PROPERTY(resultSource, ORKTaskResult, NSObject, NO, nil, nil),
                     PROPERTY(excludeInstructionSteps, NSNumber, NSObject, YES, nil, nil),
                     })),
-           ENTRY(ORKVisualConsentStep,
-                 ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-                     return [[ORKVisualConsentStep alloc] initWithIdentifier:GETPROP(dict, identifier)
-                                                                    document:GETPROP(dict, consentDocument)];
-                 },
-                 (@{
-                   PROPERTY(consentDocument, ORKConsentDocument, NSObject, NO, nil, nil),
-                   })),
            ENTRY(ORKPDFViewerStep,
                  ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
                      return [[ORKPDFViewerStep alloc] initWithIdentifier:GETPROP(dict, identifier)
