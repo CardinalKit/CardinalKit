@@ -23,22 +23,6 @@ struct OnboardingViewController: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> ORKTaskViewController {
 
         let config = CKPropertyReader(file: "CKConfiguration")
-            
-        /* **************************************************************
-        *  STEP (1): get user consent
-        **************************************************************/
-        // use the `ORKVisualConsentStep` from ResearchKit
-        let consentDocument = ConsentDocument()
-        let consentStep = ORKVisualConsentStep(identifier: "VisualConsentStep", document: consentDocument)
-        
-        /* **************************************************************
-        *  STEP (2): ask user to review and sign consent document
-        **************************************************************/
-        // use the `ORKConsentReviewStep` from ResearchKit
-        let signature = consentDocument.signatures?.first
-        let reviewConsentStep = ORKConsentReviewStep(identifier: "ConsentReviewStep", signature: signature, in: consentDocument)
-        reviewConsentStep.text = config.read(query: "Review Consent Step Text")
-        reviewConsentStep.reasonForConsent = config.read(query: "Reason for Consent Text")
         
         /* **************************************************************
         *  STEP (3): get permission to collect HealthKit data
@@ -96,7 +80,6 @@ struct OnboardingViewController: UIViewControllerRepresentable {
         **************************************************************/
         
         // given intro steps that the user should review and consent to
-        let introSteps: [ORKStep] = [consentStep, reviewConsentStep]
         
         // and steps regarding login / security
         var securitySteps = loginSteps + [passcodeStep, healthDataStep]
@@ -108,7 +91,7 @@ struct OnboardingViewController: UIViewControllerRepresentable {
         securitySteps += [completionStep]
         
         // guide the user through ALL steps
-        let fullSteps = introSteps + securitySteps
+        let fullSteps = securitySteps
         
         // unless they have already gotten as far as to enter an email address
         var stepsToUse = fullSteps
