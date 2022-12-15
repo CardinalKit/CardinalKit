@@ -23,7 +23,16 @@ struct OnboardingViewController: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> ORKTaskViewController {
 
         let config = CKPropertyReader(file: "CKConfiguration")
-        
+
+        /* **************************************************************
+        *  STEP (1+2): Ask user to review, then sign consent form
+        **************************************************************/
+        let consentDocument = ConsentDocument()
+        let signature = consentDocument.signatures?.first
+        let reviewConsentStep = ORKConsentReviewStep(identifier: "ConsentReviewStep", signature: signature, in: consentDocument)
+        reviewConsentStep.text = config.read(query: "Review Consent Step Text")
+        reviewConsentStep.reasonForConsent = config.read(query: "Reason for Consent Text")
+
         /* **************************************************************
         *  STEP (3): get permission to collect HealthKit data
         **************************************************************/
@@ -91,7 +100,7 @@ struct OnboardingViewController: UIViewControllerRepresentable {
         securitySteps += [completionStep]
         
         // guide the user through ALL steps
-        let fullSteps = securitySteps
+        let fullSteps = [reviewConsentStep] + securitySteps
         
         // unless they have already gotten as far as to enter an email address
         var stepsToUse = fullSteps
