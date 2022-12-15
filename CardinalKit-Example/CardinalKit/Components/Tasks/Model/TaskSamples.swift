@@ -73,9 +73,9 @@ struct TaskSamples {
         steps += [healthScaleQuestionStep]
         
         let textChoices = [
-            ORKTextChoice(text: "Yes, Limited A lot", value: 0 as NSCoding & NSCopying & NSObjectProtocol),
-            ORKTextChoice(text: "Yes, Limited A Little", value: 1 as NSCoding & NSCopying & NSObjectProtocol),
-            ORKTextChoice(text: "No, Not Limited At All", value: 2 as NSCoding & NSCopying & NSObjectProtocol)
+            ORKTextChoice(text: "Yes, Limited A lot", value: 0 as NSSecureCoding & NSCopying & NSObjectProtocol),
+            ORKTextChoice(text: "Yes, Limited A Little", value: 1 as NSSecureCoding & NSCopying & NSObjectProtocol),
+            ORKTextChoice(text: "No, Not Limited At All", value: 2 as NSSecureCoding & NSCopying & NSObjectProtocol)
         ]
         let textChoiceAnswerFormat = ORKAnswerFormat.choiceAnswerFormat(with: .singleChoice, textChoices: textChoices)
         let textStep = ORKQuestionStep(identifier: "TextStep", title: "Daily Activities", question: "MODERATE ACTIVITIES, such as moving a table, pushing a vacuum cleaner, bowling, or playing golf:", answer: textChoiceAnswerFormat)

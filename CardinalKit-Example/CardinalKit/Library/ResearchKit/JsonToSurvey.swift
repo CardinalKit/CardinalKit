@@ -242,7 +242,7 @@ class JsonToSurvey {
             if let text = option["text"],
                let value = option["value"]{
                 textChoices+=[
-                    ORKTextChoice(text: text, value: value as NSCoding & NSCopying & NSObjectProtocol)
+                    ORKTextChoice(text: text, value: value as NSSecureCoding & NSCopying & NSObjectProtocol)
                 ]
             }
         }
@@ -255,7 +255,7 @@ class JsonToSurvey {
             if let text = option["text"],
                let value = option["value"]{
                 imageChoicer+=[
-                    ORKImageChoice(normalImage: nil, selectedImage: nil, text: text, value: value as NSCoding & NSCopying & NSObjectProtocol)
+                    ORKImageChoice(normalImage: nil, selectedImage: nil, text: text, value: value as NSSecureCoding & NSCopying & NSObjectProtocol)
                 ]
             }
         }

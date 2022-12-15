@@ -279,15 +279,15 @@ class CK_ORKSerialization{
      - Returns: ORKTaskResult  Research kit object ORKTaskResultt
     */
     
-    static func TaskResult(fromJSONObject object: [AnyHashable : Any])-> ORKTaskResult {
+    static func TaskResult(fromJSONObject object: [AnyHashable : Any]) -> ORKTaskResult {
         
         if let identifier = object["identifier"] as? String{
-            let result = ORKTaskResult(identifier: identifier)
+            let result = ORKTaskResult(taskIdentifier: identifier, taskRun: UUID(), outputDirectory: nil)
             let results = TransformResults(fromJSONObject: object)
             result.results=results
             return result
         }
-        return ORKTaskResult()
+        return ORKTaskResult(taskIdentifier: "empty", taskRun: UUID(), outputDirectory: nil)
     }
     private static func GetResult(fromJsonObject object: [AnyHashable : Any])-> ORKResult {
         if let identifier = object["identifier"] as? String{
@@ -300,57 +300,57 @@ class CK_ORKSerialization{
                         return result
                     case "ORKChoiceQuestionResult":
                         let result = ORKChoiceQuestionResult(identifier: identifier)
-                        var answers = [NSCoding&NSCopying&NSObject]()
-                        if let nAnswer = answer as? NSCoding&NSCopying&NSObject{
+                        var answers = [NSSecureCoding & NSCopying & NSObject]()
+                        if let nAnswer = answer as? NSSecureCoding & NSCopying & NSObject{
                             answers.append(nAnswer)
                             result.choiceAnswers = answers
                             return result
                         }
                     case  "ORKDateQuestionResult":
                         let result = ORKDateQuestionResult(identifier: identifier)
-                        result.answer=answer
+                        result.answer=answer as? any NSCopying & NSSecureCoding & NSObjectProtocol
                         return result
                     case "ORKLocationQuestionResult":
                         let result = ORKLocationQuestionResult(identifier: identifier)
-                        result.answer=answer
+                        result.answer=answer as? any NSCopying & NSSecureCoding & NSObjectProtocol
                         return result
                     case "ORKScaleQuestionResult":
                         let result = ORKScaleQuestionResult(identifier: identifier)
                         if let answer = answer as? Int{
-                            result.answer = answer
+                            result.answer = answer as any NSCopying & NSSecureCoding & NSObjectProtocol
                         }
                         if let answer = answer as? String{
-                            result.answer = Int(answer)
+                            result.answer = Int(answer) as? any NSCopying & NSSecureCoding & NSObjectProtocol
                         }
 
                         
                         return result
                     case "ORKMultipleComponentQuestionResult":
                         let result = ORKMultipleComponentQuestionResult(identifier: identifier)
-                        result.answer=answer
+                        result.answer=answer as? any NSCopying & NSSecureCoding & NSObjectProtocol
                         return result
                     case "ORKNumericQuestionResult":
                         let result = ORKNumericQuestionResult(identifier: identifier)
-                        result.answer=answer
+                        result.answer=answer as? any NSCopying & NSSecureCoding & NSObjectProtocol
                         return result
                     case "ORKTextQuestionResult":
                         let result = ORKTextQuestionResult(identifier: identifier)
-                        result.answer=answer
+                        result.answer=answer as? any NSCopying & NSSecureCoding & NSObjectProtocol
                         return result
                     case "ORKTimeIntervalQuestionResult":
                         let result = ORKTimeIntervalQuestionResult(identifier: identifier)
-                        result.answer=answer
+                        result.answer=answer as? any NSCopying & NSSecureCoding & NSObjectProtocol
                         return result
                     case "ORKTimeOfDayQuestionResult":
                         let result = ORKTimeOfDayQuestionResult(identifier: identifier)
-                        result.answer=answer
+                        result.answer=answer as? any NSCopying & NSSecureCoding & NSObjectProtocol
                         return result
                     case "ORKSESQuestionResult":
                         let result = ORKSESQuestionResult(identifier: identifier)
-                        result.answer=answer
+                        result.answer=answer as? any NSCopying & NSSecureCoding & NSObjectProtocol
                         return result
                     case "ORKTaskResult":
-                        let result = ORKTaskResult(identifier: identifier)
+                        let result = ORKTaskResult(taskIdentifier: identifier, taskRun: UUID(), outputDirectory: nil)
                         result.results=TransformResults(fromJSONObject: object)
                         return result
                     case "ORKStepResult":
@@ -363,13 +363,13 @@ class CK_ORKSerialization{
                         result.fileURL = URL(string: ( (fileURL as? String) ?? "NoUrl"))
                         return result
                     default:
-                        let result = ORKTaskResult(identifier: identifier)
+                        let result = ORKTaskResult(taskIdentifier: identifier, taskRun: UUID(), outputDirectory: nil)
                         result.results=TransformResults(fromJSONObject: object)
                         return result
                 }
             }
             }
-        return ORKResult()
+        return ORKTaskResult(taskIdentifier: "empty", taskRun: UUID(), outputDirectory: nil)
     }
     
     private static func TransformResults(fromJSONObject object: [AnyHashable : Any])-> [ORKResult] {

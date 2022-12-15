@@ -85,7 +85,7 @@ extension Coding {
 
         let predicate = ORKResultPredicate.predicateForChoiceQuestionResult(
             with: resultSelector,
-            expectedAnswerValue: expectedAnswer as NSCoding & NSCopying & NSObjectProtocol
+            expectedAnswerValue: expectedAnswer as NSSecureCoding & NSCopying & NSObjectProtocol
         )
 
         switch fhirOperator {
