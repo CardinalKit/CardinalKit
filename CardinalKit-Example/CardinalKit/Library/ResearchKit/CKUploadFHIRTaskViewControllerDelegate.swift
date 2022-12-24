@@ -10,6 +10,7 @@ import Foundation
 import ResearchKit
 import Firebase
 import ModelsR4
+import CardinalKit
 
 
 class CKUploadFHIRTaskViewControllerDelegate: NSObject, ORKTaskViewControllerDelegate {
@@ -23,19 +24,36 @@ class CKUploadFHIRTaskViewControllerDelegate: NSObject, ORKTaskViewControllerDel
                 fhirResponses.subject = Reference(reference: FHIRPrimitive(FHIRString("Patient/\(uid)")))
             }
 
-            let encoder = JSONEncoder()
-            encoder.outputFormatting = .prettyPrinted
+            do {
+                // Parse FHIR QuestionnaireResponse and convert it to a JSON-friendly dictionary.
+                let encoder = JSONEncoder()
+                let data = try encoder.encode(fhirResponses)
+                let jsonDict = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
 
-            let data = try! encoder.encode(fhirResponses)
-            let json = String(decoding: data, as: UTF8.self)
+                // Upload the FHIR QuestionnaireResponse to Firebase
+                let identifier = fhirResponses.id?.value?.string ?? UUID().uuidString
 
-            print(json)
+                guard let authCollection = CKStudyUser.shared.authCollection,
+                      let userId = CKStudyUser.shared.currentUser?.uid else {
+                    return
+                }
 
-            // TODO: Upload to Firestore
+                let route = "\(authCollection)\(Constants.dataBucketFHIRQuestionnaireResponse)/\(identifier)"
+
+                CKApp.sendData(
+                    route: route,
+                    data: jsonDict,
+                    params: [
+                        "userId": userId,
+                        "merge": true
+                    ]
+                )
+            } catch {
+                print(error.localizedDescription)
+            }
+            fallthrough
         default:
-            break
+            taskViewController.dismiss(animated: false, completion: nil)
         }
-
-        taskViewController.dismiss(animated: false, completion: nil)
     }
 }
