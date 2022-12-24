@@ -25,14 +25,13 @@ class CKUploadFHIRTaskViewControllerDelegate: NSObject, ORKTaskViewControllerDel
             }
 
             let encoder = JSONEncoder()
-            encoder.outputFormatting = .prettyPrinted
 
             do {
-                // Parse result and encode it into a JSON-friendly dictionary
+                // Parse FHIR QuestionnaireResponse and convert it to a JSON-friendly dictionary.
                 let data = try encoder.encode(fhirResponses)
                 let jsonDict = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
 
-                // Store the dictionary in Firebase
+                // Upload the FHIR QuestionnaireResponse to Cloud Firestore
                 let identifier = fhirResponses.id?.value?.string ?? UUID().uuidString
 
                 guard let authCollection = CKStudyUser.shared.authCollection,
@@ -45,14 +44,14 @@ class CKUploadFHIRTaskViewControllerDelegate: NSObject, ORKTaskViewControllerDel
                 CKApp.sendData(
                     route: route,
                     data: jsonDict,
-                    params: ["userId": "\(userId)", "merge": true]
+                    params: [
+                        "userId": userId,
+                        "merge": true
+                    ]
                 )
-
             } catch {
                 print("Unable to upload FHIR survey")
             }
-
-            // TODO: Upload to Firestore
         default:
             break
         }
