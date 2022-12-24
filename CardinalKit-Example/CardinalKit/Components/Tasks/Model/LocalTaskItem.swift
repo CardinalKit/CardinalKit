@@ -55,7 +55,7 @@ enum LocalTaskItem: Int {
         case .sampleResearchKitSurvey:
             return "Sample questions and forms."
         case .sampleFHIRSurvey:
-            return "Sample FHIR survey"
+            return "Sample questions and forms."
         case .sampleResearchKitActiveTask:
             return "Sample sensor/data collection activities."
         case .sampleCoreMotionAppleWatch:
@@ -98,7 +98,7 @@ enum LocalTaskItem: Int {
      */
     var section: String {
         switch self {
-        case .sampleResearchKitSurvey, .sampleResearchKitActiveTask, .sampleFHIRSurvey:
+        case .sampleResearchKitSurvey, .sampleFHIRSurvey, .sampleResearchKitActiveTask:
             return "Current Tasks"
         case .sampleFunCoffeeSurvey, .sampleFunCoffeeResult:
             return "Your Interests"

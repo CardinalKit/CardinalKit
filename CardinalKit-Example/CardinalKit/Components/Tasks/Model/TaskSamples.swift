@@ -111,13 +111,13 @@ struct TaskSamples {
             {
               "resourceType": "Questionnaire",
               "language": "en-US",
-              "id": "Stanford Biodesign for Digital Health-skip-logic-example",
-              "title": "Skip Logic Example",
+              "id": "ckicecreamexample",
+              "title": "Ice Cream Example",
               "status": "draft",
               "publisher": "Stanford Biodesign for Digital Health",
               "meta": {
                 "profile": [
-                  "http://biodesign.stanford.edu/fhir/StructureDefinition/sdf-Questionnaire"
+                  "http://cardinalkit.org/fhir/StructureDefinition/sdf-Questionnaire"
                 ],
                 "tag": [
                   {
@@ -145,13 +145,13 @@ struct TaskSamples {
               ],
               "contact": [
                 {
-                  "name": "http://biodesign.stanford.edu"
+                  "name": "http://cardinalkit.org"
                 }
               ],
               "subjectType": [
                 "Patient"
               ],
-              "url": "http://biodesign.stanford.edu/questionnaires/skiplogicexample",
+              "url": "http://cardinalkit.org/questionnaires/ckicecreamexample",
               "item": [
                 {
                   "linkId": "f0f95365-96d2-4892-9ccf-2e2c0c74a87c",

@@ -24,14 +24,13 @@ class CKUploadFHIRTaskViewControllerDelegate: NSObject, ORKTaskViewControllerDel
                 fhirResponses.subject = Reference(reference: FHIRPrimitive(FHIRString("Patient/\(uid)")))
             }
 
-            let encoder = JSONEncoder()
-
             do {
                 // Parse FHIR QuestionnaireResponse and convert it to a JSON-friendly dictionary.
+                let encoder = JSONEncoder()
                 let data = try encoder.encode(fhirResponses)
                 let jsonDict = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
 
-                // Upload the FHIR QuestionnaireResponse to Cloud Firestore
+                // Upload the FHIR QuestionnaireResponse to Firebase
                 let identifier = fhirResponses.id?.value?.string ?? UUID().uuidString
 
                 guard let authCollection = CKStudyUser.shared.authCollection,
@@ -50,12 +49,11 @@ class CKUploadFHIRTaskViewControllerDelegate: NSObject, ORKTaskViewControllerDel
                     ]
                 )
             } catch {
-                print("Unable to upload FHIR survey")
+                print(error.localizedDescription)
             }
+            fallthrough
         default:
-            break
+            taskViewController.dismiss(animated: false, completion: nil)
         }
-
-        taskViewController.dismiss(animated: false, completion: nil)
     }
 }
