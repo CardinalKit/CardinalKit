@@ -110,14 +110,14 @@ struct TaskSamples {
         let fhirJSON = """
             {
               "resourceType": "Questionnaire",
-              "id": "sample-fhir-questionnaire-cardinalkit",
-              "url": "http://cardinalkit.org/fhir/sample-fhir-questionnaire-cardinalkit",
               "language": "en-US",
+              "id": "Stanford Biodesign for Digital Health-skip-logic-example",
+              "title": "Skip Logic Example",
               "status": "draft",
-              "publisher": "CardinalKit",
+              "publisher": "Stanford Biodesign for Digital Health",
               "meta": {
                 "profile": [
-                  "http://cardinalkit.org/fhir/StructureDefinition/sdf-Questionnaire"
+                  "http://biodesign.stanford.edu/fhir/StructureDefinition/sdf-Questionnaire"
                 ],
                 "tag": [
                   {
@@ -145,12 +145,13 @@ struct TaskSamples {
               ],
               "contact": [
                 {
-                  "name": "http://cardinalkit.org"
+                  "name": "http://biodesign.stanford.edu"
                 }
               ],
               "subjectType": [
                 "Patient"
               ],
+              "url": "http://biodesign.stanford.edu/questionnaires/skiplogicexample",
               "item": [
                 {
                   "linkId": "f0f95365-96d2-4892-9ccf-2e2c0c74a87c",
@@ -159,52 +160,36 @@ struct TaskSamples {
                   "required": true
                 },
                 {
-                  "linkId": "169e7113-1e8f-4858-fc97-5703ba865703",
-                  "type": "group",
-                  "text": "What is your favorite type?",
-                  "item": [
-                    {
-                      "linkId": "59e7a3f7-4108-47a7-8fae-0fb892574a63",
-                      "type": "choice",
-                      "text": "What is your favorite flavor?",
-                      "required": false,
-                      "answerOption": [
-                        {
-                          "valueCoding": {
-                            "id": "460afea8-2634-4bb4-89d2-001d92624d6c",
-                            "code": "chocolate",
-                            "system": "urn:uuid:ea53f9f1-4c06-4953-83b6-c944bccdeae3",
-                            "display": "Chocolate"
-                          }
-                        },
-                        {
-                          "valueCoding": {
-                            "id": "6fef1216-0b74-40bd-e773-2bd4a7f66e45",
-                            "code": "vanilla",
-                            "system": "urn:uuid:ea53f9f1-4c06-4953-83b6-c944bccdeae3",
-                            "display": "Vanilla"
-                          }
-                        },
-                        {
-                          "valueCoding": {
-                            "id": "abc0a0bf-0e35-48db-8f0f-b2d30038816b",
-                            "code": "strawberry",
-                            "system": "urn:uuid:ea53f9f1-4c06-4953-83b6-c944bccdeae3",
-                            "display": "Strawberry"
-                          }
-                        },
-                        {
-                          "valueCoding": {
-                            "id": "d1c27eeb-022a-4ef9-8f70-068d96a26154",
-                            "code": "other",
-                            "system": "urn:uuid:ea53f9f1-4c06-4953-83b6-c944bccdeae3",
-                            "display": "Other"
-                          }
-                        }
-                      ]
-                    }
-                  ],
+                  "linkId": "59e7a3f7-4108-47a7-8fae-0fb892574a63",
+                  "type": "open-choice",
+                  "text": "What is your favorite flavor?",
                   "required": false,
+                  "answerOption": [
+                    {
+                      "valueCoding": {
+                        "id": "460afea8-2634-4bb4-89d2-001d92624d6c",
+                        "code": "chocolate",
+                        "system": "urn:uuid:ea53f9f1-4c06-4953-83b6-c944bccdeae3",
+                        "display": "Chocolate"
+                      }
+                    },
+                    {
+                      "valueCoding": {
+                        "id": "6fef1216-0b74-40bd-e773-2bd4a7f66e45",
+                        "code": "vanilla",
+                        "system": "urn:uuid:ea53f9f1-4c06-4953-83b6-c944bccdeae3",
+                        "display": "Vanilla"
+                      }
+                    },
+                    {
+                      "valueCoding": {
+                        "id": "abc0a0bf-0e35-48db-8f0f-b2d30038816b",
+                        "code": "strawberry",
+                        "system": "urn:uuid:ea53f9f1-4c06-4953-83b6-c944bccdeae3",
+                        "display": "Strawberry"
+                      }
+                    },
+                  ],
                   "enableWhen": [
                     {
                       "question": "f0f95365-96d2-4892-9ccf-2e2c0c74a87c",
@@ -213,6 +198,19 @@ struct TaskSamples {
                     }
                   ]
                 },
+                {
+                  "linkId": "5699c117-70e4-4849-f89f-c3591c090381",
+                  "type": "date",
+                  "text": "When was the last time you had ice cream?",
+                  "required": false,
+                  "enableWhen": [
+                    {
+                      "question": "f0f95365-96d2-4892-9ccf-2e2c0c74a87c",
+                      "operator": "=",
+                      "answerBoolean": true
+                    }
+                  ]
+                }
               ]
             }
             """

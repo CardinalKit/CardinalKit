@@ -10,6 +10,7 @@ import Foundation
 import ResearchKit
 import Firebase
 import ModelsR4
+import CardinalKit
 
 
 class CKUploadFHIRTaskViewControllerDelegate: NSObject, ORKTaskViewControllerDelegate {
@@ -26,10 +27,30 @@ class CKUploadFHIRTaskViewControllerDelegate: NSObject, ORKTaskViewControllerDel
             let encoder = JSONEncoder()
             encoder.outputFormatting = .prettyPrinted
 
-            let data = try! encoder.encode(fhirResponses)
-            let json = String(decoding: data, as: UTF8.self)
+            do {
+                // Parse result and encode it into a JSON-friendly dictionary
+                let data = try encoder.encode(fhirResponses)
+                let jsonDict = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
 
-            print(json)
+                // Store the dictionary in Firebase
+                let identifier = fhirResponses.id?.value?.string ?? UUID().uuidString
+
+                guard let authCollection = CKStudyUser.shared.authCollection,
+                      let userId = CKStudyUser.shared.currentUser?.uid else {
+                    return
+                }
+
+                let route = "\(authCollection)\(Constants.dataBucketFHIRQuestionnaireResponse)/\(identifier)"
+
+                CKApp.sendData(
+                    route: route,
+                    data: jsonDict,
+                    params: ["userId": "\(userId)", "merge": true]
+                )
+
+            } catch {
+                print("Unable to upload FHIR survey")
+            }
 
             // TODO: Upload to Firestore
         default:
