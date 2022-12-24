@@ -6,8 +6,8 @@
 //  Copyright © 2021 CocoaPods. All rights reserved.
 //
 
-import Foundation
 import Firebase
+import Foundation
 import ResearchKit
 
 
@@ -25,26 +25,26 @@ public class CKReviewConsentDocument: ORKQuestionStep {
     }
 }
 
-public class CKReviewConsentDocumentViewController:ORKQuestionStepViewController{
-    public var CKReviewConsentDocument: CKReviewConsentDocument!{
-        return step as? CKReviewConsentDocument
+public class CKReviewConsentDocumentViewController: ORKQuestionStepViewController {
+    public var CKReviewConsentDocument: CKReviewConsentDocument! {
+        step as? CKReviewConsentDocument
     }
     
-    public override func viewDidLoad() {
+    override public func viewDidLoad() {
         let storage = Storage.storage()
         let storageRef = storage.reference()
         
         // Check if a consent document exists on the cloud, otherwise user will need to re-consent
-        if let DocumentCollection = CKStudyUser.shared.authCollection {
+        if let documentCollection = CKStudyUser.shared.authCollection {
             let config = CKPropertyReader(file: "CKConfiguration")
             let consentFileName = config.read(query: "Consent File Name")
-            let DocumentRef = storageRef.child("\(DocumentCollection)/\(consentFileName).pdf")
+            let documentRef = storageRef.child("\(documentCollection)/\(consentFileName).pdf")
             
             var docURL = (FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)).last as NSURL?
             docURL = docURL?.appendingPathComponent("\(consentFileName).pdf") as NSURL?
             let url = docURL! as URL
             
-            DocumentRef.write(toFile: url) { url, error in
+            documentRef.write(toFile: url) { url, error in
                 if let error = error {
                     print(error.localizedDescription)
                     self.setAnswer(false)

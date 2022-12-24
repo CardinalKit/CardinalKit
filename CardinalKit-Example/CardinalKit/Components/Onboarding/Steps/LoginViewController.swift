@@ -5,8 +5,8 @@
 //  Copyright © 2019 Stanford University. All rights reserved.
 //
 
-import ResearchKit
 import Firebase
+import ResearchKit
 
 class LoginViewController: ORKLoginStepViewController {
     override func goForward() {
@@ -22,7 +22,7 @@ class LoginViewController: ORKLoginStepViewController {
 
             taskViewController?.present(alert, animated: false, completion: nil)
 
-            Auth.auth().signIn(withEmail: email, password: pass) { (res, error) in
+            Auth.auth().signIn(withEmail: email, password: pass) { res, error in
                 if let error = error {
                     alert.dismiss(animated: false) {
                         let alert = UIAlertController(title: "Login Error!", message: error.localizedDescription, preferredStyle: .alert)
@@ -40,7 +40,7 @@ class LoginViewController: ORKLoginStepViewController {
     override func forgotPasswordButtonTapped() {
         let alert = UIAlertController(title: "Reset Password", message: "Enter your email to get a link for password reset.", preferredStyle: .alert)
         
-        alert.addTextField { (textField) in
+        alert.addTextField { textField in
             textField.placeholder = "Enter your email"
         }
 
@@ -51,21 +51,22 @@ class LoginViewController: ORKLoginStepViewController {
                     if error != nil {
                         alert.dismiss(animated: false, completion: nil)
                         if let errCode = AuthErrorCode.Code(rawValue: error!._code) {
-
                             switch errCode {
                                 default:
-                                    let alert = UIAlertController(title: "Password Reset Error!", message: error?.localizedDescription, preferredStyle: .alert)
+                                    let alert = UIAlertController(
+                                        title: "Password Reset Error!",
+                                        message: error?.localizedDescription,
+                                        preferredStyle: .alert
+                                    )
                                     alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
                                     
                                     alert.dismiss(animated: false, completion: nil)
                                     self.present(alert, animated: false)
                             }
                         }
-
                     } else {
                         print("Email sent!")
                     }
-
                 }
             }
         }))
@@ -87,5 +88,4 @@ class LoginViewController: ORKLoginStepViewController {
 
         self.present(alert, animated: false)
     }
-    
 }

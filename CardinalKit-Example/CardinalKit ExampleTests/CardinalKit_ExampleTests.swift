@@ -6,11 +6,13 @@
 //  Copyright © 2022 CardinalKit. All rights reserved.
 //
 
-import XCTest
 @testable import CardinalKit_Example
+import XCTest
 
+// swiftlint:disable type_name
 final class CardinalKit_ExampleTests: XCTestCase {
-    func testConfiguration() {
+    func testReadConfig() {
         let config = CKPropertyReader(file: "CKConfiguration")
+        XCTAssertNotNil(config.data)
     }
 }

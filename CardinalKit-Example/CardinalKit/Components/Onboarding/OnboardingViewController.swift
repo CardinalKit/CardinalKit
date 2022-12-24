@@ -6,13 +6,12 @@
 //  Copyright © 2020 CocoaPods. All rights reserved.
 //
 
+import Firebase
+import ResearchKit
 import SwiftUI
 import UIKit
-import ResearchKit
-import Firebase
 
 struct OnboardingViewController: UIViewControllerRepresentable {
-    
     func makeCoordinator() -> OnboardingViewCoordinator {
         OnboardingViewCoordinator()
     }
@@ -20,8 +19,9 @@ struct OnboardingViewController: UIViewControllerRepresentable {
     typealias UIViewControllerType = ORKTaskViewController
     
     func updateUIViewController(_ taskViewController: ORKTaskViewController, context: Context) {}
-    func makeUIViewController(context: Context) -> ORKTaskViewController {
 
+    // swiftlint:disable function_body_length
+    func makeUIViewController(context: Context) -> ORKTaskViewController {
         let config = CKPropertyReader(file: "CKConfiguration")
 
         /* **************************************************************
@@ -53,11 +53,37 @@ struct OnboardingViewController: UIViewControllerRepresentable {
         var loginSteps: [ORKStep]
         let signInButtons = CKMultipleSignInStep(identifier: "SignInButtons")
         
-        let regexp = try! NSRegularExpression(pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[d$@$!%*?&#])[A-Za-z\\dd$@$!%*?&#]{8,}")
+        let regexp = try? NSRegularExpression(pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[d$@$!%*?&#])[A-Za-z\\dd$@$!%*?&#]{8,}")
+
+        let registrationText = """
+        Sign up for this study using your email address.
+
+        Your password should contain a minimum of 8 characters \
+        with at least 1 uppercase, 1 lowercase, 1 number, and 1 special character.
+
+        """
+
+        let passcodeInvalidMessage = """
+        Your password does not meet the following criteria: minimum 8 \
+        characters with at least 1 uppercase alphabet, 1 lowercase \
+        alphabet, 1 number and 1 special character.
+        """
         
-        let registerStep = ORKRegistrationStep(identifier: "RegistrationStep", title: "Registration", text: "Sign up for this study using your email address.\n\nYour password should contain a minimum of 8 characters with at least 1 uppercase, 1 lowercase, 1 number, and 1 special character.\n\n", passcodeValidationRegularExpression: regexp, passcodeInvalidMessage: "Your password does not meet the following criteria: minimum 8 characters with at least 1 uppercase alphabet, 1 lowercase alphabet, 1 number and 1 special character", options: [])
+        let registerStep = ORKRegistrationStep(
+            identifier: "RegistrationStep",
+            title: "Registration",
+            text: registrationText,
+            passcodeValidationRegularExpression: regexp,
+            passcodeInvalidMessage: passcodeInvalidMessage,
+            options: []
+        )
         
-        let loginStep = ORKLoginStep(identifier: "LoginStep", title: "Login", text: "Log into this study.", loginViewControllerClass: LoginViewController.self)
+        let loginStep = ORKLoginStep(
+            identifier: "LoginStep",
+            title: "Login",
+            text: "Log into this study.",
+            loginViewControllerClass: LoginViewController.self
+        )
         
         loginSteps = [signInButtons, registerStep, loginStep]
 
@@ -67,7 +93,7 @@ struct OnboardingViewController: UIViewControllerRepresentable {
         *  that will be required to use this app!
         **************************************************************/
         // use the `ORKPasscodeStep` from ResearchKit.
-        let passcodeStep = ORKPasscodeStep(identifier: "Passcode") //NOTE: requires NSFaceIDUsageDescription in info.plist
+        let passcodeStep = ORKPasscodeStep(identifier: "Passcode") // NOTE: requires NSFaceIDUsageDescription in info.plist
         let type = config.read(query: "Passcode Type")
         if type == "6" {
             passcodeStep.passcodeType = .type6Digit
@@ -93,7 +119,7 @@ struct OnboardingViewController: UIViewControllerRepresentable {
         // and steps regarding login / security
         var securitySteps = loginSteps + [passcodeStep, healthDataStep]
         
-        if config["Health Records"]["Enabled"] as? Bool == true {
+        if config["Health Records"]?["Enabled"] as? Bool == true {
             securitySteps += [healthRecordsStep]
         }
         
@@ -117,15 +143,15 @@ struct OnboardingViewController: UIViewControllerRepresentable {
         
         let resultSelector = ORKResultSelector(resultIdentifier: "SignInButtons")
         let booleanAnswerType = ORKResultPredicate.predicateForBooleanQuestionResult(with: resultSelector, expectedAnswer: true)
-        let predicateRule = ORKPredicateStepNavigationRule(resultPredicates: [booleanAnswerType],
-                                                           destinationStepIdentifiers: ["RegistrationStep"],
-                                                           defaultStepIdentifier: "Passcode",
-                                                           validateArrays: true)
+        let predicateRule = ORKPredicateStepNavigationRule(
+            resultPredicates: [booleanAnswerType],
+            destinationStepIdentifiers: ["RegistrationStep"],
+            defaultStepIdentifier: "Passcode",
+            validateArrays: true
+        )
+        
         navigableTask.setNavigationRule(predicateRule, forTriggerStepIdentifier: "SignInButtons")
-        
-        
-        
-        
+
         // wrap that task on a view controller
         let taskViewController = ORKTaskViewController(task: navigableTask, taskRun: nil)
         taskViewController.delegate = context.coordinator // enables `ORKTaskViewControllerDelegate` below
@@ -133,5 +159,4 @@ struct OnboardingViewController: UIViewControllerRepresentable {
         // & present the VC!
         return taskViewController
     }
-    
 }

@@ -1,16 +1,15 @@
 //
 //  SceneDelegate.swift
-//  funwithswiftui
+//  CardinalKit
 //
 //  Created by Varun Shenoy on 8/8/20.
-//  Copyright © 2020 Varun Shenoy. All rights reserved.
+//  Copyright © 2020 CardinalKit. All rights reserved.
 //
 
 import SwiftUI
 import Firebase
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
     var window: UIWindow?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -63,7 +62,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
     }
 
-
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.
@@ -93,7 +91,4 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
         CKLockDidEnterBackground()
     }
-
-
 }
-

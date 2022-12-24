@@ -10,14 +10,12 @@ import SwiftUI
 import UIKit
 
 struct ScheduleViewControllerRepresentable: UIViewControllerRepresentable {
-    
     typealias UIViewControllerType = UIViewController
-    
+
     func updateUIViewController(_ taskViewController: UIViewController, context: Context) {}
     func makeUIViewController(context: Context) -> UIViewController {
         let manager = CKCareKitManager.shared
-        let vc = ScheduleViewController(storeManager: manager.synchronizedStoreManager)
-        return UINavigationController(rootViewController: vc)
+        let viewController = ScheduleViewController(storeManager: manager.synchronizedStoreManager)
+        return UINavigationController(rootViewController: viewController)
     }
-    
 }

@@ -19,7 +19,7 @@
 		2B932F84276BF8D300AB3A02 /* CKReviewConsentDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B932F83276BF8D300AB3A02 /* CKReviewConsentDocument.swift */; };
 		2BD5328326C2CC4E00C4636E /* CKResearchSurveysManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5328226C2CC4E00C4636E /* CKResearchSurveysManager.swift */; };
 		2BD5328526C30F2E00C4636E /* CloudTaskItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5328426C30F2E00C4636E /* CloudTaskItem.swift */; };
-		2BF6452026C1DBE70020C206 /* CK_ORKSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6451F26C1DBE70020C206 /* CK_ORKSerialization.swift */; };
+		2BF6452026C1DBE70020C206 /* CKORKSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6451F26C1DBE70020C206 /* CKORKSerialization.swift */; };
 		2F94C5F22536543600DF8866 /* SceneDelegate+CardinalKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F94C5F12536543600DF8866 /* SceneDelegate+CardinalKit.swift */; };
 		2FFFA2C829024EFD009D289D /* ORKTaskResult+FHIR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFFA2BF29024EFD009D289D /* ORKTaskResult+FHIR.swift */; };
 		2FFFA2C929024EFD009D289D /* FHIRToResearchKitConversionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFFA2C129024EFD009D289D /* FHIRToResearchKitConversionError.swift */; };
@@ -139,7 +139,7 @@
 		2B932F83276BF8D300AB3A02 /* CKReviewConsentDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKReviewConsentDocument.swift; sourceTree = "<group>"; };
 		2BD5328226C2CC4E00C4636E /* CKResearchSurveysManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKResearchSurveysManager.swift; sourceTree = "<group>"; };
 		2BD5328426C30F2E00C4636E /* CloudTaskItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudTaskItem.swift; sourceTree = "<group>"; };
-		2BF6451F26C1DBE70020C206 /* CK_ORKSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CK_ORKSerialization.swift; sourceTree = "<group>"; };
+		2BF6451F26C1DBE70020C206 /* CKORKSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKORKSerialization.swift; sourceTree = "<group>"; };
 		2F94C5F12536543600DF8866 /* SceneDelegate+CardinalKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SceneDelegate+CardinalKit.swift"; sourceTree = "<group>"; };
 		2FFFA2BF29024EFD009D289D /* ORKTaskResult+FHIR.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ORKTaskResult+FHIR.swift"; sourceTree = "<group>"; };
 		2FFFA2C129024EFD009D289D /* FHIRToResearchKitConversionError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FHIRToResearchKitConversionError.swift; sourceTree = "<group>"; };
@@ -571,7 +571,7 @@
 			children = (
 				2B19DD9126FE1BEB00649CE1 /* JsonToSurvey.swift */,
 				2BD5328226C2CC4E00C4636E /* CKResearchSurveysManager.swift */,
-				2BF6451F26C1DBE70020C206 /* CK_ORKSerialization.swift */,
+				2BF6451F26C1DBE70020C206 /* CKORKSerialization.swift */,
 				8E0A4386244A4A0400656518 /* ORKESerialization.m */,
 				8E0A4387244A4A0400656518 /* ORKESerialization.h */,
 				8E0A43A2244A4A0400656518 /* ConsentDocument.swift */,
@@ -624,6 +624,7 @@
 				8E0A43D0244A60D800656518 /* Embed Frameworks */,
 				F29BC1824B2344C27EEDE306 /* [CP] Embed Pods Frameworks */,
 				86B8C488D69656961A788276 /* [CP] Copy Pods Resources */,
+				27663F3129577ECF00A34080 /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -706,6 +707,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		27663F3129577ECF00A34080 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
 		7756C42D26992364A231CF75 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -905,7 +924,7 @@
 				8E0A43AD244A4A0400656518 /* Constants.swift in Sources */,
 				270CDC0A28A65A0100F2F053 /* CKFHIRTaskViewController.swift in Sources */,
 				8E0A43BE244A4A0400656518 /* CKHealthDataStepViewController.swift in Sources */,
-				2BF6452026C1DBE70020C206 /* CK_ORKSerialization.swift in Sources */,
+				2BF6452026C1DBE70020C206 /* CKORKSerialization.swift in Sources */,
 				2FFFA2CD29024EFD009D289D /* Questionnaire+ValueSets.swift in Sources */,
 				8E9CDEB6259181B400C8A228 /* CareTeamViewControllerRepresentable.swift in Sources */,
 				8E9CDEAF259172C200C8A228 /* CKCareKitManager+Sample.swift in Sources */,

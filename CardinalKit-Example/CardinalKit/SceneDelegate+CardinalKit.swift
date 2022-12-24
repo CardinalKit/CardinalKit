@@ -3,7 +3,7 @@
 //  CardinalKit_Example
 //
 //  Created by Santiago Gutierrez on 10/13/20.
-//  Copyright © 2020 CocoaPods. All rights reserved.
+//  Copyright © 2020 CardinalKit. All rights reserved.
 //
 
 import SwiftUI
@@ -28,15 +28,20 @@ extension SceneDelegate: ORKPasscodeDelegate {
      Uses `present()` to trigger an `ORKPasscodeViewController`
     */
     func CKLockApp() {
-        //only lock the app if there is a stored passcode and a passcode controller isn't already being shown.
-        guard ORKPasscodeViewController.isPasscodeStoredInKeychain() && !(window?.rootViewController?.presentedViewController is ORKPasscodeViewController) else { return }
+        // Only lock the app if there is a stored passcode and a passcode controller isn't already being shown.
+        guard ORKPasscodeViewController.isPasscodeStoredInKeychain()
+                && !(window?.rootViewController?.presentedViewController is ORKPasscodeViewController) else {
+            return
+        }
         
         window?.makeKeyAndVisible()
-        
-        //TODO: make text and passcodeType (?) configurable
+
         let config = CKPropertyReader(file: "CKConfiguration")
         
-        let passcodeViewController = ORKPasscodeViewController.passcodeAuthenticationViewController(withText: config.read(query: "Passcode On Return Text"), delegate: self)
+        let passcodeViewController = ORKPasscodeViewController.passcodeAuthenticationViewController(
+            withText: config.read(query: "Passcode On Return Text"),
+            delegate: self
+        )
         passcodeViewController.isModalInPresentation = true
         
         window?.rootViewController?.present(passcodeViewController, animated: false, completion: nil)
@@ -61,5 +66,4 @@ extension SceneDelegate: ORKPasscodeDelegate {
     func passcodeViewControllerDidFailAuthentication(_ viewController: UIViewController) {
         // TODO: handle authentication failure
     }
-    
 }

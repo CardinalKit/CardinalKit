@@ -7,51 +7,57 @@
 //
 
 import Foundation
-import UIKit
 import ResearchKit
 import SwiftUI
+import UIKit
 
 struct CloudTaskItem: Hashable {
+    var order: String
+    var title: String
+    var subtitle: String
+    var imageName: String
+    var section: String
+    var identifier: String
+    
+    var image: UIImage? {
+        UIImage(named: imageName) ?? UIImage(systemName: "questionmark.square")
+    }
+
+    var questions: [String]
+
     static func == (lhs: CloudTaskItem, rhs: CloudTaskItem) -> Bool {
-        return lhs.title == rhs.title && lhs.section == rhs.section
+        lhs.title == rhs.title && lhs.section == rhs.section
     }
-    
-    var order: String;
-    var title:String;
-    var subtitle:String;
-    var imageName: String;
-    var section: String;
-    var identifier: String;
-    
-    var image: UIImage?{
-        return UIImage(named: imageName) ?? UIImage(systemName: "questionmark.square")
-    }
-    
-    var questions:[String];
-    
-    func View()->some View{
-        var questionAsObj:[[String:Any]] = []
-        for question in questions{
-            let data = question.data(using: .utf8)!
-            do{
-                if let jsonArray = try JSONSerialization.jsonObject(with: data, options : .allowFragments) as? [String:Any]
-                {
+
+    func view() -> some View {
+        var questionAsObj: [[String: Any]] = []
+        for question in questions {
+            guard let data = question.data(using: .utf8) else {
+                continue
+            }
+            do {
+                if let jsonArray = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any] {
                     questionAsObj.append(jsonArray)
                 }
-            }
-            catch{
-                print("bad Json")
+            } catch {
+                print("Unable to parse JSON.")
             }
         }
-        questionAsObj = questionAsObj.sorted(by: {a,b in
-            if let order1 = a["order"] as? String,
-               let order2 = b["order"] as? String{
+        questionAsObj = questionAsObj.sorted(by: { first, second in
+            if let order1 = first["order"] as? String,
+               let order2 = second["order"] as? String {
                 return Int(order1) ?? 1 < Int(order2) ?? 1
             }
             return true
         })
-        
-        
-        return AnyView(CKTaskViewController(tasks: JsonToSurvey.shared.GetSurvey(from: questionAsObj,identifier: identifier)))
+
+        return AnyView(
+            CKTaskViewController(
+                tasks: JsonToSurvey.shared.getSurvey(
+                    from: questionAsObj,
+                    identifier: identifier
+                )
+            )
+        )
     }
 }

@@ -12,9 +12,12 @@ import Firebase
 import ModelsR4
 import CardinalKit
 
-
 class CKUploadFHIRTaskViewControllerDelegate: NSObject, ORKTaskViewControllerDelegate {
-    func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
+    func taskViewController(
+        _ taskViewController: ORKTaskViewController,
+        didFinishWith reason: ORKTaskViewControllerFinishReason,
+        error: Error?
+    ) {
         switch reason {
         case .completed:
             let fhirResponses = taskViewController.result.fhirResponse

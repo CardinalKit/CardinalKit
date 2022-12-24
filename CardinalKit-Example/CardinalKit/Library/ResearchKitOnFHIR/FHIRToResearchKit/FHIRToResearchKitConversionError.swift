@@ -18,7 +18,6 @@ public enum FHIRToResearchKitConversionError: Error, CustomStringConvertible, Eq
     case noOptions
     case invalidDate(FHIRPrimitive<FHIRDate>)
 
-
     public var description: String {
         switch self {
         case .noItems:

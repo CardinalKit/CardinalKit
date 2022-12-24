@@ -5,11 +5,11 @@
 //  Copyright © 2020 Stanford University. All rights reserved.
 //
 
-import ResearchKit
+import AuthenticationServices
 import CardinalKit
 import CryptoKit
 import FirebaseAuth
-import AuthenticationServices
+import ResearchKit
 
 /// A step that presents information about and performes
 /// [Sign in with Apple](https://developer.apple.com/sign-in-with-apple/).
@@ -77,15 +77,17 @@ public class CKSignInWithAppleStep: ORKInstructionStep {
     ///   Defaults to the value of "Sign in with Apple Text" entry from `CKConfiguration.plist`.
     ///   - requestedScopes: The contact information to be requested from the user during authentication.
     ///   Defaults to email only.
-    public init(identifier: String,
-         title: String! = nil,
-         text: String! = nil,
-         requestedScopes: [ASAuthorization.Scope] = [.email]) {
+    public init(
+        identifier: String,
+         title: String?,
+         text: String?,
+         requestedScopes: [ASAuthorization.Scope] = [.email]
+    ) {
         let config = CKPropertyReader(file: "CKConfiguration")
         self.requestedScopes = requestedScopes
         super.init(identifier: identifier)
-        self.title = title ?? config["Login-Sign-In-With-Apple"]["Title"] as! String
-        self.text = text ?? config["Login-Sign-In-With-Apple"]["Text"] as! String
+        self.title = title ?? config["Login-Sign-In-With-Apple"]?["Title"] as? String
+        self.text = text ?? config["Login-Sign-In-With-Apple"]?["Text"] as? String
     }
 
     @available(*, unavailable)
@@ -125,8 +127,10 @@ public class CKSignInWithAppleStepViewController: ORKInstructionStepViewControll
         authorizationController.performRequests()
     }
 
-    public func authorizationController(controller: ASAuthorizationController,
-                                        didCompleteWithAuthorization authorization: ASAuthorization) {
+    public func authorizationController(
+        controller: ASAuthorizationController,
+        didCompleteWithAuthorization authorization: ASAuthorization
+    ) {
         guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential else {
             print("Unable to obtain AppleID credentials")
             return
@@ -143,11 +147,14 @@ public class CKSignInWithAppleStepViewController: ORKInstructionStepViewControll
             return
         }
         // Initialize a Firebase credential.
-        let credential = OAuthProvider.credential(withProviderID: "apple.com",
-                                                  idToken: idTokenString,
-                                                  rawNonce: nonce)
+        let credential = OAuthProvider.credential(
+            withProviderID: "apple.com",
+            idToken: idTokenString,
+            rawNonce: nonce
+        )
+
         // Sign in with Firebase.
-        Auth.auth().signIn(with: credential) { (authResult, error) in
+        Auth.auth().signIn(with: credential) { _, error in
             if let error = error {
                 self.showError(error)
             } else {
@@ -174,41 +181,41 @@ public class CKSignInWithAppleStepViewController: ORKInstructionStepViewControll
     }
 }
 
-fileprivate extension String {
-    var sha256: String {
-        return SHA256.hash(data: Data(utf8))
-            .compactMap { String(format: "%02x", $0) }
-            .joined()
-    }
-
-    /// Adapted from https://auth0.com/docs/api-auth/tutorials/nonce#generate-a-cryptographically-random-nonce
-    static func makeRandomNonce(ofLength length: Int = 32) -> String {
-        precondition(length > 0)
-        let charset = Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
-        var result = ""
-        var remainingLength = length
-
-        while remainingLength > 0 {
-            let randoms: [UInt8] = (0 ..< 16).map { _ in
-                var random: UInt8 = 0
-                let errorCode = SecRandomCopyBytes(kSecRandomDefault, 1, &random)
-                if errorCode != errSecSuccess {
-                    fatalError("Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)")
-                }
-                return random
-            }
-
-            for random in randoms {
-                if remainingLength == 0 {
-                    break
-                }
-
-                if random < charset.count {
-                    result.append(charset[Int(random)])
-                    remainingLength -= 1
-                }
-            }
-        }
-        return result
-    }
-}
+//fileprivate extension String {
+//    var sha256: String {
+//        SHA256.hash(data: Data(utf8))
+//            .compactMap { String(format: "%02x", $0) }
+//            .joined()
+//    }
+//
+//    /// Adapted from https://auth0.com/docs/api-auth/tutorials/nonce#generate-a-cryptographically-random-nonce
+//    static func makeRandomNonce(ofLength length: Int = 32) -> String {
+//        precondition(length > 0)
+//        let charset = Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
+//        var result = ""
+//        var remainingLength = length
+//
+//        while remainingLength > 0 {
+//            let randoms: [UInt8] = (0 ..< 16).map { _ in
+//                var random: UInt8 = 0
+//                let errorCode = SecRandomCopyBytes(kSecRandomDefault, 1, &random)
+//                if errorCode != errSecSuccess {
+//                    fatalError("Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)")
+//                }
+//                return random
+//            }
+//
+//            for random in randoms {
+//                if remainingLength == 0 {
+//                    break
+//                }
+//
+//                if random < charset.count {
+//                    result.append(charset[Int(random)])
+//                    remainingLength -= 1
+//                }
+//            }
+//        }
+//        return result
+//    }
+//}

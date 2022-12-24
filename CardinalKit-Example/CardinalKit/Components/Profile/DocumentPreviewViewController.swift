@@ -12,7 +12,7 @@ import SwiftUI
 struct DocumentPreviewViewController: UIViewControllerRepresentable {
     private var isActive: Binding<Bool>
     private let viewController = UIViewController()
-    private var docController: UIDocumentInteractionController? = nil
+    private var docController: UIDocumentInteractionController?
 
     init(_ isActive: Binding<Bool>, url: URL?) {
         self.isActive = isActive
@@ -21,11 +21,16 @@ struct DocumentPreviewViewController: UIViewControllerRepresentable {
         }
     }
 
-    func makeUIViewController(context: UIViewControllerRepresentableContext<DocumentPreviewViewController>) -> UIViewController {
+    func makeUIViewController(
+        context: UIViewControllerRepresentableContext<DocumentPreviewViewController>
+    ) -> UIViewController {
         return viewController
     }
 
-    func updateUIViewController(_ uiViewController: UIViewController, context: UIViewControllerRepresentableContext<DocumentPreviewViewController>) {
+    func updateUIViewController(
+        _ uiViewController: UIViewController,
+        context: UIViewControllerRepresentableContext<DocumentPreviewViewController>
+    ) {
         if self.isActive.wrappedValue && docController?.delegate == nil { // to not show twice
             self.docController?.delegate = context.coordinator
             self.docController?.presentPreview(animated: false)
@@ -41,7 +46,9 @@ struct DocumentPreviewViewController: UIViewControllerRepresentable {
         init(owner: DocumentPreviewViewController) {
             self.owner = owner
         }
-        func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
+        func documentInteractionControllerViewControllerForPreview(
+            _ controller: UIDocumentInteractionController
+        ) -> UIViewController {
             return owner.viewController
         }
 

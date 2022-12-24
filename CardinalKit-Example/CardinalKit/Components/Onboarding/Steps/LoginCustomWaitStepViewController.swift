@@ -41,9 +41,11 @@ class LoginCustomWaitStepViewController: ORKStepViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //loadCustomBackButton()
-        
-        onLoginCallback = NotificationCenter.default.addObserver(forName: NSNotification.Name(Constants.notificationUserLogin), object: nil, queue: OperationQueue.main) { (notification) in
+        onLoginCallback = NotificationCenter.default.addObserver(
+            forName: NSNotification.Name(Constants.notificationUserLogin),
+            object: nil,
+            queue: OperationQueue.main
+        ) { (notification) in
             self.continueIfLoggedIn()
             print("Continuing; received callback.")
         }

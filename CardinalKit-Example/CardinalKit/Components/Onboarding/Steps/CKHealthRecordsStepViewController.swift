@@ -10,7 +10,6 @@ import HealthKit
 import ResearchKit
 
 class CKHealthRecordsStep: ORKInstructionStep {
-    
     override init(identifier: String) {
         super.init(identifier: identifier)
         
@@ -21,21 +20,20 @@ class CKHealthRecordsStep: ORKInstructionStep {
         
         let config = CKConfig.shared
         
-        let recordsConfig = config["Health Records"] 
+        let recordsConfig = config["Health Records"]
         
-        if let _title = recordsConfig["Permissions Title"] as? String {
-            title = NSLocalizedString(_title, comment: "")
+        if let permissionsTitle = recordsConfig?["Permissions Title"] as? String {
+            title = NSLocalizedString(permissionsTitle, comment: "")
         }
         
-        if let _text = recordsConfig["Permissions Text"] as? String {
-            text = NSLocalizedString(_text, comment: "")
+        if let permissionsText = recordsConfig?["Permissions Text"] as? String {
+            text = NSLocalizedString(permissionsText, comment: "")
         }
     }
     
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }
 
 /**
@@ -45,7 +43,6 @@ class CKHealthRecordsStep: ORKInstructionStep {
  is presented in a task view.
 */
 class CKHealthRecordsStepViewController: ORKInstructionStepViewController {
-    
     /**
      When this step is being dismissed, get `HealthKit`  authorization in the process.
      

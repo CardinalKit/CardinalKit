@@ -6,15 +6,15 @@
 //  Copyright © 2020 CocoaPods. All rights reserved.
 //
 
+import Foundation
 import CareKit
 import CareKitStore
 
 class CKCareKitManager: NSObject {
-    
     let coreDataStore = OCKStore(name: "CKCareKitStore", type: .onDisk, remote: CKCareKitRemoteSyncWithFirestore())
     let healthKitStore = OCKHealthKitPassthroughStore(name: "CKCareKitHealthKitStore", type: .onDisk)
     private(set) var synchronizedStoreManager: OCKSynchronizedStoreManager!
-    
+
     static let shared = CKCareKitManager()
     
     override init() {
@@ -25,11 +25,11 @@ class CKCareKitManager: NSObject {
         coordinator.attach(store: coreDataStore)
         synchronizedStoreManager = OCKSynchronizedStoreManager(wrapping: coordinator)
     }
-    
+
     func wipe() throws {
         try coreDataStore.delete()
     }
-    
+   
     fileprivate func initStore(forceUpdate: Bool = false) {
         let lastUpdateDate:Date? = UserDefaults.standard.object(forKey: Constants.prefCareKitCoreDataInitDate) as? Date
 //        if forceUpdate || UserDefaults.standard.object(forKey: Constants.prefCareKitCoreDataInitDate) == nil {
@@ -38,5 +38,4 @@ class CKCareKitManager: NSObject {
         UserDefaults.standard.set(Date(), forKey: Constants.prefCareKitCoreDataInitDate)
 //        }
     }
-    
 }

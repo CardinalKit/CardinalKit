@@ -6,18 +6,18 @@
 //  Copyright © 2021 CocoaPods. All rights reserved.
 //
 
-import ResearchKit
+import AuthenticationServices
 import CardinalKit
+import CryptoKit
+import FBSDKLoginKit
 import Firebase
 import FirebaseAuth
 import GoogleSignIn
-import AuthenticationServices
-import CryptoKit
-import FBSDKLoginKit
+import ResearchKit
 import SwiftUI
 
 public class CKMultipleSignInStep: ORKQuestionStep {
-    public override init(identifier: String) {
+    override public init(identifier: String) {
         super.init(identifier: identifier)
         self.answerFormat = ORKAnswerFormat.booleanAnswerFormat()
     }
@@ -29,11 +29,11 @@ public class CKMultipleSignInStep: ORKQuestionStep {
 }
 
 public class CKMultipleSignInStepViewController: ORKQuestionStepViewController, ASAuthorizationControllerDelegate {
-    public var CKMultipleSignInStep: CKMultipleSignInStep! {
+    public var CKMultipleSignInStep: CKMultipleSignInStep? {
         return step as? CKMultipleSignInStep
     }
     
-    public override func viewDidLoad() {
+    override public func viewDidLoad() {
         addSignInLabel()
         addSocialButtons()
         self.view.backgroundColor = .white
@@ -42,60 +42,70 @@ public class CKMultipleSignInStepViewController: ORKQuestionStepViewController, 
     func addSignInLabel() {
         let config = CKPropertyReader(file: "CKConfiguration")
 
-        let signInLabel = getSignInLabel(text: config["Sign In Screen"]["Label Text"] as? String ?? "Sign In",
-                                         fontSize: config["Sign In Screen"]["Label Font Size"] as? CGFloat ?? 35)
+        let signInLabel = getSignInLabel(
+            text: config["Sign In Screen"]?["Label Text"] as? String ?? "Sign In",
+            fontSize: config["Sign In Screen"]?["Label Font Size"] as? CGFloat ?? 35
+        )
         self.view.addSubview(signInLabel)
     }
 
     func addSocialButtons() {
         let config = CKPropertyReader(file: "CKConfiguration")
-        var button: UIButton? = nil
+        var button: UIButton?
 
-        if config["Login-Sign-In-With-UserPassword"]["Enabled"] as? Bool == true {
-            let buttonEmailPassword = getSignInButton(title: "Sign in with Email and Password",
-                                                      backgroundColor: .white,
-                                                      textColor: .black,
-                                                      borderColor: .black,
-                                                      reference: button,
-                                                      action: #selector(loginEmailAndPasswordAction))
+        if config["Login-Sign-In-With-UserPassword"]?["Enabled"] as? Bool == true {
+            let buttonEmailPassword = getSignInButton(
+                title: "Sign in with Email and Password",
+                backgroundColor: .white,
+                textColor: .black,
+                borderColor: .black,
+                reference: button,
+                action: #selector(loginEmailAndPasswordAction)
+            )
+
             self.view.addSubview(buttonEmailPassword)
             button = buttonEmailPassword
-
         }
 
-        if config["Login-Sign-In-With-Facebook"]["Enabled"] as? Bool == true {
-            let buttonFacebook = getSignInButton(title: "Sign in with Facebook",
-                                                 backgroundColor: UIColor(red: 59, green: 89, blue: 152),
-                                                 textColor: .white,
-                                                 borderColor: nil,
-                                                 reference: button,
-                                                 action: #selector(loginFacebookAction),
-                                                 icon: "facebook",
-                                                 imageOffset: 35)
+        if config["Login-Sign-In-With-Facebook"]?["Enabled"] as? Bool == true {
+            let buttonFacebook = getSignInButton(
+                title: "Sign in with Facebook",
+                backgroundColor: UIColor(red: 59, green: 89, blue: 152),
+                textColor: .white,
+                borderColor: nil,
+                reference: button,
+                action: #selector(loginFacebookAction),
+                icon: "facebook",
+                imageOffset: 35
+            )
             self.view.addSubview(buttonFacebook)
             button = buttonFacebook
         }
 
-        if config["Login-Sign-In-With-Google"]["Enabled"] as? Bool == true {
-            let buttonGoogle = getSignInButton(title: "Sign in with Google",
-                                               backgroundColor: .white,
-                                               textColor: .gray,
-                                               borderColor: UIColor(red: 66, green: 133, blue: 244),
-                                               reference: button,
-                                               action: #selector(loginGoogleAction),
-                                               icon: "google")
+        if config["Login-Sign-In-With-Google"]?["Enabled"] as? Bool == true {
+            let buttonGoogle = getSignInButton(
+                title: "Sign in with Google",
+                backgroundColor: .white,
+                textColor: .gray,
+                borderColor: UIColor(red: 66, green: 133, blue: 244),
+                reference: button,
+                action: #selector(loginGoogleAction),
+                icon: "google"
+            )
             self.view.addSubview(buttonGoogle)
             button = buttonGoogle
         }
 
-        if config["Login-Sign-In-With-Apple"]["Enabled"] as? Bool == true {
-            let buttonApple = getSignInButton(title: "Sign in with Apple",
-                                              backgroundColor: .black,
-                                              textColor: .white,
-                                              borderColor: nil,
-                                              reference: button,
-                                              action: #selector(loginAppleAction),
-                                              icon: "apple")
+        if config["Login-Sign-In-With-Apple"]?["Enabled"] as? Bool == true {
+            let buttonApple = getSignInButton(
+                title: "Sign in with Apple",
+                backgroundColor: .black,
+                textColor: .white,
+                borderColor: nil,
+                reference: button,
+                action: #selector(loginAppleAction),
+                icon: "apple"
+            )
             self.view.addSubview(buttonApple)
             button = buttonApple
         }
@@ -110,6 +120,7 @@ public class CKMultipleSignInStepViewController: ORKQuestionStepViewController, 
         return signInLabel
     }
 
+    // swiftlint:disable:next function_parameter_count
     func getSignInButton(
         title: String,
         backgroundColor: UIColor,
@@ -125,26 +136,25 @@ public class CKMultipleSignInStepViewController: ORKQuestionStepViewController, 
 
         if let reference = reference {
             button.center.y = reference.center.y - 60
-        } else{
+        } else {
             button.center.y = CGFloat(Float(view.frame.maxY) - 200)
         }
 
         button.setTitle(title, for: .normal)
         button.setTitleColor(textColor, for: .normal)
-        button.addTarget(self, action: action,for: .touchUpInside)
+        button.addTarget(self, action: action, for: .touchUpInside)
         button.layer.cornerRadius = 10
         button.backgroundColor = backgroundColor
 
         if let borderColor = borderColor {
             button.layer.borderWidth = 2
-            button.layer.borderColor =  borderColor.cgColor
+            button.layer.borderColor = borderColor.cgColor
         }
 
-        if(image != "") {
+        if !image.isEmpty {
             button.setImage(UIImage(named: image)!, for: .normal)
             button.imageEdgeInsets.left = -imageOffset
         }
-
         return button
     }
     
@@ -155,17 +165,19 @@ public class CKMultipleSignInStepViewController: ORKQuestionStepViewController, 
     }
     
     @objc
-    func loginFacebookAction(sender: AnyObject) {//action of the custom button in the storyboard
-        let fbLoginManager: LoginManager = LoginManager()
-        fbLoginManager.logIn(permissions: ["email"], from: self){ (result, error) -> Void in
-            if (error == nil){
-                let fbloginresult: LoginManagerLoginResult = result!
-                if (result?.isCancelled)!{ return }
+    func loginFacebookAction(sender: AnyObject) { // action of the custom button in the storyboard
+        let fbLoginManager = LoginManager()
 
-                if(fbloginresult.grantedPermissions.contains("email"))
-                {
+        fbLoginManager.logIn(permissions: ["email"], from: self){ result, error -> Void in
+            if error == nil {
+                let fbloginresult: LoginManagerLoginResult = result!
+                if (result?.isCancelled)!{
+                    return
+                }
+
+                if fbloginresult.grantedPermissions.contains("email") {
                     let credential = FacebookAuthProvider.credential(withAccessToken: AccessToken.current!.tokenString)
-                    Auth.auth().signIn(with: credential) { (_, error) in
+                    Auth.auth().signIn(with: credential) { _, error in
                         if let error = error {
                             self.showError(error)
                         } else {
@@ -193,8 +205,10 @@ public class CKMultipleSignInStepViewController: ORKQuestionStepViewController, 
         authorizationController.performRequests()
     }
 
-    public func authorizationController(controller: ASAuthorizationController,
-                                        didCompleteWithAuthorization authorization: ASAuthorization) {
+    public func authorizationController(
+        controller: ASAuthorizationController,
+        didCompleteWithAuthorization authorization: ASAuthorization
+    ) {
         guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential else {
             print("Unable to obtain AppleID credentials")
             return
@@ -211,11 +225,13 @@ public class CKMultipleSignInStepViewController: ORKQuestionStepViewController, 
             return
         }
 
-        let credential = OAuthProvider.credential(withProviderID: "apple.com",
-                                                  idToken: idTokenString,
-                                                  rawNonce: nonce)
+        let credential = OAuthProvider.credential(
+            withProviderID: "apple.com",
+            idToken: idTokenString,
+            rawNonce: nonce
+        )
 
-        Auth.auth().signIn(with: credential) { (authResult, error) in
+        Auth.auth().signIn(with: credential) { _, error in
             if let error = error {
                 self.showError(error)
             } else {
@@ -226,12 +242,14 @@ public class CKMultipleSignInStepViewController: ORKQuestionStepViewController, 
     }
     
     @objc
-    func loginGoogleAction(){
-        guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+    func loginGoogleAction() {
+        guard let clientID = FirebaseApp.app()?.options.clientID else {
+            return
+        }
 
         let config = GIDConfiguration(clientID: clientID)
 
-        GIDSignIn.sharedInstance.signIn(with: config, presenting: self){ user, error in
+        GIDSignIn.sharedInstance.signIn(with: config, presenting: self) { user, error in
             if let error = error {
                 self.showError(error)
                 return
@@ -242,14 +260,15 @@ public class CKMultipleSignInStepViewController: ORKQuestionStepViewController, 
                 let idToken = authentication.idToken
             else { return }
             
-            let credential = GoogleAuthProvider.credential(withIDToken: idToken,
-                                                           accessToken: authentication.accessToken)
+            let credential = GoogleAuthProvider.credential(
+                withIDToken: idToken,
+                accessToken: authentication.accessToken
+            )
             
-            Auth.auth().signIn(with: credential) { (authResult, error) in
+            Auth.auth().signIn(with: credential) { _, error in
                 if let error = error {
                     self.showError(error)
-                }
-                else {
+                } else {
                     self.setAnswer(false)
                     super.goForward()
                 }
@@ -258,17 +277,16 @@ public class CKMultipleSignInStepViewController: ORKQuestionStepViewController, 
     }
     
     private func showError(_ error: Error) {
-        print("Error signing in: \(error)")
         Alerts.showInfo(
-            title: NSLocalizedString("Error signing in: \(error)", comment: ""),
+            title: "Error signing in: \(error)",
             message: error.localizedDescription
         )
     }
 }
 
-fileprivate extension String {
+extension String {
     var sha256: String {
-        return SHA256.hash(data: Data(utf8))
+        SHA256.hash(data: Data(utf8))
             .compactMap { String(format: "%02x", $0) }
             .joined()
     }
