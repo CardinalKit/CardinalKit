@@ -8,8 +8,6 @@
 
 import Foundation
 
-class CKConfig : CKPropertyReader {
-    
+class CKConfig: CKPropertyReader {
     static let shared = CKPropertyReader(file: "CKConfiguration")
-    
 }

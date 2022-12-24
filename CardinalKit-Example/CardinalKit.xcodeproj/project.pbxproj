@@ -11,6 +11,7 @@
 		270CDC0C28A65AD300F2F053 /* CKUploadFHIRTaskViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270CDC0B28A65AD300F2F053 /* CKUploadFHIRTaskViewControllerDelegate.swift */; };
 		276399A129021BB5004DE158 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 276399A029021BB4004DE158 /* GoogleService-Info.plist */; };
 		27653A13272A2E7700D74E83 /* LocalTaskListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27653A12272A2E7700D74E83 /* LocalTaskListItemView.swift */; };
+		27663F2A29574F1500A34080 /* CardinalKit_ExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27663F2929574F1500A34080 /* CardinalKit_ExampleTests.swift */; };
 		2B19DD9226FE1BEB00649CE1 /* JsonToSurvey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19DD9126FE1BEB00649CE1 /* JsonToSurvey.swift */; };
 		2B19DD9426FE1D2600649CE1 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19DD9326FE1D2600649CE1 /* TestViewController.swift */; };
 		2B19DD9626FE1D2F00649CE1 /* CheckListItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19DD9526FE1D2F00649CE1 /* CheckListItemViewController.swift */; };
@@ -98,6 +99,16 @@
 		E2F1FD7824D62064006C39DF /* CKConfiguration.plist in Resources */ = {isa = PBXBuildFile; fileRef = E2F1FD7724D62064006C39DF /* CKConfiguration.plist */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		27663F2B29574F1500A34080 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 607FACC81AFB9204008FA782 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 607FACCF1AFB9204008FA782;
+			remoteInfo = CardinalKit_Example;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		8E0A43D0244A60D800656518 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -119,6 +130,8 @@
 		270CDC0B28A65AD300F2F053 /* CKUploadFHIRTaskViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKUploadFHIRTaskViewControllerDelegate.swift; sourceTree = "<group>"; };
 		276399A029021BB4004DE158 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		27653A12272A2E7700D74E83 /* LocalTaskListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalTaskListItemView.swift; sourceTree = "<group>"; };
+		27663F2729574F1500A34080 /* CardinalKit ExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "CardinalKit ExampleTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		27663F2929574F1500A34080 /* CardinalKit_ExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardinalKit_ExampleTests.swift; sourceTree = "<group>"; };
 		2B19DD9126FE1BEB00649CE1 /* JsonToSurvey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonToSurvey.swift; sourceTree = "<group>"; };
 		2B19DD9326FE1D2600649CE1 /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		2B19DD9526FE1D2F00649CE1 /* CheckListItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckListItemViewController.swift; sourceTree = "<group>"; };
@@ -211,6 +224,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		27663F2429574F1500A34080 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		607FACCD1AFB9204008FA782 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -227,6 +247,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		27663F2829574F1500A34080 /* CardinalKit ExampleTests */ = {
+			isa = PBXGroup;
+			children = (
+				27663F2929574F1500A34080 /* CardinalKit_ExampleTests.swift */,
+			);
+			path = "CardinalKit ExampleTests";
+			sourceTree = "<group>";
+		};
 		2B8FB80227552ADD000B2D7B /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
@@ -290,6 +318,7 @@
 				8E0A438B244A4A0400656518 /* CardinalKit-Example.entitlements */,
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				607FACD21AFB9204008FA782 /* CardinalKit-Example */,
+				27663F2829574F1500A34080 /* CardinalKit ExampleTests */,
 				607FACD11AFB9204008FA782 /* Products */,
 				A562A578C883F67F0DAE1385 /* Pods */,
 				2C45A885E8BD0CAC5349997A /* Frameworks */,
@@ -300,6 +329,7 @@
 			isa = PBXGroup;
 			children = (
 				607FACD01AFB9204008FA782 /* CardinalKit Example.app */,
+				27663F2729574F1500A34080 /* CardinalKit ExampleTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -414,7 +444,6 @@
 			children = (
 				8E9CDF802591E6B800C8A228 /* Configuration */,
 				8E9CDECE2591ABDF00C8A228 /* HealthKit */,
-				8E40DC022471E5590027536B /* Networking */,
 				8E0A4380244A4A0400656518 /* Auth */,
 				8E9CDF812591E6D000C8A228 /* ResearchKit */,
 				2FFFA2BD29024EFD009D289D /* ResearchKitOnFHIR */,
@@ -425,13 +454,6 @@
 				8EA664B32594387900B6A45A /* Errors.swift */,
 			);
 			path = Library;
-			sourceTree = "<group>";
-		};
-		8E40DC022471E5590027536B /* Networking */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Networking;
 			sourceTree = "<group>";
 		};
 		8E6E1E2F25353A550024B8DF /* Views */ = {
@@ -573,6 +595,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		27663F2629574F1500A34080 /* CardinalKit ExampleTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 27663F2F29574F1500A34080 /* Build configuration list for PBXNativeTarget "CardinalKit ExampleTests" */;
+			buildPhases = (
+				27663F2329574F1500A34080 /* Sources */,
+				27663F2429574F1500A34080 /* Frameworks */,
+				27663F2529574F1500A34080 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				27663F2C29574F1500A34080 /* PBXTargetDependency */,
+			);
+			name = "CardinalKit ExampleTests";
+			productName = "CardinalKit ExampleTests";
+			productReference = 27663F2729574F1500A34080 /* CardinalKit ExampleTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		607FACCF1AFB9204008FA782 /* CardinalKit_Example */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "CardinalKit_Example" */;
@@ -606,10 +646,14 @@
 		607FACC81AFB9204008FA782 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0830;
+				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = CardinalKit;
 				TargetAttributes = {
+					27663F2629574F1500A34080 = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = 607FACCF1AFB9204008FA782;
+					};
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
 						LastSwiftMigration = 1120;
@@ -634,11 +678,19 @@
 			projectRoot = "";
 			targets = (
 				607FACCF1AFB9204008FA782 /* CardinalKit_Example */,
+				27663F2629574F1500A34080 /* CardinalKit ExampleTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		27663F2529574F1500A34080 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		607FACCE1AFB9204008FA782 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -787,6 +839,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		27663F2329574F1500A34080 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27663F2A29574F1500A34080 /* CardinalKit_ExampleTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		607FACCC1AFB9204008FA782 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -874,6 +934,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		27663F2C29574F1500A34080 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 607FACCF1AFB9204008FA782 /* CardinalKit_Example */;
+			targetProxy = 27663F2B29574F1500A34080 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		8E0A4389244A4A0400656518 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -886,6 +954,71 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		27663F2D29574F1500A34080 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = "\"${SRCROOT}/Pods/Firebase/CoreOnly/Sources\"";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.stanfordBDHG.CardinalKit-ExampleTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CardinalKit Example.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CardinalKit Example";
+				USER_HEADER_SEARCH_PATHS = "";
+			};
+			name = Debug;
+		};
+		27663F2E29574F1500A34080 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = "\"${SRCROOT}/Pods/Firebase/CoreOnly/Sources\"";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.stanfordBDHG.CardinalKit-ExampleTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CardinalKit Example.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CardinalKit Example";
+				USER_HEADER_SEARCH_PATHS = "";
+			};
+			name = Release;
+		};
 		607FACED1AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1046,6 +1179,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		27663F2F29574F1500A34080 /* Build configuration list for PBXNativeTarget "CardinalKit ExampleTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				27663F2D29574F1500A34080 /* Debug */,
+				27663F2E29574F1500A34080 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		607FACCB1AFB9204008FA782 /* Build configuration list for PBXProject "CardinalKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
