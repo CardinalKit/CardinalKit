@@ -25,7 +25,7 @@ struct DocumentPreviewViewController: UIViewControllerRepresentable {
     func makeUIViewController(
         context: UIViewControllerRepresentableContext<DocumentPreviewViewController>
     ) -> UIViewController {
-        return viewController
+        viewController
     }
 
     func updateUIViewController(
@@ -39,7 +39,7 @@ struct DocumentPreviewViewController: UIViewControllerRepresentable {
     }
 
     func makeCoordinator() -> Coordinator {
-        return Coordinator(owner: self)
+        Coordinator(owner: self)
     }
 
     final class Coordinator: NSObject, UIDocumentInteractionControllerDelegate { // works as delegate
@@ -50,7 +50,7 @@ struct DocumentPreviewViewController: UIViewControllerRepresentable {
         func documentInteractionControllerViewControllerForPreview(
             _ controller: UIDocumentInteractionController
         ) -> UIViewController {
-            return owner.viewController
+            owner.viewController
         }
 
         func documentInteractionControllerDidEndPreview(_ controller: UIDocumentInteractionController) {

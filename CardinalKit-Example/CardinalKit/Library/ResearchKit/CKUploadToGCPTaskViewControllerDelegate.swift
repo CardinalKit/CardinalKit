@@ -14,7 +14,7 @@ import ResearchKit
 
 class CKUploadToGCPTaskViewControllerDelegate: NSObject, ORKTaskViewControllerDelegate {
     /// Serializes the result of a ResearchKit task into JSON and uploads it to Firebase
-    public func taskViewController(
+    func taskViewController(
         _ taskViewController: ORKTaskViewController,
         didFinishWith reason: ORKTaskViewControllerFinishReason,
         error: Error?
@@ -125,7 +125,6 @@ class CKUploadToGCPTaskViewControllerDelegate: NSObject, ORKTaskViewControllerDe
     func CKSendFiles(_ files: URL, result: [String: Any]) throws {
         if  let collection = result["identifier"] as? String,
             let taskUUID = result["taskRunUUID"] as? String {
- 
             try CKSendHelper.sendToCloudStorage(
                 files,
                 collection: collection,

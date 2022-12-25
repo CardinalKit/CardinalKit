@@ -44,18 +44,21 @@ class LoginViewController: ORKLoginStepViewController {
             textField.placeholder = "Enter your email"
         }
 
-        alert.addAction(UIAlertAction(title: "Submit", style: .default, handler: { action in
-            let textField = alert.textFields![0]
-            Auth.auth().sendPasswordReset(withEmail: textField.text!) { error in
+        alert.addAction(UIAlertAction(title: "Submit", style: .default, handler: { _ in
+            guard let textField = alert.textFields?[0],
+                  let email = textField.text else {
+                return
+            }
+            Auth.auth().sendPasswordReset(withEmail: email) { error in
                 DispatchQueue.main.async {
-                    if error != nil {
+                    if let error = error {
                         alert.dismiss(animated: false, completion: nil)
-                        if let errCode = AuthErrorCode.Code(rawValue: error!._code) {
+                        if let errCode = AuthErrorCode.Code(rawValue: error._code) {
                             switch errCode {
                                 default:
                                     let alert = UIAlertController(
                                         title: "Password Reset Error!",
-                                        message: error?.localizedDescription,
+                                        message: error.localizedDescription,
                                         preferredStyle: .alert
                                     )
                                     alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
@@ -70,19 +73,6 @@ class LoginViewController: ORKLoginStepViewController {
                 }
             }
         }))
-        
-//        alert.addAction(UIAlertAction(title: "Email", style: .default, handler: { (action) in
-//            let email = config.read(query: "Email")
-//                       EmailHelper.shared.sendEmail(subject: "App Support Request", body: "Enter your support request here.", to: email)
-//        }))
-//
-//        alert.addAction(UIAlertAction(title: "Phone", style: .default, handler: { (action) in
-//            let phone = config.read(query: "Phone")
-//            let telephone = "tel://"
-//            let formattedString = telephone + phone
-//            guard let url = URL(string: formattedString) else { return }
-//            UIApplication.shared.open(url)
-//        }))
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
 

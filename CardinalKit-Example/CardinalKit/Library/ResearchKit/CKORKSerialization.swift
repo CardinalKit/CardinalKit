@@ -21,6 +21,7 @@ class CKORKSerialization {
 
      - Returns: [String:Any] dictionary with ResearchKit results (Questions and answers)
      */
+    // swiftlint:disable cyclomatic_complexity
     static func CKTaskAsJson(result: ORKTaskResult, task: ORKTask) throws -> [String: Any]? {
         let dictQuestionTypes = [
             "None",
@@ -328,7 +329,7 @@ class CKORKSerialization {
         }
         return ORKTaskResult(taskIdentifier: "empty", taskRun: UUID(), outputDirectory: nil)
     }
-    private static func getResult(fromJsonObject object: [AnyHashable : Any]) -> ORKResult {
+    private static func getResult(fromJsonObject object: [AnyHashable: Any]) -> ORKResult {
         if let identifier = object["identifier"] as? String {
             if let type = object["class"] as? String {
                 let answer = object["answer"] ?? "No Answer"

@@ -30,13 +30,14 @@ public class CKMultipleSignInStep: ORKQuestionStep {
 
 public class CKMultipleSignInStepViewController: ORKQuestionStepViewController, ASAuthorizationControllerDelegate {
     public var CKMultipleSignInStep: CKMultipleSignInStep? {
-        return step as? CKMultipleSignInStep
+        step as? CKMultipleSignInStep
     }
     
     override public func viewDidLoad() {
         addSignInLabel()
         addSocialButtons()
         self.view.backgroundColor = .white
+        super.viewDidLoad()
     }
 
     func addSignInLabel() {
@@ -151,8 +152,8 @@ public class CKMultipleSignInStepViewController: ORKQuestionStepViewController, 
             button.layer.borderColor = borderColor.cgColor
         }
 
-        if !image.isEmpty {
-            button.setImage(UIImage(named: image)!, for: .normal)
+        if !image.isEmpty, let uiImage = UIImage(named: image) {
+            button.setImage(uiImage, for: .normal)
             button.imageEdgeInsets.left = -imageOffset
         }
         return button
@@ -168,10 +169,10 @@ public class CKMultipleSignInStepViewController: ORKQuestionStepViewController, 
     func loginFacebookAction(sender: AnyObject) { // action of the custom button in the storyboard
         let fbLoginManager = LoginManager()
 
-        fbLoginManager.logIn(permissions: ["email"], from: self){ result, error -> Void in
+        fbLoginManager.logIn(permissions: ["email"], from: self) { result, error -> Void in
             if error == nil {
                 let fbloginresult: LoginManagerLoginResult = result!
-                if (result?.isCancelled)!{
+                if (result?.isCancelled)! {
                     return
                 }
 

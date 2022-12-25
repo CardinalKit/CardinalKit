@@ -42,9 +42,10 @@ public class CKReviewConsentDocumentViewController: ORKQuestionStepViewControlle
             
             var docURL = (FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)).last as NSURL?
             docURL = docURL?.appendingPathComponent("\(consentFileName).pdf") as NSURL?
+
             let url = docURL! as URL
             
-            documentRef.write(toFile: url) { url, error in
+            documentRef.write(toFile: url) { _, error in
                 if let error = error {
                     print(error.localizedDescription)
                     self.setAnswer(false)

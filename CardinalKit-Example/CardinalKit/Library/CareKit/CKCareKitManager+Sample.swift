@@ -50,9 +50,9 @@ internal extension OCKStore {
 
                     var itemSchedule: OCKSchedule?
                     var update = true
-                    if lastUpdateDate != nil,
+                    if let lastUpdateDate = lastUpdateDate,
                        let updateTimeServer = payload["updateTime"] as? Timestamp,
-                       updateTimeServer.dateValue() < lastUpdateDate! {
+                       updateTimeServer.dateValue() < lastUpdateDate {
                         update = false
                     }
                     if update,
@@ -153,18 +153,19 @@ internal extension OCKStore {
                         // This fixes an issue where if cloud surveys were all in the future,
                         // they would not show up
                         // It does open up all surveys (even future) for completion
-                        // TODO: make a way for the future surveys to be visible but not fillable
                         task.effectiveDate = Date()
 
                         // get if task exist?
                         self.fetchTask(withID: id) { result in
                             switch result {
-                            case .failure(_): do {
-                                self.addTask(task)
-                            }
-                            case .success(_):do {
-                                self.updateTask(task)
-                            }
+                            case .failure:
+                                do {
+                                    self.addTask(task)
+                                }
+                            case .success:
+                                do {
+                                    self.updateTask(task)
+                                }
                             }
                             group.leave()
                         }
@@ -178,7 +179,8 @@ internal extension OCKStore {
             queue: .main,
             execute: {
                 onCompletion(nil)
-            })
+            }
+        )
     }
     // Adds tasks and contacts into the store
     func populateSampleData(lastUpdateDate: Date?, completion: @escaping () -> Void) {
@@ -200,7 +202,7 @@ internal extension OCKStore {
                     collection: collection,
                     authCollection: studyCollection,
                     lastUpdateDate: lastUpdateDate
-                ){ error in
+                ) { error in
                     CKApp.requestData(route: authRoute, onCompletion: { result in
                         if let documents = result as? [DocumentSnapshot] {
                             self.insertDocuments(
@@ -208,7 +210,7 @@ internal extension OCKStore {
                                 collection: collection,
                                 authCollection: nil,
                                 lastUpdateDate: lastUpdateDate
-                            ) { error in
+                            ) { _ in
                                 self.createContacts()
                                 completion()
                             }

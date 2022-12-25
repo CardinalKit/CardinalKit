@@ -46,6 +46,7 @@ struct SensorsDemoUIView: View {
                 .scaledToFit()
                 .padding(.leading, Metrics.paddingHorizontalMain * 4)
                 .padding(.trailing, Metrics.paddingHorizontalMain * 4)
+                .accessibilityLabel(Text("CardinalKit Logo"))
             
             Text("This DEMO is a CoreMotion sensors test. Press a button from below to get started.")
                 .multilineTextAlignment(.leading)
@@ -98,12 +99,14 @@ struct SensorsDemoUIView: View {
                 .scaledToFit()
                 .padding(.leading, Metrics.paddingHorizontalMain * 4)
                 .padding(.trailing, Metrics.paddingHorizontalMain * 4)
+                .accessibilityLabel(Text("Biodesign Logo"))
             
             if useAppleWatch {
                 HStack(spacing: 10) {
                     Image("WatchIcon")
                         .resizable()
                         .frame(width: 50, height: 50, alignment: .center)
+                        .accessibilityLabel(Text("Watch Icon"))
                     
                     Text("Apple Watch NOT connected")
                         .fontWeight(.bold)

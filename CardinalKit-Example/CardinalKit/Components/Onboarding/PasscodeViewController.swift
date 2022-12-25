@@ -6,10 +6,11 @@
 //  Copyright © 2020 CocoaPods. All rights reserved.
 //
 
-import UIKit
-import SwiftUI
-import ResearchKit
 import CardinalKit
+import ResearchKit
+import SwiftUI
+import UIKit
+
 
 struct PasscodeViewController: UIViewControllerRepresentable {
     func makeCoordinator() -> Coordinator {
@@ -28,7 +29,7 @@ struct PasscodeViewController: UIViewControllerRepresentable {
             let editPasscodeViewController = ORKPasscodeViewController.passcodeEditingViewController(
                 withText: "",
                 delegate: context.coordinator,
-                passcodeType:.type4Digit
+                passcodeType: .type4Digit
             )
             return editPasscodeViewController
         } else {
@@ -55,5 +56,4 @@ struct PasscodeViewController: UIViewControllerRepresentable {
             Alerts.showInfo(title: "Wrong passcode entered", message: "Okay")
         }
     }
-    
 }

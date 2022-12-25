@@ -6,12 +6,11 @@
 //  Copyright © 2020 CardinalKit. All rights reserved.
 //
 
-import Foundation
-import HealthKit
+import CardinalKit
 import CareKit
 import CareKitFHIR
 import CareKitStore
-import CardinalKit
+import HealthKit
 
 class CKHealthRecordsManager: NSObject {
     static let shared = CKHealthRecordsManager()
@@ -40,7 +39,7 @@ class CKHealthRecordsManager: NSObject {
     }
 
     func getAuth(_ completion: @escaping (_ success: Bool, _ error: Error?) -> Void) {
-        healthStore.requestAuthorization(toShare: nil, read: types) { (success, error) in
+        healthStore.requestAuthorization(toShare: nil, read: types) { success, error in
             completion(success, error)
         }
     }
@@ -52,7 +51,7 @@ class CKHealthRecordsManager: NSObject {
                 predicate: nil,
                 limit: HKObjectQueryNoLimit,
                 sortDescriptors: nil
-            ){ (query, samples, error) in
+            ) { _, samples, error in
                 guard let samples = samples as? [HKClinicalRecord] else {
                     print("*** An error occurred: \(error?.localizedDescription ?? "nil") ***")
                     onCompletion?(false, error)
@@ -90,13 +89,13 @@ class CKHealthRecordsManager: NSObject {
     }
 
     func collectAndUploadAll(_ onCompletion: ((Bool, Error?) -> Void)? = nil) {
-        CKHealthKitManager.shared.collectAllTypes({ (success, error) in
+        CKHealthKitManager.shared.collectAllTypes { _, error in
             if let error = error {
                 print(error)
             } else {
                 UserDefaults.standard.set(Date(), forKey: Constants.prefHealthRecordsLastUploaded)
                 onCompletion?(true, nil)
             }
-        })
+        }
     }
 }

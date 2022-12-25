@@ -26,7 +26,8 @@ class CKHealthDataStep: ORKInstructionStep {
             heart rate, and flights climbed data.
         """
     }
-    
+
+    @available(*, unavailable)
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -46,7 +47,7 @@ class CKHealthDataStepViewController: ORKInstructionStepViewController {
     */
     override func goForward() {
         let manager = CKHealthKitManager.shared
-        manager.getHealthAuthorization() { _, _ in
+        manager.getHealthAuthorization { _, _ in
             OperationQueue.main.addOperation {
                 super.goForward()
             }

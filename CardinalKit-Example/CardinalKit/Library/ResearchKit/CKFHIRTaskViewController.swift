@@ -6,9 +6,10 @@
 //  Copyright © 2022 CardinalKit. All rights reserved.
 //
 
-import UIKit
-import SwiftUI
 import ResearchKit
+import SwiftUI
+import UIKit
+
 
 struct CKFHIRTaskViewController: UIViewControllerRepresentable {
     private let tasks: ORKOrderedTask

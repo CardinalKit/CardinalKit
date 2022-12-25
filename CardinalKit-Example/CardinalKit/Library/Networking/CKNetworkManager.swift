@@ -32,8 +32,8 @@ class CKAppNetworkManager: CKAPIDeliveryDelegate, CKAPIReceiverDelegate {
     // MARK: - CKAPIReceiverDelegate
     func request(route: String, onCompletion: @escaping (Any) -> Void) {
         var objResult = [String: Any]()
-        let db = firestoreDb()
-        db.collection(route).getDocuments { querySnapshot, err in
+        let database = firestoreDb()
+        database.collection(route).getDocuments { querySnapshot, err in
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {

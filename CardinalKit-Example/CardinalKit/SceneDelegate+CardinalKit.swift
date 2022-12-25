@@ -6,13 +6,12 @@
 //  Copyright © 2020 CardinalKit. All rights reserved.
 //
 
-import SwiftUI
 import ResearchKit
+import SwiftUI
 
 // Extensions add new functionality to an existing class, structure, enumeration, or protocol type.
 // https://docs.swift.org/swift-book/LanguageGuide/Extensions.html
 extension SceneDelegate: ORKPasscodeDelegate {
-    
     /**
      Hide content so it doesn't appear in the app switcher.
     */
@@ -64,6 +63,6 @@ extension SceneDelegate: ORKPasscodeDelegate {
     }
     
     func passcodeViewControllerDidFailAuthentication(_ viewController: UIViewController) {
-        // TODO: handle authentication failure
+        // Not implemented
     }
 }

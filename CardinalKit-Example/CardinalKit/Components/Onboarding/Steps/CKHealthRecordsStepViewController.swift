@@ -1,4 +1,3 @@
-
 //
 //  CKHealthRecordsStepViewController.swift
 //
@@ -23,14 +22,15 @@ class CKHealthRecordsStep: ORKInstructionStep {
         let recordsConfig = config["Health Records"]
         
         if let permissionsTitle = recordsConfig?["Permissions Title"] as? String {
-            title = NSLocalizedString(permissionsTitle, comment: "")
+            title = permissionsTitle
         }
         
         if let permissionsText = recordsConfig?["Permissions Text"] as? String {
-            text = NSLocalizedString(permissionsText, comment: "")
+            text = permissionsText
         }
     }
     
+    @available(*, unavailable)
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

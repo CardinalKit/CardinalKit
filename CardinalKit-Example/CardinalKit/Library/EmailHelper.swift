@@ -11,7 +11,7 @@ import MessageUI
 class EmailHelper: NSObject, MFMailComposeViewControllerDelegate {
     static let shared = EmailHelper()
 
-    func sendEmail(subject: String, body: String, to: String){
+    func sendEmail(subject: String, body: String, to: String) {
         if !MFMailComposeViewController.canSendMail() {
             return
         }

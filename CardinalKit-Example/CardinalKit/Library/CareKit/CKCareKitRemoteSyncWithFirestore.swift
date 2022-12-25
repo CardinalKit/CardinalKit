@@ -6,11 +6,12 @@
 //  Copyright © 2020 CardinalKit. All rights reserved.
 //
 
+import CardinalKit
 import CareKit
 import CareKitStore
 import CareKitUI
-import CardinalKit
 import FirebaseFirestore
+
 
 class CKCareKitRemoteSyncWithFirestore: OCKRemoteSynchronizable {
     var delegate: OCKRemoteSynchronizationDelegate?
@@ -57,7 +58,7 @@ class CKCareKitRemoteSyncWithFirestore: OCKRemoteSynchronizable {
     }
 }
 
-// swiftlint:disable function_body_length closure_body_length
+// swiftlint:disable function_body_length closure_body_length cyclomatic_complexity
 extension CKCareKitRemoteSyncWithFirestore {
     fileprivate func putRevisionInFirestore(
         deviceRevision: OCKRevisionRecord,
@@ -230,7 +231,12 @@ extension CKCareKitRemoteSyncWithFirestore {
         _ revisions: [OCKRevisionRecord],
         _ knowledgeVector: OCKRevisionRecord.KnowledgeVector
     ) -> OCKRevisionRecord {
-        let newEntities = revisions.filter({ $0.knowledgeVector >= knowledgeVector }).flatMap { $0.entities }
+        let newEntities = revisions.filter {
+            $0.knowledgeVector >= knowledgeVector
+        }
+        .flatMap {
+            $0.entities
+        }
         
         var allKnowledge = OCKRevisionRecord.KnowledgeVector()
         for rev in revisions.map({ $0.knowledgeVector }) {
@@ -245,7 +251,12 @@ extension CKCareKitRemoteSyncWithFirestore {
         _ revisions: [OCKRevisionRecord],
         _ knowledgeVector: OCKRevisionRecord.KnowledgeVector
     ) -> OCKRevisionRecord {
-        let newEntities = revisions.filter({ knowledgeVector >= $0.knowledgeVector }).flatMap { $0.entities }
+        let newEntities = revisions.filter {
+            knowledgeVector >= $0.knowledgeVector
+        }
+        .flatMap {
+            $0.entities
+        }
         
         var allKnowledge = knowledgeVector
         for rev in revisions.map({ $0.knowledgeVector }) {

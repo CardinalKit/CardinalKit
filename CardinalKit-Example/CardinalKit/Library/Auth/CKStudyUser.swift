@@ -5,9 +5,10 @@
 //  Copyright © 2019 Stanford University. All rights reserved.
 //
 
-import Foundation
-import Firebase
 import CardinalKit
+import Firebase
+import Foundation
+
 
 class CKStudyUser: ObservableObject {
     static let shared = CKStudyUser()
@@ -18,7 +19,7 @@ class CKStudyUser: ObservableObject {
      * the current user only resolves if we are logged in
      **************************************************************/
     var currentUser: User? {
-        return Auth.auth().currentUser
+        Auth.auth().currentUser
     }
 
     /* **************************************************************
@@ -41,7 +42,7 @@ class CKStudyUser: ObservableObject {
         return nil
     }
 
-    var studyCollection: String?{
+    var studyCollection: String? {
         if let bundleId = Bundle.main.bundleIdentifier {
             return "/studies/\(bundleId)/"
         }
@@ -58,7 +59,7 @@ class CKStudyUser: ObservableObject {
 
     var email: String? {
         get {
-            return UserDefaults.standard.string(forKey: Constants.prefUserEmail)
+            UserDefaults.standard.string(forKey: Constants.prefUserEmail)
         }
         set {
             if let newValue = newValue {
@@ -70,12 +71,12 @@ class CKStudyUser: ObservableObject {
     }
 
     var isLoggedIn: Bool {
-        return (currentUser?.isEmailVerified ?? false) && UserDefaults.standard.bool(forKey: Constants.prefConfirmedLogin)
+        (currentUser?.isEmailVerified ?? false) && UserDefaults.standard.bool(forKey: Constants.prefConfirmedLogin)
     }
 
     init() {
         // listen for changes in authentication state from Firebase and update currentUser
-        authStateHandle = Auth.auth().addStateDidChangeListener { [weak self] (_, _) in
+        authStateHandle = Auth.auth().addStateDidChangeListener { [weak self] _, _ in
             self?.objectWillChange.send()
         }
     }
@@ -105,9 +106,12 @@ class CKStudyUser: ObservableObject {
         let actionCodeSettings = ActionCodeSettings()
         actionCodeSettings.url = URL(string: "https://cs342.page.link")
         actionCodeSettings.handleCodeInApp = true // The sign-in operation has to always be completed in the app.
-        actionCodeSettings.setIOSBundleID(Bundle.main.bundleIdentifier!)
 
-        Auth.auth().sendSignInLink(toEmail: email, actionCodeSettings: actionCodeSettings) { (error) in
+        if let bundleId = Bundle.main.bundleIdentifier {
+            actionCodeSettings.setIOSBundleID(bundleId)
+        }
+
+        Auth.auth().sendSignInLink(toEmail: email, actionCodeSettings: actionCodeSettings) { error in
             if let error = error {
                 print(error.localizedDescription)
                 completion(false)
@@ -128,9 +132,9 @@ class CKStudyUser: ObservableObject {
             CKSendHelper.createNecessaryDocuments(path: dataBucket)
             let settings = FirestoreSettings()
             settings.isPersistenceEnabled = false
-            let db = Firestore.firestore()
-            db.settings = settings
-            db.collection(dataBucket).document(uid).setData(
+            let database = Firestore.firestore()
+            database.settings = settings
+            database.collection(dataBucket).document(uid).setData(
                 [
                     "userID": uid,
                     "lastActive": Date().ISOStringFromDate(),

@@ -5,8 +5,8 @@
 //  Copyright © 2019 Stanford University. All rights reserved.
 //
 
-import ResearchKit
 import ModelsR4
+import ResearchKit
 
 
 /**

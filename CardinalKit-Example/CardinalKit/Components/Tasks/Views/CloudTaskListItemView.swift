@@ -16,7 +16,10 @@ struct CloudTaskListItemView: View {
     var body: some View {
         HStack {
             if let image = item.image {
-                Image(uiImage: image).resizable().frame(width: 32, height: 32)
+                Image(uiImage: image)
+                    .resizable()
+                    .frame(width: 32, height: 32)
+                    .accessibilityLabel(Text("Task Logo"))
             }
             VStack(alignment: .leading) {
                 Text(item.title).font(.system(size: 18, weight: .semibold, design: .default))

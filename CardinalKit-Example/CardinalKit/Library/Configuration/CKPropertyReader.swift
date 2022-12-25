@@ -10,6 +10,7 @@ import Foundation
 import SwiftUI
 import UIKit
 
+/// Reads values from a Property List file
 public class CKPropertyReader {
     var data: [String: AnyObject] = [:]
     
@@ -38,29 +39,29 @@ public class CKPropertyReader {
 
     // read from stored value
     func read(query: String) -> String? {
-        return data[query] as? String
+        data[query] as? String
     }
 
     func readBool(query: String) -> Bool? {
-        return data[query] as? Bool
+        data[query] as? Bool
     }
 
     func readAny(query: String) -> AnyObject? {
-        return data[query]
+        data[query]
     }
 
     // read from stored dictionary
     func readDict(query: String) -> [String: String]? {
-        return data[query] as? [String: String]
+        data[query] as? [String: String]
     }
 
     subscript(query: String) -> [String: AnyObject]? {
-        return data[query] as? [String: AnyObject]
+        data[query] as? [String: AnyObject]
     }
 
     // read from stored dictionary
     func readArray(query: String) -> [String]? {
-        return data[query] as? [String]
+        data[query] as? [String]
     }
 
     // read color from stored dictionary
