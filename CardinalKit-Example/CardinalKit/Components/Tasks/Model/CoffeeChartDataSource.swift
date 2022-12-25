@@ -50,7 +50,7 @@ extension CoffeeChartDataSource {
         CKApp.requestData(route: route, onCompletion: { result in
            guard let document = result as? DocumentSnapshot,
                  let payload = document.data()?["results"] as? [[AnyHashable: Any]] else {
-                onCompletion([NSNumber: CGFloat]())
+               onCompletion([NSNumber: CGFloat]())
                  return
              }
             for item in payload {

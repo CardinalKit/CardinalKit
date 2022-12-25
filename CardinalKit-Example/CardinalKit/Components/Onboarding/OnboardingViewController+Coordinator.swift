@@ -36,7 +36,7 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
         switch reason {
         case .completed:
             UserDefaults.standard.set(true, forKey: Constants.onboardingDidComplete)
-            
+
             if let signatureResult = taskViewController.result.stepResult(
                 forStepIdentifier: "ConsentReviewStep"
             )?.results?.first as? ORKConsentSignatureResult {
@@ -47,13 +47,14 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
                     let config = CKPropertyReader(file: "CKConfiguration")
                     let consentFileName = config.read(query: "Consent File Name") ?? "My Consent File"
                     
-                    var docURL = (FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)).last
+                    var docURL = (FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)).first
                     docURL = docURL?.appendingPathComponent("\(consentFileName).pdf")
                     
                     do {
                         guard let url = docURL else {
                             return
                         }
+                        
                         try data?.write(to: url)
                         
                         UserDefaults.standard.set(url.path, forKey: "consentFormURL")

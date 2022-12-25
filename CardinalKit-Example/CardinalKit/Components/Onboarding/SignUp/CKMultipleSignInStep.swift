@@ -29,7 +29,7 @@ public class CKMultipleSignInStep: ORKQuestionStep {
 }
 
 public class CKMultipleSignInStepViewController: ORKQuestionStepViewController, ASAuthorizationControllerDelegate {
-    public var CKMultipleSignInStep: CKMultipleSignInStep? {
+    public var CKMultipleSignInStep: CKMultipleSignInStep! {
         step as? CKMultipleSignInStep
     }
     
@@ -37,7 +37,6 @@ public class CKMultipleSignInStepViewController: ORKQuestionStepViewController, 
         addSignInLabel()
         addSocialButtons()
         self.view.backgroundColor = .white
-        super.viewDidLoad()
     }
 
     func addSignInLabel() {
@@ -63,9 +62,9 @@ public class CKMultipleSignInStepViewController: ORKQuestionStepViewController, 
                 reference: button,
                 action: #selector(loginEmailAndPasswordAction)
             )
-
             self.view.addSubview(buttonEmailPassword)
             button = buttonEmailPassword
+
         }
 
         if config["Login-Sign-In-With-Facebook"]?["Enabled"] as? Bool == true {
@@ -91,8 +90,7 @@ public class CKMultipleSignInStepViewController: ORKQuestionStepViewController, 
                 borderColor: UIColor(red: 66, green: 133, blue: 244),
                 reference: button,
                 action: #selector(loginGoogleAction),
-                icon: "google"
-            )
+                icon: "google")
             self.view.addSubview(buttonGoogle)
             button = buttonGoogle
         }
@@ -121,7 +119,6 @@ public class CKMultipleSignInStepViewController: ORKQuestionStepViewController, 
         return signInLabel
     }
 
-    // swiftlint:disable:next function_parameter_count
     func getSignInButton(
         title: String,
         backgroundColor: UIColor,
@@ -156,6 +153,7 @@ public class CKMultipleSignInStepViewController: ORKQuestionStepViewController, 
             button.setImage(uiImage, for: .normal)
             button.imageEdgeInsets.left = -imageOffset
         }
+
         return button
     }
     
@@ -166,27 +164,17 @@ public class CKMultipleSignInStepViewController: ORKQuestionStepViewController, 
     }
     
     @objc
-    func loginFacebookAction(sender: AnyObject) { // action of the custom button in the storyboard
+    func loginFacebookAction(sender: AnyObject) {
         let fbLoginManager = LoginManager()
-
         fbLoginManager.logIn(permissions: ["email"], from: self) { result, error -> Void in
-            if error == nil {
-                guard let result = result else {
-                    return
-                }
-
+            if error == nil, let result = result {
                 let fbloginresult: LoginManagerLoginResult = result
-
                 if result.isCancelled {
                     return
                 }
 
                 if fbloginresult.grantedPermissions.contains("email") {
-                    guard let token = AccessToken.current?.tokenString else {
-                        return
-                    }
-
-                    let credential = FacebookAuthProvider.credential(withAccessToken: token)
+                    let credential = FacebookAuthProvider.credential(withAccessToken: AccessToken.current!.tokenString)
                     Auth.auth().signIn(with: credential) { _, error in
                         if let error = error {
                             self.showError(error)
@@ -200,7 +188,7 @@ public class CKMultipleSignInStepViewController: ORKQuestionStepViewController, 
         }
     }
     
-    private var currentNonce: String?
+    private var currentNonce: String!
     
     @objc
     func loginAppleAction() {
@@ -208,7 +196,7 @@ public class CKMultipleSignInStepViewController: ORKQuestionStepViewController, 
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let request = appleIDProvider.createRequest()
         request.requestedScopes = [.email]
-        request.nonce = currentNonce?.sha256
+        request.nonce = currentNonce.sha256
 
         let authorizationController = ASAuthorizationController(authorizationRequests: [request])
         authorizationController.delegate = self
@@ -278,7 +266,8 @@ public class CKMultipleSignInStepViewController: ORKQuestionStepViewController, 
             Auth.auth().signIn(with: credential) { _, error in
                 if let error = error {
                     self.showError(error)
-                } else {
+                }
+                else {
                     self.setAnswer(false)
                     super.goForward()
                 }
@@ -294,9 +283,9 @@ public class CKMultipleSignInStepViewController: ORKQuestionStepViewController, 
     }
 }
 
-extension String {
+fileprivate extension String {
     var sha256: String {
-        SHA256.hash(data: Data(utf8))
+        return SHA256.hash(data: Data(utf8))
             .compactMap { String(format: "%02x", $0) }
             .joined()
     }
