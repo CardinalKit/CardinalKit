@@ -28,12 +28,11 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import UIKit
 import CareKit
 import CareKitUI
+import UIKit
 
 class TipView: OCKView, OCKCardable {
-
     var cardView: UIView { self }
     let contentView: UIView = OCKView()
     let headerView = OCKHeaderView()
@@ -50,6 +49,7 @@ class TipView: OCKView, OCKCardable {
         setup()
     }
 
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -77,7 +77,8 @@ class TipView: OCKView, OCKCardable {
         blurView.translatesAutoresizingMaskIntoConstraints = false
         headerView.translatesAutoresizingMaskIntoConstraints = false
         imageHeightConstraint = imageView.heightAnchor.constraint(
-            equalToConstant: scaledImageHeight(compatibleWith: traitCollection))
+            equalToConstant: scaledImageHeight(compatibleWith: traitCollection)
+        )
 
         NSLayoutConstraint.activate([
             headerView.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor),
@@ -98,7 +99,7 @@ class TipView: OCKView, OCKCardable {
     }
 
     func scaledImageHeight(compatibleWith traitCollection: UITraitCollection) -> CGFloat {
-        return UIFontMetrics.default.scaledValue(for: 200, compatibleWith: traitCollection)
+        UIFontMetrics.default.scaledValue(for: 200, compatibleWith: traitCollection)
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

@@ -6,18 +6,16 @@
 //  Copyright © 2020 CocoaPods. All rights reserved.
 //
 
-import Foundation
 import CareKit
-import ResearchKit
-import CareKitUI
 import CareKitStore
+import CareKitUI
+import ResearchKit
+
 
 // 1. Subclass a task view controller to customize the control flow and present a ResearchKit survey!
 class SurveyItemViewController: OCKInstructionsTaskViewController, ORKTaskViewControllerDelegate {
-
     // 2. This method is called when the use taps the button!
     override func taskView(_ taskView: UIView & OCKTaskDisplayable, didCompleteEvent isComplete: Bool, at indexPath: IndexPath, sender: Any?) {
-
         // 2a. If the task was marked incomplete, fall back on the super class's default behavior or deleting the outcome.
         if !isComplete {
             super.taskView(taskView, didCompleteEvent: isComplete, at: indexPath, sender: sender)
@@ -25,8 +23,21 @@ class SurveyItemViewController: OCKInstructionsTaskViewController, ORKTaskViewCo
         }
 
         // 2b. If the user attempted to mark the task complete, display a ResearchKit survey.
-        let answerFormat = ORKAnswerFormat.scale(withMaximumValue: 5, minimumValue: 1, defaultValue: 5, step: 1, vertical: false, maximumValueDescription: "A LOT!", minimumValueDescription: "a little")
-        let feedbackStep = ORKQuestionStep(identifier: "feedback", title: "Feedback", question: "How are you liking CardinalKit?", answer: answerFormat)
+        let answerFormat = ORKAnswerFormat.scale(
+            withMaximumValue: 5,
+            minimumValue: 1,
+            defaultValue: 5,
+            step: 1,
+            vertical: false,
+            maximumValueDescription: "A LOT!",
+            minimumValueDescription: "a little"
+        )
+        let feedbackStep = ORKQuestionStep(
+            identifier: "feedback",
+            title: "Feedback",
+            question: "How are you liking CardinalKit?",
+            answer: answerFormat
+        )
         let surveyTask = ORKOrderedTask(identifier: "feedback", steps: [feedbackStep])
         let surveyViewController = ORKTaskViewController(task: surveyTask, taskRun: nil)
         surveyViewController.delegate = self
@@ -43,18 +54,19 @@ class SurveyItemViewController: OCKInstructionsTaskViewController, ORKTaskViewCo
             return
         }
         // 4a. Retrieve the result from the ResearchKit survey
-        let survey = taskViewController.result.results!.first(where: { $0.identifier == "feedback" }) as! ORKStepResult
-        let feedbackResult = survey.results!.first as! ORKScaleQuestionResult
+        guard let survey = taskViewController.result.results?.first(where: { $0.identifier == "feedback" }) as? ORKStepResult,
+              let feedbackResult = survey.results?.first as? ORKScaleQuestionResult else {
+                  return
+              }
         
-        if let ScaleAnswer = feedbackResult.scaleAnswer{
+        if let scaleAnswer = feedbackResult.scaleAnswer {
             // 4b. Save the result into CareKit's store
-            let answer = Int(truncating: ScaleAnswer)
+            let answer = Int(truncating: scaleAnswer)
             controller.appendOutcomeValue(value: answer, at: IndexPath(item: 0, section: 0), completion: nil)
             // 5. Upload results to GCP, using the CKTaskViewControllerDelegate class.
             let gcpDelegate = CKUploadToGCPTaskViewControllerDelegate()
             gcpDelegate.taskViewController(taskViewController, didFinishWith: reason, error: error)
-        }
-        else{
+        } else {
             taskView.completionButton.isSelected = false
             let gcpDelegate = CKUploadToGCPTaskViewControllerDelegate()
             gcpDelegate.taskViewController(taskViewController, didFinishWith: .discarded, error: error)
@@ -63,7 +75,6 @@ class SurveyItemViewController: OCKInstructionsTaskViewController, ORKTaskViewCo
 }
 
 class SurveyItemViewSynchronizer: OCKInstructionsTaskViewSynchronizer {
-
     // Customize the initial state of the view
     override func makeView() -> OCKInstructionsTaskView {
         let instructionsView = super.makeView()

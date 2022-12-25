@@ -6,15 +6,19 @@
 //  Copyright © 2022 CardinalKit. All rights reserved.
 //
 
-import Foundation
-import ResearchKit
-import Firebase
-import ModelsR4
 import CardinalKit
+import Firebase
+import Foundation
+import ModelsR4
+import ResearchKit
 
 
 class CKUploadFHIRTaskViewControllerDelegate: NSObject, ORKTaskViewControllerDelegate {
-    func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
+    func taskViewController(
+        _ taskViewController: ORKTaskViewController,
+        didFinishWith reason: ORKTaskViewControllerFinishReason,
+        error: Error?
+    ) {
         switch reason {
         case .completed:
             let fhirResponses = taskViewController.result.fhirResponse

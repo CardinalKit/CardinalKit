@@ -6,8 +6,9 @@
 //  Copyright © 2019 Stanford University. All rights reserved.
 //
 
-import SwiftUI
 import ResearchKit
+import SwiftUI
+
 
 struct ChangePasscodeView: View {
     @State var showPasscode = false
@@ -17,16 +18,22 @@ struct ChangePasscodeView: View {
             Text("Change Passcode")
             Spacer()
             Text("›")
-        }.frame(height: 70).contentShape(Rectangle())
-            .gesture(TapGesture().onEnded({
+        }
+        .frame(height: 70)
+        .contentShape(Rectangle())
+        .gesture(
+            TapGesture().onEnded {
                 if ORKPasscodeViewController.isPasscodeStoredInKeychain() {
                     self.showPasscode.toggle()
                 }
-        })).sheet(isPresented: $showPasscode, onDismiss: {
-            
-        }, content: {
-            PasscodeViewController()
-        })
+            }
+        )
+        .sheet(
+            isPresented: $showPasscode,
+            content: {
+                PasscodeViewController()
+            }
+        )
     }
 }
 

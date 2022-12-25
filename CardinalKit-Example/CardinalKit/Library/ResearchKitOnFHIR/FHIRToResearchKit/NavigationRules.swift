@@ -11,7 +11,8 @@ import ResearchKit
 
 
 extension ORKNavigableOrderedTask {
-    /// This method converts predicates contained in the  "enableWhen" property on FHIR `QuestionnaireItem` to ResearchKit `ORKPredicateSkipStepNavigationRule` which are applied to an `ORKNavigableOrderedTask`.
+    /// This method converts predicates contained in the  "enableWhen" property on FHIR `QuestionnaireItem`
+    /// to ResearchKit `ORKPredicateSkipStepNavigationRule` which are applied to an `ORKNavigableOrderedTask`.
     /// - Parameters:
     ///    - questions: An array of FHIR QuestionnaireItem objects.
     func constructNavigationRules(questions: [QuestionnaireItem]) throws {
@@ -44,7 +45,8 @@ extension QuestionnaireItemEnableWhen {
             let resultSelector = ORKResultSelector(resultIdentifier: enableQuestionId)
             let predicate: NSPredicate?
 
-            // The translation from FHIR to ResearchKit preedicates requires negating the FHIR preedicates as FHIR preedicates activate steps while ResearchKit uses them to skip steps
+            // The translation from FHIR to ResearchKit predicates requires negating the FHIR predicates as
+            // FHIR preedicates activate steps while ResearchKit uses them to skip steps
             switch answer {
             case .coding(let coding):
                 predicate = try coding.predicate(with: resultSelector, operator: fhirOperator)
@@ -72,7 +74,10 @@ extension Decimal {
 }
 
 extension Coding {
-    fileprivate func predicate(with resultSelector: ORKResultSelector, operator fhirOperator: QuestionnaireItemOperator) throws -> NSPredicate? {
+    fileprivate func predicate(
+        with resultSelector: ORKResultSelector,
+        operator fhirOperator: QuestionnaireItemOperator
+    ) throws -> NSPredicate? {
         guard let code = code?.value?.string,
               let system = system?.value?.url.absoluteString else {
             return nil
@@ -100,7 +105,10 @@ extension Coding {
 }
 
 extension FHIRPrimitive where PrimitiveType == FHIRBool {
-    fileprivate func predicate(with resultSelector: ORKResultSelector, operator fhirOperator: QuestionnaireItemOperator) throws -> NSPredicate? {
+    fileprivate func predicate(
+        with resultSelector: ORKResultSelector,
+        operator fhirOperator: QuestionnaireItemOperator
+    ) throws -> NSPredicate? {
         guard let booleanValue = value?.bool else {
             return nil
         }
@@ -126,7 +134,10 @@ extension FHIRPrimitive where PrimitiveType == FHIRBool {
 }
 
 extension FHIRPrimitive where PrimitiveType == FHIRDate {
-    fileprivate func predicate(with resultSelector: ORKResultSelector, operator fhirOperator: QuestionnaireItemOperator) throws -> NSPredicate? {
+    fileprivate func predicate(
+        with resultSelector: ORKResultSelector,
+        operator fhirOperator: QuestionnaireItemOperator
+    ) throws -> NSPredicate? {
         do {
             let date = try value?.asNSDate() as? Date
             switch fhirOperator {
@@ -152,7 +163,10 @@ extension FHIRPrimitive where PrimitiveType == FHIRDate {
 }
 
 extension FHIRPrimitive where PrimitiveType == FHIRInteger {
-    fileprivate func predicate(with resultSelector: ORKResultSelector, operator fhirOperator: QuestionnaireItemOperator) throws -> NSPredicate? {
+    fileprivate func predicate(
+        with resultSelector: ORKResultSelector,
+        operator fhirOperator: QuestionnaireItemOperator
+    ) throws -> NSPredicate? {
         guard let integerValue = value?.integer else {
             return nil
         }
@@ -187,7 +201,10 @@ extension FHIRPrimitive where PrimitiveType == FHIRInteger {
 }
 
 extension FHIRPrimitive where PrimitiveType == FHIRDecimal {
-    fileprivate func predicate(with resultSelector: ORKResultSelector, operator fhirOperator: QuestionnaireItemOperator) throws -> NSPredicate? {
+    fileprivate func predicate(
+        with resultSelector: ORKResultSelector,
+        operator fhirOperator: QuestionnaireItemOperator
+    ) throws -> NSPredicate? {
         guard let decimalValue = value?.decimal else {
             return nil
         }

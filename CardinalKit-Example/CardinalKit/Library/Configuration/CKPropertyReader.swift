@@ -3,75 +3,84 @@
 //  CardinalKit_Example
 //
 //  Created by Varun Shenoy on 8/1/20.
-//  Copyright © 2020 CocoaPods. All rights reserved.
+//  Copyright © 2020 CardinalKit. All rights reserved.
 //
 
 import Foundation
-import UIKit
 import SwiftUI
+import UIKit
 
+/// Reads values from a Property List file
 public class CKPropertyReader {
-    
     var data: [String: AnyObject] = [:]
     
     init(file: String) {
-        
         // read input plist file
-        var propertyListFormat =  PropertyListSerialization.PropertyListFormat.xml
-        let plistPath: String? = Bundle.main.path(forResource: file, ofType: "plist")!
-        let plistXML = FileManager.default.contents(atPath: plistPath!)!
+        var propertyListFormat = PropertyListSerialization.PropertyListFormat.xml
+        guard let plistPath = Bundle.main.path(forResource: file, ofType: "plist"),
+              let plistXML = FileManager.default.contents(atPath: plistPath) else {
+            return
+        }
         
         // convert plist file into dictionary
         do {
-            self.data = try PropertyListSerialization.propertyList(from: plistXML, options: .mutableContainersAndLeaves, format: &propertyListFormat) as! [String:AnyObject]
-
+            let data = try PropertyListSerialization.propertyList(
+                from: plistXML,
+                options: .mutableContainersAndLeaves,
+                format: &propertyListFormat
+            )
+            if let dataDict = data as? [String: AnyObject] {
+                self.data = dataDict
+            }
         } catch {
             print("Error reading plist: \(error), format: \(propertyListFormat)")
         }
     }
-    
+
     // read from stored value
-    func read(query: String) -> String {
-        return data[query] as! String
-    }
-    
-    func readBool(query: String) -> Bool {
-        return data[query] as! Bool
-    }
-    
-    func readAny(query: String) -> AnyObject {
-        return data[query]!
-    }
-    
-    // read from stored dictionary
-    func readDict(query: String) -> [String:String] {
-        return data[query] as! [String:String]
+    func read(query: String) -> String? {
+        data[query] as? String
     }
 
-    subscript(query: String) -> [String: AnyObject] {
-        return data[query] as! [String: AnyObject]
+    func readBool(query: String) -> Bool? {
+        data[query] as? Bool
+    }
+
+    func readAny(query: String) -> AnyObject? {
+        data[query]
     }
 
     // read from stored dictionary
-    func readArray(query: String) -> [String] {
-        return data[query] as! [String]
+    func readDict(query: String) -> [String: String]? {
+        data[query] as? [String: String]
     }
-    
+
+    subscript(query: String) -> [String: AnyObject]? {
+        data[query] as? [String: AnyObject]
+    }
+
+    // read from stored dictionary
+    func readArray(query: String) -> [String]? {
+        data[query] as? [String]
+    }
+
     // read color from stored dictionary
-    func readColor(query: String) -> UIColor {
-        let hex = self.read(query: query)
-        var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+    func readColor(query: String) -> UIColor? {
+        guard let hex = self.read(query: query) else {
+            return nil
+        }
+        var cString: String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
 
-        if (cString.hasPrefix("#")) {
+        if cString.hasPrefix("#") {
             cString.remove(at: cString.startIndex)
         }
 
-        if ((cString.count) != 6) {
+        if (cString.count) != 6 {
             return UIColor.gray
         }
 
-        var rgbValue:UInt32 = 0
-        Scanner(string: cString).scanHexInt32(&rgbValue)
+        var rgbValue: UInt64 = 0
+        Scanner(string: cString).scanHexInt64(&rgbValue)
 
         return UIColor(
             red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
@@ -83,6 +92,7 @@ public class CKPropertyReader {
 }
 
 extension UIColor {
+    // swiftlint:disable:next large_tuple
     var rgba: (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
         var red: CGFloat = 0
         var green: CGFloat = 0
@@ -96,9 +106,11 @@ extension UIColor {
 
 extension Color {
     init(uiColor: UIColor) {
-        self.init(red: Double(uiColor.rgba.red),
-                  green: Double(uiColor.rgba.green),
-                  blue: Double(uiColor.rgba.blue),
-                  opacity: Double(uiColor.rgba.alpha))
+        self.init(
+            red: Double(uiColor.rgba.red),
+            green: Double(uiColor.rgba.green),
+            blue: Double(uiColor.rgba.blue),
+            opacity: Double(uiColor.rgba.alpha)
+        )
     }
 }

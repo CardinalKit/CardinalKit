@@ -6,10 +6,10 @@
 //  Copyright © 2020 Stanford University. All rights reserved.
 //
 
+import Firebase
+import ResearchKit
 import SwiftUI
 import UIKit
-import ResearchKit
-import Firebase
 
 struct OnboardingElement {
     let logo: String
@@ -18,27 +18,38 @@ struct OnboardingElement {
 }
 
 struct OnboardingUIView: View {
-    
     var onboardingElements: [OnboardingElement] = []
     let color: Color
     let config = CKPropertyReader(file: "CKConfiguration")
     @State var showingOnboard = false
     @State var showingLogin = false
     
-    var onComplete: (() -> Void)? = nil
+    var onComplete: (() -> Void)?
     
     init(onComplete: (() -> Void)? = nil) {
-        let onboardingData = config.readAny(query: "Onboarding") as! [[String:String]]
-        
-        
-        self.color = Color(config.readColor(query: "Primary Color"))
+        self.color = Color(config.readColor(query: "Primary Color") ?? UIColor.primaryColor())
         self.onComplete = onComplete
-        
-        for data in onboardingData {
-            self.onboardingElements.append(OnboardingElement(logo: data["Logo"]!, title: data["Title"]!, description: data["Description"]!))
+
+        if let onboardingData = config.readAny(query: "Onboarding") as? [[String: String]] {
+            for data in onboardingData {
+                guard let logo = data["Logo"],
+                      let title = data["Title"],
+                      let description = data["Description"] else {
+                    continue
+                }
+
+                let element = OnboardingElement(
+                    logo: logo,
+                    title: title,
+                    description: description
+                )
+
+                self.onboardingElements.append(element)
+            }
         }
     }
 
+    // swiftlint:disable closure_body_length
     var body: some View {
         VStack(spacing: 10) {
             Spacer()
@@ -46,21 +57,22 @@ struct OnboardingUIView: View {
             Image("SBDLogoGrey")
                 .resizable()
                 .scaledToFit()
-                .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN*4)
-                .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN*4)
+                .padding(.leading, Metrics.paddingHorizontalMain * 4)
+                .padding(.trailing, Metrics.paddingHorizontalMain * 4)
+                .accessibilityLabel(Text("Logo"))
             
             Spacer(minLength: 2)
             
-            Text(config.read(query: "Study Title"))
+            Text(config.read(query: "Study Title") ?? "CardinalKit")
                 .foregroundColor(self.color)
                 .multilineTextAlignment(.center)
                 .font(.system(size: 35, weight: .bold, design: .default))
-                .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN)
-                .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN)
+                .padding(.leading, Metrics.paddingHorizontalMain)
+                .padding(.trailing, Metrics.paddingHorizontalMain)
             
-            Text(config.read(query: "Team Name"))
-                .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN)
-                .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN)
+            Text(config.read(query: "Team Name") ?? "Stanford Byers Center for Biodesign")
+                .padding(.leading, Metrics.paddingHorizontalMain)
+                .padding(.trailing, Metrics.paddingHorizontalMain)
 
             PageView(self.onboardingElements.map { InfoView(logo: $0.logo, title: $0.title, description: $0.description, color: self.color) })
 
@@ -72,21 +84,24 @@ struct OnboardingUIView: View {
                     self.showingOnboard.toggle()
                 }, label: {
                      Text("Join Study")
-                        .padding(Metrics.PADDING_BUTTON_LABEL)
+                        .padding(Metrics.paddingButtonLabel)
                         .frame(maxWidth: .infinity)
                         .foregroundColor(.white)
                         .background(self.color)
-                        .cornerRadius(Metrics.RADIUS_CORNER_BUTTON)
+                        .cornerRadius(Metrics.radiusCornerButton)
                         .font(.system(size: 20, weight: .bold, design: .default))
                 })
-                .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN)
-                .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN)
-                .sheet(isPresented: $showingOnboard, onDismiss: {
-                    self.onComplete?()
-                }, content: {
-                    OnboardingViewController().ignoresSafeArea(edges: .all)
-                })
-        
+                .padding(.leading, Metrics.paddingHorizontalMain)
+                .padding(.trailing, Metrics.paddingHorizontalMain)
+                .sheet(
+                    isPresented: $showingOnboard,
+                    onDismiss: {
+                        self.onComplete?()
+                    },
+                    content: {
+                        OnboardingViewController().ignoresSafeArea(edges: .all)
+                    }
+                )
                 Spacer()
             }
             
@@ -96,26 +111,28 @@ struct OnboardingUIView: View {
                     self.showingLogin.toggle()
                 }, label: {
                      Text("I'm a Returning User")
-                        .padding(Metrics.PADDING_BUTTON_LABEL)
+                        .padding(Metrics.paddingButtonLabel)
                         .frame(maxWidth: .infinity)
                         .foregroundColor(self.color)
                         .font(.system(size: 20, weight: .bold, design: .default))
                         .overlay(
-                                    RoundedRectangle(cornerRadius: Metrics.RADIUS_CORNER_BUTTON)
+                                    RoundedRectangle(cornerRadius: Metrics.radiusCornerButton)
                                         .stroke(self.color, lineWidth: 2)
                             )
                 })
-                .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN)
-                .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN)
-                .sheet(isPresented: $showingLogin, onDismiss: {
-                    self.onComplete?()
-                }, content: {
-                    LoginExistingUserViewController().ignoresSafeArea(edges: .all)
-                })
-        
+                .padding(.leading, Metrics.paddingHorizontalMain)
+                .padding(.trailing, Metrics.paddingHorizontalMain)
+                .sheet(
+                    isPresented: $showingLogin,
+                    onDismiss: {
+                        self.onComplete?()
+                    },
+                    content: {
+                        LoginExistingUserViewController().ignoresSafeArea(edges: .all)
+                    }
+                )
                 Spacer()
             }
-            
             Spacer()
         }
     }

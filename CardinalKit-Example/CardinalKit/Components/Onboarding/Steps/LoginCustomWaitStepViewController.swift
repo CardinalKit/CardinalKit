@@ -9,7 +9,6 @@ import Foundation
 import ResearchKit
 
 class LoginCustomWaitStep: ORKStep {
-    
     static let identifier = "LoginCustomWaitStep"
     
     override func stepViewControllerClass() -> AnyClass {
@@ -23,11 +22,9 @@ class LoginCustomWaitStep: ORKStep {
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
 }
 
 class LoginCustomWaitStepViewController: ORKStepViewController {
-    
     var onLoginCallback: NSObjectProtocol?
     
     override init(step: ORKStep?) {
@@ -41,9 +38,11 @@ class LoginCustomWaitStepViewController: ORKStepViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //loadCustomBackButton()
-        
-        onLoginCallback = NotificationCenter.default.addObserver(forName: NSNotification.Name(Constants.notificationUserLogin), object: nil, queue: OperationQueue.main) { (notification) in
+        onLoginCallback = NotificationCenter.default.addObserver(
+            forName: NSNotification.Name(Constants.notificationUserLogin),
+            object: nil,
+            queue: OperationQueue.main
+        ) { _ in
             self.continueIfLoggedIn()
             print("Continuing; received callback.")
         }
@@ -75,7 +74,7 @@ class LoginCustomWaitStepViewController: ORKStepViewController {
         let backItem = UIBarButtonItem()
         backItem.title = "wrong email?"
         
-        self.navigationItem.backBarButtonItem = backItem 
+        self.navigationItem.backBarButtonItem = backItem
     }
     
     @IBAction func wrongEmail(_ sender: UIButton) {
@@ -87,5 +86,4 @@ class LoginCustomWaitStepViewController: ORKStepViewController {
             UIApplication.shared.open(mailURL, options: [:], completionHandler: nil)
         }
     }
-    
 }

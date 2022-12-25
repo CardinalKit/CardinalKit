@@ -11,12 +11,7 @@ import SwiftUI
 struct SupportView: View {
     let color: Color
     var phone = ""
-    
-    init(color: Color, phone: String) {
-        self.color = color
-        self.phone = phone
-    }
-    
+
     var body: some View {
         HStack {
             Text("Support")
@@ -25,12 +20,22 @@ struct SupportView: View {
         }
         .frame(height: 60)
         .contentShape(Rectangle())
-        .gesture(TapGesture().onEnded({
-            let telephone = "tel://"
-                let formattedString = telephone + self.phone
-            guard let url = URL(string: formattedString) else { return }
-            UIApplication.shared.open(url)
-        }))
+        .gesture(
+            TapGesture()
+                .onEnded {
+                    let telephone = "tel://"
+                    let formattedString = telephone + self.phone
+                    guard let url = URL(string: formattedString) else {
+                        return
+                    }
+                    UIApplication.shared.open(url)
+                }
+        )
+    }
+
+    init(color: Color, phone: String) {
+        self.color = color
+        self.phone = phone
     }
 }
 

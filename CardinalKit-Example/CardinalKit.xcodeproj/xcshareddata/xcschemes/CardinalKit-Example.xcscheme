@@ -75,6 +75,17 @@
                ReferencedContainer = "container:CardinalKit.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "27663F2629574F1500A34080"
+               BuildableName = "CardinalKit ExampleTests.xctest"
+               BlueprintName = "CardinalKit ExampleTests"
+               ReferencedContainer = "container:CardinalKit.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

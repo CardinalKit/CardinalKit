@@ -6,32 +6,32 @@
 //  Copyright © 2019 Stanford University. All rights reserved.
 //
 
-import SwiftUI
 import ResearchKit
+import SwiftUI
 
 struct CoffeeUIView: View {
-    
     var body: some View {
         VStack(spacing: 10) {
             Image("CKLogo")
                 .resizable()
                 .scaledToFit()
-                .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN*4)
-                .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN*4)
+                .padding(.leading, Metrics.paddingHorizontalMain * 4)
+                .padding(.trailing, Metrics.paddingHorizontalMain * 4)
+                .accessibilityLabel(Text("Logo"))
             
             CoffeePieChartView()
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
                 .scaledToFit()
-                .padding(Metrics.PADDING_HORIZONTAL_MAIN*4)
+                .padding(Metrics.paddingHorizontalMain * 4)
             
             Spacer()
             
             Image("SBDLogoGrey")
                 .resizable()
                 .scaledToFit()
-                .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN*4)
-                .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN*4)
-            
+                .padding(.leading, Metrics.paddingHorizontalMain * 4)
+                .padding(.trailing, Metrics.paddingHorizontalMain * 4)
+                .accessibilityLabel(Text("Logo"))
         }
     }
 }

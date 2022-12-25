@@ -5,8 +5,8 @@
 //  Copyright © 2019 Stanford University. All rights reserved.
 //
 
-import ResearchKit
 import Firebase
+import ResearchKit
 
 class LoginViewController: ORKLoginStepViewController {
     override func goForward() {
@@ -22,7 +22,7 @@ class LoginViewController: ORKLoginStepViewController {
 
             taskViewController?.present(alert, animated: false, completion: nil)
 
-            Auth.auth().signIn(withEmail: email, password: pass) { (res, error) in
+            Auth.auth().signIn(withEmail: email, password: pass) { _, error in
                 if let error = error {
                     alert.dismiss(animated: false) {
                         let alert = UIAlertController(title: "Login Error!", message: error.localizedDescription, preferredStyle: .alert)
@@ -40,52 +40,39 @@ class LoginViewController: ORKLoginStepViewController {
     override func forgotPasswordButtonTapped() {
         let alert = UIAlertController(title: "Reset Password", message: "Enter your email to get a link for password reset.", preferredStyle: .alert)
         
-        alert.addTextField { (textField) in
+        alert.addTextField { textField in
             textField.placeholder = "Enter your email"
         }
 
-        alert.addAction(UIAlertAction(title: "Submit", style: .default, handler: { (action) in
-            let textField = alert.textFields![0]
-            Auth.auth().sendPasswordReset(withEmail: textField.text!) { error in
+        alert.addAction(UIAlertAction(title: "Submit", style: .default, handler: { _ in
+            guard let textField = alert.textFields?[0],
+                  let email = textField.text else {
+                return
+            }
+            Auth.auth().sendPasswordReset(withEmail: email) { error in
                 DispatchQueue.main.async {
-                    if error != nil {
+                    if let error = error {
                         alert.dismiss(animated: false, completion: nil)
-                        if let errCode = AuthErrorCode.Code(rawValue: error!._code) {
+                        if let errCode = AuthErrorCode.Code(rawValue: error._code) {
+                            let alert = UIAlertController(
+                                title: "Password Reset Error!",
+                                message: error.localizedDescription,
+                                preferredStyle: .alert
+                            )
+                            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
 
-                            switch errCode {
-                                default:
-                                    let alert = UIAlertController(title: "Password Reset Error!", message: error?.localizedDescription, preferredStyle: .alert)
-                                    alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-                                    
-                                    alert.dismiss(animated: false, completion: nil)
-                                    self.present(alert, animated: false)
-                            }
+                            alert.dismiss(animated: false, completion: nil)
+                            self.present(alert, animated: false)
                         }
-
                     } else {
                         print("Email sent!")
                     }
-
                 }
             }
         }))
-        
-//        alert.addAction(UIAlertAction(title: "Email", style: .default, handler: { (action) in
-//            let email = config.read(query: "Email")
-//                       EmailHelper.shared.sendEmail(subject: "App Support Request", body: "Enter your support request here.", to: email)
-//        }))
-//
-//        alert.addAction(UIAlertAction(title: "Phone", style: .default, handler: { (action) in
-//            let phone = config.read(query: "Phone")
-//            let telephone = "tel://"
-//            let formattedString = telephone + phone
-//            guard let url = URL(string: formattedString) else { return }
-//            UIApplication.shared.open(url)
-//        }))
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
 
         self.present(alert, animated: false)
     }
-    
 }

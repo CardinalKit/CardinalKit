@@ -40,7 +40,6 @@ extension ORKTaskResult {
         return questionnaireResponse
     }
 
-
     // MARK: Functions for creating FHIR responses from ResearchKit results
 
     private func createResponse(_ result: ORKResult) -> QuestionnaireResponseItem {

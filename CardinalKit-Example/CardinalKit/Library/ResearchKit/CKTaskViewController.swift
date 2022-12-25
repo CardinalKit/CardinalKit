@@ -3,36 +3,34 @@
 //  CardinalKit_Example
 //
 //  Created by Santiago Gutierrez on 10/12/20.
-//  Copyright © 2020 CocoaPods. All rights reserved.
+//  Copyright © 2020 CardinalKit. All rights reserved.
 //
 
-import UIKit
-import SwiftUI
 import ResearchKit
+import SwiftUI
+import UIKit
 
 struct CKTaskViewController: UIViewControllerRepresentable {
-    
-    let vc: ORKTaskViewController
+    typealias UIViewControllerType = ORKTaskViewController
+
+    let viewController: ORKTaskViewController
     let delegate: CKUploadToGCPTaskViewControllerDelegate
-    
+
     init(tasks: ORKOrderedTask) {
-        self.vc = ORKTaskViewController(task: tasks, taskRun: NSUUID() as UUID)
+        self.viewController = ORKTaskViewController(task: tasks, taskRun: UUID())
         self.delegate = CKUploadToGCPTaskViewControllerDelegate()
     }
-
-    typealias UIViewControllerType = ORKTaskViewController
     
     func updateUIViewController(_ taskViewController: ORKTaskViewController, context: Context) { }
+
     func makeUIViewController(context: Context) -> ORKTaskViewController {
-        
-        if vc.outputDirectory == nil {
-            vc.outputDirectory = self.delegate.CKGetTaskOutputDirectory(vc)
+        if viewController.outputDirectory == nil {
+            viewController.outputDirectory = self.delegate.CKGetTaskOutputDirectory(viewController)
         }
-        
-        self.vc.delegate = self.delegate // enables `ORKTaskViewControllerDelegate` below
-        
+
+        self.viewController.delegate = self.delegate // enables `ORKTaskViewControllerDelegate` below
+
         // & present the VC!
-        return self.vc
+        return self.viewController
     }
-    
 }

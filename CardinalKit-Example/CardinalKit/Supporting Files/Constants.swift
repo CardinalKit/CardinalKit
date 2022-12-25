@@ -8,8 +8,7 @@
 
 import Foundation
 
-class Constants {
-    
+enum Constants {
     static let prefConfirmedLogin = "PREF_CONFIRMED_LOGIN"
     static let prefFirstRunWasMarked = "PREF_FIRST_RUN"
     static let prefUserEmail = "PREF_USER_EMAIL"
@@ -27,5 +26,4 @@ class Constants {
     static let dataBucketMetrics = "metrics"
     
     static let onboardingDidComplete = "didCompleteOnboarding"
-    
 }

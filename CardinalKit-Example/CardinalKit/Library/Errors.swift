@@ -3,7 +3,7 @@
 //  CardinalKit_Example
 //
 //  Created by Santiago Gutierrez on 12/23/20.
-//  Copyright © 2020 CocoaPods. All rights reserved.
+//  Copyright © 2020 CardinalKit. All rights reserved.
 //
 
 enum CKError: Error {

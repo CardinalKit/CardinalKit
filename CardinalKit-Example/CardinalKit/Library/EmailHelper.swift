@@ -3,15 +3,15 @@
 //  CardinalKit_Example
 //
 //  Created by Santiago Gutierrez on 10/12/20.
-//  Copyright © 2020 CocoaPods. All rights reserved.
+//  Copyright © 2020 CardinalKit. All rights reserved.
 //
 
 import MessageUI
 
 class EmailHelper: NSObject, MFMailComposeViewControllerDelegate {
-    public static let shared = EmailHelper()
+    static let shared = EmailHelper()
 
-    func sendEmail(subject:String, body:String, to:String){
+    func sendEmail(subject: String, body: String, to: String) {
         if !MFMailComposeViewController.canSendMail() {
             return
         }
@@ -26,7 +26,11 @@ class EmailHelper: NSObject, MFMailComposeViewControllerDelegate {
         EmailHelper.getRootViewController()?.present(picker, animated: false, completion: nil)
     }
     
-    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+    func mailComposeController(
+        _ controller: MFMailComposeViewController,
+        didFinishWith result: MFMailComposeResult,
+        error: Error?
+    ) {
         EmailHelper.getRootViewController()?.dismiss(animated: false, completion: nil)
     }
     
