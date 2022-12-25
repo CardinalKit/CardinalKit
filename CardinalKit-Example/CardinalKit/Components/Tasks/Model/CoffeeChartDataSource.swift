@@ -6,9 +6,10 @@
 //  Copyright © 2019 Stanford University. All rights reserved.
 //
 
-import ResearchKit
-import FirebaseFirestore
 import CardinalKit
+import FirebaseFirestore
+import ResearchKit
+
 
 class CoffeeChartDataSource: NSObject, ORKPieChartViewDataSource {
     var countPerAnswer = [NSNumber: CGFloat]()

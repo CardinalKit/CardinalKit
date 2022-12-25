@@ -6,9 +6,9 @@
 //  Copyright © 2020 CocoaPods. All rights reserved.
 //
 
+import CareKit
 import SwiftUI
 import UIKit
-import CareKit
 
 struct CareTeamViewControllerRepresentable: UIViewControllerRepresentable {
     typealias UIViewControllerType = UIViewController

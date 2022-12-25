@@ -9,7 +9,6 @@ import Foundation
 import ResearchKit
 
 class LoginCustomWaitStep: ORKStep {
-    
     static let identifier = "LoginCustomWaitStep"
     
     override func stepViewControllerClass() -> AnyClass {
@@ -23,11 +22,9 @@ class LoginCustomWaitStep: ORKStep {
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
 }
 
 class LoginCustomWaitStepViewController: ORKStepViewController {
-    
     var onLoginCallback: NSObjectProtocol?
     
     override init(step: ORKStep?) {
@@ -45,7 +42,7 @@ class LoginCustomWaitStepViewController: ORKStepViewController {
             forName: NSNotification.Name(Constants.notificationUserLogin),
             object: nil,
             queue: OperationQueue.main
-        ) { (notification) in
+        ) { notification in
             self.continueIfLoggedIn()
             print("Continuing; received callback.")
         }
@@ -89,5 +86,4 @@ class LoginCustomWaitStepViewController: ORKStepViewController {
             UIApplication.shared.open(mailURL, options: [:], completionHandler: nil)
         }
     }
-    
 }

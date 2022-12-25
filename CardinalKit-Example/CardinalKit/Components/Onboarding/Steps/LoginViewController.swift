@@ -22,7 +22,7 @@ class LoginViewController: ORKLoginStepViewController {
 
             taskViewController?.present(alert, animated: false, completion: nil)
 
-            Auth.auth().signIn(withEmail: email, password: pass) { res, error in
+            Auth.auth().signIn(withEmail: email, password: pass) { _, error in
                 if let error = error {
                     alert.dismiss(animated: false) {
                         let alert = UIAlertController(title: "Login Error!", message: error.localizedDescription, preferredStyle: .alert)
@@ -44,7 +44,7 @@ class LoginViewController: ORKLoginStepViewController {
             textField.placeholder = "Enter your email"
         }
 
-        alert.addAction(UIAlertAction(title: "Submit", style: .default, handler: { (action) in
+        alert.addAction(UIAlertAction(title: "Submit", style: .default, handler: { action in
             let textField = alert.textFields![0]
             Auth.auth().sendPasswordReset(withEmail: textField.text!) { error in
                 DispatchQueue.main.async {

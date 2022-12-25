@@ -5,11 +5,12 @@
 //  Created by Santiago Gutierrez on 2/14/21.
 //
 
-import Foundation
-import CareKit
-import ResearchKit
-import Firebase
 import CardinalKit
+import CareKit
+import Firebase
+import Foundation
+import ResearchKit
+
 
 class CKUploadToGCPTaskViewControllerDelegate: NSObject, ORKTaskViewControllerDelegate {
     /// Serializes the result of a ResearchKit task into JSON and uploads it to Firebase

@@ -14,15 +14,13 @@ struct MainUIView: View {
     
     @State var useCareKit = false
     @State var carekitLoaded = false
-    
-    init() {
-        self.color = Color(config.readColor(query: "Primary Color") ?? UIColor.primaryColor())
-    }
-    
+
     var body: some View {
         TabView {
             TasksUIView(color: self.color).tabItem {
-                Image("tab_tasks").renderingMode(.template)
+                Image("tab_tasks")
+                    .renderingMode(.template)
+                    .accessibilityLabel(Text("Tasks"))
                 Text("Tasks")
             }
             
@@ -30,20 +28,26 @@ struct MainUIView: View {
                 ScheduleViewControllerRepresentable()
                     .ignoresSafeArea(edges: .all)
                     .tabItem {
-                        Image("tab_schedule").renderingMode(.template)
+                        Image("tab_schedule")
+                            .renderingMode(.template)
+                            .accessibilityLabel(Text("Schedule"))
                         Text("Schedule")
                     }
                 
                 CareTeamViewControllerRepresentable()
                     .ignoresSafeArea(edges: .all)
                     .tabItem {
-                        Image("tab_care").renderingMode(.template)
+                        Image("tab_care")
+                            .renderingMode(.template)
+                            .accessibilityLabel(Text("Contact"))
                         Text("Contact")
                     }
             }
 
             ProfileUIView(color: self.color).tabItem {
-                Image("tab_profile").renderingMode(.template)
+                Image("tab_profile")
+                    .renderingMode(.template)
+                    .accessibilityLabel(Text("Profile"))
                 Text("Profile")
             }
         }
@@ -56,6 +60,10 @@ struct MainUIView: View {
                 self.carekitLoaded = true
             }
         })
+    }
+
+    init() {
+        self.color = Color(config.readColor(query: "Primary Color") ?? UIColor.primaryColor())
     }
 }
 

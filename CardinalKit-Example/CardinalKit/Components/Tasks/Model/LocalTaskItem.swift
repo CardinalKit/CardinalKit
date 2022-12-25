@@ -6,9 +6,9 @@
 //
 
 import Foundation
-import UIKit
 import ResearchKit
 import SwiftUI
+import UIKit
 
 enum LocalTaskItem: Int {
     /*
@@ -138,7 +138,7 @@ enum LocalTaskItem: Int {
 
     static var allValues: [LocalTaskItem] {
         var index = 0
-        return Array (
+        return Array(
             AnyIterator {
                 let returnedElement = self.init(rawValue: index)
                 index += 1

@@ -95,7 +95,7 @@ internal extension OCKStore {
                                     yearForWeekOfYear: interval["yearForWeekOfYear"] as? Int
                                 )
                             }
-                            if let duration = element["duration"] as? [String:Any] {
+                            if let duration = element["duration"] as? [String: Any] {
                                 if let allDay = duration["allDay"] as? Bool, allDay {
                                     durationElement = .allDay
                                 }

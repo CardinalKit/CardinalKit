@@ -6,11 +6,15 @@
 //  Copyright © 2021 CocoaPods. All rights reserved.
 //
 
-import SwiftUI
 import ResearchKit
+import SwiftUI
 
-struct CoffeePieChartView : UIViewRepresentable {
-    
+
+struct CoffeePieChartView: UIViewRepresentable {
+    func updateUIView(_ uiView: UIViewType, context: Context) {
+        // not implemented
+    }
+
     func makeUIView(context: Context) -> some UIView {
         let config = CKConfig.shared
         let tintColor = config.readColor(query: "Tint Color")
@@ -22,7 +26,7 @@ struct CoffeePieChartView : UIViewRepresentable {
         chartView.text = "How many cups per day?"
         chartView.noDataText = "Take the coffee survey and come back!"
         
-        CoffeeChartDataSource.fetchData() { result in
+        CoffeeChartDataSource.fetchData { result in
             let dataSource = CoffeeChartDataSource(countPerAnswer: result)
             chartView.dataSource = dataSource
             chartView.animate(withDuration: 1.0)
@@ -30,9 +34,4 @@ struct CoffeePieChartView : UIViewRepresentable {
         
         return chartView
     }
-    
-    func updateUIView(_ uiView: UIViewType, context: Context) {
-        
-    }
-    
 }

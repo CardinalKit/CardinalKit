@@ -6,8 +6,8 @@
 //  Copyright © 2020 CocoaPods. All rights reserved.
 //
 
-import SwiftUI
 import Firebase
+import SwiftUI
 
 struct DocumentView: View {
     @State private var showPreview = false
@@ -32,7 +32,6 @@ struct DocumentView: View {
         let storage = Storage.storage()
         let storageRef = storage.reference()
         if let documentCollection = CKStudyUser.shared.authCollection {
-
             // download consent document from Firebase Cloud Storage and display it to the user
             let config = CKPropertyReader(file: "CKConfiguration")
             let consentFileName = config.read(query: "Consent File Name") ?? "My Consent Form"
@@ -60,5 +59,3 @@ struct DDocumentView_Previews: PreviewProvider {
         DocumentView()
     }
 }
-
-

@@ -6,11 +6,12 @@
 //  Copyright © 2022 CardinalKit. All rights reserved.
 //
 
-import Foundation
-import ResearchKit
-import Firebase
-import ModelsR4
 import CardinalKit
+import Firebase
+import Foundation
+import ModelsR4
+import ResearchKit
+
 
 class CKUploadFHIRTaskViewControllerDelegate: NSObject, ORKTaskViewControllerDelegate {
     func taskViewController(

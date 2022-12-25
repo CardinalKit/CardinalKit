@@ -5,22 +5,21 @@
 //  Copyright © 2019 Stanford University. All rights reserved.
 //
 
+import CardinalKit
+import Firebase
 import Foundation
 import ResearchKit
-import Firebase
-import CardinalKit
+
 
 // Extensions add new functionality to an existing class, structure, enumeration, or protocol type.
 // https://docs.swift.org/swift-book/LanguageGuide/Extensions.html
 extension AppDelegate {
-    
     /**
      Handle special CardinalKit logic for when the app is launched.
     */
     func CKAppLaunch() {
-        
         // (1) setup the CardinalKit SDK
-        var options = CKAppOptions()
+        let options = CKAppOptions()
         CKApp.configure(options)
         
         // (2) if we have already logged in
@@ -29,7 +28,7 @@ extension AppDelegate {
             
             // (3) then start the requested HK data collection (if any).
             let manager = CKHealthKitManager.shared
-            manager.getHealthAuthorization { (success, error) in
+            manager.getHealthAuthorization { _, error in
                 if let error = error {
                     print(error)
                 }
@@ -37,5 +36,4 @@ extension AppDelegate {
         }
         CKStudyUser.shared.save()
     }
-    
 }

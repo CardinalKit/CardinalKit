@@ -6,8 +6,9 @@
 //  Copyright © 2020 CocoaPods. All rights reserved.
 //
 
-import UIKit
 import SwiftUI
+import UIKit
+
 
 struct DocumentPreviewViewController: UIViewControllerRepresentable {
     private var isActive: Binding<Bool>

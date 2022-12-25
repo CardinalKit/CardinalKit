@@ -16,6 +16,7 @@ struct LearnUIView: View {
                 .scaledToFit()
                 .padding(.leading, Metrics.paddingHorizontalMain * 4)
                 .padding(.trailing, Metrics.paddingHorizontalMain * 4)
+                .accessibilityLabel(Text("Logo"))
             
             Text("""
                 CardinalKit is a suite of tools designed to help you build a digital health app \
@@ -34,6 +35,7 @@ struct LearnUIView: View {
                 .scaledToFit()
                 .padding(.leading, Metrics.paddingHorizontalMain * 4)
                 .padding(.trailing, Metrics.paddingHorizontalMain * 4)
+                .accessibilityLabel(Text("Logo"))
         }
     }
 }

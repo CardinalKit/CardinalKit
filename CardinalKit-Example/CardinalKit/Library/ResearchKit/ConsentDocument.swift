@@ -14,9 +14,7 @@ class ConsentDocument: ORKConsentDocument {
         super.init()
 
         let config = CKConfig.shared
-        let consentTitle = config.read(query: "Consent Title") ?? "Consent Form"
-
-        title = NSLocalizedString(consentTitle, comment: "")
+        title = config.read(query: "Consent Title") ?? "Consent Form"
         sections = []
 
         let sectionTypes: [ORKConsentSectionType] = [
@@ -40,9 +38,9 @@ class ConsentDocument: ORKConsentDocument {
 
             if let consentSection = consentForm[type.description] {
                 let errorMessage = "We didn't find a consent form for your project. Did you configure the CKConfiguration.plist file already?"
-                section.title = NSLocalizedString(consentSection["Title"] ?? ":(", comment: "")
-                section.summary = NSLocalizedString(consentSection["Summary"] ?? errorMessage, comment: "")
-                section.content = NSLocalizedString(consentSection["Content"] ?? errorMessage, comment: "")
+                section.title = consentSection["Title"] ?? ":("
+                section.summary = consentSection["Summary"] ?? errorMessage
+                section.content = consentSection["Content"] ?? errorMessage
                 sections?.append(section)
             }
         }

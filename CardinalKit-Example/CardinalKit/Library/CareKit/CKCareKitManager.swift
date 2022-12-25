@@ -6,17 +6,24 @@
 //  Copyright © 2020 CocoaPods. All rights reserved.
 //
 
-import Foundation
 import CareKit
 import CareKitStore
 
 class CKCareKitManager: NSObject {
-    let coreDataStore = OCKStore(name: "CKCareKitStore", type: .onDisk, remote: CKCareKitRemoteSyncWithFirestore())
-    let healthKitStore = OCKHealthKitPassthroughStore(name: "CKCareKitHealthKitStore", type: .onDisk)
     private(set) var synchronizedStoreManager: OCKSynchronizedStoreManager!
 
     static let shared = CKCareKitManager()
-    
+
+    let coreDataStore = OCKStore(
+        name: "CKCareKitStore",
+        type: .onDisk,
+        remote: CKCareKitRemoteSyncWithFirestore()
+    )
+    let healthKitStore = OCKHealthKitPassthroughStore(
+        name: "CKCareKitHealthKitStore",
+        type: .onDisk
+    )
+
     override init() {
         super.init()
         initStore()
@@ -31,11 +38,8 @@ class CKCareKitManager: NSObject {
     }
    
     fileprivate func initStore(forceUpdate: Bool = false) {
-        let lastUpdateDate:Date? = UserDefaults.standard.object(forKey: Constants.prefCareKitCoreDataInitDate) as? Date
-//        if forceUpdate || UserDefaults.standard.object(forKey: Constants.prefCareKitCoreDataInitDate) == nil {
-//        coreDataStore.populateSampleData(lastUpdateDate:lastUpdateDate)
-        healthKitStore.populateSampleData()            
+        let lastUpdateDate = UserDefaults.standard.object(forKey: Constants.prefCareKitCoreDataInitDate) as? Date
+        healthKitStore.populateSampleData()
         UserDefaults.standard.set(Date(), forKey: Constants.prefCareKitCoreDataInitDate)
-//        }
     }
 }

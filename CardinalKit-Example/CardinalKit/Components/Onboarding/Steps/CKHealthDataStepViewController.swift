@@ -9,7 +9,6 @@ import HealthKit
 import ResearchKit
 
 class CKHealthDataStep: ORKInstructionStep {
-    
     override init(identifier: String) {
         super.init(identifier: identifier)
         
@@ -31,7 +30,6 @@ class CKHealthDataStep: ORKInstructionStep {
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }
 
 /**
@@ -41,7 +39,6 @@ class CKHealthDataStep: ORKInstructionStep {
  is presented in a task view.
 */
 class CKHealthDataStepViewController: ORKInstructionStepViewController {
-    
     /**
      When this step is being dismissed, get `HealthKit`  authorization in the process.
      
@@ -49,7 +46,7 @@ class CKHealthDataStepViewController: ORKInstructionStepViewController {
     */
     override func goForward() {
         let manager = CKHealthKitManager.shared
-        manager.getHealthAuthorization() { _,_ in
+        manager.getHealthAuthorization() { _, _ in
             OperationQueue.main.addOperation {
                 super.goForward()
             }

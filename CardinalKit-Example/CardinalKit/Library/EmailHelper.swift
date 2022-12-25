@@ -9,9 +9,9 @@
 import MessageUI
 
 class EmailHelper: NSObject, MFMailComposeViewControllerDelegate {
-    public static let shared = EmailHelper()
+    static let shared = EmailHelper()
 
-    func sendEmail(subject:String, body:String, to:String){
+    func sendEmail(subject: String, body: String, to: String){
         if !MFMailComposeViewController.canSendMail() {
             return
         }
@@ -26,7 +26,11 @@ class EmailHelper: NSObject, MFMailComposeViewControllerDelegate {
         EmailHelper.getRootViewController()?.present(picker, animated: false, completion: nil)
     }
     
-    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+    func mailComposeController(
+        _ controller: MFMailComposeViewController,
+        didFinishWith result: MFMailComposeResult,
+        error: Error?
+    ) {
         EmailHelper.getRootViewController()?.dismiss(animated: false, completion: nil)
     }
     
