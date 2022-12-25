@@ -171,13 +171,22 @@ public class CKMultipleSignInStepViewController: ORKQuestionStepViewController, 
 
         fbLoginManager.logIn(permissions: ["email"], from: self) { result, error -> Void in
             if error == nil {
-                let fbloginresult: LoginManagerLoginResult = result!
-                if (result?.isCancelled)! {
+                guard let result = result else {
+                    return
+                }
+
+                let fbloginresult: LoginManagerLoginResult = result
+
+                if result.isCancelled {
                     return
                 }
 
                 if fbloginresult.grantedPermissions.contains("email") {
-                    let credential = FacebookAuthProvider.credential(withAccessToken: AccessToken.current!.tokenString)
+                    guard let token = AccessToken.current?.tokenString else {
+                        return
+                    }
+
+                    let credential = FacebookAuthProvider.credential(withAccessToken: token)
                     Auth.auth().signIn(with: credential) { _, error in
                         if let error = error {
                             self.showError(error)
@@ -191,7 +200,7 @@ public class CKMultipleSignInStepViewController: ORKQuestionStepViewController, 
         }
     }
     
-    private var currentNonce: String!
+    private var currentNonce: String?
     
     @objc
     func loginAppleAction() {
@@ -199,7 +208,7 @@ public class CKMultipleSignInStepViewController: ORKQuestionStepViewController, 
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let request = appleIDProvider.createRequest()
         request.requestedScopes = [.email]
-        request.nonce = currentNonce.sha256
+        request.nonce = currentNonce?.sha256
 
         let authorizationController = ASAuthorizationController(authorizationRequests: [request])
         authorizationController.delegate = self

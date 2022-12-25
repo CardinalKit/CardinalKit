@@ -39,7 +39,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
-        guard let url = userActivity.webpageURL else { return }
+        guard let url = userActivity.webpageURL else {
+            return
+        }
         DynamicLinks.dynamicLinks().handleUniversalLink(url) { dynamiclink, error in
             // (1) check to see if we have a valid login link
             guard let link = dynamiclink?.url?.absoluteString,

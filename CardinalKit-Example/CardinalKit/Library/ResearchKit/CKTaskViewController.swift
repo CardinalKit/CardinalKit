@@ -11,13 +11,13 @@ import SwiftUI
 import UIKit
 
 struct CKTaskViewController: UIViewControllerRepresentable {
+    typealias UIViewControllerType = ORKTaskViewController
+
     let viewController: ORKTaskViewController
     let delegate: CKUploadToGCPTaskViewControllerDelegate
 
-    typealias UIViewControllerType = ORKTaskViewController
-
     init(tasks: ORKOrderedTask) {
-        self.viewController = ORKTaskViewController(task: tasks, taskRun: NSUUID() as UUID)
+        self.viewController = ORKTaskViewController(task: tasks, taskRun: UUID())
         self.delegate = CKUploadToGCPTaskViewControllerDelegate()
     }
     
@@ -33,5 +33,4 @@ struct CKTaskViewController: UIViewControllerRepresentable {
         // & present the VC!
         return self.viewController
     }
-
 }

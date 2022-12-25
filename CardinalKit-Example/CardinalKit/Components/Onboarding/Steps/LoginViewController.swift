@@ -54,18 +54,15 @@ class LoginViewController: ORKLoginStepViewController {
                     if let error = error {
                         alert.dismiss(animated: false, completion: nil)
                         if let errCode = AuthErrorCode.Code(rawValue: error._code) {
-                            switch errCode {
-                                default:
-                                    let alert = UIAlertController(
-                                        title: "Password Reset Error!",
-                                        message: error.localizedDescription,
-                                        preferredStyle: .alert
-                                    )
-                                    alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-                                    
-                                    alert.dismiss(animated: false, completion: nil)
-                                    self.present(alert, animated: false)
-                            }
+                            let alert = UIAlertController(
+                                title: "Password Reset Error!",
+                                message: error.localizedDescription,
+                                preferredStyle: .alert
+                            )
+                            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+
+                            alert.dismiss(animated: false, completion: nil)
+                            self.present(alert, animated: false)
                         }
                     } else {
                         print("Email sent!")

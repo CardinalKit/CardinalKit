@@ -6,7 +6,7 @@
 //  Copyright © 2020 CardinalKit. All rights reserved.
 //
 
-class Metrics {
+enum Metrics {
     static let paddingHorizontalMain: CGFloat = 15
     static let paddingVerticalMain: CGFloat = 15
     static let paddingButtonLabel: CGFloat = 15

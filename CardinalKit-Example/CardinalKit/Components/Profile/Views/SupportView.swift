@@ -25,7 +25,9 @@ struct SupportView: View {
                 .onEnded {
                     let telephone = "tel://"
                     let formattedString = telephone + self.phone
-                    guard let url = URL(string: formattedString) else { return }
+                    guard let url = URL(string: formattedString) else {
+                        return
+                    }
                     UIApplication.shared.open(url)
                 }
         )

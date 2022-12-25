@@ -103,8 +103,6 @@ only_rules:
   - file_length
   # File name should not contain any whitespace.
   - file_name_no_space
-  # Specifies how the types within a file should be ordered.
-  - file_types_order
   # Prefer using ``.first(where:)`` over ``.filter { }.first` in collections.
   - first_where
   # Prefer flatMap over map followed by reduce([], +).
@@ -166,8 +164,6 @@ only_rules:
   - legacy_multiple
   # Struct extension properties and methods are preferred over legacy functions
   - legacy_nsgeometry_functions
-  # Prefer Swift value types to bridged Objective-C reference types
-  - legacy_objc_type
   # Prefer using type.random(in:) over legacy functions.
   - legacy_random
   # Lines should not span too many characters.
@@ -312,8 +308,6 @@ only_rules:
   # Type bodies should not span too many lines.
   # See large_tuple below for the exact configuration.
   - type_body_length
-  # Specifies the order of subtypes, properties, methods & more within a type.
-  - type_contents_order
   # Type name should only contain alphanumeric characters, start with an uppercase character and span between 3 and 40 characters in length.
   # Excluded types are listed below.
   - type_name

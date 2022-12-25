@@ -25,9 +25,12 @@ struct ReportView: View {
         }
         .frame(height: 60)
         .contentShape(Rectangle())
-        .gesture(TapGesture().onEnded({
-            EmailHelper.shared.sendEmail(subject: "App Support Request", body: "Enter your support request here.", to: self.email)
-        }))
+        .gesture(
+            TapGesture()
+                .onEnded {
+                    EmailHelper.shared.sendEmail(subject: "App Support Request", body: "Enter your support request here.", to: self.email)
+                }
+        )
     }
 }
 

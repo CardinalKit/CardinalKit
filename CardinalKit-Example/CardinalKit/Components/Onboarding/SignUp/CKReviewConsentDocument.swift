@@ -12,7 +12,7 @@ import ResearchKit
 
 
 public class CKReviewConsentDocument: ORKQuestionStep {
-    public override init(
+    override public init(
         identifier: String
     ) {
         super.init(identifier: identifier)
@@ -26,25 +26,27 @@ public class CKReviewConsentDocument: ORKQuestionStep {
 }
 
 public class CKReviewConsentDocumentViewController: ORKQuestionStepViewController {
-    public var CKReviewConsentDocument: CKReviewConsentDocument! {
+    public var CKReviewConsentDocument: CKReviewConsentDocument? {
         step as? CKReviewConsentDocument
     }
     
     override public func viewDidLoad() {
+        super.viewDidLoad()
         let storage = Storage.storage()
         let storageRef = storage.reference()
         
         // Check if a consent document exists on the cloud, otherwise user will need to re-consent
         if let documentCollection = CKStudyUser.shared.authCollection {
             let config = CKPropertyReader(file: "CKConfiguration")
-            let consentFileName = config.read(query: "Consent File Name")
+            let consentFileName = config.read(query: "Consent File Name") ?? "My Consent File"
             let documentRef = storageRef.child("\(documentCollection)/\(consentFileName).pdf")
-            
-            var docURL = (FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)).last as NSURL?
-            docURL = docURL?.appendingPathComponent("\(consentFileName).pdf") as NSURL?
 
-            let url = docURL! as URL
-            
+            guard let docURL = (FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)).last else {
+                return
+            }
+
+            let url = docURL.appendingPathComponent("\(consentFileName).pdf")
+
             documentRef.write(toFile: url) { _, error in
                 if let error = error {
                     print(error.localizedDescription)

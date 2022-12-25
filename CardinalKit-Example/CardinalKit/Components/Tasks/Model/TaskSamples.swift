@@ -13,7 +13,7 @@ import ResearchKit
  This file contains some sample `ResearchKit` tasks
  that you can modify and use throughout your project!
 */
-struct TaskSamples {
+enum TaskSamples {
     /**
      Active tasks created with short-hand constructors from `ORKOrderedTask`
     */

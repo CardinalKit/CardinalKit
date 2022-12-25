@@ -25,7 +25,12 @@ struct DocumentView: View {
                     self.showPreview = true
                 }
             )
-            .background(DocumentPreviewViewController(self.$showPreview, url: self.documentsURL))
+            .background(
+                DocumentPreviewViewController(
+                    self.$showPreview,
+                    url: self.documentsURL
+                )
+            )
     }
 
     init() {
@@ -37,18 +42,20 @@ struct DocumentView: View {
             let consentFileName = config.read(query: "Consent File Name") ?? "My Consent Form"
             let documentRef = storageRef.child("\(documentCollection)/\(consentFileName).pdf")
 
-            var docURL = (FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)).last as NSURL?
-            docURL = docURL?.appendingPathComponent("\(consentFileName).pdf") as NSURL?
-            let url = docURL! as URL
+            guard let docURL = (FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)).last else {
+                return
+            }
+
+            let url = docURL.appendingPathComponent("\(consentFileName).pdf")
             self.documentsURL = URL(fileURLWithPath: url.path, isDirectory: false)
             UserDefaults.standard.set(url.path, forKey: "consentFormURL")
 
             documentRef.write(toFile: url) { _, error in
-              if let error = error {
-                  print("Error downloading consent document: \(error)")
-              } else {
-                  print("Consent document downloaded successfully.")
-              }
+                if let error = error {
+                    print("Error downloading consent document: \(error)")
+                } else {
+                    print("Consent document downloaded successfully.")
+                }
             }
         }
     }

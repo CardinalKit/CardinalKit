@@ -23,7 +23,7 @@ class CoffeeChartDataSource: NSObject, ORKPieChartViewDataSource {
     }
 
     func numberOfSegments(in pieChartView: ORKPieChartView) -> Int {
-        return keys.count
+        keys.count
     }
 
     func pieChartView(_ pieChartView: ORKPieChartView, valueForSegmentAt index: Int) -> CGFloat {

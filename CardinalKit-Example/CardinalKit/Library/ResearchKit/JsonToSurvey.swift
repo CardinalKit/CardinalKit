@@ -20,7 +20,7 @@ class JsonToSurvey {
                let identifier = question["identifier"] as? String,
                let description = question["description"] as? String,
                let title = question["title"] as? String {
-                let qs = question["question"] as? String ?? ""
+                let questionItem = question["question"] as? String ?? ""
                 switch type {
                 case "instruction":
                     let instructionStep = ORKInstructionStep(identifier: identifier)
@@ -46,7 +46,7 @@ class JsonToSurvey {
                         let questionStep = ORKQuestionStep(
                             identifier: identifier,
                             title: title,
-                            question: qs,
+                            question: questionItem,
                             answer: step
                         )
                         steps += [questionStep]

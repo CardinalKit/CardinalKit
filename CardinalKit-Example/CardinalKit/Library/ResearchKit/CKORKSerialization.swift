@@ -9,7 +9,7 @@
 import Foundation
 import ResearchKit
 
-// swiftlint:disable type_body_length function_body_length
+// swiftlint:disable type_body_length function_body_length legacy_objc_type
 class CKORKSerialization {
     /**
      Transform the result of the ResearchKit task into a Json, including the questions

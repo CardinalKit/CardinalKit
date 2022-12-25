@@ -19,6 +19,7 @@ class CKCareKitManager: NSObject {
         type: .onDisk,
         remote: CKCareKitRemoteSyncWithFirestore()
     )
+
     let healthKitStore = OCKHealthKitPassthroughStore(
         name: "CKCareKitHealthKitStore",
         type: .onDisk
@@ -38,7 +39,6 @@ class CKCareKitManager: NSObject {
     }
    
     fileprivate func initStore(forceUpdate: Bool = false) {
-        let lastUpdateDate = UserDefaults.standard.object(forKey: Constants.prefCareKitCoreDataInitDate) as? Date
         healthKitStore.populateSampleData()
         UserDefaults.standard.set(Date(), forKey: Constants.prefCareKitCoreDataInitDate)
     }

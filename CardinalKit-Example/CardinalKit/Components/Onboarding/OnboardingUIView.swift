@@ -27,18 +27,23 @@ struct OnboardingUIView: View {
     var onComplete: (() -> Void)?
     
     init(onComplete: (() -> Void)? = nil) {
-        self.color = Color(config.readColor(
-            query: "Primary Color") ?? UIColor.primaryColor()
-        )
+        self.color = Color(config.readColor(query: "Primary Color") ?? UIColor.primaryColor())
         self.onComplete = onComplete
 
         if let onboardingData = config.readAny(query: "Onboarding") as? [[String: String]] {
             for data in onboardingData {
+                guard let logo = data["Logo"],
+                      let title = data["Title"],
+                      let description = data["Description"] else {
+                    continue
+                }
+
                 let element = OnboardingElement(
-                    logo: data["Logo"]!,
-                    title: data["Title"]!,
-                    description: data["Description"]!
+                    logo: logo,
+                    title: title,
+                    description: description
                 )
+
                 self.onboardingElements.append(element)
             }
         }
@@ -54,6 +59,7 @@ struct OnboardingUIView: View {
                 .scaledToFit()
                 .padding(.leading, Metrics.paddingHorizontalMain * 4)
                 .padding(.trailing, Metrics.paddingHorizontalMain * 4)
+                .accessibilityLabel(Text("Logo"))
             
             Spacer(minLength: 2)
             
@@ -91,10 +97,11 @@ struct OnboardingUIView: View {
                     isPresented: $showingOnboard,
                     onDismiss: {
                         self.onComplete?()
-                }, content: {
-                    OnboardingViewController().ignoresSafeArea(edges: .all)
-                })
-        
+                    },
+                    content: {
+                        OnboardingViewController().ignoresSafeArea(edges: .all)
+                    }
+                )
                 Spacer()
             }
             
@@ -118,14 +125,14 @@ struct OnboardingUIView: View {
                 .sheet(
                     isPresented: $showingLogin,
                     onDismiss: {
-                    self.onComplete?()
-                }, content: {
-                    LoginExistingUserViewController().ignoresSafeArea(edges: .all)
-                })
-        
+                        self.onComplete?()
+                    },
+                    content: {
+                        LoginExistingUserViewController().ignoresSafeArea(edges: .all)
+                    }
+                )
                 Spacer()
             }
-            
             Spacer()
         }
     }

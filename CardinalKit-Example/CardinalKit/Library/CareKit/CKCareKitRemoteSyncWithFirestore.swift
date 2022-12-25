@@ -1,5 +1,5 @@
 //
-//  CKCareKitRemoteSynchronizable.swift
+//  CKCareKitRemoteSyncWithFirestore.swift
 //  CardinalKit_Example
 //
 //  Created by Santiago Gutierrez on 12/23/20.

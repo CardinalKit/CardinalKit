@@ -202,7 +202,7 @@ internal extension OCKStore {
                     collection: collection,
                     authCollection: studyCollection,
                     lastUpdateDate: lastUpdateDate
-                ) { error in
+                ) { _ in
                     CKApp.requestData(route: authRoute, onCompletion: { result in
                         if let documents = result as? [DocumentSnapshot] {
                             self.insertDocuments(

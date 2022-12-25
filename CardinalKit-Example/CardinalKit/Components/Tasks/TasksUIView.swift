@@ -77,21 +77,25 @@ struct TasksUIView: View {
             if useCloudSurveys {
                 List {
                     ForEach(listItemsSections, id: \.self) { key in
-                        Section(header: Text(key)) {
-                            ForEach(listItemsPerHeader[key]!, id: \.self) { item in
-                                CloudTaskListItemView(item: item)
-                            }
-                        }.listRowBackground(Color.white)
+                        if let items = listItemsPerHeader[key] {
+                            Section(header: Text(key)) {
+                                ForEach(items, id: \.self) { item in
+                                    CloudTaskListItemView(item: item)
+                                }
+                            }.listRowBackground(Color.white)
+                        }
                     }
                 }.listStyle(GroupedListStyle())
             } else {
                 List {
                     ForEach(localListItemsSections, id: \.self) { key in
-                        Section(header: Text(key)) {
-                            ForEach(localListItemsPerHeader[key]!, id: \.self) { item in
-                                LocalTaskListItemView(item: item)
-                            }
-                        }.listRowBackground(Color.white)
+                        if let items = localListItemsPerHeader[key] {
+                            Section(header: Text(key)) {
+                                ForEach(items, id: \.self) { item in
+                                    LocalTaskListItemView(item: item)
+                                }
+                            }.listRowBackground(Color.white)
+                        }
                     }
                 }.listStyle(GroupedListStyle())
             }
