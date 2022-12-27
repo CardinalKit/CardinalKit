@@ -32,8 +32,9 @@ class CKHealthRecordsManager: NSObject {
     override init() {
         super.init()
         for id in typesById {
-            print(id.rawValue)
-            guard let record = HKObjectType.clinicalType(forIdentifier: id) else { continue }
+            guard let record = HKObjectType.clinicalType(forIdentifier: id) else {
+                continue
+            }
             types.insert(record)
         }
     }
