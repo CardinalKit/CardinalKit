@@ -49,6 +49,8 @@ class CKHealthRecordsStepViewController: ORKInstructionStepViewController {
      Relies on a `CKHealthDataStep` instance as `self.step`.
     */
     override func goForward() {
+        self.showActivityIndicator(inContinueButton: true)
+        
         let manager = CKHealthRecordsManager.shared
         manager.getAuth { succeeded, _ in
             if succeeded {
