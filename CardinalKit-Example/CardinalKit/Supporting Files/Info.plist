@@ -48,11 +48,6 @@
 	<string></string>
 	<key>FacebookDisplayName</key>
 	<string></string>
-	<key>FirebaseDynamicLinksCustomDomains</key>
-	<array>
-		<string>https://cs342.page.link</string>
-		<string>https://cs342.page.link/Rdse</string>
-	</array>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>

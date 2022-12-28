@@ -82,7 +82,7 @@ struct LoginExistingUserViewController: UIViewControllerRepresentable {
         var existingUserOnboardingSteps: [ORKStep] = []
 
         // Add login steps
-        existinUserOnboardingSteps += loginSteps
+        existingUserOnboardingSteps += loginSteps
 
         // Add consent steps
         existingUserOnboardingSteps += [consentReview, reviewConsentStep]
@@ -137,8 +137,6 @@ struct LoginExistingUserViewController: UIViewControllerRepresentable {
         **************************************************************/
         let taskViewController = ORKTaskViewController(task: navigableTask, taskRun: nil)
         taskViewController.delegate = context.coordinator
-
-        // & present the VC!
         return taskViewController
     }
 }

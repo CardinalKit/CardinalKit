@@ -89,39 +89,6 @@ class CKStudyUser: ObservableObject {
     }
 
     /**
-     Send a login email to the user.
-
-     At this stage, we do not have a `currentUser` via Google Identity.
-
-     - Parameters:
-     - email: validated address that should receive the sign-in link.
-     - completion: callback
-     */
-    func sendLoginLink(email: String, completion: @escaping (Bool) -> Void) {
-        guard !email.isEmpty else {
-            completion(false)
-            return
-        }
-
-        let actionCodeSettings = ActionCodeSettings()
-        actionCodeSettings.url = URL(string: "https://cs342.page.link")
-        actionCodeSettings.handleCodeInApp = true // The sign-in operation has to always be completed in the app.
-
-        if let bundleId = Bundle.main.bundleIdentifier {
-            actionCodeSettings.setIOSBundleID(bundleId)
-        }
-
-        Auth.auth().sendSignInLink(toEmail: email, actionCodeSettings: actionCodeSettings) { error in
-            if let error = error {
-                print(error.localizedDescription)
-                completion(false)
-                return
-            }
-            completion(true)
-        }
-    }
-
-    /**
      Save a snapshot of our current user into Firestore.
      */
     func save() {

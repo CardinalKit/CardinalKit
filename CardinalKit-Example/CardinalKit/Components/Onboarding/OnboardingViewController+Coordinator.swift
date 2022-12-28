@@ -3,7 +3,7 @@
 //  CardinalKit_Example
 //
 //  Created by Santiago Gutierrez on 10/12/20.
-//  Copyright © 2020 CocoaPods. All rights reserved.
+//  Copyright © 2020 CardinalKit. All rights reserved.
 //
 
 import CardinalKit
@@ -89,96 +89,46 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
         _ taskViewController: ORKTaskViewController,
         stepViewControllerWillAppear stepViewController: ORKStepViewController
     ) {
-        // MARK: - Advanced Concepts
-        // Sometimes we might want some custom logic
-        // to run when a step appears 🎩
-        
-        if stepViewController.step?.identifier == PasswordlessLoginStep.identifier {
-            /* **************************************************************
-             * When the login step appears, asking for the patient's email
-             **************************************************************/
-            if CKStudyUser.shared.currentUser?.email != nil {
-                // if we already have an email, go forward and continue.
-                DispatchQueue.main.async {
-                    stepViewController.goForward()
-                }
-            }
-        } else if stepViewController.step?.identifier == "RegistrationStep" {
-            if CKStudyUser.shared.currentUser?.email != nil {
-                // if we already have an email, go forward and continue.
-                DispatchQueue.main.async {
-                    stepViewController.goForward()
-                }
-            }
-        } else if stepViewController.step?.identifier == "LoginStep" {
-            if CKStudyUser.shared.currentUser?.email != nil {
-                // good — we have an email!
-            } else {
-                let alert = UIAlertController(title: nil, message: "Creating account...", preferredStyle: .alert)
-                
-                let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
-                loadingIndicator.hidesWhenStopped = true
-                loadingIndicator.style = UIActivityIndicatorView.Style.medium
-                loadingIndicator.startAnimating()
-                
-                alert.view.addSubview(loadingIndicator)
-                taskViewController.present(alert, animated: false, completion: nil)
-                
-                let stepResult = taskViewController.result.stepResult(forStepIdentifier: "RegistrationStep")
-                if let emailRes = stepResult?.results?.first as? ORKTextQuestionResult, let email = emailRes.textAnswer {
-                    if let passwordRes = stepResult?.results?[1] as? ORKTextQuestionResult, let pass = passwordRes.textAnswer {
-                        Auth.auth().createUser(withEmail: email, password: pass) { _, error in
-                            DispatchQueue.main.async {
-                                if let error = error {
-                                    alert.dismiss(animated: false, completion: nil)
-                                    if let errCode = AuthErrorCode.Code(rawValue: error._code) {
-                                        switch errCode {
-                                        default:
-                                            let alert = UIAlertController(
-                                                title: "Registration Error!",
-                                                message: error.localizedDescription,
-                                                preferredStyle: .alert
-                                            )
-                                            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-                                            
-                                            taskViewController.present(alert, animated: false)
-                                        }
+        if stepViewController.step?.identifier == "LoginStep" {
+            let alert = UIAlertController(title: nil, message: "Creating account...", preferredStyle: .alert)
+
+            let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+            loadingIndicator.hidesWhenStopped = true
+            loadingIndicator.style = UIActivityIndicatorView.Style.medium
+            loadingIndicator.startAnimating()
+
+            alert.view.addSubview(loadingIndicator)
+            taskViewController.present(alert, animated: false, completion: nil)
+
+            let stepResult = taskViewController.result.stepResult(forStepIdentifier: "RegistrationStep")
+            if let emailRes = stepResult?.results?.first as? ORKTextQuestionResult,
+               let email = emailRes.textAnswer {
+                if let passwordRes = stepResult?.results?[1] as? ORKTextQuestionResult,
+                   let pass = passwordRes.textAnswer {
+                    Auth.auth().createUser(withEmail: email, password: pass) { _, error in
+                        DispatchQueue.main.async {
+                            if let error = error {
+                                alert.dismiss(animated: false, completion: nil)
+                                if let errCode = AuthErrorCode.Code(rawValue: error._code) {
+                                    switch errCode {
+                                    default:
+                                        let alert = UIAlertController(
+                                            title: "Registration Error!",
+                                            message: error.localizedDescription,
+                                            preferredStyle: .alert
+                                        )
+                                        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+
+                                        taskViewController.present(alert, animated: false)
                                     }
-                                    stepViewController.goBackward()
-                                } else {
-                                    alert.dismiss(animated: false, completion: nil)
-                                    print("Created user!")
                                 }
+                                stepViewController.goBackward()
+                            } else {
+                                alert.dismiss(animated: false, completion: nil)
+                                print("Created user!")
                             }
                         }
                     }
-                }
-            }
-        } else if stepViewController.step?.identifier == LoginCustomWaitStep.identifier {
-            /* **************************************************************
-             * When the email verification step appears, send email in background!
-             **************************************************************/
-            
-            let stepResult = taskViewController.result.stepResult(forStepIdentifier: PasswordlessLoginStep.identifier)
-            if let emailRes = stepResult?.results?.first as? ORKTextQuestionResult, let email = emailRes.textAnswer {
-                // if we received a valid email
-                CKStudyUser.shared.sendLoginLink(email: email) { success in
-                    // send a login link
-                    guard success else {
-                        // and react accordingly if we ran into an error.
-                        DispatchQueue.main.async {
-                            let config = CKPropertyReader(file: "CKConfiguration")
-                            
-                            Alerts.showInfo(
-                                title: config.read(query: "Failed Login Title") ?? "Unable to log in.",
-                                message: config.read(query: "Failed Login Text") ?? "Please try again."
-                            )
-                            stepViewController.goBackward()
-                        }
-                        return
-                    }
-                    
-                    CKStudyUser.shared.email = email
                 }
             }
         }
@@ -193,13 +143,10 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
         switch step {
         case is CKHealthDataStep:
             // this step lets us run custom logic to ask for
-            // HealthKit permissins when this step appears on screen.
+            // HealthKit permissions when this step appears on screen.
             return CKHealthDataStepViewController(step: step)
         case is CKHealthRecordsStep:
             return CKHealthRecordsStepViewController(step: step)
-        case is LoginCustomWaitStep:
-            // run custom code to send an email for login!
-            return LoginCustomWaitStepViewController(step: step)
         case is CKMultipleSignInStep:
             return CKMultipleSignInStepViewController(step: step)
         case is CKReviewConsentDocument:

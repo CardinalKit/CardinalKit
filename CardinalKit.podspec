@@ -53,7 +53,6 @@ Pod::Spec.new do |s|
   s.dependency 'Firebase/Auth', '~> 10'
   s.dependency 'Firebase/Storage', '~> 10'
   s.dependency 'Firebase/Analytics', '~> 10'
-  s.dependency 'Firebase/DynamicLinks', '~> 10'
 
   s.static_framework = true
   s.public_header_files = 'CardinalKit/Source/Components/Header.h'

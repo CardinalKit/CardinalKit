@@ -10,7 +10,6 @@ import FirebaseAuth
 import FirebaseFirestore
 
 class CKStudyUser {
-    
     static let shared = CKStudyUser()
     
     /* **************************************************************
@@ -74,37 +73,6 @@ class CKStudyUser {
     var isLoggedIn: Bool {
         return (currentUser?.isEmailVerified ?? false) && UserDefaults.standard.bool(forKey: Constants.UserDefaults.prefConfirmedLogin)
     }
-    
-    /**
-    Send a login email to the user.
-
-    At this stage, we do not have a `currentUser` via Google Identity.
-
-    - Parameters:
-        - email: validated address that should receive the sign-in link.
-        - completion: callback
-    */
-    func sendLoginLink(email: String, completion: @escaping (Bool)->Void) {
-        guard !email.isEmpty else {
-            completion(false)
-            return
-        }
-        
-        let actionCodeSettings = ActionCodeSettings()
-        actionCodeSettings.url = URL(string: "https://cs342.page.link")
-        actionCodeSettings.handleCodeInApp = true // The sign-in operation has to always be completed in the app.
-        actionCodeSettings.setIOSBundleID(Bundle.main.bundleIdentifier!)
-        
-        Auth.auth().sendSignInLink(toEmail: email, actionCodeSettings: actionCodeSettings) { (error) in
-            if let error = error {
-                print(error.localizedDescription)
-                completion(false)
-                return
-            }
-            
-            completion(true)
-        }
-    }
 
     /**
     Save a snapshot of our current user into Firestore.
@@ -120,7 +88,12 @@ class CKStudyUser {
             settings.isPersistenceEnabled = false
             let db = Firestore.firestore()
             db.settings = settings
-            db.collection(dataBucket).document(uid).setData(["userID":uid, "lastActive":Date().ISOStringFromDate(),"email":email])
+            db.collection(dataBucket).document(uid).setData(
+                ["userID": uid,
+                 "lastActive": Date().ISOStringFromDate(),
+                 "email": email
+                ]
+            )
         }
     }
     
@@ -154,5 +127,4 @@ class CKStudyUser {
         db.settings = settings
         return db
     }
-    
 }
