@@ -253,15 +253,6 @@
 			path = "CardinalKit ExampleTests";
 			sourceTree = "<group>";
 		};
-		2B8FB80227552ADD000B2D7B /* SignUp */ = {
-			isa = PBXGroup;
-			children = (
-				2B8FB80327552B02000B2D7B /* CKMultipleSignInStep.swift */,
-				2B932F83276BF8D300AB3A02 /* CKReviewConsentDocument.swift */,
-			);
-			path = SignUp;
-			sourceTree = "<group>";
-		};
 		2C45A885E8BD0CAC5349997A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -403,7 +394,6 @@
 		8E0A4399244A4A0400656518 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				2B8FB80227552ADD000B2D7B /* SignUp */,
 				8E0A439C244A4A0400656518 /* Steps */,
 				8E6E1E2125352C780024B8DF /* OnboardingUIView.swift */,
 				8E6E1E082534F4100024B8DF /* OnboardingViewController.swift */,
@@ -421,6 +411,8 @@
 				8E0A43A0244A4A0400656518 /* Views */,
 				8E0A439D244A4A0400656518 /* CKHealthDataStepViewController.swift */,
 				8EA6648625930B6B00B6A45A /* CKHealthRecordsStepViewController.swift */,
+				2B8FB80327552B02000B2D7B /* CKMultipleSignInStep.swift */,
+				2B932F83276BF8D300AB3A02 /* CKReviewConsentDocument.swift */,
 				8E0A439F244A4A0400656518 /* PasswordlessLoginStep.swift */,
 				8E0A43A3244A4A0400656518 /* LoginCustomWaitStepViewController.swift */,
 				E2DF9F092500C9CE00A93B93 /* LoginViewController.swift */,

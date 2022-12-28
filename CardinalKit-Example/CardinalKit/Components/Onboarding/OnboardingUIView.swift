@@ -74,7 +74,14 @@ struct OnboardingUIView: View {
                 .padding(.leading, Metrics.paddingHorizontalMain)
                 .padding(.trailing, Metrics.paddingHorizontalMain)
 
-            PageView(self.onboardingElements.map { InfoView(logo: $0.logo, title: $0.title, description: $0.description, color: self.color) })
+            PageView(self.onboardingElements.map {
+                InfoView(
+                    logo: $0.logo,
+                    title: $0.title,
+                    description: $0.description,
+                    color: self.color
+                )
+            })
 
             Spacer()
             
@@ -116,9 +123,9 @@ struct OnboardingUIView: View {
                         .foregroundColor(self.color)
                         .font(.system(size: 20, weight: .bold, design: .default))
                         .overlay(
-                                    RoundedRectangle(cornerRadius: Metrics.radiusCornerButton)
-                                        .stroke(self.color, lineWidth: 2)
-                            )
+                            RoundedRectangle(
+                                cornerRadius: Metrics.radiusCornerButton
+                            ).stroke(self.color, lineWidth: 2))
                 })
                 .padding(.leading, Metrics.paddingHorizontalMain)
                 .padding(.trailing, Metrics.paddingHorizontalMain)

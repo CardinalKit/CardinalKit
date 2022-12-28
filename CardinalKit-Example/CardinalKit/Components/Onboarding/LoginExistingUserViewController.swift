@@ -2,7 +2,7 @@
 //  LoginViewController.swift
 //  CardinalKit_Example
 //
-//  Created by Varun Shenoy on 3/2/21.
+//  Created for the CardinalKit framework.
 //  Copyright © 2021 CardinalKit. All rights reserved.
 //
 
@@ -11,7 +11,7 @@ import ResearchKit
 import SwiftUI
 import UIKit
 
-
+/// Onboarding workflow for users who have an existing account.
 struct LoginExistingUserViewController: UIViewControllerRepresentable {
     func makeCoordinator() -> OnboardingViewCoordinator {
         OnboardingViewCoordinator()
@@ -25,6 +25,9 @@ struct LoginExistingUserViewController: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> ORKTaskViewController {
         let config = CKPropertyReader(file: "CKConfiguration")
 
+        /* **************************************************************
+         *  STEP (1): Ask the user to log in
+         **************************************************************/
         var loginSteps: [ORKStep]
         let signInButtons = CKMultipleSignInStep(identifier: "SignInButtons")
         let loginUserPassword = ORKLoginStep(
@@ -35,13 +38,9 @@ struct LoginExistingUserViewController: UIViewControllerRepresentable {
         )
         loginSteps = [signInButtons, loginUserPassword]
 
-        // set health data permissions
-        let healthDataStep = CKHealthDataStep(identifier: "HealthKit")
-
-        // set health records permissions
-        let healthRecordsStep = CKHealthRecordsStep(identifier: "HealthRecords")
-
-        // get consent if user doesn't have a consent document in cloud storage
+        /* **************************************************************
+         *  STEP (2): Ask user to sign consent form (if not found in cloud storage)
+         **************************************************************/
         let consentDocument = ConsentDocument()
         let signature = consentDocument.signatures?.first
         let reviewConsentStep = ORKConsentReviewStep(
@@ -53,6 +52,20 @@ struct LoginExistingUserViewController: UIViewControllerRepresentable {
         reviewConsentStep.reasonForConsent = config.read(query: "Reason for Consent Text")
         let consentReview = CKReviewConsentDocument(identifier: "ConsentReview")
 
+        /* **************************************************************
+         *  STEP (3): Get permission to collect HealthKit data
+         **************************************************************/
+        let healthDataStep = CKHealthDataStep(identifier: "HealthKit")
+
+        /* **************************************************************
+         *  STEP (3.5): Get permission to collect Health Records data
+         **************************************************************/
+        let healthRecordsStep = CKHealthRecordsStep(identifier: "HealthRecords")
+
+        /* **************************************************************
+        *  STEP (4): ask the user to create a security passcode
+        *  that will be required to use this app!
+        *****************************************************************/
         // set passcode
         let passcodeStep = ORKPasscodeStep(identifier: "Passcode")
         let type = config.read(query: "Passcode Type")
@@ -63,15 +76,32 @@ struct LoginExistingUserViewController: UIViewControllerRepresentable {
         }
         passcodeStep.text = config.read(query: "Passcode Text")
 
-        // create a task with each step
-        loginSteps += [consentReview, reviewConsentStep, healthDataStep]
+        /* **************************************************************
+        * STEP (5): Create an array with the steps to show new users.
+        *****************************************************************/
+        var existingUserOnboardingSteps: [ORKStep] = []
 
+        // Add login steps
+        existinUserOnboardingSteps += loginSteps
+
+        // Add consent steps
+        existingUserOnboardingSteps += [consentReview, reviewConsentStep]
+
+        // Add steps for requesting permissions for health data access
+        existingUserOnboardingSteps.append(healthDataStep)
         if config["Health Records"]?["Enabled"] as? Bool == true {
             loginSteps += [healthRecordsStep]
         }
 
-        loginSteps += [passcodeStep]
+        // Add passcode step
+        existingUserOnboardingSteps += [passcodeStep]
 
+        /* **************************************************************
+        * STEP (6): Create a ResearchKit task from the array of steps.
+        *****************************************************************/
+        // Create a navigation rule for the sign in screen that will show
+        // the email/password workflow if the user chose it,
+        // otherwise skips forward to consent.
         let navigableTask = ORKNavigableOrderedTask(identifier: "StudyLoginTask", steps: loginSteps)
         let resultSelector = ORKResultSelector(resultIdentifier: "SignInButtons")
         let booleanAnswerType = ORKResultPredicate.predicateForBooleanQuestionResult(
@@ -86,8 +116,9 @@ struct LoginExistingUserViewController: UIViewControllerRepresentable {
         )
         navigableTask.setNavigationRule(predicateRule, forTriggerStepIdentifier: "SignInButtons")
 
-        // ADD New navigation Rule (if has or not consentDocument)
-        // Consent Rule
+        // Create a navigation rule that checks if the user has previously signed
+        // a consent document - if so, they are redirected to the HealthKit permissions
+        // step, else they are shown the consent document to sign.
         let resultConsent = ORKResultSelector(resultIdentifier: "ConsentReview")
         let booleanAnswerConsent = ORKResultPredicate.predicateForBooleanQuestionResult(
             with: resultConsent,
@@ -101,8 +132,9 @@ struct LoginExistingUserViewController: UIViewControllerRepresentable {
         )
         navigableTask.setNavigationRule(predicateRuleConsent, forTriggerStepIdentifier: "ConsentReview")
 
-
-        // wrap that task on a view controller
+        /* **************************************************************
+        * STEP (7): Present the task to the user
+        **************************************************************/
         let taskViewController = ORKTaskViewController(task: navigableTask, taskRun: nil)
         taskViewController.delegate = context.coordinator
 

@@ -2,8 +2,8 @@
 //  OnboardingViewController.swift
 //  CardinalKit_Example
 //
-//  Created by Santiago Gutierrez on 10/12/20.
-//  Copyright © 2020 CocoaPods. All rights reserved.
+//  Created for the CardinalKit framework.
+//  Copyright © 2020 CardinalKit. All rights reserved.
 //
 
 import Firebase
@@ -11,6 +11,7 @@ import ResearchKit
 import SwiftUI
 import UIKit
 
+/// Onboarding workflow for new users.
 struct OnboardingViewController: UIViewControllerRepresentable {
     func makeCoordinator() -> OnboardingViewCoordinator {
         OnboardingViewCoordinator()
@@ -25,8 +26,8 @@ struct OnboardingViewController: UIViewControllerRepresentable {
         let config = CKPropertyReader(file: "CKConfiguration")
 
         /* **************************************************************
-        *  STEP (1+2): Ask user to review, then sign consent form
-        **************************************************************/
+         *  STEP (1+2): Ask user to review, then sign consent form
+         ****************************************************************/
         let consentDocument = ConsentDocument()
         let signature = consentDocument.signatures?.first
         let reviewConsentStep = ORKConsentReviewStep(identifier: "ConsentReviewStep", signature: signature, in: consentDocument)
@@ -34,27 +35,29 @@ struct OnboardingViewController: UIViewControllerRepresentable {
         reviewConsentStep.reasonForConsent = config.read(query: "Reason for Consent Text")
 
         /* **************************************************************
-        *  STEP (3): get permission to collect HealthKit data
-        **************************************************************/
-        // see `HealthDataStep` to configure!
+         *  STEP (3): Get permission to collect HealthKit data
+         ****************************************************************/
         let healthDataStep = CKHealthDataStep(identifier: "Healthkit")
         
         /* **************************************************************
-        *  STEP (3.5): get permission to collect HealthKit health records data
-        **************************************************************/
+         *  STEP (3.5): Get permission to collect Health Records data
+         ****************************************************************/
         let healthRecordsStep = CKHealthRecordsStep(identifier: "HealthRecords")
         
         /* **************************************************************
-        *  STEP (4): ask user to enter their email address for login
-        **************************************************************/
-        // the `LoginStep` collects and email address, and
-        // the `LoginCustomWaitStep` waits for email verification.
-
+         *  STEP (4): Ask the user to sign up using Apple, Google,
+         *  or their email address
+         ****************************************************************/
         var loginSteps: [ORKStep]
-        let signInButtons = CKMultipleSignInStep(identifier: "SignInButtons")
-        
-        let regexp = try? NSRegularExpression(pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[d$@$!%*?&#])[A-Za-z\\dd$@$!%*?&#]{8,}")
 
+        // First, we create a step that allows users to choose their
+        // sign in modality (e.g. Google, Apple, Email and Password)
+        let signInButtons = CKMultipleSignInStep(identifier: "SignInButtons")
+
+        // Then, we create a step that allow users to sign up
+        // with their email address.
+
+        // Text shown on the email & password registration screen
         let registrationText = """
         Sign up for this study using your email address.
 
@@ -63,6 +66,10 @@ struct OnboardingViewController: UIViewControllerRepresentable {
 
         """
 
+        // Regular expression that defines the password criteria
+        let regexp = try? NSRegularExpression(pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[d$@$!%*?&#])[A-Za-z\\dd$@$!%*?&#]{8,}")
+
+        // Error message shown if the password the user entered does not meet criteria
         let passcodeInvalidMessage = """
         Your password does not meet the following criteria: minimum 8 \
         characters with at least 1 uppercase alphabet, 1 lowercase \
@@ -84,15 +91,14 @@ struct OnboardingViewController: UIViewControllerRepresentable {
             text: "Log into this study.",
             loginViewControllerClass: LoginViewController.self
         )
-        
-        loginSteps = [signInButtons, registerStep, loginStep]
 
+        // Now, we combine these steps into an array
+        loginSteps = [signInButtons, registerStep, loginStep]
         
         /* **************************************************************
         *  STEP (5): ask the user to create a security passcode
         *  that will be required to use this app!
-        **************************************************************/
-        // use the `ORKPasscodeStep` from ResearchKit.
+        *****************************************************************/
         let passcodeStep = ORKPasscodeStep(identifier: "Passcode") // NOTE: requires NSFaceIDUsageDescription in info.plist
         let type = config.read(query: "Passcode Type")
         if type == "6" {
@@ -104,59 +110,61 @@ struct OnboardingViewController: UIViewControllerRepresentable {
         
         /* **************************************************************
         *  STEP (6): inform the user that they are done with sign-up!
-        **************************************************************/
+        *****************************************************************/
         // use the `ORKCompletionStep` from ResearchKit
         let completionStep = ORKCompletionStep(identifier: "CompletionStep")
         completionStep.title = config.read(query: "Completion Step Title")
         completionStep.text = config.read(query: "Completion Step Text")
         
         /* **************************************************************
-        * finally, CREATE an array with the steps to show the user
-        **************************************************************/
-        
-        // given intro steps that the user should review and consent to
-        
-        // and steps regarding login / security
-        var securitySteps = loginSteps + [passcodeStep, healthDataStep]
-        
-        if config["Health Records"]?["Enabled"] as? Bool == true {
-            securitySteps += [healthRecordsStep]
-        }
-        
-        securitySteps += [completionStep]
-        
-        // guide the user through ALL steps
-        let fullSteps = [reviewConsentStep] + securitySteps
-        
-        // unless they have already gotten as far as to enter an email address
-        var stepsToUse = fullSteps
-        if CKStudyUser.shared.email != nil {
-            stepsToUse = securitySteps
-        }
-        
-        /* **************************************************************
-        * and SHOW the user these steps!
-        **************************************************************/
-        // create a task with each step
+        * STEP (7): Create an array with the steps to show new users.
+        *****************************************************************/
+        var onboardingSteps: [ORKStep] = []
 
-        let navigableTask = ORKNavigableOrderedTask(identifier: "StudyOnboardingTask", steps: stepsToUse)
-        
+        // Add consent steps
+        onboardingSteps.append(reviewConsentStep)
+
+        // Add login steps
+        onboardingSteps += loginSteps
+
+        // Add passcode step
+        onboardingSteps.append(passcodeStep)
+
+        // Add steps for requesting permission for health data access
+        onboardingSteps.append(healthDataStep)
+        if config["Health Records"]?["Enabled"] as? Bool == true {
+            onboardingSteps.append(healthRecordsStep)
+        }
+
+        // Add completion step
+        onboardingSteps.append(completionStep)
+
+        /* **************************************************************
+        * STEP (8): Create a ResearchKit task from the array of steps.
+        *****************************************************************/
+        let navigableTask = ORKNavigableOrderedTask(identifier: "StudyOnboardingTask", steps: onboardingSteps)
+
+        // Create a navigation rule for the sign in screen that will show
+        // the email/password sign up workflow if the user chose it,
+        // otherwise skips forward to the passcode entry screen.
         let resultSelector = ORKResultSelector(resultIdentifier: "SignInButtons")
-        let booleanAnswerType = ORKResultPredicate.predicateForBooleanQuestionResult(with: resultSelector, expectedAnswer: true)
+        let booleanAnswerType = ORKResultPredicate.predicateForBooleanQuestionResult(
+            with: resultSelector,
+            expectedAnswer: true
+        )
         let predicateRule = ORKPredicateStepNavigationRule(
             resultPredicates: [booleanAnswerType],
             destinationStepIdentifiers: ["RegistrationStep"],
             defaultStepIdentifier: "Passcode",
             validateArrays: true
         )
-        
         navigableTask.setNavigationRule(predicateRule, forTriggerStepIdentifier: "SignInButtons")
 
-        // wrap that task on a view controller
+        /* **************************************************************
+        * STEP (9): Present the task to the user
+        **************************************************************/
         let taskViewController = ORKTaskViewController(task: navigableTask, taskRun: nil)
-        taskViewController.delegate = context.coordinator // enables `ORKTaskViewControllerDelegate` below
-        
-        // & present the VC!
+        taskViewController.delegate = context.coordinator // enables `ORKTaskViewControllerDelegate`
         return taskViewController
     }
 }

@@ -3,7 +3,7 @@
 //  CardinalKit_Example
 //
 //  Created by Julian Esteban Ramos Martinez on 16/12/21.
-//  Copyright © 2021 CocoaPods. All rights reserved.
+//  Copyright © 2021 CardinalKit. All rights reserved.
 //
 
 import Firebase
