@@ -6,10 +6,6 @@
 	<array>
 		<string>Default</string>
 	</array>
-	<key>com.apple.developer.associated-domains</key>
-	<array>
-		<string>applinks:cs342.page.link</string>
-	</array>
 	<key>com.apple.developer.default-data-protection</key>
 	<string>NSFileProtectionComplete</string>
 	<key>com.apple.developer.healthkit</key>
@@ -17,10 +13,6 @@
 	<key>com.apple.developer.healthkit.access</key>
 	<array>
 		<string>health-records</string>
-	</array>
-	<key>keychain-access-groups</key>
-	<array>
-		<string>$(AppIdentifierPrefix)edu.stanford.cs342.sample-study</string>
 	</array>
 </dict>
 </plist>

@@ -23,17 +23,6 @@
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
-			<key>CFBundleURLName</key>
-			<string>edu.stanford.cs342.firebase</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>edu.stanford.cardinalkit</string>
-				<string>fb415789243347763</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>com.googleusercontent.apps.949411969311-25li9prr4lnl9njusscqv5rq586j3un4</string>
@@ -48,11 +37,6 @@
 	<string></string>
 	<key>FacebookDisplayName</key>
 	<string></string>
-	<key>FirebaseDynamicLinksCustomDomains</key>
-	<array>
-		<string>https://cs342.page.link</string>
-		<string>https://cs342.page.link/Rdse</string>
-	</array>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>

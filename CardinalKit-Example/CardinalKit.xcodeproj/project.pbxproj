@@ -16,7 +16,7 @@
 		2B19DD9426FE1D2600649CE1 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19DD9326FE1D2600649CE1 /* TestViewController.swift */; };
 		2B19DD9626FE1D2F00649CE1 /* CheckListItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19DD9526FE1D2F00649CE1 /* CheckListItemViewController.swift */; };
 		2B8FB80427552B02000B2D7B /* CKMultipleSignInStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8FB80327552B02000B2D7B /* CKMultipleSignInStep.swift */; };
-		2B932F84276BF8D300AB3A02 /* CKReviewConsentDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B932F83276BF8D300AB3A02 /* CKReviewConsentDocument.swift */; };
+		2B932F84276BF8D300AB3A02 /* CKVerifyConsentDocumentStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B932F83276BF8D300AB3A02 /* CKVerifyConsentDocumentStep.swift */; };
 		2BD5328326C2CC4E00C4636E /* CKResearchSurveysManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5328226C2CC4E00C4636E /* CKResearchSurveysManager.swift */; };
 		2BD5328526C30F2E00C4636E /* CloudTaskItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5328426C30F2E00C4636E /* CloudTaskItem.swift */; };
 		2BF6452026C1DBE70020C206 /* CKORKSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6451F26C1DBE70020C206 /* CKORKSerialization.swift */; };
@@ -29,7 +29,6 @@
 		2FFFA2CD29024EFD009D289D /* Questionnaire+ValueSets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFFA2C529024EFD009D289D /* Questionnaire+ValueSets.swift */; };
 		2FFFA2CE29024EFD009D289D /* FHIRExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFFA2C729024EFD009D289D /* FHIRExtensions.swift */; };
 		2FFFA2D229025241009D289D /* ORKESerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4386244A4A0400656518 /* ORKESerialization.m */; };
-		65AAD69AC65C3B5C95FC5147 /* Pods_CardinalKit_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51947F51EF96E554462DBD69 /* Pods_CardinalKit_Example.framework */; };
 		8E0A43AC244A4A0400656518 /* CKStudyUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4382244A4A0400656518 /* CKStudyUser.swift */; };
 		8E0A43AD244A4A0400656518 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4384244A4A0400656518 /* Constants.swift */; };
 		8E0A43AF244A4A0400656518 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E0A4388244A4A0400656518 /* Assets.xcassets */; };
@@ -38,10 +37,7 @@
 		8E0A43B5244A4A0400656518 /* LocalTaskItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4391244A4A0400656518 /* LocalTaskItem.swift */; };
 		8E0A43B9244A4A0400656518 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4396244A4A0400656518 /* AppDelegate.swift */; };
 		8E0A43BE244A4A0400656518 /* CKHealthDataStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A439D244A4A0400656518 /* CKHealthDataStepViewController.swift */; };
-		8E0A43C0244A4A0400656518 /* PasswordlessLoginStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A439F244A4A0400656518 /* PasswordlessLoginStep.swift */; };
-		8E0A43C1244A4A0400656518 /* LoginCustomWaitStepView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E0A43A1244A4A0400656518 /* LoginCustomWaitStepView.xib */; };
 		8E0A43C2244A4A0400656518 /* ConsentDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A43A2244A4A0400656518 /* ConsentDocument.swift */; };
-		8E0A43C3244A4A0400656518 /* LoginCustomWaitStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A43A3244A4A0400656518 /* LoginCustomWaitStepViewController.swift */; };
 		8E0A43D5244A693D00656518 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E0A43D4244A693D00656518 /* HealthKit.framework */; };
 		8E6E1E092534F4100024B8DF /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E1E082534F4100024B8DF /* OnboardingViewController.swift */; };
 		8E6E1E0B2534FF640024B8DF /* OnboardingViewController+Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E1E0A2534FF640024B8DF /* OnboardingViewController+Coordinator.swift */; };
@@ -90,10 +86,11 @@
 		8EA664B2259422E400B6A45A /* CKCareKitRemoteSyncWithFirestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA664B1259422E400B6A45A /* CKCareKitRemoteSyncWithFirestore.swift */; };
 		8EA664B42594387900B6A45A /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA664B32594387900B6A45A /* Errors.swift */; };
 		8EBE6F9C24B3C0E60093D07C /* AppDelegate+CardinalKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE6F9B24B3C0E60093D07C /* AppDelegate+CardinalKit.swift */; };
+		DEC31BE29127C341654C2BAD /* Pods_CardinalKit_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97A8BB88E35DE3702B351411 /* Pods_CardinalKit_Example.framework */; };
 		E235077724F7082700CC1899 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E235077624F7082700CC1899 /* SceneDelegate.swift */; };
 		E2680B1B260A72DD00B755EA /* LoginExistingUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2680B1A260A72DD00B755EA /* LoginExistingUserViewController.swift */; };
 		E29143FC24E74AD100EE97B2 /* LaunchUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29143FB24E74AD100EE97B2 /* LaunchUIView.swift */; };
-		E2DF9F0A2500C9CE00A93B93 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DF9F092500C9CE00A93B93 /* LoginViewController.swift */; };
+		E2DF9F0A2500C9CE00A93B93 /* CKLoginStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DF9F092500C9CE00A93B93 /* CKLoginStepViewController.swift */; };
 		E2F1FD7624D61EDA006C39DF /* CKPropertyReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F1FD7524D61EDA006C39DF /* CKPropertyReader.swift */; };
 		E2F1FD7824D62064006C39DF /* CKConfiguration.plist in Resources */ = {isa = PBXBuildFile; fileRef = E2F1FD7724D62064006C39DF /* CKConfiguration.plist */; };
 /* End PBXBuildFile section */
@@ -122,7 +119,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		03D6A77B106673CC00F2E63D /* Pods-CardinalKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardinalKit_Example.debug.xcconfig"; path = "Target Support Files/Pods-CardinalKit_Example/Pods-CardinalKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		07D78DA16FC9C3C7709EA243 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		270AF36127872C13002945A7 /* CardinalKit_ExampleRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CardinalKit_ExampleRelease.entitlements; sourceTree = "<group>"; };
 		270CDC0928A65A0100F2F053 /* CKFHIRTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKFHIRTaskViewController.swift; sourceTree = "<group>"; };
@@ -135,7 +131,7 @@
 		2B19DD9326FE1D2600649CE1 /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		2B19DD9526FE1D2F00649CE1 /* CheckListItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckListItemViewController.swift; sourceTree = "<group>"; };
 		2B8FB80327552B02000B2D7B /* CKMultipleSignInStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKMultipleSignInStep.swift; sourceTree = "<group>"; };
-		2B932F83276BF8D300AB3A02 /* CKReviewConsentDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKReviewConsentDocument.swift; sourceTree = "<group>"; };
+		2B932F83276BF8D300AB3A02 /* CKVerifyConsentDocumentStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKVerifyConsentDocumentStep.swift; sourceTree = "<group>"; };
 		2BD5328226C2CC4E00C4636E /* CKResearchSurveysManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKResearchSurveysManager.swift; sourceTree = "<group>"; };
 		2BD5328426C30F2E00C4636E /* CloudTaskItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudTaskItem.swift; sourceTree = "<group>"; };
 		2BF6451F26C1DBE70020C206 /* CKORKSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKORKSerialization.swift; sourceTree = "<group>"; };
@@ -148,10 +144,10 @@
 		2FFFA2C529024EFD009D289D /* Questionnaire+ValueSets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Questionnaire+ValueSets.swift"; sourceTree = "<group>"; };
 		2FFFA2C729024EFD009D289D /* FHIRExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FHIRExtensions.swift; sourceTree = "<group>"; };
 		41DC264876E45FE5A3FD8701 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		51947F51EF96E554462DBD69 /* Pods_CardinalKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CardinalKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD01AFB9204008FA782 /* CardinalKit Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CardinalKit Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		62AA5CD1C2188D392530510F /* CardinalKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = CardinalKit.podspec; path = ../CardinalKit.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		6931B4E9F0B2B8BDC1817BDA /* Pods-CardinalKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardinalKit_Example.release.xcconfig"; path = "Target Support Files/Pods-CardinalKit_Example/Pods-CardinalKit_Example.release.xcconfig"; sourceTree = "<group>"; };
+		8BB68D8E9AEB46F04C9B8F37 /* Pods-CardinalKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardinalKit_Example.release.xcconfig"; path = "Target Support Files/Pods-CardinalKit_Example/Pods-CardinalKit_Example.release.xcconfig"; sourceTree = "<group>"; };
+		8D256BEF2D225D0B287288D0 /* Pods-CardinalKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardinalKit_Example.debug.xcconfig"; path = "Target Support Files/Pods-CardinalKit_Example/Pods-CardinalKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		8E0A4378244A4A0300656518 /* CardinalKit_Example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CardinalKit_Example-Bridging-Header.h"; sourceTree = "<group>"; };
 		8E0A4382244A4A0400656518 /* CKStudyUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKStudyUser.swift; sourceTree = "<group>"; };
 		8E0A4384244A4A0400656518 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -164,10 +160,7 @@
 		8E0A4391244A4A0400656518 /* LocalTaskItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalTaskItem.swift; sourceTree = "<group>"; };
 		8E0A4396244A4A0400656518 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8E0A439D244A4A0400656518 /* CKHealthDataStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKHealthDataStepViewController.swift; sourceTree = "<group>"; };
-		8E0A439F244A4A0400656518 /* PasswordlessLoginStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordlessLoginStep.swift; sourceTree = "<group>"; };
-		8E0A43A1244A4A0400656518 /* LoginCustomWaitStepView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginCustomWaitStepView.xib; sourceTree = "<group>"; };
 		8E0A43A2244A4A0400656518 /* ConsentDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsentDocument.swift; sourceTree = "<group>"; };
-		8E0A43A3244A4A0400656518 /* LoginCustomWaitStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginCustomWaitStepViewController.swift; sourceTree = "<group>"; };
 		8E0A43C9244A4C6500656518 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8E0A43D4244A693D00656518 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		8E6E1E082534F4100024B8DF /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
@@ -213,10 +206,11 @@
 		8EA664B1259422E400B6A45A /* CKCareKitRemoteSyncWithFirestore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKCareKitRemoteSyncWithFirestore.swift; sourceTree = "<group>"; };
 		8EA664B32594387900B6A45A /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		8EBE6F9B24B3C0E60093D07C /* AppDelegate+CardinalKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+CardinalKit.swift"; sourceTree = "<group>"; };
+		97A8BB88E35DE3702B351411 /* Pods_CardinalKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CardinalKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E235077624F7082700CC1899 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		E2680B1A260A72DD00B755EA /* LoginExistingUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginExistingUserViewController.swift; sourceTree = "<group>"; };
 		E29143FB24E74AD100EE97B2 /* LaunchUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchUIView.swift; sourceTree = "<group>"; };
-		E2DF9F092500C9CE00A93B93 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		E2DF9F092500C9CE00A93B93 /* CKLoginStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKLoginStepViewController.swift; sourceTree = "<group>"; };
 		E2F1FD7524D61EDA006C39DF /* CKPropertyReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKPropertyReader.swift; sourceTree = "<group>"; };
 		E2F1FD7724D62064006C39DF /* CKConfiguration.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = CKConfiguration.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -238,7 +232,7 @@
 				8E0A43D5244A693D00656518 /* HealthKit.framework in Frameworks */,
 				8E9CDE912591534B00C8A228 /* CareKitStore in Frameworks */,
 				8E9CDE932591534B00C8A228 /* CareKitFHIR in Frameworks */,
-				65AAD69AC65C3B5C95FC5147 /* Pods_CardinalKit_Example.framework in Frameworks */,
+				DEC31BE29127C341654C2BAD /* Pods_CardinalKit_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,20 +247,11 @@
 			path = "CardinalKit ExampleTests";
 			sourceTree = "<group>";
 		};
-		2B8FB80227552ADD000B2D7B /* SignUp */ = {
-			isa = PBXGroup;
-			children = (
-				2B8FB80327552B02000B2D7B /* CKMultipleSignInStep.swift */,
-				2B932F83276BF8D300AB3A02 /* CKReviewConsentDocument.swift */,
-			);
-			path = SignUp;
-			sourceTree = "<group>";
-		};
 		2C45A885E8BD0CAC5349997A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				8E0A43D4244A693D00656518 /* HealthKit.framework */,
-				51947F51EF96E554462DBD69 /* Pods_CardinalKit_Example.framework */,
+				97A8BB88E35DE3702B351411 /* Pods_CardinalKit_Example.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -403,7 +388,6 @@
 		8E0A4399244A4A0400656518 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				2B8FB80227552ADD000B2D7B /* SignUp */,
 				8E0A439C244A4A0400656518 /* Steps */,
 				8E6E1E2125352C780024B8DF /* OnboardingUIView.swift */,
 				8E6E1E082534F4100024B8DF /* OnboardingViewController.swift */,
@@ -418,22 +402,13 @@
 		8E0A439C244A4A0400656518 /* Steps */ = {
 			isa = PBXGroup;
 			children = (
-				8E0A43A0244A4A0400656518 /* Views */,
 				8E0A439D244A4A0400656518 /* CKHealthDataStepViewController.swift */,
 				8EA6648625930B6B00B6A45A /* CKHealthRecordsStepViewController.swift */,
-				8E0A439F244A4A0400656518 /* PasswordlessLoginStep.swift */,
-				8E0A43A3244A4A0400656518 /* LoginCustomWaitStepViewController.swift */,
-				E2DF9F092500C9CE00A93B93 /* LoginViewController.swift */,
+				2B8FB80327552B02000B2D7B /* CKMultipleSignInStep.swift */,
+				2B932F83276BF8D300AB3A02 /* CKVerifyConsentDocumentStep.swift */,
+				E2DF9F092500C9CE00A93B93 /* CKLoginStepViewController.swift */,
 			);
 			path = Steps;
-			sourceTree = "<group>";
-		};
-		8E0A43A0244A4A0400656518 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				8E0A43A1244A4A0400656518 /* LoginCustomWaitStepView.xib */,
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		8E0A43C5244A4A5700656518 /* Library */ = {
@@ -583,8 +558,8 @@
 		A562A578C883F67F0DAE1385 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				03D6A77B106673CC00F2E63D /* Pods-CardinalKit_Example.debug.xcconfig */,
-				6931B4E9F0B2B8BDC1817BDA /* Pods-CardinalKit_Example.release.xcconfig */,
+				8D256BEF2D225D0B287288D0 /* Pods-CardinalKit_Example.debug.xcconfig */,
+				8BB68D8E9AEB46F04C9B8F37 /* Pods-CardinalKit_Example.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -614,14 +589,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "CardinalKit_Example" */;
 			buildPhases = (
-				7756C42D26992364A231CF75 /* [CP] Check Pods Manifest.lock */,
+				C83A717AF3CA64D988F08845 /* [CP] Check Pods Manifest.lock */,
 				607FACCC1AFB9204008FA782 /* Sources */,
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
 				8E0A43D0244A60D800656518 /* Embed Frameworks */,
-				F29BC1824B2344C27EEDE306 /* [CP] Embed Pods Frameworks */,
-				86B8C488D69656961A788276 /* [CP] Copy Pods Resources */,
 				27663F3129577ECF00A34080 /* SwiftLint */,
+				24722186EFA46B1F94986B81 /* [CP] Embed Pods Frameworks */,
+				BA8893ED9E24F730E42CB847 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -697,72 +672,13 @@
 				8E0A43B0244A4A0400656518 /* LaunchScreen.storyboard in Resources */,
 				276399A129021BB5004DE158 /* GoogleService-Info.plist in Resources */,
 				E2F1FD7824D62064006C39DF /* CKConfiguration.plist in Resources */,
-				8E0A43C1244A4A0400656518 /* LoginCustomWaitStepView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		27663F3129577ECF00A34080 /* SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = SwiftLint;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# if which swiftlint >/dev/null; then\n#    swiftlint\n# else\n#     echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\n# fi\n";
-		};
-		7756C42D26992364A231CF75 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-CardinalKit_Example-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		86B8C488D69656961A788276 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CardinalKit_Example/Pods-CardinalKit_Example-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/CardinalKit/CardinalKit.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/CardinalKit.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CardinalKit_Example/Pods-CardinalKit_Example-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F29BC1824B2344C27EEDE306 /* [CP] Embed Pods Frameworks */ = {
+		24722186EFA46B1F94986B81 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -777,7 +693,6 @@
 				"${BUILT_PRODUCTS_DIR}/FirebaseCore/FirebaseCore.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseCoreExtension/FirebaseCoreExtension.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseCoreInternal/FirebaseCoreInternal.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseDynamicLinks/FirebaseDynamicLinks.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseFirestore/FirebaseFirestore.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseInstallations/FirebaseInstallations.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseStorage/FirebaseStorage.framework",
@@ -817,7 +732,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCoreExtension.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCoreInternal.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseDynamicLinks.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseFirestore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseInstallations.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseStorage.framework",
@@ -852,6 +766,64 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CardinalKit_Example/Pods-CardinalKit_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		27663F3129577ECF00A34080 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# if which swiftlint >/dev/null; then\n#    swiftlint\n# else\n#     echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\n# fi\n";
+		};
+		BA8893ED9E24F730E42CB847 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CardinalKit_Example/Pods-CardinalKit_Example-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/CardinalKit/CardinalKit.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/CardinalKit.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CardinalKit_Example/Pods-CardinalKit_Example-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C83A717AF3CA64D988F08845 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CardinalKit_Example-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -867,7 +839,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E2DF9F0A2500C9CE00A93B93 /* LoginViewController.swift in Sources */,
+				E2DF9F0A2500C9CE00A93B93 /* CKLoginStepViewController.swift in Sources */,
 				2FFFA2D229025241009D289D /* ORKESerialization.m in Sources */,
 				8E6E1E14253520440024B8DF /* PasscodeViewController.swift in Sources */,
 				2B19DD9626FE1D2F00649CE1 /* CheckListItemViewController.swift in Sources */,
@@ -876,7 +848,6 @@
 				2B8FB80427552B02000B2D7B /* CKMultipleSignInStep.swift in Sources */,
 				270CDC0C28A65AD300F2F053 /* CKUploadFHIRTaskViewControllerDelegate.swift in Sources */,
 				8EA6648725930B6B00B6A45A /* CKHealthRecordsStepViewController.swift in Sources */,
-				8E0A43C0244A4A0400656518 /* PasswordlessLoginStep.swift in Sources */,
 				8EA664B2259422E400B6A45A /* CKCareKitRemoteSyncWithFirestore.swift in Sources */,
 				8EA664AD2593380D00B6A45A /* SendRecordsView.swift in Sources */,
 				8E6E1E28253538CC0024B8DF /* CloudTaskListItemView.swift in Sources */,
@@ -929,7 +900,6 @@
 				2BD5328526C30F2E00C4636E /* CloudTaskItem.swift in Sources */,
 				8E6E1E0D25351D8F0024B8DF /* PageViewController.swift in Sources */,
 				8E0A43AC244A4A0400656518 /* CKStudyUser.swift in Sources */,
-				8E0A43C3244A4A0400656518 /* LoginCustomWaitStepViewController.swift in Sources */,
 				8E9CDEB22591739A00C8A228 /* TipView.swift in Sources */,
 				8E7FFFBD25DE38E4002982B4 /* CoffeeChartDataSource.swift in Sources */,
 				E2F1FD7624D61EDA006C39DF /* CKPropertyReader.swift in Sources */,
@@ -937,7 +907,7 @@
 				8E9CDF832592844A00C8A228 /* LearnUIView.swift in Sources */,
 				8E9CDEA725916B2800C8A228 /* ScheduleViewControllerRepresentable.swift in Sources */,
 				2FFFA2CE29024EFD009D289D /* FHIRExtensions.swift in Sources */,
-				2B932F84276BF8D300AB3A02 /* CKReviewConsentDocument.swift in Sources */,
+				2B932F84276BF8D300AB3A02 /* CKVerifyConsentDocumentStep.swift in Sources */,
 				E235077724F7082700CC1899 /* SceneDelegate.swift in Sources */,
 				8E6E1E16253524500024B8DF /* WithdrawalViewController.swift in Sources */,
 				E2680B1B260A72DD00B755EA /* LoginExistingUserViewController.swift in Sources */,
@@ -1136,7 +1106,7 @@
 		};
 		607FACF01AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 03D6A77B106673CC00F2E63D /* Pods-CardinalKit_Example.debug.xcconfig */;
+			baseConfigurationReference = 8D256BEF2D225D0B287288D0 /* Pods-CardinalKit_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -1162,7 +1132,7 @@
 		};
 		607FACF11AFB9204008FA782 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6931B4E9F0B2B8BDC1817BDA /* Pods-CardinalKit_Example.release.xcconfig */;
+			baseConfigurationReference = 8BB68D8E9AEB46F04C9B8F37 /* Pods-CardinalKit_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

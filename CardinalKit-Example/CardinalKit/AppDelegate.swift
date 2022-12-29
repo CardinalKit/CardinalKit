@@ -35,18 +35,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let config = CKPropertyReader(file: "CKConfiguration")
         UIView.appearance(whenContainedInInstancesOf: [ORKTaskViewController.self]).tintColor = config.readColor(query: "Tint Color")
 
-        // Fix transparent navbar in iOS 15
-               if #available(iOS 15, *) {
-                   let appearance = UINavigationBarAppearance()
-                   appearance.configureWithOpaqueBackground()
-                   UINavigationBar.appearance().standardAppearance = appearance
-                   UINavigationBar.appearance().scrollEdgeAppearance = appearance
-               }
+        // Fix transparent navbar in iOS 15+
+        if #available(iOS 15, *) {
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            UINavigationBar.appearance().standardAppearance = appearance
+            UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        }
+
         // Set up FB Sign In
         FBSDKCoreKit.ApplicationDelegate.shared.application(
-                    application,
-                    didFinishLaunchingWithOptions: launchOptions
-                )
+            application,
+            didFinishLaunchingWithOptions: launchOptions
+        )
         return true
     }
 
@@ -57,13 +58,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         open url: URL,
         options: [UIApplication.OpenURLOptionsKey: Any]
     ) -> Bool {
-          ApplicationDelegate.shared.application(
-              application,
-              open: url,
-              sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
-              annotation: options[UIApplication.OpenURLOptionsKey.annotation]
-          )
-      return GIDSignIn.sharedInstance.handle(url)
+        ApplicationDelegate.shared.application(
+            application,
+            open: url,
+            sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
+            annotation: options[UIApplication.OpenURLOptionsKey.annotation]
+        )
+        return GIDSignIn.sharedInstance.handle(url)
     }
 
     func application(
@@ -92,7 +93,7 @@ extension AppDelegate {
      
      This step is required as an edge-case, since
      keychain items persist after uninstallation.
-    */
+     */
     fileprivate func cleanIfFirstRun() {
         if !UserDefaults.standard.bool(forKey: Constants.prefFirstRunWasMarked) {
             if ORKPasscodeViewController.isPasscodeStoredInKeychain() {

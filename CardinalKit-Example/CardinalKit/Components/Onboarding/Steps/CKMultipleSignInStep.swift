@@ -1,9 +1,8 @@
 //
 //  CKMultipleSignInStep.swift
-//  CardinalKit_Example
 //
-//  Created by Julian Esteban Ramos Martinez on 25/11/21.
-//  Copyright © 2021 CocoaPods. All rights reserved.
+//  Created for the CardinalKit framework.
+//  Copyright © 2021 CardinalKit. All rights reserved.
 //
 
 import AuthenticationServices
