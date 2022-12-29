@@ -84,44 +84,36 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
         }
     }
 
-    // swiftlint:disable cyclomatic_complexity
     func taskViewController(
         _ taskViewController: ORKTaskViewController,
         stepViewControllerWillAppear stepViewController: ORKStepViewController
     ) {
+        /// If we are navigating forward from the registration step, then try to register an account
         if stepViewController.step?.identifier == "LoginStep" {
-            let alert = UIAlertController(title: nil, message: "Creating account...", preferredStyle: .alert)
-
-            let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
-            loadingIndicator.hidesWhenStopped = true
-            loadingIndicator.style = UIActivityIndicatorView.Style.medium
-            loadingIndicator.startAnimating()
-
-            alert.view.addSubview(loadingIndicator)
-            taskViewController.present(alert, animated: false, completion: nil)
-
             let stepResult = taskViewController.result.stepResult(forStepIdentifier: "RegistrationStep")
             if let emailRes = stepResult?.results?.first as? ORKTextQuestionResult,
                let email = emailRes.textAnswer {
                 if let passwordRes = stepResult?.results?[1] as? ORKTextQuestionResult,
                    let pass = passwordRes.textAnswer {
+                    
+                    /// Register a new account with given email and password using Firebase
                     Auth.auth().createUser(withEmail: email, password: pass) { _, error in
                         DispatchQueue.main.async {
                             if let error = error {
-                                alert.dismiss(animated: false, completion: nil)
-
+                                /// If an error occurs, show an alert and navigate back to the registration step
                                 let alert = UIAlertController(
                                     title: "Registration Error!",
                                     message: error.localizedDescription,
                                     preferredStyle: .alert
                                 )
-
-                                alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-
+                                let action = UIAlertAction(
+                                    title: "OK",
+                                    style: .cancel,
+                                    handler: nil
+                                )
+                                alert.addAction(action)
                                 taskViewController.present(alert, animated: false)
                                 stepViewController.goBackward()
-                            } else {
-                                alert.dismiss(animated: false, completion: nil)
                             }
                         }
                     }
