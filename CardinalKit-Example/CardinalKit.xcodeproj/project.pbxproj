@@ -90,7 +90,7 @@
 		E235077724F7082700CC1899 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E235077624F7082700CC1899 /* SceneDelegate.swift */; };
 		E2680B1B260A72DD00B755EA /* LoginExistingUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2680B1A260A72DD00B755EA /* LoginExistingUserViewController.swift */; };
 		E29143FC24E74AD100EE97B2 /* LaunchUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29143FB24E74AD100EE97B2 /* LaunchUIView.swift */; };
-		E2DF9F0A2500C9CE00A93B93 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DF9F092500C9CE00A93B93 /* LoginViewController.swift */; };
+		E2DF9F0A2500C9CE00A93B93 /* CKLoginStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DF9F092500C9CE00A93B93 /* CKLoginStepViewController.swift */; };
 		E2F1FD7624D61EDA006C39DF /* CKPropertyReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F1FD7524D61EDA006C39DF /* CKPropertyReader.swift */; };
 		E2F1FD7824D62064006C39DF /* CKConfiguration.plist in Resources */ = {isa = PBXBuildFile; fileRef = E2F1FD7724D62064006C39DF /* CKConfiguration.plist */; };
 /* End PBXBuildFile section */
@@ -210,7 +210,7 @@
 		E235077624F7082700CC1899 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		E2680B1A260A72DD00B755EA /* LoginExistingUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginExistingUserViewController.swift; sourceTree = "<group>"; };
 		E29143FB24E74AD100EE97B2 /* LaunchUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchUIView.swift; sourceTree = "<group>"; };
-		E2DF9F092500C9CE00A93B93 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		E2DF9F092500C9CE00A93B93 /* CKLoginStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKLoginStepViewController.swift; sourceTree = "<group>"; };
 		E2F1FD7524D61EDA006C39DF /* CKPropertyReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKPropertyReader.swift; sourceTree = "<group>"; };
 		E2F1FD7724D62064006C39DF /* CKConfiguration.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = CKConfiguration.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -406,7 +406,7 @@
 				8EA6648625930B6B00B6A45A /* CKHealthRecordsStepViewController.swift */,
 				2B8FB80327552B02000B2D7B /* CKMultipleSignInStep.swift */,
 				2B932F83276BF8D300AB3A02 /* CKReviewConsentDocument.swift */,
-				E2DF9F092500C9CE00A93B93 /* LoginViewController.swift */,
+				E2DF9F092500C9CE00A93B93 /* CKLoginStepViewController.swift */,
 			);
 			path = Steps;
 			sourceTree = "<group>";
@@ -839,7 +839,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E2DF9F0A2500C9CE00A93B93 /* LoginViewController.swift in Sources */,
+				E2DF9F0A2500C9CE00A93B93 /* CKLoginStepViewController.swift in Sources */,
 				2FFFA2D229025241009D289D /* ORKESerialization.m in Sources */,
 				8E6E1E14253520440024B8DF /* PasscodeViewController.swift in Sources */,
 				2B19DD9626FE1D2F00649CE1 /* CheckListItemViewController.swift in Sources */,

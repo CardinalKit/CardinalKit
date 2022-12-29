@@ -109,23 +109,19 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
                         DispatchQueue.main.async {
                             if let error = error {
                                 alert.dismiss(animated: false, completion: nil)
-                                if let errCode = AuthErrorCode.Code(rawValue: error._code) {
-                                    switch errCode {
-                                    default:
-                                        let alert = UIAlertController(
-                                            title: "Registration Error!",
-                                            message: error.localizedDescription,
-                                            preferredStyle: .alert
-                                        )
-                                        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
 
-                                        taskViewController.present(alert, animated: false)
-                                    }
-                                }
+                                let alert = UIAlertController(
+                                    title: "Registration Error!",
+                                    message: error.localizedDescription,
+                                    preferredStyle: .alert
+                                )
+
+                                alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+
+                                taskViewController.present(alert, animated: false)
                                 stepViewController.goBackward()
                             } else {
                                 alert.dismiss(animated: false, completion: nil)
-                                print("Created user!")
                             }
                         }
                     }
@@ -134,16 +130,16 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
         }
     }
     
-    func taskViewController(_ taskViewController: ORKTaskViewController, viewControllerFor step: ORKStep) -> ORKStepViewController? {
-        // MARK: - Advanced Concepts
+    func taskViewController(
+        _ taskViewController: ORKTaskViewController,
+        viewControllerFor step: ORKStep
+    ) -> ORKStepViewController? {
         // Overriding the view controller of an ORKStep
         // lets us run our own code on top of what
         // ResearchKit already provides!
         
         switch step {
         case is CKHealthDataStep:
-            // this step lets us run custom logic to ask for
-            // HealthKit permissions when this step appears on screen.
             return CKHealthDataStepViewController(step: step)
         case is CKHealthRecordsStep:
             return CKHealthRecordsStepViewController(step: step)

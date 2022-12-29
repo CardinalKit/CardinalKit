@@ -11,7 +11,7 @@ import Foundation
 import ResearchKit
 
 
-public class CKReviewConsentDocument: ORKQuestionStep {
+public class CKVerifyConsentDocument: ORKQuestionStep {
     override public init(
         identifier: String
     ) {
@@ -25,9 +25,9 @@ public class CKReviewConsentDocument: ORKQuestionStep {
     }
 }
 
-public class CKReviewConsentDocumentViewController: ORKQuestionStepViewController {
-    public var CKReviewConsentDocument: CKReviewConsentDocument? {
-        step as? CKReviewConsentDocument
+public class CKVerifyConsentDocumentViewController: ORKQuestionStepViewController {
+    public var CKVerifyConsentDocument: CKVerifyConsentDocument? {
+        step as? CKVerifyConsentDocument
     }
     
     override public func viewDidLoad() {

@@ -14,9 +14,5 @@
 	<array>
 		<string>health-records</string>
 	</array>
-	<key>keychain-access-groups</key>
-	<array>
-		<string>$(AppIdentifierPrefix)edu.stanford.cs342.sample-study</string>
-	</array>
 </dict>
 </plist>
