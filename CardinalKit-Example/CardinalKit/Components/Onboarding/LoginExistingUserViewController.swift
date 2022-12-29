@@ -40,14 +40,14 @@ struct LoginExistingUserViewController: UIViewControllerRepresentable {
         /// Ask the user to sign the consent form (if not already present in cloud storage)
         let consentDocument = ConsentDocument()
         let signature = consentDocument.signatures?.first
-        let reviewConsentStep = ORKConsentReviewStep(
+        let consentReviewStep = ORKConsentReviewStep(
             identifier: "ConsentReviewStep",
             signature: signature,
             in: consentDocument
         )
-        reviewConsentStep.text = config.read(query: "Review Consent Step Text")
-        reviewConsentStep.reasonForConsent = config.read(query: "Reason for Consent Text")
-        let verifyConsentStep = CKVerifyConsentDocument(identifier: "VerifyConsentStep")
+        consentReviewStep.text = config.read(query: "Review Consent Step Text")
+        consentReviewStep.reasonForConsent = config.read(query: "Reason for Consent Text")
+        let verifyConsentDocumentStep = CKVerifyConsentDocumentStep(identifier: "VerifyConsentDocumentStep")
 
         /// Get permission to collect health data from HealthKit
         let healthDataStep = CKHealthDataStep(identifier: "HealthKit")
@@ -72,7 +72,7 @@ struct LoginExistingUserViewController: UIViewControllerRepresentable {
         existingUserOnboardingSteps += loginSteps
 
         /// Add consent steps
-        existingUserOnboardingSteps += [verifyConsentStep, reviewConsentStep]
+        existingUserOnboardingSteps += [verifyConsentDocumentStep, consentReviewStep]
 
         /// Add steps for requesting permissions for health data access
         existingUserOnboardingSteps += [healthDataStep]
@@ -97,16 +97,16 @@ struct LoginExistingUserViewController: UIViewControllerRepresentable {
         let predicateRule = ORKPredicateStepNavigationRule(
             resultPredicates: [booleanAnswerType],
             destinationStepIdentifiers: ["LoginExistingStep"],
-            defaultStepIdentifier: "VerifyConsentStep",
+            defaultStepIdentifier: "VerifyConsentDocumentStep",
             validateArrays: true
         )
         navigableTask.setNavigationRule(predicateRule, forTriggerStepIdentifier: "SignInButtons")
 
         /// Create a navigation rule that checks if the user has previously signed a consent document.
         /// If they have, direct to the HealthKit permissions step, else show the consent document to sign.
-        let resultConsent = ORKResultSelector(resultIdentifier: "VerifyConsentStep")
+        let consentVerified = ORKResultSelector(resultIdentifier: "VerifyConsentDocumentStep")
         let booleanAnswerConsent = ORKResultPredicate.predicateForBooleanQuestionResult(
-            with: resultConsent,
+            with: consentVerified,
             expectedAnswer: true
         )
         let predicateRuleConsent = ORKPredicateStepNavigationRule(
@@ -115,7 +115,7 @@ struct LoginExistingUserViewController: UIViewControllerRepresentable {
             defaultStepIdentifier: "ConsentReviewStep",
             validateArrays: true
         )
-        navigableTask.setNavigationRule(predicateRuleConsent, forTriggerStepIdentifier: "ConsentReview")
+        navigableTask.setNavigationRule(predicateRuleConsent, forTriggerStepIdentifier: "VerifyConsentDocumentStep")
 
         /// Present the task to the user
         let taskViewController = ORKTaskViewController(task: navigableTask, taskRun: nil)

@@ -1,8 +1,7 @@
 //
-//  CKReviewConsentDocument.swift
-//  CardinalKit_Example
+//  CKVerifyConsentDocument.swift
 //
-//  Created by Julian Esteban Ramos Martinez on 16/12/21.
+//  Created for the CardinalKit framework.
 //  Copyright © 2021 CardinalKit. All rights reserved.
 //
 
@@ -11,7 +10,7 @@ import Foundation
 import ResearchKit
 
 
-public class CKVerifyConsentDocument: ORKQuestionStep {
+public class CKVerifyConsentDocumentStep: ORKQuestionStep {
     override public init(
         identifier: String
     ) {
@@ -25,9 +24,9 @@ public class CKVerifyConsentDocument: ORKQuestionStep {
     }
 }
 
-public class CKVerifyConsentDocumentViewController: ORKQuestionStepViewController {
-    public var CKVerifyConsentDocument: CKVerifyConsentDocument? {
-        step as? CKVerifyConsentDocument
+public class CKVerifyConsentDocumentStepViewController: ORKQuestionStepViewController {
+    public var CKVerifyConsentDocumentStep: CKVerifyConsentDocumentStep? {
+        step as? CKVerifyConsentDocumentStep
     }
     
     override public func viewDidLoad() {

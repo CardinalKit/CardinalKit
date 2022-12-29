@@ -145,8 +145,8 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
             return CKHealthRecordsStepViewController(step: step)
         case is CKMultipleSignInStep:
             return CKMultipleSignInStepViewController(step: step)
-        case is CKReviewConsentDocument:
-            return CKReviewConsentDocumentViewController(step: step)
+        case is CKVerifyConsentDocumentStep:
+            return CKVerifyConsentDocumentStepViewController(step: step)
         default:
             return nil
         }
