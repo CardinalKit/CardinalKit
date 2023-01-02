@@ -25,6 +25,9 @@ struct OnboardingViewController: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> ORKTaskViewController {
         let config = CKPropertyReader(file: "CKConfiguration")
 
+        /// Show instruction steps
+        let instructionSteps = CKInstructionSteps.steps
+
         /// Ask user to review, then sign consent form.
         let consentDocument = ConsentDocument()
         let signature = consentDocument.signatures?.first
@@ -101,6 +104,9 @@ struct OnboardingViewController: UIViewControllerRepresentable {
         
         /// Create an array with the steps to show users
         var onboardingSteps: [ORKStep] = []
+
+        /// Add instruction steps
+        onboardingSteps += instructionSteps
 
         /// Add consent steps
         onboardingSteps.append(reviewConsentStep)
