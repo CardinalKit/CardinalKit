@@ -3,7 +3,7 @@
 //  CardinalKit_Example
 //
 //  Created by Vishnu Ravi on 10/27/21.
-//  Copyright © 2021 CocoaPods. All rights reserved.
+//  Copyright © 2021 CardinalKit. All rights reserved.
 //
 
 import ResearchKit
