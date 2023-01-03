@@ -8,14 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'CardinalKit'
-  s.version          = '2.1.0'
+  s.version          = '2.2.0'
   s.summary          = 'https://cardinalkit.org/'
-
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = 'CardinalKit empowers the digital health community to rapidly prototype and build modern, interoperable, scalable digital health solutions on a variety of platforms.'
 

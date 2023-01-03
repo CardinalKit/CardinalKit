@@ -608,7 +608,7 @@ PODS:
   - BoringSSL-GRPC/Implementation (0.0.24):
     - BoringSSL-GRPC/Interface (= 0.0.24)
   - BoringSSL-GRPC/Interface (0.0.24)
-  - CardinalKit (2.1.0):
+  - CardinalKit (2.2.0):
     - Firebase/Analytics (~> 10)
     - Firebase/Auth (~> 10)
     - Firebase/Firestore (~> 10)
@@ -896,7 +896,7 @@ SPEC CHECKSUMS:
   abseil: ebe5b5529fb05d93a8bdb7951607be08b7fa71bc
   AppAuth: 8fca6b5563a5baef2c04bee27538025e4ceb2add
   BoringSSL-GRPC: 3175b25143e648463a56daeaaa499c6cb86dad33
-  CardinalKit: d621b5ef1b630ce236dbcd4827c35bdd3dbcbd42
+  CardinalKit: 88922ab350d667b532808dbabfb6e87a1356331b
   FBAEMKit: c7f82b5145d446bcbbcd50485c032689032fc6a2
   FBSDKCoreKit: 7542746fc63a2a38dd6a865eeb54268341f37b83
   FBSDKCoreKit_Basics: 92d6b26c0bed30ab09bbdd96dccaa26e6c9978d1
