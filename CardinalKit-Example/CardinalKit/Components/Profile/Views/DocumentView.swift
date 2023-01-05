@@ -11,7 +11,7 @@ import SwiftUI
 
 struct DocumentView: View {
     @State private var showPreview = false
-    var documentsURL: URL?
+    @State var documentsURL: URL?
     
     var body: some View {
         HStack {
@@ -31,32 +31,24 @@ struct DocumentView: View {
                     url: self.documentsURL
                 )
             )
+            .task {
+                await downloadConsent()
+            }
     }
 
     init() {
-        let storage = Storage.storage()
-        let storageRef = storage.reference()
-        if let documentCollection = CKStudyUser.shared.authCollection {
-            // download consent document from Firebase Cloud Storage and display it to the user
-            let config = CKPropertyReader(file: "CKConfiguration")
-            let consentFileName = config.read(query: "Consent File Name") ?? "My Consent Form"
-            let documentRef = storageRef.child("\(documentCollection)/\(consentFileName).pdf")
+        Task {
+            //await downloadConsent()
+        }
+    }
 
-            guard let docURL = (FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)).last else {
-                return
-            }
-
-            let url = docURL.appendingPathComponent("\(consentFileName).pdf")
-            self.documentsURL = URL(fileURLWithPath: url.path, isDirectory: false)
-            UserDefaults.standard.set(url.path, forKey: "consentFormURL")
-
-            documentRef.write(toFile: url) { _, error in
-                if let error = error {
-                    print("Error downloading consent document: \(error)")
-                } else {
-                    print("Consent document downloaded successfully.")
-                }
-            }
+    @MainActor func downloadConsent() async {
+        do {
+            let manager = CKConsentManager()
+            let url = try await manager.downloadConsent()
+            self.documentsURL = url
+        } catch {
+            print(error.localizedDescription)
         }
     }
 }

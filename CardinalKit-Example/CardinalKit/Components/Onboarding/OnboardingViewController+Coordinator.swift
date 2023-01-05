@@ -43,35 +43,16 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
                 let consentDocument = ConsentDocument()
                 signatureResult.apply(to: consentDocument)
                 
-                consentDocument.makePDF { data, error -> Void in
-                    let config = CKPropertyReader(file: "CKConfiguration")
-                    let consentFileName = config.read(query: "Consent File Name") ?? "My Consent File"
-                    
-                    var docURL = (FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)).first
-                    docURL = docURL?.appendingPathComponent("\(consentFileName).pdf")
-                    
-                    do {
-                        guard let url = docURL else {
-                            return
-                        }
-                        
-                        try data?.write(to: url)
-                        
-                        UserDefaults.standard.set(url.path, forKey: "consentFormURL")
-                        
-                        let storageRef = storage.reference()
-                        
-                        if let documentCollection = CKStudyUser.shared.authCollection {
-                            let documentRef = storageRef.child("\(documentCollection)/\(consentFileName).pdf")
-                            
-                            documentRef.putFile(from: url, metadata: nil) { _, error in
-                                if let error = error {
-                                    print(error.localizedDescription)
-                                }
+                consentDocument.makePDF { data, error in
+                    if let data {
+                        Task {
+                            do {
+                                let manager = CKConsentManager()
+                                try await manager.uploadConsent(data: data)
+                            } catch {
+                                print(error.localizedDescription)
                             }
                         }
-                    } catch {
-                        print(error.localizedDescription)
                     }
                 }
             }

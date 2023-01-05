@@ -13,6 +13,7 @@
 		27653A13272A2E7700D74E83 /* LocalTaskListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27653A12272A2E7700D74E83 /* LocalTaskListItemView.swift */; };
 		27663F2A29574F1500A34080 /* CardinalKit_ExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27663F2929574F1500A34080 /* CardinalKit_ExampleTests.swift */; };
 		27797418296289F2006D6DE5 /* CKInstructionSteps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27797417296289F2006D6DE5 /* CKInstructionSteps.swift */; };
+		27FD79452966F9550048A6DD /* CKConsentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FD79442966F9550048A6DD /* CKConsentManager.swift */; };
 		2B19DD9226FE1BEB00649CE1 /* JsonToSurvey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19DD9126FE1BEB00649CE1 /* JsonToSurvey.swift */; };
 		2B19DD9426FE1D2600649CE1 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19DD9326FE1D2600649CE1 /* TestViewController.swift */; };
 		2B19DD9626FE1D2F00649CE1 /* CheckListItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19DD9526FE1D2F00649CE1 /* CheckListItemViewController.swift */; };
@@ -129,6 +130,7 @@
 		27663F2729574F1500A34080 /* CardinalKit ExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "CardinalKit ExampleTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		27663F2929574F1500A34080 /* CardinalKit_ExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardinalKit_ExampleTests.swift; sourceTree = "<group>"; };
 		27797417296289F2006D6DE5 /* CKInstructionSteps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKInstructionSteps.swift; sourceTree = "<group>"; };
+		27FD79442966F9550048A6DD /* CKConsentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKConsentManager.swift; sourceTree = "<group>"; };
 		2B19DD9126FE1BEB00649CE1 /* JsonToSurvey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonToSurvey.swift; sourceTree = "<group>"; };
 		2B19DD9326FE1D2600649CE1 /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		2B19DD9526FE1D2F00649CE1 /* CheckListItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckListItemViewController.swift; sourceTree = "<group>"; };
@@ -359,6 +361,7 @@
 			isa = PBXGroup;
 			children = (
 				8E0A4382244A4A0400656518 /* CKStudyUser.swift */,
+				27FD79442966F9550048A6DD /* CKConsentManager.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -845,6 +848,7 @@
 				E2DF9F0A2500C9CE00A93B93 /* CKLoginStepViewController.swift in Sources */,
 				2FFFA2D229025241009D289D /* ORKESerialization.m in Sources */,
 				8E6E1E14253520440024B8DF /* PasscodeViewController.swift in Sources */,
+				27FD79452966F9550048A6DD /* CKConsentManager.swift in Sources */,
 				2B19DD9626FE1D2F00649CE1 /* CheckListItemViewController.swift in Sources */,
 				2B19DD9426FE1D2600649CE1 /* TestViewController.swift in Sources */,
 				E29143FC24E74AD100EE97B2 /* LaunchUIView.swift in Sources */,
@@ -1118,7 +1122,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "CardinalKit/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1148,7 +1152,7 @@
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 637867499T;
 				INFOPLIST_FILE = "CardinalKit/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
