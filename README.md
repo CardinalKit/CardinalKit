@@ -19,6 +19,8 @@ Includes:
 * Zero-code [customizable configuration file.](https://cardinalkit.org/docs/ckconfig)
 * GCP Firebase Integration.
 
+CardinalKit runs on iOS 15.0 and up. [Xcode 14](https://developer.apple.com/xcode/) is required for development.
+
 ## Build your App with CardinalKit
 
 This repository contains a fully functional example in the `CardinalKit-Example` directory that you can use as a starting point for building your own app. To get started, clone this repository and follow our simple [setup instructions](https://cardinalkit.org/cardinalkit-docs/1-cardinalkit-app/1-start.html).

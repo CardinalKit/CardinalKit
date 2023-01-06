@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
   s.author           = { 'CardinalKit' => 'https://cardinalkit.org/' }
   s.source           = { :git => 'https://github.com/CardinalKit/CardinalKit.git', :tag => s.version.to_s }
 
-  s.ios.deployment_target = '14.3'
+  s.ios.deployment_target = '15.0'
 
   s.source_files = 'CardinalKit/Source/**/*'
   
