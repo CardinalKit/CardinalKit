@@ -1,5 +1,5 @@
 use_frameworks!
-platform :ios, '14.3'
+platform :ios, '15.0'
 
 target 'CardinalKit_Example' do
   pod 'CardinalKit', :path => '../'
