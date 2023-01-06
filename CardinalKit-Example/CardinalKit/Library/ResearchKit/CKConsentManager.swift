@@ -80,4 +80,23 @@ class CKConsentManager {
         }
         return url
     }
+
+    func verifyConsent() async -> Bool {
+        guard let documentCollection = CKStudyUser.shared.authCollection else {
+            return false
+        }
+
+        let storageRef = Storage.storage().reference()
+        let documentRef = storageRef.child("\(documentCollection)/\(consentFileName).pdf")
+
+        return await withCheckedContinuation { (continuation: CheckedContinuation) in
+            documentRef.getMetadata { metadata, error in
+                if error != nil {
+                    continuation.resume(returning: false)
+                } else {
+                    continuation.resume(returning: true)
+                }
+            }
+        }
+    }
 }

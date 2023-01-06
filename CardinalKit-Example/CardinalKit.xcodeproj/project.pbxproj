@@ -361,7 +361,6 @@
 			isa = PBXGroup;
 			children = (
 				8E0A4382244A4A0400656518 /* CKStudyUser.swift */,
-				27FD79442966F9550048A6DD /* CKConsentManager.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -552,6 +551,7 @@
 				2BF6451F26C1DBE70020C206 /* CKORKSerialization.swift */,
 				8E0A4386244A4A0400656518 /* ORKESerialization.m */,
 				8E0A4387244A4A0400656518 /* ORKESerialization.h */,
+				27FD79442966F9550048A6DD /* CKConsentManager.swift */,
 				8E0A43A2244A4A0400656518 /* ConsentDocument.swift */,
 				8E6E1E172535263F0024B8DF /* CKTaskViewController.swift */,
 				8E7FFFB325DCE9B7002982B4 /* CKUploadToGCPTaskViewControllerDelegate.swift */,

@@ -32,7 +32,6 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
         didFinishWith reason: ORKTaskViewControllerFinishReason,
         error: Error?
     ) {
-        let storage = Storage.storage()
         switch reason {
         case .completed:
             UserDefaults.standard.set(true, forKey: Constants.onboardingDidComplete)

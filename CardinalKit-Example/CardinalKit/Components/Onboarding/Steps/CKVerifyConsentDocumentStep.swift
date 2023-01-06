@@ -31,30 +31,13 @@ public class CKVerifyConsentDocumentStepViewController: ORKQuestionStepViewContr
     
     override public func viewDidLoad() {
         super.viewDidLoad()
-        let storage = Storage.storage()
-        let storageRef = storage.reference()
-        
-        // Check if a consent document exists on the cloud, otherwise user will need to re-consent
-        if let documentCollection = CKStudyUser.shared.authCollection {
-            let config = CKPropertyReader(file: "CKConfiguration")
-            let consentFileName = config.read(query: "Consent File Name") ?? "My Consent File"
-            let documentRef = storageRef.child("\(documentCollection)/\(consentFileName).pdf")
-
-            guard let docURL = (FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)).last else {
-                return
-            }
-
-            let url = docURL.appendingPathComponent("\(consentFileName).pdf")
-
-            documentRef.write(toFile: url) { _, error in
-                if let error = error {
-                    print(error.localizedDescription)
-                    self.setAnswer(false)
-                } else {
-                    self.setAnswer(true)
-                }
-                super.goForward()
-            }
+        // Downloads the user's consent file from Cloud Storage.
+        // If a consent doesn't exist, the next step will ask the user to sign it.
+        Task {
+            let manager = CKConsentManager()
+            let result = await manager.verifyConsent()
+            self.setAnswer(result)
+            super.goForward()
         }
     }
 }

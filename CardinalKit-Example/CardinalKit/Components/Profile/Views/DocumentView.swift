@@ -36,12 +36,6 @@ struct DocumentView: View {
             }
     }
 
-    init() {
-        Task {
-            //await downloadConsent()
-        }
-    }
-
     @MainActor func downloadConsent() async {
         do {
             let manager = CKConsentManager()
@@ -53,7 +47,7 @@ struct DocumentView: View {
     }
 }
 
-struct DDocumentView_Previews: PreviewProvider {
+struct DocumentView_Previews: PreviewProvider {
     static var previews: some View {
         DocumentView()
     }
