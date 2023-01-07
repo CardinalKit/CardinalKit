@@ -13,6 +13,8 @@ struct CKSignInView: View {
     let appleSignInAction: () -> Void
     let emailSignInAction: () -> Void
 
+    let config = CKConfig.shared
+
     var body: some View {
         VStack {
             Spacer()
@@ -25,29 +27,32 @@ struct CKSignInView: View {
             Button {
                 appleSignInAction()
             } label: {
-                Text("Sign In With Apple")
+                Label("Sign In With Apple", image: "AppleLogo")
+                    .font(.headline)
                     .padding()
                     .frame(maxWidth: .infinity)
             }
-            .buttonStyle(.bordered)
+            .buttonStyle(.borderedProminent)
 
             Button {
                 googleSignInAction()
             } label: {
-                Text("Sign In With Google")
+                Label("Sign In With Google", image: "GoogleLogo")
+                    .font(.headline)
                     .padding()
                     .frame(maxWidth: .infinity)
             }
-            .buttonStyle(.bordered)
+            .buttonStyle(.borderedProminent)
 
             Button {
                 emailSignInAction()
             } label: {
-                Text("Sign In With Email")
+                Label("Sign In With Email", systemImage: "envelope")
+                    .font(.headline)
                     .padding()
                     .frame(maxWidth: .infinity)
             }
-            .buttonStyle(.bordered)
+            .buttonStyle(.borderedProminent)
         }
         .padding()
     }
