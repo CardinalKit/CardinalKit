@@ -53,16 +53,12 @@
 	</dict>
 	<key>Background Read Frequency</key>
 	<string>immediate</string>
-	<key>Login-Sign-In-With-Google</key>
+	<key>Sign In With Google</key>
 	<true/>
-	<key>Login-Sign-In-With-UserPassword</key>
+	<key>Sign In With Email</key>
 	<true/>
-	<key>Login-Sign-In-With-Apple</key>
+	<key>Sign In With Apple</key>
 	<true/>
-	<key>Login Step Title</key>
-	<string>Almost done!</string>
-	<key>Login Step Text</key>
-	<string>We need to confirm your email address and send you a copy of the consent you just signed.</string>
 	<key>Withdrawal Instruction Title</key>
 	<string>Are you sure you want to withdraw?</string>
 	<key>Withdrawal Instruction Text</key>

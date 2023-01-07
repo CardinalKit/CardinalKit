@@ -13,7 +13,7 @@ struct CKSignInView: View {
     let appleSignInAction: () -> Void
     let emailSignInAction: () -> Void
 
-    let config = CKConfig.shared
+    let config = CKPropertyReader(file: "CKConfiguration")
 
     var body: some View {
         VStack {
@@ -24,35 +24,44 @@ struct CKSignInView: View {
 
             Spacer()
 
-            Button {
-                appleSignInAction()
-            } label: {
-                Label("Sign In With Apple", image: "AppleLogo")
-                    .font(.headline)
-                    .padding()
-                    .frame(maxWidth: .infinity)
+            if let appleSignInEnabled = config.readBool(query: "Sign In With Apple"),
+                appleSignInEnabled {
+                Button {
+                    appleSignInAction()
+                } label: {
+                    Label("Sign In With Apple", image: "AppleLogo")
+                        .font(.headline)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.borderedProminent)
             }
-            .buttonStyle(.borderedProminent)
 
-            Button {
-                googleSignInAction()
-            } label: {
-                Label("Sign In With Google", image: "GoogleLogo")
-                    .font(.headline)
-                    .padding()
-                    .frame(maxWidth: .infinity)
+            if let googleSignInEnabled = config.readBool(query: "Sign In With Google"),
+                googleSignInEnabled {
+                Button {
+                    googleSignInAction()
+                } label: {
+                    Label("Sign In With Google", image: "GoogleLogo")
+                        .font(.headline)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.borderedProminent)
             }
-            .buttonStyle(.borderedProminent)
 
-            Button {
-                emailSignInAction()
-            } label: {
-                Label("Sign In With Email", systemImage: "envelope")
-                    .font(.headline)
-                    .padding()
-                    .frame(maxWidth: .infinity)
+            if let emailSignInEnabled = config.readBool(query: "Sign In With Email"),
+                emailSignInEnabled {
+                Button {
+                    emailSignInAction()
+                } label: {
+                    Label("Sign In With Email", systemImage: "envelope")
+                        .font(.headline)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.borderedProminent)
             }
-            .buttonStyle(.borderedProminent)
         }
         .padding()
     }
