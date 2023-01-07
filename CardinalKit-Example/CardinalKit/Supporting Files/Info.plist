@@ -31,12 +31,6 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>6</string>
-	<key>FacebookAppID</key>
-	<string></string>
-	<key>FacebookClientToken</key>
-	<string></string>
-	<key>FacebookDisplayName</key>
-	<string></string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>

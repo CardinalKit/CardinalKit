@@ -15,10 +15,41 @@ struct CKSignInView: View {
 
     var body: some View {
         VStack {
-            Button("Sign In With Google", action: googleSignInAction)
-            Button("Sign in With Apple", action: appleSignInAction)
-            Button("Sign in With Email and Password", action: emailSignInAction)
+            Spacer()
+
+            Text("Sign In")
+                .font(.title)
+
+            Spacer()
+
+            Button {
+                appleSignInAction()
+            } label: {
+                Text("Sign In With Apple")
+                    .padding()
+                    .frame(maxWidth: .infinity)
+            }
+            .buttonStyle(.bordered)
+
+            Button {
+                googleSignInAction()
+            } label: {
+                Text("Sign In With Google")
+                    .padding()
+                    .frame(maxWidth: .infinity)
+            }
+            .buttonStyle(.bordered)
+
+            Button {
+                emailSignInAction()
+            } label: {
+                Text("Sign In With Email")
+                    .padding()
+                    .frame(maxWidth: .infinity)
+            }
+            .buttonStyle(.bordered)
         }
+        .padding()
     }
 }
 

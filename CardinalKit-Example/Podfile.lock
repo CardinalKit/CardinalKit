@@ -620,14 +620,6 @@ PODS:
     - SAMKeychain (~> 1)
     - SwiftyJSON (~> 4)
     - Zip (~> 2.1.2)
-  - FBAEMKit (15.1.0):
-    - FBSDKCoreKit_Basics (= 15.1.0)
-  - FBSDKCoreKit (15.1.0):
-    - FBAEMKit (= 15.1.0)
-    - FBSDKCoreKit_Basics (= 15.1.0)
-  - FBSDKCoreKit_Basics (15.1.0)
-  - FBSDKLoginKit (15.1.0):
-    - FBSDKCoreKit (= 15.1.0)
   - Firebase/Analytics (10.3.0):
     - Firebase/Core
   - Firebase/Auth (10.3.0):
@@ -829,7 +821,6 @@ PODS:
 
 DEPENDENCIES:
   - CardinalKit (from `../`)
-  - FBSDKLoginKit (~> 15)
   - GoogleSignIn (~> 6)
   - Granola (from `https://github.com/CardinalKit/Granola.git`, commit `9e0b287`)
   - ResearchKit (from `https://github.com/ResearchKit/ResearchKit.git`, tag `2.1.1-dev`)
@@ -839,10 +830,6 @@ SPEC REPOS:
     - abseil
     - AppAuth
     - BoringSSL-GRPC
-    - FBAEMKit
-    - FBSDKCoreKit
-    - FBSDKCoreKit_Basics
-    - FBSDKLoginKit
     - Firebase
     - FirebaseAnalytics
     - FirebaseAppCheckInterop
@@ -897,10 +884,6 @@ SPEC CHECKSUMS:
   AppAuth: 8fca6b5563a5baef2c04bee27538025e4ceb2add
   BoringSSL-GRPC: 3175b25143e648463a56daeaaa499c6cb86dad33
   CardinalKit: a191adb5d980d4a721dd9c55ea7c5d8a14775f57
-  FBAEMKit: c7f82b5145d446bcbbcd50485c032689032fc6a2
-  FBSDKCoreKit: 7542746fc63a2a38dd6a865eeb54268341f37b83
-  FBSDKCoreKit_Basics: 92d6b26c0bed30ab09bbdd96dccaa26e6c9978d1
-  FBSDKLoginKit: 4e275d30cf90e92bdf3a7c82857a8642abf23037
   Firebase: f92fc551ead69c94168d36c2b26188263860acd9
   FirebaseAnalytics: 036232b6a1e2918e5f67572417be1173576245f3
   FirebaseAppCheckInterop: 9fc57dfa08f0abb737b185ea065422b55355c909
@@ -934,6 +917,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
   Zip: b3fef584b147b6e582b2256a9815c897d60ddc67
 
-PODFILE CHECKSUM: 6da301819c523fc10a23629684b01cad10ae1d58
+PODFILE CHECKSUM: efa0a176141179a1bf274fc494ded03349ec0434
 
 COCOAPODS: 1.11.3
