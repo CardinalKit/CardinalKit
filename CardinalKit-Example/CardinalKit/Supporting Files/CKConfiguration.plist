@@ -34,10 +34,6 @@
 	<string>Welcome aboard.</string>
 	<key>Completion Step Text</key>
 	<string>This step concludes the onboarding and consent process of the CardinalKit framework. Next up, you will see main app functionality.</string>
-	<key>Failed Login Title</key>
-	<string>Unable to Login 😔</string>
-	<key>Failed Login Text</key>
-	<string>Please try again in five minutes.</string>
 	<key>Health Permissions Title</key>
 	<string>Permission to read Activity Data 🏃🏽‍♀️</string>
 	<key>Health Permissions Text</key>
@@ -53,43 +49,12 @@
 	</dict>
 	<key>Background Read Frequency</key>
 	<string>immediate</string>
-	<key>Sign In Screen</key>
-	<dict>
-		<key>Label Text</key>
-		<string>Sign In to CardinalKit</string>
-		<key>Label Font Size</key>
-		<integer>35</integer>
-	</dict>
-	<key>Login-Sign-In-With-Facebook</key>
-	<dict>
-		<key>Enabled</key>
-		<true/>
-	</dict>
-	<key>Login-Sign-In-With-Google</key>
-	<dict>
-		<key>Enabled</key>
-		<true/>
-	</dict>
-	<key>Login-Sign-In-With-UserPassword</key>
-	<dict>
-		<key>Enabled</key>
-		<true/>
-	</dict>
-	<key>Login-Sign-In-With-Apple</key>
-	<dict>
-		<key>Enabled</key>
-		<true/>
-		<key>Title</key>
-		<string>Sign in with Apple</string>
-		<key>Text</key>
-		<string>Sign in using your Apple ID is fast and easy, and Apple will not track any of your activities.</string>
-	</dict>
-	<key>Login-Passwordless</key>
-	<false/>
-	<key>Login Step Title</key>
-	<string>Almost done!</string>
-	<key>Login Step Text</key>
-	<string>We need to confirm your email address and send you a copy of the consent you just signed.</string>
+	<key>Sign In With Google</key>
+	<true/>
+	<key>Sign In With Email</key>
+	<true/>
+	<key>Sign In With Apple</key>
+	<true/>
 	<key>Withdrawal Instruction Title</key>
 	<string>Are you sure you want to withdraw?</string>
 	<key>Withdrawal Instruction Text</key>
