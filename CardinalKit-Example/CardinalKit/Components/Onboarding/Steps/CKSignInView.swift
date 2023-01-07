@@ -21,6 +21,7 @@ struct CKSignInView: View {
 
             Text("Sign In")
                 .font(.title)
+                .fontWeight(.bold)
 
             Spacer()
 
@@ -30,7 +31,7 @@ struct CKSignInView: View {
                     appleSignInAction()
                 } label: {
                     Label("Sign In With Apple", image: "AppleLogo")
-                        .font(.headline)
+                        .font(.title2)
                         .padding()
                         .frame(maxWidth: .infinity)
                 }
@@ -43,7 +44,7 @@ struct CKSignInView: View {
                     googleSignInAction()
                 } label: {
                     Label("Sign In With Google", image: "GoogleLogo")
-                        .font(.headline)
+                        .font(.title2)
                         .padding()
                         .frame(maxWidth: .infinity)
                 }
@@ -56,7 +57,7 @@ struct CKSignInView: View {
                     emailSignInAction()
                 } label: {
                     Label("Sign In With Email", systemImage: "envelope")
-                        .font(.headline)
+                        .font(.title2)
                         .padding()
                         .frame(maxWidth: .infinity)
                 }

@@ -34,10 +34,6 @@
 	<string>Welcome aboard.</string>
 	<key>Completion Step Text</key>
 	<string>This step concludes the onboarding and consent process of the CardinalKit framework. Next up, you will see main app functionality.</string>
-	<key>Failed Login Title</key>
-	<string>Unable to Login 😔</string>
-	<key>Failed Login Text</key>
-	<string>Please try again in five minutes.</string>
 	<key>Health Permissions Title</key>
 	<string>Permission to read Activity Data 🏃🏽‍♀️</string>
 	<key>Health Permissions Text</key>
