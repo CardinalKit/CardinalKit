@@ -12,6 +12,7 @@
 		276399A129021BB5004DE158 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 276399A029021BB4004DE158 /* GoogleService-Info.plist */; };
 		27653A13272A2E7700D74E83 /* LocalTaskListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27653A12272A2E7700D74E83 /* LocalTaskListItemView.swift */; };
 		27663F2A29574F1500A34080 /* CardinalKit_ExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27663F2929574F1500A34080 /* CardinalKit_ExampleTests.swift */; };
+		2777DADD2969F76300F2ECD4 /* CKSignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2777DADC2969F76300F2ECD4 /* CKSignInView.swift */; };
 		27797418296289F2006D6DE5 /* CKInstructionSteps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27797417296289F2006D6DE5 /* CKInstructionSteps.swift */; };
 		27FD79452966F9550048A6DD /* CKConsentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FD79442966F9550048A6DD /* CKConsentManager.swift */; };
 		2B19DD9226FE1BEB00649CE1 /* JsonToSurvey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19DD9126FE1BEB00649CE1 /* JsonToSurvey.swift */; };
@@ -129,6 +130,7 @@
 		27653A12272A2E7700D74E83 /* LocalTaskListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalTaskListItemView.swift; sourceTree = "<group>"; };
 		27663F2729574F1500A34080 /* CardinalKit ExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "CardinalKit ExampleTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		27663F2929574F1500A34080 /* CardinalKit_ExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardinalKit_ExampleTests.swift; sourceTree = "<group>"; };
+		2777DADC2969F76300F2ECD4 /* CKSignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKSignInView.swift; sourceTree = "<group>"; };
 		27797417296289F2006D6DE5 /* CKInstructionSteps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKInstructionSteps.swift; sourceTree = "<group>"; };
 		27FD79442966F9550048A6DD /* CKConsentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKConsentManager.swift; sourceTree = "<group>"; };
 		2B19DD9126FE1BEB00649CE1 /* JsonToSurvey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonToSurvey.swift; sourceTree = "<group>"; };
@@ -409,6 +411,7 @@
 				8E0A439D244A4A0400656518 /* CKHealthDataStepViewController.swift */,
 				8EA6648625930B6B00B6A45A /* CKHealthRecordsStepViewController.swift */,
 				2B8FB80327552B02000B2D7B /* CKMultipleSignInStep.swift */,
+				2777DADC2969F76300F2ECD4 /* CKSignInView.swift */,
 				2B932F83276BF8D300AB3A02 /* CKVerifyConsentDocumentStep.swift */,
 				E2DF9F092500C9CE00A93B93 /* CKLoginStepViewController.swift */,
 				27797417296289F2006D6DE5 /* CKInstructionSteps.swift */,
@@ -891,6 +894,7 @@
 				8E6E1E1225351F830024B8DF /* DocumentPreviewViewController.swift in Sources */,
 				8E6E1E20253529760024B8DF /* DocumentView.swift in Sources */,
 				8E7FFFBB25DE37FF002982B4 /* CoffeePieChartView.swift in Sources */,
+				2777DADD2969F76300F2ECD4 /* CKSignInView.swift in Sources */,
 				8E7FFFB825DE350A002982B4 /* CoffeeUIView.swift in Sources */,
 				2B19DD9226FE1BEB00649CE1 /* JsonToSurvey.swift in Sources */,
 				8E0A43B5244A4A0400656518 /* LocalTaskItem.swift in Sources */,
