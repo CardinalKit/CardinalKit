@@ -14,7 +14,6 @@ import UIKit
 /// `OnboardingUIView` is shown to unauthenticated users
 /// allowing them to create a new account or sign in with an existing account.
 struct OnboardingUIView: View {
-    var onboardingElements: [OnboardingElement] = []
     let color: Color
     let config = CKPropertyReader(file: "CKConfiguration")
     @State var showingOnboard = false
@@ -25,33 +24,12 @@ struct OnboardingUIView: View {
     init(onComplete: (() -> Void)? = nil) {
         self.color = Color(config.readColor(query: "Primary Color") ?? UIColor.primaryColor())
         self.onComplete = onComplete
-
-        if let onboardingData = config.readAny(query: "Onboarding") as? [[String: String]] {
-            for data in onboardingData {
-                guard let logo = data["Logo"],
-                      let title = data["Title"],
-                      let description = data["Description"] else {
-                    continue
-                }
-
-                let element = OnboardingElement(
-                    id: UUID(),
-                    logo: logo,
-                    title: title,
-                    description: description
-                )
-
-                self.onboardingElements.append(element)
-            }
-        }
     }
 
-    // swiftlint:disable closure_body_length
     var body: some View {
         VStack(spacing: 10) {
             Spacer()
 
-            /// The app logo
             Image("SBDLogoGrey")
                 .resizable()
                 .scaledToFit()
@@ -72,22 +50,9 @@ struct OnboardingUIView: View {
                 .padding(.leading, Metrics.paddingHorizontalMain)
                 .padding(.trailing, Metrics.paddingHorizontalMain)
 
-            /// This `TabView` shows pages of `InfoView`s that contain content
-            /// defined in the 'Onboarding' key within the CKConfiguration.plist.
-            TabView {
-                ForEach(onboardingElements, id: \.self) { element in
-                    InfoView(
-                        logo: element.logo,
-                        title: element.title,
-                        description: element.description,
-                        color: self.color
-                    )
-                }
-            }
-            .tabViewStyle(.page)
-            .indexViewStyle(.page(backgroundDisplayMode: .always))
-
             Spacer()
+
+            OnboardingPageView()
             
             HStack {
                 Spacer()
@@ -147,43 +112,6 @@ struct OnboardingUIView: View {
             Spacer()
         }
     }
-}
-
-/// A section of content that is showed in a scrolling paged view on the `OnboardingUIView`.
-struct InfoView: View {
-    let logo: String
-    let title: String
-    let description: String
-    let color: Color
-    var body: some View {
-        VStack(spacing: 10) {
-            Circle()
-                .fill(color)
-                .frame(width: 100, height: 100, alignment: .center)
-                .padding(6)
-                .overlay(
-                    Text(logo)
-                        .foregroundColor(.white)
-                        .font(.system(size: 42, weight: .light, design: .default))
-                )
-
-            Text(title).font(.title)
-            
-            Text(description)
-                .font(.body)
-                .multilineTextAlignment(.center)
-                .padding(.leading, 40)
-                .padding(.trailing, 40)
-        }
-    }
-}
-
-/// An element of content to be rendered in an `InfoView`.
-struct OnboardingElement: Identifiable, Hashable {
-    let id: UUID
-    let logo: String
-    let title: String
-    let description: String
 }
 
 struct OnboardingUIView_Previews: PreviewProvider {
