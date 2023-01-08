@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		270CDC0A28A65A0100F2F053 /* CKFHIRTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270CDC0928A65A0100F2F053 /* CKFHIRTaskViewController.swift */; };
 		270CDC0C28A65AD300F2F053 /* CKUploadFHIRTaskViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270CDC0B28A65AD300F2F053 /* CKUploadFHIRTaskViewControllerDelegate.swift */; };
+		275A6AC5296A684800DA4943 /* OnboardingPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275A6AC4296A684800DA4943 /* OnboardingPageView.swift */; };
 		276399A129021BB5004DE158 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 276399A029021BB4004DE158 /* GoogleService-Info.plist */; };
 		27653A13272A2E7700D74E83 /* LocalTaskListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27653A12272A2E7700D74E83 /* LocalTaskListItemView.swift */; };
 		27663F2A29574F1500A34080 /* CardinalKit_ExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27663F2929574F1500A34080 /* CardinalKit_ExampleTests.swift */; };
@@ -45,7 +46,6 @@
 		8E0A43D5244A693D00656518 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E0A43D4244A693D00656518 /* HealthKit.framework */; };
 		8E6E1E092534F4100024B8DF /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E1E082534F4100024B8DF /* OnboardingViewController.swift */; };
 		8E6E1E0B2534FF640024B8DF /* OnboardingViewController+Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E1E0A2534FF640024B8DF /* OnboardingViewController+Coordinator.swift */; };
-		8E6E1E0D25351D8F0024B8DF /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E1E0C25351D8F0024B8DF /* PageViewController.swift */; };
 		8E6E1E1025351E890024B8DF /* Extensions+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E1E0F25351E890024B8DF /* Extensions+UIColor.swift */; };
 		8E6E1E1225351F830024B8DF /* DocumentPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E1E1125351F830024B8DF /* DocumentPreviewViewController.swift */; };
 		8E6E1E14253520440024B8DF /* PasscodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E1E13253520440024B8DF /* PasscodeViewController.swift */; };
@@ -126,6 +126,7 @@
 		270AF36127872C13002945A7 /* CardinalKit_ExampleRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CardinalKit_ExampleRelease.entitlements; sourceTree = "<group>"; };
 		270CDC0928A65A0100F2F053 /* CKFHIRTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKFHIRTaskViewController.swift; sourceTree = "<group>"; };
 		270CDC0B28A65AD300F2F053 /* CKUploadFHIRTaskViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKUploadFHIRTaskViewControllerDelegate.swift; sourceTree = "<group>"; };
+		275A6AC4296A684800DA4943 /* OnboardingPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageView.swift; sourceTree = "<group>"; };
 		276399A029021BB4004DE158 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		27653A12272A2E7700D74E83 /* LocalTaskListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalTaskListItemView.swift; sourceTree = "<group>"; };
 		27663F2729574F1500A34080 /* CardinalKit ExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "CardinalKit ExampleTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -171,7 +172,6 @@
 		8E0A43D4244A693D00656518 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		8E6E1E082534F4100024B8DF /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		8E6E1E0A2534FF640024B8DF /* OnboardingViewController+Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OnboardingViewController+Coordinator.swift"; sourceTree = "<group>"; };
-		8E6E1E0C25351D8F0024B8DF /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		8E6E1E0F25351E890024B8DF /* Extensions+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions+UIColor.swift"; sourceTree = "<group>"; };
 		8E6E1E1125351F830024B8DF /* DocumentPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPreviewViewController.swift; sourceTree = "<group>"; };
 		8E6E1E13253520440024B8DF /* PasscodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeViewController.swift; sourceTree = "<group>"; };
@@ -396,9 +396,9 @@
 			children = (
 				8E0A439C244A4A0400656518 /* Steps */,
 				8E6E1E2125352C780024B8DF /* OnboardingUIView.swift */,
+				275A6AC4296A684800DA4943 /* OnboardingPageView.swift */,
 				8E6E1E082534F4100024B8DF /* OnboardingViewController.swift */,
 				8E6E1E0A2534FF640024B8DF /* OnboardingViewController+Coordinator.swift */,
-				8E6E1E0C25351D8F0024B8DF /* PageViewController.swift */,
 				8E6E1E13253520440024B8DF /* PasscodeViewController.swift */,
 				E2680B1A260A72DD00B755EA /* LoginExistingUserViewController.swift */,
 			);
@@ -883,6 +883,7 @@
 				8E6E1E182535263F0024B8DF /* CKTaskViewController.swift in Sources */,
 				8E9CDF142591B73900C8A228 /* CKHealthRecordsManager.swift in Sources */,
 				8EA664B42594387900B6A45A /* Errors.swift in Sources */,
+				275A6AC5296A684800DA4943 /* OnboardingPageView.swift in Sources */,
 				8E6E1E1225351F830024B8DF /* DocumentPreviewViewController.swift in Sources */,
 				8E6E1E20253529760024B8DF /* DocumentView.swift in Sources */,
 				8E7FFFBB25DE37FF002982B4 /* CoffeePieChartView.swift in Sources */,
@@ -902,7 +903,6 @@
 				8E9CDEAF259172C200C8A228 /* CKCareKitManager+Sample.swift in Sources */,
 				8E9CDEA925916E6600C8A228 /* ScheduleViewController.swift in Sources */,
 				2BD5328526C30F2E00C4636E /* CloudTaskItem.swift in Sources */,
-				8E6E1E0D25351D8F0024B8DF /* PageViewController.swift in Sources */,
 				8E0A43AC244A4A0400656518 /* CKStudyUser.swift in Sources */,
 				8E9CDEB22591739A00C8A228 /* TipView.swift in Sources */,
 				8E7FFFBD25DE38E4002982B4 /* CoffeeChartDataSource.swift in Sources */,

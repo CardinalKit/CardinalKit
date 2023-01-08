@@ -150,25 +150,25 @@
 			<key>Title</key>
 			<string>First Title</string>
 			<key>Description</key>
-			<string>Lorem Ipsum is simply dummy text of the printing and typesetting industry</string>
+			<string>You can customize this section your own logo and text.</string>
 			<key>Logo</key>
-			<string>1️⃣</string>
+			<string>ActivityIcon</string>
 		</dict>
 		<dict>
 			<key>Title</key>
 			<string>Second Title</string>
 			<key>Description</key>
-			<string>Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</string>
+			<string>You can customize this section your own logo and text.</string>
 			<key>Logo</key>
-			<string>2️⃣</string>
+			<string>DataIcon</string>
 		</dict>
 		<dict>
 			<key>Title</key>
 			<string>Third Title</string>
 			<key>Description</key>
-			<string>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</string>
+			<string>You can customize this section your own logo and text.</string>
 			<key>Logo</key>
-			<string>3️⃣</string>
+			<string>WatchIcon</string>
 		</dict>
 	</array>
 	<key>Contacts</key>
