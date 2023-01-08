@@ -81,7 +81,7 @@ struct OnboardingInfoView: View {
     }
 }
 
-/// An element of content to be rendered in an `InfoView`.
+/// An element of content to be rendered in an `OnboardingInfoView`.
 struct OnboardingElement: Identifiable, Hashable {
     let id: UUID
     let logo: Image
