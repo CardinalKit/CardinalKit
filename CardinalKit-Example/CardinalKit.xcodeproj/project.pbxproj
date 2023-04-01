@@ -33,7 +33,6 @@
 		2FFFA2CD29024EFD009D289D /* Questionnaire+ValueSets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFFA2C529024EFD009D289D /* Questionnaire+ValueSets.swift */; };
 		2FFFA2CE29024EFD009D289D /* FHIRExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFFA2C729024EFD009D289D /* FHIRExtensions.swift */; };
 		2FFFA2D229025241009D289D /* ORKESerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4386244A4A0400656518 /* ORKESerialization.m */; };
-		47084CFA948738B99E6CE113 /* Pods_CardinalKit_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CA5570ED934810C236DAAFB /* Pods_CardinalKit_Example.framework */; };
 		8E0A43AC244A4A0400656518 /* CKStudyUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4382244A4A0400656518 /* CKStudyUser.swift */; };
 		8E0A43AD244A4A0400656518 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4384244A4A0400656518 /* Constants.swift */; };
 		8E0A43AF244A4A0400656518 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E0A4388244A4A0400656518 /* Assets.xcassets */; };
@@ -90,6 +89,7 @@
 		8EA664B2259422E400B6A45A /* CKCareKitRemoteSyncWithFirestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA664B1259422E400B6A45A /* CKCareKitRemoteSyncWithFirestore.swift */; };
 		8EA664B42594387900B6A45A /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA664B32594387900B6A45A /* Errors.swift */; };
 		8EBE6F9C24B3C0E60093D07C /* AppDelegate+CardinalKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE6F9B24B3C0E60093D07C /* AppDelegate+CardinalKit.swift */; };
+		B2C0DD56FA3DDFE7E8CF6677 /* Pods_CardinalKit_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39FF130C076C678C004D6972 /* Pods_CardinalKit_Example.framework */; };
 		E235077724F7082700CC1899 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E235077624F7082700CC1899 /* SceneDelegate.swift */; };
 		E2680B1B260A72DD00B755EA /* LoginExistingUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2680B1A260A72DD00B755EA /* LoginExistingUserViewController.swift */; };
 		E29143FC24E74AD100EE97B2 /* LaunchUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29143FB24E74AD100EE97B2 /* LaunchUIView.swift */; };
@@ -134,7 +134,6 @@
 		2777DADC2969F76300F2ECD4 /* CKSignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKSignInView.swift; sourceTree = "<group>"; };
 		27797417296289F2006D6DE5 /* CKInstructionSteps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKInstructionSteps.swift; sourceTree = "<group>"; };
 		27FD79442966F9550048A6DD /* CKConsentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKConsentManager.swift; sourceTree = "<group>"; };
-		28928B6DB4B452CDEC3FB00F /* Pods-CardinalKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardinalKit_Example.release.xcconfig"; path = "Target Support Files/Pods-CardinalKit_Example/Pods-CardinalKit_Example.release.xcconfig"; sourceTree = "<group>"; };
 		2B19DD9126FE1BEB00649CE1 /* JsonToSurvey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonToSurvey.swift; sourceTree = "<group>"; };
 		2B19DD9326FE1D2600649CE1 /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		2B19DD9526FE1D2F00649CE1 /* CheckListItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckListItemViewController.swift; sourceTree = "<group>"; };
@@ -151,10 +150,12 @@
 		2FFFA2C429024EFD009D289D /* ORKNavigableOrderedTask+FHIR.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ORKNavigableOrderedTask+FHIR.swift"; sourceTree = "<group>"; };
 		2FFFA2C529024EFD009D289D /* Questionnaire+ValueSets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Questionnaire+ValueSets.swift"; sourceTree = "<group>"; };
 		2FFFA2C729024EFD009D289D /* FHIRExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FHIRExtensions.swift; sourceTree = "<group>"; };
-		3CA5570ED934810C236DAAFB /* Pods_CardinalKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CardinalKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		39FF130C076C678C004D6972 /* Pods_CardinalKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CardinalKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		41DC264876E45FE5A3FD8701 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		51159C82ACBCF2EF65C8B903 /* Pods-CardinalKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardinalKit_Example.release.xcconfig"; path = "Target Support Files/Pods-CardinalKit_Example/Pods-CardinalKit_Example.release.xcconfig"; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* CardinalKit Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CardinalKit Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		62AA5CD1C2188D392530510F /* CardinalKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = CardinalKit.podspec; path = ../CardinalKit.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		829625EFB2251C41ED3E2302 /* Pods-CardinalKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardinalKit_Example.debug.xcconfig"; path = "Target Support Files/Pods-CardinalKit_Example/Pods-CardinalKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		8E0A4378244A4A0300656518 /* CardinalKit_Example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CardinalKit_Example-Bridging-Header.h"; sourceTree = "<group>"; };
 		8E0A4382244A4A0400656518 /* CKStudyUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKStudyUser.swift; sourceTree = "<group>"; };
 		8E0A4384244A4A0400656518 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -218,7 +219,6 @@
 		E2DF9F092500C9CE00A93B93 /* CKLoginStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKLoginStepViewController.swift; sourceTree = "<group>"; };
 		E2F1FD7524D61EDA006C39DF /* CKPropertyReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKPropertyReader.swift; sourceTree = "<group>"; };
 		E2F1FD7724D62064006C39DF /* CKConfiguration.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = CKConfiguration.plist; sourceTree = "<group>"; };
-		F4907206C9EE32FC098D68FA /* Pods-CardinalKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardinalKit_Example.debug.xcconfig"; path = "Target Support Files/Pods-CardinalKit_Example/Pods-CardinalKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -238,7 +238,7 @@
 				8E0A43D5244A693D00656518 /* HealthKit.framework in Frameworks */,
 				8E9CDE912591534B00C8A228 /* CareKitStore in Frameworks */,
 				8E9CDE932591534B00C8A228 /* CareKitFHIR in Frameworks */,
-				47084CFA948738B99E6CE113 /* Pods_CardinalKit_Example.framework in Frameworks */,
+				B2C0DD56FA3DDFE7E8CF6677 /* Pods_CardinalKit_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,7 +257,7 @@
 			isa = PBXGroup;
 			children = (
 				8E0A43D4244A693D00656518 /* HealthKit.framework */,
-				3CA5570ED934810C236DAAFB /* Pods_CardinalKit_Example.framework */,
+				39FF130C076C678C004D6972 /* Pods_CardinalKit_Example.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -567,8 +567,8 @@
 		A562A578C883F67F0DAE1385 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				F4907206C9EE32FC098D68FA /* Pods-CardinalKit_Example.debug.xcconfig */,
-				28928B6DB4B452CDEC3FB00F /* Pods-CardinalKit_Example.release.xcconfig */,
+				829625EFB2251C41ED3E2302 /* Pods-CardinalKit_Example.debug.xcconfig */,
+				51159C82ACBCF2EF65C8B903 /* Pods-CardinalKit_Example.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -598,14 +598,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "CardinalKit_Example" */;
 			buildPhases = (
-				58284B68A751889FCE26D361 /* [CP] Check Pods Manifest.lock */,
+				B2FCADDB2BB1CF613A66E130 /* [CP] Check Pods Manifest.lock */,
 				607FACCC1AFB9204008FA782 /* Sources */,
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
 				8E0A43D0244A60D800656518 /* Embed Frameworks */,
 				27663F3129577ECF00A34080 /* SwiftLint */,
-				437621C69569C6F36C0D5DBE /* [CP] Embed Pods Frameworks */,
-				63DAE51926507EFF28AD5E85 /* [CP] Copy Pods Resources */,
+				7CE1AF541DC4AEBC63FDD03C /* [CP] Embed Pods Frameworks */,
+				F0F535F3AA730BF20AD8BF13 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -705,7 +705,7 @@
 			shellPath = /bin/sh;
 			shellScript = "# if which swiftlint >/dev/null; then\n#    swiftlint\n# else\n#     echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\n# fi\n";
 		};
-		437621C69569C6F36C0D5DBE /* [CP] Embed Pods Frameworks */ = {
+		7CE1AF541DC4AEBC63FDD03C /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -785,7 +785,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CardinalKit_Example/Pods-CardinalKit_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		58284B68A751889FCE26D361 /* [CP] Check Pods Manifest.lock */ = {
+		B2FCADDB2BB1CF613A66E130 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -807,7 +807,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		63DAE51926507EFF28AD5E85 /* [CP] Copy Pods Resources */ = {
+		F0F535F3AA730BF20AD8BF13 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1110,7 +1110,7 @@
 		};
 		607FACF01AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F4907206C9EE32FC098D68FA /* Pods-CardinalKit_Example.debug.xcconfig */;
+			baseConfigurationReference = 829625EFB2251C41ED3E2302 /* Pods-CardinalKit_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -1136,7 +1136,7 @@
 		};
 		607FACF11AFB9204008FA782 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 28928B6DB4B452CDEC3FB00F /* Pods-CardinalKit_Example.release.xcconfig */;
+			baseConfigurationReference = 51159C82ACBCF2EF65C8B903 /* Pods-CardinalKit_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
