@@ -3,7 +3,7 @@ platform :ios, '15.0'
 
 target 'CardinalKit_Example' do
   pod 'CardinalKit', :path => '../'
-  pod 'ResearchKit',  :git => 'https://github.com/ResearchKit/ResearchKit.git', :tag => '2.1.1-dev'
+  pod 'ResearchKit',  :git => 'https://github.com/ResearchKit/ResearchKit.git', :tag => '2.2.9-dev'
   pod 'Granola', :git => 'https://github.com/CardinalKit/Granola.git', :commit => '9e0b287'
   pod 'GoogleSignIn', '~> 6'
 end
@@ -13,6 +13,7 @@ post_install do |installer|
     target.build_configurations.each do |config|
         config.build_settings['CODE_SIGNING_ALLOWED'] = 'NO'
         config.build_settings['ONLY_ACTIVE_ARCH'] = 'NO'
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '15.0'
     end
   end
 end

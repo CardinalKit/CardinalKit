@@ -186,7 +186,7 @@ class JsonToSurvey {
                         unit: unit,
                         minimum: Int(min) as NSNumber?,
                         maximum: Int(max) as NSNumber?,
-                        maximumFractionDigits: maxFractionDigits as NSNumber?
+                        maximumFractionDigits: maxFractionDigits as NSNumber? ?? 2
                     )
                     return numericAnswerFormat
                 }
