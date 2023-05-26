@@ -323,7 +323,7 @@ extension HealthKitDataSync {
     }
     
     fileprivate func sendActivityIndex(forDate date: Date,value: Double, stepCount:Double){
-        let dictionary=["date":date.shortStringFromDate(),"activityindex":String(value),"stepCount":String(stepCount)]
+        let dictionary=["date":date.shortStringFromDate(),"activityindex":String(value),"stepCount":Int(stepCount)] as [String : Any]
         do{
             let data = try JSONSerialization.data(withJSONObject: dictionary, options: [])
             let package = try Package("metrics"+date.shortStringFromDate(), type: .metricsData, data: data)
