@@ -1,3 +1,6 @@
+> [!IMPORTANT]  
+> The CardinalKit iOS template application is in maintenance mode. All new projects should use [Stanford Spezi](https://github.com/StanfordSpezi), our modular and standards-based framework successor to CardinalKit. Check out the [Spezi Template Application]([https://github.com/StanfordSpezi](https://github.com/StanfordSpezi/SpeziTemplateApplication)) as a great way to get started.
+
 ![CardinalKit Logo](https://raw.githubusercontent.com/CardinalKit/.github/main/assets/ck-header-light.png#gh-light-mode-only)
 ![CardinalKit Logo](https://raw.githubusercontent.com/CardinalKit/.github/main/assets/ck-header-dark.png#gh-dark-mode-only)
 
@@ -20,9 +23,6 @@ Includes:
 * GCP Firebase Integration.
 
 CardinalKit runs on iOS 15.0 and up. [Xcode 14](https://developer.apple.com/xcode/) is required for development.
-
-> [!IMPORTANT]  
-> CardinalKit iOS is now in maintenance mode. We recommend that new projects try [Stanford Spezi](https://github.com/StanfordSpezi), the next generation of CardinalKit.
 
 ## Build your App with CardinalKit
 
