@@ -617,7 +617,6 @@ PODS:
     - ObjectMapper (~> 3)
     - ReachabilitySwift (~> 3)
     - RealmSwift (~> 10)
-    - SAMKeychain (~> 1)
     - SwiftyJSON (~> 4)
     - Zip (~> 2.1.2)
   - Firebase/Analytics (10.3.0):
@@ -815,7 +814,6 @@ PODS:
   - RealmSwift (10.33.0):
     - Realm (= 10.33.0)
   - ResearchKit (2.1.0)
-  - SAMKeychain (1.5.3)
   - SwiftyJSON (4.3.0)
   - Zip (2.1.2)
 
@@ -857,7 +855,6 @@ SPEC REPOS:
     - ReachabilitySwift
     - Realm
     - RealmSwift
-    - SAMKeychain
     - SwiftyJSON
     - Zip
 
@@ -883,7 +880,7 @@ SPEC CHECKSUMS:
   abseil: ebe5b5529fb05d93a8bdb7951607be08b7fa71bc
   AppAuth: 8fca6b5563a5baef2c04bee27538025e4ceb2add
   BoringSSL-GRPC: 3175b25143e648463a56daeaaa499c6cb86dad33
-  CardinalKit: a191adb5d980d4a721dd9c55ea7c5d8a14775f57
+  CardinalKit: 46d4ed725bc1dfb4b2c536ffdab4c6ac36407c10
   Firebase: f92fc551ead69c94168d36c2b26188263860acd9
   FirebaseAnalytics: 036232b6a1e2918e5f67572417be1173576245f3
   FirebaseAppCheckInterop: 9fc57dfa08f0abb737b185ea065422b55355c909
@@ -913,7 +910,6 @@ SPEC CHECKSUMS:
   Realm: d4f810e161fa2c2c589b9860b6eb09238deacd73
   RealmSwift: cef9946f09f2333a8f2ac8bac4f8de52fb9f5ac3
   ResearchKit: 70c28052fabb418069ab0dcea9888edf364edfe3
-  SAMKeychain: 483e1c9f32984d50ca961e26818a534283b4cd5c
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
   Zip: b3fef584b147b6e582b2256a9815c897d60ddc67
 
