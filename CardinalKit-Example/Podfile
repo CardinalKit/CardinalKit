@@ -3,7 +3,6 @@ platform :ios, '15.0'
 
 target 'CardinalKit_Example' do
   pod 'CardinalKit', :path => '../'
-  pod 'ResearchKit',  :git => 'https://github.com/ResearchKit/ResearchKit.git', :tag => '2.2.10-dev'
   pod 'Granola', :git => 'https://github.com/CardinalKit/Granola.git', :commit => '9e0b287'
   pod 'GoogleSignIn', '~> 6'
 end
