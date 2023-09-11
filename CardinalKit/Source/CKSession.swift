@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import SAMKeychain
+import Security
 
 public class CKSession {
     
@@ -24,25 +24,61 @@ public class CKSession {
     public class func getSecure(key: String) -> String? {
         let service = "\(Constants.Keychain.AppIdentifier)-\(key)"
         let account = Constants.Keychain.TokenIdentifier
-        return SAMKeychain.password(forService: service, account: account)
+        
+        let query: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrService as String: service,
+            kSecAttrAccount as String: account,
+            kSecReturnData as String: kCFBooleanTrue,
+            kSecMatchLimit as String: kSecMatchLimitOne
+        ]
+        
+        var dataTypeRef: AnyObject?
+        let status = SecItemCopyMatching(query as CFDictionary, &dataTypeRef)
+        
+        if status == errSecSuccess, let data = dataTypeRef as? Data, let result = String(data: data, encoding: .utf8) {
+            return result
+        }
+        
+        return nil
     }
     
     public class func putSecure(value: String?, forKey key: String) {
         let service = "\(Constants.Keychain.AppIdentifier)-\(key)"
         let account = Constants.Keychain.TokenIdentifier
-        if value == nil {
-            SAMKeychain.deletePassword(forService: service, account: account)
-        } else {
-            SAMKeychain.setPassword(value!, forService: service, account: account)
+        
+        let deleteQuery: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrService as String: service,
+            kSecAttrAccount as String: account
+        ]
+        
+        SecItemDelete(deleteQuery as CFDictionary)
+        
+        if let value = value, let data = value.data(using: .utf8) {
+            let query: [String: Any] = [
+                kSecClass as String: kSecClassGenericPassword,
+                kSecAttrService as String: service,
+                kSecAttrAccount as String: account,
+                kSecValueData as String: data
+            ]
+            
+            SecItemAdd(query as CFDictionary, nil)
         }
     }
     
     public class func removeSecure(key: String) {
         let service = "\(Constants.Keychain.AppIdentifier)-\(key)"
         let account = Constants.Keychain.TokenIdentifier
-        SAMKeychain.deletePassword(forService: service, account: account)
+        
+        let query: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrService as String: service,
+            kSecAttrAccount as String: account
+        ]
+        
+        SecItemDelete(query as CFDictionary)
     }
-    
 }
 
 extension CKSession {
