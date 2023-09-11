@@ -8,7 +8,6 @@
 
 import UIKit
 import RealmSwift
-import SAMKeychain
 import SwiftyJSON
 
 public class SessionManager {

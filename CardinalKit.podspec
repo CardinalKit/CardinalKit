@@ -30,9 +30,6 @@ Pod::Spec.new do |s|
   
   s.dependency 'Granola'
 
-  #Securely storing key-value pairs on keychain
-  s.dependency 'SAMKeychain', '~> 1'
-
   #Local Storage
   s.dependency 'RealmSwift', '~> 10'
   
