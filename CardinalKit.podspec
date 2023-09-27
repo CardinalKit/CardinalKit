@@ -35,7 +35,6 @@ Pod::Spec.new do |s|
   
   #Networking and responses
   s.dependency 'ObjectMapper', '~> 3'
-  s.dependency 'SwiftyJSON', '~> 4'
   s.dependency 'ReachabilitySwift', '~> 3'
 
   #Compressing files
