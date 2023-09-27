@@ -8,7 +8,6 @@
 
 import UIKit
 import RealmSwift
-import SwiftyJSON
 
 public class SessionManager {
     
@@ -100,21 +99,6 @@ public class SessionManager {
     @objc func sessionExpired() {
         clearAppData(forceNavigation: true)
     }
-    
-    // MARK: - Convenience
-    /* func mapUser(_ data: [String: Any]) -> User? {
-        
-        let json = JSON(data)
-        
-        guard json["ID"] != JSON.null else {
-            return nil
-        }
-        
-        var userDict = json.dictionaryObject!
-        userDict["userId"] = json["ID"].numberValue.stringValue
-        
-        return User(value: userDict)
-    }*/
     
     func toMap() -> [String:Any] {
         guard let currentUser = SessionManager.shared.userId else {
