@@ -17,7 +17,7 @@ struct LaunchUIView: View {
 
     var body: some View {
         VStack(spacing: 10) {
-            if didCompleteOnboarding && (auth.currentUser != nil) {
+            if (didCompleteOnboarding && (auth.currentUser != nil)) || FeatureFlags.skipOnboarding {
                 MainUIView()
             } else {
                 OnboardingUIView()

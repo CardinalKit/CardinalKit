@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,6 +15,7 @@
 		27663F2A29574F1500A34080 /* CardinalKit_ExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27663F2929574F1500A34080 /* CardinalKit_ExampleTests.swift */; };
 		2777DADD2969F76300F2ECD4 /* CKSignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2777DADC2969F76300F2ECD4 /* CKSignInView.swift */; };
 		27797418296289F2006D6DE5 /* CKInstructionSteps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27797417296289F2006D6DE5 /* CKInstructionSteps.swift */; };
+		27A9F0382AC9F0400084D2B8 /* FeatureFlags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A9F0372AC9F0400084D2B8 /* FeatureFlags.swift */; };
 		27FD79452966F9550048A6DD /* CKConsentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FD79442966F9550048A6DD /* CKConsentManager.swift */; };
 		2B19DD9226FE1BEB00649CE1 /* JsonToSurvey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19DD9126FE1BEB00649CE1 /* JsonToSurvey.swift */; };
 		2B19DD9426FE1D2600649CE1 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19DD9326FE1D2600649CE1 /* TestViewController.swift */; };
@@ -135,6 +136,7 @@
 		27663F2929574F1500A34080 /* CardinalKit_ExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardinalKit_ExampleTests.swift; sourceTree = "<group>"; };
 		2777DADC2969F76300F2ECD4 /* CKSignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKSignInView.swift; sourceTree = "<group>"; };
 		27797417296289F2006D6DE5 /* CKInstructionSteps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKInstructionSteps.swift; sourceTree = "<group>"; };
+		27A9F0372AC9F0400084D2B8 /* FeatureFlags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureFlags.swift; sourceTree = "<group>"; };
 		27FD79442966F9550048A6DD /* CKConsentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKConsentManager.swift; sourceTree = "<group>"; };
 		2B19DD9126FE1BEB00649CE1 /* JsonToSurvey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonToSurvey.swift; sourceTree = "<group>"; };
 		2B19DD9326FE1D2600649CE1 /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
@@ -382,6 +384,7 @@
 				276399A029021BB4004DE158 /* GoogleService-Info.plist */,
 				8E0A43C9244A4C6500656518 /* Info.plist */,
 				E2F1FD7724D62064006C39DF /* CKConfiguration.plist */,
+				27A9F0372AC9F0400084D2B8 /* FeatureFlags.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -912,6 +915,7 @@
 				8E6E1E1025351E890024B8DF /* Extensions+UIColor.swift in Sources */,
 				8E9CDF832592844A00C8A228 /* LearnUIView.swift in Sources */,
 				8E9CDEA725916B2800C8A228 /* ScheduleViewControllerRepresentable.swift in Sources */,
+				27A9F0382AC9F0400084D2B8 /* FeatureFlags.swift in Sources */,
 				2FFFA2CE29024EFD009D289D /* FHIRExtensions.swift in Sources */,
 				2B932F84276BF8D300AB3A02 /* CKVerifyConsentDocumentStep.swift in Sources */,
 				E235077724F7082700CC1899 /* SceneDelegate.swift in Sources */,
