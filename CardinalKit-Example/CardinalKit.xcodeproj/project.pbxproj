@@ -34,6 +34,7 @@
 		2FFFA2CD29024EFD009D289D /* Questionnaire+ValueSets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFFA2C529024EFD009D289D /* Questionnaire+ValueSets.swift */; };
 		2FFFA2CE29024EFD009D289D /* FHIRExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFFA2C729024EFD009D289D /* FHIRExtensions.swift */; };
 		2FFFA2D229025241009D289D /* ORKESerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4386244A4A0400656518 /* ORKESerialization.m */; };
+		631D54612CF430C0000CE312 /* ValueCoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D54602CF430BA000CE312 /* ValueCoding.swift */; };
 		6333443D2AAE1E56006DC7A7 /* ResearchKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6333443C2AAE1E56006DC7A7 /* ResearchKit */; };
 		6372202D2AAE390C00367157 /* CKSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6372202C2AAE390C00367157 /* CKSessionTests.swift */; };
 		665B820F3D6BA70AD8576CAF /* Pods_CardinalKit_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D903DA29E1FF73FC44EC2199 /* Pods_CardinalKit_Example.framework */; };
@@ -157,6 +158,7 @@
 		41DC264876E45FE5A3FD8701 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* CardinalKit Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CardinalKit Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		62AA5CD1C2188D392530510F /* CardinalKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = CardinalKit.podspec; path = ../CardinalKit.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		631D54602CF430BA000CE312 /* ValueCoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueCoding.swift; sourceTree = "<group>"; };
 		6372202C2AAE390C00367157 /* CKSessionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKSessionTests.swift; sourceTree = "<group>"; };
 		781BB8F6E8A681D16E3A0982 /* Pods-CardinalKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardinalKit_Example.debug.xcconfig"; path = "Target Support Files/Pods-CardinalKit_Example/Pods-CardinalKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		8E0A4378244A4A0300656518 /* CardinalKit_Example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CardinalKit_Example-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -272,6 +274,7 @@
 		2FFFA2BD29024EFD009D289D /* ResearchKitOnFHIR */ = {
 			isa = PBXGroup;
 			children = (
+				631D545F2CF430B1000CE312 /* ValueCoding */,
 				2FFFA2BE29024EFD009D289D /* ResearchKitToFHIR */,
 				2FFFA2C029024EFD009D289D /* FHIRToResearchKit */,
 				2FFFA2C629024EFD009D289D /* FHIRExtensions */,
@@ -353,6 +356,14 @@
 				07D78DA16FC9C3C7709EA243 /* LICENSE */,
 			);
 			name = "Podspec Metadata";
+			sourceTree = "<group>";
+		};
+		631D545F2CF430B1000CE312 /* ValueCoding */ = {
+			isa = PBXGroup;
+			children = (
+				631D54602CF430BA000CE312 /* ValueCoding.swift */,
+			);
+			path = ValueCoding;
 			sourceTree = "<group>";
 		};
 		8E0A4379244A4A0400656518 /* Profile */ = {
@@ -888,6 +899,7 @@
 				8EA664B42594387900B6A45A /* Errors.swift in Sources */,
 				275A6AC5296A684800DA4943 /* OnboardingPageView.swift in Sources */,
 				8E6E1E1225351F830024B8DF /* DocumentPreviewViewController.swift in Sources */,
+				631D54612CF430C0000CE312 /* ValueCoding.swift in Sources */,
 				8E6E1E20253529760024B8DF /* DocumentView.swift in Sources */,
 				8E7FFFBB25DE37FF002982B4 /* CoffeePieChartView.swift in Sources */,
 				2777DADD2969F76300F2ECD4 /* CKSignInView.swift in Sources */,

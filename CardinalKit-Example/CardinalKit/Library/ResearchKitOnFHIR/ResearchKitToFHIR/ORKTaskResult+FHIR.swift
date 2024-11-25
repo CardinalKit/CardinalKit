@@ -41,30 +41,41 @@ extension ORKTaskResult {
     }
 
     // MARK: Functions for creating FHIR responses from ResearchKit results
+    
+    private func appendResponseAnswer(_ value: QuestionnaireResponseItemAnswer.ValueX?, to responseAnswers: inout [QuestionnaireResponseItemAnswer]) {
+        let responseAnswer = QuestionnaireResponseItemAnswer()
+        responseAnswer.value = value
+        responseAnswers.append(responseAnswer)
+    }
 
     private func createResponse(_ result: ORKResult) -> QuestionnaireResponseItem {
         let response = QuestionnaireResponseItem(linkId: FHIRPrimitive(FHIRString(result.identifier)))
-        let responseAnswer = QuestionnaireResponseItemAnswer()
+        var responseAnswers: [QuestionnaireResponseItemAnswer] = []
 
         switch result {
         case let result as ORKBooleanQuestionResult:
-            responseAnswer.value = createBooleanResponse(result)
+            appendResponseAnswer(createBooleanResponse(result), to: &responseAnswers)
         case let result as ORKChoiceQuestionResult:
-            responseAnswer.value = createChoiceResponse(result)
+            let values = createChoiceResponse(result)
+            for value in values {
+                appendResponseAnswer(value, to: &responseAnswers)
+            }
+        case let result as ORKFileResult:
+            appendResponseAnswer(createAttachmentResponse(result), to: &responseAnswers)
         case let result as ORKNumericQuestionResult:
-            responseAnswer.value = createNumericResponse(result)
+            appendResponseAnswer(createNumericResponse(result), to: &responseAnswers)
         case let result as ORKDateQuestionResult:
-            responseAnswer.value = createDateResponse(result)
+            appendResponseAnswer(createDateResponse(result), to: &responseAnswers)
         case let result as ORKTimeOfDayQuestionResult:
-            responseAnswer.value = createTimeResponse(result)
+            appendResponseAnswer(createTimeResponse(result), to: &responseAnswers)
         case let result as ORKTextQuestionResult:
-            responseAnswer.value = createTextResponse(result)
+            appendResponseAnswer(createTextResponse(result), to: &responseAnswers)
         default:
             // Unsupported result type
-            responseAnswer.value = nil
+            appendResponseAnswer(nil, to: &responseAnswers)
         }
 
-        response.answer = [responseAnswer]
+        response.answer = responseAnswers
         return response
     }
 
@@ -97,29 +108,29 @@ extension ORKTaskResult {
         return .string(FHIRPrimitive(FHIRString(text)))
     }
 
-    private func createChoiceResponse(_ result: ORKChoiceQuestionResult) -> QuestionnaireResponseItemAnswer.ValueX? {
-        guard let answerArray = result.answer as? NSArray,
-              answerArray.count > 0, // swiftlint:disable:this empty_count
-              let answerDictionary = answerArray[0] as? [String: String] else {
-            return nil
+    private func createChoiceResponse(_ result: ORKChoiceQuestionResult) -> [QuestionnaireResponseItemAnswer.ValueX] {
+        guard let answerArray = result.answer as? NSArray, answerArray.count > 0 else { // swiftlint:disable:this empty_count
+            return []
         }
-
-        var codingCode: FHIRPrimitive<FHIRString>?,
-            codingSystem: FHIRPrimitive<FHIRURI>?
-
-        if let code = answerDictionary["code"] {
-            codingCode = FHIRPrimitive(FHIRString(code))
+        
+        var responses: [QuestionnaireResponseItemAnswer.ValueX] = []
+        
+        for answer in answerArray {
+            // Check if answer can be treated as a ValueCoding first
+            if let valueCodingString = answer as? String, let valueCoding = ValueCoding(rawValue: valueCodingString) {
+                let coding = Coding(
+                    code: FHIRPrimitive(FHIRString(valueCoding.code)),
+                    display: valueCoding.display.map { FHIRPrimitive(FHIRString($0)) },
+                    system: FHIRPrimitive(FHIRURI(stringLiteral: valueCoding.system))
+                )
+                responses += [.coding(coding)]
+            } else if let answerString = answer as? String {
+                // If not, fall back to treating it as a regular string
+                responses += [.string(FHIRPrimitive(FHIRString(answerString)))]
+            }
         }
-
-        if let system = answerDictionary["system"] {
-            codingSystem = FHIRPrimitive(FHIRURI(stringLiteral: system))
-        }
-
-        let coding = Coding(
-            code: codingCode,
-            system: codingSystem
-        )
-        return .coding(coding)
+        
+        return responses
     }
 
     private func createBooleanResponse(_ result: ORKBooleanQuestionResult) -> QuestionnaireResponseItemAnswer.ValueX? {
@@ -155,5 +166,13 @@ extension ORKTaskResult {
         // Note: ORKTimeOfDayAnswerFormat doesn't support entry of seconds, so it is zero-filled.
         let fhirTime = FHIRPrimitive(FHIRTime(hour: hour, minute: minute, second: 0))
         return .time(fhirTime)
+    }
+    
+    private func createAttachmentResponse(_ result: ORKFileResult) -> QuestionnaireResponseItemAnswer.ValueX? {
+        guard let url = result.fileURL else {
+            return nil
+        }
+
+        return .attachment(Attachment(url: url.asFHIRURIPrimitive()))
     }
 }
