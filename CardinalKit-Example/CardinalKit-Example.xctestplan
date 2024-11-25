@@ -1,0 +1,36 @@
+{
+  "configurations" : [
+    {
+      "id" : "A5DAEA5F-C939-448E-AAB9-9A5B9AF711FC",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false,
+    "commandLineArgumentEntries" : [
+      {
+        "argument" : "--skipOnboarding",
+        "enabled" : false
+      }
+    ],
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:CardinalKit.xcodeproj",
+      "identifier" : "607FACCF1AFB9204008FA782",
+      "name" : "CardinalKit_Example"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : false,
+      "target" : {
+        "containerPath" : "container:CardinalKit.xcodeproj",
+        "identifier" : "27663F2629574F1500A34080",
+        "name" : "CardinalKit ExampleTests"
+      }
+    }
+  ],
+  "version" : 1
+}

@@ -164,6 +164,7 @@
 		631D54602CF430BA000CE312 /* ValueCoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueCoding.swift; sourceTree = "<group>"; };
 		631D546B2CF4A21E000CE312 /* ResearchKitToFHIRTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResearchKitToFHIRTests.swift; sourceTree = "<group>"; };
 		631D546E2CF4A4F5000CE312 /* NavigationRulesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRulesTests.swift; sourceTree = "<group>"; };
+		631D54702CF4B4C3000CE312 /* CardinalKit-Example.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "CardinalKit-Example.xctestplan"; sourceTree = SOURCE_ROOT; };
 		6372202C2AAE390C00367157 /* CKSessionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKSessionTests.swift; sourceTree = "<group>"; };
 		781BB8F6E8A681D16E3A0982 /* Pods-CardinalKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardinalKit_Example.debug.xcconfig"; path = "Target Support Files/Pods-CardinalKit_Example/Pods-CardinalKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		8E0A4378244A4A0300656518 /* CardinalKit_Example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CardinalKit_Example-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -319,6 +320,7 @@
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
+				631D54702CF4B4C3000CE312 /* CardinalKit-Example.xctestplan */,
 				270AF36127872C13002945A7 /* CardinalKit_ExampleRelease.entitlements */,
 				8E0A438B244A4A0400656518 /* CardinalKit-Example.entitlements */,
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
