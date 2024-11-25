@@ -1,5 +1,5 @@
 > [!IMPORTANT]  
-> The CardinalKit iOS template application is in maintenance mode. All new projects should use [Stanford Spezi](https://github.com/StanfordSpezi), our modular and standards-based framework successor to CardinalKit. Check out the [Spezi Template Application]([https://github.com/StanfordSpezi](https://github.com/StanfordSpezi/SpeziTemplateApplication)) as a great way to get started.
+> The CardinalKit iOS template application is in maintenance mode. All new projects should use [Stanford Spezi](https://github.com/StanfordSpezi), our modular and standards-based framework successor to CardinalKit. Check out the [Spezi Template Application](https://github.com/StanfordSpezi) as a great way to get started.
 
 ![CardinalKit Logo](https://raw.githubusercontent.com/CardinalKit/.github/main/assets/ck-header-light.png#gh-light-mode-only)
 ![CardinalKit Logo](https://raw.githubusercontent.com/CardinalKit/.github/main/assets/ck-header-dark.png#gh-dark-mode-only)
@@ -13,14 +13,13 @@
 <img src="https://raw.githubusercontent.com/CardinalKit/.github/main/assets/CK_Map.jpg" alt="cardinalkit map">
 
 Includes:
-* Informed consent process using ResearchKit.
-* Track day-to-day adherence with CareKit.
+* Informed consent process using [ResearchKit](https://github.com/ResearchKit/ResearchKit).
+* Track day-to-day adherence with [CareKit](https://github.com/carekit-apple/CareKit).
 * Monitor health data with HealthKit.
-* Collect and upload EHR data.
+* Collect and upload Electronic Health Record (EHR) data via Apple Health.
 * CoreMotion data demo.
 * Awesome SwiftUI templates.
-* Zero-code [customizable configuration file.](https://cardinalkit.org/docs/ckconfig)
-* GCP Firebase Integration.
+* Google Cloud Firebase Integration.
 
 CardinalKit runs on iOS 15.0 and up. [Xcode 14](https://developer.apple.com/xcode/) is required for development.
 
