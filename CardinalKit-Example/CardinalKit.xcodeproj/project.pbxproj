@@ -35,6 +35,9 @@
 		2FFFA2CE29024EFD009D289D /* FHIRExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFFA2C729024EFD009D289D /* FHIRExtensions.swift */; };
 		2FFFA2D229025241009D289D /* ORKESerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4386244A4A0400656518 /* ORKESerialization.m */; };
 		631D54612CF430C0000CE312 /* ValueCoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D54602CF430BA000CE312 /* ValueCoding.swift */; };
+		631D546C2CF4A223000CE312 /* ResearchKitToFHIRTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D546B2CF4A21E000CE312 /* ResearchKitToFHIRTests.swift */; };
+		631D546D2CF4A46E000CE312 /* ValueCoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D54602CF430BA000CE312 /* ValueCoding.swift */; };
+		631D546F2CF4A4F8000CE312 /* NavigationRulesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D546E2CF4A4F5000CE312 /* NavigationRulesTests.swift */; };
 		6333443D2AAE1E56006DC7A7 /* ResearchKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6333443C2AAE1E56006DC7A7 /* ResearchKit */; };
 		6372202D2AAE390C00367157 /* CKSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6372202C2AAE390C00367157 /* CKSessionTests.swift */; };
 		665B820F3D6BA70AD8576CAF /* Pods_CardinalKit_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D903DA29E1FF73FC44EC2199 /* Pods_CardinalKit_Example.framework */; };
@@ -159,6 +162,8 @@
 		607FACD01AFB9204008FA782 /* CardinalKit Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CardinalKit Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		62AA5CD1C2188D392530510F /* CardinalKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = CardinalKit.podspec; path = ../CardinalKit.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		631D54602CF430BA000CE312 /* ValueCoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueCoding.swift; sourceTree = "<group>"; };
+		631D546B2CF4A21E000CE312 /* ResearchKitToFHIRTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResearchKitToFHIRTests.swift; sourceTree = "<group>"; };
+		631D546E2CF4A4F5000CE312 /* NavigationRulesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRulesTests.swift; sourceTree = "<group>"; };
 		6372202C2AAE390C00367157 /* CKSessionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKSessionTests.swift; sourceTree = "<group>"; };
 		781BB8F6E8A681D16E3A0982 /* Pods-CardinalKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardinalKit_Example.debug.xcconfig"; path = "Target Support Files/Pods-CardinalKit_Example/Pods-CardinalKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		8E0A4378244A4A0300656518 /* CardinalKit_Example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CardinalKit_Example-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -256,6 +261,7 @@
 		27663F2829574F1500A34080 /* CardinalKit ExampleTests */ = {
 			isa = PBXGroup;
 			children = (
+				631D546A2CF4A218000CE312 /* ResearchKitOnFHIRTests */,
 				27663F2929574F1500A34080 /* CardinalKit_ExampleTests.swift */,
 				6372202C2AAE390C00367157 /* CKSessionTests.swift */,
 			);
@@ -364,6 +370,15 @@
 				631D54602CF430BA000CE312 /* ValueCoding.swift */,
 			);
 			path = ValueCoding;
+			sourceTree = "<group>";
+		};
+		631D546A2CF4A218000CE312 /* ResearchKitOnFHIRTests */ = {
+			isa = PBXGroup;
+			children = (
+				631D546E2CF4A4F5000CE312 /* NavigationRulesTests.swift */,
+				631D546B2CF4A21E000CE312 /* ResearchKitToFHIRTests.swift */,
+			);
+			path = ResearchKitOnFHIRTests;
 			sourceTree = "<group>";
 		};
 		8E0A4379244A4A0400656518 /* Profile */ = {
@@ -845,6 +860,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				631D546C2CF4A223000CE312 /* ResearchKitToFHIRTests.swift in Sources */,
+				631D546D2CF4A46E000CE312 /* ValueCoding.swift in Sources */,
+				631D546F2CF4A4F8000CE312 /* NavigationRulesTests.swift in Sources */,
 				6372202D2AAE390C00367157 /* CKSessionTests.swift in Sources */,
 				27663F2A29574F1500A34080 /* CardinalKit_ExampleTests.swift in Sources */,
 			);
