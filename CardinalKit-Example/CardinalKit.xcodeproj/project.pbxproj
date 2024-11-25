@@ -1219,7 +1219,7 @@
 			repositoryURL = "https://github.com/StanfordBDHG/ResearchKit";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
+				minimumVersion = 2.2.30;
 			};
 		};
 		8E9CDE8F2591534B00C8A228 /* XCRemoteSwiftPackageReference "CareKit" */ = {
