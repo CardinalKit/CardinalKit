@@ -1,0 +1,59 @@
+{
+  "title": "Image Capture Example",
+  "resourceType": "Questionnaire",
+  "language": "en-US",
+  "status": "draft",
+  "publisher": "CardinalKit",
+  "meta": {
+    "profile": [
+      "http://cardinalkit.org/fhir/StructureDefinition/sdf-Questionnaire"
+    ],
+    "tag": [
+      {
+        "system": "urn:ietf:bcp:47",
+        "code": "en-US",
+        "display": "English"
+      }
+    ]
+  },
+  "useContext": [
+    {
+      "code": {
+        "system": "http://hl7.org/fhir/ValueSet/usage-context-type",
+        "code": "focus",
+        "display": "Clinical Focus"
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:oid:2.16.578.1.12.4.1.1.8655",
+            "display": "Image Capture Example"
+          }
+        ]
+      }
+    }
+  ],
+  "contact": [
+    {
+      "name": "http://cardinalkit.org"
+    }
+  ],
+  "subjectType": [
+    "Patient"
+  ],
+  "url": "http://cardinalkit.org/fhir/questionnaire/7c10f9e2-0662-4f5e-c592-28115f8d9adb",
+  "item": [
+    {
+      "linkId": "1aca86a1-cb08-49cd-a2ba-d210e7ed0a07",
+      "type": "attachment",
+      "text": "Capture a picture with your phone's camera.",
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/maxSize",
+          "valueDecimal": 5
+        }
+      ],
+      "required": false
+    }
+  ]
+}

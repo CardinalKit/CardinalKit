@@ -66,6 +66,8 @@ extension ORKTaskResult {
             appendResponseAnswer(createNumericResponse(result), to: &responseAnswers)
         case let result as ORKDateQuestionResult:
             appendResponseAnswer(createDateResponse(result), to: &responseAnswers)
+        case let result as ORKScaleQuestionResult:
+            appendResponseAnswer(createScaleResponse(result), to: &responseAnswers)
         case let result as ORKTimeOfDayQuestionResult:
             appendResponseAnswer(createTimeResponse(result), to: &responseAnswers)
         case let result as ORKTextQuestionResult:
@@ -99,6 +101,14 @@ extension ORKTaskResult {
         } else {
             return .decimal(FHIRPrimitive(FHIRDecimal(value.decimalValue)))
         }
+    }
+    
+    private func createScaleResponse(_ result: ORKScaleQuestionResult) -> QuestionnaireResponseItemAnswer.ValueX? {
+        guard let value = result.scaleAnswer else {
+            return nil
+        }
+
+        return .integer(FHIRPrimitive(FHIRInteger(value.int32Value)))
     }
 
     private func createTextResponse(_ result: ORKTextQuestionResult) -> QuestionnaireResponseItemAnswer.ValueX? {

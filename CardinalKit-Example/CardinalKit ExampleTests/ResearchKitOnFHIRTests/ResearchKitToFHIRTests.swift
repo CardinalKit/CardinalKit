@@ -6,6 +6,7 @@
 // SPDX-License-Identifier: MIT
 //
 
+@testable import CardinalKit_Example
 import ResearchKit
 import XCTest
 

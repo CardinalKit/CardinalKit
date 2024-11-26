@@ -1,0 +1,237 @@
+{
+    "title": "International Prostatism Symptom Score",
+    "resourceType": "Questionnaire",
+    "language": "en-US",
+    "status": "draft",
+    "publisher": "Stanford University",
+    "meta": {
+        "profile": [
+            "http://biodesign.stanford.edu/fhir/StructureDefinition/sdf-Questionnaire"
+        ],
+        "tag": [
+            {
+                "system": "urn:ietf:bcp:47",
+                "code": "en-US",
+                "display": "English"
+            }
+        ]
+    },
+    "useContext": [
+        {
+            "code": {
+                "system": "http://hl7.org/fhir/ValueSet/usage-context-type",
+                "code": "focus",
+                "display": "Clinical Focus"
+            },
+            "valueCodeableConcept": {
+                "coding": [
+                    {
+                        "system": "urn:oid:2.16.578.1.12.4.1.1.8655",
+                        "display": "International Prostatism Symptom Score (IPSS)"
+                    }
+                ]
+            }
+        }
+    ],
+    "contact": [
+        {
+            "name": "http://biodesign.stanford.edu"
+        }
+    ],
+    "subjectType": [
+        "Patient"
+    ],
+    "url": "http://biodesign.stanford.edu/fhir/questionnaire/ipss",
+    "contained": [
+        {
+            "resourceType": "ValueSet",
+            "id": "VSIPSS",
+            "meta": {
+                "profile": [
+                    "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-valueset"
+                ]
+            },
+            "url": "http://biodesign.stanford.edu/fhir/uv/sdc/ValueSet/VSGAD7",
+            "name": "VSIPSS",
+            "status": "draft",
+            "description": "The answer list for questions addressing the frequency in which patient reports experiencing behaviors that are assessed in the PHQ-9 Questionnaire.",
+            "immutable": true,
+            "compose": {
+                "include": [
+                    {
+                        "system": "http://biodesign.stanford.edu/fhir/uv/sdc/CodeSystem/CSIPSS",
+                        "concept": [
+                            {
+                                "extension": [
+                                    {
+                                        "url": "http://hl7.org/fhir/StructureDefinition/ordinalValue",
+                                        "valueDecimal": 0
+                                    }
+                                ],
+                                "code": "Not-at-all",
+                                "display": "Not at all"
+                            },
+                            {
+                                "extension": [
+                                    {
+                                        "url": "http://hl7.org/fhir/StructureDefinition/ordinalValue",
+                                        "valueDecimal": 1
+                                    }
+                                ],
+                                "code": "less-than-1-time-in-5",
+                                "display": "Less than 1 time in 5"
+                            },
+                            {
+                                "extension": [
+                                    {
+                                        "url": "http://hl7.org/fhir/StructureDefinition/ordinalValue",
+                                        "valueDecimal": 2
+                                    }
+                                ],
+                                "code": "less-than-half-the-time",
+                                "display": "Less than half the time"
+                            },
+                            {
+                                "extension": [
+                                    {
+                                        "url": "http://hl7.org/fhir/StructureDefinition/ordinalValue",
+                                        "valueDecimal": 3
+                                    }
+                                ],
+                                "code": "about-half-the-time",
+                                "display": "About half the time"
+                            },
+                            {
+                                "extension": [
+                                    {
+                                        "url": "http://hl7.org/fhir/StructureDefinition/ordinalValue",
+                                        "valueDecimal": 4
+                                    }
+                                ],
+                                "code": "more-than-half-the-time",
+                                "display": "More than half the time"
+                            },
+                            {
+                                "extension": [
+                                    {
+                                        "url": "http://hl7.org/fhir/StructureDefinition/ordinalValue",
+                                        "valueDecimal": 5
+                                    }
+                                ],
+                                "code": "almost-always",
+                                "display": "Almost always"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    ],
+    "item": [
+        {
+            "linkId": "3d167596-7a76-41d1-e185-439864399e77",
+            "type": "group",
+            "item": [
+                {
+                    "linkId": "49a98d42-186c-4e07-8a69-2cf1718d12e8",
+                    "type": "choice",
+                    "required": true,
+                    "text": "Over the past month, how often have you had a sensation of not emptying your bladder completely after you finished urinating?",
+                    "answerValueSet": "#VSIPSS"
+                },
+                {
+                    "linkId": "f03fd74f-c9a1-44b8-8a51-b9b6492c97ee",
+                    "type": "choice",
+                    "required": true,
+                    "text": "Over the past month, how often have you had to urinate again less than 2 hours after you finished urinating?",
+                    "answerValueSet": "#VSIPSS"
+                },
+                {
+                    "linkId": "b7b74ffe-0f93-4658-8ba2-1869680ce0f8",
+                    "type": "choice",
+                    "required": true,
+                    "text": "Over the past month, how often have you found you stopped and started again several times when you urinated?",
+                    "answerValueSet": "#VSIPSS"
+                },
+                {
+                    "linkId": "0381fb44-3cb0-4429-83ca-80404f55955a",
+                    "type": "choice",
+                    "required": true,
+                    "text": "Over the past month, how often have you found it difficult to postpone urination?",
+                    "answerValueSet": "#VSIPSS"
+                },
+                {
+                    "linkId": "7c9102ca-2585-4001-8e5c-baf955dfa446",
+                    "type": "choice",
+                    "required": true,
+                    "text": "Over the past month, how often have you had a weak urinary stream?",
+                    "answerValueSet": "#VSIPSS"
+                },
+                {
+                    "linkId": "477d93e6-5960-4ecc-91a0-fc9ce20533bf",
+                    "type": "choice",
+                    "required": true,
+                    "text": "Over the past month, how often have you had to push or strain to begin urination?",
+                    "answerValueSet": "#VSIPSS"
+                },
+                {
+                    "linkId": "0c29668e-2c78-40cc-827f-d9c200284aa2",
+                    "type": "choice",
+                    "required": true,
+                    "text": "Over the past month, how many times did you most typically get up to urinate from the time you went to bed at night until the time you got up in the morning?",
+                    "answerOption": [
+                        {
+                            "valueCoding": {
+                                "id": "2fe09463-1967-49a3-95bc-86600601fba3",
+                                "code": "0",
+                                "system": "urn:uuid:8387c267-735c-4891-fb9e-ed3fc1194349",
+                                "display": "None"
+                            }
+                        },
+                        {
+                            "valueCoding": {
+                                "id": "97b8438e-a315-44b2-8e75-5e94a20c813f",
+                                "code": "1",
+                                "system": "urn:uuid:8387c267-735c-4891-fb9e-ed3fc1194349",
+                                "display": "1 time"
+                            }
+                        },
+                        {
+                            "valueCoding": {
+                                "id": "d13ab539-767f-48ee-8776-ecc11409ca57",
+                                "code": "2",
+                                "system": "urn:uuid:8387c267-735c-4891-fb9e-ed3fc1194349",
+                                "display": "2 times"
+                            }
+                        },
+                        {
+                            "valueCoding": {
+                                "id": "268b3406-6edb-4e78-fbc0-b8941ca944d2",
+                                "code": "3",
+                                "system": "urn:uuid:8387c267-735c-4891-fb9e-ed3fc1194349",
+                                "display": "3 times"
+                            }
+                        },
+                        {
+                            "valueCoding": {
+                                "id": "6d7ea7cc-2a96-4ecb-9c5e-f99e63f60d03",
+                                "code": "4",
+                                "system": "urn:uuid:8387c267-735c-4891-fb9e-ed3fc1194349",
+                                "display": "4 times"
+                            }
+                        },
+                        {
+                            "valueCoding": {
+                                "id": "eef580d6-7ce8-4f49-8d37-fb6fcfe7f34a",
+                                "code": "5",
+                                "system": "urn:uuid:8387c267-735c-4891-fb9e-ed3fc1194349",
+                                "display": "5 or more times"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "required": true
+        }
+    ]
+}

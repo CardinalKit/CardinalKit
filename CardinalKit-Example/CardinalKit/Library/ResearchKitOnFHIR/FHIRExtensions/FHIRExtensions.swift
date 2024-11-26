@@ -16,7 +16,8 @@ extension QuestionnaireItem {
         static let questionnaireUnit = "http://hl7.org/fhir/StructureDefinition/questionnaire-unit"
         static let regex = "http://hl7.org/fhir/StructureDefinition/regex"
         static let sliderStepValue = "http://hl7.org/fhir/StructureDefinition/questionnaire-sliderStepValue"
-        static let validationMessage = "http://cardinalkit.org/fhir/StructureDefinition/validationtext"
+        static let validationMessage = "http://bdh.stanford.edu/fhir/StructureDefinition/validationtext"
+        static let validationMessageLegacy = "http://biodesign.stanford.edu/fhir/StructureDefinition/validationtext"
         static let maxDecimalPlaces = "http://hl7.org/fhir/StructureDefinition/maxDecimalPlaces"
         static let minValue = "http://hl7.org/fhir/StructureDefinition/minValue"
         static let maxValue = "http://hl7.org/fhir/StructureDefinition/maxValue"
@@ -128,7 +129,8 @@ extension QuestionnaireItem {
     /// The validation message for a question.
     /// - Returns: An optional `String` containing the validation message, if it exists.
     var validationMessage: String? {
-        guard let validationMessageExtension = getExtensionInQuestionnaireItem(url: SupportedExtensions.validationMessage),
+        guard let validationMessageExtension = getExtensionInQuestionnaireItem(url: SupportedExtensions.validationMessage)
+                ?? getExtensionInQuestionnaireItem(url: SupportedExtensions.validationMessageLegacy),
               case let .string(message) = validationMessageExtension.value,
               let stringMessage = message.value?.string else {
             return nil

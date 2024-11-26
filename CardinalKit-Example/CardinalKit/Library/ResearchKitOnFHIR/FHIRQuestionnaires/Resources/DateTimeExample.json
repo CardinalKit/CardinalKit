@@ -1,0 +1,75 @@
+{
+  "title": "Date and Time Example",
+  "resourceType": "Questionnaire",
+  "language": "en-US",
+  "status": "draft",
+  "publisher": "Stanford University",
+  "meta": {
+    "profile": [
+      "http://biodesign.stanford.edu/fhir/StructureDefinition/sdf-Questionnaire"
+    ],
+    "tag": [
+      {
+        "system": "urn:ietf:bcp:47",
+        "code": "en-US",
+        "display": "English"
+      }
+    ]
+  },
+  "useContext": [
+    {
+      "code": {
+        "system": "http://hl7.org/fhir/ValueSet/usage-context-type",
+        "code": "focus",
+        "display": "Clinical Focus"
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:oid:2.16.578.1.12.4.1.1.8655",
+            "display": "Date and Time Example"
+          }
+        ]
+      }
+    }
+  ],
+  "contact": [
+    {
+      "name": "http://biodesign.stanford.edu"
+    }
+  ],
+  "subjectType": [
+    "Patient"
+  ],
+  "url": "http://biodesign.stanford.edu/fhir/questionnaire/date-time-example",
+  "item": [
+    {
+      "linkId": "cc7f8427-15fc-4c52-b6a3-3ba6635b8249",
+      "type": "date",
+      "text": "Choose a date",
+      "required": false,
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/minValue",
+          "valueDate": "2001-01-01"
+        },
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/maxValue",
+          "valueDate": "2024-01-01"
+        }
+      ]
+    },
+    {
+      "linkId": "af50f8ea-1298-42ce-8d6b-f6b88ce1ca88",
+      "type": "dateTime",
+      "text": "Choose a date and time",
+      "required": false
+    },
+    {
+      "linkId": "9c9d9281-8e38-4e1f-8316-7f0de2c24d29",
+      "type": "time",
+      "text": "Choose a time",
+      "required": false
+    }
+  ]
+}

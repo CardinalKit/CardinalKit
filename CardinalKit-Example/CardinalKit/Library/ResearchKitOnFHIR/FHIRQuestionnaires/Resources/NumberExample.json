@@ -1,0 +1,111 @@
+{
+  "resourceType": "Questionnaire",
+  "language": "en-US",
+  "title": "Number Validation Example",
+  "status": "draft",
+  "publisher": "Stanford University",
+  "meta": {
+    "profile": [
+      "http://biodesign.stanford.edu/fhir/StructureDefinition/sdf-Questionnaire"
+    ],
+    "tag": [
+      {
+        "system": "urn:ietf:bcp:47",
+        "code": "en-US",
+        "display": "English"
+      }
+    ]
+  },
+  "useContext": [
+    {
+      "code": {
+        "system": "http://hl7.org/fhir/ValueSet/usage-context-type",
+        "code": "focus",
+        "display": "Clinical Focus"
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:oid:2.16.578.1.12.4.1.1.8655",
+            "display": "Number Example"
+          }
+        ]
+      }
+    }
+  ],
+  "contact": [
+    {
+      "name": "http://biodesign.stanford.edu"
+    }
+  ],
+  "subjectType": [
+    "Patient"
+  ],
+  "url": "http://biodesign.stanford.edu/fhir/questionnaire/4f34fe66-ee0d-4e8d-8a3b-0cf952f4a35d",
+  "item": [
+    {
+      "linkId": "2b441d69-0e29-4cd7-88b7-91ce722d47e1",
+      "type": "integer",
+      "text": "Enter an integer between 1 and 100",
+      "required": false,
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/minValue",
+          "valueInteger": 1
+        },
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/maxValue",
+          "valueInteger": 100
+        }
+      ]
+    },
+    {
+      "linkId": "904c4c88-1ae6-45cd-89e5-a35d81177909",
+      "type": "decimal",
+      "text": "Enter a decimal between 1 and 100",
+      "required": false,
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/maxDecimalPlaces",
+          "valueInteger": 3
+        },
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/minValue",
+          "valueInteger": 1
+        },
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/maxValue",
+          "valueInteger": 100
+        }
+      ]
+    },
+    {
+      "linkId": "508db543-88b3-4ce8-809e-1ec9f73b1eb7",
+      "type": "quantity",
+      "text": "Enter a number of grams between 1 and 100",
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-unit",
+          "valueCoding": {
+            "system": "http://unitsofmeasure.org",
+            "code": "g",
+            "display": "gram"
+          }
+        },
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/maxDecimalPlaces",
+          "valueInteger": 3
+        },
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/minValue",
+          "valueInteger": 1
+        },
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/maxValue",
+          "valueInteger": 100
+        }
+      ],
+      "required": false
+    }
+  ]
+}

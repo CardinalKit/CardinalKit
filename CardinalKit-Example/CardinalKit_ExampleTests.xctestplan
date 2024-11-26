@@ -1,7 +1,7 @@
 {
   "configurations" : [
     {
-      "id" : "A5DAEA5F-C939-448E-AAB9-9A5B9AF711FC",
+      "id" : "54C471DF-60C1-4870-967C-188425A1A0E9",
       "name" : "Configuration 1",
       "options" : {
 
@@ -9,18 +9,7 @@
     }
   ],
   "defaultOptions" : {
-    "codeCoverage" : false,
-    "commandLineArgumentEntries" : [
-      {
-        "argument" : "--skipOnboarding",
-        "enabled" : false
-      }
-    ],
-    "targetForVariableExpansion" : {
-      "containerPath" : "container:CardinalKit.xcodeproj",
-      "identifier" : "607FACCF1AFB9204008FA782",
-      "name" : "CardinalKit_Example"
-    }
+
   },
   "testTargets" : [
     {

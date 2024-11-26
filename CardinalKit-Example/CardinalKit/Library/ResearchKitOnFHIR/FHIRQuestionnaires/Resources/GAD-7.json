@@ -1,0 +1,169 @@
+{
+   "title":"Generalized Anxiety Disorder - 7",
+   "resourceType":"Questionnaire",
+   "language":"en-US",
+   "status":"draft",
+   "publisher":"Stanford University",
+   "meta":{
+      "profile":[
+         "http://biodesign.stanford.edu/fhir/StructureDefinition/sdf-Questionnaire"
+      ],
+      "tag":[
+         {
+            "system":"urn:ietf:bcp:47",
+            "code":"en-US",
+            "display":"English"
+         }
+      ]
+   },
+   "useContext":[
+      {
+         "code":{
+            "system":"http://hl7.org/fhir/ValueSet/usage-context-type",
+            "code":"focus",
+            "display":"Clinical Focus"
+         },
+         "valueCodeableConcept":{
+            "coding":[
+               {
+                  "system":"urn:oid:2.16.578.1.12.4.1.1.8655",
+                  "display":"Generalized Anxiety Disorder-7"
+               }
+            ]
+         }
+      }
+   ],
+   "contact":[
+      {
+         "name":"http://biodesign.stanford.edu"
+      }
+   ],
+   "subjectType":[
+      "Patient"
+   ],
+   "url":"http://biodesign.stanford.edu/fhir/questionnaire/GAD-7",
+   "contained":[
+      {
+         "resourceType":"ValueSet",
+         "id":"VSGAD7",
+         "meta":{
+            "profile":[
+               "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-valueset"
+            ]
+         },
+         "url":"http://biodesign.stanford.edu/fhir/uv/sdc/ValueSet/VSGAD7",
+         "name":"VSGAD7",
+         "status":"draft",
+         "description":"The answer list for questions addressing the frequency in which patient reports experiencing behaviors that are assessed in the PHQ-9 Questionnaire.",
+         "immutable":true,
+         "compose":{
+            "include":[
+               {
+                  "system":"http://biodesign.stanford.edu/fhir/uv/sdc/CodeSystem/CSGAD7",
+                  "concept":[
+                     {
+                        "extension":[
+                           {
+                              "url":"http://hl7.org/fhir/StructureDefinition/ordinalValue",
+                              "valueDecimal":0
+                           }
+                        ],
+                        "code":"Not-at-all",
+                        "display":"Not at all"
+                     },
+                     {
+                        "extension":[
+                           {
+                              "url":"http://hl7.org/fhir/StructureDefinition/ordinalValue",
+                              "valueDecimal":1
+                           }
+                        ],
+                        "code":"Several-days",
+                        "display":"Several days"
+                     },
+                     {
+                        "extension":[
+                           {
+                              "url":"http://hl7.org/fhir/StructureDefinition/ordinalValue",
+                              "valueDecimal":2
+                           }
+                        ],
+                        "code":"More than half the days",
+                        "display":"More than half the days"
+                     },
+                     {
+                        "extension":[
+                           {
+                              "url":"http://hl7.org/fhir/StructureDefinition/ordinalValue",
+                              "valueDecimal":3
+                           }
+                        ],
+                        "code":"Nearly every day",
+                        "display":"Nearly every day"
+                     }
+                  ]
+               }
+            ]
+         }
+      }
+   ],
+   "item":[
+      {
+         "linkId":"a2ae9518-55b5-41cc-928d-00132d1a3c1e",
+         "type":"group",
+         "text":"How often have you been bothered by the following over the past 2 weeks?",
+         "item":[
+            {
+               "linkId":"2bab9480-5251-4997-8a2e-937a1701cfe9",
+               "type":"choice",
+               "text":"Feeling nervous, anxious, or on edge",
+               "required":true,
+               "answerValueSet":"#VSGAD7"
+            },
+            {
+               "linkId":"d8c78a49-c02c-4986-800c-b076a5bb3553",
+               "type":"choice",
+               "text":"Not being able to stop or control worrying",
+               "required":true,
+               "answerValueSet":"#VSGAD7"
+            },
+            {
+               "linkId":"9756848f-1360-4e72-8884-a3bdc08799ed",
+               "type":"choice",
+               "text":"Worrying too much about different things",
+               "required":true,
+               "answerValueSet":"#VSGAD7"
+            },
+            {
+               "linkId":"4158b3d6-c218-42f4-8e83-42932e590100",
+               "type":"choice",
+               "text":"Trouble relaxing",
+               "required":true,
+               "answerValueSet":"#VSGAD7"
+            },
+            {
+               "linkId":"1c05b1f1-763d-44cc-bb72-0a833b581aba",
+               "type":"choice",
+               "text":"Being so restless that it's hard to sit still",
+               "required":true,
+               "answerValueSet":"#VSGAD7"
+            },
+            {
+               "linkId":"2f0858ee-23d0-4cd0-86f7-a63609b62f6a",
+               "type":"choice",
+               "text":"Becoming easily annoyed or irritable",
+               "required":true,
+               "answerValueSet":"#VSGAD7"
+            },
+            {
+               "linkId":"8c6a877a-3867-4b36-c097-2b342649cadb",
+               "type":"choice",
+               "text":"Feeling as if something awful might happen",
+               "required":true,
+               "answerValueSet":"#VSGAD7"
+            }
+         ],
+         "required":true
+      }
+   ]
+}
