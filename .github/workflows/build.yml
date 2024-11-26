@@ -21,6 +21,10 @@ jobs:
       run: |
           xcodebuild -version
           swift --version
+    - name: Setup Cocoapods
+      uses: maxim-lobanov/setup-cocoapods@v1
+      with:
+        podfile-path: CardinalKit-Example/Podfile.lock
     - uses: actions/cache@v3
       with:
         path: CardinalKit-Example/Pods
