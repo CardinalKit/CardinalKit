@@ -1,0 +1,161 @@
+{
+  "title": "Form Example",
+  "resourceType": "Questionnaire",
+  "language": "en-US",
+  "status": "draft",
+  "publisher": "Stanford University",
+  "meta": {
+    "profile": [
+      "http://biodesign.stanford.edu/fhir/StructureDefinition/sdf-Questionnaire"
+    ],
+    "tag": [
+      {
+        "system": "urn:ietf:bcp:47",
+        "code": "en-US",
+        "display": "English"
+      }
+    ]
+  },
+  "useContext": [
+    {
+      "code": {
+        "system": "http://hl7.org/fhir/ValueSet/usage-context-type",
+        "code": "focus",
+        "display": "Clinical Focus"
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:oid:2.16.578.1.12.4.1.1.8655",
+            "display": "Form Example"
+          }
+        ]
+      }
+    }
+  ],
+  "contact": [
+    {
+      "name": "http://biodesign.stanford.edu"
+    }
+  ],
+  "subjectType": [
+    "Patient"
+  ],
+  "url": "http://biodesign.stanford.edu/fhir/questionnaire/71272809-d6e9-4329-880c-efdad485e558",
+  "item": [
+    {
+      "linkId": "1f5037a1-7b82-402a-fcbe-e6d977b0418a",
+      "type": "display",
+      "text": "This example questionnaire shows how you can group questions into a form.",
+      "required": false
+    },
+    {
+      "linkId": "c74bc859-bae9-43c0-890c-f5ecdf1939bb",
+      "type": "group",
+      "text": "Let's talk about ice cream.",
+      "item": [
+        {
+          "linkId": "b5098d46-9e1b-45e2-9082-22ed3a9b821c",
+          "type": "boolean",
+          "text": "Do you like ice cream?",
+          "required": true
+        },
+        {
+          "linkId": "5ad9456c-1451-4190-fff5-3fd71545a591",
+          "type": "open-choice",
+          "text": "What is your favorite flavor of ice cream?",
+          "required": true,
+          "answerOption": [
+            {
+              "valueCoding": {
+                "id": "ea71b4ad-5a32-4e32-f156-30216a002f2b",
+                "code": "chocolate",
+                "system": "urn:uuid:108f3ec2-1c17-4c1e-8ab6-34f049eb7aa9",
+                "display": "Chocolate"
+              }
+            },
+            {
+              "valueCoding": {
+                "id": "1e6b3875-101f-4edf-cceb-df0dca06cbe8",
+                "code": "vanilla",
+                "system": "urn:uuid:108f3ec2-1c17-4c1e-8ab6-34f049eb7aa9",
+                "display": "Vanilla"
+              }
+            },
+            {
+              "valueCoding": {
+                "id": "3979ddc4-031e-4d8b-979b-7e52b4aac58e",
+                "code": "strawberry",
+                "system": "urn:uuid:108f3ec2-1c17-4c1e-8ab6-34f049eb7aa9",
+                "display": "Strawberry"
+              }
+            },
+            {
+              "valueCoding": {
+                "id": "b518003e-d252-4905-86a2-5c2157ec02f2",
+                "code": "cookie-dough",
+                "system": "urn:uuid:108f3ec2-1c17-4c1e-8ab6-34f049eb7aa9",
+                "display": "Cookie Dough"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "cce2813e-5a21-4c11-96e7-dfa03bcb35fb",
+          "type": "choice",
+          "text": "What is your favorite topping on ice cream?",
+          "required": false,
+          "extension": [
+              {
+                "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+                "valueCodeableConcept": {
+                  "coding": [
+                    {
+                      "system": "http://hl7.org/fhir/questionnaire-item-control",
+                      "code": "check-box",
+                      "display": "Checkbox"
+                    }
+                  ]
+                }
+              },
+          ],
+          "answerOption": [
+            {
+              "valueCoding": {
+                "id": "dd09f6d4-f5af-47dd-8449-ea47f817afa6",
+                "code": "sprinkles",
+                "system": "urn:uuid:07823547-9166-4913-96e3-b9115faee5e2",
+                "display": "Sprinkles"
+              }
+            },
+            {
+              "valueCoding": {
+                "id": "ffa91a22-c01c-4d6f-dcf7-314a6360b1e6",
+                "code": "marshmallows",
+                "system": "urn:uuid:07823547-9166-4913-96e3-b9115faee5e2",
+                "display": "Marshmallows"
+              }
+            },
+            {
+              "valueCoding": {
+                "id": "17b55f46-84e5-4a22-9171-937165d90cc7",
+                "code": "pretzels",
+                "system": "urn:uuid:07823547-9166-4913-96e3-b9115faee5e2",
+                "display": "Pretzels"
+              }
+            },
+            {
+              "valueCoding": {
+                "id": "e3c4e4a7-f874-488c-daa2-fc8775449121",
+                "code": "candy",
+                "system": "urn:uuid:07823547-9166-4913-96e3-b9115faee5e2",
+                "display": "Candy"
+              }
+            }
+          ]
+        }
+      ],
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,155 @@
+{
+  "resourceType": "Questionnaire",
+  "language": "en-US",
+  "title": "Multiple EnableWhen Expressions",
+  "status": "draft",
+  "publisher": "CardinalKit",
+  "meta": {
+    "profile": [
+      "http://cardinalkit.org/fhir/StructureDefinition/sdf-Questionnaire"
+    ],
+    "tag": [
+      {
+        "system": "urn:ietf:bcp:47",
+        "code": "en-US",
+        "display": "English"
+      }
+    ]
+  },
+  "useContext": [
+    {
+      "code": {
+        "system": "http://hl7.org/fhir/ValueSet/usage-context-type",
+        "code": "focus",
+        "display": "Clinical Focus"
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:oid:2.16.578.1.12.4.1.1.8655",
+            "display": "Multiple EnableWhen Survey"
+          }
+        ]
+      }
+    }
+  ],
+  "contact": [
+    {
+      "name": "http://cardinalkit.org"
+    }
+  ],
+  "subjectType": [
+    "Patient"
+  ],
+  "url": "http://cardinalkit.org/fhir/questionnaire/ec52e3b0-6405-461f-ae79-7c531a5ec5f0",
+  "item": [
+    {
+      "linkId": "ae4bde24-8709-436d-8961-15d04d649d7c",
+      "type": "boolean",
+      "text": "Is the sky blue?",
+      "required": false
+    },
+    {
+      "linkId": "c3fd1ee9-1f0d-4136-887c-f22589bbdc68",
+      "type": "choice",
+      "required": false,
+      "answerOption": [
+        {
+          "valueCoding": {
+            "id": "b35bdd61-24b0-4c21-cd73-2affe80ddb2a",
+            "code": "blue",
+            "system": "urn:uuid:2dab6b0b-4518-4c39-9f7f-a9da98e7c2f3",
+            "display": "blue"
+          }
+        },
+        {
+          "valueCoding": {
+            "id": "9843d5fa-84d6-40c5-8ecd-e9cc87c3e81d",
+            "code": "red",
+            "system": "urn:uuid:2dab6b0b-4518-4c39-9f7f-a9da98e7c2f3",
+            "display": "red"
+          }
+        },
+        {
+          "valueCoding": {
+            "id": "e622e940-7a8d-44e9-8834-35c87f062333",
+            "code": "orange",
+            "system": "urn:uuid:2dab6b0b-4518-4c39-9f7f-a9da98e7c2f3",
+            "display": "orange"
+          }
+        },
+        {
+          "valueCoding": {
+            "id": "6e368156-dcf7-43c4-94cf-70215a230e7b",
+            "code": "green",
+            "system": "urn:uuid:2dab6b0b-4518-4c39-9f7f-a9da98e7c2f3",
+            "display": "green"
+          }
+        }
+      ],
+      "text": "What color is grass?"
+    },
+    {
+      "linkId": "7384620c-276b-46da-cfb0-da857efced0d",
+      "type": "integer",
+      "text": "How many items are in a dozen?",
+      "required": false
+    },
+    {
+      "linkId": "9b128844-d321-4748-8666-22c74ff20829",
+      "type": "display",
+      "text": "This screen appears if at least one of the previous questions were answered correctly.",
+      "required": false,
+      "enableWhen": [
+        {
+          "question": "ae4bde24-8709-436d-8961-15d04d649d7c",
+          "operator": "=",
+          "answerBoolean": true
+        },
+        {
+          "question": "c3fd1ee9-1f0d-4136-887c-f22589bbdc68",
+          "operator": "=",
+          "answerCoding": {
+            "code": "green",
+            "system": "urn:uuid:2dab6b0b-4518-4c39-9f7f-a9da98e7c2f3",
+            "display": "green"
+          }
+        },
+        {
+          "question": "7384620c-276b-46da-cfb0-da857efced0d",
+          "operator": "=",
+          "answerInteger": 12
+        }
+      ],
+      "enableBehavior": "any"
+    },
+    {
+      "linkId": "eadbd01a-21a1-4586-a231-ee5e984aecda",
+      "type": "display",
+      "text": "This screen is appearing because all the questions were answered correctly.",
+      "required": false,
+      "enableWhen": [
+        {
+          "question": "ae4bde24-8709-436d-8961-15d04d649d7c",
+          "operator": "=",
+          "answerBoolean": true
+        },
+        {
+          "question": "c3fd1ee9-1f0d-4136-887c-f22589bbdc68",
+          "operator": "=",
+          "answerCoding": {
+            "code": "green",
+            "system": "urn:uuid:2dab6b0b-4518-4c39-9f7f-a9da98e7c2f3",
+            "display": "green"
+          }
+        },
+        {
+          "question": "7384620c-276b-46da-cfb0-da857efced0d",
+          "operator": "=",
+          "answerInteger": 12
+        }
+      ],
+      "enableBehavior": "all"
+    }
+  ]
+}

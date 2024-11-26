@@ -18,15 +18,37 @@ extension ORKNavigableOrderedTask {
     func constructNavigationRules(questions: [QuestionnaireItem]) throws {
         for question in questions {
             guard let questionId = question.linkId.value?.string,
-                  let enableWhen = question.enableWhen else {
+                  let enableWhen = question.enableWhen,
+                  !enableWhen.isEmpty else {
                 continue
             }
-
-            for fhirPredicate in enableWhen {
-                guard let predicate = try fhirPredicate.predicate else {
+            
+            if enableWhen.count > 1 {
+                let enableBehavior = question.enableBehavior?.value ?? .all
+                let allPredicates: [NSPredicate] = enableWhen.compactMap {
+                    do {
+                        return try $0.predicate
+                    } catch {
+                        print("Error creating predicate: \(error)")
+                        return nil
+                    }
+                }
+                
+                guard !allPredicates.isEmpty else { continue }
+                
+                var compoundPredicate = NSCompoundPredicate()
+                switch enableBehavior {
+                case .all:
+                    compoundPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: allPredicates)
+                case .any:
+                    compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: allPredicates)
+                }
+                
+                self.setSkip(ORKPredicateSkipStepNavigationRule(resultPredicate: compoundPredicate), forStepIdentifier: questionId)
+            } else {
+                guard let predicate = try enableWhen.first?.predicate else {
                     continue
                 }
-
                 self.setSkip(ORKPredicateSkipStepNavigationRule(resultPredicate: predicate), forStepIdentifier: questionId)
             }
         }
@@ -74,25 +96,19 @@ extension Decimal {
 }
 
 extension Coding {
-    fileprivate func predicate(
-        with resultSelector: ORKResultSelector,
-        operator fhirOperator: QuestionnaireItemOperator
-    ) throws -> NSPredicate? {
+    fileprivate func predicate(with resultSelector: ORKResultSelector, operator fhirOperator: QuestionnaireItemOperator) throws -> NSPredicate? {
         guard let code = code?.value?.string,
               let system = system?.value?.url.absoluteString else {
             return nil
         }
-
-        let expectedAnswer = [
-            "code": code,
-            "system": system
-        ]
-
+        
+        let expectedAnswer = ValueCoding(code: code, system: system, display: display?.value?.string)
+        
         let predicate = ORKResultPredicate.predicateForChoiceQuestionResult(
             with: resultSelector,
-            expectedAnswerValue: expectedAnswer as NSSecureCoding & NSCopying & NSObjectProtocol
+            expectedAnswerValue: expectedAnswer.rawValue as NSSecureCoding & NSCopying & NSObjectProtocol
         )
-
+        
         switch fhirOperator {
         case .equal:
             return NSCompoundPredicate(notPredicateWithSubpredicate: predicate)
