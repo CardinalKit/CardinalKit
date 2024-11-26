@@ -24,7 +24,6 @@ jobs:
       run: |
           xcodebuild -version
           swift --version
-          pod --version
     - name: Install the Apple certificate and provisioning profile
       env:
         BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
