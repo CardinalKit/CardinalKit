@@ -1,0 +1,25 @@
+{
+  "configurations" : [
+    {
+      "id" : "54C471DF-60C1-4870-967C-188425A1A0E9",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : false,
+      "target" : {
+        "containerPath" : "container:CardinalKit.xcodeproj",
+        "identifier" : "27663F2629574F1500A34080",
+        "name" : "CardinalKit ExampleTests"
+      }
+    }
+  ],
+  "version" : 1
+}

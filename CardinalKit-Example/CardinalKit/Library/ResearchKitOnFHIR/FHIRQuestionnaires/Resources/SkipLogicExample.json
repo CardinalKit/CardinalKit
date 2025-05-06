@@ -1,0 +1,105 @@
+{
+  "resourceType": "Questionnaire",
+  "language": "en-US",
+  "id": "Stanford University-skip-logic-example",
+  "title": "Skip Logic Example",
+  "status": "draft",
+  "publisher": "Stanford University",
+  "meta": {
+    "profile": [
+      "http://biodesign.stanford.edu/fhir/StructureDefinition/sdf-Questionnaire"
+    ],
+    "tag": [
+      {
+        "system": "urn:ietf:bcp:47",
+        "code": "en-US",
+        "display": "English"
+      }
+    ]
+  },
+  "useContext": [
+    {
+      "code": {
+        "system": "http://hl7.org/fhir/ValueSet/usage-context-type",
+        "code": "focus",
+        "display": "Clinical Focus"
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:oid:2.16.578.1.12.4.1.1.8655"
+          }
+        ]
+      }
+    }
+  ],
+  "contact": [
+    {
+      "name": "http://biodesign.stanford.edu"
+    }
+  ],
+  "subjectType": [
+    "Patient"
+  ],
+  "url": "http://biodesign.stanford.edu/questionnaires/skiplogicexample",
+  "item": [
+    {
+      "linkId": "f0f95365-96d2-4892-9ccf-2e2c0c74a87c",
+      "type": "boolean",
+      "text": "Do you like ice cream?",
+      "required": true
+    },
+    {
+      "linkId": "59e7a3f7-4108-47a7-8fae-0fb892574a63",
+      "type": "open-choice",
+      "text": "What is your favorite flavor?",
+      "required": false,
+      "answerOption": [
+        {
+          "valueCoding": {
+            "id": "460afea8-2634-4bb4-89d2-001d92624d6c",
+            "code": "chocolate",
+            "system": "urn:uuid:ea53f9f1-4c06-4953-83b6-c944bccdeae3",
+            "display": "Chocolate"
+          }
+        },
+        {
+          "valueCoding": {
+            "id": "6fef1216-0b74-40bd-e773-2bd4a7f66e45",
+            "code": "vanilla",
+            "system": "urn:uuid:ea53f9f1-4c06-4953-83b6-c944bccdeae3",
+            "display": "Vanilla"
+          }
+        },
+        {
+          "valueCoding": {
+            "id": "abc0a0bf-0e35-48db-8f0f-b2d30038816b",
+            "code": "strawberry",
+            "system": "urn:uuid:ea53f9f1-4c06-4953-83b6-c944bccdeae3",
+            "display": "Strawberry"
+          }
+        },
+      ],
+      "enableWhen": [
+        {
+          "question": "f0f95365-96d2-4892-9ccf-2e2c0c74a87c",
+          "operator": "=",
+          "answerBoolean": true
+        }
+      ]
+    },
+    {
+      "linkId": "5699c117-70e4-4849-f89f-c3591c090381",
+      "type": "date",
+      "text": "When was the last time you had ice cream?",
+      "required": false,
+      "enableWhen": [
+        {
+          "question": "f0f95365-96d2-4892-9ccf-2e2c0c74a87c",
+          "operator": "=",
+          "answerBoolean": true
+        }
+      ]
+    }
+  ]
+}
