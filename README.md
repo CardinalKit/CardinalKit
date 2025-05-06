@@ -1,5 +1,5 @@
 > [!IMPORTANT]  
-> The CardinalKit iOS template application is *no longer actively developed*. All new projects should use [Stanford Spezi](https://github.com/StanfordSpezi), our modular and standards-based framework successor to CardinalKit. Check out the [Spezi Template Application](https://github.com/StanfordSpezi) as a great way to get started.
+> The CardinalKit iOS template application is *no longer actively developed*. All new projects should use [Stanford Spezi](https://github.com/StanfordSpezi), our modular and standards-based framework successor to CardinalKit. Check out the [Spezi Template Application](https://github.com/StanfordSpezi/SpeziTemplateApplication) as a great way to get started.
 
 ![CardinalKit Logo](https://raw.githubusercontent.com/CardinalKit/.github/main/assets/ck-header-light.png#gh-light-mode-only)
 ![CardinalKit Logo](https://raw.githubusercontent.com/CardinalKit/.github/main/assets/ck-header-dark.png#gh-dark-mode-only)
