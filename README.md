@@ -1,5 +1,5 @@
 > [!IMPORTANT]  
-> The CardinalKit iOS template application is in maintenance mode. All new projects should use [Stanford Spezi](https://github.com/StanfordSpezi), our modular and standards-based framework successor to CardinalKit. Check out the [Spezi Template Application](https://github.com/StanfordSpezi) as a great way to get started.
+> The CardinalKit iOS template application is *no longer actively developed*. All new projects should use [Stanford Spezi](https://github.com/StanfordSpezi), our modular and standards-based framework successor to CardinalKit. Check out the [Spezi Template Application](https://github.com/StanfordSpezi) as a great way to get started.
 
 ![CardinalKit Logo](https://raw.githubusercontent.com/CardinalKit/.github/main/assets/ck-header-light.png#gh-light-mode-only)
 ![CardinalKit Logo](https://raw.githubusercontent.com/CardinalKit/.github/main/assets/ck-header-dark.png#gh-dark-mode-only)
@@ -21,7 +21,7 @@ Includes:
 * Awesome SwiftUI templates.
 * Google Cloud Firebase Integration.
 
-CardinalKit runs on iOS 15.0 and up. [Xcode 14](https://developer.apple.com/xcode/) is required for development.
+CardinalKit runs on iOS 15.0 and up. [Xcode 14](https://developer.apple.com/xcode/) or above is required for development.
 
 ## Build your App with CardinalKit
 
@@ -64,7 +64,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 
 ## License
 
-CardinalKit is available under the MIT license. See the LICENSE file for more info.
+CardinalKit is available under the MIT license. See the [LICENSE](https://github.com/CardinalKit/CardinalKit/blob/main/LICENSE) file for more info.
 
 
 ![Stanford Byers Center for Biodesign Logo](https://raw.githubusercontent.com/CardinalKit/.github/main/assets/ck-footer-light.png#gh-light-mode-only)
