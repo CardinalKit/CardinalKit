@@ -1,0 +1,42 @@
+{
+  "resourceType": "Questionnaire",
+  "language": "en-US",
+  "id": "Stanford University-slider-example",
+  "title": "Slider Example",
+  "status": "draft",
+  "publisher": "Stanford University",
+  "url": "http://biodesign.stanford.edu/questionnaires/sliderexample",
+  "item": [
+    {
+      "linkId": "1",
+      "text": "How bad is the pain on a scale of 0-10?",
+      "type": "integer",
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+          "valueCodeableConcept": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/questionnaire-item-control",
+                "code": "slider",
+                "display": "Slider"
+              }
+            ]
+          }
+        },
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/minValue",
+          "valueInteger": 0
+        },
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/maxValue",
+          "valueInteger": 10
+        },
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-sliderStepValue",
+          "valueInteger": 1
+        }
+      ]
+    }
+  ]
+}

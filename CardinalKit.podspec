@@ -38,11 +38,14 @@ Pod::Spec.new do |s|
   s.dependency 'ReachabilitySwift', '~> 3'
 
   #Compressing files
-  s.dependency 'Zip', '~> 2.1.2'        
-  s.dependency 'Firebase/Firestore', '~> 10'
-  s.dependency 'Firebase/Auth', '~> 10'
-  s.dependency 'Firebase/Storage', '~> 10'
-  s.dependency 'Firebase/Analytics', '~> 10'
+  s.dependency 'Zip', '~> 2.1.2'
+  
+  #Firebase
+  s.dependency 'Firebase', '~> 10'
+  s.dependency 'FirebaseFirestore', '~> 10'
+  s.dependency 'FirebaseAuth', '~> 10'
+  s.dependency 'FirebaseStorage', '~> 10'
+  s.dependency 'FirebaseAnalytics', '~> 10'
 
   s.static_framework = true
   s.public_header_files = 'CardinalKit/Source/Components/Header.h'

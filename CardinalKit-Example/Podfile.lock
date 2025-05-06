@@ -641,31 +641,23 @@ PODS:
     - BoringSSL-GRPC/Interface (= 0.0.24)
   - BoringSSL-GRPC/Interface (0.0.24)
   - CardinalKit (2.2.0):
-    - Firebase/Analytics (~> 10)
-    - Firebase/Auth (~> 10)
-    - Firebase/Firestore (~> 10)
-    - Firebase/Storage (~> 10)
+    - Firebase (~> 10)
+    - FirebaseAnalytics (~> 10)
+    - FirebaseAuth (~> 10)
+    - FirebaseFirestore (~> 10)
+    - FirebaseStorage (~> 10)
     - Granola
     - ObjectMapper (~> 3)
     - ReachabilitySwift (~> 3)
     - RealmSwift (~> 10)
     - Zip (~> 2.1.2)
-  - Firebase/Analytics (10.13.0):
-    - Firebase/Core
-  - Firebase/Auth (10.13.0):
-    - Firebase/CoreOnly
-    - FirebaseAuth (~> 10.13.0)
+  - Firebase (10.13.0):
+    - Firebase/Core (= 10.13.0)
   - Firebase/Core (10.13.0):
     - Firebase/CoreOnly
     - FirebaseAnalytics (~> 10.13.0)
   - Firebase/CoreOnly (10.13.0):
     - FirebaseCore (= 10.13.0)
-  - Firebase/Firestore (10.13.0):
-    - Firebase/CoreOnly
-    - FirebaseFirestore (~> 10.13.0)
-  - Firebase/Storage (10.13.0):
-    - Firebase/CoreOnly
-    - FirebaseStorage (~> 10.13.0)
   - FirebaseAnalytics (10.13.0):
     - FirebaseAnalytics/AdIdSupport (= 10.13.0)
     - FirebaseCore (~> 10.0)
@@ -905,7 +897,7 @@ SPEC CHECKSUMS:
   abseil: 926fb7a82dc6d2b8e1f2ed7f3a718bce691d1e46
   AppAuth: 3bb1d1cd9340bd09f5ed189fb00b1cc28e1e8570
   BoringSSL-GRPC: 3175b25143e648463a56daeaaa499c6cb86dad33
-  CardinalKit: 336cf08a300198b4592a9e8526538d2e2e3fd26c
+  CardinalKit: ed4abed83bfd110849562ef83ca141ba7f2e0eab
   Firebase: 343d7539befb614d22b2eae24759f6307b1175e9
   FirebaseAnalytics: 9a12e090ead49f8877ed8132ae920e3cbbd2fcd0
   FirebaseAppCheckInterop: 5e12dc623d443dedffcde9c6f3ed41510125d8ef
@@ -937,4 +929,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 9f6cb9e06c65dd51b90ab91dc48e79031d708e19
 
-COCOAPODS: 1.15.2
+COCOAPODS: 1.16.2

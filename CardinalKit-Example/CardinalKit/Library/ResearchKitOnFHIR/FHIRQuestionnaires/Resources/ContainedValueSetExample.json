@@ -1,0 +1,86 @@
+{
+  "resourceType": "Questionnaire",
+  "language": "en-US",
+  "title": "Contained ValueSet Example",
+  "status": "draft",
+  "publisher": "Stanford University",
+  "url": "http://biodesign.stanford.edu/fhir/questionnaires/contained-valueset-example",
+  "meta": {
+    "profile": [
+      "http://biodesign.stanford.edu/fhir/StructureDefinition/sdf-Questionnaire"
+    ],
+    "tag": [
+      {
+        "system": "urn:ietf:bcp:47",
+        "code": "en-US",
+        "display": "English"
+      }
+    ]
+  },
+  "useContext": [
+    {
+      "code": {
+        "system": "http://hl7.org/fhir/ValueSet/usage-context-type",
+        "code": "focus",
+        "display": "Clinical Focus"
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:oid:2.16.578.1.12.4.1.1.8655"
+          }
+        ]
+      }
+    }
+  ],
+  "contact": [
+    {
+      "name": "http://biodesign.stanford.edu"
+    }
+  ],
+  "subjectType": [
+    "Patient"
+  ],
+  "contained": [
+    {
+      "url": "http://biodesign.stanford.edu/fhir/ValueSet/Predefined",
+      "resourceType": "ValueSet",
+      "id": "9523",
+      "version": "1.0",
+      "name": "urn:oid:9523",
+      "title": "Yes / No / Unsure",
+      "status": "draft",
+      "publisher": "Stanford University",
+      "compose": {
+        "include": [
+          {
+            "system": "urn:oid:2.16.578.1.12.4.1.9523",
+            "concept": [
+              {
+                "code": "1",
+                "display": "Yes"
+              },
+              {
+                "code": "2",
+                "display": "No"
+              },
+              {
+                "code": "3",
+                "display": "Unsure"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "item": [
+    {
+      "linkId": "e222f329-9bf1-4d14-c48f-04e5ae082090",
+      "type": "choice",
+      "text": "Do you like ice cream?",
+      "required": false,
+      "answerValueSet": "#9523"
+    }
+  ]
+}

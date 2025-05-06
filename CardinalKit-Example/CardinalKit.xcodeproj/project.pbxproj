@@ -34,8 +34,40 @@
 		2FFFA2CD29024EFD009D289D /* Questionnaire+ValueSets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFFA2C529024EFD009D289D /* Questionnaire+ValueSets.swift */; };
 		2FFFA2CE29024EFD009D289D /* FHIRExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFFA2C729024EFD009D289D /* FHIRExtensions.swift */; };
 		2FFFA2D229025241009D289D /* ORKESerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4386244A4A0400656518 /* ORKESerialization.m */; };
+		631D54612CF430C0000CE312 /* ValueCoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D54602CF430BA000CE312 /* ValueCoding.swift */; };
+		631D546C2CF4A223000CE312 /* ResearchKitToFHIRTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D546B2CF4A21E000CE312 /* ResearchKitToFHIRTests.swift */; };
+		631D546D2CF4A46E000CE312 /* ValueCoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D54602CF430BA000CE312 /* ValueCoding.swift */; };
+		631D546F2CF4A4F8000CE312 /* NavigationRulesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D546E2CF4A4F5000CE312 /* NavigationRulesTests.swift */; };
 		6333443D2AAE1E56006DC7A7 /* ResearchKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6333443C2AAE1E56006DC7A7 /* ResearchKit */; };
 		6372202D2AAE390C00367157 /* CKSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6372202C2AAE390C00367157 /* CKSessionTests.swift */; };
+		637B303A2CF5E822006881AE /* FHIRToResearchKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B30392CF5E81C006881AE /* FHIRToResearchKitTests.swift */; };
+		637B303D2CF5E8B4006881AE /* Questionnaire+Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B303C2CF5E8AC006881AE /* Questionnaire+Resource.swift */; };
+		637B30592CF5EB0D006881AE /* SliderExample.json in Resources */ = {isa = PBXBuildFile; fileRef = 637B30552CF5EB0D006881AE /* SliderExample.json */; };
+		637B305A2CF5EB0D006881AE /* SkipLogicExample.json in Resources */ = {isa = PBXBuildFile; fileRef = 637B30532CF5EB0D006881AE /* SkipLogicExample.json */; };
+		637B305B2CF5EB0D006881AE /* ImageCapture.json.license in Resources */ = {isa = PBXBuildFile; fileRef = 637B304A2CF5EB0D006881AE /* ImageCapture.json.license */; };
+		637B305C2CF5EB0D006881AE /* GAD-7.json in Resources */ = {isa = PBXBuildFile; fileRef = 637B30452CF5EB0D006881AE /* GAD-7.json */; };
+		637B305D2CF5EB0D006881AE /* SliderExample.json.license in Resources */ = {isa = PBXBuildFile; fileRef = 637B30562CF5EB0D006881AE /* SliderExample.json.license */; };
+		637B305E2CF5EB0D006881AE /* MultipleEnableWhen.json in Resources */ = {isa = PBXBuildFile; fileRef = 637B304D2CF5EB0D006881AE /* MultipleEnableWhen.json */; };
+		637B305F2CF5EB0D006881AE /* ContainedValueSetExample.json.license in Resources */ = {isa = PBXBuildFile; fileRef = 637B30402CF5EB0D006881AE /* ContainedValueSetExample.json.license */; };
+		637B30602CF5EB0D006881AE /* TextValidationExample.json in Resources */ = {isa = PBXBuildFile; fileRef = 637B30572CF5EB0D006881AE /* TextValidationExample.json */; };
+		637B30612CF5EB0D006881AE /* FormExample.json.license in Resources */ = {isa = PBXBuildFile; fileRef = 637B30442CF5EB0D006881AE /* FormExample.json.license */; };
+		637B30622CF5EB0D006881AE /* SkipLogicExample.json.license in Resources */ = {isa = PBXBuildFile; fileRef = 637B30542CF5EB0D006881AE /* SkipLogicExample.json.license */; };
+		637B30632CF5EB0D006881AE /* IPSS.json.license in Resources */ = {isa = PBXBuildFile; fileRef = 637B304C2CF5EB0D006881AE /* IPSS.json.license */; };
+		637B30642CF5EB0D006881AE /* DateTimeExample.json in Resources */ = {isa = PBXBuildFile; fileRef = 637B30412CF5EB0D006881AE /* DateTimeExample.json */; };
+		637B30652CF5EB0D006881AE /* NumberExample.json.license in Resources */ = {isa = PBXBuildFile; fileRef = 637B30502CF5EB0D006881AE /* NumberExample.json.license */; };
+		637B30662CF5EB0D006881AE /* ContainedValueSetExample.json in Resources */ = {isa = PBXBuildFile; fileRef = 637B303F2CF5EB0D006881AE /* ContainedValueSetExample.json */; };
+		637B30672CF5EB0D006881AE /* GAD-7.json.license in Resources */ = {isa = PBXBuildFile; fileRef = 637B30462CF5EB0D006881AE /* GAD-7.json.license */; };
+		637B30682CF5EB0D006881AE /* MultipleEnableWhen.json.license in Resources */ = {isa = PBXBuildFile; fileRef = 637B304E2CF5EB0D006881AE /* MultipleEnableWhen.json.license */; };
+		637B30692CF5EB0D006881AE /* TextValidationExample.json.license in Resources */ = {isa = PBXBuildFile; fileRef = 637B30582CF5EB0D006881AE /* TextValidationExample.json.license */; };
+		637B306A2CF5EB0D006881AE /* GCS.json.license in Resources */ = {isa = PBXBuildFile; fileRef = 637B30482CF5EB0D006881AE /* GCS.json.license */; };
+		637B306B2CF5EB0D006881AE /* GCS.json in Resources */ = {isa = PBXBuildFile; fileRef = 637B30472CF5EB0D006881AE /* GCS.json */; };
+		637B306C2CF5EB0D006881AE /* FormExample.json in Resources */ = {isa = PBXBuildFile; fileRef = 637B30432CF5EB0D006881AE /* FormExample.json */; };
+		637B306D2CF5EB0D006881AE /* ImageCapture.json in Resources */ = {isa = PBXBuildFile; fileRef = 637B30492CF5EB0D006881AE /* ImageCapture.json */; };
+		637B306E2CF5EB0D006881AE /* PHQ-9.json in Resources */ = {isa = PBXBuildFile; fileRef = 637B30512CF5EB0D006881AE /* PHQ-9.json */; };
+		637B306F2CF5EB0D006881AE /* DateTimeExample.json.license in Resources */ = {isa = PBXBuildFile; fileRef = 637B30422CF5EB0D006881AE /* DateTimeExample.json.license */; };
+		637B30702CF5EB0D006881AE /* NumberExample.json in Resources */ = {isa = PBXBuildFile; fileRef = 637B304F2CF5EB0D006881AE /* NumberExample.json */; };
+		637B30712CF5EB0D006881AE /* PHQ-9.json.license in Resources */ = {isa = PBXBuildFile; fileRef = 637B30522CF5EB0D006881AE /* PHQ-9.json.license */; };
+		637B30722CF5EB0D006881AE /* IPSS.json in Resources */ = {isa = PBXBuildFile; fileRef = 637B304B2CF5EB0D006881AE /* IPSS.json */; };
 		665B820F3D6BA70AD8576CAF /* Pods_CardinalKit_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D903DA29E1FF73FC44EC2199 /* Pods_CardinalKit_Example.framework */; };
 		8E0A43AC244A4A0400656518 /* CKStudyUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4382244A4A0400656518 /* CKStudyUser.swift */; };
 		8E0A43AD244A4A0400656518 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4384244A4A0400656518 /* Constants.swift */; };
@@ -157,7 +189,39 @@
 		41DC264876E45FE5A3FD8701 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* CardinalKit Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CardinalKit Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		62AA5CD1C2188D392530510F /* CardinalKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = CardinalKit.podspec; path = ../CardinalKit.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		631D54602CF430BA000CE312 /* ValueCoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueCoding.swift; sourceTree = "<group>"; };
+		631D546B2CF4A21E000CE312 /* ResearchKitToFHIRTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResearchKitToFHIRTests.swift; sourceTree = "<group>"; };
+		631D546E2CF4A4F5000CE312 /* NavigationRulesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRulesTests.swift; sourceTree = "<group>"; };
 		6372202C2AAE390C00367157 /* CKSessionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKSessionTests.swift; sourceTree = "<group>"; };
+		637B30392CF5E81C006881AE /* FHIRToResearchKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FHIRToResearchKitTests.swift; sourceTree = "<group>"; };
+		637B303C2CF5E8AC006881AE /* Questionnaire+Resource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Questionnaire+Resource.swift"; sourceTree = "<group>"; };
+		637B303F2CF5EB0D006881AE /* ContainedValueSetExample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ContainedValueSetExample.json; sourceTree = "<group>"; };
+		637B30402CF5EB0D006881AE /* ContainedValueSetExample.json.license */ = {isa = PBXFileReference; lastKnownFileType = text; path = ContainedValueSetExample.json.license; sourceTree = "<group>"; };
+		637B30412CF5EB0D006881AE /* DateTimeExample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DateTimeExample.json; sourceTree = "<group>"; };
+		637B30422CF5EB0D006881AE /* DateTimeExample.json.license */ = {isa = PBXFileReference; lastKnownFileType = text; path = DateTimeExample.json.license; sourceTree = "<group>"; };
+		637B30432CF5EB0D006881AE /* FormExample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = FormExample.json; sourceTree = "<group>"; };
+		637B30442CF5EB0D006881AE /* FormExample.json.license */ = {isa = PBXFileReference; lastKnownFileType = text; path = FormExample.json.license; sourceTree = "<group>"; };
+		637B30452CF5EB0D006881AE /* GAD-7.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "GAD-7.json"; sourceTree = "<group>"; };
+		637B30462CF5EB0D006881AE /* GAD-7.json.license */ = {isa = PBXFileReference; lastKnownFileType = text; path = "GAD-7.json.license"; sourceTree = "<group>"; };
+		637B30472CF5EB0D006881AE /* GCS.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = GCS.json; sourceTree = "<group>"; };
+		637B30482CF5EB0D006881AE /* GCS.json.license */ = {isa = PBXFileReference; lastKnownFileType = text; path = GCS.json.license; sourceTree = "<group>"; };
+		637B30492CF5EB0D006881AE /* ImageCapture.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ImageCapture.json; sourceTree = "<group>"; };
+		637B304A2CF5EB0D006881AE /* ImageCapture.json.license */ = {isa = PBXFileReference; lastKnownFileType = text; path = ImageCapture.json.license; sourceTree = "<group>"; };
+		637B304B2CF5EB0D006881AE /* IPSS.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = IPSS.json; sourceTree = "<group>"; };
+		637B304C2CF5EB0D006881AE /* IPSS.json.license */ = {isa = PBXFileReference; lastKnownFileType = text; path = IPSS.json.license; sourceTree = "<group>"; };
+		637B304D2CF5EB0D006881AE /* MultipleEnableWhen.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MultipleEnableWhen.json; sourceTree = "<group>"; };
+		637B304E2CF5EB0D006881AE /* MultipleEnableWhen.json.license */ = {isa = PBXFileReference; lastKnownFileType = text; path = MultipleEnableWhen.json.license; sourceTree = "<group>"; };
+		637B304F2CF5EB0D006881AE /* NumberExample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = NumberExample.json; sourceTree = "<group>"; };
+		637B30502CF5EB0D006881AE /* NumberExample.json.license */ = {isa = PBXFileReference; lastKnownFileType = text; path = NumberExample.json.license; sourceTree = "<group>"; };
+		637B30512CF5EB0D006881AE /* PHQ-9.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "PHQ-9.json"; sourceTree = "<group>"; };
+		637B30522CF5EB0D006881AE /* PHQ-9.json.license */ = {isa = PBXFileReference; lastKnownFileType = text; path = "PHQ-9.json.license"; sourceTree = "<group>"; };
+		637B30532CF5EB0D006881AE /* SkipLogicExample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SkipLogicExample.json; sourceTree = "<group>"; };
+		637B30542CF5EB0D006881AE /* SkipLogicExample.json.license */ = {isa = PBXFileReference; lastKnownFileType = text; path = SkipLogicExample.json.license; sourceTree = "<group>"; };
+		637B30552CF5EB0D006881AE /* SliderExample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SliderExample.json; sourceTree = "<group>"; };
+		637B30562CF5EB0D006881AE /* SliderExample.json.license */ = {isa = PBXFileReference; lastKnownFileType = text; path = SliderExample.json.license; sourceTree = "<group>"; };
+		637B30572CF5EB0D006881AE /* TextValidationExample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = TextValidationExample.json; sourceTree = "<group>"; };
+		637B30582CF5EB0D006881AE /* TextValidationExample.json.license */ = {isa = PBXFileReference; lastKnownFileType = text; path = TextValidationExample.json.license; sourceTree = "<group>"; };
+		637B30732CF5EBC0006881AE /* CardinalKit_ExampleTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = CardinalKit_ExampleTests.xctestplan; sourceTree = "<group>"; };
 		781BB8F6E8A681D16E3A0982 /* Pods-CardinalKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardinalKit_Example.debug.xcconfig"; path = "Target Support Files/Pods-CardinalKit_Example/Pods-CardinalKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		8E0A4378244A4A0300656518 /* CardinalKit_Example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CardinalKit_Example-Bridging-Header.h"; sourceTree = "<group>"; };
 		8E0A4382244A4A0400656518 /* CKStudyUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKStudyUser.swift; sourceTree = "<group>"; };
@@ -254,6 +318,7 @@
 		27663F2829574F1500A34080 /* CardinalKit ExampleTests */ = {
 			isa = PBXGroup;
 			children = (
+				631D546A2CF4A218000CE312 /* ResearchKitOnFHIRTests */,
 				27663F2929574F1500A34080 /* CardinalKit_ExampleTests.swift */,
 				6372202C2AAE390C00367157 /* CKSessionTests.swift */,
 			);
@@ -272,6 +337,8 @@
 		2FFFA2BD29024EFD009D289D /* ResearchKitOnFHIR */ = {
 			isa = PBXGroup;
 			children = (
+				637B303B2CF5E8A4006881AE /* FHIRQuestionnaires */,
+				631D545F2CF430B1000CE312 /* ValueCoding */,
 				2FFFA2BE29024EFD009D289D /* ResearchKitToFHIR */,
 				2FFFA2C029024EFD009D289D /* FHIRToResearchKit */,
 				2FFFA2C629024EFD009D289D /* FHIRExtensions */,
@@ -310,6 +377,7 @@
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
+				637B30732CF5EBC0006881AE /* CardinalKit_ExampleTests.xctestplan */,
 				270AF36127872C13002945A7 /* CardinalKit_ExampleRelease.entitlements */,
 				8E0A438B244A4A0400656518 /* CardinalKit-Example.entitlements */,
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
@@ -353,6 +421,66 @@
 				07D78DA16FC9C3C7709EA243 /* LICENSE */,
 			);
 			name = "Podspec Metadata";
+			sourceTree = "<group>";
+		};
+		631D545F2CF430B1000CE312 /* ValueCoding */ = {
+			isa = PBXGroup;
+			children = (
+				631D54602CF430BA000CE312 /* ValueCoding.swift */,
+			);
+			path = ValueCoding;
+			sourceTree = "<group>";
+		};
+		631D546A2CF4A218000CE312 /* ResearchKitOnFHIRTests */ = {
+			isa = PBXGroup;
+			children = (
+				637B30392CF5E81C006881AE /* FHIRToResearchKitTests.swift */,
+				631D546E2CF4A4F5000CE312 /* NavigationRulesTests.swift */,
+				631D546B2CF4A21E000CE312 /* ResearchKitToFHIRTests.swift */,
+			);
+			path = ResearchKitOnFHIRTests;
+			sourceTree = "<group>";
+		};
+		637B303B2CF5E8A4006881AE /* FHIRQuestionnaires */ = {
+			isa = PBXGroup;
+			children = (
+				637B303E2CF5EAB7006881AE /* Resources */,
+				637B303C2CF5E8AC006881AE /* Questionnaire+Resource.swift */,
+			);
+			path = FHIRQuestionnaires;
+			sourceTree = "<group>";
+		};
+		637B303E2CF5EAB7006881AE /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				637B303F2CF5EB0D006881AE /* ContainedValueSetExample.json */,
+				637B30402CF5EB0D006881AE /* ContainedValueSetExample.json.license */,
+				637B30412CF5EB0D006881AE /* DateTimeExample.json */,
+				637B30422CF5EB0D006881AE /* DateTimeExample.json.license */,
+				637B30432CF5EB0D006881AE /* FormExample.json */,
+				637B30442CF5EB0D006881AE /* FormExample.json.license */,
+				637B30452CF5EB0D006881AE /* GAD-7.json */,
+				637B30462CF5EB0D006881AE /* GAD-7.json.license */,
+				637B30472CF5EB0D006881AE /* GCS.json */,
+				637B30482CF5EB0D006881AE /* GCS.json.license */,
+				637B30492CF5EB0D006881AE /* ImageCapture.json */,
+				637B304A2CF5EB0D006881AE /* ImageCapture.json.license */,
+				637B304B2CF5EB0D006881AE /* IPSS.json */,
+				637B304C2CF5EB0D006881AE /* IPSS.json.license */,
+				637B304D2CF5EB0D006881AE /* MultipleEnableWhen.json */,
+				637B304E2CF5EB0D006881AE /* MultipleEnableWhen.json.license */,
+				637B304F2CF5EB0D006881AE /* NumberExample.json */,
+				637B30502CF5EB0D006881AE /* NumberExample.json.license */,
+				637B30512CF5EB0D006881AE /* PHQ-9.json */,
+				637B30522CF5EB0D006881AE /* PHQ-9.json.license */,
+				637B30532CF5EB0D006881AE /* SkipLogicExample.json */,
+				637B30542CF5EB0D006881AE /* SkipLogicExample.json.license */,
+				637B30552CF5EB0D006881AE /* SliderExample.json */,
+				637B30562CF5EB0D006881AE /* SliderExample.json.license */,
+				637B30572CF5EB0D006881AE /* TextValidationExample.json */,
+				637B30582CF5EB0D006881AE /* TextValidationExample.json.license */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		8E0A4379244A4A0400656518 /* Profile */ = {
@@ -688,6 +816,32 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E0A43AF244A4A0400656518 /* Assets.xcassets in Resources */,
+				637B30592CF5EB0D006881AE /* SliderExample.json in Resources */,
+				637B305A2CF5EB0D006881AE /* SkipLogicExample.json in Resources */,
+				637B305B2CF5EB0D006881AE /* ImageCapture.json.license in Resources */,
+				637B305C2CF5EB0D006881AE /* GAD-7.json in Resources */,
+				637B305D2CF5EB0D006881AE /* SliderExample.json.license in Resources */,
+				637B305E2CF5EB0D006881AE /* MultipleEnableWhen.json in Resources */,
+				637B305F2CF5EB0D006881AE /* ContainedValueSetExample.json.license in Resources */,
+				637B30602CF5EB0D006881AE /* TextValidationExample.json in Resources */,
+				637B30612CF5EB0D006881AE /* FormExample.json.license in Resources */,
+				637B30622CF5EB0D006881AE /* SkipLogicExample.json.license in Resources */,
+				637B30632CF5EB0D006881AE /* IPSS.json.license in Resources */,
+				637B30642CF5EB0D006881AE /* DateTimeExample.json in Resources */,
+				637B30652CF5EB0D006881AE /* NumberExample.json.license in Resources */,
+				637B30662CF5EB0D006881AE /* ContainedValueSetExample.json in Resources */,
+				637B30672CF5EB0D006881AE /* GAD-7.json.license in Resources */,
+				637B30682CF5EB0D006881AE /* MultipleEnableWhen.json.license in Resources */,
+				637B30692CF5EB0D006881AE /* TextValidationExample.json.license in Resources */,
+				637B306A2CF5EB0D006881AE /* GCS.json.license in Resources */,
+				637B306B2CF5EB0D006881AE /* GCS.json in Resources */,
+				637B306C2CF5EB0D006881AE /* FormExample.json in Resources */,
+				637B306D2CF5EB0D006881AE /* ImageCapture.json in Resources */,
+				637B306E2CF5EB0D006881AE /* PHQ-9.json in Resources */,
+				637B306F2CF5EB0D006881AE /* DateTimeExample.json.license in Resources */,
+				637B30702CF5EB0D006881AE /* NumberExample.json in Resources */,
+				637B30712CF5EB0D006881AE /* PHQ-9.json.license in Resources */,
+				637B30722CF5EB0D006881AE /* IPSS.json in Resources */,
 				8E0A43B0244A4A0400656518 /* LaunchScreen.storyboard in Resources */,
 				276399A129021BB5004DE158 /* GoogleService-Info.plist in Resources */,
 				E2F1FD7824D62064006C39DF /* CKConfiguration.plist in Resources */,
@@ -834,6 +988,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				631D546C2CF4A223000CE312 /* ResearchKitToFHIRTests.swift in Sources */,
+				631D546D2CF4A46E000CE312 /* ValueCoding.swift in Sources */,
+				631D546F2CF4A4F8000CE312 /* NavigationRulesTests.swift in Sources */,
+				637B303A2CF5E822006881AE /* FHIRToResearchKitTests.swift in Sources */,
 				6372202D2AAE390C00367157 /* CKSessionTests.swift in Sources */,
 				27663F2A29574F1500A34080 /* CardinalKit_ExampleTests.swift in Sources */,
 			);
@@ -888,6 +1046,7 @@
 				8EA664B42594387900B6A45A /* Errors.swift in Sources */,
 				275A6AC5296A684800DA4943 /* OnboardingPageView.swift in Sources */,
 				8E6E1E1225351F830024B8DF /* DocumentPreviewViewController.swift in Sources */,
+				631D54612CF430C0000CE312 /* ValueCoding.swift in Sources */,
 				8E6E1E20253529760024B8DF /* DocumentView.swift in Sources */,
 				8E7FFFBB25DE37FF002982B4 /* CoffeePieChartView.swift in Sources */,
 				2777DADD2969F76300F2ECD4 /* CKSignInView.swift in Sources */,
@@ -904,6 +1063,7 @@
 				2FFFA2CD29024EFD009D289D /* Questionnaire+ValueSets.swift in Sources */,
 				8E9CDEB6259181B400C8A228 /* CareTeamViewControllerRepresentable.swift in Sources */,
 				8E9CDEAF259172C200C8A228 /* CKCareKitManager+Sample.swift in Sources */,
+				637B303D2CF5E8B4006881AE /* Questionnaire+Resource.swift in Sources */,
 				8E9CDEA925916E6600C8A228 /* ScheduleViewController.swift in Sources */,
 				2BD5328526C30F2E00C4636E /* CloudTaskItem.swift in Sources */,
 				8E0A43AC244A4A0400656518 /* CKStudyUser.swift in Sources */,
