@@ -34,6 +34,12 @@ This repository contains a fully functional example in the `CardinalKit-Example`
 
 Feel free to join our Slack community or attend one of our workshops or buildathons for help customizing your app! Learn more at https://cardinalkit.org.
 
+## How to Cite
+
+If you use CardinalKit in your research, please cite:
+
+Hittle, M. (2018). *CardinalKit: An Open, Interoperable Framework for Digital Health Application Development* (v1.0.0). Zenodo. https://doi.org/10.5281/zenodo.17620129
+
 ## Contribute to CardinalKit
 
 Head on over to https://cardinalkit.org/ to get onboarded to our open source community ⚡️ 
