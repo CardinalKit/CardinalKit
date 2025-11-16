@@ -1,0 +1,34 @@
+cff-version: 1.2.0
+title: "CardinalKit: An Open, Interoperable Framework for Digital Health Application Development"
+message: "If you use this software, please cite it using the metadata below."
+type: software
+version: "1.0.0"
+doi: "10.5281/zenodo.17620129"
+date-released: "2018-02-18"
+
+authors:
+  - family-names: Hittle
+    given-names: Michael
+    affiliation: "CardinalKit Foundation"
+    orcid: "0000-0002-4934-2453" 
+    role: creator
+
+contributors:
+  - family-names: Gutierrez
+    given-names: Santiago
+    role: developer
+  - family-names: Aalami
+    given-names: Oliver
+    role: contributor
+  - family-names: Ravi
+    given-names: Vishnu
+    role: contributor
+  - family-names: Schmiedmayer
+    given-names: Paul
+    role: contributor
+  - family-names: Griffin
+    given-names: Ashley
+    role: contributor
+
+license: "MIT"
+url: "https://github.com/CardinalKit/CardinalKit"
