@@ -2,6 +2,10 @@
 
 > CardinalKit is currently in a planning phase, targetting a significant upgrade and refactor to V2.0. If you would like to join the 2.0 team, please reach out to team@cardinalkit.org  
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17620129.svg)](https://doi.org/10.5281/zenodo.17620129)
+
+
+
 ![CardinalKit Logo](https://raw.githubusercontent.com/CardinalKit/.github/main/assets/ck-header-light.png#gh-light-mode-only)
 ![CardinalKit Logo](https://raw.githubusercontent.com/CardinalKit/.github/main/assets/ck-header-dark.png#gh-dark-mode-only)
 
